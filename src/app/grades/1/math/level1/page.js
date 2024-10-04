@@ -174,15 +174,17 @@ const Level1 = () => {
                 style={{ width: `${progressPercentage}%` }}
               />
             </div>
-            <p className="text-xs text-right">
-              {progressPercentage.toFixed(0)}% Complete
-            </p>
-          </div>
-          {completed && (
-            <p className="text-green-600 font-bold">
-              You've completed this level! 🎉
-            </p>
-          )}
+            <div>
+  <p className="text-xs text-right">
+    {progressPercentage.toFixed(0)}% Complete
+  </p>
+</div>
+{completed && (
+  <p className="text-green-600 font-bold">
+    You have completed this level! 🎉
+  </p>
+)}
+
         </div>
 
         {/* Button to return to Math Page */}
