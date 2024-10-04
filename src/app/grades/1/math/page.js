@@ -5,9 +5,14 @@ import { useRouter } from "next/navigation"; // Import useRouter for navigation
 import Header from "../../../components/layout/header/Header"; // Import Header component
 import Footer from "../../../components/layout/footer/Footer"; // Import Footer component
 import BackToTop from "../../../components/ui/BackToTop"; // Import BackToTop button
+import ToggleModal from "../../../components/ui/Modal";
 
 const MathPage = () => {
   const router = useRouter();
+
+  // State for the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
 
   // Initialize progress state with 12 levels
   const initialProgress = Array.from({ length: 12 }, () => ({
@@ -57,9 +62,11 @@ const MathPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Header />
+      <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
       <main className="flex-grow p-4">
-        <h1 className="text-3xl font-bold mb-4 text-center">Math Levels</h1>
+        <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">
+          Math Levels
+        </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Level Cards */}
           {progress.map((level, index) => (
@@ -73,15 +80,19 @@ const MathPage = () => {
                   : level.status === "Incomplete"
                   ? "border-yellow-500"
                   : "border-gray-400"
-              }`}
+              } m-2`} // Add margin
               onClick={() => navigateToLevel(index + 1)} // Navigate to level on click
             >
-              <h2 className="text-xl font-bold">{`Level ${index + 1}`}</h2>
-              <p className="text-sm">
+              <h2 className="text-xl font-bold text-gray-800">{`Level ${
+                index + 1
+              }`}</h2>{" "}
+              {/* Changed to dark gray */}
+              <p className="text-sm text-gray-700">
                 Click to start exercises for Level {index + 1}
-              </p>
+              </p>{" "}
+              {/* Changed to darker color */}
               <div className="mt-2">
-                <div className="text-lg font-semibold">
+                <div className="text-lg font-semibold text-gray-800">
                   Status:{" "}
                   <span
                     className={
@@ -102,7 +113,8 @@ const MathPage = () => {
 
         {/* Status Summary Section */}
         <div className="mt-8 bg-gray-200 p-4 rounded-lg shadow-md text-center">
-          <h2 className="text-xl font-bold">Status Summary</h2>
+          <h2 className="text-xl font-bold text-gray-800">Status Summary</h2>{" "}
+          {/* Changed to dark gray */}
           <p>
             Total Levels Completed:{" "}
             <span className="font-semibold">
@@ -119,6 +131,13 @@ const MathPage = () => {
       </main>
       <Footer />
       <BackToTop />
+      {/* Toggle Modal for SignIn and SignUp */}
+      <ToggleModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        isRegister={isRegister}
+        setIsRegister={setIsRegister}
+      />
     </div>
   );
 };

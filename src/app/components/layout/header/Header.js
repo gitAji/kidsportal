@@ -1,10 +1,8 @@
-// app/src/components/layout/header/Header.js
-
 "use client"; // Ensure this component is treated as a client component
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Header({ toggleModal }) {
+export default function Header({ setIsModalOpen, setIsRegister }) {
   return (
     <header className="bg-white shadow">
       <div className="container mx-auto p-6 flex justify-between items-center">
@@ -36,13 +34,19 @@ export default function Header({ toggleModal }) {
         <div className="flex space-x-4">
           <button
             className="text-gray-600 hover:text-blue-600"
-            onClick={() => toggleModal(false)} // Trigger Sign In modal
+            onClick={() => {
+              setIsModalOpen(true); // Open the modal
+              setIsRegister(false); // Set to login mode
+            }}
           >
             Sign In
           </button>
           <button
             className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
-            onClick={() => toggleModal(true)} // Trigger Sign Up modal
+            onClick={() => {
+              setIsModalOpen(true); // Open the modal
+              setIsRegister(true); // Set to signup mode
+            }}
           >
             Sign Up
           </button>
