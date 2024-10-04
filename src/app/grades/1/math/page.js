@@ -1,5 +1,3 @@
-// src/app/grades/1/math/page.js
-
 "use client"; // Ensure this component is treated as a client component
 
 import React, { useState, useEffect } from "react"; // Import React and useState
@@ -11,7 +9,7 @@ import BackToTop from "../../../components/ui/BackToTop"; // Import BackToTop bu
 const MathPage = () => {
   const router = useRouter();
 
-  // Initialize progress state
+  // Initialize progress state with 12 levels
   const initialProgress = Array.from({ length: 12 }, () => ({
     status: "Not Attempted", // Possible statuses: Completed, Incomplete, Not Attempted
     wrongAnswers: 0,
@@ -37,44 +35,45 @@ const MathPage = () => {
     localStorage.setItem("mathProgress", JSON.stringify(progress));
   };
 
-  // Update the progress when the component unmounts
+  // Save progress to localStorage whenever progress changes
   useEffect(() => {
     saveProgress();
   }, [progress]);
 
-  // Define light color palette for level cards
-  const borderColors = [
-    "border-blue-200", // Level 1
-    "border-green-200", // Level 2
-    "border-yellow-200", // Level 3
-    "border-red-200", // Level 4
-    "border-purple-200", // Level 5
-    "border-pink-200", // Level 6
-    "border-teal-200", // Level 7
-    "border-indigo-200", // Level 8
-    "border-orange-200", // Level 9
-    "border-gray-300", // Level 10
-    "border-sky-200", // Level 11
-    "border-emerald-200", // Level 12
+  const levelColors = [
+    "border-red-200",
+    "border-green-200",
+    "border-blue-200",
+    "border-yellow-200",
+    "border-purple-200",
+    "border-pink-200",
+    "border-indigo-200",
+    "border-orange-200",
+    "border-teal-200",
+    "border-cyan-200",
+    "border-lime-200",
+    "border-amber-200",
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <Header />
       <main className="flex-grow p-4">
-        <h1 className="text-3xl font-bold mb-4">Math Levels</h1>
+        <h1 className="text-3xl font-bold mb-4 text-center">Math Levels</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Level Cards */}
           {progress.map((level, index) => (
             <div
               key={index}
-              className={`border-4 ${borderColors[index]} ${
+              className={`border-4 p-6 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition transform hover:scale-105 ${
+                levelColors[index]
+              } ${
                 level.status === "Completed"
-                  ? "bg-green-50"
+                  ? "border-green-500"
                   : level.status === "Incomplete"
-                  ? "bg-yellow-50"
-                  : "bg-white"
-              } p-6 rounded-lg shadow cursor-pointer hover:shadow-lg transition`}
+                  ? "border-yellow-500"
+                  : "border-gray-400"
+              }`}
               onClick={() => navigateToLevel(index + 1)} // Navigate to level on click
             >
               <h2 className="text-xl font-bold">{`Level ${index + 1}`}</h2>
@@ -83,21 +82,38 @@ const MathPage = () => {
               </p>
               <div className="mt-2">
                 <div className="text-lg font-semibold">
-                  Status: {level.status}
+                  Status:{" "}
+                  <span
+                    className={
+                      level.status === "Completed"
+                        ? "text-green-500"
+                        : level.status === "Incomplete"
+                        ? "text-yellow-500"
+                        : "text-gray-500"
+                    }
+                  >
+                    {level.status}
+                  </span>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="mt-8 bg-gray-200 p-4 rounded-lg shadow">
+
+        {/* Status Summary Section */}
+        <div className="mt-8 bg-gray-200 p-4 rounded-lg shadow-md text-center">
           <h2 className="text-xl font-bold">Status Summary</h2>
           <p>
             Total Levels Completed:{" "}
-            {progress.filter((p) => p.status === "Completed").length} / 12
+            <span className="font-semibold">
+              {progress.filter((p) => p.status === "Completed").length} / 12
+            </span>
           </p>
           <p>
             Total Wrong Answers:{" "}
-            {progress.reduce((acc, level) => acc + level.wrongAnswers, 0)}
+            <span className="font-semibold">
+              {progress.reduce((acc, level) => acc + level.wrongAnswers, 0)}
+            </span>
           </p>
         </div>
       </main>
