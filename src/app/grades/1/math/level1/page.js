@@ -154,7 +154,9 @@ const Level1 = () => {
                   : "text-red-500"
               }`}
             >
-              {feedback}
+              {feedback.includes("Well done")
+                ? "Well done! 🎉"
+                : `Oops! The correct answer was &#39;${questions[currentQuestionIndex].answer}&#39;. 😞`}
             </div>
           )}
         </div>
