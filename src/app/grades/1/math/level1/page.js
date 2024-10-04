@@ -175,51 +175,52 @@ const Level1 = () => {
               />
             </div>
             <div>
-  <p className="text-xs text-right">
-    {progressPercentage.toFixed(0)}% Complete
-  </p>
-</div>
-{completed && (
-  <p className="text-green-600 font-bold">
-    You have completed this level! 🎉
-  </p>
-)}
-
-        </div>
-
-        {/* Button to return to Math Page */}
-        {completed && (
-          <button
-            onClick={() => {
-              localStorage.setItem(
-                "mathProgress",
-                JSON.stringify({
-                  status: "Completed",
-                  wrongAnswers: progress.wrongAnswers.length,
-                })
-              );
-              window.location.href = "/grades/1/math"; // Redirect to Math page
-            }}
-            className="mt-4 bg-green-500 text-white py-2 px-4 rounded"
-          >
-            Back to Levels
-          </button>
-        )}
-
-        {/* Review Incorrect Answers */}
-        {completed && progress.incorrect > 0 && (
-          <div className="mt-4">
-            <h3 className="font-bold">Review Incorrect Answers:</h3>
-            <ul className="list-disc list-inside">
-              {progress.wrongAnswers.map((question, index) => (
-                <li key={index} className="text-red-500">
-                  {question}
-                </li>
-              ))}
-            </ul>
+              <p className="text-xs text-right">
+                {progressPercentage.toFixed(0)}% Complete
+              </p>
+            </div>
+            {completed && (
+              <p className="text-green-600 font-bold">
+                You have completed this level! 🎉
+              </p>
+            )}
           </div>
-        )}
+
+          {/* Button to return to Math Page */}
+          {completed && (
+            <button
+              onClick={() => {
+                localStorage.setItem(
+                  "mathProgress",
+                  JSON.stringify({
+                    status: "Completed",
+                    wrongAnswers: progress.wrongAnswers.length,
+                  })
+                );
+                window.location.href = "/grades/1/math"; // Redirect to Math page
+              }}
+              className="mt-4 bg-green-500 text-white py-2 px-4 rounded"
+            >
+              Back to Levels
+            </button>
+          )}
+
+          {/* Review Incorrect Answers */}
+          {completed && progress.incorrect > 0 && (
+            <div className="mt-4">
+              <h3 className="font-bold">Review Incorrect Answers:</h3>
+              <ul className="list-disc list-inside">
+                {progress.wrongAnswers.map((question, index) => (
+                  <li key={index} className="text-red-500">
+                    {question}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </main>
+
       <Footer />
       <BackToTop />
     </div>
