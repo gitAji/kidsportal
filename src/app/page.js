@@ -1,101 +1,144 @@
+"use client"; // Ensure this component is treated as a client component
+
+import { useState } from "react"; // Import useState for modal state management
+import { useRouter } from "next/navigation"; // Using next/navigation
+import { signIn } from "next-auth/react"; // Import the signIn function
+import { faGoogle, faArrowUp } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import Header from "./components/layout/header/Header"; // Header component
+import Footer from "./components/layout/footer/Footer"; // Footer component
+import ToggleModal from "./components/ui/Modal"; // Modal component for login and register
+import GradeCard from "./components/ui/GradeCard"; // Import the GradeCard component
+import BackToTop from "./components/ui/BackToTop";
 
-export default function Home() {
+export default function HomePage() {
+  const router = useRouter();
+
+  // State for the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
+
+  // Darker colors for grade card borders
+  const borderColors = [
+    "border-[#8B0000]", // Dark Red
+    "border-[#FF8C00]", // Dark Orange
+    "border-[#FFD700]", // Gold
+    "border-[#228B22]", // Forest Green
+    "border-[#20B2AA]", // Light Sea Green
+    "border-[#4682B4]", // Steel Blue
+    "border-[#6A5ACD]", // Slate Blue
+    "border-[#C71585]", // Medium Violet Red
+    "border-[#FF4500]", // Orange Red
+    "border-[#B22222]", // Firebrick
+    "border-[#8A2BE2]", // Blue Violet
+    "border-[#D2691E]", // Chocolate
+  ];
+
+  // Grade labels
+  const gradeLabels = [
+    "First Grade",
+    "Second Grade",
+    "Third Grade",
+    "Fourth Grade",
+    "Fifth Grade",
+    "Sixth Grade",
+    "Seventh Grade",
+    "Eighth Grade",
+    "Ninth Grade",
+    "Tenth Grade",
+    "Eleventh Grade",
+    "Twelfth Grade",
+  ];
+
+  // Unique colors for subjects
+  const subjectColors = [
+    { subject: "Math", color: "bg-[#FF6347]" }, // Tomato
+    { subject: "Tamil", color: "bg-[#32CD32]" }, // Lime Green
+    { subject: "English", color: "bg-[#1E90FF]" }, // Dodger Blue
+    { subject: "Ariviyal", color: "bg-[#FFD700]" }, // Gold (Science in Tamil)
+  ];
+
+  // Function to scroll back to the top
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Function to generate the link dynamically based on grade and subject
+  const generateLink = (grade, subject) => {
+    return `/grades/${grade}/${subject.toLowerCase()}`; // Example: /grades/1/math or /grades/2/english
+  };
+
+  // Function to toggle modal for SignIn/SignUp
+  const toggleModal = (register = false) => {
+    setIsRegister(register);
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      {/* Header Section */}
+      <Header toggleModal={toggleModal} />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Hero Section */}
+      <section className="relative bg-blue-50 py-20">
+        <div className="container mx-auto text-center">
+          <h1 className="text-4xl font-bold text-blue-600">
+            Master skills with in-depth learning
+          </h1>
+          <p className="mt-4 text-gray-600">
+            Our platform helps you build the foundational skills you need for
+            school and beyond.
+          </p>
+          <div className="mt-8">
+            <button className="bg-blue-600 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-blue-700">
+              Get Started
+            </button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        {/* Placeholder for Hero Image */}
+        <Image
+          src=""
+          alt="Hero"
+          className="absolute inset-0 w-full h-full object-cover opacity-50"
+        />
+      </section>
+
+      {/* Features Section with Cards (Grades 1-12) */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl font-bold">Explore Our Grades</h2>
+          <p className="text-gray-600 mt-4">
+            Choose a grade to access various subjects designed to engage
+            students.
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {/* Loop through grades from 1-12 */}
+            {Array.from({ length: 12 }, (_, gradeIndex) => (
+              <GradeCard
+                key={gradeIndex}
+                gradeIndex={gradeIndex}
+                gradeLabel={gradeLabels[gradeIndex]}
+                borderColor={borderColors[gradeIndex]}
+                subjectColors={subjectColors}
+                generateLink={generateLink}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Section */}
+      <Footer />
+      <BackToTop />
+      {/* Toggle Modal for SignIn and SignUp */}
+      <ToggleModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        isRegister={isRegister}
+        setIsRegister={setIsRegister}
+      />
+    </>
   );
 }
