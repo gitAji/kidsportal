@@ -94,7 +94,7 @@ export default function LearningPage() {
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl font-bold text-blue-600">Learning Hub</h1>
           <p className="mt-4 text-gray-600">
-            Discover engaging content designed to enhance your child's learning
+            Discover engaging content designed to enhance your child learning
             experience.
           </p>
 
@@ -128,7 +128,7 @@ export default function LearningPage() {
             <h2 className="text-3xl font-bold text-blue-600">Why Choose Us?</h2>
             <p className="mt-4 text-gray-600">
               Our learning platform offers a variety of features designed to
-              enhance your child's education.
+              enhance your child education.
             </p>
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {whyChooseUs.map((item, index) => (
