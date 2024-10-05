@@ -18,18 +18,18 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
           </Link>
         </div>
         <nav className="hidden md:flex space-x-6">
-          <a href="#" className="text-gray-600 hover:text-blue-600">
+          <Link href="/learning" className="text-gray-600 hover:text-blue-600">
             Learning
-          </a>
-          <a href="#" className="text-gray-600 hover:text-blue-600">
+          </Link>
+          <Link href="/analytics" className="text-gray-600 hover:text-blue-600">
             Analytics
-          </a>
-          <a href="#" className="text-gray-600 hover:text-blue-600">
+          </Link>
+          <Link href="/pricing" className="text-gray-600 hover:text-blue-600">
             Pricing
-          </a>
-          <a href="#" className="text-gray-600 hover:text-blue-600">
+          </Link>
+          <Link href="/help" className="text-gray-600 hover:text-blue-600">
             Help
-          </a>
+          </Link>
         </nav>
         <div className="flex space-x-4">
           <button
