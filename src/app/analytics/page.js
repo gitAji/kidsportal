@@ -29,7 +29,7 @@ export default function AnalyticsPage() {
             Analytics Overview
           </h1>
           <p className="mt-4 text-gray-600">
-            Here you can view your child's learning analytics and progress.
+            Here you can view your childs learning analytics and progress.
           </p>
 
           {/* Sample Analytics Data Display */}
