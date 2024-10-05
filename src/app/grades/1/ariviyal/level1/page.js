@@ -57,13 +57,6 @@ const Level1 = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
 
-  //bread crumb
-  const breadcrumbs = [
-    { label: "Home", href: "/" },
-    { label: "Grades", href: "/grades" },
-    { label: "Math", href: "/grades/1/math" },
-    { label: "Level 1", href: "/grades/1/math/level1" }, // Current page, no link
-  ];
   // Load progress from localStorage
   useEffect(() => {
     const savedProgress = localStorage.getItem("level1Progress");
