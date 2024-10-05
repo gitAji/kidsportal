@@ -203,7 +203,7 @@ export default function HomePage() {
           <div className="mt-8">
             <div className="bg-white rounded-lg shadow-lg p-6">
               <p className="text-gray-600 italic">
-                "{testimonials[currentSlide].text}"
+                {testimonials[currentSlide].text}
               </p>
               <p className="font-semibold mt-2">
                 - {testimonials[currentSlide].author}
