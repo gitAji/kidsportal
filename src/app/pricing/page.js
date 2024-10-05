@@ -45,7 +45,7 @@ export default function PricingPage() {
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl font-bold text-blue-600">Pricing Plans</h1>
           <p className="mt-4 text-gray-600">
-            Choose the best plan that suits your child's learning needs.
+            Choose the best plan that suits your child learning needs.
           </p>
 
           {/* Plan Toggle */}
