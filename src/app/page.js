@@ -78,7 +78,7 @@ export default function HomePage() {
   return (
     <>
       {/* Header Section */}
-      <Header toggleModal={toggleModal} />
+      <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
 
       {/* Hero Section */}
       <section className="relative bg-blue-50 py-20">
