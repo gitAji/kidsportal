@@ -1,137 +1,265 @@
 "use client"; // Ensure this component is treated as a client component
 
-import React, { useState, useEffect } from "react"; // Import React and useState
-import { useRouter } from "next/navigation"; // Import useRouter for navigation
+import React, { useState, useEffect } from "react";
+import Image from "next/image"; // Optimized images with Next.js
 import Header from "../../../components/layout/header/Header"; // Import Header component
 import Footer from "../../../components/layout/footer/Footer"; // Import Footer component
 import BackToTop from "../../../components/ui/BackToTop"; // Import BackToTop button
-import ToggleModal from "../../../components/ui/Modal";
+import ToggleModal from "../../../components/ui/Modal"; // Import Modal component
 
-const MathPage = () => {
-  const router = useRouter();
+// Sample English questions for Grade 1, Level 1
+const questions = [
+  {
+    question: "What letter does this word start with? 'Apple'",
+    answer: "A",
+    image: "/images/apple.png",
+    width: 100,
+    height: 100,
+  },
+  {
+    question: "What letter does this word start with? 'Ball'",
+    answer: "B",
+    image: "/images/ball.png",
+    width: 100,
+    height: 100,
+  },
+  {
+    question: "What is the first letter of 'Cat'?",
+    answer: "C",
+    image: "/images/cat.png",
+    width: 100,
+    height: 100,
+  },
+  {
+    question: "What word starts with the letter 'D'?",
+    answer: "Dog",
+    image: "/images/dog.png",
+    width: 100,
+    height: 100,
+  },
+];
 
-  // State for the modal
+const Level1 = () => {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [userAnswer, setUserAnswer] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [progress, setProgress] = useState({
+    correct: 0,
+    incorrect: 0,
+    wrongAnswers: [],
+    attempted: 0,
+  });
+  const [completed, setCompleted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
 
-  // Initialize progress state with 12 levels
-  const initialProgress = Array.from({ length: 12 }, () => ({
-    status: "Not Attempted", // Possible statuses: Completed, Incomplete, Not Attempted
-    wrongAnswers: 0,
-  }));
-
-  const [progress, setProgress] = useState(initialProgress);
-
-  // Load progress from localStorage on component mount
+  // Load progress from localStorage
   useEffect(() => {
-    const savedProgress = localStorage.getItem("mathProgress");
+    const savedProgress = localStorage.getItem("level1EnglishProgress");
     if (savedProgress) {
-      setProgress(JSON.parse(savedProgress));
+      const { correct, incorrect, wrongAnswers, attempted, completed } =
+        JSON.parse(savedProgress);
+      setProgress({ correct, incorrect, wrongAnswers, attempted });
+      setCompleted(completed);
+      setCurrentQuestionIndex(0);
     }
   }, []);
 
-  // Function to navigate to level pages
-  const navigateToLevel = (level) => {
-    router.push(`/grades/1/math/level${level}`); // Navigate to the level page
+  // Function to speak the current question aloud using the Web Speech API
+  const speakQuestion = () => {
+    const synth = window.speechSynthesis;
+    const questionText = questions[currentQuestionIndex].question;
+    const utterance = new SpeechSynthesisUtterance(questionText);
+    utterance.lang = "en-US"; // Set the language
+    synth.speak(utterance); // Speak the question
   };
 
-  // Function to save progress in localStorage
-  const saveProgress = () => {
-    localStorage.setItem("mathProgress", JSON.stringify(progress));
+  const validateAnswer = () => {
+    const trimmedAnswer = userAnswer.trim();
+
+    setProgress((prev) => ({ ...prev, attempted: prev.attempted + 1 })); // Increase attempt count
+
+    if (
+      trimmedAnswer.toLowerCase() ===
+      questions[currentQuestionIndex].answer.toLowerCase()
+    ) {
+      setFeedback("Great job! 🎉");
+      setProgress((prev) => ({ ...prev, correct: prev.correct + 1 }));
+    } else {
+      setFeedback(
+        `Oops! The correct answer was ${questions[currentQuestionIndex].answer}. 😞`
+      );
+      setProgress((prev) => ({
+        ...prev,
+        incorrect: prev.incorrect + 1,
+        wrongAnswers: [
+          ...prev.wrongAnswers,
+          questions[currentQuestionIndex].question,
+        ],
+      }));
+    }
+
+    // Move to the next question or end the quiz if all questions are completed
+    setTimeout(() => {
+      setFeedback(""); // Clear feedback after moving to next question
+      if (currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex((prev) => prev + 1);
+        setUserAnswer(""); // Clear the input for the next question
+      } else {
+        setCompleted(true); // Set completed to true when done
+      }
+    }, 2000);
   };
 
-  // Save progress to localStorage whenever progress changes
+  // Save progress to localStorage
   useEffect(() => {
-    saveProgress();
-  }, [progress]);
+    localStorage.setItem(
+      "level1EnglishProgress",
+      JSON.stringify({ ...progress, completed })
+    );
+  }, [progress, completed]);
 
-  const levelColors = [
-    "border-red-200",
-    "border-green-200",
-    "border-blue-200",
-    "border-yellow-200",
-    "border-purple-200",
-    "border-pink-200",
-    "border-indigo-200",
-    "border-orange-200",
-    "border-teal-200",
-    "border-cyan-200",
-    "border-lime-200",
-    "border-amber-200",
-  ];
+  // Calculate progress percentage based on attempted questions
+  const progressPercentage = (progress.attempted / questions.length) * 100;
+
+  const handleReattempt = () => {
+    setProgress({ correct: 0, incorrect: 0, wrongAnswers: [], attempted: 0 });
+    setCompleted(false);
+    setCurrentQuestionIndex(0); // Restart the questions
+    setUserAnswer(""); // Clear the input
+  };
+
+  const goToEnglishPage = () => {
+    window.location.href = "/grades/1/english"; // Redirect to English page
+  };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen">
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
-      <main className="flex-grow p-4">
-        <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">
-          Math Levels
-        </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* Level Cards */}
-          {progress.map((level, index) => (
-            <div
-              key={index}
-              className={`border-4 p-6 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition transform hover:scale-105 ${
-                levelColors[index]
-              } ${
-                level.status === "Completed"
-                  ? "border-green-500"
-                  : level.status === "Incomplete"
-                  ? "border-yellow-500"
-                  : "border-gray-400"
-              } m-2`} // Add margin
-              onClick={() => navigateToLevel(index + 1)} // Navigate to level on click
-            >
-              <h2 className="text-xl font-bold text-gray-800">{`Level ${
-                index + 1
-              }`}</h2>{" "}
-              {/* Changed to dark gray */}
-              <p className="text-sm text-gray-700">
-                Click to start exercises for Level {index + 1}
-              </p>{" "}
-              {/* Changed to darker color */}
-              <div className="mt-2">
-                <div className="text-lg font-semibold text-gray-800">
-                  Status:{" "}
-                  <span
-                    className={
-                      level.status === "Completed"
-                        ? "text-green-500"
-                        : level.status === "Incomplete"
-                        ? "text-yellow-500"
-                        : "text-gray-500"
-                    }
-                  >
-                    {level.status}
-                  </span>
-                </div>
-              </div>
+      <main className="flex-grow p-4 flex flex-col items-center justify-center">
+        <h1 className="text-3xl font-bold mb-4">Level 1: English Quiz</h1>
+        <div className="mb-4 bg-gray-100 p-6 rounded-lg shadow w-full max-w-md">
+          {/* Display a "completed" image if quiz is done */}
+          {completed ? (
+            <div className="flex justify-center">
+              <Image
+                src="/images/completed.png" // Image for completion state
+                alt="Completed"
+                width={150}
+                height={150}
+              />
             </div>
-          ))}
+          ) : (
+            <div className="flex flex-wrap justify-center">
+              <Image
+                src={questions[currentQuestionIndex].image}
+                alt={questions[currentQuestionIndex].question}
+                width={questions[currentQuestionIndex].width}
+                height={questions[currentQuestionIndex].height}
+                className="mb-2"
+              />
+            </div>
+          )}
+
+          <h2 className="text-xl mt-2 text-black">
+            {completed
+              ? "Quiz Completed!"
+              : questions[currentQuestionIndex].question}
+          </h2>
+
+          {/* Voice button to play the question */}
+          {!completed && (
+            <>
+              <button
+                onClick={speakQuestion}
+                className="bg-green-500 text-white py-1 px-3 rounded mt-2 mr-2"
+              >
+                🔊 Play Question
+              </button>
+
+              <input
+                type="text"
+                value={userAnswer}
+                onChange={(e) => setUserAnswer(e.target.value)}
+                placeholder="Your answer"
+                className="border border-gray-300 rounded p-2 mt-2 w-full text-black"
+              />
+              <button
+                onClick={validateAnswer}
+                className="bg-blue-500 text-white py-1 px-3 rounded mt-2"
+                disabled={!userAnswer} // Disable button if input is empty
+              >
+                Submit
+              </button>
+            </>
+          )}
+          {feedback && (
+            <div
+              className={`mt-2 ${
+                feedback.includes("Great job")
+                  ? "text-green-500"
+                  : "text-red-500"
+              }`}
+            >
+              {feedback}
+            </div>
+          )}
         </div>
 
-        {/* Status Summary Section */}
-        <div className="mt-8 bg-gray-200 p-4 rounded-lg shadow-md text-center">
-          <h2 className="text-xl font-bold text-gray-800">Status Summary</h2>{" "}
-          {/* Changed to dark gray */}
-          <p>
-            Total Levels Completed:{" "}
-            <span className="font-semibold">
-              {progress.filter((p) => p.status === "Completed").length} / 12
-            </span>
+        {/* Progress Status */}
+        <div className="mt-4 bg-gray-200 p-4 rounded-lg shadow w-full max-w-md">
+          <h3 className="font-bold text-black">Progress:</h3>
+          <p className="text-black">Correct: {progress.correct}</p>
+          <p className="text-black">Incorrect: {progress.incorrect}</p>
+          <p className="text-black">
+            Wrong Answers: {progress.wrongAnswers.join(", ") || "None"}
           </p>
-          <p>
-            Total Wrong Answers:{" "}
-            <span className="font-semibold">
-              {progress.reduce((acc, level) => acc + level.wrongAnswers, 0)}
-            </span>
-          </p>
+          <div className="mt-2">
+            <div className="h-4 bg-blue-300 rounded">
+              <div
+                className="h-full bg-blue-500 rounded"
+                style={{ width: `${Math.min(progressPercentage, 100)}%` }}
+              />
+            </div>
+            <div>
+              <p className="text-xs text-right text-black">
+                {progressPercentage.toFixed(0)}% Completed
+              </p>
+            </div>
+          </div>
+
+          {/* Retry All */}
+          {completed && progress.correct !== questions.length && (
+            <button
+              onClick={handleReattempt}
+              className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
+            >
+              Retry All
+            </button>
+          )}
+
+          {/* Show "Back to Levels" if all answers are correct */}
+          {completed && progress.correct === questions.length && (
+            <button
+              onClick={goToEnglishPage}
+              className="mt-4 bg-green-500 text-white py-2 px-4 rounded"
+            >
+              Back to Levels
+            </button>
+          )}
+
+          {/* Completion Summary */}
+          {completed && (
+            <p className="text-green-600 font-bold mt-4">
+              Done! You got {progress.correct} right out of {questions.length}!
+              🎉
+            </p>
+          )}
         </div>
       </main>
+
       <Footer />
       <BackToTop />
-      {/* Toggle Modal for SignIn and SignUp */}
       <ToggleModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
@@ -142,4 +270,4 @@ const MathPage = () => {
   );
 };
 
-export default MathPage;
+export default Level1;

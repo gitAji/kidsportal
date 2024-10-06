@@ -57,13 +57,14 @@ const Level1 = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
 
-  //bread crumb
+  // Breadcrumbs for navigation
   const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: "Grades", href: "/grades" },
     { label: "Math", href: "/grades/1/math" },
     { label: "Level 1", href: "/grades/1/math/level1" }, // Current page, no link
   ];
+
   // Load progress from localStorage
   useEffect(() => {
     const savedProgress = localStorage.getItem("level1Progress");
@@ -75,6 +76,15 @@ const Level1 = () => {
       setCurrentQuestionIndex(0);
     }
   }, []);
+
+  // Function to speak the current question aloud using Web Speech API
+  const speakQuestion = () => {
+    const synth = window.speechSynthesis;
+    const questionText = questions[currentQuestionIndex].question;
+    const utterance = new SpeechSynthesisUtterance(questionText);
+    utterance.lang = "en-US"; // Set the language
+    synth.speak(utterance); // Speak the question
+  };
 
   const validateAnswer = () => {
     const trimmedAnswer = userAnswer.trim();
@@ -171,8 +181,16 @@ const Level1 = () => {
               : questions[currentQuestionIndex].question}
           </h2>
 
+          {/* Voice button to play the question */}
           {!completed && (
             <>
+              <button
+                onClick={speakQuestion}
+                className="bg-green-500 text-white py-1 px-3 rounded mt-2 mr-2"
+              >
+                🔊 Play Question
+              </button>
+
               <input
                 type="text"
                 value={userAnswer}
