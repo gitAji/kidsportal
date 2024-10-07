@@ -7,126 +7,160 @@ import Footer from "../../../components/layout/footer/Footer"; // Import Footer 
 import BackToTop from "../../../components/ui/BackToTop"; // Import BackToTop button
 import ToggleModal from "../../../components/ui/Modal";
 
+// Sample subjects for each category
+const subjects = {
+  recommended: [
+    {
+      title: "Counting",
+      image: "/images/counting.png", // Replace with the actual image path
+      status: "Not Attempted", // Status can be dynamically set later
+      score: 0, // Placeholder for the score
+      path: "/grades/1/math/counting", // Path to the counting questions
+    },
+    {
+      title: "Introduction to Numbers",
+      image: "/images/intro2num.jpg",
+      status: "Not Attempted",
+      score: 0,
+      path: "/grades/1/math/intro_to_numbers",
+    },
+    {
+      title: "Addition",
+      image: "/images/addition.png",
+      status: "Not Attempted",
+      score: 0,
+      path: "/grades/1/math/addition",
+    },
+  ],
+  assigned: [
+    // Corrected syntax here
+    {
+      title: "Multiplication",
+      image: "/images/multiplication.png",
+      status: "Not Attempted",
+      score: 0,
+      path: "/grades/1/math/multiplication",
+    },
+    {
+      title: "Division",
+      image: "/images/division.png",
+      status: "Not Attempted",
+      score: 0,
+      path: "/grades/1/math/division",
+    },
+    {
+      title: "Clock",
+      image: "/images/clock.jpg",
+      status: "Not Attempted",
+      score: 0,
+      path: "/grades/1/math/clock",
+    },
+  ],
+  // Add more subjects as needed
+};
+
 const MathPage = () => {
   const router = useRouter();
 
-  // State for the modal
+  // State for the modal and tab selection
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
-
-  // Initialize progress state with 12 levels
-  const initialProgress = Array.from({ length: 12 }, () => ({
-    status: "Not Attempted", // Possible statuses: Completed, Incomplete, Not Attempted
-    wrongAnswers: 0,
-  }));
-
-  const [progress, setProgress] = useState(initialProgress);
+  const [activeTab, setActiveTab] = useState("recommended"); // Default tab
 
   // Load progress from localStorage on component mount
   useEffect(() => {
     const savedProgress = localStorage.getItem("mathProgress");
     if (savedProgress) {
-      setProgress(JSON.parse(savedProgress));
+      const progress = JSON.parse(savedProgress);
+      Object.keys(subjects).forEach((key) => {
+        subjects[key].forEach((subject, index) => {
+          subject.status = progress[index]?.status || "Not Attempted"; // Update subject status
+          subject.score = progress[index]?.score || 0; // Update score if available
+        });
+      });
     }
   }, []);
 
-  // Function to navigate to level pages
-  const navigateToLevel = (level) => {
-    router.push(`/grades/1/math/level${level}`); // Navigate to the level page
+  // Function to navigate to subject pages
+  const navigateToSubject = (path) => {
+    router.push(path); // Navigate to the subject page
   };
 
-  // Function to save progress in localStorage
-  const saveProgress = () => {
-    localStorage.setItem("mathProgress", JSON.stringify(progress));
+  // Function to change the active tab
+  const handleTabChange = (tab) => {
+    setActiveTab(tab); // Update active tab
   };
-
-  // Save progress to localStorage whenever progress changes
-  useEffect(() => {
-    saveProgress();
-  }, [progress]);
-
-  const levelColors = [
-    "border-red-200",
-    "border-green-200",
-    "border-blue-200",
-    "border-yellow-200",
-    "border-purple-200",
-    "border-pink-200",
-    "border-indigo-200",
-    "border-orange-200",
-    "border-teal-200",
-    "border-cyan-200",
-    "border-lime-200",
-    "border-amber-200",
-  ];
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
       <main className="flex-grow p-4">
         <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">
-          Math Levels
+          Math Subjects
         </h1>
+
+        {/* Tab Navigation */}
+        <div className="flex -space-x-8 mb-4 gap-5">
+          <button
+            className={`flex-2 py-2 px-12 border-spacing-4 font-semibold text-center ${
+              activeTab === "recommended"
+                ? "bg-blue-400 text-white"
+                : "bg-gray-100 text-gray-800"
+            }`}
+            onClick={() => handleTabChange("recommended")}
+          >
+            Recommended
+          </button>
+          <button
+            className={`flex-2 py-2 px-12 font-semibold text-center ${
+              activeTab === "assigned"
+                ? "bg-blue-400 text-white"
+                : "bg-gray-100 text-gray-800"
+            }`}
+            onClick={() => handleTabChange("assigned")}
+          >
+            Assigned by Parents
+          </button>
+          {/* Add more tabs as needed */}
+        </div>
+
+        {/* Subject Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* Level Cards */}
-          {progress.map((level, index) => (
+          {subjects[activeTab].map((subject, index) => (
             <div
               key={index}
-              className={`border-4 p-6 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition transform hover:scale-105 ${
-                levelColors[index]
-              } ${
-                level.status === "Completed"
-                  ? "border-green-500"
-                  : level.status === "Incomplete"
-                  ? "border-yellow-500"
-                  : "border-gray-400"
-              } m-2`} // Add margin
-              onClick={() => navigateToLevel(index + 1)} // Navigate to level on click
+              className="border-2 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition transform hover:scale-105 m-2"
+              onClick={() => navigateToSubject(subject.path)} // Navigate to subject on click
             >
-              <h2 className="text-xl font-bold text-gray-800">{`Level ${
-                index + 1
-              }`}</h2>{" "}
-              {/* Changed to dark gray */}
-              <p className="text-sm text-gray-700">
-                Click to start exercises for Level {index + 1}
-              </p>{" "}
-              {/* Changed to darker color */}
-              <div className="mt-2">
-                <div className="text-lg font-semibold text-gray-800">
-                  Status:{" "}
-                  <span
-                    className={
-                      level.status === "Completed"
-                        ? "text-green-500"
-                        : level.status === "Incomplete"
-                        ? "text-yellow-500"
-                        : "text-gray-500"
-                    }
-                  >
-                    {level.status}
+              <img
+                src={subject.image}
+                alt={subject.title}
+                className="w-full h-32 rounded-t-lg object-cover" // Card image
+              />
+              <div className="p-4">
+                <h2 className="text-xl font-bold text-gray-800">
+                  {subject.title}
+                </h2>
+                <div className="mt-2 flex items-center">
+                  <div
+                    className={`h-4 w-4 rounded-full ${
+                      subject.status === "Completed"
+                        ? "bg-yellow-500"
+                        : "bg-gray-400"
+                    }`}
+                  ></div>
+                  <span className="ml-2 text-gray-700">
+                    {subject.status === "Completed"
+                      ? "Completed"
+                      : "Not Attempted"}
                   </span>
+                </div>
+                <div className="mt-1 text-gray-700">
+                  Score: <span className="font-semibold">{subject.score}</span>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Status Summary Section */}
-        <div className="mt-8 bg-gray-200 p-4 rounded-lg shadow-md text-center">
-          <h2 className="text-xl font-bold text-gray-800">Status Summary</h2>{" "}
-          {/* Changed to dark gray */}
-          <p>
-            Total Levels Completed:{" "}
-            <span className="font-semibold">
-              {progress.filter((p) => p.status === "Completed").length} / 12
-            </span>
-          </p>
-          <p>
-            Total Wrong Answers:{" "}
-            <span className="font-semibold">
-              {progress.reduce((acc, level) => acc + level.wrongAnswers, 0)}
-            </span>
-          </p>
         </div>
       </main>
       <Footer />

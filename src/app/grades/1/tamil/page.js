@@ -7,7 +7,7 @@ import Footer from "../../../components/layout/footer/Footer"; // Import Footer 
 import BackToTop from "../../../components/ui/BackToTop"; // Import BackToTop button
 import ToggleModal from "../../../components/ui/Modal";
 
-const MathPage = () => {
+const TamilPage = () => {
   const router = useRouter();
 
   // State for the modal
@@ -32,7 +32,7 @@ const MathPage = () => {
 
   // Function to navigate to level pages
   const navigateToLevel = (level) => {
-    router.push(`/grades/1/math/level${level}`); // Navigate to the level page
+    router.push(`/grades/1/tamil/level${level}`); // Navigate to the level page
   };
 
   // Function to save progress in localStorage
@@ -65,7 +65,7 @@ const MathPage = () => {
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
       <main className="flex-grow p-4">
         <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">
-          Math Levels
+          Tamil Levels
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Level Cards */}
@@ -142,4 +142,4 @@ const MathPage = () => {
   );
 };
 
-export default MathPage;
+export default TamilPage;

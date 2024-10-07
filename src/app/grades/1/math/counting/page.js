@@ -6,8 +6,13 @@ import Header from "../../../../components/layout/header/Header"; // Import Head
 import Footer from "../../../../components/layout/footer/Footer"; // Import Footer component
 import BackToTop from "../../../../components/ui/BackToTop"; // Import BackToTop button
 import ToggleModal from "../../../../components/ui/Modal"; // Import Modal component
+import VoiceButton from "../../../../components/ui/VoiceButton"; // Import the new VoiceButton component
+import useSound from "use-sound"; // Import use-sound for audio playback
+import correctSound from "../../../../../../public/sounds/correct.mp3"; // Correct answer sound
+import incorrectSound from "../../../../../../public/sounds/incorrect.mp3"; // Incorrect answer sound
+import FeedbackMessage from "../../../../components/ui/FeedbackMessage"; // Import the FeedbackMessage component
 
-// Sample questions
+// Sample questions array
 const questions = [
   {
     question: "How many apples do you see?",
@@ -44,9 +49,11 @@ const questions = [
 ];
 
 const Level1 = () => {
+  // States to track the progress, feedback, and current answers
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [isCorrect, setIsCorrect] = useState(null); // State to track if the answer is correct
   const [progress, setProgress] = useState({
     correct: 0,
     incorrect: 0,
@@ -57,15 +64,7 @@ const Level1 = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
 
-  // Breadcrumbs for navigation
-  const breadcrumbs = [
-    { label: "Home", href: "/" },
-    { label: "Grades", href: "/grades" },
-    { label: "Math", href: "/grades/1/math" },
-    { label: "Level 1", href: "/grades/1/math/level1" }, // Current page, no link
-  ];
-
-  // Load progress from localStorage
+  // Load progress from localStorage when the component mounts
   useEffect(() => {
     const savedProgress = localStorage.getItem("level1Progress");
     if (savedProgress) {
@@ -77,27 +76,20 @@ const Level1 = () => {
     }
   }, []);
 
-  // Function to speak the current question aloud using Web Speech API
-  const speakQuestion = () => {
-    const synth = window.speechSynthesis;
-    const questionText = questions[currentQuestionIndex].question;
-    const utterance = new SpeechSynthesisUtterance(questionText);
-    utterance.lang = "en-US"; // Set the language
-    synth.speak(utterance); // Speak the question
-  };
-
+  // Function to validate the user's answer
   const validateAnswer = () => {
     const trimmedAnswer = userAnswer.trim();
-
-    setProgress((prev) => ({ ...prev, attempted: prev.attempted + 1 })); // Increase attempt count
+    setProgress((prev) => ({ ...prev, attempted: prev.attempted + 1 })); // Increment attempted
 
     if (trimmedAnswer === questions[currentQuestionIndex].answer) {
       setFeedback("Well done! 🎉");
+      setIsCorrect(true);
       setProgress((prev) => ({ ...prev, correct: prev.correct + 1 }));
     } else {
       setFeedback(
         `Oops! The correct answer was ${questions[currentQuestionIndex].answer}. 😞`
       );
+      setIsCorrect(false);
       setProgress((prev) => ({
         ...prev,
         incorrect: prev.incorrect + 1,
@@ -108,19 +100,20 @@ const Level1 = () => {
       }));
     }
 
-    // Move to the next question or end the quiz if all questions are completed
+    // Move to the next question after 2 seconds or mark as completed
     setTimeout(() => {
-      setFeedback(""); // Clear feedback after moving to next question
+      setFeedback("");
+      setIsCorrect(null); // Reset isCorrect
       if (currentQuestionIndex < questions.length - 1) {
         setCurrentQuestionIndex((prev) => prev + 1);
-        setUserAnswer(""); // Clear the input for the next question
+        setUserAnswer("");
       } else {
-        setCompleted(true); // Set completed to true when done
+        setCompleted(true);
       }
     }, 2000);
   };
 
-  // Save progress to localStorage
+  // Save progress to localStorage on every update of progress or completion
   useEffect(() => {
     localStorage.setItem(
       "level1Progress",
@@ -128,18 +121,20 @@ const Level1 = () => {
     );
   }, [progress, completed]);
 
-  // Calculate progress percentage based on attempted questions
+  // Calculate percentage progress
   const progressPercentage = (progress.attempted / questions.length) * 100;
 
+  // Function to restart the quiz
   const handleReattempt = () => {
     setProgress({ correct: 0, incorrect: 0, wrongAnswers: [], attempted: 0 });
     setCompleted(false);
-    setCurrentQuestionIndex(0); // Restart the questions
-    setUserAnswer(""); // Clear the input
+    setCurrentQuestionIndex(0);
+    setUserAnswer("");
   };
 
+  // Function to navigate back to the Math page
   const goToMathPage = () => {
-    window.location.href = "/grades/1/math"; // Redirect to Math page
+    window.location.href = "/grades/1/math"; // Redirect to the math page
   };
 
   return (
@@ -148,11 +143,11 @@ const Level1 = () => {
       <main className="flex-grow p-4 flex flex-col items-center justify-center">
         <h1 className="text-3xl font-bold mb-4">Level 1: Counting</h1>
         <div className="mb-4 bg-gray-100 p-6 rounded-lg shadow w-full max-w-md">
-          {/* Display a "completed" image if quiz is done */}
+          {/* Quiz completion image */}
           {completed ? (
             <div className="flex justify-center">
               <Image
-                src="/images/completed.png" // Image for completion state
+                src="/images/completed.png" // Image shown on quiz completion
                 alt="Completed"
                 width={150}
                 height={150}
@@ -181,16 +176,13 @@ const Level1 = () => {
               : questions[currentQuestionIndex].question}
           </h2>
 
-          {/* Voice button to play the question */}
+          {/* Speak button and answer input */}
           {!completed && (
             <>
-              <button
-                onClick={speakQuestion}
-                className="bg-green-500 text-white py-1 px-3 rounded mt-2 mr-2"
-              >
-                🔊 Play Question
-              </button>
-
+              <VoiceButton
+                questionText={questions[currentQuestionIndex].question}
+              />{" "}
+              {/* Use new VoiceButton */}
               <input
                 type="text"
                 value={userAnswer}
@@ -201,26 +193,18 @@ const Level1 = () => {
               <button
                 onClick={validateAnswer}
                 className="bg-blue-500 text-white py-1 px-3 rounded mt-2"
-                disabled={!userAnswer} // Disable button if input is empty
+                disabled={!userAnswer} // Disable button if no answer is provided
               >
                 Submit
               </button>
             </>
           )}
           {feedback && (
-            <div
-              className={`mt-2 ${
-                feedback.includes("Well done")
-                  ? "text-green-500"
-                  : "text-red-500"
-              }`}
-            >
-              {feedback}
-            </div>
+            <FeedbackMessage message={feedback} isCorrect={isCorrect} />
           )}
         </div>
 
-        {/* Progress Status */}
+        {/* Progress status */}
         <div className="mt-4 bg-gray-200 p-4 rounded-lg shadow w-full max-w-md">
           <h3 className="font-bold text-black">Progress:</h3>
           <p className="text-black">Correct: {progress.correct}</p>
@@ -236,50 +220,40 @@ const Level1 = () => {
               />
             </div>
             <div>
-              <p className="text-xs text-right text-black">
-                {progressPercentage.toFixed(0)}% Completed
+              <p>
+                {progress.attempted}/{questions.length} attempted
               </p>
             </div>
           </div>
+        </div>
 
-          {/* Retry All */}
-          {completed && progress.correct !== questions.length && (
+        {/* Completion actions */}
+        {completed && (
+          <div className="mt-4">
             <button
               onClick={handleReattempt}
-              className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
+              className="bg-yellow-500 text-white py-2 px-4 rounded mr-2"
             >
-              Retry All
+              Reattempt
             </button>
-          )}
-
-          {/* Show "Back to Levels" if all answers are correct */}
-          {completed && progress.correct === questions.length && (
             <button
               onClick={goToMathPage}
-              className="mt-4 bg-green-500 text-white py-2 px-4 rounded"
+              className="bg-green-500 text-white py-2 px-4 rounded"
             >
-              Back to Levels
+              Go to Math Page
             </button>
-          )}
-
-          {/* Completion Summary */}
-          {completed && (
-            <p className="text-green-600 font-bold mt-4">
-              Done! You got {progress.correct} right out of {questions.length}!
-              🎉
-            </p>
-          )}
-        </div>
+          </div>
+        )}
       </main>
-
       <Footer />
       <BackToTop />
-      <ToggleModal
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        isRegister={isRegister}
-        setIsRegister={setIsRegister}
-      />
+      {isModalOpen && (
+        <ToggleModal
+          setIsModalOpen={setIsModalOpen}
+          isRegister={isRegister}
+          setIsRegister={setIsRegister}
+        />
+      )}
     </div>
   );
 };
