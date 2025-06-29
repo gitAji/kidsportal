@@ -111,8 +111,15 @@ export default function HomePage() {
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
 
       {/* Hero Section */}
-      <section className="relative bg-blue-50 py-20">
-        <div className="container mx-auto text-center px-4">
+      <section className="relative bg-blue-50 py-20 h-[400px] ">
+        <Image
+          src="/images/intro.jpeg"
+          alt="Hero"
+          fill
+          className="object-cover opacity-30"
+          priority
+        />
+        <div className="container mx-auto text-center relative z-1 px-4">
           <h1 className="text-4xl font-bold text-blue-600">
             Master skills with in-depth learning
           </h1>
@@ -122,19 +129,13 @@ export default function HomePage() {
           </p>
           <div className="mt-8">
             <button
-              onClick={scrollToGradeSection} // Change to link to Grade Section
+              onClick={scrollToGradeSection}
               className="bg-blue-600 text-white py-4 px-8 rounded-lg shadow-lg hover:bg-blue-700"
             >
               Get Started
             </button>
           </div>
         </div>
-        {/* Placeholder for Hero Image */}
-        <Image
-          src="" // Replace with your image path
-          alt="Hero"
-          className="absolute inset-0 w-full h-full object-cover opacity-50"
-        />
       </section>
 
       {/* Features Section */}
