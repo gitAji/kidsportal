@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import SessionProviderWrapper from "./providers/SessionProviderWrapper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -13,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "First next app",
-  description: "new one",
+  title: "Kids Learning Portal",
+  description: "A platform for kids to learn and explore",
 };
 
 export default function RootLayout({ children }) {
@@ -23,7 +24,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <SessionProviderWrapper>{children}</SessionProviderWrapper>
       </body>
     </html>
   );

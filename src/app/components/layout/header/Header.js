@@ -170,27 +170,44 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
                 Help
               </Link>
 
-              {/* Sign In & Sign Up in mobile menu */}
-              <button
-                className="text-gray-600 text-xl hover:text-blue-600"
-                onClick={() => {
-                  setIsModalOpen(true); // Open the modal
-                  setIsRegister(false); // Set to login mode
-                  setIsMenuOpen(false); // Close the mobile menu
-                }}
-              >
-                Sign In
-              </button>
-              <button
-                className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 text-xl mt-4 mx-auto w-32"
-                onClick={() => {
-                  setIsModalOpen(true); // Open the modal
-                  setIsRegister(true); // Set to signup mode
-                  setIsMenuOpen(false); // Close the mobile menu
-                }}
-              >
-                Sign Up
-              </button>
+              {/* Sign In & Sign Up / User Info in mobile menu */}
+              {session ? (
+                <>
+                  <span className="text-gray-600 text-xl">Hello, {session.user.name || session.user.email}!</span>
+                  <button
+                    className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 text-xl mt-4 mx-auto w-32"
+                    onClick={() => {
+                      signOut();
+                      setIsMenuOpen(false); // Close the mobile menu
+                    }}
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className="text-gray-600 text-xl hover:text-blue-600"
+                    onClick={() => {
+                      setIsModalOpen(true); // Open the modal
+                      setIsRegister(false); // Set to login mode
+                      setIsMenuOpen(false); // Close the mobile menu
+                    }}
+                  >
+                    Sign In
+                  </button>
+                  <button
+                    className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 text-xl mt-4 mx-auto w-32"
+                    onClick={() => {
+                      setIsModalOpen(true); // Open the modal
+                      setIsRegister(true); // Set to signup mode
+                      setIsMenuOpen(false); // Close the mobile menu
+                    }}
+                  >
+                    Sign Up
+                  </button>
+                </>
+              )}
             </nav>
           </div>
         </>
