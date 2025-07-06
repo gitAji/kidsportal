@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-gray-800 text-white py-10">
       <div className="container mx-auto text-center">
-        <p>&copy; 2024 MyLearning Platform. All rights reserved.</p>
+        <p>&copy; 2025 MyLearning Platform. All rights reserved.</p>
         <div className="mt-4 space-x-4">
           <a href="#" className="hover:underline">
             Privacy Policy
