@@ -1,7 +1,9 @@
 "use client"; // Ensure this component is treated as a client component
 
-import React, { useState, useEffect } from "react"; // Import React and useState
-import { useRouter } from "next/navigation"; // Import useRouter for navigation
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+
 import Header from "../../../components/layout/header/Header"; // Import Header component
 import Footer from "../../../components/layout/footer/Footer"; // Import Footer component
 import BackToTop from "../../../components/ui/BackToTop"; // Import BackToTop button
@@ -132,9 +134,11 @@ const MathPage = () => {
               className="border-2 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition transform hover:scale-105 m-2"
               onClick={() => navigateToSubject(subject.path)} // Navigate to subject on click
             >
-              <img
+              <Image
                 src={subject.image}
                 alt={subject.title}
+                width={300} // Placeholder width
+                height={128} // Placeholder height (h-32 = 128px)
                 className="w-full h-32 rounded-t-lg object-cover" // Card image
               />
               <div className="p-4">

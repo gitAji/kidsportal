@@ -1,7 +1,7 @@
 "use client"; // Ensure this component is treated as a client component
 
-import React, { useState, useEffect } from "react"; // Import React and useState
-import { useRouter } from "next/navigation"; // Import useRouter for navigation
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Header from "../../../components/layout/header/Header"; // Import Header component
 import Footer from "../../../components/layout/footer/Footer"; // Import Footer component
 import BackToTop from "../../../components/ui/BackToTop"; // Import BackToTop button
@@ -35,13 +35,11 @@ const MathPage = () => {
     router.push(`/grades/1/math/level${level}`); // Navigate to the level page
   };
 
-  // Function to save progress in localStorage
-  const saveProgress = () => {
-    localStorage.setItem("mathProgress", JSON.stringify(progress));
-  };
-
   // Save progress to localStorage whenever progress changes
   useEffect(() => {
+    const saveProgress = () => {
+      localStorage.setItem("mathProgress", JSON.stringify(progress));
+    };
     saveProgress();
   }, [progress]);
 

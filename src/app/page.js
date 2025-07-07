@@ -1,8 +1,8 @@
 "use client"; // Ensure this component is treated as a client component
 
-import { useState, useRef, useEffect } from "react"; // Import useState for modal state management
-import { useRouter } from "next/navigation"; // Using next/navigation
-import { signIn } from "next-auth/react"; // Import the signIn function
+import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 import { faGoogle, faArrowUp } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";

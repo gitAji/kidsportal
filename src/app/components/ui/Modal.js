@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { signIn } from "next-auth/react";
+import { signInWithGoogle, signInWithEmail, signUpWithEmail } from "../../../firebase/auth";
+import { useRouter } from "next/navigation";
 
 export default function ToggleModal({
   isModalOpen,
@@ -11,6 +12,35 @@ export default function ToggleModal({
   isRegister,
   setIsRegister,
 }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const handleEmailAuth = async (e) => {
+    e.preventDefault();
+    try {
+      if (isRegister) {
+        await signUpWithEmail(email, password);
+      } else {
+        await signInWithEmail(email, password);
+      }
+      setIsModalOpen(false);
+      router.push("/");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const handleGoogleAuth = async () => {
+    try {
+      await signInWithGoogle();
+      setIsModalOpen(false);
+      router.push("/");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   const handleVippsLogin = () => {
     console.log("Vipps login triggered");
     // Add Vipps login logic here later
@@ -30,7 +60,7 @@ export default function ToggleModal({
             <h3 className="text-2xl font-bold mb-4 text-center">
               {isRegister ? "Register" : "Login"}
             </h3>
-            <form>
+            <form onSubmit={handleEmailAuth}>
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -43,6 +73,8 @@ export default function ToggleModal({
                   id="email"
                   className="border border-gray-300 rounded w-full py-2 px-3"
                   placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="mb-4">
@@ -57,6 +89,8 @@ export default function ToggleModal({
                   id="password"
                   className="border border-gray-300 rounded w-full py-2 px-3"
                   placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div className="text-center">
@@ -78,7 +112,7 @@ export default function ToggleModal({
             <div className="mt-4 text-center">
               <button
                 className="bg-red-500 text-white py-2 px-4 rounded w-full flex items-center justify-center"
-                onClick={() => signIn("google")} // Use Google sign-in with NextAuth.js
+                onClick={handleGoogleAuth}
               >
                 <FontAwesomeIcon icon={faGoogle} className="mr-2" />
                 Sign {isRegister ? "Up" : "In"} with Google

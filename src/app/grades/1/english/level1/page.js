@@ -1,5 +1,6 @@
 "use client"; // Ensure this component is treated as a client component
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image"; // Optimized images with Next.js
 import Header from "../../../../components/layout/header/Header"; // Import Header component
 import Footer from "../../../../components/layout/footer/Footer"; // Import Footer component

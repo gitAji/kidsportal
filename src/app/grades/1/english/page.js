@@ -1,6 +1,6 @@
 "use client"; // Ensure this component is treated as a client component
 
-import React, { useState, useEffect } from "react"; // Import React and useState
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter for navigation
 import useSound from "use-sound"; // Import use-sound for audio playback
 import Header from "../../../components/layout/header/Header"; // Import Header component
@@ -40,13 +40,11 @@ const EnglishPage = () => {
     // You could call playCorrect() or playIncorrect() depending on the context
   };
 
-  // Function to save progress in localStorage
-  const saveProgress = () => {
-    localStorage.setItem("englishProgress", JSON.stringify(progress));
-  };
-
   // Save progress to localStorage whenever progress changes
   useEffect(() => {
+    const saveProgress = () => {
+      localStorage.setItem("mathProgress", JSON.stringify(progress));
+    };
     saveProgress();
   }, [progress]);
 

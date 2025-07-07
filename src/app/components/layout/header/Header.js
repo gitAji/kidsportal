@@ -1,10 +1,20 @@
-"use client"; // Ensure this component is treated as a client component
-import { useState } from "react";
+"use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, logout } from "../../../../firebase/auth";
 
 export default function Header({ setIsModalOpen, setIsRegister }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <header className="bg-white shadow">
@@ -64,26 +74,57 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
           </Link>
         </nav>
 
-        {/* Sign In & Sign Up Buttons */}
-        <div className="hidden md:flex space-x-4">
-          <button
-            className="text-gray-600 hover:text-blue-600"
-            onClick={() => {
-              setIsModalOpen(true); // Open the modal
-              setIsRegister(false); // Set to login mode
-            }}
-          >
-            Sign In
-          </button>
-          <button
-            className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
-            onClick={() => {
-              setIsModalOpen(true); // Open the modal
-              setIsRegister(true); // Set to signup mode
-            }}
-          >
-            Sign Up
-          </button>
+        {/* User Info or Sign In/Sign Up Buttons */}
+        <div className="hidden md:flex space-x-4 items-center">
+          {user ? (
+            <div className="flex items-center space-x-4">
+              {user.photoURL && (
+                <Image
+                  src={user.photoURL}
+                  alt="User Avatar"
+                  width={32}
+                  height={32}
+                  className="rounded-full"
+                />
+              )}
+              <span className="text-gray-600 font-medium">
+                {user.displayName || user.email}
+              </span>
+              <Link href="/dashboard" className="text-gray-600 hover:text-blue-600">
+                Dashboard
+              </Link>
+              <Link href="/profile" className="text-gray-600 hover:text-blue-600">
+                Profile
+              </Link>
+              <button
+                onClick={logout}
+                className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <>
+              <button
+                className="text-gray-600 hover:text-blue-600"
+                onClick={() => {
+                  setIsModalOpen(true); // Open the modal
+                  setIsRegister(false); // Set to login mode
+                }}
+              >
+                Sign In
+              </button>
+              <button
+                className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+                onClick={() => {
+                  setIsModalOpen(true); // Open the modal
+                  setIsRegister(true); // Set to signup mode
+                }}
+              >
+                Sign Up
+              </button>
+            </>
+          )}
         </div>
       </div>
 
@@ -171,17 +212,23 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
               </Link>
 
               {/* Sign In & Sign Up / User Info in mobile menu */}
-              {session ? (
+              {user ? (
                 <>
-                  <span className="text-gray-600 text-xl">Hello, {session.user.name || session.user.email}!</span>
+                  <span className="text-gray-600 text-xl">Hello, {user.displayName || user.email}!</span>
+                  <Link href="/dashboard" className="text-gray-600 text-xl hover:text-blue-600">
+                    Dashboard
+                  </Link>
+                  <Link href="/profile" className="text-gray-600 text-xl hover:text-blue-600">
+                    Profile
+                  </Link>
                   <button
-                    className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 text-xl mt-4 mx-auto w-32"
+                    className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 text-xl mt-4 mx-auto w-32"
                     onClick={() => {
-                      signOut();
+                      logout();
                       setIsMenuOpen(false); // Close the mobile menu
                     }}
                   >
-                    Sign Out
+                    Logout
                   </button>
                 </>
               ) : (

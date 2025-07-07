@@ -6,16 +6,22 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    // Handle registration logic here
+    try {
+      await signUpWithEmail(email, password);
+      router.push("/"); // Redirect to home after successful registration
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-80">
-        <h2 className="text-2xl font-bold mb-4">Register</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
         <form onSubmit={handleRegister}>
           <input
             type="text"
@@ -48,6 +54,12 @@ export default function RegisterPage() {
             Sign Up
           </button>
         </form>
+        <p className="text-center text-sm mt-4">
+          Already have an account?{" "}
+          <a href="/login" className="text-blue-600 hover:underline">
+            Login
+          </a>
+        </p>
       </div>
     </div>
   );

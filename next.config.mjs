@@ -3,6 +3,9 @@ import { withSentryConfig } from "@sentry/nextjs"; // Example import, adjust as 
 
 const nextConfig = {
   reactStrictMode: true, // Example configuration
+  images: {
+    domains: ['lh3.googleusercontent.com'],
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(mp3|wav|ogg)$/,
