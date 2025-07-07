@@ -1,4 +1,4 @@
-import { auth } from "./config";
+import { auth, db } from "./config";
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -6,12 +6,21 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 const googleProvider = new GoogleAuthProvider();
 
 export const signInWithGoogle = async () => {
   try {
-    await signInWithPopup(auth, googleProvider);
+    const result = await signInWithPopup(auth, googleProvider);
+    // Create user document in Firestore if it doesn't exist
+    const userRef = doc(db, "users", result.user.uid);
+    await setDoc(userRef, {
+      email: result.user.email,
+      displayName: result.user.displayName,
+      role: 'parent', // Default role for new sign-ups
+      createdAt: new Date(),
+    }, { merge: true }); // Use merge: true to avoid overwriting existing data
   } catch (error) {
     console.error("Error signing in with Google", error);
     throw error;
@@ -20,7 +29,14 @@ export const signInWithGoogle = async () => {
 
 export const signUpWithEmail = async (email, password) => {
   try {
-    await createUserWithEmailAndPassword(auth, email, password);
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    // Create user document in Firestore
+    const userRef = doc(db, "users", result.user.uid);
+    await setDoc(userRef, {
+      email: result.user.email,
+      role: 'parent', // Default role for new sign-ups
+      createdAt: new Date(),
+    });
   } catch (error) {
     console.error("Error signing up with email and password", error);
     throw error;

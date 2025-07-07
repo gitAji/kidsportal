@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import KidsList from './KidsList';
+import KidManagement from './KidManagement';
+
+const ParentDashboard = () => {
+  const [showManageKidsModal, setShowManageKidsModal] = useState(false);
+
+  const handleManageKidsClick = () => {
+    setShowManageKidsModal(true);
+  };
+
+  const handleCloseManageKidsModal = () => {
+    setShowManageKidsModal(false);
+  };
+
+  return (
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-6">Parent Dashboard</h1>
+
+      <section className="mb-8">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-semibold">Overview of All Kids</h2>
+          <button
+            onClick={handleManageKidsClick}
+            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          >
+            Manage Kids
+          </button>
+        </div>
+        <KidsList />
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Notifications</h2>
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <p className="text-gray-700">No new notifications.</p>
+          {/* Placeholder for notifications */}
+        </div>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Payments & Subscription Management</h2>
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <p className="text-gray-700">Current Plan: Free</p>
+          <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+            Upgrade to Premium
+          </button>
+          {/* Placeholder for payment history */}
+        </div>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">User Profile</h2>
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          
+        </div>
+      </section>
+
+      {showManageKidsModal && <KidManagement onClose={handleCloseManageKidsModal} />}
+    </div>
+  );
+};
+
+export default ParentDashboard;
