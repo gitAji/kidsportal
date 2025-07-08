@@ -4,9 +4,9 @@ import { onAuthStateChanged, updateProfile, updateEmail, updatePassword } from "
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../../../firebase/config";
 import { useRouter } from "next/navigation";
-import Header from "../../../components/layout/header/Header";
-import Footer from "../../../components/layout/footer/Footer";
-import SkeletonLoader from "../../../components/ui/SkeletonLoader";
+import Header from "../../components/layout/header/Header";
+import Footer from "../../components/layout/footer/Footer";
+import SkeletonLoader from "../../components/ui/SkeletonLoader";
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
