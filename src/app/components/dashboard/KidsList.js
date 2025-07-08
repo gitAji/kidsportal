@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { collection, query, onSnapshot, doc } from 'firebase/firestore';
-import { db, auth } from '../../firebase/config';
+import { db, auth } from '../../../firebase/config';
+import KidProgressReport from './KidProgressReport';
 
 const KidsList = () => {
   const [kids, setKids] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showProgressReportModal, setShowProgressReportModal] = useState(false);
+  const [selectedKid, setSelectedKid] = useState(null);
 
   useEffect(() => {
     if (!auth.currentUser) {
@@ -34,6 +37,16 @@ const KidsList = () => {
     return () => unsubscribe();
   }, []);
 
+  const handleViewProfileClick = (kid) => {
+    setSelectedKid(kid);
+    setShowProgressReportModal(true);
+  };
+
+  const handleCloseProgressReportModal = () => {
+    setShowProgressReportModal(false);
+    setSelectedKid(null);
+  };
+
   if (loading) {
     return <p>Loading kids...</p>;
   }
@@ -43,7 +56,7 @@ const KidsList = () => {
   }
 
   if (kids.length === 0) {
-    return <p className="text-gray-700">No kids added yet. Click "Add Child" to get started!</p>;
+    return <p className="text-gray-700">No kids added yet. Click "Manage Kids" to get started!</p>;
   }
 
   return (
@@ -64,11 +77,18 @@ const KidsList = () => {
             </div>
             <p className="text-gray-700 text-sm mt-1">Progress: {kid.progress || 0}%</p>
           </div>
-          <button className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+          <button
+            onClick={() => handleViewProfileClick(kid)}
+            className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+          >
             View Profile
           </button>
         </div>
       ))}
+
+      {showProgressReportModal && (
+        <KidProgressReport kid={selectedKid} onClose={handleCloseProgressReportModal} />
+      )}
     </div>
   );
 };
