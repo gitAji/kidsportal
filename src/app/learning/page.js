@@ -1,61 +1,41 @@
-"use client"; // Ensure this component is treated as a client component
+"use client";
 
-import Header from "../components/layout/header/Header"; // Header component
-import Footer from "../components/layout/footer/Footer"; // Footer component
-import BackToTop from "../components/ui/BackToTop"; // BackToTop component
-import Image from "next/image"; // Import Next.js Image component
+import React, { useEffect, useState } from 'react';
+import Header from "../components/layout/header/Header";
+import Footer from "../components/layout/footer/Footer";
+import BackToTop from "../components/ui/BackToTop";
+import Image from "next/image";
+import { collection, query, onSnapshot } from 'firebase/firestore';
+import { db } from '../../firebase/config';
+import { useRouter } from 'next/navigation'; // Import useRouter
 
 export default function LearningPage() {
-  // Subjects offered
-  const subjects = [
-    {
-      name: "Mathematics",
-      description:
-        "Explore the world of numbers, equations, and problem-solving.",
-      image: "/images/math.jpg", // Example image path
-      width: 300,
-      height: 200,
-    },
-    {
-      name: "Science",
-      description: "Dive into the wonders of physics, chemistry, and biology.",
-      image: "/images/science.jpg", // Example image path
-      width: 300,
-      height: 200,
-    },
-    {
-      name: "English Language Arts",
-      description: "Enhance your reading, writing, and communication skills.",
-      image: "/images/english.jpg", // Example image path
-      width: 300,
-      height: 200,
-    },
-    {
-      name: "Social Studies",
-      description: "Understand history, geography, and the world around you.",
-      image: "/images/social.jpg", // Example image path
-      width: 300,
-      height: 200,
-    },
-    {
-      name: "Art & Creativity",
-      description:
-        "Express yourself through art, music, and creative projects.",
-      image: "/images/art.jpg", // Example image path
-      width: 300,
-      height: 200,
-    },
-    {
-      name: "Technology",
-      description:
-        "Discover the world of computers, programming, and innovation.",
-      image: "/images/tech.jpg", // Example image path
-      width: 300,
-      height: 200,
-    },
-  ];
+  const [subjects, setSubjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const router = useRouter(); // Initialize useRouter
 
-  // Why Choose Us details
+  useEffect(() => {
+    const subjectsCollectionRef = collection(db, 'subjects');
+    const q = query(subjectsCollectionRef);
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const subjectsData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setSubjects(subjectsData);
+      setLoading(false);
+    }, (err) => {
+      console.error("Error fetching subjects:", err);
+      setError("Failed to load subjects.");
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Why Choose Us details (static for now)
   const whyChooseUs = [
     {
       title: "Interactive Lessons",
@@ -84,12 +64,37 @@ export default function LearningPage() {
     },
   ];
 
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-50">
+        <Header />
+        <main className="flex-grow p-4 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-lg font-semibold">Loading learning content...</p>
+            <div className="mt-4 animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-50">
+        <Header />
+        <main className="flex-grow p-4 flex items-center justify-center">
+          <p className="text-red-500">Error: {error}</p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <>
-      {/* Header Section */}
       <Header />
 
-      {/* Learning Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl font-bold text-blue-600">Learning Hub</h1>
@@ -98,32 +103,35 @@ export default function LearningPage() {
             experience.
           </p>
 
-          {/* Subjects Offered */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {subjects.map((subject, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105"
-              >
-                <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={subject.image}
-                    alt={subject.name}
-                    layout="fill" // Use layout="fill" for responsive images
-                    objectFit="cover" // Ensures the image covers the entire area
-                    loading="lazy" // Enable lazy loading
-                    className="rounded-t-lg" // Optional: Rounds the top corners of the image
-                  />
+            {subjects.length === 0 ? (
+              <p className="text-gray-700">No subjects available yet.</p>
+            ) : (
+              subjects.map((subject) => (
+                <div
+                  key={subject.id}
+                  className="bg-white p-6 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 cursor-pointer"
+                  onClick={() => router.push(`/learning/${subject.id}`)} // Add onClick to navigate
+                >
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <Image
+                      src={subject.image || '/images/placeholder.jpg'}
+                      alt={subject.name}
+                      layout="fill"
+                      objectFit="cover"
+                      loading="lazy"
+                      className="rounded-t-lg"
+                    />
+                  </div>
+                  <h3 className="text-2xl font-bold text-blue-600 mt-4">
+                    {subject.name}
+                  </h3>
+                  <p className="mt-2 text-gray-600">{subject.description}</p>
                 </div>
-                <h3 className="text-2xl font-bold text-blue-600 mt-4">
-                  {subject.name}
-                </h3>
-                <p className="mt-2 text-gray-600">{subject.description}</p>
-              </div>
-            ))}
+              ))
+            )}
           </div>
 
-          {/* Why Choose Us Section */}
           <div className="mt-20">
             <h2 className="text-3xl font-bold text-blue-600">Why Choose Us?</h2>
             <p className="mt-4 text-gray-600">
@@ -147,7 +155,6 @@ export default function LearningPage() {
         </div>
       </section>
 
-      {/* Footer Section */}
       <Footer />
       <BackToTop />
     </>

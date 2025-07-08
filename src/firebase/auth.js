@@ -20,6 +20,7 @@ export const signInWithGoogle = async () => {
       displayName: result.user.displayName,
       role: 'parent', // Default role for new sign-ups
       createdAt: new Date(),
+      subscriptionStatus: 'free', // Add subscription status
     }, { merge: true }); // Use merge: true to avoid overwriting existing data
   } catch (error) {
     console.error("Error signing in with Google", error);
@@ -36,6 +37,7 @@ export const signUpWithEmail = async (email, password) => {
       email: result.user.email,
       role: 'parent', // Default role for new sign-ups
       createdAt: new Date(),
+      subscriptionStatus: 'free', // Add subscription status
     });
   } catch (error) {
     console.error("Error signing up with email and password", error);

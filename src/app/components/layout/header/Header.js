@@ -4,10 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, logout } from "../../../../firebase/auth";
+import { FaBell, FaUserCircle, FaCaretDown } from 'react-icons/fa'; // Import icons
 
 export default function Header({ setIsModalOpen, setIsRegister }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0); // Placeholder for notification count
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -15,6 +18,15 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
     });
     return () => unsubscribe();
   }, []);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    setIsDropdownOpen(false); // Close dropdown after logout
+  };
 
   return (
     <header className="bg-white shadow">
@@ -77,31 +89,53 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
         {/* User Info or Sign In/Sign Up Buttons */}
         <div className="hidden md:flex space-x-4 items-center">
           {user ? (
-            <div className="flex items-center space-x-4">
-              {user.photoURL && (
-                <Image
-                  src={user.photoURL}
-                  alt="User Avatar"
-                  width={32}
-                  height={32}
-                  className="rounded-full"
-                />
-              )}
-              <span className="text-gray-600 font-medium">
-                {user.displayName || user.email}
-              </span>
-              <Link href="/dashboard" className="text-gray-600 hover:text-blue-600">
-                Dashboard
-              </Link>
-              <Link href="/profile" className="text-gray-600 hover:text-blue-600">
-                Profile
-              </Link>
-              <button
-                onClick={logout}
-                className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
-              >
-                Logout
-              </button>
+            <div className="relative flex items-center space-x-4">
+              {/* Notification Icon */}
+              <div className="relative">
+                <FaBell className="text-gray-600 text-xl cursor-pointer" />
+                {notificationCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                    {notificationCount}
+                  </span>
+                )}
+              </div>
+
+              {/* User Icon with Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={toggleDropdown}
+                  className="flex items-center text-gray-600 focus:outline-none"
+                >
+                  {user.photoURL ? (
+                    <Image
+                      src={user.photoURL}
+                      alt="User Avatar"
+                      width={32}
+                      height={32}
+                      className="rounded-full"
+                    />
+                  ) : (
+                    <FaUserCircle className="text-gray-600 text-3xl" />
+                  )}
+                  <FaCaretDown className="ml-1 text-gray-600" />
+                </button>
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                    <Link href="/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={toggleDropdown}>
+                      Dashboard
+                    </Link>
+                    <Link href="/dashboard/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={toggleDropdown}>
+                      Profile
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           ) : (
             <>
@@ -211,34 +245,32 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
                 Help
               </Link>
 
-              {/* Sign In & Sign Up / User Info in mobile menu */}
-              {user ? (
-                <>
-                  <span className="text-gray-600 text-xl">Hello, {user.displayName || user.email}!</span>
-                  <Link href="/dashboard" className="text-gray-600 text-xl hover:text-blue-600">
+              {/* User Info in mobile menu */}
+              {user && (
+                <div className="mt-4">
+                  <span className="text-gray-600 text-xl block mb-2">Hello, {user.displayName || user.email}!</span>
+                  <Link href="/dashboard" className="block text-gray-600 text-xl hover:text-blue-600 mb-2" onClick={() => setIsMenuOpen(false)}>
                     Dashboard
                   </Link>
-                  <Link href="/profile" className="text-gray-600 text-xl hover:text-blue-600">
+                  <Link href="/dashboard/profile" className="block text-gray-600 text-xl hover:text-blue-600 mb-2" onClick={() => setIsMenuOpen(false)}>
                     Profile
                   </Link>
                   <button
+                    onClick={() => { handleLogout(); setIsMenuOpen(false); }}
                     className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 text-xl mt-4 mx-auto w-32"
-                    onClick={() => {
-                      logout();
-                      setIsMenuOpen(false); // Close the mobile menu
-                    }}
                   >
-                    Logout
+                    Sign Out
                   </button>
-                </>
-              ) : (
+                </div>
+              )}
+              {!user && (
                 <>
                   <button
                     className="text-gray-600 text-xl hover:text-blue-600"
                     onClick={() => {
-                      setIsModalOpen(true); // Open the modal
-                      setIsRegister(false); // Set to login mode
-                      setIsMenuOpen(false); // Close the mobile menu
+                      setIsModalOpen(true);
+                      setIsRegister(false);
+                      setIsMenuOpen(false);
                     }}
                   >
                     Sign In
@@ -246,9 +278,9 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
                   <button
                     className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 text-xl mt-4 mx-auto w-32"
                     onClick={() => {
-                      setIsModalOpen(true); // Open the modal
-                      setIsRegister(true); // Set to signup mode
-                      setIsMenuOpen(false); // Close the mobile menu
+                      setIsModalOpen(true);
+                      setIsRegister(true);
+                      setIsMenuOpen(false);
                     }}
                   >
                     Sign Up

@@ -1,18 +1,19 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase/config";
 import { useRouter } from "next/navigation";
 import Header from "../components/layout/header/Header";
 import Footer from "../components/layout/footer/Footer";
-import ParentDashboard from "../components/dashboard/ParentDashboard";
-import KidDashboard from "../components/dashboard/KidDashboard";
+
+const LazyParentDashboard = React.lazy(() => import("../components/dashboard/ParentDashboard"));
+const LazyKidDashboard = React.lazy(() => import("../components/dashboard/KidDashboard"));
 
 export default function DashboardPage() {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [isParent, setIsParent] = useState(true); // Default to parent, will be updated from Firestore
+  const [loadingAuth, setLoadingAuth] = useState(true); 
+  const [isParent, setIsParent] = useState(true); 
   const router = useRouter();
 
   useEffect(() => {
@@ -43,13 +44,13 @@ export default function DashboardPage() {
           console.error("Error fetching user role:", error);
           setIsParent(true); // Fallback to parent in case of error
         } finally {
-          console.log("Setting loading to false after auth state and role check.");
-          setLoading(false);
+          console.log("Setting loadingAuth to false after auth state and role check.");
+          setLoadingAuth(false);
         }
       } else {
         console.log("No current user. Redirecting to login.");
-        router.push("/login"); // Redirect to login if not authenticated
-        setLoading(false); // Also set loading to false if redirecting
+        router.push("/login"); 
+        setLoadingAuth(false); 
       }
     });
     return () => {
@@ -58,24 +59,24 @@ export default function DashboardPage() {
     };
   }, [router]);
 
-  if (!user && !loading) {
-    console.log("No user and not loading, returning null (should redirect).");
-    return null; // Should redirect to login if not authenticated and not loading
+  // If authentication is still loading, display a simple message or nothing
+  if (loadingAuth) {
+    return null; // Or a very minimal loading indicator if absolutely necessary
   }
 
-  console.log("Rendering dashboard for user:", user?.uid, "isParent:", isParent, "loading:", loading);
+  if (!user) {
+    console.log("No user, returning null (should redirect).");
+    return null; 
+  }
+
+  console.log("Rendering dashboard for user:", user?.uid, "isParent:", isParent);
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Header />
-      <main className="flex-grow p-4 flex items-center justify-center">
-        {loading ? (
-          <div className="text-center">
-            <p className="text-lg font-semibold">Loading dashboard...</p>
-            <div className="mt-4 animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-          </div>
-        ) : (
-          isParent ? <ParentDashboard /> : <KidDashboard />
-        )}
+      <main className="flex-grow p-4">
+        <Suspense fallback={<div>Loading...</div>}>
+          {isParent ? <LazyParentDashboard /> : <LazyKidDashboard />}
+        </Suspense>
       </main>
       <Footer />
     </div>
