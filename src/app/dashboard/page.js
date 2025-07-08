@@ -9,7 +9,7 @@ import Footer from "../components/layout/footer/Footer";
 import SkeletonLoader from "../components/ui/SkeletonLoader"; // Import SkeletonLoader
 
 const LazyParentDashboard = React.lazy(() => import("../components/dashboard/ParentDashboard"));
-const LazyKidDashboard = React.lazy(() => import("../components/dashboard/KidDashboard"));
+const LazyChildDashboard = React.lazy(() => import("../components/dashboard/ChildDashboard"));
 
 export default function DashboardPage() {
   const [user, setUser] = useState(null);
@@ -60,9 +60,17 @@ export default function DashboardPage() {
     };
   }, [router]);
 
-  // If authentication is still loading, display a simple message or nothing
+  // If authentication is still loading, display a skeleton loader
   if (loadingAuth) {
-    return null; 
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-50">
+        <Header />
+        <main className="flex-grow p-4">
+          <SkeletonLoader />
+        </main>
+        <Footer />
+      </div>
+    );
   }
 
   if (!user) {
@@ -76,7 +84,7 @@ export default function DashboardPage() {
       <Header />
       <main className="flex-grow p-4">
         <Suspense fallback={<SkeletonLoader />}>
-          {isParent ? <LazyParentDashboard /> : <LazyKidDashboard />}
+          {isParent ? <LazyParentDashboard /> : <LazyChildDashboard />}
         </Suspense>
       </main>
       <Footer />

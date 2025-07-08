@@ -1,12 +1,17 @@
 "use client";
 import { useEffect, useState, Suspense } from "react";
-import { onAuthStateChanged, updateProfile, updateEmail, updatePassword } from "firebase/auth";
+import {
+  onAuthStateChanged,
+  updateProfile,
+  updateEmail,
+  updatePassword,
+} from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { auth, db } from "../../../firebase/config";
+import { auth, db } from "../../firebase/config";
 import { useRouter } from "next/navigation";
-import Header from "../../components/layout/header/Header";
-import Footer from "../../components/layout/footer/Footer";
-import SkeletonLoader from "../../components/ui/SkeletonLoader";
+import Header from "../components/layout/header/Header";
+import Footer from "../components/layout/footer/Footer";
+import SkeletonLoader from "../components/ui/SkeletonLoader";
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
@@ -14,7 +19,7 @@ export default function ProfilePage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [photoURL, setPhotoURL] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(""); 
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
   const router = useRouter();
 
@@ -27,7 +32,7 @@ export default function ProfilePage() {
         setPhotoURL(currentUser.photoURL || "");
 
         try {
-          const userDocRef = doc(db, 'users', currentUser.uid);
+          const userDocRef = doc(db, "users", currentUser.uid);
           const userDocSnap = await getDoc(userDocRef);
           if (userDocSnap.exists()) {
             setPhoneNumber(userDocSnap.data().phoneNumber || "");
@@ -35,9 +40,8 @@ export default function ProfilePage() {
         } catch (error) {
           console.error("Error fetching phone number:", error);
         }
-
       } else {
-        router.push("/login"); 
+        router.push("/login");
       }
     });
     return () => unsubscribe();
@@ -61,7 +65,7 @@ export default function ProfilePage() {
           await updatePassword(user, password);
         }
 
-        const userDocRef = doc(db, 'users', user.uid);
+        const userDocRef = doc(db, "users", user.uid);
         await setDoc(userDocRef, { phoneNumber: phoneNumber }, { merge: true });
 
         setMessage("Profile updated successfully!");
@@ -75,14 +79,14 @@ export default function ProfilePage() {
   };
 
   if (!user) {
-    return null; 
+    return null;
   }
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Header />
       <main className="flex-grow p-4 flex items-center justify-center">
-        <Suspense fallback={<SkeletonLoader />}> 
+        <Suspense fallback={<SkeletonLoader />}>
           <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
             <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">
               User Profile
@@ -90,7 +94,9 @@ export default function ProfilePage() {
             {message && (
               <div
                 className={`p-3 mb-4 rounded text-center ${
-                  message.includes("Error") ? "bg-red-100 text-red-700" : "bg-green-100 text-green-700"
+                  message.includes("Error")
+                    ? "bg-red-100 text-red-700"
+                    : "bg-green-100 text-green-700"
                 }`}
               >
                 {message}
@@ -110,64 +116,64 @@ export default function ProfilePage() {
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Email:
-                  </label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Password (leave blank to keep current):
-                  </label>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="********"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Photo URL:
-                  </label>
-                  <input
-                    type="text"
-                    value={photoURL}
-                    onChange={(e) => setPhotoURL(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                </div>
-                {/* Phone Number Field */}
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Phone Number:
-                  </label>
-                  <input
-                    type="tel"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Enter phone number"
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <button
-                    type="submit"
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  >
-                    Update Profile
-                  </button>
-                </div>
-              </form>
-            </div>
-          </Suspense>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+                  Email:
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Password (leave blank to keep current):
+                </label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="********"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Photo URL:
+                </label>
+                <input
+                  type="text"
+                  value={photoURL}
+                  onChange={(e) => setPhotoURL(e.target.value)}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+              </div>
+              {/* Phone Number Field */}
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Phone Number:
+                </label>
+                <input
+                  type="tel"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Enter phone number"
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <button
+                  type="submit"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                  Update Profile
+                </button>
+              </div>
+            </form>
+          </div>
+        </Suspense>
+      </main>
+      <Footer />
+    </div>
+  );
+}

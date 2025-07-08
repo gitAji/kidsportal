@@ -23,7 +23,8 @@ export default function GradeCard({
           <a
             key={subject.subject}
             href={generateLink(gradeIndex + 1, subject.subject)} // Generate the link dynamically
-            className={`rounded-md text-gray-700 py-2 px-2 mb-2 text-sm ${subject.color}`}
+            className={`rounded-full py-2 px-4 mb-2 text-sm font-semibold transition-all duration-200 hover:scale-110 ${subject.textColor} ${subject.color}`}
+            style={{ backgroundColor: subject.color, color: subject.textColor }}
           >
             {subject.subject}
           </a>

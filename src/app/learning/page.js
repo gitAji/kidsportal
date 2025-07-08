@@ -1,40 +1,55 @@
-"use client";
+"use client"; // Ensure this component is treated as a client component
 
 import React, { useEffect, useState } from 'react';
 import Header from "../components/layout/header/Header";
 import Footer from "../components/layout/footer/Footer";
 import BackToTop from "../components/ui/BackToTop";
 import Image from "next/image";
-import { collection, query, onSnapshot } from 'firebase/firestore';
-import { db } from '../../firebase/config';
 import { useRouter } from 'next/navigation'; 
-import SkeletonLoader from "../components/ui/SkeletonLoader"; // Import SkeletonLoader
 
 export default function LearningPage() {
-  const [subjects, setSubjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const router = useRouter(); 
-
-  useEffect(() => {
-    const subjectsCollectionRef = collection(db, 'subjects');
-    const q = query(subjectsCollectionRef);
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const subjectsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setSubjects(subjectsData);
-      setLoading(false);
-    }, (err) => {
-      console.error("Error fetching subjects:", err);
-      setError("Failed to load subjects.");
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
+  // Subjects offered (static data)
+  const subjects = [
+    {
+      id: 'mathematics',
+      name: "Mathematics",
+      description:
+        "Explore the world of numbers, equations, and problem-solving.",
+      image: "/images/math.jpg", 
+    },
+    {
+      id: 'science',
+      name: "Science",
+      description: "Dive into the wonders of physics, chemistry, and biology.",
+      image: "/images/science.jpg", 
+    },
+    {
+      id: 'english',
+      name: "English Language Arts",
+      description: "Enhance your reading, writing, and communication skills.",
+      image: "/images/english.jpg", 
+    },
+    {
+      id: 'social',
+      name: "Social Studies",
+      description: "Understand history, geography, and the world around you.",
+      image: "/images/social.jpg", 
+    },
+    {
+      id: 'art',
+      name: "Art & Creativity",
+      description:
+        "Express yourself through art, music, and creative projects.",
+      image: "/images/art.jpg", 
+    },
+    {
+      id: 'technology',
+      name: "Technology",
+      description:
+        "Discover the world of computers, programming, and innovation.",
+      image: "/images/tech.jpg", 
+    },
+  ];
 
   // Why Choose Us details (static for now)
   const whyChooseUs = [
@@ -65,31 +80,7 @@ export default function LearningPage() {
     },
   ];
 
-  if (loading) {
-    return (
-      <div className="flex flex-col min-h-screen bg-gray-50">
-        <Header />
-        <main className="flex-grow p-4 flex items-center justify-center">
-          <div className="text-center w-full">
-            <SkeletonLoader />
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex flex-col min-h-screen bg-gray-50">
-        <Header />
-        <main className="flex-grow p-4 flex items-center justify-center">
-          <p className="text-red-500">Error: {error}</p>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  const router = useRouter(); 
 
   return (
     <>
@@ -104,32 +95,28 @@ export default function LearningPage() {
           </p>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {subjects.length === 0 ? (
-              <p className="text-gray-700">No subjects available yet.</p>
-            ) : (
-              subjects.map((subject) => (
-                <div
-                  key={subject.id}
-                  className="bg-white p-6 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 cursor-pointer"
-                  onClick={() => router.push(`/learning/${subject.id}`)} 
-                >
-                  <div className="relative h-48 w-full overflow-hidden">
-                    <Image
-                      src={subject.image || '/images/placeholder.jpg'}
-                      alt={subject.name}
-                      layout="fill"
-                      objectFit="cover"
-                      loading="lazy"
-                      className="rounded-t-lg"
-                    />
-                  </div>
-                  <h3 className="text-2xl font-bold text-blue-600 mt-4">
-                    {subject.name}
-                  </h3>
-                  <p className="mt-2 text-gray-600">{subject.description}</p>
+            {subjects.map((subject) => (
+              <div
+                key={subject.id}
+                className="bg-white p-6 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 cursor-pointer"
+                onClick={() => router.push(`/learning/${subject.id}`)} 
+              >
+                <div className="relative h-48 w-full overflow-hidden">
+                  <Image
+                    src={subject.image || '/images/placeholder.jpg'}
+                    alt={subject.name}
+                    layout="fill"
+                    objectFit="cover"
+                    loading="lazy"
+                    className="rounded-t-lg"
+                  />
                 </div>
-              ))
-            )}
+                <h3 className="text-2xl font-bold text-blue-600 mt-4">
+                  {subject.name}
+                </h3>
+                <p className="mt-2 text-gray-600">{subject.description}</p>
+              </div>
+            ))}
           </div>
 
           <div className="mt-20">

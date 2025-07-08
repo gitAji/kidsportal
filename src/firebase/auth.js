@@ -19,8 +19,6 @@ export const signInWithGoogle = async (onSuccess) => {
       email: result.user.email,
       displayName: result.user.displayName,
       role: 'parent', // Default role for new sign-ups
-      createdAt: new Date(),
-      subscriptionStatus: 'free', // Add subscription status
     }, { merge: true }); // Use merge: true to avoid overwriting existing data
     if (onSuccess) onSuccess();
   } catch (error) {
@@ -37,8 +35,6 @@ export const signUpWithEmail = async (email, password, onSuccess) => {
     await setDoc(userRef, {
       email: result.user.email,
       role: 'parent', // Default role for new sign-ups
-      createdAt: new Date(),
-      subscriptionStatus: 'free', // Add subscription status
     });
     if (onSuccess) onSuccess();
   } catch (error) {

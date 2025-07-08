@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 import { faGoogle, faArrowUp } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -38,45 +40,46 @@ export default function HomePage() {
     },
   ];
 
-  // Darker colors for grade card borders
-  const borderColors = [
-    "border-[#8B0000]", // Dark Red
-    "border-[#FF8C00]", // Dark Orange
-    "border-[#FFD700]", // Gold
-    "border-[#228B22]", // Forest Green
-    "border-[#20B2AA]", // Light Sea Green
-    "border-[#4682B4]", // Steel Blue
-    "border-[#6A5ACD]", // Slate Blue
-    "border-[#C71585]", // Medium Violet Red
-    "border-[#FF4500]", // Orange Red
-    "border-[#B22222]", // Firebrick
-    "border-[#8A2BE2]", // Blue Violet
-    "border-[#D2691E]", // Chocolate
-  ];
+  const [gradesData, setGradesData] = useState([]);
+  const [loadingGrades, setLoadingGrades] = useState(true);
+  const [errorGrades, setErrorGrades] = useState(null);
 
-  // Grade labels
-  const gradeLabels = [
-    "First Grade",
-    "Second Grade",
-    "Third Grade",
-    "Fourth Grade",
-    "Fifth Grade",
-    "Sixth Grade",
-    "Seventh Grade",
-    "Eighth Grade",
-    "Ninth Grade",
-    "Tenth Grade",
-    "Eleventh Grade",
-    "Twelfth Grade",
-  ];
+  useEffect(() => {
+    const fetchGrades = async () => {
+      try {
+        const subjectsCollectionRef = collection(db, "subjects");
+        const querySnapshot = await getDocs(subjectsCollectionRef);
+        const fetchedSubjects = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
 
-  // Unique colors for subjects
-  const subjectColors = [
-    { subject: "Math", color: "bg-[#FF6347]", textColor: "text-white" }, // Tomato
-    { subject: "Tamil", color: "bg-[#32CD32]", textColor: "text-white" }, // Lime Green
-    { subject: "English", color: "bg-[#1E90FF]", textColor: "text-white" }, // Dodger Blue
-    { subject: "Ariviyal", color: "bg-[#FFD700]", textColor: "text-black" }, // Gold (Science in Tamil)
-  ];
+        // Group subjects by grade (assuming grade is part of subject data or derived)
+        // For now, let's create a simplified structure based on the existing gradeLabels concept
+        // In a real scenario, grades might be a separate collection or derived from levels
+        const gradesMap = new Map();
+        fetchedSubjects.forEach(subject => {
+          // This is a placeholder. You'll need a way to associate subjects with grades.
+          // For demonstration, I'll just create a single 'grade' entry for all subjects.
+          const gradeKey = "all"; // Placeholder for a single grade grouping
+          if (!gradesMap.has(gradeKey)) {
+            gradesMap.set(gradeKey, { gradeLabel: "All Grades", subjects: [] });
+          }
+          gradesMap.get(gradeKey).subjects.push(subject);
+        });
+
+        // Convert map to array and sort if necessary
+        setGradesData(Array.from(gradesMap.values()));
+      } catch (err) {
+        console.error("Error fetching grades:", err);
+        setErrorGrades("Failed to load grades.");
+      } finally {
+        setLoadingGrades(false);
+      }
+    };
+
+    fetchGrades();
+  }, []);
 
   // Function to scroll to the grade section
   const scrollToGradeSection = () => {
@@ -85,9 +88,9 @@ export default function HomePage() {
     }
   };
 
-  // Function to generate the link dynamically based on grade and subject
-  const generateLink = (grade, subject) => {
-    return `/grades/${grade}/${subject.toLowerCase()}`; // Example: /grades/1/math or /grades/2/english
+  // Function to generate the link dynamically based on subject ID
+  const generateLink = (subjectId) => {
+    return `/learning/${subjectId}`;
   };
 
   // Function to toggle modal for SignIn/SignUp
@@ -180,17 +183,31 @@ export default function HomePage() {
           </p>
 
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {/* Loop through grades from 1-12 */}
-            {Array.from({ length: 12 }, (_, gradeIndex) => (
-              <GradeCard
-                key={gradeIndex}
-                gradeIndex={gradeIndex}
-                gradeLabel={gradeLabels[gradeIndex]}
-                borderColor={borderColors[gradeIndex]}
-                subjectColors={subjectColors}
-                generateLink={generateLink} // Pass generateLink function
-              />
-            ))}
+            {loadingGrades ? (
+              <p>Loading grades...</p>
+            ) : errorGrades ? (
+              <p className="text-red-500">Error: {errorGrades}</p>
+            ) : gradesData.length === 0 ? (
+              <p className="text-gray-700">No grades available yet.</p>
+            ) : (
+              gradesData.map((gradeEntry, index) => (
+                <div key={index} className="w-full">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4">{gradeEntry.gradeLabel}</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    {gradeEntry.subjects.map((subject) => (
+                      <GradeCard
+                        key={subject.id}
+                        gradeLabel={subject.name}
+                        borderColor={subject.imageUrl ? '' : 'border-gray-300'} // Use image or default border
+                        subjectColors={[]} // Not used directly here, but passed for consistency if needed
+                        generateLink={() => generateLink(subject.id)}
+                        imageUrl={subject.imageUrl}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </section>

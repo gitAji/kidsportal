@@ -1,58 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { collection, query, onSnapshot, doc } from 'firebase/firestore';
-import { db } from '../../../firebase/config';
+import React, { useState } from 'react';
 import AssignTaskForm from './AssignTaskForm';
 
 const KidProgressReport = ({ kid, onClose }) => {
   const [showAssignTaskModal, setShowAssignTaskModal] = useState(false);
-  const [assignedTasks, setAssignedTasks] = useState([]);
-  const [loadingTasks, setLoadingTasks] = useState(true);
-  const [tasksError, setTasksError] = useState(null);
 
   if (!kid) {
     return null;
   }
 
-  useEffect(() => {
-    if (!kid || !kid.id) return;
-
-    setLoadingTasks(true);
-    setTasksError(null);
-
-    // Fetch tasks from all subjects for this kid
-    // This requires a collection group query if tasks are in subcollections of subjects
-    // For simplicity, let's assume a top-level 'tasks' collection for now, or iterate through subjects
-    // Given the data model: users/{kidId}/progressTracking/{subjectId}/tasks
-    // We need to fetch all subjects first, then iterate to get tasks, or use a collection group query if available and indexed.
-    // For now, let's simplify and assume a direct path for tasks under kid's progressTracking
-
-    // A more robust solution would involve fetching all subjects first, then their tasks
-    // For demonstration, let's assume a simplified structure or fetch all tasks under kid's progressTracking
-
-    // To fetch tasks from users/{kidId}/progressTracking/{subjectId}/tasks, we need to know the subjectIds.
-    // For now, let's fetch all tasks directly under a kid's progressTracking if that's feasible, or iterate.
-    // Given the current data model, a direct query for all tasks under a kid across subjects is complex without collection group queries.
-    // Let's adjust the data model slightly for easier fetching of all assigned tasks for a kid.
-    // New proposed task path: users/{kidId}/assignedTasks/{taskId}
-
-    const tasksCollectionRef = collection(db, 'users', kid.id, 'assignedTasks');
-    const q = query(tasksCollectionRef);
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const tasksData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setAssignedTasks(tasksData);
-      setLoadingTasks(false);
-    }, (err) => {
-      console.error("Error fetching assigned tasks:", err);
-      setTasksError("Failed to load assigned tasks.");
-      setLoadingTasks(false);
-    });
-
-    return () => unsubscribe();
-  }, [kid.id]);
+  // Static data for tasks
+  const assignedTasks = [
+    { id: 1, name: 'Math - Addition Level 1', status: 'completed', deadline: '2025-07-15' },
+    { id: 2, name: 'English - Alphabets', status: 'in-progress', deadline: '2025-07-20' },
+    { id: 3, name: 'Science - Animals', status: 'assigned', deadline: '2025-07-25' },
+    { id: 4, name: 'History - Ancient Civilizations', status: 'assigned', deadline: '2025-07-30' },
+  ];
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -85,16 +47,10 @@ const KidProgressReport = ({ kid, onClose }) => {
           <p className="text-gray-700">Age: {kid.age}</p>
           <p className="text-gray-700">Grade: {kid.grade}</p>
           <div className="mt-4">
-            {loadingTasks ? (
-              <p>Loading tasks overview...</p>
-            ) : (
-              <>
-                <p className="text-gray-700">Total Assigned Tasks: {assignedTasks.length}</p>
-                <p className="text-gray-700">Tasks Completed: {assignedTasks.filter(task => task.status === 'completed').length}</p>
-                <p className="text-gray-700">Tasks In Progress: {assignedTasks.filter(task => task.status === 'in-progress').length}</p>
-                <p className="text-gray-700">Tasks Assigned: {assignedTasks.filter(task => task.status === 'assigned').length}</p>
-              </>
-            )}
+            <p className="text-gray-700">Total Assigned Tasks: {assignedTasks.length}</p>
+            <p className="text-gray-700">Tasks Completed: {assignedTasks.filter(task => task.status === 'completed').length}</p>
+            <p className="text-gray-700">Tasks In Progress: {assignedTasks.filter(task => task.status === 'in-progress').length}</p>
+            <p className="text-gray-700">Tasks Assigned: {assignedTasks.filter(task => task.status === 'assigned').length}</p>
             <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
               <div
                 className="bg-blue-600 h-2.5 rounded-full"
@@ -113,11 +69,7 @@ const KidProgressReport = ({ kid, onClose }) => {
           >
             Assign New Task
           </button>
-          {loadingTasks ? (
-            <p>Loading assigned tasks...</p>
-          ) : tasksError ? (
-            <p className="text-red-500">Error: {tasksError}</p>
-          ) : assignedTasks.length === 0 ? (
+          {assignedTasks.length === 0 ? (
             <p className="text-gray-700">No assigned tasks.</p>
           ) : (
             <div className="overflow-x-auto">
@@ -125,22 +77,18 @@ const KidProgressReport = ({ kid, onClose }) => {
                 <thead>
                   <tr>
                     <th className="py-2 px-4 border-b">Task Name</th>
-                    <th className="py-2 px-4 border-b">Subject</th>
-                    <th className="py-2 px-4 border-b">Level</th>
                     <th className="py-2 px-4 border-b">Status</th>
-                    <th className="py-2 px-4 border-b">Assigned Date</th>
+                    <th className="py-2 px-4 border-b">Deadline</th>
                   </tr>
                 </thead>
                 <tbody>
                   {assignedTasks.map((task) => (
                     <tr key={task.id}>
-                      <td className="py-2 px-4 border-b">{task.lessonName}</td>
-                      <td className="py-2 px-4 border-b">{task.subjectName}</td>
-                      <td className="py-2 px-4 border-b">{task.levelName}</td>
+                      <td className="py-2 px-4 border-b">{task.name}</td>
                       <td className={`py-2 px-4 border-b ${getStatusColor(task.status)}`}>
                         {task.status.replace('-', ' ')}
                       </td>
-                      <td className="py-2 px-4 border-b">{task.assignedDate?.toDate().toLocaleDateString()}</td>
+                      <td className="py-2 px-4 border-b">{task.deadline}</td>
                     </tr>
                   ))}
                 </tbody>

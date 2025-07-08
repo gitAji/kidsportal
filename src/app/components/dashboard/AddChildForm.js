@@ -2,20 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../../../firebase/config';
 
-const AddChildForm = ({ onClose, kidToEdit, onSaveSuccess }) => {
-  const [name, setName] = useState(kidToEdit ? kidToEdit.name : '');
-  const [age, setAge] = useState(kidToEdit ? kidToEdit.age : '');
-  const [grade, setGrade] = useState(kidToEdit ? kidToEdit.grade : '');
+const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
+  const [name, setName] = useState(childToEdit ? childToEdit.name : '');
+  const [age, setAge] = useState(childToEdit ? childToEdit.age : '');
+  const [grade, setGrade] = useState(childToEdit ? childToEdit.grade : '');
+  const [username, setUsername] = useState(childToEdit ? childToEdit.username : '');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
-    if (kidToEdit) {
-      setName(kidToEdit.name);
-      setAge(kidToEdit.age);
-      setGrade(kidToEdit.grade);
+    if (childToEdit) {
+      setName(childToEdit.name);
+      setAge(childToEdit.age);
+      setGrade(childToEdit.grade);
+      setUsername(childToEdit.username);
     }
-  }, [kidToEdit]);
+  }, [childToEdit]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,36 +32,39 @@ const AddChildForm = ({ onClose, kidToEdit, onSaveSuccess }) => {
 
     try {
       const parentUid = auth.currentUser.uid;
-      if (kidToEdit) {
-        // Update existing child
-        const kidDocRef = doc(db, 'users', parentUid, 'kids', kidToEdit.id);
-        await updateDoc(kidDocRef, {
-          name,
-          age: parseInt(age),
-          grade,
-        });
+      const childData = {
+        name,
+        age: parseInt(age),
+        grade,
+        username,
+      };
+
+      if (password) {
+        childData.password = password; 
+      }
+
+      if (childToEdit) {
+        const childDocRef = doc(db, 'users', parentUid, 'children', childToEdit.id);
+        await updateDoc(childDocRef, childData);
         setSuccessMessage('Child updated successfully!');
       } else {
-        // Add new child
-        const kidsCollectionRef = collection(db, 'users', parentUid, 'kids');
-        await addDoc(kidsCollectionRef, {
-          name,
-          age: parseInt(age),
-          grade,
+        const childrenCollectionRef = collection(db, 'users', parentUid, 'children');
+        await addDoc(childrenCollectionRef, {
+          ...childData,
           assignedTasks: 0,
           tasksCompleted: 0,
           progress: 0,
         });
         setSuccessMessage('Child added successfully!');
       }
-      // Call the success callback if provided
+      
       if (onSaveSuccess) {
         onSaveSuccess();
       }
-      // Close the modal after a short delay to show the success message
+      
       setTimeout(() => {
         onClose();
-      }, 1500); // 1.5 seconds delay
+      }, 1500);
     } catch (err) {
       console.error("Error saving child:", err);
       setError("Failed to save child. Please try again.");
@@ -68,12 +74,12 @@ const AddChildForm = ({ onClose, kidToEdit, onSaveSuccess }) => {
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-4">{kidToEdit ? 'Edit Child' : 'Add New Child'}</h2>
+        <h2 className="text-2xl font-bold mb-4">{childToEdit ? 'Edit Child' : 'Add New Child'}</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="childName" className="block text-gray-700 text-sm font-bold mb-2">Child's Name:</label>
+            <label htmlFor="childName" className="block text-gray-700 text-sm font-bold mb-2">Child&apos;s Name:</label>
             <input
               type="text"
               id="childName"
@@ -85,7 +91,7 @@ const AddChildForm = ({ onClose, kidToEdit, onSaveSuccess }) => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="childAge" className="block text-gray-700 text-sm font-bold mb-2">Child's Age:</label>
+            <label htmlFor="childAge" className="block text-gray-700 text-sm font-bold mb-2">Child&apos;s Age:</label>
             <input
               type="number"
               id="childAge"
@@ -96,8 +102,8 @@ const AddChildForm = ({ onClose, kidToEdit, onSaveSuccess }) => {
               required
             />
           </div>
-          <div className="mb-6">
-            <label htmlFor="childGrade" className="block text-gray-700 text-sm font-bold mb-2">Child's Grade:</label>
+          <div className="mb-4">
+            <label htmlFor="childGrade" className="block text-gray-700 text-sm font-bold mb-2">Child&apos;s Grade:</label>
             <input
               type="text"
               id="childGrade"
@@ -108,12 +114,35 @@ const AddChildForm = ({ onClose, kidToEdit, onSaveSuccess }) => {
               required
             />
           </div>
+          <div className="mb-4">
+            <label htmlFor="childUsername" className="block text-gray-700 text-sm font-bold mb-2">Username:</label>
+            <input
+              type="text"
+              id="childUsername"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Enter a username for the child"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label htmlFor="childPassword" className="block text-gray-700 text-sm font-bold mb-2">Password:</label>
+            <input
+              type="password"
+              id="childPassword"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder={childToEdit ? "Leave blank to keep current password" : "Enter a password for the child"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
           <div className="flex items-center justify-between">
             <button
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              {kidToEdit ? 'Update Child' : 'Add Child'}
+              {childToEdit ? 'Update Child' : 'Add Child'}
             </button>
             <button
               type="button"

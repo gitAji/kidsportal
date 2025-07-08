@@ -1,90 +1,56 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
-import { collection, query, onSnapshot, doc, getDoc } from 'firebase/firestore';
-import { db } from '../../../../firebase/config';
 import Header from "../../../../components/layout/header/Header";
 import Footer from "../../../../components/layout/footer/Footer";
-import SkeletonLoader from "../../../../components/ui/SkeletonLoader"; // Import SkeletonLoader
 
 export default function SubjectDetailPage({ params }) {
   const router = useRouter();
   const { subjectId } = params;
-  const [subject, setSubject] = useState(null);
-  const [levels, setLevels] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchSubjectAndLevels = async () => {
-      try {
-        // Fetch subject details
-        const subjectDocRef = doc(db, 'subjects', subjectId);
-        const subjectDocSnap = await getDoc(subjectDocRef);
+  // Static data for demonstration
+  const subjectsData = {
+    mathematics: {
+      name: 'Mathematics',
+      description: 'Explore the world of numbers, equations, and problem-solving.',
+      levels: [
+        { id: 'level1', name: 'Level 1', description: 'Basic Arithmetic', isPremium: false },
+        { id: 'level2', name: 'Level 2', description: 'Addition & Subtraction', isPremium: false },
+        { id: 'level3', name: 'Level 3', description: 'Multiplication & Division', isPremium: true },
+        { id: 'level4', name: 'Level 4', description: 'Fractions & Decimals', isPremium: true },
+      ],
+    },
+    english: {
+      name: 'English Language Arts',
+      description: 'Enhance your reading, writing, and communication skills.',
+      levels: [
+        { id: 'level1', name: 'Level 1', description: 'Alphabets & Phonics', isPremium: false },
+        { id: 'level2', name: 'Level 2', description: 'Basic Grammar', isPremium: false },
+        { id: 'level3', name: 'Level 3', description: 'Sentence Structure', isPremium: true },
+      ],
+    },
+    science: {
+      name: 'Science',
+      description: 'Dive into the wonders of physics, chemistry, and biology.',
+      levels: [
+        { id: 'level1', name: 'Level 1', description: 'Living Things', isPremium: false },
+        { id: 'level2', name: 'Level 2', description: 'Our Environment', isPremium: false },
+        { id: 'level3', name: 'Level 3', description: 'Physical Science', isPremium: true },
+      ],
+    },
+    tamil: {
+      name: 'Tamil',
+      description: 'Learn the beautiful Tamil language and its rich literature.',
+      levels: [
+        { id: 'level1', name: 'Level 1', description: 'Uyir Ezhuthukkal', isPremium: false },
+        { id: 'level2', name: 'Level 2', description: 'Mei Ezhuthukkal', isPremium: false },
+        { id: 'level3', name: 'Level 3', description: 'Uyir Mei Ezhuthukkal', isPremium: true },
+      ],
+    },
+  };
 
-        if (subjectDocSnap.exists()) {
-          setSubject({ id: subjectDocSnap.id, ...subjectDocSnap.data() });
-
-          // Fetch levels for the subject
-          const levelsCollectionRef = collection(db, 'subjects', subjectId, 'levels');
-          const q = query(levelsCollectionRef);
-
-          const unsubscribe = onSnapshot(q, (snapshot) => {
-            const levelsData = snapshot.docs.map(doc => ({
-              id: doc.id,
-              ...doc.data()
-            }));
-            setLevels(levelsData);
-            setLoading(false);
-          }, (err) => {
-            console.error("Error fetching levels:", err);
-            setError("Failed to load levels.");
-            setLoading(false);
-          });
-
-          return () => unsubscribe();
-        } else {
-          setError("Subject not found.");
-          setLoading(false);
-        }
-      } catch (err) {
-        console.error("Error fetching subject or levels:", err);
-        setError("Failed to load subject details.");
-        setLoading(false);
-      }
-    };
-
-    if (subjectId) {
-      fetchSubjectAndLevels();
-    }
-  }, [subjectId]);
-
-  if (loading) {
-    return (
-      <div className="flex flex-col min-h-screen bg-gray-50">
-        <Header />
-        <main className="flex-grow p-4 flex items-center justify-center">
-          <div className="text-center w-full">
-            <SkeletonLoader />
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex flex-col min-h-screen bg-gray-50">
-        <Header />
-        <main className="flex-grow p-4 flex items-center justify-center">
-          <p className="text-red-500">Error: {error}</p>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  const subject = subjectsData[subjectId];
 
   if (!subject) {
     return (
@@ -107,10 +73,10 @@ export default function SubjectDetailPage({ params }) {
           <p className="mt-4 text-gray-600">{subject.description}</p>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {levels.length === 0 ? (
+            {subject.levels.length === 0 ? (
               <p className="text-gray-700">No levels available for this subject yet.</p>
             ) : (
-              levels.map((level) => (
+              subject.levels.map((level) => (
                 <div
                   key={level.id}
                   className="bg-white p-6 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 cursor-pointer"
