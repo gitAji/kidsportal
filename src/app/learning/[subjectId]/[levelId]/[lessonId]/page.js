@@ -7,7 +7,7 @@ import { db, auth } from '../../../../../../firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import Header from "../../../../../../components/layout/header/Header";
 import Footer from "../../../../../../components/layout/footer/Footer";
-import SkeletonLoader from "../../../../../../components/components/ui/SkeletonLoader"; 
+import SkeletonLoader from "../../../../components/ui/SkeletonLoader"; 
 
 export default function LessonDetailPage({ params }) {
   const router = useRouter();
