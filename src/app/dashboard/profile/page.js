@@ -6,7 +6,7 @@ import { auth, db } from "../../../firebase/config";
 import { useRouter } from "next/navigation";
 import Header from "../../../components/layout/header/Header";
 import Footer from "../../../components/layout/footer/Footer";
-import SkeletonLoader from "../../../components/ui/SkeletonLoader"; // Import SkeletonLoader
+import SkeletonLoader from "../../../components/ui/SkeletonLoader";
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
