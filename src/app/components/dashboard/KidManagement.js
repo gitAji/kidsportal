@@ -61,6 +61,10 @@ const KidManagement = ({ onClose }) => {
     setEditingKid(null); // Clear editing kid when modal closes
   };
 
+  const handleSaveSuccess = () => {
+    onClose(); // Close KidManagement modal after successful save in AddChildForm
+  };
+
   if (loading) {
     return <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center"><p>Loading kids...</p></div>;
   }
@@ -132,6 +136,7 @@ const KidManagement = ({ onClose }) => {
           <AddChildForm
             onClose={handleCloseAddChildModal}
             kidToEdit={editingKid}
+            onSaveSuccess={handleSaveSuccess} // Pass the new callback
           />
         )}
       </div>

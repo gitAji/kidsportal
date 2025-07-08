@@ -6,6 +6,7 @@ import { auth, db } from "../../firebase/config";
 import { useRouter } from "next/navigation";
 import Header from "../components/layout/header/Header";
 import Footer from "../components/layout/footer/Footer";
+import SkeletonLoader from "../components/ui/SkeletonLoader"; // Import SkeletonLoader
 
 const LazyParentDashboard = React.lazy(() => import("../components/dashboard/ParentDashboard"));
 const LazyKidDashboard = React.lazy(() => import("../components/dashboard/KidDashboard"));
@@ -61,7 +62,7 @@ export default function DashboardPage() {
 
   // If authentication is still loading, display a simple message or nothing
   if (loadingAuth) {
-    return null; // Or a very minimal loading indicator if absolutely necessary
+    return null; 
   }
 
   if (!user) {
@@ -74,7 +75,7 @@ export default function DashboardPage() {
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Header />
       <main className="flex-grow p-4">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<SkeletonLoader />}>
           {isParent ? <LazyParentDashboard /> : <LazyKidDashboard />}
         </Suspense>
       </main>

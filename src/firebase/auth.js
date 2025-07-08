@@ -10,7 +10,7 @@ import { doc, setDoc } from "firebase/firestore";
 
 const googleProvider = new GoogleAuthProvider();
 
-export const signInWithGoogle = async () => {
+export const signInWithGoogle = async (onSuccess) => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
     // Create user document in Firestore if it doesn't exist
@@ -22,13 +22,14 @@ export const signInWithGoogle = async () => {
       createdAt: new Date(),
       subscriptionStatus: 'free', // Add subscription status
     }, { merge: true }); // Use merge: true to avoid overwriting existing data
+    if (onSuccess) onSuccess();
   } catch (error) {
     console.error("Error signing in with Google", error);
     throw error;
   }
 };
 
-export const signUpWithEmail = async (email, password) => {
+export const signUpWithEmail = async (email, password, onSuccess) => {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     // Create user document in Firestore
@@ -39,6 +40,7 @@ export const signUpWithEmail = async (email, password) => {
       createdAt: new Date(),
       subscriptionStatus: 'free', // Add subscription status
     });
+    if (onSuccess) onSuccess();
   } catch (error) {
     console.error("Error signing up with email and password", error);
     throw error;

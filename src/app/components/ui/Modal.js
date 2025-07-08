@@ -20,11 +20,11 @@ export default function ToggleModal({
     e.preventDefault();
     try {
       if (isRegister) {
-        await signUpWithEmail(email, password);
+        await signUpWithEmail(email, password, () => setIsModalOpen(false));
       } else {
-        await signInWithEmail(email, password);
+        await signInWithEmail(email, password, () => setIsModalOpen(false));
+        setIsModalOpen(false);
       }
-      setIsModalOpen(false);
       router.push("/");
     } catch (error) {
       alert(error.message);
@@ -33,7 +33,7 @@ export default function ToggleModal({
 
   const handleGoogleAuth = async () => {
     try {
-      await signInWithGoogle();
+      await signInWithGoogle(() => setIsModalOpen(false));
       setIsModalOpen(false);
       router.push("/");
     } catch (error) {

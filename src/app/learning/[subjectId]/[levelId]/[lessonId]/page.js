@@ -6,6 +6,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../../../../firebase/config';
 import Header from "../../../../../../components/layout/header/Header";
 import Footer from "../../../../../../components/layout/footer/Footer";
+import SkeletonLoader from "../../../../../../components/components/ui/SkeletonLoader"; // Import SkeletonLoader
 
 export default function LessonDetailPage({ params }) {
   const router = useRouter();
@@ -43,9 +44,8 @@ export default function LessonDetailPage({ params }) {
       <div className="flex flex-col min-h-screen bg-gray-50">
         <Header />
         <main className="flex-grow p-4 flex items-center justify-center">
-          <div className="text-center">
-            <p className="text-lg font-semibold">Loading lesson...</p>
-            <div className="mt-4 animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="text-center w-full">
+            <SkeletonLoader />
           </div>
         </main>
         <Footer />

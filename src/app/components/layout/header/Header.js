@@ -1,31 +1,83 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, logout } from "../../../../firebase/auth";
 import { FaBell, FaUserCircle, FaCaretDown } from 'react-icons/fa'; // Import icons
+import { collection, query, where, onSnapshot } from 'firebase/firestore'; // Import Firestore functions
+import { db } from '../../../../firebase/config'; // Import db
 
 export default function Header({ setIsModalOpen, setIsRegister }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [notificationCount, setNotificationCount] = useState(0); // Placeholder for notification count
+  const [isNotificationDropdownOpen, setIsNotificationDropdownOpen] = useState(false); 
+  const [notifications, setNotifications] = useState([]); // State for notifications
+  const [notificationCount, setNotificationCount] = useState(0); 
+
+  const dropdownRef = useRef(null);
+  const notificationRef = useRef(null); 
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-    return () => unsubscribe();
+    return () => unsubscribeAuth();
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      const notificationsCollectionRef = collection(db, 'notifications');
+      const q = query(notificationsCollectionRef, where("userId", "==", user.uid));
+
+      const unsubscribeNotifications = onSnapshot(q, (snapshot) => {
+        const userNotifications = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setNotifications(userNotifications);
+        setNotificationCount(userNotifications.filter(n => !n.read).length); // Count unread notifications
+      }, (err) => {
+        console.error("Error fetching notifications:", err);
+      });
+
+      return () => unsubscribeNotifications();
+    } else {
+      setNotifications([]);
+      setNotificationCount(0);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+      if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+        setIsNotificationDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+    setIsNotificationDropdownOpen(false); 
+  };
+
+  const toggleNotificationDropdown = () => {
+    setIsNotificationDropdownOpen(!isNotificationDropdownOpen);
+    setIsDropdownOpen(false); 
   };
 
   const handleLogout = async () => {
     await logout();
-    setIsDropdownOpen(false); // Close dropdown after logout
+    setIsDropdownOpen(false); 
   };
 
   return (
@@ -48,7 +100,7 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
         <div className="md:hidden">
           <button
             className="text-gray-600 focus:outline-none"
-            onClick={() => setIsMenuOpen(true)} // Open menu on click
+            onClick={() => setIsMenuOpen(true)} 
           >
             <svg
               className="w-6 h-6"
@@ -91,17 +143,31 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
           {user ? (
             <div className="relative flex items-center space-x-4">
               {/* Notification Icon */}
-              <div className="relative">
-                <FaBell className="text-gray-600 text-xl cursor-pointer" />
+              <div className="relative" ref={notificationRef}>
+                <FaBell className="text-gray-600 text-xl cursor-pointer" onClick={toggleNotificationDropdown} />
                 {notificationCount > 0 && (
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                     {notificationCount}
                   </span>
                 )}
+                {isNotificationDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg py-1 z-50">
+                    {notifications.length === 0 ? (
+                      <p className="px-4 py-2 text-sm text-gray-700">No new notifications</p>
+                    ) : (
+                      notifications.map(notification => (
+                        <div key={notification.id} className="px-4 py-2 text-sm text-gray-700 border-b last:border-b-0">
+                          <p>{notification.message}</p>
+                          <span className="text-xs text-gray-500">{new Date(notification.timestamp?.toDate()).toLocaleString()}</span>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* User Icon with Dropdown */}
-              <div className="relative">
+              <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={toggleDropdown}
                   className="flex items-center text-gray-600 focus:outline-none"
@@ -142,8 +208,8 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
               <button
                 className="text-gray-600 hover:text-blue-600"
                 onClick={() => {
-                  setIsModalOpen(true); // Open the modal
-                  setIsRegister(false); // Set to login mode
+                  setIsModalOpen(true); 
+                  setIsRegister(false); 
                 }}
               >
                 Sign In
@@ -151,8 +217,8 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
               <button
                 className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
                 onClick={() => {
-                  setIsModalOpen(true); // Open the modal
-                  setIsRegister(true); // Set to signup mode
+                  setIsModalOpen(true); 
+                  setIsRegister(true); 
                 }}
               >
                 Sign Up
@@ -168,7 +234,7 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
           {/* Overlay */}
           <div
             className="fixed inset-0 bg-black opacity-50 z-40"
-            onClick={() => setIsMenuOpen(false)} // Close menu when clicking outside
+            onClick={() => setIsMenuOpen(false)} 
           />
 
           {/* Full-page Slide-in Menu */}
@@ -188,7 +254,7 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
               {/* Close button */}
               <button
                 className="text-gray-600 focus:outline-none"
-                onClick={() => setIsMenuOpen(false)} // Close the menu
+                onClick={() => setIsMenuOpen(false)} 
               >
                 <svg
                   className="w-8 h-8"
@@ -212,35 +278,35 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
               <Link
                 href="/"
                 className="text-gray-600 text-xl hover:text-blue-600"
-                onClick={() => setIsMenuOpen(false)} // Close menu on link click
+                onClick={() => setIsMenuOpen(false)} 
               >
                 Home
               </Link>
               <Link
                 href="/learning"
                 className="text-gray-600 text-xl hover:text-blue-600"
-                onClick={() => setIsMenuOpen(false)} // Close menu on link click
+                onClick={() => setIsMenuOpen(false)} 
               >
                 Learning
               </Link>
               <Link
                 href="/analytics"
                 className="text-gray-600 text-xl hover:text-blue-600"
-                onClick={() => setIsMenuOpen(false)} // Close menu on link click
+                onClick={() => setIsMenuOpen(false)} 
               >
                 Analytics
               </Link>
               <Link
                 href="/pricing"
                 className="text-gray-600 text-xl hover:text-blue-600"
-                onClick={() => setIsMenuOpen(false)} // Close menu on link click
+                onClick={() => setIsMenuOpen(false)} 
               >
                 Pricing
               </Link>
               <Link
                 href="/help"
                 className="text-gray-600 text-xl hover:text-blue-600"
-                onClick={() => setIsMenuOpen(false)} // Close menu on link click
+                onClick={() => setIsMenuOpen(false)} 
               >
                 Help
               </Link>

@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../../../firebase/config';
 
-const AddChildForm = ({ onClose, kidToEdit }) => {
+const AddChildForm = ({ onClose, kidToEdit, onSaveSuccess }) => {
   const [name, setName] = useState(kidToEdit ? kidToEdit.name : '');
   const [age, setAge] = useState(kidToEdit ? kidToEdit.age : '');
   const [grade, setGrade] = useState(kidToEdit ? kidToEdit.grade : '');
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
     if (kidToEdit) {
@@ -19,6 +20,7 @@ const AddChildForm = ({ onClose, kidToEdit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    setSuccessMessage(null);
 
     if (!auth.currentUser) {
       setError("No user logged in.");
@@ -35,7 +37,7 @@ const AddChildForm = ({ onClose, kidToEdit }) => {
           age: parseInt(age),
           grade,
         });
-        alert('Child updated successfully!');
+        setSuccessMessage('Child updated successfully!');
       } else {
         // Add new child
         const kidsCollectionRef = collection(db, 'users', parentUid, 'kids');
@@ -47,9 +49,16 @@ const AddChildForm = ({ onClose, kidToEdit }) => {
           tasksCompleted: 0,
           progress: 0,
         });
-        alert('Child added successfully!');
+        setSuccessMessage('Child added successfully!');
       }
-      onClose();
+      // Call the success callback if provided
+      if (onSaveSuccess) {
+        onSaveSuccess();
+      }
+      // Close the modal after a short delay to show the success message
+      setTimeout(() => {
+        onClose();
+      }, 1500); // 1.5 seconds delay
     } catch (err) {
       console.error("Error saving child:", err);
       setError("Failed to save child. Please try again.");
@@ -61,6 +70,7 @@ const AddChildForm = ({ onClose, kidToEdit }) => {
       <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full">
         <h2 className="text-2xl font-bold mb-4">{kidToEdit ? 'Edit Child' : 'Add New Child'}</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
+        {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="childName" className="block text-gray-700 text-sm font-bold mb-2">Child's Name:</label>

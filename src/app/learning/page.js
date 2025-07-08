@@ -7,13 +7,14 @@ import BackToTop from "../components/ui/BackToTop";
 import Image from "next/image";
 import { collection, query, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebase/config';
-import { useRouter } from 'next/navigation'; // Import useRouter
+import { useRouter } from 'next/navigation'; 
+import SkeletonLoader from "../components/ui/SkeletonLoader"; // Import SkeletonLoader
 
 export default function LearningPage() {
   const [subjects, setSubjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter(); 
 
   useEffect(() => {
     const subjectsCollectionRef = collection(db, 'subjects');
@@ -69,9 +70,8 @@ export default function LearningPage() {
       <div className="flex flex-col min-h-screen bg-gray-50">
         <Header />
         <main className="flex-grow p-4 flex items-center justify-center">
-          <div className="text-center">
-            <p className="text-lg font-semibold">Loading learning content...</p>
-            <div className="mt-4 animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="text-center w-full">
+            <SkeletonLoader />
           </div>
         </main>
         <Footer />
@@ -111,7 +111,7 @@ export default function LearningPage() {
                 <div
                   key={subject.id}
                   className="bg-white p-6 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 cursor-pointer"
-                  onClick={() => router.push(`/learning/${subject.id}`)} // Add onClick to navigate
+                  onClick={() => router.push(`/learning/${subject.id}`)} 
                 >
                   <div className="relative h-48 w-full overflow-hidden">
                     <Image
