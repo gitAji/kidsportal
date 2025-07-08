@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, query, onSnapshot, doc, addDoc } from 'firebase/firestore';
 import { db, auth } from '../../../firebase/config';
+import { addNotification } from '../../../firebase/notifications'; // Import addNotification
 
 const AssignTaskForm = ({ onClose, kidId, kidName }) => {
   const [subjects, setSubjects] = useState([]);
@@ -102,7 +103,7 @@ const AssignTaskForm = ({ onClose, kidId, kidName }) => {
 
     try {
       const parentUid = auth.currentUser.uid;
-      const taskRef = collection(db, 'users', kidId, 'progressTracking', selectedSubject, 'tasks');
+      const taskRef = collection(db, 'users', kidId, 'assignedTasks');
       await addDoc(taskRef, {
         lessonId: selectedLesson,
         subjectId: selectedSubject,
@@ -116,6 +117,10 @@ const AssignTaskForm = ({ onClose, kidId, kidName }) => {
         levelName: levels.find(l => l.id === selectedLevel)?.name, // Store level name
       });
       setSuccessMessage('Task assigned successfully!');
+
+      // Add notification for the kid
+      await addNotification(kidId, `A new task has been assigned to you: ${lessons.find(l => l.id === selectedLesson)?.name} in ${subjects.find(s => s.id === selectedSubject)?.name}.`);
+
       setTimeout(() => {
         onClose();
       }, 1500);
