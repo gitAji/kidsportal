@@ -10,7 +10,6 @@ import SkeletonLoader from "../components/ui/SkeletonLoader"; // Import Skeleton
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Keep loading state for data fetching
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,13 +34,10 @@ export default function ProfilePage() {
           }
         } catch (error) {
           console.error("Error fetching phone number:", error);
-        } finally {
-          setLoading(false); // Set loading to false after all data is fetched
         }
 
       } else {
         router.push("/login"); 
-        setLoading(false); // Set loading to false if redirecting
       }
     });
     return () => unsubscribe();
@@ -78,7 +74,7 @@ export default function ProfilePage() {
     }
   };
 
-  if (!user && !loading) {
+  if (!user) {
     return null; 
   }
 
@@ -86,93 +82,89 @@ export default function ProfilePage() {
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Header />
       <main className="flex-grow p-4 flex items-center justify-center">
-        <Suspense fallback={<SkeletonLoader />}> {/* Use Suspense with SkeletonLoader */}
-          {loading ? (
-            <SkeletonLoader />
-          ) : (
-            <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-              <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">
-                User Profile
-              </h1>
-              {message && (
-                <div
-                  className={`p-3 mb-4 rounded text-center ${
-                    message.includes("Error") ? "bg-red-100 text-red-700" : "bg-green-100 text-green-700"
-                  }`}
-                >
-                  {message}
-                </div>
-              )}
-              <form onSubmit={handleUpdateProfile}>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Display Name:
+        <Suspense fallback={<SkeletonLoader />}> 
+          <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+            <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">
+              User Profile
+            </h1>
+            {message && (
+              <div
+                className={`p-3 mb-4 rounded text-center ${
+                  message.includes("Error") ? "bg-red-100 text-red-700" : "bg-green-100 text-green-700"
+                }`}
+              >
+                {message}
+              </div>
+            )}
+            <form onSubmit={handleUpdateProfile}>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Display Name:
+                </label>
+                <input
+                  type="text"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                    Email:
                   </label>
                   <input
-                    type="text"
-                    value={displayName}
-                    onChange={(e) => setDisplayName(e.target.value)}
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   />
                 </div>
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
-                      Email:
-                    </label>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">
-                      Password (leave blank to keep current):
-                    </label>
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      placeholder="********"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">
-                      Photo URL:
-                    </label>
-                    <input
-                      type="text"
-                      value={photoURL}
-                      onChange={(e) => setPhotoURL(e.target.value)}
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    />
-                  </div>
-                  {/* Phone Number Field */}
-                  <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">
-                      Phone Number:
-                    </label>
-                    <input
-                      type="tel"
-                      value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      placeholder="Enter phone number"
-                    />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <button
-                      type="submit"
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    >
-                      Update Profile
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
+                    Password (leave blank to keep current):
+                  </label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="********"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2">
+                    Photo URL:
+                  </label>
+                  <input
+                    type="text"
+                    value={photoURL}
+                    onChange={(e) => setPhotoURL(e.target.value)}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                {/* Phone Number Field */}
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2">
+                    Phone Number:
+                  </label>
+                  <input
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Enter phone number"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Update Profile
+                  </button>
+                </div>
+              </form>
+            </div>
           </Suspense>
         </main>
         <Footer />

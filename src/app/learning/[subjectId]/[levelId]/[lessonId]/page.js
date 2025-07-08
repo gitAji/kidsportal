@@ -2,11 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../../../../../firebase/config';
+import { doc, getDoc, collection, query, where, getDocs, updateDoc } from 'firebase/firestore';
+import { db, auth } from '../../../../../../firebase/config';
+import { onAuthStateChanged } from 'firebase/auth';
 import Header from "../../../../../../components/layout/header/Header";
 import Footer from "../../../../../../components/layout/footer/Footer";
-import SkeletonLoader from "../../../../../../components/components/ui/SkeletonLoader"; // Import SkeletonLoader
+import SkeletonLoader from "../../../../../../components/components/ui/SkeletonLoader"; 
 
 export default function LessonDetailPage({ params }) {
   const router = useRouter();
@@ -14,30 +15,78 @@ export default function LessonDetailPage({ params }) {
   const [lesson, setLesson] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null); // To get the current user (kid)
+  const [taskStatus, setTaskStatus] = useState('assigned'); // To track the status of the current lesson's task
+  const [taskId, setTaskId] = useState(null); // To store the ID of the task document
 
   useEffect(() => {
-    const fetchLesson = async () => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribeAuth();
+  }, []);
+
+  useEffect(() => {
+    const fetchLessonAndTaskStatus = async () => {
+      if (!user) return; // Wait for user to be loaded
+
       try {
         const lessonDocRef = doc(db, 'subjects', subjectId, 'levels', levelId, 'lessons', lessonId);
         const lessonDocSnap = await getDoc(lessonDocRef);
 
         if (lessonDocSnap.exists()) {
           setLesson({ id: lessonDocSnap.id, ...lessonDocSnap.data() });
+
+          // Fetch task status for the current user and lesson
+          const tasksCollectionRef = collection(db, 'users', user.uid, 'assignedTasks');
+          const q = query(
+            tasksCollectionRef,
+            where("lessonId", "==", lessonId),
+            where("levelId", "==", levelId),
+            where("subjectId", "==", subjectId)
+          );
+          const querySnapshot = await getDocs(q);
+
+          if (!querySnapshot.empty) {
+            const taskDoc = querySnapshot.docs[0];
+            setTaskStatus(taskDoc.data().status);
+            setTaskId(taskDoc.id);
+          }
         } else {
           setError("Lesson not found.");
         }
       } catch (err) {
-        console.error("Error fetching lesson:", err);
-        setError("Failed to load lesson details.");
+        console.error("Error fetching lesson or task status:", err);
+        setError("Failed to load lesson details or task status.");
       } finally {
         setLoading(false);
       }
     };
 
-    if (subjectId && levelId && lessonId) {
-      fetchLesson();
+    if (subjectId && levelId && lessonId && user) {
+      fetchLessonAndTaskStatus();
     }
-  }, [subjectId, levelId, lessonId]);
+  }, [subjectId, levelId, lessonId, user]);
+
+  const handleMarkAsComplete = async () => {
+    if (!user || !taskId) {
+      alert("Cannot mark as complete. User not logged in or task not found.");
+      return;
+    }
+
+    try {
+      const taskDocRef = doc(db, 'users', user.uid, 'assignedTasks', taskId);
+      await updateDoc(taskDocRef, {
+        status: 'completed',
+        completedDate: new Date(),
+      });
+      setTaskStatus('completed');
+      alert("Task marked as complete!");
+    } catch (err) {
+      console.error("Error marking task as complete:", err);
+      alert("Failed to mark task as complete. Please try again.");
+    }
+  };
 
   if (loading) {
     return (
@@ -108,14 +157,17 @@ export default function LessonDetailPage({ params }) {
             </div>
           )}
 
-          {/* Placeholder for quizzes/interactive elements */}
           <div className="mt-8 text-center">
-            <button
-              onClick={() => alert('Quiz/Task functionality coming soon!')}
-              className="px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 text-lg font-semibold"
-            >
-              Start Quiz / Mark as Complete
-            </button>
+            {taskStatus === 'completed' ? (
+              <p className="text-green-600 text-lg font-semibold">Task Completed!</p>
+            ) : (
+              <button
+                onClick={handleMarkAsComplete}
+                className="px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 text-lg font-semibold"
+              >
+                Mark as Complete
+              </button>
+            )}
           </div>
         </div>
       </section>
