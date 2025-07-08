@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import KidsList from './KidsList';
-import KidManagement from './KidManagement';
+import AddChildForm from './AddChildForm';
 
 const ParentDashboard = () => {
-  const [showManageKidsModal, setShowManageKidsModal] = useState(false);
+  const [showAddChildModal, setShowAddChildModal] = useState(false);
 
-  const handleManageKidsClick = () => {
-    setShowManageKidsModal(true);
+  const handleAddChildClick = () => {
+    setShowAddChildModal(true);
   };
 
-  const handleCloseManageKidsModal = () => {
-    setShowManageKidsModal(false);
+  const handleCloseAddChildModal = () => {
+    setShowAddChildModal(false);
   };
 
   return (
@@ -21,10 +21,10 @@ const ParentDashboard = () => {
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-semibold">Overview of All Kids</h2>
           <button
-            onClick={handleManageKidsClick}
+            onClick={handleAddChildClick}
             className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
           >
-            Manage Kids
+            Add Kid
           </button>
         </div>
         <KidsList />
@@ -56,7 +56,7 @@ const ParentDashboard = () => {
         </div>
       </section>
 
-      {showManageKidsModal && <KidManagement onClose={handleCloseManageKidsModal} />}
+      {showAddChildModal && <AddChildForm onClose={handleCloseAddChildModal} />}
     </div>
   );
 };
