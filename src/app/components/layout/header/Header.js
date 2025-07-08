@@ -190,7 +190,7 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
                     <Link href="/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={toggleDropdown}>
                       Dashboard
                     </Link>
-                    <Link href="/dashboard/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={toggleDropdown}>
+                    <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={toggleDropdown}>
                       Profile
                     </Link>
                     <button
@@ -318,7 +318,7 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
                   <Link href="/dashboard" className="block text-gray-600 text-xl hover:text-blue-600 mb-2" onClick={() => setIsMenuOpen(false)}>
                     Dashboard
                   </Link>
-                  <Link href="/dashboard/profile" className="block text-gray-600 text-xl hover:text-blue-600 mb-2" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/profile" className="block text-gray-600 text-xl hover:text-blue-600 mb-2" onClick={() => setIsMenuOpen(false)}>
                     Profile
                   </Link>
                   <button
