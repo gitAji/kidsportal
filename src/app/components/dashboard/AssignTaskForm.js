@@ -1,49 +1,113 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { collection, addDoc, doc, getDoc, getDocs } from 'firebase/firestore';
+import { db, auth } from '../../../firebase/config';
 
-const AssignTaskForm = ({ onClose, kidId, kidName }) => {
+const AssignTaskForm = ({ onClose, childId, childName }) => {
+  const parentUid = auth.currentUser?.uid; // Get parent UID from auth
+
+  // Placeholder for addNotification function
+  const addNotification = async (userId, message) => {
+    try {
+      await addDoc(collection(db, 'users', userId, 'notifications'), {
+        id: new Date().getTime().toString(), // Simple unique ID
+        type: 'task_assigned',
+        message: message,
+        read: false,
+        timestamp: new Date(),
+      });
+      console.log("Notification added successfully!");
+    } catch (error) {
+      console.error("Error adding notification:", error);
+    }
+  };
+
   const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedLevel, setSelectedLevel] = useState('');
   const [selectedLesson, setSelectedLesson] = useState('');
   const [successMessage, setSuccessMessage] = useState(null);
+  const [subjects, setSubjects] = useState([]);
+  const [levels, setLevels] = useState([]);
+  const [lessons, setLessons] = useState([]);
+  const [loadingSubjects, setLoadingSubjects] = useState(true);
+  const [loadingLevels, setLoadingLevels] = useState(false);
+  const [loadingLessons, setLoadingLessons] = useState(false);
 
-  // Static data for demonstration
-  const subjects = [
-    { id: 'math', name: 'Mathematics' },
-    { id: 'english', name: 'English Language Arts' },
-    { id: 'science', name: 'Science' },
-    { id: 'tamil', name: 'Tamil' },
-  ];
+  useEffect(() => {
+    const fetchSubjects = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'subjects'));
+        const subjectsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setSubjects(subjectsData);
+      } catch (error) {
+        console.error("Error fetching subjects:", error);
+      } finally {
+        setLoadingSubjects(false);
+      }
+    };
+    fetchSubjects();
+  }, []);
 
-  const levelsData = {
-    math: [
-      { id: 'level1', name: 'Level 1' },
-      { id: 'level2', name: 'Level 2' },
-    ],
-    english: [
-      { id: 'level1', name: 'Level 1' },
-      { id: 'level2', name: 'Level 2' },
-    ],
-  };
+  useEffect(() => {
+    if (selectedSubject) {
+      setLoadingLevels(true);
+      const fetchLevels = async () => {
+        try {
+          const subjectDoc = await getDoc(doc(db, 'subjects', selectedSubject));
+          if (subjectDoc.exists()) {
+            const subjectData = subjectDoc.data();
+            // Assuming child.grade is available, for now, let's use a default or pass it as a prop
+            const childGrade = childToEdit?.grade || 1; // Default to grade 1 if not available
+            const gradeData = subjectData.grades.find(g => g.grade === childGrade);
+            if (gradeData) {
+              setLevels(gradeData.levels);
+            } else {
+              setLevels([]);
+            }
+          }
+        } catch (error) {
+          console.error("Error fetching levels:", error);
+        } finally {
+          setLoadingLevels(false);
+        }
+      };
+      fetchLevels();
+    } else {
+      setLevels([]);
+      setLessons([]);
+    }
+  }, [selectedSubject, childId]); // Added childId to dependency array
 
-  const lessonsData = {
-    math: {
-      level1: [
-        { id: 'lesson1', name: 'Lesson 1: Counting' },
-        { id: 'lesson2', name: 'Lesson 2: Addition Basics' },
-      ],
-    },
-    english: {
-      level1: [
-        { id: 'lesson1', name: 'Lesson 1: ABCs' },
-        { id: 'lesson2', name: 'Lesson 2: Short Vowels' },
-      ],
-    },
-  };
+  useEffect(() => {
+    if (selectedSubject && selectedLevel) {
+      setLoadingLessons(true);
+      const fetchLessons = async () => {
+        try {
+          const subjectDoc = await getDoc(doc(db, 'subjects', selectedSubject));
+          if (subjectDoc.exists()) {
+            const subjectData = subjectDoc.data();
+            const childGrade = childToEdit?.grade || 1; // Default to grade 1 if not available
+            const gradeData = subjectData.grades.find(g => g.grade === childGrade);
+            const levelData = gradeData?.levels.find(l => l.level.toString() === selectedLevel);
+            if (levelData && levelData.questions) {
+              // For simplicity, treating questions as lessons for now
+              setLessons(levelData.questions.map((q, index) => ({ id: `lesson${index + 1}`, name: q.question })));
+            } else {
+              setLessons([]);
+            }
+          }
+        } catch (error) {
+          console.error("Error fetching lessons:", error);
+        } finally {
+          setLoadingLessons(false);
+        }
+      };
+      fetchLessons();
+    } else {
+      setLessons([]);
+    }
+  }, [selectedSubject, selectedLevel, childId]); // Added childId to dependency array
 
-  const currentLevels = selectedSubject ? levelsData[selectedSubject] || [] : [];
-  const currentLessons = (selectedSubject && selectedLevel) ? (lessonsData[selectedSubject] && lessonsData[selectedSubject][selectedLevel]) || [] : [];
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccessMessage(null);
 
@@ -54,16 +118,30 @@ const AssignTaskForm = ({ onClose, kidId, kidName }) => {
 
     // Simulate saving to a database
     console.log(`Assigning task to ${kidName}: Subject: ${selectedSubject}, Level: ${selectedLevel}, Lesson: ${selectedLesson}`);
-    setSuccessMessage('Task assigned successfully!');
-    setTimeout(() => {
-      onClose();
-    }, 1500);
+    const taskRef = collection(db, 'users', childId, 'assignedTasks');
+      await addDoc(taskRef, {
+        lessonId: selectedLesson,
+        subjectId: selectedSubject,
+        levelId: selectedLevel,
+        status: 'assigned',
+        assignedBy: parentUid,
+        assignedDate: new Date(),
+        dueDate: new Date(new Date().setDate(new Date().getDate() + 7)), // Default due date 7 days from now
+        childName: childName, // Store child's name for easier display
+        lessonName: lessons.find(l => l.id === selectedLesson)?.name, // Store lesson name
+        subjectName: subjects.find(s => s.id === selectedSubject)?.name, // Store subject name
+        levelName: levels.find(l => l.id === selectedLevel)?.name, // Store level name
+      });
+      setSuccessMessage('Task assigned successfully!');
+
+      // Add notification for the parent
+      await addNotification(parentUid, `A new task has been assigned to ${childName}: ${lessons.find(l => l.id === selectedLesson)?.name} in ${subjects.find(s => s.id === selectedSubject)?.name}.`);
   };
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-4">Assign Task to {kidName}</h2>
+        <h2 className="text-2xl font-bold mb-4">Assign Task to {childName}</h2>
         {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
 import AssignTaskForm from './AssignTaskForm';
+import AssignedTasks from './AssignedTasks';
+import ProgressTracker from './ProgressTracker';
+import GradesReport from './GradesReport';
+import RewardsDisplay from './RewardsDisplay';
 
-const KidProgressReport = ({ kid, onClose }) => {
+const ChildDashboard = ({ child, onClose }) => {
   const [showAssignTaskModal, setShowAssignTaskModal] = useState(false);
-
-  if (!kid) {
-    return null;
-  }
-
-  // Static data for tasks
-  const assignedTasks = [
-    { id: 1, name: 'Math - Addition Level 1', status: 'completed', deadline: '2025-07-15' },
-    { id: 2, name: 'English - Alphabets', status: 'in-progress', deadline: '2025-07-20' },
-    { id: 3, name: 'Science - Animals', status: 'assigned', deadline: '2025-07-25' },
-    { id: 4, name: 'History - Ancient Civilizations', status: 'assigned', deadline: '2025-07-30' },
-  ];
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -22,8 +14,10 @@ const KidProgressReport = ({ kid, onClose }) => {
         return 'text-green-600';
       case 'in-progress':
         return 'text-yellow-600';
-      case 'assigned':
-        return 'text-blue-600';
+      case 'overdue':
+        return 'text-red-600';
+      case 'not-started':
+        return 'text-gray-600';
       default:
         return 'text-gray-600';
     }
@@ -37,27 +31,28 @@ const KidProgressReport = ({ kid, onClose }) => {
     setShowAssignTaskModal(false);
   };
 
+  const assignedTasks = child.assignedTasks || [];
+  const overallProgress = child.progress ? child.progress.overall : 0;
+
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-xl max-w-3xl w-full">
-        <h2 className="text-2xl font-bold mb-4">{kid.name}'s Progress Report</h2>
+        <h2 className="text-2xl font-bold mb-4">{child.name}&apos;s Progress Report</h2>
 
         <div className="mb-6">
           <h3 className="text-xl font-semibold mb-2">Overview</h3>
-          <p className="text-gray-700">Age: {kid.age}</p>
-          <p className="text-gray-700">Grade: {kid.grade}</p>
+          <p className="text-gray-700">Age: {child.age}</p>
+          <p className="text-gray-700">Grade: {child.grade}</p>
           <div className="mt-4">
             <p className="text-gray-700">Total Assigned Tasks: {assignedTasks.length}</p>
             <p className="text-gray-700">Tasks Completed: {assignedTasks.filter(task => task.status === 'completed').length}</p>
-            <p className="text-gray-700">Tasks In Progress: {assignedTasks.filter(task => task.status === 'in-progress').length}</p>
-            <p className="text-gray-700">Tasks Assigned: {assignedTasks.filter(task => task.status === 'assigned').length}</p>
             <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
               <div
                 className="bg-blue-600 h-2.5 rounded-full"
-                style={{ width: `${kid.progress || 0}%` }}
+                style={{ width: `${overallProgress}%` }}
               ></div>
             </div>
-            <p className="text-gray-700 text-sm mt-1">Overall Progress: {kid.progress || 0}%</p>
+            <p className="text-gray-700 text-sm mt-1">Overall Progress: {overallProgress}%</p>
           </div>
         </div>
 
@@ -76,19 +71,23 @@ const KidProgressReport = ({ kid, onClose }) => {
               <table className="min-w-full bg-white">
                 <thead>
                   <tr>
-                    <th className="py-2 px-4 border-b">Task Name</th>
+                    <th className="py-2 px-4 border-b">Subject</th>
+                    <th className="py-2 px-4 border-b">Level</th>
                     <th className="py-2 px-4 border-b">Status</th>
-                    <th className="py-2 px-4 border-b">Deadline</th>
+                    <th className="py-2 px-4 border-b">Assigned Date</th>
+                    <th className="py-2 px-4 border-b">Due Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   {assignedTasks.map((task) => (
                     <tr key={task.id}>
-                      <td className="py-2 px-4 border-b">{task.name}</td>
+                      <td className="py-2 px-4 border-b">{task.subjectId}</td>
+                      <td className="py-2 px-4 border-b">{task.levelId}</td>
                       <td className={`py-2 px-4 border-b ${getStatusColor(task.status)}`}>
-                        {task.status.replace('-', ' ')}
+                        {task.status}
                       </td>
-                      <td className="py-2 px-4 border-b">{task.deadline}</td>
+                      <td className="py-2 px-4 border-b">{new Date(task.assignedDate.seconds * 1000).toLocaleDateString()}</td>
+                      <td className="py-2 px-4 border-b">{new Date(task.dueDate.seconds * 1000).toLocaleDateString()}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -96,6 +95,21 @@ const KidProgressReport = ({ kid, onClose }) => {
             </div>
           )}
         </div>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Progress Tracker</h2>
+          <ProgressTracker progress={child.progress} />
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Grades</h2>
+          <GradesReport progress={child.progress} />
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Rewards</h2>
+          <RewardsDisplay rewards={child.rewards} />
+        </section>
 
         <button
           onClick={onClose}
@@ -107,8 +121,8 @@ const KidProgressReport = ({ kid, onClose }) => {
         {showAssignTaskModal && (
           <AssignTaskForm
             onClose={handleCloseAssignTaskModal}
-            kidId={kid.id}
-            kidName={kid.name}
+            childId={child.id}
+            childName={child.name}
           />
         )}
       </div>
@@ -116,4 +130,4 @@ const KidProgressReport = ({ kid, onClose }) => {
   );
 };
 
-export default KidProgressReport;
+export default ChildDashboard;

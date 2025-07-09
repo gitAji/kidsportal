@@ -1,6 +1,7 @@
 // app/src/components/ui/GradeCard.js
 
 import React from "react";
+import Link from "next/link";
 
 export default function GradeCard({
   gradeIndex,
@@ -9,27 +10,40 @@ export default function GradeCard({
   subjectColors,
   generateLink,
 }) {
+  const gradeOverviewLink = `/grades/${gradeIndex + 1}`;
+
   return (
-    <div
-      className={`bg-white p-6 rounded-lg shadow-lg text-center ${borderColor} border-2`}
-    >
-      <h3 className="text-2xl font-bold text-blue-600 mb-2">
-        {gradeIndex + 1}
-      </h3>
-      <h4 className="text-lg font-medium">{gradeLabel}</h4>
-      <p className="mt-4 text-gray-600">Subjects:</p>
-      <div className="mt-2 flex flex-wrap justify-center space-x-2">
-        {subjectColors.map((subject) => (
-          <a
-            key={subject.subject}
-            href={generateLink(gradeIndex + 1, subject.subject)} // Generate the link dynamically
-            className={`rounded-full py-2 px-4 mb-2 text-sm font-semibold transition-all duration-200 hover:scale-110 ${subject.textColor} ${subject.color}`}
-            style={{ backgroundColor: subject.color, color: subject.textColor }}
-          >
-            {subject.subject}
-          </a>
-        ))}
+    <Link href={gradeOverviewLink} passHref>
+      <div
+        className={`bg-white p-6 rounded-lg shadow-lg text-center ${borderColor} border-2
+          transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer`}
+      >
+        {/* Optional: Add an icon or image here for visual appeal */}
+        {/* <img src="/path/to/grade-icon.png" alt="Grade Icon" className="mx-auto mb-4 w-16 h-16" /> */}
+
+        <h3 className="text-3xl font-extrabold text-blue-700 mb-2">
+          Grade {gradeIndex + 1}
+        </h3>
+        <h4 className="text-lg font-semibold text-gray-800">{gradeLabel}</h4>
+        <p className="mt-4 text-gray-600 font-medium">Explore Subjects:</p>
+        <div className="mt-3 flex flex-wrap justify-center gap-2">
+          {subjectColors.map((subject) => (
+            <Link
+              key={subject.subject}
+              href={generateLink(gradeIndex + 1, subject.subject)}
+              passHref
+            >
+              <span
+                className={`rounded-full py-2 px-4 text-sm font-bold 
+                  ${subject.color} ${subject.textColor} 
+                  transform transition-transform duration-200 hover:scale-110 hover:brightness-90`}
+              >
+                {subject.subject}
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

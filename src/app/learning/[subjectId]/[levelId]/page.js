@@ -1,9 +1,9 @@
 "use client";
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
-import Header from "../../../../../components/layout/header/Header";
-import Footer from "../../../../../components/layout/footer/Footer";
+import React from "react";
+import { useRouter } from "next/navigation";
+import Header from "../../../components/layout/header/Header";
+import Footer from "../../components/layout/footer/Footer";
 
 export default function LevelDetailPage({ params }) {
   const router = useRouter();
@@ -13,29 +13,61 @@ export default function LevelDetailPage({ params }) {
   const levelsData = {
     mathematics: {
       level1: {
-        name: 'Level 1',
-        description: 'Basic Arithmetic',
+        name: "Level 1",
+        description: "Basic Arithmetic",
         lessons: [
-          { id: 'lesson1', name: 'Lesson 1: Counting', description: 'Learn to count from 1 to 10.', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', textContent: 'Content for counting.' },
-          { id: 'lesson2', name: 'Lesson 2: Addition Basics', description: 'Understand simple addition.', textContent: 'Content for addition.' },
+          {
+            id: "lesson1",
+            name: "Lesson 1: Counting",
+            description: "Learn to count from 1 to 10.",
+            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            textContent: "Content for counting.",
+          },
+          {
+            id: "lesson2",
+            name: "Lesson 2: Addition Basics",
+            description: "Understand simple addition.",
+            textContent: "Content for addition.",
+          },
         ],
       },
       level2: {
-        name: 'Level 2',
-        description: 'Addition & Subtraction',
+        name: "Level 2",
+        description: "Addition & Subtraction",
         lessons: [
-          { id: 'lesson1', name: 'Lesson 1: Advanced Addition', description: 'Practice addition with larger numbers.', textContent: 'Content for advanced addition.' },
-          { id: 'lesson2', name: 'Lesson 2: Subtraction Basics', description: 'Introduction to subtraction.', textContent: 'Content for subtraction.' },
+          {
+            id: "lesson1",
+            name: "Lesson 1: Advanced Addition",
+            description: "Practice addition with larger numbers.",
+            textContent: "Content for advanced addition.",
+          },
+          {
+            id: "lesson2",
+            name: "Lesson 2: Subtraction Basics",
+            description: "Introduction to subtraction.",
+            textContent: "Content for subtraction.",
+          },
         ],
       },
     },
     english: {
       level1: {
-        name: 'Level 1',
-        description: 'Alphabets & Phonics',
+        name: "Level 1",
+        description: "Alphabets & Phonics",
         lessons: [
-          { id: 'lesson1', name: 'Lesson 1: ABCs', description: 'Learn the English alphabet.', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', textContent: 'Content for ABCs.' },
-          { id: 'lesson2', name: 'Lesson 2: Short Vowels', description: 'Understand short vowel sounds.', textContent: 'Content for short vowels.' },
+          {
+            id: "lesson1",
+            name: "Lesson 1: ABCs",
+            description: "Learn the English alphabet.",
+            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            textContent: "Content for ABCs.",
+          },
+          {
+            id: "lesson2",
+            name: "Lesson 2: Short Vowels",
+            description: "Understand short vowel sounds.",
+            textContent: "Content for short vowels.",
+          },
         ],
       },
     },
@@ -66,13 +98,19 @@ export default function LevelDetailPage({ params }) {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {level.lessons.length === 0 ? (
-              <p className="text-gray-700">No lessons available for this level yet.</p>
+              <p className="text-gray-700">
+                No lessons available for this level yet.
+              </p>
             ) : (
               level.lessons.map((lesson) => (
                 <div
                   key={lesson.id}
                   className="bg-white p-6 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 cursor-pointer"
-                  onClick={() => router.push(`/learning/${subjectId}/${levelId}/${lesson.id}`)}
+                  onClick={() =>
+                    router.push(
+                      `/learning/${subjectId}/${levelId}/${lesson.id}`
+                    )
+                  }
                 >
                   <h3 className="text-2xl font-bold text-blue-600 mt-4">
                     {lesson.name}

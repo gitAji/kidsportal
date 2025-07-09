@@ -51,9 +51,12 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
         const childrenCollectionRef = collection(db, 'users', parentUid, 'children');
         await addDoc(childrenCollectionRef, {
           ...childData,
-          assignedTasks: 0,
+          assignedTasks: [], // Initialize as an empty array
           tasksCompleted: 0,
-          progress: 0,
+          progress: { // Initialize as an object
+            overall: 0,
+            subjects: {}
+          },
         });
         setSuccessMessage('Child added successfully!');
       }
