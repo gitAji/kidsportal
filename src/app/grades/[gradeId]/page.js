@@ -1,10 +1,11 @@
-import React from 'react';
-import { useRouter } from 'next/navigation';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import Link from 'next/link';
-import Header from '../../components/layout/header/Header';
-import Footer from '../../components/layout/footer/Footer';
+"use client";
+import React, { use } from "react";
+import { useRouter } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import Header from "../../components/layout/header/Header";
+import Footer from "../../components/layout/footer/Footer";
 
 const GradeOverviewPage = ({ params }) => {
   const router = useRouter();
@@ -12,10 +13,30 @@ const GradeOverviewPage = ({ params }) => {
 
   // Define subjects and their corresponding paths
   const subjects = [
-    { name: 'Math', path: 'math', color: "bg-[#FF6347]", textColor: "text-white" },
-    { name: 'Tamil', path: 'tamil', color: "bg-[#32CD32]", textColor: "text-white" },
-    { name: 'English', path: 'english', color: "bg-[#1E90FF]", textColor: "text-white" },
-    { name: 'Ariviyal', path: 'ariviyal', color: "bg-[#FFD700]", textColor: "text-black" }, // Science in Tamil
+    {
+      name: "Math",
+      path: "math",
+      color: "bg-[#FF6347]",
+      textColor: "text-white",
+    },
+    {
+      name: "Tamil",
+      path: "tamil",
+      color: "bg-[#32CD32]",
+      textColor: "text-white",
+    },
+    {
+      name: "English",
+      path: "english",
+      color: "bg-[#1E90FF]",
+      textColor: "text-white",
+    },
+    {
+      name: "Ariviyal",
+      path: "ariviyal",
+      color: "bg-[#FFD700]",
+      textColor: "text-black",
+    }, // Science in Tamil
   ];
 
   return (

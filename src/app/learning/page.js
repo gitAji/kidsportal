@@ -1,53 +1,53 @@
 "use client"; // Ensure this component is treated as a client component
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import Header from "../components/layout/header/Header";
 import Footer from "../components/layout/footer/Footer";
 import BackToTop from "../components/ui/BackToTop";
 import Image from "next/image";
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from "next/navigation";
 
 export default function LearningPage() {
   // Subjects offered (static data)
   const subjects = [
     {
-      id: 'mathematics',
+      id: "mathematics",
       name: "Mathematics",
       description:
         "Explore the world of numbers, equations, and problem-solving.",
-      image: "/images/math.jpg", 
+      image: "/images/math.jpg",
     },
     {
-      id: 'science',
+      id: "science",
       name: "Science",
       description: "Dive into the wonders of physics, chemistry, and biology.",
-      image: "/images/science.jpg", 
+      image: "/images/science.jpg",
     },
     {
-      id: 'english',
+      id: "english",
       name: "English Language Arts",
       description: "Enhance your reading, writing, and communication skills.",
-      image: "/images/english.jpg", 
+      image: "/images/english.jpg",
     },
     {
-      id: 'social',
+      id: "social",
       name: "Social Studies",
       description: "Understand history, geography, and the world around you.",
-      image: "/images/social.jpg", 
+      image: "/images/social.jpg",
     },
     {
-      id: 'art',
+      id: "art",
       name: "Art & Creativity",
       description:
         "Express yourself through art, music, and creative projects.",
-      image: "/images/art.jpg", 
+      image: "/images/art.jpg",
     },
     {
-      id: 'technology',
+      id: "technology",
       name: "Technology",
       description:
         "Discover the world of computers, programming, and innovation.",
-      image: "/images/tech.jpg", 
+      image: "/images/tech.jpg",
     },
   ];
 
@@ -80,7 +80,7 @@ export default function LearningPage() {
     },
   ];
 
-  const router = useRouter(); 
+  const router = useRouter();
 
   return (
     <>
@@ -99,11 +99,11 @@ export default function LearningPage() {
               <div
                 key={subject.id}
                 className="bg-white p-6 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 cursor-pointer"
-                onClick={() => router.push(`/learning/${subject.id}`)} 
+                onClick={() => router.push(`/learning/${subject.id}`)}
               >
                 <div className="relative h-48 w-full overflow-hidden">
                   <Image
-                    src={subject.image || '/images/placeholder.jpg'}
+                    src={subject.image || "/images/placeholder.jpg"}
                     alt={subject.name}
                     layout="fill"
                     objectFit="cover"
