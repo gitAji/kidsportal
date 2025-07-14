@@ -2,28 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 @import 'animate.css/animate.min.css';
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #333333;
+  --heading-color: #222222; /* A dark charcoal color */
+  --primary-blue: #007bff; /* A standard blue */
+  --deep-ocean: #0a2342; /* A dark blue */
+  --link-color: #007bff; /* Same as primary-blue for links */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --heading-color: #2e2e2e;
+    --primary-blue: #252525;
+    --deep-ocean: #87ceeb;
+    --link-color: #429df8;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Nunito', sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+  font-weight: 800;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .text-heading {
+    color: var(--heading-color);
   }
 }

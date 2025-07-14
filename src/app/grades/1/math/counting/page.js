@@ -14,8 +14,6 @@ import correctSound from "../../../../../../public/sounds/correct.mp3"; // Corre
 import incorrectSound from "../../../../../../public/sounds/incorrect.mp3"; // Incorrect answer sound
 import FeedbackMessage from "../../../../components/ui/FeedbackMessage"; // Import the FeedbackMessage component
 
-// Sample questions array
-
 import ProgressBar from "../../../../components/ui/ProgressBar"; // Import ProgressBar
 
 // Sample questions array
@@ -133,31 +131,31 @@ const Level1 = () => {
       style={{ backgroundImage: "url('/images/background.jpg')" }}
     >
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
-      <main className="flex-grow p-4 flex flex-col items-center justify-center text-white">
-        <h1 className="text-4xl font-extrabold mb-4 drop-shadow-lg">
+      <main className="flex-grow p-4 sm:p-6 flex flex-col items-center justify-center text-white">
+        <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 drop-shadow-lg">
           Level 1: Counting Fun!
         </h1>
-        <div className="w-full max-w-2xl mx-auto">
+        <div className="w-full max-w-2xl mx-auto mb-6">
           <ProgressBar percentage={progress} />
         </div>
 
-        <div className="mt-8 bg-white bg-opacity-20 p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center backdrop-blur-sm">
+        <div className="mt-4 sm:mt-8 bg-white bg-opacity-20 p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center backdrop-blur-sm">
           {completed ? (
             <div className="flex flex-col items-center">
               <Image
                 src="/images/completed.avif"
                 alt="Completed"
-                width={200}
-                height={200}
-                className="rounded-full shadow-lg"
+                width={180}
+                height={180}
+                className="rounded-full shadow-lg mb-4"
               />
-              <h2 className="text-3xl font-bold mt-4 text-yellow-300">
+              <h2 className="text-2xl sm:text-3xl font-bold mt-4 text-yellow-300">
                 Awesome! You did it!
               </h2>
-              <div className="mt-6">
+              <div className="mt-6 flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
                 <button
                   onClick={handleReattempt}
-                  className="bg-yellow-400 text-white py-3 px-6 rounded-full shadow-lg hover:bg-yellow-500 transform hover:scale-105 transition-transform duration-300 mr-4"
+                  className="bg-yellow-400 text-white py-3 px-6 rounded-full shadow-lg hover:bg-yellow-500 transform hover:scale-105 transition-transform duration-300"
                 >
                   Play Again
                 </button>
@@ -176,7 +174,7 @@ const Level1 = () => {
                   (_, index) => (
                     <div
                       key={index}
-                      className="transform hover:scale-110 transition-transform duration-300 m-2"
+                      className="transform hover:scale-110 transition-transform duration-300 m-1 sm:m-2"
                     >
                       <Image
                         src={questions[currentQuestionIndex].image}
@@ -188,10 +186,10 @@ const Level1 = () => {
                   )
                 )}
               </div>
-              <h2 className="text-2xl font-semibold mt-2 text-white">
+              <h2 className="text-xl sm:text-2xl font-semibold mt-2 text-white">
                 {questions[currentQuestionIndex].question}
               </h2>
-              <div className="flex items-center justify-center mt-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center mt-4 space-y-3 sm:space-y-0 sm:space-x-4">
                 <VoiceButton
                   questionText={questions[currentQuestionIndex].question}
                 />
@@ -200,7 +198,7 @@ const Level1 = () => {
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
                   placeholder="Your answer"
-                  className="border-2 border-yellow-300 bg-transparent text-white rounded-full p-3 w-48 text-center text-xl focus:outline-none focus:ring-2 focus:ring-yellow-200 mx-4"
+                  className="border-2 border-yellow-300 bg-transparent text-white rounded-full p-3 w-full max-w-xs text-center text-lg sm:text-xl focus:outline-none focus:ring-2 focus:ring-yellow-200"
                 />
                 <button
                   onClick={validateAnswer}
@@ -229,8 +227,5 @@ const Level1 = () => {
     </div>
   );
 };
-
-export default Level1;
-
 
 export default Level1;

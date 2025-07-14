@@ -57,8 +57,8 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
   if (!childData) {
     return (
       <div className="text-center py-20">
-        <h2 className="text-2xl font-semibold text-deep-ocean mb-4">No Child Data Available</h2>
-        <p className="text-gray-600">Please select a child or ensure child data is loaded.</p>
+        <h2 className="text-2xl font-semibold text-[var(--deep-ocean)] mb-4">No Child Data Available</h2>
+        <p className="text-[var(--foreground)]">Please select a child or ensure child data is loaded.</p>
       </div>
     );
   }
@@ -91,7 +91,7 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
       >
         {/* Details View */}
         <div className="w-full flex-shrink-0 p-4 md:p-6">
-          <h2 className="text-3xl font-bold text-deep-ocean mb-6 text-center">{childData.name}'s Dashboard</h2>
+          <h2 className="text-3xl font-bold text-[var(--deep-ocean)] mb-6 text-center">{childData.name}'s Dashboard</h2>
           
           {/* Tab Navigation */}
           <div className="mb-6">
@@ -99,7 +99,7 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
               <li className="me-2" role="presentation">
                 <button
                   className={`inline-block p-4 border-b-2 rounded-t-lg flex items-center transition-colors duration-200 ${
-                    activeTab === 'about' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-600 hover:border-gray-300'
+                    activeTab === 'about' ? 'border-blue-600 text-blue-600' : 'border-transparent text-[var(--foreground)] hover:text-[var(--foreground)] hover:border-gray-300'
                   }`}
                   onClick={() => setActiveTab('about')}
                   type="button"
@@ -113,7 +113,7 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
               <li className="me-2" role="presentation">
                 <button
                   className={`inline-block p-4 border-b-2 rounded-t-lg flex items-center transition-colors duration-200 ${
-                    activeTab === 'insights' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-600 hover:border-gray-300'
+                    activeTab === 'insights' ? 'border-blue-600 text-blue-600' : 'border-transparent text-[var(--foreground)] hover:text-[var(--foreground)] hover:border-gray-300'
                   }`}
                   onClick={() => setActiveTab('insights')}
                   type="button"
@@ -127,7 +127,7 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
               <li className="me-2" role="presentation">
                 <button
                   className={`inline-block p-4 border-b-2 rounded-t-lg flex items-center transition-colors duration-200 ${
-                    activeTab === 'tasks' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-600 hover:border-gray-300'
+                    activeTab === 'tasks' ? 'border-blue-600 text-blue-600' : 'border-transparent text-[var(--foreground)] hover:text-[var(--foreground)] hover:border-gray-300'
                   }`}
                   onClick={() => setActiveTab('tasks')}
                   type="button"
@@ -141,7 +141,7 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
               <li className="me-2" role="presentation">
                 <button
                   className={`inline-block p-4 border-b-2 rounded-t-lg flex items-center transition-colors duration-200 ${
-                    activeTab === 'progress' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-600 hover:border-gray-300'
+                    activeTab === 'progress' ? 'border-blue-600 text-blue-600' : 'border-transparent text-[var(--foreground)] hover:text-[var(--foreground)] hover:border-gray-300'
                   }`}
                   onClick={() => setActiveTab('progress')}
                   type="button"
@@ -155,7 +155,7 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
               <li className="me-2" role="presentation">
                 <button
                   className={`inline-block p-4 border-b-2 rounded-t-lg flex items-center transition-colors duration-200 ${
-                    activeTab === 'settings' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-600 hover:border-gray-300'
+                    activeTab === 'settings' ? 'border-blue-600 text-blue-600' : 'border-transparent text-[var(--foreground)] hover:text-[var(--foreground)] hover:border-gray-300'
                   }`}
                   onClick={() => setActiveTab('settings')}
                   type="button"
@@ -173,17 +173,17 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
           <div id="child-dashboard-tab-content">
             {activeTab === 'about' && (
               <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                <h3 className="text-2xl font-semibold text-deep-ocean mb-4">About {childData.name}</h3>
+                <h3 className="text-2xl font-semibold text-[var(--deep-ocean)] mb-4">About {childData.name}</h3>
                 <div className="flex items-center mb-4">
                   {/* Child Image/Initial */}
                   <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center text-white text-5xl font-bold mr-4">
                     {childData.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="text-gray-700 text-xl font-bold">{childData.name}</p>
-                    <p className="text-gray-600">Age: {childData.age} | Grade: {childData.grade} | Gender: {childData.gender}</p>
-                    <p className="text-gray-600">Profile Completion: <span className="font-bold">{profileCompletionPercentage}%</span></p>
-                    <p className="text-gray-600">Last Activity: (Placeholder)</p>
+                    <p className="text-[var(--foreground)] text-xl font-bold">{childData.name}</p>
+                    <p className="text-[var(--foreground)]">Age: {childData.age} | Grade: {childData.grade} | Gender: {childData.gender}</p>
+                    <p className="text-[var(--foreground)]">Profile Completion: <span className="font-bold">{profileCompletionPercentage}%</span></p>
+                    <p className="text-[var(--foreground)]">Last Activity: (Placeholder)</p>
                   </div>
                 </div>
                 <div className="mt-4">
@@ -191,11 +191,11 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
                     <FaUpload className="mr-2" /> Upload Image
                   </button>
                 </div>
-                <p className="text-gray-700 mt-4"><strong>Notes:</strong> {childData.notes || 'No notes available.'}</p>
+                <p className="text-[var(--foreground)] mt-4"><strong>Notes:</strong> {childData.notes || 'No notes available.'}</p>
                 <div className="flex justify-around mt-6">
                   <button
                     onClick={handleEditClick}
-                    className="px-6 py-3 bg-sunny-yellow text-deep-ocean font-semibold rounded-lg hover:bg-sunny-yellow/80 transition-colors duration-300 flex items-center"
+                    className="px-6 py-3 bg-sunny-yellow text-[var(--deep-ocean)] font-semibold rounded-lg hover:bg-sunny-yellow/80 transition-colors duration-300 flex items-center"
                   >
                     <FaEdit className="mr-2" /> Edit Child
                   </button>
@@ -220,13 +220,13 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
 
             {activeTab === 'insights' && (
               <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                <h3 className="text-2xl font-semibold text-deep-ocean mb-4">Insights</h3>
-                <h4 className="text-xl font-semibold text-gray-800 mb-3">Subject Performance:</h4>
+                <h3 className="text-2xl font-semibold text-[var(--deep-ocean)] mb-4">Insights</h3>
+                <h4 className="text-xl font-semibold text-[var(--heading-color)] mb-3">Subject Performance:</h4>
                 <div className="space-y-4 mb-6">
                   {Object.entries(childData.progress?.subjects || {}).map(([subject, data]) => (
                     <div key={subject}>
                       <div className="flex justify-between items-center mb-1">
-                        <span className="text-gray-700 font-medium">{subject}</span>
+                        <span className="text-[var(--foreground)] font-medium">{subject}</span>
                         <span className={`font-bold ${data.score >= 70 ? 'text-green-600' : data.score >= 50 ? 'text-yellow-600' : 'text-red-600'}`}>{data.score || 0}%</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-4">
@@ -253,7 +253,7 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
 
             {activeTab === 'tasks' && (
               <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                <h3 className="text-2xl font-semibold text-deep-ocean mb-4">Tasks</h3>
+                <h3 className="text-2xl font-semibold text-[var(--deep-ocean)] mb-4">Tasks</h3>
                 {childData.assignedTasks && childData.assignedTasks.length > 0 ? (
                   <ul className="space-y-3">
                     {childData.assignedTasks.map((task, index) => (
@@ -282,7 +282,7 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
 
             {activeTab === 'progress' && (
               <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                <h3 className="text-2xl font-semibold text-deep-ocean mb-4">Progress</h3>
+                <h3 className="text-2xl font-semibold text-[var(--deep-ocean)] mb-4">Progress</h3>
                 <p className="text-gray-700 mb-2"><strong>Week-by-week activity:</strong> (Placeholder for timeline)</p>
                 <p className="text-gray-700 mb-2"><strong>Time spent on platform:</strong> (Placeholder)</p>
                 <p className="text-gray-700 mb-2"><strong>Badges/Milestones:</strong> (Placeholder)</p>
@@ -291,7 +291,7 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
 
             {activeTab === 'settings' && (
               <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                <h3 className="text-2xl font-semibold text-deep-ocean mb-4">Settings</h3>
+                <h3 className="text-2xl font-semibold text-[var(--deep-ocean)] mb-4">Settings</h3>
                 <p className="text-gray-700 mb-2"><strong>Update grade:</strong> (Placeholder)</p>
                 <p className="text-gray-700 mb-2"><strong>Assign subject access:</strong> (Placeholder)</p>
                 <p className="text-gray-700 mb-2"><strong>Notification preferences:</strong> (Placeholder)</p>
@@ -303,14 +303,14 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
 
         {/* Edit View */}
         <div className="w-full flex-shrink-0 p-4 md:p-6">
-          <h2 className="text-3xl font-bold text-deep-ocean mb-6 text-center">Edit Child</h2>
+          <h2 className="text-3xl font-bold text-[var(--deep-ocean)] mb-6 text-center">Edit Child</h2>
           <AddChildForm childToEdit={childData} onClose={handleCancel} onSaveSuccess={handleSaveSuccess} />
         </div>
 
         {/* Delete Confirmation View */}
         <div className="w-full flex-shrink-0 p-4 md:p-6 flex flex-col items-center justify-center text-center">
           <FaTrash className="text-red-500 text-6xl mb-4" />
-          <h2 className="text-2xl font-bold text-deep-ocean mb-4">Are you sure you want to delete {childData.name}?</h2>
+          <h2 className="text-2xl font-bold text-[var(--deep-ocean)] mb-4">Are you sure you want to delete {childData.name}?</h2>
           <p className="text-gray-700 mb-6">This action cannot be undone.</p>
           <div className="flex justify-center space-x-4">
             <button

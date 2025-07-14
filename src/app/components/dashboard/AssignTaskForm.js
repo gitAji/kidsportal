@@ -145,18 +145,14 @@ const AssignTaskForm = ({ onClose, childId, childName }) => {
         {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="subject" className="block text-gray-700 text-sm font-bold mb-2">Subject:</label>
+            <label htmlFor="subject" className="block text-[var(--foreground)] text-sm font-bold mb-2">Subject:</label>
             <select
-              id="subject"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={selectedSubject}
-              onChange={(e) => {
-                setSelectedSubject(e.target.value);
-                setSelectedLevel('');
-                setSelectedLesson('');
-              }}
-              required
-            >
+            id="subject"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:shadow-outline"
+          >
               <option value="">Select a Subject</option>
               {subjects.map(subject => (
                 <option key={subject.id} value={subject.id}>{subject.name}</option>
@@ -165,18 +161,14 @@ const AssignTaskForm = ({ onClose, childId, childName }) => {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="level" className="block text-gray-700 text-sm font-bold mb-2">Level:</label>
+            <label htmlFor="level" className="block text-[var(--foreground)] text-sm font-bold mb-2">Level:</label>
             <select
-              id="level"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={selectedLevel}
-              onChange={(e) => {
-                setSelectedLevel(e.target.value);
-                setSelectedLesson('');
-              }}
-              disabled={!selectedSubject}
-              required
-            >
+            id="level"
+            name="level"
+            value={formData.level}
+            onChange={handleChange}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:shadow-outline"
+          >
               <option value="">Select a Level</option>
               {currentLevels.map(level => (
                 <option key={level.id} value={level.id}>{level.name}</option>
@@ -185,15 +177,14 @@ const AssignTaskForm = ({ onClose, childId, childName }) => {
           </div>
 
           <div className="mb-6">
-            <label htmlFor="lesson" className="block text-gray-700 text-sm font-bold mb-2">Lesson:</label>
+            <label htmlFor="lesson" className="block text-[var(--foreground)] text-sm font-bold mb-2">Lesson:</label>
             <select
-              id="lesson"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={selectedLesson}
-              onChange={(e) => setSelectedLesson(e.target.value)}
-              disabled={!selectedLevel}
-              required
-            >
+            id="lesson"
+            name="lesson"
+            value={formData.lesson}
+            onChange={handleChange}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:shadow-outline"
+          >
               <option value="">Select a Lesson</option>
               {currentLessons.map(lesson => (
                 <option key={lesson.id} value={lesson.id}>{lesson.name}</option>

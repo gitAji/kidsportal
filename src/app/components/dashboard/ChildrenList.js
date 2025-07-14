@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { collection, query, onSnapshot } from 'firebase/firestore';
 import { db } from '../../../firebase/config';
 import { auth } from '../../../firebase/auth';
+import Link from 'next/link'; // Import Link for navigation
 
-const ChildrenList = ({ onChildCardClick, onEditChild, onDeleteChild }) => {
+const ChildrenList = () => {
   const [children, setChildren] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -36,7 +37,7 @@ const ChildrenList = ({ onChildCardClick, onEditChild, onDeleteChild }) => {
   }, []);
 
   if (loading) {
-    return <p>Loading children...</p>;
+    return <p className="text-[var(--foreground)]">Loading children...</p>;
   }
 
   if (error) {
@@ -44,7 +45,7 @@ const ChildrenList = ({ onChildCardClick, onEditChild, onDeleteChild }) => {
   }
 
   if (children.length === 0) {
-    return <p className="text-gray-700">No children added yet. Click &quot;Add Child&quot; to get started!</p>;
+    return <p className="text-[var(--foreground)]">No children added yet. Click &quot;Add Child&quot; to get started!</p>;
   }
 
   return (
@@ -55,42 +56,24 @@ const ChildrenList = ({ onChildCardClick, onEditChild, onDeleteChild }) => {
         const overallProgress = child.progress ? child.progress.overall : 0;
 
         return (
-          <div key={child.id} className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-2">{child.name}</h3>
-            <p className="text-gray-700">Age: {child.age}</p>
-            <p className="text-gray-700">Grade: {child.grade}</p>
-            <div className="mt-4">
-              <p className="text-gray-700">Assigned Tasks: {assignedTasksCount}</p>
-              <p className="text-gray-700">Tasks Completed: {completedTasksCount}</p>
-              <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                <div
-                  className="bg-blue-600 h-2.5 rounded-full"
-                  style={{ width: `${overallProgress}%` }}
-                ></div>
+          <Link href={`/child-profile/${child.id}`} key={child.id} passHref>
+            <div className="bg-white p-6 rounded-lg shadow-md cursor-pointer transform transition-transform duration-200 hover:scale-105">
+              <h3 className="text-xl font-bold text-[var(--text-dark)] mb-2">{child.name}</h3>
+              <p className="text-lg text-[var(--foreground)]">Age: {child.age}</p>
+              <p className="text-lg text-[var(--foreground)]">Grade: {child.grade}</p>
+              <div className="mt-4">
+                <p className="text-base text-[var(--foreground)]">Assigned Tasks: {assignedTasksCount}</p>
+                <p className="text-base text-[var(--foreground)]">Tasks Completed: {completedTasksCount}</p>
+                <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                  <div
+                    className="bg-[var(--primary-blue)] h-2.5 rounded-full"
+                    style={{ width: `${overallProgress}%` }}
+                  ></div>
+                </div>
+                <p className="text-sm text-[var(--foreground)] mt-1">Progress: {overallProgress}%</p>
               </div>
-              <p className="text-gray-700 text-sm mt-1">Progress: {overallProgress}%</p>
             </div>
-            <div className="mt-4 flex justify-between space-x-2">
-              <button
-                onClick={() => onEditChild(child)}
-                className="flex-1 px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 text-sm"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => onDeleteChild(child.id)}
-                className="flex-1 px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 text-sm"
-              >
-                Delete
-              </button>
-              <button
-                onClick={() => onChildCardClick(child)}
-                className="flex-1 px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 text-sm"
-              >
-                View Profile
-              </button>
-            </div>
-          </div>
+          </Link>
         );
       })}
     </div>

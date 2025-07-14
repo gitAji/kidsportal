@@ -10,9 +10,9 @@ const AssignedTasks = ({ tasks }) => {
       case 'overdue':
         return 'text-red-600';
       case 'not-started':
-        return 'text-gray-600';
+        return 'text-[var(--foreground)]';
       default:
-        return 'text-gray-600';
+        return 'text-[var(--foreground)]';
     }
   };
 
@@ -23,7 +23,7 @@ const AssignedTasks = ({ tasks }) => {
           {tasks.map((task) => (
             <li key={task.id} className="mb-2">
               <p className="text-lg font-medium">{task.subjectName} - {task.lessonName}</p>
-              <p className="text-gray-600 text-sm">Due Date: {new Date(task.dueDate.seconds * 1000).toLocaleDateString()}</p>
+              <p className="text-[var(--foreground)] text-sm">Due Date: {new Date(task.dueDate.seconds * 1000).toLocaleDateString()}</p>
               <p className={`${getStatusColor(task.status)} text-sm capitalize`}>
                 Status: {task.status}
               </p>
@@ -31,7 +31,7 @@ const AssignedTasks = ({ tasks }) => {
           ))}
         </ul>
       ) : (
-        <p className="text-gray-700">No assigned tasks.</p>
+        <p className="text-[var(--foreground)]">No assigned tasks.</p>
       )}
     </div>
   );

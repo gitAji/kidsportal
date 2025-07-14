@@ -3,6 +3,7 @@ import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../../../firebase/config';
 import { auth } from '../../../firebase/auth';
 import UpgradeModal from './UpgradeModal';
+import Tooltip from '../ui/Tooltip';
 
 const Subscription = () => {
   const [subscription, setSubscription] = useState(null);
@@ -58,7 +59,7 @@ const Subscription = () => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Subscription Management</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-heading">Subscription Management</h2>
       <p className="text-gray-700">
         Current Plan: <span className="font-bold">{subscription?.plan}</span>
       </p>
@@ -74,19 +75,23 @@ const Subscription = () => {
       )}
       <div className="mt-4">
         {isPremium ? (
-          <button
-            onClick={handleDowngrade}
-            className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-          >
-            Downgrade to Free
-          </button>
+          <Tooltip text="Downgrade to the Free plan and lose Premium features.">
+            <button
+              onClick={handleDowngrade}
+              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+            >
+              Downgrade to Free
+            </button>
+          </Tooltip>
         ) : (
-          <button
-            onClick={handleUpgradeClick}
-            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-          >
-            Upgrade to Premium
-          </button>
+          <Tooltip text="Upgrade to Premium for more features and content!">
+            <button
+              onClick={handleUpgradeClick}
+              className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+            >
+              Upgrade to Premium
+            </button>
+          </Tooltip>
         )}
       </div>
       {showUpgradeModal && <UpgradeModal onClose={handleCloseUpgradeModal} />}

@@ -164,17 +164,17 @@ export default function HomePage() {
         </div>
 
         <div className="container mx-auto text-center relative z-10 px-4">
-          <h1 className="text-5xl font-extrabold text-blue-600 drop-shadow-lg">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-600 drop-shadow-lg leading-tight">
             Welcome to a World of Fun Learning!
           </h1>
-          <p className="mt-4 text-lg text-gray-700">
+          <p className="mt-4 text-base sm:text-lg text-gray-700 max-w-2xl mx-auto">
             Explore exciting games and activities that make learning an
             adventure.
           </p>
           <div className="mt-8">
             <button
               onClick={scrollToGradeSection}
-              className="bg-yellow-400 text-white py-4 px-10 rounded-full shadow-lg hover:bg-yellow-500 transform hover:scale-105 transition-transform duration-300"
+              className="bg-yellow-400 text-white py-3 px-8 sm:py-4 sm:px-10 rounded-full shadow-lg hover:bg-yellow-500 transform hover:scale-105 transition-transform duration-300 text-base sm:text-lg"
             >
               Let's Get Started!
             </button>
@@ -189,22 +189,22 @@ export default function HomePage() {
           <p className="text-gray-600 mt-4">
             Unlock new opportunities with our platform.
           </p>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <div className="bg-[#E0E7FF] p-6 rounded-lg shadow-lg text-gray-800">
-              <h3 className="text-xl font-semibold">Interactive Lessons</h3>
-              <p className="mt-2">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+            <div className="bg-[#E0E7FF] p-5 sm:p-6 rounded-lg shadow-lg text-gray-800">
+              <h3 className="text-lg sm:text-xl font-semibold">Interactive Lessons</h3>
+              <p className="mt-2 text-sm sm:text-base">
                 Engage with interactive content designed to make learning fun.
               </p>
             </div>
-            <div className="bg-[#D1FAE5] p-6 rounded-lg shadow-lg text-gray-800">
-              <h3 className="text-xl font-semibold">Expert Teachers</h3>
-              <p className="mt-2">
+            <div className="bg-[#D1FAE5] p-5 sm:p-6 rounded-lg shadow-lg text-gray-800">
+              <h3 className="text-lg sm:text-xl font-semibold">Expert Teachers</h3>
+              <p className="mt-2 text-sm sm:text-base">
                 Learn from the best instructors with years of experience.
               </p>
             </div>
-            <div className="bg-[#FFEDD5] p-6 rounded-lg shadow-lg text-gray-800">
-              <h3 className="text-xl font-semibold">Progress Tracking</h3>
-              <p className="mt-2">
+            <div className="bg-[#FFEDD5] p-5 sm:p-6 rounded-lg shadow-lg text-gray-800">
+              <h3 className="text-lg sm:text-xl font-semibold">Progress Tracking</h3>
+              <p className="mt-2 text-sm sm:text-base">
                 Monitor your progress with detailed reports and feedback.
               </p>
             </div>
@@ -222,7 +222,7 @@ export default function HomePage() {
             Choose a grade to start your learning adventure!
           </p>
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
             {/* Loop through grades from 1-12 */}
             {Array.from({ length: 12 }, (_, gradeIndex) => (
               <GradeCard
@@ -244,20 +244,20 @@ export default function HomePage() {
           <h2 className="text-3xl font-bold text-gray-800">
             What Our Students Say
           </h2>
-          <div className="mt-8">
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <p className="text-gray-600 italic">
+          <div className="mt-8 max-w-lg mx-auto">
+            <div className="bg-white rounded-lg shadow-lg p-6 sm:p-8">
+              <p className="text-base sm:text-lg text-gray-600 italic">
                 {testimonials[currentSlide].text}
               </p>
-              <p className="font-semibold mt-2">
+              <p className="font-semibold mt-4 text-sm sm:text-base">
                 - {testimonials[currentSlide].author}
               </p>
             </div>
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center mt-4 space-x-2">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
-                  className={`w-3 h-3 rounded-full mx-1 ${
+                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full mx-1 ${
                     currentSlide === index ? "bg-blue-600" : "bg-gray-300"
                   }`}
                   onClick={() => setCurrentSlide(index)}

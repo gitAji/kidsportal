@@ -82,11 +82,11 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
         {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="childName" className="block text-gray-700 text-sm font-bold mb-2">Child&apos;s Name:</label>
+            <label htmlFor="childName" className="block text-[var(--foreground)] text-sm font-bold mb-2">Child&apos;s Name:</label>
             <input
               type="text"
               id="childName"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Enter child's name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -98,7 +98,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
             <input
               type="number"
               id="childAge"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Enter child's age"
               value={age}
               onChange={(e) => setAge(e.target.value)}
@@ -110,7 +110,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
             <input
               type="text"
               id="childGrade"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Enter child's grade"
               value={grade}
               onChange={(e) => setGrade(e.target.value)}
@@ -122,7 +122,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
             <input
               type="text"
               id="childUsername"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Enter a username for the child"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -134,7 +134,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
             <input
               type="password"
               id="childPassword"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:shadow-outline"
               placeholder={childToEdit ? "Leave blank to keep current password" : "Enter a password for the child"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}

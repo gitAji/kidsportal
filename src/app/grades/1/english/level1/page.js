@@ -1,50 +1,5 @@
 "use client"; // Ensure this component is treated as a client component
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image"; // Optimized images with Next.js
-import Header from "../../../../components/layout/header/Header"; // Import Header component
-import Footer from "../../../../components/layout/footer/Footer"; // Import Footer component
-import BackToTop from "../../../../components/ui/BackToTop"; // Import BackToTop button
-import ToggleModal from "../../../../components/ui/Modal"; // Import Modal component
-import VoiceButton from "../../../../components/ui/VoiceButton"; // Import the new VoiceButton component
-import FeedbackMessage from "../../../../components/ui/FeedbackMessage"; // Import the FeedbackMessage component
-import "animate.css"; // Import animate.css for animations
 
-// Sample questions array for English Level 1
-const questions = [
-  {
-    question: "What color is the apple?",
-    answer: "Red",
-    options: ["Red", "Green", "Blue", "Yellow"],
-    image: "/images/apple.png", // Replace with an actual image of an apple
-    width: 100,
-    height: 100,
-  },
-  {
-    question: "What color is the sky?",
-    answer: "Blue",
-    options: ["Blue", "Green", "Red", "Yellow"],
-    image: "/images/sky.png", // Replace with an actual image of the sky
-    width: 100,
-    height: 100,
-  },
-  {
-    question: "What color is a banana?",
-    answer: "Yellow",
-    options: ["Yellow", "Blue", "Red", "Green"],
-    image: "/images/banana.png", // Replace with an actual image of a banana
-    width: 100,
-    height: 100,
-  },
-  {
-    question: "What color is the grass?",
-    answer: "Green",
-    options: ["Green", "Blue", "Red", "Yellow"],
-    image: "/images/grass.png", // Replace with an actual image of grass
-    width: 100,
-    height: 100,
-  },
-];
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -260,8 +215,5 @@ const Level1 = () => {
     </div>
   );
 };
-
-export default Level1;
-
 
 export default Level1;
