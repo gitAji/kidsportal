@@ -87,7 +87,24 @@ export default function HomePage() {
 
   // Function to generate the link dynamically based on grade and subject
   const generateLink = (grade, subject) => {
-    return `/grades/${grade}/${subject.toLowerCase()}`; // Example: /grades/1/math or /grades/2/english
+    let levelPath = '';
+    switch (subject.toLowerCase()) {
+      case 'math':
+        levelPath = 'counting'; // Assuming 'counting' is the first level for math
+        break;
+      case 'english':
+        levelPath = 'level1';
+        break;
+      case 'tamil':
+        levelPath = 'level1';
+        break;
+      case 'ariviyal':
+        levelPath = 'level1';
+        break;
+      default:
+        levelPath = 'level1'; // Default to level1 if subject not specifically handled
+    }
+    return `/grades/${grade}/${subject.toLowerCase()}/${levelPath}`;
   };
 
   // Function to toggle modal for SignIn/SignUp
@@ -111,28 +128,55 @@ export default function HomePage() {
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
 
       {/* Hero Section */}
-      <section className="relative bg-blue-50 py-20 h-[400px] ">
+      <section className="relative bg-blue-100 py-20 h-[500px] overflow-hidden">
         <Image
-          src="/images/intro.jpeg"
-          alt="Hero"
+          src="/images/intro.png"
+          alt="Hero Background"
           fill
           className="object-cover opacity-30"
           priority
         />
-        <div className="container mx-auto text-center relative z-1 px-4">
-          <h1 className="text-4xl font-bold text-blue-600">
-            Master skills with in-depth learning
+
+        {/* Decorative Images */}
+        <div className="absolute top-10 left-10 w-24 h-24 animate-pulse">
+          <Image
+            src="/images/cloud.png"
+            alt="Cloud"
+            width={90}
+            height={90}
+          />
+        </div>
+        <div className="absolute top-20 right-10 w-32 h-32 animate-pulse delay-500">
+          <Image
+            src="/images/cloud.png"
+            alt="Cloud"
+            width={120}
+            height={120}
+          />
+        </div>
+        <div className="absolute bottom-10 left-1/4 w-48 h-24">
+          <Image
+            src="/images/rainbow.png"
+            alt="Rainbow"
+            width={192}
+            height={96}
+          />
+        </div>
+
+        <div className="container mx-auto text-center relative z-10 px-4">
+          <h1 className="text-5xl font-extrabold text-blue-600 drop-shadow-lg">
+            Welcome to a World of Fun Learning!
           </h1>
-          <p className="mt-4 text-gray-600">
-            Our platform helps you build the foundational skills you need for
-            school and beyond.
+          <p className="mt-4 text-lg text-gray-700">
+            Explore exciting games and activities that make learning an
+            adventure.
           </p>
           <div className="mt-8">
             <button
               onClick={scrollToGradeSection}
-              className="bg-blue-600 text-white py-4 px-8 rounded-lg shadow-lg hover:bg-blue-700"
+              className="bg-yellow-400 text-white py-4 px-10 rounded-full shadow-lg hover:bg-yellow-500 transform hover:scale-105 transition-transform duration-300"
             >
-              Get Started
+              Let's Get Started!
             </button>
           </div>
         </div>
@@ -171,12 +215,11 @@ export default function HomePage() {
       {/* Grade Cards Section */}
       <section ref={gradeSectionRef} className="py-16 bg-gray-50">
         <div className="container mx-auto text-center px-4">
-          <h2 className="text-3xl font-bold text-blue-600">
+          <h2 className="text-4xl font-extrabold text-blue-600 drop-shadow-lg">
             Explore Our Grades
           </h2>
-          <p className="text-gray-600 mt-4">
-            Choose a grade to access various subjects designed to engage
-            students.
+          <p className="text-gray-600 mt-4 text-lg">
+            Choose a grade to start your learning adventure!
           </p>
 
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -196,7 +239,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="container mx-auto text-center px-4">
           <h2 className="text-3xl font-bold text-gray-800">
             What Our Students Say

@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { collection, query, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
-import { db, auth } from '../../../firebase/config';
-import ChildDashboard from './ChildDashboard'; // Import the consolidated ChildDashboard
-import AddChildForm from './AddChildForm';
+import { collection, query, onSnapshot } from 'firebase/firestore';
+import { db } from '../../../firebase/config';
+import { auth } from '../../../firebase/auth';
 
-const ChildrenList = () => {
+const ChildrenList = ({ onChildCardClick, onEditChild, onDeleteChild }) => {
   const [children, setChildren] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showChildDashboardModal, setShowChildDashboardModal] = useState(false); // Renamed state
-  const [selectedChild, setSelectedChild] = useState(null);
-  const [showAddChildModal, setShowAddChildModal] = useState(false);
-  const [editingChild, setEditingChild] = useState(null);
 
   useEffect(() => {
     if (!auth.currentUser) {
@@ -39,45 +34,6 @@ const ChildrenList = () => {
 
     return () => unsubscribe();
   }, []);
-
-  const handleViewProfileClick = (child) => {
-    setSelectedChild(child);
-    setShowChildDashboardModal(true); // Use the new state
-  };
-
-  const handleCloseChildDashboardModal = () => { // Renamed handler
-    setShowChildDashboardModal(false);
-    setSelectedChild(null);
-  };
-
-  const handleDeleteChild = async (childId) => {
-    if (window.confirm("Are you sure you want to delete this child?")) {
-      try {
-        const parentUid = auth.currentUser.uid;
-        const childDocRef = doc(db, 'users', parentUid, 'children', childId);
-        await deleteDoc(childDocRef);
-        alert("Child deleted successfully!");
-      } catch (err) {
-        console.error("Error deleting child:", err);
-        alert("Failed to delete child. Please try again.");
-      }
-    }
-  };
-
-  const handleEditChild = (child) => {
-    setEditingChild(child);
-    setShowAddChildModal(true);
-  };
-
-  const handleCloseAddChildModal = () => {
-    setShowAddChildModal(false);
-    setEditingChild(null);
-  };
-
-  const handleSaveSuccess = () => {
-    setShowAddChildModal(false);
-    setEditingChild(null);
-  };
 
   if (loading) {
     return <p>Loading children...</p>;
@@ -116,19 +72,19 @@ const ChildrenList = () => {
             </div>
             <div className="mt-4 flex justify-between space-x-2">
               <button
-                onClick={() => handleEditChild(child)}
+                onClick={() => onEditChild(child)}
                 className="flex-1 px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 text-sm"
               >
                 Edit
               </button>
               <button
-                onClick={() => handleDeleteChild(child.id)}
+                onClick={() => onDeleteChild(child.id)}
                 className="flex-1 px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 text-sm"
               >
                 Delete
               </button>
               <button
-                onClick={() => handleViewProfileClick(child)}
+                onClick={() => onChildCardClick(child)}
                 className="flex-1 px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 text-sm"
               >
                 View Profile
@@ -137,18 +93,6 @@ const ChildrenList = () => {
           </div>
         );
       })}
-
-      {showChildDashboardModal && (
-        <ChildDashboard child={selectedChild} onClose={handleCloseChildDashboardModal} />
-      )}
-
-      {showAddChildModal && (
-        <AddChildForm
-          onClose={handleCloseAddChildModal}
-          childToEdit={editingChild}
-          onSaveSuccess={handleSaveSuccess}
-        />
-      )}
     </div>
   );
 };

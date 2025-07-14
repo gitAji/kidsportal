@@ -15,6 +15,10 @@ import incorrectSound from "../../../../../../public/sounds/incorrect.mp3"; // I
 import FeedbackMessage from "../../../../components/ui/FeedbackMessage"; // Import the FeedbackMessage component
 
 // Sample questions array
+
+import ProgressBar from "../../../../components/ui/ProgressBar"; // Import ProgressBar
+
+// Sample questions array
 const questions = [
   {
     question: "How many apples do you see?",
@@ -51,201 +55,167 @@ const questions = [
 ];
 
 const Level1 = () => {
-  // States to track the progress, feedback, and current answers
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
-  const [isCorrect, setIsCorrect] = useState(null); // State to track if the answer is correct
-  const [progress, setProgress] = useState({
-    correct: 0,
-    incorrect: 0,
-    wrongAnswers: [],
-    attempted: 0,
-  });
+  const [isCorrect, setIsCorrect] = useState(null);
+  const [progress, setProgress] = useState(0);
   const [completed, setCompleted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
 
-  // Load progress from localStorage when the component mounts
+  const [playCorrect] = useSound(correctSound);
+  const [playIncorrect] = useSound(incorrectSound);
+
   useEffect(() => {
     const savedProgress = localStorage.getItem("level1Progress");
     if (savedProgress) {
-      const { correct, incorrect, wrongAnswers, attempted, completed } =
-        JSON.parse(savedProgress);
-      setProgress({ correct, incorrect, wrongAnswers, attempted });
+      const { completed, currentQuestionIndex } = JSON.parse(savedProgress);
       setCompleted(completed);
-      setCurrentQuestionIndex(0);
+      setCurrentQuestionIndex(currentQuestionIndex);
+      setProgress((currentQuestionIndex / questions.length) * 100);
     }
   }, []);
 
-  // Function to validate the user's answer
   const validateAnswer = () => {
     const trimmedAnswer = userAnswer.trim();
-    setProgress((prev) => ({ ...prev, attempted: prev.attempted + 1 })); // Increment attempted
-
     if (trimmedAnswer === questions[currentQuestionIndex].answer) {
-      setFeedback("Well done! 🎉");
+      setFeedback("Correct! 🎉");
       setIsCorrect(true);
-      setProgress((prev) => ({ ...prev, correct: prev.correct + 1 }));
+      playCorrect();
+      setTimeout(() => {
+        if (currentQuestionIndex < questions.length - 1) {
+          const nextIndex = currentQuestionIndex + 1;
+          setCurrentQuestionIndex(nextIndex);
+          setProgress((nextIndex / questions.length) * 100);
+          setUserAnswer("");
+          setFeedback("");
+          setIsCorrect(null);
+          localStorage.setItem(
+            "level1Progress",
+            JSON.stringify({ completed: false, currentQuestionIndex: nextIndex })
+          );
+        } else {
+          setCompleted(true);
+          setProgress(100);
+          localStorage.setItem(
+            "level1Progress",
+            JSON.stringify({ completed: true, currentQuestionIndex: 0 })
+          );
+        }
+      }, 1500);
     } else {
       setFeedback(
-        `Oops! The correct answer was ${questions[currentQuestionIndex].answer}. 😞`
+        `Try again! The correct answer was ${questions[currentQuestionIndex].answer}.`
       );
       setIsCorrect(false);
-      setProgress((prev) => ({
-        ...prev,
-        incorrect: prev.incorrect + 1,
-        wrongAnswers: [
-          ...prev.wrongAnswers,
-          questions[currentQuestionIndex].question,
-        ],
-      }));
+      playIncorrect();
     }
-
-    // Move to the next question after 2 seconds or mark as completed
-    setTimeout(() => {
-      setFeedback("");
-      setIsCorrect(null); // Reset isCorrect
-      if (currentQuestionIndex < questions.length - 1) {
-        setCurrentQuestionIndex((prev) => prev + 1);
-        setUserAnswer("");
-      } else {
-        setCompleted(true);
-      }
-    }, 2000);
   };
 
-  // Save progress to localStorage on every update of progress or completion
-  useEffect(() => {
-    localStorage.setItem(
-      "level1Progress",
-      JSON.stringify({ ...progress, completed })
-    );
-  }, [progress, completed]);
-
-  // Calculate percentage progress
-  const progressPercentage = (progress.attempted / questions.length) * 100;
-
-  // Function to restart the quiz
   const handleReattempt = () => {
-    setProgress({ correct: 0, incorrect: 0, wrongAnswers: [], attempted: 0 });
     setCompleted(false);
     setCurrentQuestionIndex(0);
+    setProgress(0);
     setUserAnswer("");
+    setFeedback("");
+    setIsCorrect(null);
+    localStorage.removeItem("level1Progress");
   };
 
-  // Function to navigate back to the Math page
   const goToMathPage = () => {
-    window.location.href = "/grades/1/math"; // Redirect to the math page
+    window.location.href = "/grades/1/math";
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div
+      className="flex flex-col min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url('/images/background.jpg')" }}
+    >
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
-      <main className="flex-grow p-4 flex flex-col items-center justify-center">
-        <h1 className="text-3xl font-bold mb-4">Level 1: Counting</h1>
-        <div className="mb-4 bg-gray-100 p-6 rounded-lg shadow w-full max-w-md">
-          {/* Quiz completion image */}
+      <main className="flex-grow p-4 flex flex-col items-center justify-center text-white">
+        <h1 className="text-4xl font-extrabold mb-4 drop-shadow-lg">
+          Level 1: Counting Fun!
+        </h1>
+        <div className="w-full max-w-2xl mx-auto">
+          <ProgressBar percentage={progress} />
+        </div>
+
+        <div className="mt-8 bg-white bg-opacity-20 p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center backdrop-blur-sm">
           {completed ? (
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center">
               <Image
-                src="/images/completed.png" // Image shown on quiz completion
+                src="/images/completed.avif"
                 alt="Completed"
-                width={150}
-                height={150}
+                width={200}
+                height={200}
+                className="rounded-full shadow-lg"
               />
+              <h2 className="text-3xl font-bold mt-4 text-yellow-300">
+                Awesome! You did it!
+              </h2>
+              <div className="mt-6">
+                <button
+                  onClick={handleReattempt}
+                  className="bg-yellow-400 text-white py-3 px-6 rounded-full shadow-lg hover:bg-yellow-500 transform hover:scale-105 transition-transform duration-300 mr-4"
+                >
+                  Play Again
+                </button>
+                <button
+                  onClick={goToMathPage}
+                  className="bg-green-500 text-white py-3 px-6 rounded-full shadow-lg hover:bg-green-600 transform hover:scale-105 transition-transform duration-300"
+                >
+                  Back to Math
+                </button>
+              </div>
             </div>
           ) : (
-            <div className="flex flex-wrap justify-center">
-              {[...Array(questions[currentQuestionIndex].count)].map(
-                (_, index) => (
-                  <Image
-                    key={index}
-                    src={questions[currentQuestionIndex].image}
-                    alt={questions[currentQuestionIndex].question}
-                    width={questions[currentQuestionIndex].width}
-                    height={questions[currentQuestionIndex].height}
-                    className="mb-2"
-                  />
-                )
-              )}
-            </div>
-          )}
-
-          <h2 className="text-xl mt-2 text-black">
-            {completed
-              ? "Quiz Completed!"
-              : questions[currentQuestionIndex].question}
-          </h2>
-
-          {/* Speak button and answer input */}
-          {!completed && (
             <>
-              <VoiceButton
-                questionText={questions[currentQuestionIndex].question}
-              />{" "}
-              {/* Use new VoiceButton */}
-              <input
-                type="text"
-                value={userAnswer}
-                onChange={(e) => setUserAnswer(e.target.value)}
-                placeholder="Your answer"
-                className="border border-gray-300 rounded p-2 mt-2 w-full text-black"
-              />
-              <button
-                onClick={validateAnswer}
-                className="bg-blue-500 text-white py-1 px-3 rounded mt-2"
-                disabled={!userAnswer} // Disable button if no answer is provided
-              >
-                Submit
-              </button>
+              <div className="flex flex-wrap justify-center items-center mb-6">
+                {[...Array(questions[currentQuestionIndex].count)].map(
+                  (_, index) => (
+                    <div
+                      key={index}
+                      className="transform hover:scale-110 transition-transform duration-300 m-2"
+                    >
+                      <Image
+                        src={questions[currentQuestionIndex].image}
+                        alt={`Item ${index + 1}`}
+                        width={questions[currentQuestionIndex].width}
+                        height={questions[currentQuestionIndex].height}
+                      />
+                    </div>
+                  )
+                )}
+              </div>
+              <h2 className="text-2xl font-semibold mt-2 text-white">
+                {questions[currentQuestionIndex].question}
+              </h2>
+              <div className="flex items-center justify-center mt-4">
+                <VoiceButton
+                  questionText={questions[currentQuestionIndex].question}
+                />
+                <input
+                  type="text"
+                  value={userAnswer}
+                  onChange={(e) => setUserAnswer(e.target.value)}
+                  placeholder="Your answer"
+                  className="border-2 border-yellow-300 bg-transparent text-white rounded-full p-3 w-48 text-center text-xl focus:outline-none focus:ring-2 focus:ring-yellow-200 mx-4"
+                />
+                <button
+                  onClick={validateAnswer}
+                  className="bg-pink-500 text-white py-3 px-8 rounded-full shadow-lg hover:bg-pink-600 transform hover:scale-105 transition-transform duration-300"
+                  disabled={!userAnswer}
+                >
+                  Submit
+                </button>
+              </div>
+              {feedback && (
+                <FeedbackMessage message={feedback} isCorrect={isCorrect} />
+              )}
             </>
           )}
-          {feedback && (
-            <FeedbackMessage message={feedback} isCorrect={isCorrect} />
-          )}
         </div>
-
-        {/* Progress status */}
-        <div className="mt-4 bg-gray-200 p-4 rounded-lg shadow w-full max-w-md">
-          <h3 className="font-bold text-black">Progress:</h3>
-          <p className="text-black">Correct: {progress.correct}</p>
-          <p className="text-black">Incorrect: {progress.incorrect}</p>
-          <p className="text-black">
-            Wrong Answers: {progress.wrongAnswers.join(", ") || "None"}
-          </p>
-          <div className="mt-2">
-            <div className="h-4 bg-blue-300 rounded">
-              <div
-                className="h-full bg-blue-500 rounded"
-                style={{ width: `${Math.min(progressPercentage, 100)}%` }}
-              />
-            </div>
-            <div>
-              <p>
-                {progress.attempted}/{questions.length} attempted
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Completion actions */}
-        {completed && (
-          <div className="mt-4">
-            <button
-              onClick={handleReattempt}
-              className="bg-yellow-500 text-white py-2 px-4 rounded mr-2"
-            >
-              Reattempt
-            </button>
-            <button
-              onClick={goToMathPage}
-              className="bg-green-500 text-white py-2 px-4 rounded"
-            >
-              Go to Math Page
-            </button>
-          </div>
-        )}
       </main>
       <Footer />
       <BackToTop />
@@ -259,5 +229,8 @@ const Level1 = () => {
     </div>
   );
 };
+
+export default Level1;
+
 
 export default Level1;

@@ -7,6 +7,8 @@ import { auth, logout } from "../../../../firebase/auth";
 import { FaBell, FaUserCircle, FaCaretDown } from 'react-icons/fa'; // Import icons
 import { collection, query, where, onSnapshot } from 'firebase/firestore'; // Import Firestore functions
 import { db } from '../../../../firebase/config'; // Import db
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChartBar, faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header({ setIsModalOpen, setIsRegister }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -187,16 +189,19 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
                 </button>
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                    <Link href="/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={toggleDropdown}>
+                    <Link href="/dashboard" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={toggleDropdown}>
+                      <FontAwesomeIcon icon={faChartBar} className="mr-2" />
                       Dashboard
                     </Link>
-                    <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={toggleDropdown}>
+                    <Link href="/profile" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={toggleDropdown}>
+                      <FontAwesomeIcon icon={faUser} className="mr-2" />
                       Profile
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
+                      <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
                       Sign Out
                     </button>
                   </div>
@@ -290,7 +295,7 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
                 Learning
               </Link>
               <Link
-                href="/analytics"
+                href="/analytics" 
                 className="text-gray-600 text-xl hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)} 
               >
@@ -315,16 +320,19 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
               {user && (
                 <div className="mt-4">
                   <span className="text-gray-600 text-xl block mb-2">Hello, {user.displayName || user.email}!</span>
-                  <Link href="/dashboard" className="block text-gray-600 text-xl hover:text-blue-600 mb-2" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/dashboard" className="flex items-center justify-center text-gray-600 text-xl hover:text-blue-600 mb-2" onClick={() => setIsMenuOpen(false)}>
+                    <FontAwesomeIcon icon={faChartBar} className="mr-2" />
                     Dashboard
                   </Link>
-                  <Link href="/profile" className="block text-gray-600 text-xl hover:text-blue-600 mb-2" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/profile" className="flex items-center justify-center text-gray-600 text-xl hover:text-blue-600 mb-2" onClick={() => setIsMenuOpen(false)}>
+                    <FontAwesomeIcon icon={faUser} className="mr-2" />
                     Profile
                   </Link>
                   <button
                     onClick={() => { handleLogout(); setIsMenuOpen(false); }}
-                    className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 text-xl mt-4 mx-auto w-32"
+                    className="flex items-center justify-center bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 text-xl mt-4 mx-auto w-32"
                   >
+                    <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
                     Sign Out
                   </button>
                 </div>

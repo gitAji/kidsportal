@@ -16,24 +16,28 @@ const GradeOverviewPage = ({ params }) => {
     {
       name: "Math",
       path: "math",
+      levelPath: "counting",
       color: "bg-[#FF6347]",
       textColor: "text-white",
     },
     {
       name: "Tamil",
       path: "tamil",
+      levelPath: "level1",
       color: "bg-[#32CD32]",
       textColor: "text-white",
     },
     {
       name: "English",
       path: "english",
+      levelPath: "level1",
       color: "bg-[#1E90FF]",
       textColor: "text-white",
     },
     {
       name: "Ariviyal",
       path: "ariviyal",
+      levelPath: "level1",
       color: "bg-[#FFD700]",
       textColor: "text-black",
     }, // Science in Tamil
@@ -60,7 +64,7 @@ const GradeOverviewPage = ({ params }) => {
           {subjects.map((subject) => (
             <Link
               key={subject.path}
-              href={`/grades/${gradeId}/${subject.path}`}
+              href={`/grades/${gradeId}/${subject.path}/${subject.levelPath}`}
               passHref
             >
               <div

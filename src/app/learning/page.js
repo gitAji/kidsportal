@@ -1,9 +1,11 @@
 "use client"; // Ensure this component is treated as a client component
 
 import React, { useEffect, useState } from "react";
-import Header from "../components/layout/header/Header";
-import Footer from "../components/layout/footer/Footer";
-import BackToTop from "../components/ui/BackToTop";
+import dynamic from 'next/dynamic';
+
+const Header = dynamic(() => import("../components/layout/header/Header"), { ssr: false });
+const Footer = dynamic(() => import("../components/layout/footer/Footer"), { ssr: false });
+const BackToTop = dynamic(() => import("../components/ui/BackToTop"), { ssr: false });
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
