@@ -1,11 +1,12 @@
 "use client";
+"use client";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // Import usePathname
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, logout } from "../../../../firebase/auth";
-import { FaBell, FaUserCircle, FaCaretDown } from "react-icons/fa"; // Import icons
+import { FaBell, FaUserCircle, FaCaretDown, FaCommentDots } from "react-icons/fa"; // Import icons
 import { collection, query, where, onSnapshot } from "firebase/firestore"; // Import Firestore functions
 import { db } from "../../../../firebase/config"; // Import db
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,7 +16,7 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Header({ setIsModalOpen, setIsRegister }) {
+export default function Header({ setIsModalOpen = () => {}, setIsRegister = () => {} }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -169,6 +170,12 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
               )}
             </div>
           )}
+          {user && (
+            <FaCommentDots
+              className="text-[var(--foreground)] text-xl cursor-pointer mr-4"
+              onClick={() => console.log("Chat icon clicked from mobile!")}
+            />
+          )}
           <button
             className="text-[var(--foreground)] focus:outline-none p-3"
             onClick={() => setIsMenuOpen(true)}
@@ -249,6 +256,12 @@ export default function Header({ setIsModalOpen, setIsRegister }) {
                   </div>
                 )}
               </div>
+
+              {/* Chat Icon */}
+              <FaCommentDots
+                className="text-[var(--foreground)] text-xl cursor-pointer ml-4"
+                onClick={() => console.log("Chat icon clicked!")}
+              />
 
               {/* User Icon with Dropdown */}
               <div className="relative" ref={dropdownRef}>

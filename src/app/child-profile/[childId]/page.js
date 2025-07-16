@@ -3,14 +3,14 @@ import { useEffect, useState, Suspense } from "react";
 import { doc, getDoc, setDoc, deleteDoc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../../../firebase/config";
 import { useRouter } from "next/navigation";
-import Header from "../../components/layout/header/Header";
-import Footer from "../../components/layout/footer/Footer";
-import SkeletonLoader from "../../../components/ui/SkeletonLoader";
-import AddChildForm from "../../../components/dashboard/AddChildForm"; // Re-use for editing
+import SkeletonLoader from "../../components/ui/SkeletonLoader";
+import AddChildForm from "../../components/dashboard/AddChildForm"; // Re-use for editing
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
-export default function ChildProfilePage({ params }) {
+export default function ChildProfilePage() {
+  // Added a comment to trigger re-evaluation
+
   const { childId } = params;
   const router = useRouter();
   const [childData, setChildData] = useState(null);
@@ -90,11 +90,9 @@ export default function ChildProfilePage({ params }) {
   if (loading) {
     return (
       <div className="flex flex-col min-h-screen bg-[var(--background)]">
-        <Header />
         <main className="flex-grow p-4">
           <SkeletonLoader />
         </main>
-        <Footer />
       </div>
     );
   }
@@ -102,11 +100,9 @@ export default function ChildProfilePage({ params }) {
   if (!childData) {
     return (
       <div className="flex flex-col min-h-screen bg-[var(--background)]">
-        <Header />
         <main className="flex-grow p-4 flex items-center justify-center text-red-500 text-xl">
           {message || "Child data could not be loaded."}
         </main>
-        <Footer />
       </div>
     );
   }
@@ -119,7 +115,6 @@ export default function ChildProfilePage({ params }) {
 
   return (
     <div className="flex flex-col min-h-screen bg-[var(--background)]">
-      <Header />
       <main className="flex-grow p-4 flex items-center justify-center">
         <Suspense fallback={<SkeletonLoader />}>
           <div className="w-full max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg flex flex-col md:flex-row">
@@ -296,7 +291,6 @@ export default function ChildProfilePage({ params }) {
           </div>
         </Suspense>
       </main>
-      <Footer />
     </div>
   );
 }

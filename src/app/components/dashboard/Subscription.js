@@ -1,100 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
-import { db } from '../../../firebase/config';
-import { auth } from '../../../firebase/auth';
-import UpgradeModal from './UpgradeModal';
-import Tooltip from '../ui/Tooltip';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { auth, db } from '../../../firebase/config';
+import { useRouter } from 'next/navigation';
 
 const Subscription = () => {
-  const [subscription, setSubscription] = useState(null);
+  const [isPremium, setIsPremium] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    if (auth.currentUser) {
-      const userDocRef = doc(db, 'users', auth.currentUser.uid);
-      const unsubscribe = onSnapshot(userDocRef, (docSnap) => {
-        if (docSnap.exists()) {
-          const userData = docSnap.data();
-          setSubscription({
-            plan: userData.currentPlan || 'Free',
-            status: userData.subscriptionStatus || 'active',
-            planEndDate: userData.planEndDate ? userData.planEndDate.toDate() : null, // Convert Firestore Timestamp to Date object
-          });
-        } else {
-          setSubscription({ plan: 'Free', status: 'active', planEndDate: null });
-        }
+    const unsubscribeAuth = auth.onAuthStateChanged(user => {
+      if (user) {
+        const userDocRef = doc(db, 'users', user.uid);
+        const unsubscribeSnapshot = onSnapshot(userDocRef, (docSnap) => {
+          if (docSnap.exists()) {
+            setIsPremium(docSnap.data().isPremium || false);
+          }
+          setLoading(false);
+        });
+        return () => unsubscribeSnapshot();
+      } else {
+        setIsPremium(false);
         setLoading(false);
-      });
-      return () => unsubscribe();
-    }
-  }, []);
-
-  const handleUpgradeClick = () => {
-    setShowUpgradeModal(true);
-  };
-
-  const handleDowngrade = async () => {
-    if (window.confirm('Are you sure you want to downgrade to the Free plan? You will lose access to Premium features.')) {
-      try {
-        const userDocRef = doc(db, 'users', auth.currentUser.uid);
-        await updateDoc(userDocRef, { currentPlan: 'Free', subscriptionStatus: 'active', planEndDate: null });
-        alert('You have successfully downgraded to the Free plan.');
-      } catch (error) {
-        console.error('Error downgrading subscription: ', error);
-        alert('Failed to downgrade. Please try again.');
       }
-    }
-  };
-
-  const handleCloseUpgradeModal = () => {
-    setShowUpgradeModal(false);
-  };
-
+    });
+    return () => unsubscribeAuth();
+  }, []);
   if (loading) {
     return <p>Loading subscription details...</p>;
   }
 
-  const isPremium = subscription?.plan !== 'Free';
-
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-4 text-heading">Subscription Management</h2>
-      <p className="text-gray-700">
-        Current Plan: <span className="font-bold">{subscription?.plan}</span>
-      </p>
-      {isPremium && (
-        <p className="text-gray-700">
-          Status: <span className="font-bold">{subscription?.status}</span>
-        </p>
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">Subscription Details</h2>
+      <p className="text-gray-600">Current Plan: {isPremium ? 'Premium' : 'Free'}</p>
+      {isPremium ? (
+        <button
+          className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+          onClick={() => router.push('/pricing')}
+        >
+          Downgrade
+        </button>
+      ) : (
+        <button
+          className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+          onClick={() => router.push('/pricing')}
+        >
+          Upgrade to Premium
+        </button>
       )}
-      {subscription?.planEndDate && (
-        <p className="text-gray-700">
-          Renews on: <span className="font-bold">{subscription.planEndDate.toLocaleDateString()}</span>
-        </p>
-      )}
-      <div className="mt-4">
-        {isPremium ? (
-          <Tooltip text="Downgrade to the Free plan and lose Premium features.">
-            <button
-              onClick={handleDowngrade}
-              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-            >
-              Downgrade to Free
-            </button>
-          </Tooltip>
-        ) : (
-          <Tooltip text="Upgrade to Premium for more features and content!">
-            <button
-              onClick={handleUpgradeClick}
-              className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-            >
-              Upgrade to Premium
-            </button>
-          </Tooltip>
-        )}
-      </div>
-      {showUpgradeModal && <UpgradeModal onClose={handleCloseUpgradeModal} />}
     </div>
   );
 };

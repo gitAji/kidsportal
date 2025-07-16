@@ -3,16 +3,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import { useModal } from "../providers/ModalProvider";
-import Header from "../components/layout/header/Header";
-import Footer from "../components/layout/footer/Footer";
 
 export default function ChildLoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
-  const { setIsModalOpen, setIsRegister } = useModal();
 
   const handleChildLogin = async (e) => {
     e.preventDefault();
@@ -45,7 +41,10 @@ export default function ChildLoginPage() {
       if (foundChild) {
         // For demonstration, store child data in session storage
         // In a real app, use a more secure token-based authentication
-        sessionStorage.setItem("childUser", JSON.stringify({ ...foundChild, parentUid }));
+        sessionStorage.setItem(
+          "childUser",
+          JSON.stringify({ ...foundChild, parentUid })
+        );
         router.push("/child-dashboard"); // Redirect to the child's dashboard
       } else {
         setError("Invalid username or password.");
@@ -58,7 +57,6 @@ export default function ChildLoginPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Header />
       <main className="flex-grow p-4 flex items-center justify-center">
         <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md w-full">
           <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
@@ -113,19 +111,14 @@ export default function ChildLoginPage() {
             <div className="mt-4 text-center">
               <p className="text-gray-600">
                 Are you a parent?{" "}
-                <button
-                  type="button"
-                  onClick={() => { setIsModalOpen(true); setIsRegister(false); }}
-                  className="text-blue-600 hover:underline"
-                >
+                <a href="/login" className="text-blue-600 hover:underline">
                   Sign In/Sign Up here
-                </button>
+                </a>
               </p>
             </div>
           </form>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

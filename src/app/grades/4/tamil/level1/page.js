@@ -6,7 +6,7 @@ import Image from "next/image";
 import Header from "../../../../components/layout/header/Header";
 import Footer from "../../../../components/layout/footer/Footer";
 import BackToTop from "../../../../components/ui/BackToTop";
-import ToggleModal from "../../../../components/ui/Modal";
+import Modal from "../../../../components/ui/Modal";
 import VoiceButton from "../../../../components/ui/VoiceButton";
 import { FaCheckCircle, FaTimesCircle, FaTrophy, FaClock } from "react-icons/fa";
 
@@ -252,7 +252,7 @@ const Level1 = () => {
       <Footer />
       <BackToTop />
       {isModalOpen && (
-        <ToggleModal
+        <Modal
           setIsModalOpen={setIsModalOpen}
           isRegister={isRegister}
           setIsRegister={setIsRegister}

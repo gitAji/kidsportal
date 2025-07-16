@@ -1,13 +1,16 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { collection, query, onSnapshot } from 'firebase/firestore';
 import { db } from '../../../firebase/config';
 import { auth } from '../../../firebase/auth';
-import Link from 'next/link'; // Import Link for navigation
+import { useRouter } from 'next/navigation';
 
 const ChildrenList = () => {
   const [children, setChildren] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (!auth.currentUser) {
@@ -36,6 +39,11 @@ const ChildrenList = () => {
     return () => unsubscribe();
   }, []);
 
+  const handleChildClick = (child) => {
+    sessionStorage.setItem('childUser', JSON.stringify(child));
+    router.push('/child-dashboard');
+  };
+
   if (loading) {
     return <p className="text-[var(--foreground)]">Loading children...</p>;
   }
@@ -56,24 +64,26 @@ const ChildrenList = () => {
         const overallProgress = child.progress ? child.progress.overall : 0;
 
         return (
-          <Link href={`/child-profile/${child.id}`} key={child.id} passHref>
-            <div className="bg-white p-6 rounded-lg shadow-md cursor-pointer transform transition-transform duration-200 hover:scale-105">
-              <h3 className="text-xl font-bold text-[var(--text-dark)] mb-2">{child.name}</h3>
-              <p className="text-lg text-[var(--foreground)]">Age: {child.age}</p>
-              <p className="text-lg text-[var(--foreground)]">Grade: {child.grade}</p>
-              <div className="mt-4">
-                <p className="text-base text-[var(--foreground)]">Assigned Tasks: {assignedTasksCount}</p>
-                <p className="text-base text-[var(--foreground)]">Tasks Completed: {completedTasksCount}</p>
-                <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                  <div
-                    className="bg-[var(--primary-blue)] h-2.5 rounded-full"
-                    style={{ width: `${overallProgress}%` }}
-                  ></div>
-                </div>
-                <p className="text-sm text-[var(--foreground)] mt-1">Progress: {overallProgress}%</p>
+          <div
+            key={child.id}
+            onClick={() => handleChildClick(child)}
+            className="bg-white p-6 rounded-lg shadow-md cursor-pointer transform transition-transform duration-200 hover:scale-105"
+          >
+            <h3 className="text-xl font-bold text-[var(--text-dark)] mb-2">{child.name}</h3>
+            <p className="text-lg text-[var(--foreground)]">Age: {child.age}</p>
+            <p className="text-lg text-[var(--foreground)]">Grade: {child.grade}</p>
+            <div className="mt-4">
+              <p className="text-base text-[var(--foreground)]">Assigned Tasks: {assignedTasksCount}</p>
+              <p className="text-base text-[var(--foreground)]">Tasks Completed: {completedTasksCount}</p>
+              <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                <div
+                  className="bg-[var(--primary-blue)] h-2.5 rounded-full"
+                  style={{ width: `${overallProgress}%` }}
+                ></div>
               </div>
+              <p className="text-sm text-[var(--foreground)] mt-1">Progress: {overallProgress}%</p>
             </div>
-          </Link>
+          </div>
         );
       })}
     </div>

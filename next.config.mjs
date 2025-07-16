@@ -2,7 +2,8 @@
 import { withSentryConfig } from "@sentry/nextjs"; // Example import, adjust as needed
 
 const nextConfig = {
-  reactStrictMode: true, // Example configuration
+  reactStrictMode: true,
+  output: 'standalone', // Example configuration
   images: {
     domains: ['lh3.googleusercontent.com'],
   },

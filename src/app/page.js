@@ -6,9 +6,7 @@ import { useRouter } from "next/navigation";
 import { faGoogle, faArrowUp } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import Header from "./components/layout/header/Header"; // Header component
-import Footer from "./components/layout/footer/Footer"; // Footer component
-import ToggleModal from "./components/ui/Modal"; // Modal component for login and register
+import AuthModal from "./components/ui/AuthModal"; // Modal component for login and register
 import GradeCard from "./components/ui/GradeCard"; // Import the GradeCard component
 import BackToTop from "./components/ui/BackToTop";
 import Link from "next/link";
@@ -85,26 +83,8 @@ export default function HomePage() {
     }
   };
 
-  // Function to generate the link dynamically based on grade and subject
   const generateLink = (grade, subject) => {
-    let levelPath = '';
-    switch (subject.toLowerCase()) {
-      case 'math':
-        levelPath = 'counting'; // Assuming 'counting' is the first level for math
-        break;
-      case 'english':
-        levelPath = 'level1';
-        break;
-      case 'tamil':
-        levelPath = 'level1';
-        break;
-      case 'ariviyal':
-        levelPath = 'level1';
-        break;
-      default:
-        levelPath = 'level1'; // Default to level1 if subject not specifically handled
-    }
-    return `/grades/${grade}/${subject.toLowerCase()}/${levelPath}`;
+    return `/grades/${grade}/${subject.toLowerCase()}`;
   };
 
   // Function to toggle modal for SignIn/SignUp
@@ -125,7 +105,6 @@ export default function HomePage() {
   return (
     <>
       {/* Header Section */}
-      <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
 
       {/* Hero Section */}
       <section className="relative bg-blue-100 py-20 h-[500px] overflow-hidden">
@@ -139,20 +118,10 @@ export default function HomePage() {
 
         {/* Decorative Images */}
         <div className="absolute top-10 left-10 w-24 h-24 animate-pulse">
-          <Image
-            src="/images/cloud.png"
-            alt="Cloud"
-            width={90}
-            height={90}
-          />
+          <Image src="/images/cloud.png" alt="Cloud" width={90} height={90} />
         </div>
         <div className="absolute top-20 right-10 w-32 h-32 animate-pulse delay-500">
-          <Image
-            src="/images/cloud.png"
-            alt="Cloud"
-            width={120}
-            height={120}
-          />
+          <Image src="/images/cloud.png" alt="Cloud" width={120} height={120} />
         </div>
         <div className="absolute bottom-10 left-1/4 w-48 h-24">
           <Image
@@ -176,7 +145,7 @@ export default function HomePage() {
               onClick={scrollToGradeSection}
               className="bg-yellow-400 text-white py-3 px-8 sm:py-4 sm:px-10 rounded-full shadow-lg hover:bg-yellow-500 transform hover:scale-105 transition-transform duration-300 text-base sm:text-lg"
             >
-              Let's Get Started!
+              Let&apos;s Get Started!
             </button>
           </div>
         </div>
@@ -191,19 +160,25 @@ export default function HomePage() {
           </p>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-[#E0E7FF] p-5 sm:p-6 rounded-lg shadow-lg text-gray-800">
-              <h3 className="text-lg sm:text-xl font-semibold">Interactive Lessons</h3>
+              <h3 className="text-lg sm:text-xl font-semibold">
+                Interactive Lessons
+              </h3>
               <p className="mt-2 text-sm sm:text-base">
                 Engage with interactive content designed to make learning fun.
               </p>
             </div>
             <div className="bg-[#D1FAE5] p-5 sm:p-6 rounded-lg shadow-lg text-gray-800">
-              <h3 className="text-lg sm:text-xl font-semibold">Expert Teachers</h3>
+              <h3 className="text-lg sm:text-xl font-semibold">
+                Expert Teachers
+              </h3>
               <p className="mt-2 text-sm sm:text-base">
                 Learn from the best instructors with years of experience.
               </p>
             </div>
             <div className="bg-[#FFEDD5] p-5 sm:p-6 rounded-lg shadow-lg text-gray-800">
-              <h3 className="text-lg sm:text-xl font-semibold">Progress Tracking</h3>
+              <h3 className="text-lg sm:text-xl font-semibold">
+                Progress Tracking
+              </h3>
               <p className="mt-2 text-sm sm:text-base">
                 Monitor your progress with detailed reports and feedback.
               </p>
@@ -269,10 +244,10 @@ export default function HomePage() {
       </section>
 
       {/* Footer Section */}
-      <Footer />
+
       <BackToTop />
       {/* Toggle Modal for SignIn and SignUp */}
-      <ToggleModal
+      <AuthModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         isRegister={isRegister}

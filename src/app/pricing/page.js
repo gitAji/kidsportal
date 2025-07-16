@@ -1,13 +1,24 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Header from "../components/layout/header/Header";
-import Footer from "../components/layout/footer/Footer";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase/config";
+
 import { motion } from "framer-motion";
 
 export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState("monthly"); // 'monthly' or 'yearly'
   const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        // User is not logged in, redirect to login page
+        router.push("/login");
+      }
+    });
+    return () => unsubscribe();
+  }, [router]);
 
   const plans = [
     {
@@ -17,6 +28,7 @@ export default function PricingPage() {
       features: [
         "Limited access to grades and subjects",
         "Basic practice sessions",
+        "Up to 5 children accounts",
         "Standard support",
       ],
       isCurrent: true,
@@ -24,12 +36,13 @@ export default function PricingPage() {
     },
     {
       name: "Premium Plan",
-      priceMonthly: "$10",
-      priceYearly: "$100",
+      priceMonthly: "$9.99",
+      priceYearly: "$99.99",
       features: [
         "Full access to all grades and subjects",
         "Unlimited practice sessions",
         "Detailed progress reports",
+        "Up to 3 children accounts",
         "Priority support",
         "Exclusive content",
       ],
@@ -39,11 +52,18 @@ export default function PricingPage() {
   ];
 
   const handleChoosePlan = (planName) => {
+    if (!auth.currentUser) {
+      router.push("/login");
+      return;
+    }
+
     if (planName === "Premium Plan") {
-      router.push(`/payment?plan=${billingCycle}`);
+      router.push(`/profile?tab=payment`);
     } else {
       // Handle downgrade or other actions for Free Plan if necessary
-      alert("You are already on the Free Plan or cannot downgrade to it directly from here.");
+      alert(
+        "You are already on the Free Plan or cannot downgrade to it directly from here."
+      );
     }
   };
 
@@ -54,7 +74,6 @@ export default function PricingPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Header />
       <main className="flex-grow p-4 flex flex-col items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
@@ -66,7 +85,8 @@ export default function PricingPage() {
             Choose Your Learning Adventure!
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Unlock a world of knowledge with our flexible plans. Select the best option that fits your family's learning journey.
+            Unlock a world of knowledge with our flexible plans. Select the best
+            option that fits your family&apos;s learning journey.
           </p>
         </motion.div>
 
@@ -90,7 +110,8 @@ export default function PricingPage() {
                 : "text-gray-700 hover:bg-gray-300"
             }`}
           >
-            Yearly <span className="text-yellow-300 text-sm ml-2">(Save 17%)</span>
+            Yearly{" "}
+            <span className="text-lime-400 text-sm ml-2">(Save 17%)</span>
           </button>
         </div>
 
@@ -147,7 +168,6 @@ export default function PricingPage() {
           ))}
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

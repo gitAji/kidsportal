@@ -1,7 +1,5 @@
 "use client"; // Ensure this component is treated as a client component
 
-import Header from "../components/layout/header/Header"; // Header component
-import Footer from "../components/layout/footer/Footer"; // Footer component
 import BackToTop from "../components/ui/BackToTop"; // BackToTop component
 
 export default function HelpPage() {
@@ -32,7 +30,6 @@ export default function HelpPage() {
   return (
     <>
       {/* Header Section */}
-      <Header />
 
       {/* Help Section */}
       <section className="py-20 bg-gray-50">
@@ -112,7 +109,6 @@ export default function HelpPage() {
       </section>
 
       {/* Footer Section */}
-      <Footer />
       <BackToTop />
     </>
   );

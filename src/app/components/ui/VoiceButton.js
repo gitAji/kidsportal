@@ -1,3 +1,4 @@
+"use client";
 // components/ui/VoiceButton.js
 import React from "react";
 import { FaVolumeUp } from "react-icons/fa"; // Importing a volume icon from react-icons

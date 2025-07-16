@@ -5,7 +5,7 @@ import Image from "next/image"; // Optimized images with Next.js
 import Header from "../../../../components/layout/header/Header"; // Import Header component
 import Footer from "../../../../components/layout/footer/Footer"; // Import Footer component
 import BackToTop from "../../../../components/ui/BackToTop"; // Import BackToTop button
-import ToggleModal from "../../../../components/ui/Modal"; // Import Modal component
+import Modal from "../../../../components/ui/Modal"; // Import Modal component
 
 // Sample questions
 const questions = [
@@ -249,12 +249,11 @@ const Level1 = () => {
 
       <Footer />
       <BackToTop />
-      <ToggleModal
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        isRegister={isRegister}
-        setIsRegister={setIsRegister}
-      />
+      <Modal
+          setIsModalOpen={setIsModalOpen}
+          isRegister={isRegister}
+          setIsRegister={setIsRegister}
+        />
     </div>
   );
 };

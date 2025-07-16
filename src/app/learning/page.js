@@ -1,150 +1,165 @@
 "use client"; // Ensure this component is treated as a client component
 
-import React, { useEffect, useState } from "react";
-import dynamic from 'next/dynamic';
-
-const Header = dynamic(() => import("../components/layout/header/Header"), { ssr: false });
-const Footer = dynamic(() => import("../components/layout/footer/Footer"), { ssr: false });
-const BackToTop = dynamic(() => import("../components/ui/BackToTop"), { ssr: false });
+import React from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import {
+  FaBookOpen,
+  FaTasks,
+  FaGraduationCap,
+  FaLaptopCode,
+  FaChalkboardTeacher,
+  FaClock,
+} from "react-icons/fa";
+
+const BackToTop = dynamic(() => import("../components/ui/BackToTop"), {
+  ssr: false,
+});
 
 export default function LearningPage() {
-  // Subjects offered (static data)
   const subjects = [
     {
-      id: "mathematics",
       name: "Mathematics",
       description:
-        "Explore the world of numbers, equations, and problem-solving.",
+        "Fun and engaging math lessons from basic counting to complex problem-solving.",
       image: "/images/math.jpg",
     },
     {
-      id: "science",
-      name: "Science",
-      description: "Dive into the wonders of physics, chemistry, and biology.",
-      image: "/images/science.jpg",
-    },
-    {
-      id: "english",
-      name: "English Language Arts",
-      description: "Enhance your reading, writing, and communication skills.",
+      name: "English",
+      description:
+        "Improve reading, writing, and communication skills with interactive English modules.",
       image: "/images/english.jpg",
     },
     {
-      id: "social",
-      name: "Social Studies",
-      description: "Understand history, geography, and the world around you.",
-      image: "/images/social.jpg",
+      name: "Science",
+      description:
+        "Explore the wonders of science through exciting experiments and discoveries.",
+      image: "/images/science.jpg",
     },
     {
-      id: "art",
       name: "Art & Creativity",
       description:
-        "Express yourself through art, music, and creative projects.",
+        "Unleash your child's imagination with creative art projects and drawing lessons.",
       image: "/images/art.jpg",
     },
     {
-      id: "technology",
+      name: "Social Studies",
+      description:
+        "Learn about history, geography, and civics in an engaging way.",
+      image: "/images/social.jpg",
+    },
+    {
       name: "Technology",
       description:
-        "Discover the world of computers, programming, and innovation.",
+        "Introduction to basic computer skills and digital literacy.",
       image: "/images/tech.jpg",
     },
-  ];
-
-  // Why Choose Us details (static for now)
-  const whyChooseUs = [
     {
-      title: "Interactive Lessons",
-      description: "Engaging and interactive lessons that make learning fun.",
-    },
-    {
-      title: "Progress Tracking",
-      description: "Monitor your child’s progress with detailed reports.",
-    },
-    {
-      title: "Personalized Learning",
-      description: "Tailored content to meet individual learning needs.",
-    },
-    {
-      title: "Expert Tutors",
-      description: "Access to qualified tutors for additional support.",
-    },
-    {
-      title: "Resource Library",
+      name: "Tamil",
       description:
-        "A vast library of resources, videos, and practice exercises.",
-    },
-    {
-      title: "Flexible Scheduling",
-      description: "Choose learning times that fit your schedule.",
+        "Learn the Tamil language, including reading, writing, and speaking.",
+      image: "/images/அ.png",
     },
   ];
 
-  const router = useRouter();
+  const learningSteps = [
+    {
+      icon: <FaBookOpen className="text-4xl text-blue-500 mb-4" />,
+      title: "Interactive Lessons & Levels",
+      description:
+        "Our curriculum is broken down into engaging lessons and progressive levels, ensuring a smooth learning journey.",
+    },
+    {
+      icon: <FaTasks className="text-4xl text-green-500 mb-4" />,
+      title: "Hands-on Tasks & Quizzes",
+      description:
+        "Reinforce learning with practical tasks and fun quizzes designed to test understanding and build confidence.",
+    },
+    {
+      icon: <FaGraduationCap className="text-4xl text-purple-500 mb-4" />,
+      title: "Comprehensive Exams",
+      description:
+        "Regular assessments and comprehensive exams help track progress and identify areas for improvement.",
+    },
+    {
+      icon: <FaLaptopCode className="text-4xl text-red-500 mb-4" />,
+      title: "Interactive Learning",
+      description:
+        "Our platform uses gamification and interactive elements to make learning an exciting adventure.",
+    },
+    {
+      icon: <FaChalkboardTeacher className="text-4xl text-yellow-500 mb-4" />,
+      title: "Expert Teachers",
+      description:
+        "Learn from experienced and passionate educators who make complex topics easy to understand.",
+    },
+    {
+      icon: <FaClock className="text-4xl text-teal-500 mb-4" />,
+      title: "24/7 Online Help",
+      description:
+        "Get support whenever you need it with our round-the-clock online assistance.",
+    },
+  ];
 
   return (
     <>
-      <Header />
-
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="container mx-auto text-center px-4">
-          <h1 className="text-4xl font-bold text-blue-600">Learning Hub</h1>
-          <p className="mt-4 text-gray-600">
-            Discover engaging content designed to enhance your child learning
-            experience.
+          <h1 className="text-5xl font-extrabold text-gray-800 mb-6 animate-fade-in-down">
+            Discover a World of Knowledge!
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 animate-fade-in-up">
+            Engaging and interactive learning experiences across a variety of
+            subjects, designed for young minds.
           </p>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {subjects.map((subject) => (
+          <h2 className="text-4xl font-bold text-blue-700 mb-10">
+            Our Subjects
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {subjects.map((subject, index) => (
               <div
-                key={subject.id}
-                className="bg-white p-6 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 cursor-pointer"
-                onClick={() => router.push(`/learning/${subject.id}`)}
+                key={index}
+                className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-200"
               >
-                <div className="relative h-48 w-full overflow-hidden">
+                <div className="relative h-56 w-full">
                   <Image
-                    src={subject.image || "/images/placeholder.jpg"}
+                    src={subject.image}
                     alt={subject.name}
                     layout="fill"
                     objectFit="cover"
-                    loading="lazy"
-                    className="rounded-t-lg"
+                    className="rounded-t-xl"
                   />
                 </div>
-                <h3 className="text-2xl font-bold text-blue-600 mt-4">
-                  {subject.name}
-                </h3>
-                <p className="mt-2 text-gray-600">{subject.description}</p>
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                    {subject.name}
+                  </h3>
+                  <p className="text-gray-600">{subject.description}</p>
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-20">
-            <h2 className="text-3xl font-bold text-blue-600">Why Choose Us?</h2>
-            <p className="mt-4 text-gray-600">
-              Our learning platform offers a variety of features designed to
-              enhance your child education.
-            </p>
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {whyChooseUs.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-white p-6 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105"
-                >
-                  <h3 className="text-xl font-semibold text-blue-600">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-gray-600">{item.description}</p>
-                </div>
-              ))}
-            </div>
+          <h2 className="text-4xl font-bold text-blue-700 mt-20 mb-10">
+            How We Make Learning Fun
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {learningSteps.map((step, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-200"
+              >
+                {step.icon}
+                <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-gray-600">{step.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
-
-      <Footer />
       <BackToTop />
     </>
   );

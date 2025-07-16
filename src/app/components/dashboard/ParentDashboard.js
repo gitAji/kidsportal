@@ -9,13 +9,13 @@ const ChildrenList = lazy(() => import("./ChildrenList"));
 const AddChildForm = lazy(() => import("./AddChildForm"));
 const Notifications = lazy(() => import("./Notifications"));
 const SkeletonLoader = lazy(() => import("../ui/SkeletonLoader"));
-const ToggleModal = lazy(() => import("../ui/Modal")); // Keep Modal for AddChildForm
+const Modal = lazy(() => import("../ui/Modal")); // Use generic Modal for AddChildForm
 const ChildDashboard = lazy(() => import("./ChildDashboard")); // Import ChildDashboard
+const GradesReport = lazy(() => import("./GradesReport"));
 const Subscription = lazy(() => import("./Subscription")); // Import Subscription
 
 const ParentDashboard = () => {
   const [showAddChildModal, setShowAddChildModal] = useState(false);
-  const [showChildDashboardModal, setShowChildDashboardModal] = useState(false);
   const [selectedChild, setSelectedChild] = useState(null);
   const [parentData, setParentData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -52,38 +52,6 @@ const ParentDashboard = () => {
 
   const handleCloseAddChildModal = () => {
     setShowAddChildModal(false);
-  };
-
-  const handleChildCardClick = (child) => {
-    setSelectedChild(child);
-    setShowChildDashboardModal(true);
-  };
-
-  const handleCloseChildDashboardModal = () => {
-    setShowChildDashboardModal(false);
-    setSelectedChild(null);
-  };
-
-  const handleEditChild = (child) => {
-    setSelectedChild(child);
-    setShowAddChildModal(true);
-    setShowChildDashboardModal(false); // Close child dashboard modal if open
-  };
-
-  const handleDeleteChild = async (childId) => {
-    if (window.confirm("Are you sure you want to delete this child?")) {
-      try {
-        const parentUid = auth.currentUser.uid;
-        const childDocRef = doc(db, 'users', parentUid, 'children', childId);
-        await deleteDoc(childDocRef);
-        alert("Child deleted successfully!");
-        setShowChildDashboardModal(false); // Close modal after deletion
-        setSelectedChild(null);
-      } catch (err) {
-        console.error("Error deleting child:", err);
-        alert("Failed to delete child. Please try again.");
-      }
-    }
   };
 
   const handleSaveSuccess = () => {
@@ -146,6 +114,13 @@ const ParentDashboard = () => {
         </div>
       </section>
 
+      {/* Grades Report Section */}
+      <section className="mb-8">
+        <Suspense fallback={<SkeletonLoader />}>
+          <GradesReport />
+        </Suspense>
+      </section>
+
       {/* Notifications Section */}
       <section className="mb-8">
         <Suspense fallback={<SkeletonLoader />}>
@@ -156,17 +131,9 @@ const ParentDashboard = () => {
       {/* Add Child Modal */}
       {showAddChildModal && (
         <Suspense fallback={<SkeletonLoader />}>
-          <ToggleModal onClose={handleCloseAddChildModal}>
+          <Modal onClose={handleCloseAddChildModal}>
             <AddChildForm onClose={handleCloseAddChildModal} childToEdit={selectedChild} onSaveSuccess={handleSaveSuccess} />
-          </ToggleModal>
-        </Suspense>
-      )}
-
-      {showChildDashboardModal && selectedChild && (
-        <Suspense fallback={<SkeletonLoader />}>
-          <ToggleModal onClose={handleCloseChildDashboardModal}>
-            <ChildDashboard child={selectedChild} onEdit={handleEditChild} onDelete={handleDeleteChild} />
-          </ToggleModal>
+          </Modal>
         </Suspense>
       )}
     </div>

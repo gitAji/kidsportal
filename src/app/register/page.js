@@ -2,8 +2,6 @@
 import { useState } from "react";
 import { signUpWithEmail, signInWithGoogle } from "../../firebase/auth";
 import { useRouter } from "next/navigation";
-import Header from "../components/layout/header/Header";
-import Footer from "../components/layout/footer/Footer";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -44,6 +42,7 @@ export default function RegisterPage() {
   };
 
   const handleGoogleRegister = async () => {
+    setError("");
     try {
       await signInWithGoogle();
       router.push("/"); // Redirect to home after successful registration
@@ -58,10 +57,9 @@ export default function RegisterPage() {
   };
 
   return (
-    <>
-      <Header />
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      <main className="flex-grow flex items-center justify-center p-4">
+        <div className="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto w-full sm:w-96 relative">
           <h3 className="text-2xl font-bold mb-4 text-center">Register</h3>
           {error && <p className="text-red-500 text-center mb-4">{error}</p>}
           <form onSubmit={handleEmailRegister}>
@@ -175,8 +173,7 @@ export default function RegisterPage() {
             </a>
           </p>
         </div>
-      </div>
-      <Footer />
-    </>
+      </main>
+    </div>
   );
 }

@@ -5,9 +5,10 @@ import { db } from '../../../firebase/config';
 import { auth } from '../../../firebase/auth';
 import SkeletonLoader from '../ui/SkeletonLoader';
 import AddChildForm from './AddChildForm'; // Reusing the AddChildForm
-import { FaEdit, FaTrash, FaCheckCircle, FaTimesCircle, FaUser, FaChartLine, FaTasks, FaHourglassHalf, FaCog, FaUpload } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaCheckCircle, FaTimesCircle, FaUser, FaChartLine, FaTasks, FaHourglassHalf, FaCog, FaUpload, FaFilePdf } from 'react-icons/fa';
 
-const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
+const ChildDashboard = ({ child, onDelete, onClose }) => {
+  console.log("ChildDashboard received child prop:", child);
   const [currentView, setCurrentView] = useState('details'); // 'details', 'edit', 'deleteConfirm'
   const [activeTab, setActiveTab] = useState('about'); // New state for active tab
   const [childData, setChildData] = useState(child);
@@ -18,9 +19,11 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
     setChildData(child);
     setCurrentView('details'); // Reset view when child changes
     setActiveTab('about'); // Reset active tab when child changes
+    
   }, [child]);
 
   const handleEditClick = () => {
+    console.log("Edit button clicked. Setting currentView to 'edit'.");
     setCurrentView('edit');
   };
 
@@ -91,7 +94,7 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
       >
         {/* Details View */}
         <div className="w-full flex-shrink-0 p-4 md:p-6">
-          <h2 className="text-3xl font-bold text-[var(--deep-ocean)] mb-6 text-center">{childData.name}'s Dashboard</h2>
+          <h2 className="text-3xl font-bold text-[var(--deep-ocean)] mb-6 text-center">{childData.name}&apos;s Dashboard</h2>
           
           {/* Tab Navigation */}
           <div className="mb-6">
@@ -173,17 +176,15 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
           <div id="child-dashboard-tab-content">
             {activeTab === 'about' && (
               <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                <h3 className="text-2xl font-semibold text-[var(--deep-ocean)] mb-4">About {childData.name}</h3>
                 <div className="flex items-center mb-4">
                   {/* Child Image/Initial */}
                   <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center text-white text-5xl font-bold mr-4">
                     {childData.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="text-[var(--foreground)] text-xl font-bold">{childData.name}</p>
-                    <p className="text-[var(--foreground)]">Age: {childData.age} | Grade: {childData.grade} | Gender: {childData.gender}</p>
-                    <p className="text-[var(--foreground)]">Profile Completion: <span className="font-bold">{profileCompletionPercentage}%</span></p>
-                    <p className="text-[var(--foreground)]">Last Activity: (Placeholder)</p>
+                    <h3 className="text-2xl font-semibold text-[var(--deep-ocean)]">{childData.name}</h3>
+                    <p className="text-lg text-gray-600">Age: {childData.age}</p>
+                    <p className="text-lg text-gray-600">Grade: {childData.grade}</p>
                   </div>
                 </div>
                 <div className="mt-4">
@@ -192,27 +193,22 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
                   </button>
                 </div>
                 <p className="text-[var(--foreground)] mt-4"><strong>Notes:</strong> {childData.notes || 'No notes available.'}</p>
-                <div className="flex justify-around mt-6">
+                <div className="mt-6 pt-4 border-t border-gray-200 flex justify-end gap-4">
                   <button
                     onClick={handleEditClick}
-                    className="px-6 py-3 bg-sunny-yellow text-[var(--deep-ocean)] font-semibold rounded-lg hover:bg-sunny-yellow/80 transition-colors duration-300 flex items-center"
+                    className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-300 flex items-center"
+                    title="Edit Child"
                   >
-                    <FaEdit className="mr-2" /> Edit Child
+                    <FaEdit className="mr-2" /> 
+                    <span>Edit</span>
                   </button>
                   <button
                     onClick={handleDeleteClick}
-                    className="px-6 py-3 bg-sweet-pink text-white font-semibold rounded-lg hover:bg-sweet-pink/80 transition-colors duration-300 flex items-center"
+                    className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition-colors duration-300 flex items-center"
+                    title="Delete Child"
                   >
-                    <FaTrash className="mr-2" /> Delete Child
-                  </button>
-                  <button
-                    onClick={() => {
-                      sessionStorage.setItem('childUser', JSON.stringify(childData));
-                      router.push('/child-dashboard');
-                    }}
-                    className="px-6 py-3 bg-primary-blue text-white font-semibold rounded-lg hover:bg-primary-blue/80 transition-colors duration-300 flex items-center"
-                  >
-                    Login as Child
+                    <FaTrash className="mr-2" /> 
+                    <span>Delete</span>
                   </button>
                 </div>
               </div>
@@ -220,34 +216,75 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
 
             {activeTab === 'insights' && (
               <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                <h3 className="text-2xl font-semibold text-[var(--deep-ocean)] mb-4">Insights</h3>
-                <h4 className="text-xl font-semibold text-[var(--heading-color)] mb-3">Subject Performance:</h4>
-                <div className="space-y-4 mb-6">
-                  {Object.entries(childData.progress?.subjects || {}).map(([subject, data]) => (
-                    <div key={subject}>
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-[var(--foreground)] font-medium">{subject}</span>
-                        <span className={`font-bold ${data.score >= 70 ? 'text-green-600' : data.score >= 50 ? 'text-yellow-600' : 'text-red-600'}`}>{data.score || 0}%</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-4">
-                        <div className={`h-4 rounded-full ${data.score >= 70 ? 'bg-green-500' : data.score >= 50 ? 'bg-yellow-500' : 'bg-red-500'}`}
-                             style={{ width: `${data.score || 0}%` }}></div>
-                      </div>
-                      <p className="text-sm text-gray-600 mt-1">{data.feedback}</p>
+                <h3 className="text-2xl font-semibold text-[var(--deep-ocean)] mb-4">Learning Insights</h3>
+
+                {/* Progress Overview */}
+                <div className="mb-6">
+                  <h4 className="text-xl font-semibold text-[var(--heading-color)] mb-3">Overall Progress</h4>
+                  <div className="w-full bg-gray-200 rounded-full h-4 mb-2">
+                    <div
+                      className="bg-green-500 h-4 rounded-full text-xs font-medium text-blue-100 text-center p-0.5 leading-none"
+                      style={{ width: `${overallProgress}%` }}
+                    >
+                      {overallProgress}%
                     </div>
-                  ))}
+                  </div>
+                  <p className="text-sm text-gray-600">{completedTasksCount} of {assignedTasksCount} tasks completed.</p>
                 </div>
-                <h4 className="text-xl font-semibold text-gray-800 mb-3">Task Summary:</h4>
-                <p className="text-gray-700">Completed Tasks: <span className="font-bold">{completedTasksCount}</span></p>
-                <p className="text-gray-700">Assigned Tasks: <span className="font-bold">{assignedTasksCount}</span></p>
-                <p className="text-gray-700 mb-4">In Progress: <span className="font-bold">{assignedTasksCount - completedTasksCount}</span></p>
-                
-                <div className="flex space-x-2 mb-4">
-                  <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Last 7 days</button>
-                  <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">This month</button>
-                  <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Custom range</button>
+
+                {/* Activity Trends */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h5 className="font-semibold text-gray-700">Learning Streak</h5>
+                    <p className="text-2xl font-bold text-blue-600">5 days</p>
+                    <p className="text-sm text-gray-500">Keep up the great work!</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h5 className="font-semibold text-gray-700">Last Active</h5>
+                    <p className="text-2xl font-bold text-blue-600">Yesterday</p>
+                    <p className="text-sm text-gray-500">Completed Math Quiz</p>
+                  </div>
                 </div>
-                <button className="mt-4 px-4 py-2 bg-primary-blue text-white rounded-md hover:bg-primary-blue/80">View Full Report</button>
+
+                {/* Subject-wise Performance */}
+                <div className="mb-6">
+                  <h4 className="text-xl font-semibold text-[var(--heading-color)] mb-3">Subject Performance</h4>
+                  <div className="space-y-4">
+                    {Object.entries(childData.progress?.subjects || {}).map(([subject, data]) => (
+                      <div key={subject}>
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-[var(--foreground)] font-medium">{subject}</span>
+                          <span className={`font-bold ${data.score >= 70 ? 'text-green-600' : data.score >= 50 ? 'text-yellow-600' : 'text-red-600'}`}>{data.score || 0}%</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-2.5">
+                          <div className={`h-2.5 rounded-full ${data.score >= 70 ? 'bg-green-500' : data.score >= 50 ? 'bg-yellow-500' : 'bg-red-500'}`}
+                               style={{ width: `${data.score || 0}%` }}></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Recent Activity */}
+                <div className="mb-6">
+                    <h4 className="text-xl font-semibold text-[var(--heading-color)] mb-3">Recent Activity</h4>
+                    <ul className="space-y-2">
+                        {childData.assignedTasks?.filter(t => t.status === 'completed').slice(0, 3).map((task, index) => (
+                            <li key={index} className="flex items-center text-gray-700">
+                                <FaCheckCircle className="text-green-500 mr-2" />
+                                <span>Completed <strong>{task.name}</strong> in {task.subject}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Download Report Button */}
+                <div className="text-right mt-6">
+                  <button className="px-4 py-2 bg-primary-blue text-white rounded-md hover:bg-primary-blue/80 flex items-center">
+                    <FaFilePdf className="mr-2" />
+                    Download Report
+                  </button>
+                </div>
               </div>
             )}
 
@@ -291,21 +328,121 @@ const ChildDashboard = ({ child, onEdit, onDelete, onClose }) => {
 
             {activeTab === 'settings' && (
               <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                <h3 className="text-2xl font-semibold text-[var(--deep-ocean)] mb-4">Settings</h3>
-                <p className="text-gray-700 mb-2"><strong>Update grade:</strong> (Placeholder)</p>
-                <p className="text-gray-700 mb-2"><strong>Assign subject access:</strong> (Placeholder)</p>
-                <p className="text-gray-700 mb-2"><strong>Notification preferences:</strong> (Placeholder)</p>
-                <p className="text-gray-700 mb-2"><strong>Optional:</strong> Lock account, change theme for child, etc. (Placeholder)</p>
+                <h3 className="text-2xl font-semibold text-[var(--deep-ocean)] mb-6">Settings & Controls</h3>
+
+                {/* Academic Settings */}
+                <div className="mb-8">
+                  <h4 className="text-xl font-semibold text-[var(--heading-color)] mb-4 border-b pb-2">Academic Settings</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Grade Level */}
+                    <div>
+                      <label htmlFor="grade-level" className="block text-md font-medium text-gray-700 mb-2">Grade Level</label>
+                      <select
+                        id="grade-level"
+                        name="grade-level"
+                        defaultValue={childData.grade}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                      >
+                        <option>Kindergarten</option>
+                        <option>Grade 1</option>
+                        <option>Grade 2</option>
+                        <option>Grade 3</option>
+                        <option>Grade 4</option>
+                        <option>Grade 5</option>
+                      </select>
+                    </div>
+                    {/* Subject Access */}
+                    <div>
+                      <h5 className="text-md font-medium text-gray-700 mb-2">Subject Access</h5>
+                      <div className="space-y-2">
+                        <div className="flex items-center">
+                          <input id="math-access" name="math-access" type="checkbox" defaultChecked className="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                          <label htmlFor="math-access" className="ml-3 block text-sm text-gray-900">Mathematics</label>
+                        </div>
+                        <div className="flex items-center">
+                          <input id="english-access" name="english-access" type="checkbox" defaultChecked className="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                          <label htmlFor="english-access" className="ml-3 block text-sm text-gray-900">English</label>
+                        </div>
+                        <div className="flex items-center">
+                          <input id="science-access" name="science-access" type="checkbox" className="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                          <label htmlFor="science-access" className="ml-3 block text-sm text-gray-900">Science</label>
+                        </div>
+                         <div className="flex items-center">
+                          <input id="tamil-access" name="tamil-access" type="checkbox" defaultChecked className="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                          <label htmlFor="tamil-access" className="ml-3 block text-sm text-gray-900">Tamil</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Goals & Limits */}
+                <div className="mb-8">
+                  <h4 className="text-xl font-semibold text-[var(--heading-color)] mb-4 border-b pb-2">Goals & Time Limits</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="time-limit" className="block text-md font-medium text-gray-700 mb-2">Daily Time Limit</label>
+                      <select
+                        id="time-limit"
+                        name="time-limit"
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                      >
+                        <option>No Limit</option>
+                        <option>30 minutes</option>
+                        <option>1 hour</option>
+                        <option>1.5 hours</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="learning-goal" className="block text-md font-medium text-gray-700 mb-2">Weekly Learning Goal (e.g., 5 lessons)</label>
+                      <input
+                        type="text"
+                        name="learning-goal"
+                        id="learning-goal"
+                        placeholder="e.g., 5 lessons"
+                        className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Account Control */}
+                <div className="mb-8">
+                    <h4 className="text-xl font-semibold text-[var(--heading-color)] mb-4 border-b pb-2">Account Control</h4>
+                    <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+                        <div>
+                            <h5 className="font-medium text-gray-800">Child&apos;s Login Access</h5>
+                            <p className="text-sm text-gray-600">Enable or disable the child&apos;s ability to log in independently.</p>
+                        </div>
+                        <label htmlFor="login-toggle" className="inline-flex relative items-center cursor-pointer">
+                            <input type="checkbox" value="" id="login-toggle" className="sr-only peer" defaultChecked />
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        </label>
+                    </div>
+                </div>
+
+
+                {/* Save Changes Button */}
+                <div className="text-right mt-8">
+                  <button
+                    type="button"
+                    className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-300"
+                  >
+                    Save Changes
+                  </button>
+                </div>
               </div>
             )}
           </div>
         </div>
 
         {/* Edit View */}
-        <div className="w-full flex-shrink-0 p-4 md:p-6">
-          <h2 className="text-3xl font-bold text-[var(--deep-ocean)] mb-6 text-center">Edit Child</h2>
-          <AddChildForm childToEdit={childData} onClose={handleCancel} onSaveSuccess={handleSaveSuccess} />
-        </div>
+        {currentView === 'edit' && (
+          <div className="w-full flex-shrink-0 p-4 md:p-6">
+            <h2 className="text-3xl font-bold text-[var(--deep-ocean)] mb-6 text-center">Edit Child</h2>
+            <AddChildForm childToEdit={child} onClose={handleCancel} onSaveSuccess={handleSaveSuccess} />
+          </div>
+        )}
 
         {/* Delete Confirmation View */}
         <div className="w-full flex-shrink-0 p-4 md:p-6 flex flex-col items-center justify-center text-center">

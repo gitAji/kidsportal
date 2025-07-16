@@ -1,31 +1,17 @@
-"use client";
+'use client';
 
-import { useState } from 'react';
+import React from 'react';
 import { FaCommentDots } from 'react-icons/fa';
-import Chat from './Chat';
 
-const FloatingChatButton = () => {
-  const [isChatOpen, setIsChatOpen] = useState(false);
-
-  const toggleChat = () => {
-    setIsChatOpen(!isChatOpen);
-  };
-
+const FloatingChatButton = ({ onClick }) => {
   return (
-    <div className="fixed bottom-6 right-6 z-50">
-      {isChatOpen && (
-        <div className="mb-4">
-          <Chat onClose={() => setIsChatOpen(false)} />
-        </div>
-      )}
-      <button
-        onClick={toggleChat}
-        className="bg-blue-600 text-white rounded-full p-4 shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-        aria-label="Open chat"
-      >
-        <FaCommentDots className="text-2xl" />
-      </button>
-    </div>
+    <button
+      onClick={onClick}
+      className="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300 z-50"
+      aria-label="Open chat"
+    >
+      <FaCommentDots className="text-2xl" />
+    </button>
   );
 };
 

@@ -3,8 +3,6 @@ import React, { useEffect, useState, Suspense } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { useRouter } from "next/navigation";
-import Header from "../components/layout/header/Header";
-import Footer from "../components/layout/footer/Footer";
 import SkeletonLoader from "../components/ui/SkeletonLoader";
 import ParentDashboard from "../components/dashboard/ParentDashboard";
 
@@ -28,11 +26,9 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="flex flex-col min-h-screen bg-gray-50">
-        <Header />
         <main className="flex-grow p-4">
           <SkeletonLoader />
         </main>
-        <Footer />
       </div>
     );
   }
@@ -43,13 +39,11 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Header />
       <main className="flex-grow p-4">
         <Suspense fallback={<SkeletonLoader />}>
           <ParentDashboard />
         </Suspense>
       </main>
-      <Footer />
     </div>
   );
 }

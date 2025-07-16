@@ -5,22 +5,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
 
 :root {
-  --background: #ffffff;
+  --background: #f0f4f8;
   --foreground: #333333;
-  --heading-color: #222222; /* A dark charcoal color */
-  --primary-blue: #007bff; /* A standard blue */
-  --deep-ocean: #0a2342; /* A dark blue */
-  --link-color: #007bff; /* Same as primary-blue for links */
+  --heading-color: #2c3e50;
+  --primary-blue: #3498db;
+  --deep-ocean: #1a5276;
+  --link-color: #3498db;
+  --success-green: #2ecc71;
+  --warning-orange: #f39c12;
+  --error-red: #e74c3c;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --heading-color: #2e2e2e;
-    --primary-blue: #252525;
+    --background: #2c3e50;
+    --foreground: #ecf0f1;
+    --heading-color: #ffffff;
+    --primary-blue: #3498db;
     --deep-ocean: #87ceeb;
-    --link-color: #429df8;
+    --link-color: #3498db;
+    --success-green: #2ecc71;
+    --warning-orange: #f39c12;
+    --error-red: #e74c3c;
   }
 }
 
