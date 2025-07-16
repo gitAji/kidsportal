@@ -10,14 +10,12 @@ import Modal from "@/app/components/ui/Modal";
 import VoiceButton from "@/app/components/ui/VoiceButton";
 import FeedbackMessage from "@/app/components/ui/FeedbackMessage";
 import ProgressBar from "@/app/components/ui/ProgressBar";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../../../firebase/config";
 
-const useSound = dynamic(() => import('use-sound'), { ssr: false });
-import correctSound from "../../../../../../public/sounds/correct.mp3";
-import incorrectSound from "../../../../../../public/sounds/incorrect.mp3";
+const useSound = dynamic(() => import("use-sound"), { ssr: false });
 import "animate.css";
 
 // Sample questions for Ariviyal Level 1
@@ -53,7 +51,7 @@ const optionColors = {
 export default function Level1Content() {
   const router = useRouter();
   const pathname = usePathname();
-  const levelId = parseInt(pathname.split('/').pop());
+  const levelId = parseInt(pathname.split("/").pop());
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [feedback, setFeedback] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
@@ -107,7 +105,10 @@ export default function Level1Content() {
           setIsCorrect(null);
           localStorage.setItem(
             "ariviyalL1Progress",
-            JSON.stringify({ completed: false, currentQuestionIndex: nextIndex })
+            JSON.stringify({
+              completed: false,
+              currentQuestionIndex: nextIndex,
+            })
           );
         } else {
           setCompleted(true);
@@ -138,20 +139,20 @@ export default function Level1Content() {
     window.location.href = "/grades/1/ariviyal";
   };
 
-  
-
-  
-
   if (levelId > 2 && (!currentUser || !isPremiumUser)) {
     return (
       <div className="flex flex-col min-h-screen bg-gray-50">
         <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
         <main className="flex-grow p-4 flex flex-col items-center justify-center text-white">
           <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center backdrop-blur-sm">
-            <h2 className="text-3xl font-bold mb-4 text-red-500">Access Denied</h2>
-            <p className="text-gray-700 mb-4">This level is only available to Premium users.</p>
+            <h2 className="text-3xl font-bold mb-4 text-red-500">
+              Access Denied
+            </h2>
+            <p className="text-gray-700 mb-4">
+              This level is only available to Premium users.
+            </p>
             <button
-              onClick={() => router.push('/pricing')}
+              onClick={() => router.push("/pricing")}
               className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
             >
               Upgrade to Premium

@@ -9,9 +9,7 @@ import Modal from "../../../../../../components/ui/Modal";
 import VoiceButton from "../../../../../../components/ui/VoiceButton";
 import FeedbackMessage from "../../../../../../components/ui/FeedbackMessage";
 import ProgressBar from "../../../../../../components/ui/ProgressBar";
-import useSound from "use-sound";
-import correctSound from "/sounds/correct.mp3";
-import incorrectSound from "/sounds/incorrect.mp3";
+
 import "animate.css";
 
 // Sample questions for Ariviyal Level 1
