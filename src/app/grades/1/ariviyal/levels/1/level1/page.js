@@ -7,7 +7,7 @@ import Footer from "../../../../../../components/layout/footer/Footer";
 import BackToTop from "../../../../../../components/ui/BackToTop";
 import Modal from "../../../../../../components/ui/Modal";
 import VoiceButton from "../../../../../../components/ui/VoiceButton";
-import FeedbackMessage from "../../../../components/ui/FeedbackMessage";
+import FeedbackMessage from "../../../../../../components/ui/FeedbackMessage";
 import ProgressBar from "../../../../../../components/ui/ProgressBar";
 import useSound from "use-sound";
 import correctSound from "/sounds/correct.mp3";
