@@ -6,7 +6,7 @@ import { db, auth } from "../../firebase/config";
 
 import SkeletonLoader from "../components/ui/SkeletonLoader";
 import ChildDashboard from "../components/dashboard/ChildDashboard"; // Import ChildDashboard
-import Breadcrumb from "../components/ui/Breadcrumb";
+import Breadcrumb from "../components/ui/BreadCrumb";
 
 export default function ChildDashboardPage() {
   const [childUser, setChildUser] = useState(null);

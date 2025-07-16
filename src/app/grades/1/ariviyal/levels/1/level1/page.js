@@ -1,17 +1,14 @@
 "use client"; // Ensure this component is treated as a client component
 
-
-
-
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Header from "../../../../components/layout/header/Header";
-import Footer from "../../../../components/layout/footer/Footer";
-import BackToTop from "../../../../components/ui/BackToTop";
-import Modal from "../../../../components/ui/Modal";
-import VoiceButton from "../../../../components/ui/VoiceButton";
+import Header from "../../../../../../components/layout/header/Header";
+import Footer from "../../../../../../components/layout/footer/Footer";
+import BackToTop from "../../../../../../components/ui/BackToTop";
+import Modal from "../../../../../../components/ui/Modal";
+import VoiceButton from "../../../../../../components/ui/VoiceButton";
 import FeedbackMessage from "../../../../components/ui/FeedbackMessage";
-import ProgressBar from "../../../../components/ui/ProgressBar";
+import ProgressBar from "../../../../../../components/ui/ProgressBar";
 import useSound from "use-sound";
 import correctSound from "/sounds/correct.mp3";
 import incorrectSound from "/sounds/incorrect.mp3";
@@ -47,12 +44,10 @@ const optionColors = {
   Grapes: "bg-purple-500 hover:bg-purple-600",
 };
 
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const Level1Content = dynamic(() => import('./Level1Content'), { ssr: false });
+const Level1Content = dynamic(() => import("./Level1Content"), { ssr: false });
 
 export default function Level1() {
   return <Level1Content />;
 }
-
-
