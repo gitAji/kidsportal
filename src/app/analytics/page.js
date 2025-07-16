@@ -1,8 +1,7 @@
 "use client"; // Ensure this component is treated as a client component
 
 import { useEffect } from "react"; // Import useEffect for side effects
-import Header from "../components/layout/header/Header"; // Header component
-import Footer from "../components/layout/footer/Footer"; // Footer component
+
 import BackToTop from "../components/ui/BackToTop"; // BackToTop component
 
 export default function AnalyticsPage() {
@@ -20,7 +19,6 @@ export default function AnalyticsPage() {
   return (
     <>
       {/* Header Section */}
-      <Header />
 
       {/* Analytics Section */}
       <section className="py-20 bg-gray-50">
@@ -84,7 +82,7 @@ export default function AnalyticsPage() {
       </section>
 
       {/* Footer Section */}
-      <Footer />
+
       <BackToTop />
     </>
   );
