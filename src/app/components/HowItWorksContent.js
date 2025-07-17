@@ -8,7 +8,6 @@ import {
   faCreditCard,
   faArrowLeft,
   faHome,
-  faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
 const faqData = [

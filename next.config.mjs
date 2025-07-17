@@ -7,6 +7,9 @@ const nextConfig = {
   images: {
     domains: ["lh3.googleusercontent.com"], // List allowed domains for optimized images
   },
+  compiler: {
+    emotion: true,
+  },
   webpack: (config, { isServer }) => {
     // Add custom rule for handling audio files (.mp3, .wav, .ogg)
     config.module.rules.push({

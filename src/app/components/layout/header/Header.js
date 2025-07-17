@@ -6,7 +6,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation"; // Import usePathname
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, logout } from "../../../../firebase/auth";
-import { FaBell, FaUserCircle, FaCaretDown, FaCommentDots } from "react-icons/fa"; // Import icons
+import {
+  FaBell,
+  FaUserCircle,
+  FaCaretDown,
+  FaCommentDots,
+} from "react-icons/fa"; // Import icons
 import { collection, query, where, onSnapshot } from "firebase/firestore"; // Import Firestore functions
 import { db } from "../../../../firebase/config"; // Import db
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +21,13 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Header({ setIsModalOpen = () => {}, setIsRegister = () => {}, setIsHowItWorksOpen = () => {}, setIsAboutUsOpen = () => {} }) {
+export default function Header({
+  setIsModalOpen = () => {},
+  setIsRegister = () => {},
+  setIsHowItWorksOpen = () => {},
+  setIsAboutUsOpen = () => {},
+  setIsOurTeamOpen = () => {},
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -118,18 +129,24 @@ export default function Header({ setIsModalOpen = () => {}, setIsRegister = () =
 
   return (
     <header className="bg-[#ffffff] shadow-md relative">
-      <div className="absolute top-0 right-0 p-4 flex space-x-4 items-center">
+      <div className="absolute top-0 right-0 p-4 pr-5 flex space-x-4 items-center">
         <a
-          className="text-gray-600 text-xs uppercase font-semibold cursor-pointer pb-2"
+          className="text-gray-600 text-xs uppercase font-semibold cursor-pointer pb-4"
           onClick={() => setIsHowItWorksOpen(true)}
         >
           How It Works
         </a>
         <a
-          className="text-gray-600 text-xs uppercase font-semibold cursor-pointer pb-2"
+          className="text-gray-600 text-xs uppercase font-semibold cursor-pointer pb-4"
           onClick={() => setIsAboutUsOpen(true)}
         >
           About Us
+        </a>
+        <a
+          className="text-gray-600 text-xs uppercase font-semibold cursor-pointer pb-4"
+          onClick={() => setIsOurTeamOpen(true)}
+        >
+          Our Team
         </a>
       </div>
       <div className="container mx-auto p-6 flex justify-between items-center">
@@ -333,7 +350,7 @@ export default function Header({ setIsModalOpen = () => {}, setIsRegister = () =
                 setIsRegister(false);
               }}
             >
-              Sign In / Sign Up
+              Sign In / Register
             </button>
           )}
         </div>
@@ -469,7 +486,7 @@ export default function Header({ setIsModalOpen = () => {}, setIsRegister = () =
                     setIsMenuOpen(false);
                   }}
                 >
-                  Sign In / Sign Up
+                  Sign In / Register
                 </button>
               )}
             </nav>

@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
 
-export default function AboutUsContent() {
+export default function AboutUsContent({ onClose }) {
   return (
-    <div className="p-4">
+    <div className="relative h-full flex flex-col p-4">
       <h2 className="text-3xl font-extrabold text-center mb-8 text-gray-800">About KidsPortal</h2>
       <div className="space-y-4 text-gray-700 leading-relaxed">
         <p>
