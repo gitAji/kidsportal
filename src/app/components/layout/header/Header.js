@@ -16,7 +16,7 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Header({ setIsModalOpen = () => {}, setIsRegister = () => {} }) {
+export default function Header({ setIsModalOpen = () => {}, setIsRegister = () => {}, setIsHowItWorksOpen = () => {}, setIsAboutUsOpen = () => {} }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -117,7 +117,21 @@ export default function Header({ setIsModalOpen = () => {}, setIsRegister = () =
   };
 
   return (
-    <header className="bg-[#ffffff] shadow-md">
+    <header className="bg-[#ffffff] shadow-md relative">
+      <div className="absolute top-0 right-0 p-4 flex space-x-4 items-center">
+        <a
+          className="text-gray-600 text-xs uppercase font-semibold cursor-pointer pb-2"
+          onClick={() => setIsHowItWorksOpen(true)}
+        >
+          How It Works
+        </a>
+        <a
+          className="text-gray-600 text-xs uppercase font-semibold cursor-pointer pb-2"
+          onClick={() => setIsAboutUsOpen(true)}
+        >
+          About Us
+        </a>
+      </div>
       <div className="container mx-auto p-6 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
@@ -312,26 +326,15 @@ export default function Header({ setIsModalOpen = () => {}, setIsRegister = () =
               </div>
             </div>
           ) : (
-            <>
-              <button
-                className="text-[var(--foreground)] hover:text-[var(--primary-blue)] transition-colors duration-200"
-                onClick={() => {
-                  setIsModalOpen(true);
-                  setIsRegister(false);
-                }}
-              >
-                Sign In
-              </button>
-              <button
-                className="bg-[var(--primary-blue)] text-white py-2 px-4 rounded hover:bg-[var(--primary-blue)]/80 transition-colors duration-200"
-                onClick={() => {
-                  setIsModalOpen(true);
-                  setIsRegister(true);
-                }}
-              >
-                Sign Up
-              </button>
-            </>
+            <button
+              className="bg-[var(--primary-blue)] text-white py-2 px-4 rounded hover:bg-[var(--primary-blue)]/80 transition-colors duration-200"
+              onClick={() => {
+                setIsModalOpen(true);
+                setIsRegister(false);
+              }}
+            >
+              Sign In / Sign Up
+            </button>
           )}
         </div>
       </div>
@@ -458,28 +461,16 @@ export default function Header({ setIsModalOpen = () => {}, setIsRegister = () =
                 </div>
               )}
               {!user && (
-                <>
-                  <button
-                    className="text-[var(--foreground)] text-lg hover:text-[var(--primary-blue)] transition-colors duration-200 py-2 w-full"
-                    onClick={() => {
-                      setIsModalOpen(true);
-                      setIsRegister(false);
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Sign In
-                  </button>
-                  <button
-                    className="bg-[var(--primary-blue)] text-white py-2 px-4 rounded hover:bg-[var(--primary-blue)]/80 text-lg w-full"
-                    onClick={() => {
-                      setIsModalOpen(true);
-                      setIsRegister(true);
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Sign Up
-                  </button>
-                </>
+                <button
+                  className="text-[var(--foreground)] text-lg hover:text-[var(--primary-blue)] transition-colors duration-200 py-2 w-full"
+                  onClick={() => {
+                    setIsModalOpen(true);
+                    setIsRegister(false);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Sign In / Sign Up
+                </button>
               )}
             </nav>
           </div>

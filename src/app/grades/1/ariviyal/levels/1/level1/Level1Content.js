@@ -1,5 +1,8 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import Particles from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+import Lottie from "lottie-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Header from "../../../../../../components/layout/header/Header";
@@ -96,10 +99,103 @@ export default function Level1Content() {
 
   const currentQuestion = questions[currentQuestionIndex];
 
+  const particlesInit = useCallback(async (engine) => {
+    await loadSlim(engine);
+  }, []);
+
+  const particlesLoaded = useCallback(async (container) => {
+    console.log(container);
+  }, []);
+
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-100 to-white">
+    <div className="flex flex-col min-h-screen relative">
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        loaded={particlesLoaded}
+        options={{
+          background: {
+            color: {
+              value: "#000000", // Black background for stars
+            },
+          },
+          fpsLimit: 60,
+          interactivity: {
+            events: {
+              onClick: {
+                enable: true,
+                mode: "push",
+              },
+              onHover: {
+                enable: true,
+                mode: "repulse",
+              },
+              resize: true,
+            },
+            modes: {
+              push: {
+                quantity: 4,
+              },
+              repulse: {
+                distance: 200,
+                duration: 0.4,
+              },
+            },
+          },
+          particles: {
+            color: {
+              value: "#ffffff", // White stars
+            },
+            links: {
+              color: "#ffffff",
+              distance: 150,
+              enable: true,
+              opacity: 0.5,
+              width: 1,
+            },
+            collisions: {
+              enable: true,
+            },
+            move: {
+              direction: "none",
+              enable: true,
+              outModes: {
+                default: "bounce",
+              },
+              random: false,
+              speed: 2,
+              straight: false,
+            },
+            number: {
+              density: {
+                enable: true,
+                area: 800,
+              },
+              value: 80,
+            },
+            opacity: {
+              value: 0.5,
+            },
+            shape: {
+              type: "star", // Stars
+            },
+            size: {
+              value: { min: 1, max: 5 },
+            },
+          },
+          detectRetina: true,
+        }}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: -1, // Ensure it's in the background
+        }}
+      />
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-8">
+      <main className="flex-grow container mx-auto px-4 py-8 relative z-10">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-blue-600 animate__animated animate__fadeInDown">
             Ariviyal - Level 1
@@ -164,7 +260,84 @@ export default function Level1Content() {
             message="You have successfully completed Level 1!"
             buttonText="Next Level"
             onButtonClick={() => router.push("/grades/1/ariviyal/levels/2")}
-          />
+          >
+            {/* Placeholder for Lottie animation */}
+            {completed && (
+              <div className="w-full h-48 flex items-center justify-center">
+                <Lottie
+                  animationData={{
+                    /* Your Lottie animation JSON data here */
+                    v: "5.7.4",
+                    fr: 60,
+                    ip: 0,
+                    op: 180,
+                    w: 500,
+                    h: 500,
+                    nm: "Confetti",
+                    ddd: 0,
+                    assets: [],
+                    layers: [
+                      {
+                        ind: 1,
+                        ty: 4,
+                        nm: "Confetti",
+                        sr: 1,
+                        ks: {
+                          o: { a: 0, k: [{ i: { x: 0.67, y: 0.67 }, o: { x: 0.33, y: 0.33 }, t: 0, s: [100] }, { t: 10, s: [0] }] },
+                          r: { a: 0, k: [{ i: { x: 0.67, y: 0.67 }, o: { x: 0.33, y: 0.33 }, t: 0, s: [0] }, { t: 10, s: [360] }] },
+                          p: { a: 1, k: [{ i: { x: 0.67, y: 0.67 }, o: { x: 0.33, y: 0.33 }, t: 0, s: [250, 250, 0] }, { t: 10, s: [250, 0, 0] }] },
+                          a: { a: 0, k: [0, 0, 0] },
+                          s: { a: 0, k: [100, 100, 100] },
+                        },
+                        ao: 0,
+                        shapes: [
+                          {
+                            ty: "gr",
+                            it: [
+                              {
+                                ind: 0,
+                                ty: "sh",
+                                ix: 1,
+                                ks: {
+                                  c: { a: 0, k: [0.96, 0.78, 0.0, 1] },
+                                  o: { a: 0, k: [100] },
+                                  s: { a: 0, k: [100, 100] },
+                                  p: { a: 0, k: [0, 0] },
+                                  a: { a: 0, k: [0, 0] },
+                                  r: { a: 0, k: [0] },
+                                  sk: { a: 0, k: [0] },
+                                  sa: { a: 0, k: [0] },
+                                },
+                                mn: "Shape 1",
+                                nm: "Shape 1",
+                                hd: false,
+                              },
+                            ],
+                            nm: "Group 1",
+                            np: 3,
+                            cix: 2,
+                            hd: false,
+                          },
+                        ],
+                        bm: 0,
+                        sc: "#ffffff",
+                        sh: 0,
+                        cl: "",
+                        ln: "",
+                        ip: 0,
+                        op: 180,
+                        st: 0,
+                        bm: 0,
+                      },
+                    ],
+                  }}
+                  loop={false}
+                  autoplay={true}
+                  style={{ width: 200, height: 200 }}
+                />
+              </div>
+            )}
+          </Modal>
         )}
       </main>
       <Footer />

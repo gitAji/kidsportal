@@ -1,6 +1,6 @@
 "use client"; // Ensure this component is treated as a client component
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
 import Image from "next/image"; // Optimized images with Next.js
@@ -12,6 +12,8 @@ import dynamic from 'next/dynamic';
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/firebase/config";
+import Particles from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 
 const useSound = dynamic(() => import('use-sound'), { ssr: false }); // Import use-sound for audio playback
 import correctSound from "@/public/sounds/correct.mp3"; // Correct answer sound
@@ -160,43 +162,94 @@ export default function Level1Content() {
     window.location.href = "/grades/1/math"; // Redirect to Math page
   };
 
-  if (loadingUser) {
-    return (
-      <div className="flex flex-col min-h-screen bg-gray-50">
-        <Header />
-        <main className="flex-grow p-4">
-          <p>Loading user data...</p>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (levelId > 2 && (!currentUser || !isPremiumUser)) {
-    return (
-      <div className="flex flex-col min-h-screen bg-gray-50">
-        <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
-        <main className="flex-grow p-4 flex flex-col items-center justify-center text-white">
-          <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center backdrop-blur-sm">
-            <h2 className="text-3xl font-bold mb-4 text-red-500">Access Denied</h2>
-            <p className="text-gray-700 mb-4">This level is only available to Premium users.</p>
-            <button
-              onClick={() => router.push('/pricing')}
-              className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
-            >
-              Upgrade to Premium
-            </button>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen relative">
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        loaded={particlesLoaded}
+        options={{
+          background: {
+            color: {
+              value: "#87CEEB", // Sky blue background
+            },
+          },
+          fpsLimit: 60,
+          interactivity: {
+            events: {
+              onClick: {
+                enable: true,
+                mode: "push",
+              },
+              onHover: {
+                enable: true,
+                mode: "bubble",
+              },
+              resize: true,
+            },
+            modes: {
+              bubble: {
+                distance: 200,
+                size: 40,
+                duration: 2,
+                opacity: 0.8,
+                speed: 3,
+              },
+              push: {
+                quantity: 4,
+              },
+            },
+          },
+          particles: {
+            color: {
+              value: "#FFFFFF", // White bubbles
+            },
+            links: {
+              enable: false,
+            },
+            collisions: {
+              enable: true,
+            },
+            move: {
+              direction: "none",
+              enable: true,
+              outModes: {
+                default: "bounce",
+              },
+              random: false,
+              speed: 2,
+              straight: false,
+            },
+            number: {
+              density: {
+                enable: true,
+                area: 800,
+              },
+              value: 80,
+            },
+            opacity: {
+              value: 0.5,
+            },
+            shape: {
+              type: "circle", // Bubbles
+            },
+            size: {
+              value: { min: 1, max: 10 },
+            },
+          },
+          detectRetina: true,
+        }}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: -1, // Ensure it's in the background
+        }}
+      />
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
-      <main className="flex-grow p-4 flex flex-col items-center justify-center">
+      <main className="flex-grow p-4 flex flex-col items-center justify-center relative z-10">
         <h1 className="text-3xl font-bold mb-4">Level 1: Counting</h1>
         <div className="mb-4 bg-gray-100 p-6 rounded-lg shadow w-full max-w-md">
           {/* Display a "completed" image if quiz is done */}

@@ -3,7 +3,7 @@ import { withSentryConfig } from "@sentry/nextjs"; // Example import, adjust as 
 // Conditionally use 'standalone' only in production
 const nextConfig = {
   reactStrictMode: true,
-  output: process.env.NODE_ENV === "production" ? "standalone" : undefined, // Only use 'standalone' in production
+  // output: process.env.NODE_ENV === "production" ? "standalone" : undefined, // Only use 'standalone' in production
   images: {
     domains: ["lh3.googleusercontent.com"], // List allowed domains for optimized images
   },

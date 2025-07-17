@@ -63,3 +63,42 @@ button {
     color: var(--heading-color);
   }
 }
+
+/* InfoBox styles */
+.info-link {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #3498db;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 50;
+}
+
+.info-box {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 33%;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: -2px 0px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  z-index: 9999; /* Ensure it's on top of other content */
+}
+
+.close-btn {
+  background-color: #e74c3c;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #c0392b;
+}

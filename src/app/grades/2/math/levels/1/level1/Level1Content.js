@@ -1,6 +1,6 @@
 "use client"; // Ensure this component is treated as a client component
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image"; // Optimized images with Next.js
 import Header from "../../../../../../components/layout/header/Header"; // Import Header component
@@ -11,6 +11,8 @@ import dynamic from 'next/dynamic';
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/firebase/config";
+import Particles from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 
 const useSound = dynamic(() => import('use-sound'), { ssr: false }); // Import use-sound for audio playback
 import correctSound from "@/public/sounds/correct.mp3"; // Correct answer sound
@@ -159,6 +161,14 @@ export default function Level1Content() {
   const pathname = usePathname();
   const levelId = parseInt(pathname.split('/').pop());
 
+  const particlesInit = useCallback(async (engine) => {
+    await loadSlim(engine);
+  }, []);
+
+  const particlesLoaded = useCallback(async (container) => {
+    console.log(container);
+  }, []);
+
   if (loadingUser) {
     return (
       <div className="flex flex-col min-h-screen bg-gray-50">
@@ -193,9 +203,93 @@ export default function Level1Content() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen relative">
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        loaded={particlesLoaded}
+        options={{
+          background: {
+            color: {
+              value: "#87CEEB", // Sky blue background
+            },
+          },
+          fpsLimit: 60,
+          interactivity: {
+            events: {
+              onClick: {
+                enable: true,
+                mode: "push",
+              },
+              onHover: {
+                enable: true,
+                mode: "bubble",
+              },
+              resize: true,
+            },
+            modes: {
+              bubble: {
+                distance: 200,
+                size: 40,
+                duration: 2,
+                opacity: 0.8,
+                speed: 3,
+              },
+              push: {
+                quantity: 4,
+              },
+            },
+          },
+          particles: {
+            color: {
+              value: "#FFFFFF", // White bubbles
+            },
+            links: {
+              enable: false,
+            },
+            collisions: {
+              enable: true,
+            },
+            move: {
+              direction: "none",
+              enable: true,
+              outModes: {
+                default: "bounce",
+              },
+              random: false,
+              speed: 2,
+              straight: false,
+            },
+            number: {
+              density: {
+                enable: true,
+                area: 800,
+              },
+              value: 80,
+            },
+            opacity: {
+              value: 0.5,
+            },
+            shape: {
+              type: "circle", // Bubbles
+            },
+            size: {
+              value: { min: 1, max: 10 },
+            },
+          },
+          detectRetina: true,
+        }}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: -1, // Ensure it's in the background
+        }}
+      />
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
-      <main className="flex-grow p-4 flex flex-col items-center justify-center">
+      <main className="flex-grow p-4 flex flex-col items-center justify-center relative z-10">
         <h1 className="text-3xl font-bold mb-4">Level 1: Counting</h1>
         <div className="mb-4 bg-gray-100 p-6 rounded-lg shadow w-full max-w-md">
           {/* Display a "completed" image if quiz is done */}
