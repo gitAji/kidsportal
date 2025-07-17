@@ -16,8 +16,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/firebase/config";
 
 const useSound = dynamic(() => import('use-sound'), { ssr: false });
-import correctSound from "../../../../../../../public/sounds/correct.mp3";
-import incorrectSound from "../../../../../../../public/sounds/incorrect.mp3";
+import correctSound from "@/public/sounds/correct.mp3";
+import incorrectSound from "@/public/sounds/incorrect.mp3";
 import "animate.css";
 
 // Sample questions array in Tamil with 12 main letters

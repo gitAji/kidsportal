@@ -10,11 +10,11 @@ import Modal from "../../../../../../components/ui/Modal"; // Import Modal compo
 import dynamic from 'next/dynamic';
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../../../../../firebase/config";
+import { auth, db } from "@/firebase/config";
 
 const useSound = dynamic(() => import('use-sound'), { ssr: false }); // Import use-sound for audio playback
-import correctSound from "../../../../../../../public/sounds/correct.mp3"; // Correct answer sound
-import incorrectSound from "../../../../../../../public/sounds/incorrect.mp3"; // Incorrect answer sound
+import correctSound from "@/public/sounds/correct.mp3"; // Correct answer sound
+import incorrectSound from "@/public/sounds/incorrect.mp3"; // Incorrect answer sound
 
 // Sample questions
 const questions = [
