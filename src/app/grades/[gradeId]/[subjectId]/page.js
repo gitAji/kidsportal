@@ -1,26 +1,29 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'next/navigation';
 import LevelCard from '@/app/components/ui/LevelCard';
+import LevelPath from '@/app/components/ui/LevelPath';
 
 const LevelsPage = () => {
   const { gradeId, subjectId } = useParams();
-  const [unlockedLevels, setUnlockedLevels] = useState([1]); // Initially, only level 1 is unlocked
+  const [unlockedLevels, setUnlockedLevels] = React.useState([1]); // Initially, only level 1 is unlocked
+  const levels = Array.from({ length: 12 }, (_, i) => i + 1);
+  const [cardRefs] = React.useState(levels.map(() => React.createRef()));
 
   // In a real app, you would fetch the unlocked levels for the user from a database.
   // For now, we'll just use local state.
 
-  const levels = Array.from({ length: 12 }, (_, i) => i + 1);
-
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-8">{subjectId.charAt(0).toUpperCase() + subjectId.slice(1)} - Grade {gradeId}</h1>
+    <div className="min-h-screen bg-cover bg-center p-8" style={{ backgroundImage: "url('/images/intro11.png')" }}>
+      <div className="relative max-w-7xl mx-auto bg-white bg-opacity-80 rounded-xl shadow-lg p-8">
+        <LevelPath cardRefs={cardRefs} />
+        <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">{subjectId.charAt(0).toUpperCase() + subjectId.slice(1)} - Grade {gradeId}</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {levels.map(level => (
+          {levels.map((level, i) => (
             <LevelCard 
-              key={level} 
+              key={level}
+              ref={cardRefs[i]}
               grade={gradeId} 
               subject={subjectId} 
               level={level} 

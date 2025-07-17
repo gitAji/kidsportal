@@ -3,20 +3,20 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
-import Header from "../../../../components/layout/header/Header";
-import Footer from "../../../../components/layout/footer/Footer";
-import BackToTop from "../../../../components/ui/BackToTop";
-import Modal from "../../../../components/ui/Modal";
-import VoiceButton from "../../../../components/ui/VoiceButton";
-import FeedbackMessage from "../../../../components/ui/FeedbackMessage";
-import ProgressBar from "../../../../components/ui/ProgressBar";
+import Header from "@/components/layout/header/Header";
+import Footer from "@/components/layout/footer/Footer";
+import BackToTop from "@/components/ui/BackToTop";
+import Modal from "@/components/ui/Modal";
+import VoiceButton from "@/components/ui/VoiceButton";
+import FeedbackMessage from "@/components/ui/FeedbackMessage";
+import ProgressBar from "@/components/ui/ProgressBar";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../../../firebase/config";
-
+import { auth, db } from "@/firebase/config";
+import dynamic from "next/dynamic";
 const useSound = dynamic(() => import('use-sound'), { ssr: false });
-import correctSound from "../../../../../../public/sounds/correct.mp3";
-import incorrectSound from "../../../../../../public/sounds/incorrect.mp3";
+import correctSound from "@/public/sounds/correct.mp3";
+import incorrectSound from "@/public/sounds/incorrect.mp3";
 import "animate.css";
 
 // Sample questions array for English Level 1
@@ -74,7 +74,7 @@ export default function Level1Content() {
   const [isPremiumUser, setIsPremiumUser] = useState(false);
   const [loadingUser, setLoadingUser] = useState(true);
 
-  const useSound = dynamic(() => import('use-sound'), { ssr: false });
+
   const [playCorrect] = useSound(correctSound);
   const [playIncorrect] = useSound(incorrectSound);
 

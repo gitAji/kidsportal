@@ -4,22 +4,22 @@ import React, { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
 import Image from "next/image"; // Optimized images with Next.js
-import Header from "../../../../../../components/layout/header/Header"; // Import Header component
-import Footer from "../../../../../../components/layout/footer/Footer"; // Import Footer component
-import BackToTop from "../../../../../../components/ui/BackToTop"; // Import BackToTop button
-import Modal from "../../../../../../components/ui/Modal"; // Import Modal component
-import VoiceButton from "../../../../../../components/ui/VoiceButton"; // Import the new VoiceButton component
+import Header from "@/components/layout/header/Header"; // Import Header component
+import Footer from "@/components/layout/footer/Footer"; // Import Footer component
+import BackToTop from "@/components/ui/BackToTop"; // Import BackToTop button
+import Modal from "@/components/ui/Modal"; // Import Modal component
+import VoiceButton from "@/components/ui/VoiceButton"; // Import the new VoiceButton component
 import dynamic from 'next/dynamic';
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../../../../../firebase/config";
+import { auth, db } from "@/firebase/config";
 
 const useSound = dynamic(() => import('use-sound'), { ssr: false }); // Import use-sound for audio playback
-import correctSound from "../../../../../../../public/sounds/correct.mp3"; // Correct answer sound
-import incorrectSound from "../../../../../../../public/sounds/incorrect.mp3"; // Incorrect answer sound
-import FeedbackMessage from "../../../../../../components/ui/FeedbackMessage"; // Import the FeedbackMessage component
+import correctSound from "@/public/sounds/correct.mp3"; // Correct answer sound
+import incorrectSound from "@/public/sounds/incorrect.mp3"; // Incorrect answer sound
+import FeedbackMessage from "@/components/ui/FeedbackMessage"; // Import the FeedbackMessage component
 
-import ProgressBar from "../../../../../../components/ui/ProgressBar"; // Import ProgressBar
+import ProgressBar from "@/components/ui/ProgressBar"; // Import ProgressBar
 
 // Sample questions array
 const questions = [
