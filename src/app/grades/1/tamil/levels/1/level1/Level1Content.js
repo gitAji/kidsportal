@@ -13,7 +13,7 @@ import ProgressBar from "../../../../../../components/ui/ProgressBar";
 import dynamic from 'next/dynamic';
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../../../../../firebase/config";
+import { auth, db } from "@/firebase/config";
 
 const useSound = dynamic(() => import('use-sound'), { ssr: false });
 import correctSound from "../../../../../../../public/sounds/correct.mp3";

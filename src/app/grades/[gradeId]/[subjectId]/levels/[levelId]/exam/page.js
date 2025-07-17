@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import ExamTaker from '@/app/components/learning/ExamTaker';
+import ExamTaker from '@/components/learning/ExamTaker';
 
 // Mock questions for the exam
 const examQuestions = {

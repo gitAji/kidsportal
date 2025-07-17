@@ -105,7 +105,7 @@ export default function Level1Content() {
             Ariviyal - Level 1
           </h1>
           <p className="text-lg text-gray-600 mt-2 animate__animated animate__fadeInUp">
-            Let's learn about fruits and vegetables!
+            Let&apos;s learn about fruits and vegetables!
           </p>
         </div>
 

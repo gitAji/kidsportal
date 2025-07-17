@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import Image from "next/image"; // Optimized images with Next.js
-import Header from "@/app/components/layout/header/Header"; // Import Header component
-import Footer from "@/app/components/layout/footer/Footer"; // Import Footer component
-import BackToTop from "@/app/components/ui/BackToTop"; // Import BackToTop button
-import Modal from "@/app/components/ui/Modal"; // Import Modal component
+import Header from "@/components/layout/header/Header"; // Import Header component
+import Footer from "@/components/layout/footer/Footer"; // Import Footer component
+import BackToTop from "@/components/ui/BackToTop"; // Import BackToTop button
+import Modal from "@/components/ui/Modal"; // Import Modal component
 
 // Sample questions
 const questions = [

@@ -41,6 +41,8 @@ const LevelCard = React.forwardRef(({ grade, subject, level, isUnlocked }, ref) 
   );
 });
 
+LevelCard.displayName = 'LevelCard';
+
 export default LevelCard;
 
 

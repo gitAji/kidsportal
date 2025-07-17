@@ -160,9 +160,6 @@ export default function Level1Content() {
     window.location.href = "/grades/1/math"; // Redirect to Math page
   };
 
-  const pathname = usePathname();
-  const levelId = parseInt(pathname.split('/').pop());
-
   if (loadingUser) {
     return (
       <div className="flex flex-col min-h-screen bg-gray-50">
