@@ -1,15 +1,15 @@
 "use client"; // Ensure this component is treated as a client component
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
-import Header from "../../../../../../components/layout/header/Header";
-import Footer from "../../../../../../components/layout/footer/Footer";
-import BackToTop from "../../../../../../components/ui/BackToTop";
-import Modal from "../../../../../../components/ui/Modal";
-import VoiceButton from "../../../../../../components/ui/VoiceButton";
-import FeedbackMessage from "../../../../../../components/ui/FeedbackMessage";
-import ProgressBar from "../../../../../../components/ui/ProgressBar";
+import Header from "@/components/layout/header/Header";
+import Footer from "@/components/layout/footer/Footer";
+import BackToTop from "@/components/ui/BackToTop";
+import Modal from "@/components/ui/Modal";
+import VoiceButton from "@/components/ui/VoiceButton";
+import FeedbackMessage from "@/components/ui/FeedbackMessage";
+import ProgressBar from "@/components/ui/ProgressBar";
 import dynamic from 'next/dynamic';
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
@@ -25,90 +25,171 @@ import "animate.css";
 // Sample questions array in Tamil with 12 main letters
 const questions = [
   {
-    questionTamil: "இந்த எழுத்தை கண்டுபிடிக்கவும்",
-    questionEnglish: "Find this letter",
-    answer: "அ",
-    image: "/images/அ.png",
-    width: 100,
-    height: 100,
+    question: "What is the first letter of the Tamil alphabet?",
+    type: "mcq",
     options: ["அ", "ஆ", "இ", "ஈ"],
+    correctAnswer: "அ",
+    rewardPoints: 10,
   },
   {
-    questionTamil: "இந்த எழுத்தை கண்டுபிடிக்கவும்",
-    questionEnglish: "Find this letter",
-    answer: "ஆ",
-    image: "/images/ஆ.png",
-    width: 100,
-    height: 100,
-    options: ["அ", "ஆ", "இ", "ஈ"],
+    question: "Which of these is a Tamil vowel?",
+    type: "mcq",
+    options: ["க", "ச", "உ", "ட"],
+    correctAnswer: "உ",
+    rewardPoints: 10,
   },
   {
-    questionTamil: "இந்த எழுத்தை கண்டுபிடிக்கவும்",
-    questionEnglish: "Find this letter",
-    answer: "இ",
-    image: "/images/இ.png",
-    width: 100,
-    height: 100,
-    options: ["இ", "ஈ", "உ", "எ"],
+    question: "How do you say 'hello' in Tamil?",
+    type: "mcq",
+    options: ["வணக்கம்", "நன்றி", "ஆம்", "இல்லை"],
+    correctAnswer: "வணக்கம்",
+    rewardPoints: 10,
   },
   {
-    questionTamil: "இந்த எழுத்தை கண்டுபிடிக்கவும்",
-    questionEnglish: "Find this letter",
-    answer: "ஈ",
-    image: "/images/ஈ.png",
-    width: 100,
-    height: 100,
-    options: ["இ", "ஈ", "உ", "எ"],
-  },
-  {
-    questionTamil: "இந்த எழுத்தை கண்டுபிடிக்கவும்",
-    questionEnglish: "Find this letter",
-    answer: "உ",
-    image: "/images/உ.png",
-    width: 100,
-    height: 100,
-    options: ["உ", "எ", "ஏ", "ஒ"],
-  },
-  {
-    questionTamil: "இந்த எழுத்தை கண்டுபிடிக்கவும்",
-    questionEnglish: "Find this letter",
-    answer: "எ",
-    image: "/images/எ.png",
-    width: 100,
-    height: 100,
-    options: ["உ", "எ", "ஏ", "ஒ"],
-  },
-  {
-    questionTamil: "இந்த எழுத்தை கண்டுபிடிக்கவும்",
-    questionEnglish: "Find this letter",
-    answer: "ஏ",
-    image: "/images/ஏ.png",
-    width: 100,
-    height: 100,
-    options: ["ஏ", "ஒ", "ஃ", "க"],
-  },
-  {
-    questionTamil: "இந்த எழுத்தை கண்டுபிடிக்கவும்",
-    questionEnglish: "Find this letter",
-    answer: "ஒ",
-    image: "/images/ஒ.png",
-    width: 100,
-    height: 100,
-    options: ["ஏ", "ஒ", "ஃ", "க"],
+    question: "Which of these is a Tamil consonant?",
+    type: "mcq",
+    options: ["அ", "ஆ", "க", "இ"],
+    correctAnswer: "க",
+    rewardPoints: 10,
   },
 ];
 
 export default function Level1Content() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [userAnswer, setUserAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState({
+    correct: 0,
+    incorrect: 0,
+    wrongAnswers: [],
+    attempted: 0,
+    score: 0,
+  });
   const [completed, setCompleted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [isPremiumUser, setIsPremiumUser] = useState(false);
   const [loadingUser, setLoadingUser] = useState(true);
+  const [timer, setTimer] = useState(0);
+  const [timerActive, setTimerActive] = useState(false);
+
+  const [playCorrect] = useSound(correctSound);
+  const [playIncorrect] = useSound(incorrectSound);
+
+  useEffect(() => {
+    const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
+      setCurrentUser(user);
+      if (user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          setIsPremiumUser(userDocSnap.data().isPremium || false);
+        }
+      }
+      setLoadingUser(false);
+    });
+    return () => unsubscribeAuth();
+  }, []);
+
+  useEffect(() => {
+    const savedProgress = localStorage.getItem("level1TamilProgress");
+    if (savedProgress) {
+      const { correct, incorrect, wrongAnswers, attempted, completed, score } =
+        JSON.parse(savedProgress);
+      setProgress({ correct, incorrect, wrongAnswers, attempted, score });
+      setCompleted(completed);
+      setCurrentQuestionIndex(0);
+    }
+  }, []);
+
+  useEffect(() => {
+    let interval = null;
+    if (timerActive && !completed) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer + 1);
+      }, 1000);
+    } else if (!timerActive && timer !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [timerActive, completed, timer]);
+
+  const startTimer = () => {
+    setTimerActive(true);
+  };
+
+  const stopTimer = () => {
+    setTimerActive(false);
+  };
+
+  const validateAnswer = () => {
+    const currentQuestion = questions[currentQuestionIndex];
+    let isAnswerCorrect = false;
+
+    if (currentQuestion.type === "mcq") {
+      isAnswerCorrect = userAnswer === currentQuestion.correctAnswer;
+    } else {
+      isAnswerCorrect = userAnswer.trim().toLowerCase() === currentQuestion.correctAnswer.toLowerCase();
+    }
+
+    setProgress((prev) => ({ ...prev, attempted: prev.attempted + 1 }));
+
+    if (isAnswerCorrect) {
+      setFeedback("Correct! 🎉");
+      setIsCorrect(true);
+      playCorrect();
+      setProgress((prev) => ({ ...prev, correct: prev.correct + 1, score: prev.score + currentQuestion.rewardPoints }));
+      setTimeout(() => {
+        if (currentQuestionIndex < questions.length - 1) {
+          const nextIndex = currentQuestionIndex + 1;
+          setCurrentQuestionIndex(nextIndex);
+          setUserAnswer("");
+          setFeedback("");
+          setIsCorrect(null);
+          localStorage.setItem(
+            "level1TamilProgress",
+            JSON.stringify({ ...progress, completed: false, currentQuestionIndex: nextIndex })
+          );
+        } else {
+          setCompleted(true);
+          stopTimer();
+          localStorage.setItem(
+            "level1TamilProgress",
+            JSON.stringify({ ...progress, completed: true, currentQuestionIndex: 0, score: progress.score + currentQuestion.rewardPoints })
+          );
+        }
+      }, 1500);
+    } else {
+      setFeedback(
+        `Try again! The correct answer was ${currentQuestion.correctAnswer}.`
+      );
+      setIsCorrect(false);
+      playIncorrect();
+      setProgress((prev) => ({
+        ...prev,
+        incorrect: prev.incorrect + 1,
+        wrongAnswers: [...prev.wrongAnswers, currentQuestionIndex],
+      }));
+    }
+  };
+
+  const handleReattempt = () => {
+    setCompleted(false);
+    setCurrentQuestionIndex(0);
+    setProgress({ correct: 0, incorrect: 0, wrongAnswers: [], attempted: 0, score: 0 });
+    setUserAnswer("");
+    setFeedback("");
+    setIsCorrect(null);
+    setTimer(0);
+    setTimerActive(false);
+    localStorage.removeItem("level1TamilProgress");
+  };
+
+  const goToSubjectPage = () => {
+    window.location.href = `/grades/1/tamil`;
+  };
 
   const pathname = usePathname();
   const levelId = parseInt(pathname.split('/').pop());
@@ -154,6 +235,8 @@ export default function Level1Content() {
     );
   }
 
+  const currentQuestion = questions[currentQuestionIndex];
+
   return (
     <div className="flex flex-col min-h-screen relative">
       <Particles
@@ -163,7 +246,7 @@ export default function Level1Content() {
         options={{
           background: {
             color: {
-              value: "#87CEEB", // Sky blue background
+              value: "#87CEEB",
             },
           },
           fpsLimit: 60,
@@ -194,7 +277,7 @@ export default function Level1Content() {
           },
           particles: {
             color: {
-              value: "#FFFFFF", // White bubbles
+              value: "#FFFFFF",
             },
             links: {
               enable: false,
@@ -223,7 +306,7 @@ export default function Level1Content() {
               value: 0.5,
             },
             shape: {
-              type: "circle", // Bubbles
+              type: "circle",
             },
             size: {
               value: { min: 1, max: 10 },
@@ -237,136 +320,113 @@ export default function Level1Content() {
           left: 0,
           width: "100%",
           height: "100%",
-          zIndex: -1, // Ensure it's in the background
+          zIndex: -1,
         }}
       />
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
       <main className="flex-grow p-4 flex flex-col items-center justify-center relative z-10">
-        <h1 className="text-3xl font-bold mb-4">Level 1: Counting</h1>
-        <div className="mb-4 bg-gray-100 p-6 rounded-lg shadow w-full max-w-md">
-          {/* Display a "completed" image if quiz is done */}
-          {completed ? (
-            <div className="flex justify-center">
-              <Image
-                src="/images/completed.png" // Image for completion state
-                alt="Completed"
-                width={150}
-                height={150}
-              />
-            </div>
-          ) : (
-            <div className="flex flex-wrap justify-center">
-              {[...Array(questions[currentQuestionIndex].count)].map(
-                (_, index) => (
-                  <Image
-                    key={index}
-                    src={questions[currentQuestionIndex].image}
-                    alt={questions[currentQuestionIndex].question}
-                    width={questions[currentQuestionIndex].width}
-                    height={questions[currentQuestionIndex].height}
-                    className="mb-2"
-                  />
-                )
-              )}
-            </div>
-          )}
-
-          <h2 className="text-xl mt-2 text-black">
-            {completed
-              ? "Quiz Completed!"
-              : questions[currentQuestionIndex].question}
-          </h2>
-
-          {!completed && (
-            <>
-              <input
-                type="text"
-                value={userAnswer}
-                onChange={(e) => setUserAnswer(e.target.value)}
-                placeholder="Your answer"
-                className="border-2 border-yellow-300 bg-transparent text-white rounded-full p-3 w-full max-w-xs text-center text-lg sm:text-xl focus:outline-none focus:ring-2 focus:ring-yellow-200"
-              />
-              <button
-                onClick={validateAnswer}
-                className="bg-blue-500 text-white py-1 px-3 rounded mt-2"
-                disabled={!userAnswer} // Disable button if input is empty
-              >
-                Submit
-              </button>
-            </>
-          )}
-          {feedback && (
-            <div
-              className={`mt-2 ${
-                feedback.includes("Well done")
-                  ? "text-green-500"
-                  : "text-red-500"
-              }`}
-            >
-              {feedback}
-            </div>
-          )}
+        <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 drop-shadow-lg">
+          Level 1: Tamil Basics!
+        </h1>
+        <div className="w-full max-w-md mx-auto mb-6">
+          <ProgressBar percentage={(progress.correct / questions.length) * 100} />
         </div>
 
-        {/* Progress Status */}
-        <div className="mt-4 bg-gray-200 p-4 rounded-lg shadow w-full max-w-md">
-          <h3 className="font-bold text-black">Progress:</h3>
-          <p className="text-black">Correct: {progress.correct}</p>
-          <p className="text-black">Incorrect: {progress.incorrect}</p>
-          <p className="text-black">
-            Wrong Answers: {progress.wrongAnswers.join(", ") || "None"}
-          </p>
-          <div className="mt-2">
-            <div className="h-4 bg-blue-300 rounded">
-              <div
-                className="h-full bg-blue-500 rounded"
-                style={{ width: `${Math.min(progressPercentage, 100)}%` }}
+        <div className="mt-4 sm:mt-8 bg-white bg-opacity-20 p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center backdrop-blur-sm">
+          {completed ? (
+            <div className="flex flex-col items-center">
+              <Image
+                src="/images/completed.avif"
+                alt="Completed"
+                width={180}
+                height={180}
+                className="rounded-full shadow-lg mb-4"
               />
+              <h2 className="text-2xl sm:text-3xl font-bold mt-4 text-yellow-300">
+                Awesome! You completed the level!
+              </h2>
+              <p className="text-white text-lg mt-2">Your score: {progress.score} points</p>
+              <p className="text-white text-lg mt-2">Time taken: {timer} seconds</p>
+              <div className="mt-6 flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                <button
+                  onClick={handleReattempt}
+                  className="bg-yellow-400 text-white py-3 px-6 rounded-full shadow-lg hover:bg-yellow-500 transform hover:scale-105 transition-transform duration-300"
+                >
+                  Play Again
+                </button>
+                <button
+                  onClick={goToSubjectPage}
+                  className="bg-green-500 text-white py-3 px-6 rounded-full shadow-lg hover:bg-green-600 transform hover:scale-105 transition-transform duration-300"
+                >
+                  Back to Levels
+                </button>
+              </div>
             </div>
-            <div>
-              <p className="text-xs text-right text-black">
-                {progressPercentage.toFixed(0)}% Completed
-              </p>
-            </div>
-          </div>
-
-          {/* Retry All */}
-          {completed && progress.correct !== questions.length && (
-            <button
-              onClick={handleReattempt}
-              className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
-            >
-              Retry All
-            </button>
-          )}
-
-          {/* Show "Back to Levels" if all answers are correct */}
-          {completed && progress.correct === questions.length && (
-            <button
-              onClick={goToMathPage}
-              className="mt-4 bg-green-500 text-white py-2 px-4 rounded"
-            >
-              Back to Levels
-            </button>
-          )}
-
-          {/* Completion Summary */}
-          {completed && (
-            <p className="text-green-600 font-bold mt-4">
-              Done! You got {progress.correct} right out of {questions.length}!
-              🎉
-            </p>
+          ) : (
+            <>
+              <p className="text-white text-lg mb-4">Time: {timer} seconds</p>
+              <h2 className="text-xl sm:text-2xl font-semibold mt-2 text-white">
+                {currentQuestion.question}
+              </h2>
+              {currentQuestion.image && (
+                <div className="flex justify-center my-4">
+                  <Image
+                    src={currentQuestion.image}
+                    alt="Question Image"
+                    width={200}
+                    height={200}
+                    className="rounded-lg"
+                  />
+                </div>
+              )}
+              <div className="flex flex-col items-center justify-center mt-4 space-y-3 sm:space-y-0 sm:space-x-4">
+                <VoiceButton questionText={currentQuestion.question} />
+                {currentQuestion.type === "mcq" ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xs">
+                    {currentQuestion.options.map((option, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setUserAnswer(option)}
+                        className={`py-3 px-6 rounded-full shadow-lg transition-colors duration-300
+                          ${userAnswer === option ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800 hover:bg-gray-300"}`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    value={userAnswer}
+                    onChange={(e) => setUserAnswer(e.target.value)}
+                    placeholder="Your answer"
+                    className="border-2 border-yellow-300 bg-transparent text-white rounded-full p-3 w-full max-w-xs text-center text-lg sm:text-xl focus:outline-none focus:ring-2 focus:ring-yellow-200"
+                  />
+                )}
+                <button
+                  onClick={validateAnswer}
+                  className="bg-pink-500 text-white py-3 px-8 rounded-full shadow-lg hover:bg-pink-600 transform hover:scale-105 transition-transform duration-300"
+                  disabled={!userAnswer}
+                >
+                  Submit
+                </button>
+              </div>
+              {feedback && (
+                <FeedbackMessage message={feedback} isCorrect={isCorrect} />
+              )}
+            </>
           )}
         </div>
       </main>
-
       <Footer />
       <BackToTop />
-      <Modal
+      {isModalOpen && (
+        <Modal
           setIsModalOpen={setIsModalOpen}
           isRegister={isRegister}
           setIsRegister={setIsRegister}
         />
+      )}
     </div>
   );
 }

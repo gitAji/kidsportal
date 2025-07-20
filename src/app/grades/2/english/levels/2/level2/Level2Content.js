@@ -24,36 +24,36 @@ import ProgressBar from "@/components/ui/ProgressBar";
 
 const questions = [
   {
-    question: "What is the past tense of 'run'?",
+    question: "What is the past tense of 'go'?",
     type: "mcq",
-    options: ["Runned", "Ran", "Running", "Runs"],
-    correctAnswer: "Ran",
+    options: ["Goes", "Went", "Gone", "Going"],
+    correctAnswer: "Went",
     rewardPoints: 10,
   },
   {
-    question: "Which word is an antonym for 'fast'?",
+    question: "Which word is a synonym for 'big'?",
     type: "mcq",
-    options: ["Quick", "Rapid", "Slow", "Speedy"],
-    correctAnswer: "Slow",
+    options: ["Small", "Large", "Tiny", "Little"],
+    correctAnswer: "Large",
     rewardPoints: 10,
   },
   {
-    question: "Complete the sentence: 'The bird is ____ in the sky.'",
+    question: "Complete the sentence: 'The sun shines ____.'",
     type: "mcq",
-    options: ["Swimming", "Flying", "Walking", "Sleeping"],
-    correctAnswer: "Flying",
+    options: ["Sadly", "Brightly", "Slowly", "Quietly"],
+    correctAnswer: "Brightly",
     rewardPoints: 10,
   },
   {
-    question: "What is the plural of 'child'?",
+    question: "What is the plural of 'mouse'?",
     type: "mcq",
-    options: ["Childs", "Children", "Childes", "Childen"],
-    correctAnswer: "Children",
+    options: ["Mouses", "Mice", "Mouse", "Meese"],
+    correctAnswer: "Mice",
     rewardPoints: 10,
   },
 ];
 
-export default function Level1Content() {
+export default function Level2Content() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
@@ -93,7 +93,7 @@ export default function Level1Content() {
   }, []);
 
   useEffect(() => {
-    const savedProgress = localStorage.getItem("level1EnglishProgress");
+    const savedProgress = localStorage.getItem("level2EnglishProgress");
     if (savedProgress) {
       const { correct, incorrect, wrongAnswers, attempted, completed, score } =
         JSON.parse(savedProgress);
@@ -148,14 +148,14 @@ export default function Level1Content() {
           setFeedback("");
           setIsCorrect(null);
           localStorage.setItem(
-            "level1EnglishProgress",
+            "level2EnglishProgress",
             JSON.stringify({ ...progress, completed: false, currentQuestionIndex: nextIndex })
           );
         } else {
           setCompleted(true);
           stopTimer();
           localStorage.setItem(
-            "level1EnglishProgress",
+            "level2EnglishProgress",
             JSON.stringify({ ...progress, completed: true, currentQuestionIndex: 0, score: progress.score + currentQuestion.rewardPoints })
           );
         }
@@ -183,7 +183,7 @@ export default function Level1Content() {
     setIsCorrect(null);
     setTimer(0);
     setTimerActive(false);
-    localStorage.removeItem("level1EnglishProgress");
+    localStorage.removeItem("level2EnglishProgress");
   };
 
   const goToSubjectPage = () => {
@@ -325,7 +325,7 @@ export default function Level1Content() {
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
       <main className="flex-grow p-4 flex flex-col items-center justify-center relative z-10">
         <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 drop-shadow-lg">
-          Level 1: English Basics!
+          Level 2: English Adventures!
         </h1>
         <div className="w-full max-w-md mx-auto mb-6">
           <ProgressBar percentage={(progress.correct / questions.length) * 100} />

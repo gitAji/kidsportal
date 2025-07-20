@@ -1,103 +1,195 @@
 "use client";
-import { useState, useEffect, useRef, useCallback } from "react";
+
+import React, { useState, useEffect, useCallback } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
+import Header from "@/components/layout/header/Header";
+import Footer from "@/components/layout/footer/Footer";
+import BackToTop from "@/components/ui/BackToTop";
+import Modal from "@/components/ui/Modal";
+import VoiceButton from "@/components/ui/VoiceButton";
+import dynamic from 'next/dynamic';
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "@/firebase/config";
 import Particles from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import Lottie from "lottie-react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import Header from "../../../../../../components/layout/header/Header";
-import Footer from "../../../../../../components/layout/footer/Footer";
-import BackToTop from "../../../../../../components/ui/BackToTop";
-import Modal from "../../../../../../components/ui/Modal";
-import VoiceButton from "../../../../../../components/ui/VoiceButton";
-import FeedbackMessage from "../../../../../../components/ui/FeedbackMessage";
-import ProgressBar from "../../../../../../components/ui/ProgressBar";
-import "animate.css";
+
+const useSound = dynamic(() => import('use-sound'), { ssr: false });
+import correctSound from "@/public/sounds/correct.mp3";
+import incorrectSound from "@/public/sounds/incorrect.mp3";
+import FeedbackMessage from "@/components/ui/FeedbackMessage";
+import ProgressBar from "@/components/ui/ProgressBar";
 
 const questions = [
   {
-    question: "Which of these is a fruit?",
-    answer: "Apple",
-    options: ["Apple", "Carrot", "Broccoli", "Potato"],
-    image: "/images/apple.png",
-    width: 100,
-    height: 100,
+    question: "What animal says \"Moo\"?",
+    type: "mcq",
+    options: ["Cow", "Dog", "Cat", "Bird"],
+    correctAnswer: "Cow",
+    rewardPoints: 10,
   },
   {
-    question: "Which of these is a vegetable?",
-    answer: "Carrot",
-    options: ["Banana", "Carrot", "Orange", "Grapes"],
-    image: "/images/apple.png", // Placeholder
-    width: 100,
-    height: 100,
+    question: "What color is the sky?",
+    type: "input",
+    correctAnswer: "blue",
+    rewardPoints: 10,
+  },
+  {
+    question: "Which of these is a fruit?",
+    type: "mcq",
+    options: ["Banana", "Potato", "Onion", "Carrot"],
+    correctAnswer: "Banana",
+    rewardPoints: 10,
+  },
+  {
+    question: "What do bees make?",
+    type: "input",
+    correctAnswer: "honey",
+    rewardPoints: 10,
   },
 ];
 
-const optionColors = {
-  Apple: "bg-red-500 hover:bg-red-600",
-  Carrot: "bg-orange-500 hover:bg-orange-600",
-  Broccoli: "bg-green-500 hover:bg-green-600",
-  Potato: "bg-yellow-700 hover:bg-yellow-800",
-  Banana: "bg-yellow-400 hover:bg-yellow-500",
-  Orange: "bg-orange-500 hover:bg-orange-600",
-  Grapes: "bg-purple-500 hover:bg-purple-600",
-};
-
 export default function Level1Content() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [userAnswer, setUserAnswer] = useState("");
+  const [feedback, setFeedback] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [isAnswered, setIsAnswered] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState({
+    correct: 0,
+    incorrect: 0,
+    wrongAnswers: [],
+    attempted: 0,
+    score: 0,
+  });
   const [completed, setCompleted] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isPremiumUser, setIsPremiumUser] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(true);
+  const [timer, setTimer] = useState(0);
+  const [timerActive, setTimerActive] = useState(false);
 
-  const router = useRouter();
-  const correctSoundRef = useRef(null);
-  const incorrectSoundRef = useRef(null);
-  const completedSoundRef = useRef(null);
+  const [playCorrect] = useSound(correctSound);
+  const [playIncorrect] = useSound(incorrectSound);
 
   useEffect(() => {
-    correctSoundRef.current = new Audio("/sounds/correct.mp3");
-    incorrectSoundRef.current = new Audio("/sounds/incorrect.mp3");
-    completedSoundRef.current = new Audio("/sounds/completed.mp3");
+    const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
+      setCurrentUser(user);
+      if (user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          setIsPremiumUser(userDocSnap.data().isPremium || false);
+        }
+      }
+      setLoadingUser(false);
+    });
+    return () => unsubscribeAuth();
   }, []);
 
-  const handleAnswer = (option) => {
-    if (isAnswered) return;
-
-    const isAnswerCorrect = option === questions[currentQuestionIndex].answer;
-    setSelectedAnswer(option);
-    setIsCorrect(isAnswerCorrect);
-    setIsAnswered(true);
-
-    if (isAnswerCorrect) {
-      correctSoundRef.current.play();
-      setProgress(((currentQuestionIndex + 1) / questions.length) * 100);
-    } else {
-      incorrectSoundRef.current.play();
+  useEffect(() => {
+    const savedProgress = localStorage.getItem("level1AriviyalProgress");
+    if (savedProgress) {
+      const { correct, incorrect, wrongAnswers, attempted, completed, score } =
+        JSON.parse(savedProgress);
+      setProgress({ correct, incorrect, wrongAnswers, attempted, score });
+      setCompleted(completed);
+      setCurrentQuestionIndex(0);
     }
+  }, []);
 
-    setTimeout(() => {
-      if (isAnswerCorrect) {
-        if (currentQuestionIndex + 1 < questions.length) {
-          setCurrentQuestionIndex(currentQuestionIndex + 1);
-          setSelectedAnswer(null);
-          setIsCorrect(null);
-          setIsAnswered(false);
-        } else {
-          setCompleted(true);
-          completedSoundRef.current.play();
-          setShowModal(true);
-        }
-      } else {
-        setIsAnswered(false);
-        setSelectedAnswer(null);
-      }
-    }, 2000);
+  useEffect(() => {
+    let interval = null;
+    if (timerActive && !completed) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer + 1);
+      }, 1000);
+    } else if (!timerActive && timer !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [timerActive, completed, timer]);
+
+  const startTimer = () => {
+    setTimerActive(true);
   };
 
-  const currentQuestion = questions[currentQuestionIndex];
+  const stopTimer = () => {
+    setTimerActive(false);
+  };
+
+  const validateAnswer = () => {
+    const currentQuestion = questions[currentQuestionIndex];
+    let isAnswerCorrect = false;
+
+    if (currentQuestion.type === "mcq") {
+      isAnswerCorrect = userAnswer === currentQuestion.correctAnswer;
+    } else {
+      isAnswerCorrect = userAnswer.trim().toLowerCase() === currentQuestion.correctAnswer.toLowerCase();
+    }
+
+    setProgress((prev) => ({ ...prev, attempted: prev.attempted + 1 }));
+
+    if (isAnswerCorrect) {
+      setFeedback("Correct! 🎉");
+      setIsCorrect(true);
+      playCorrect();
+      setProgress((prev) => ({ ...prev, correct: prev.correct + 1, score: prev.score + currentQuestion.rewardPoints }));
+      setTimeout(() => {
+        if (currentQuestionIndex < questions.length - 1) {
+          const nextIndex = currentQuestionIndex + 1;
+          setCurrentQuestionIndex(nextIndex);
+          setUserAnswer("");
+          setFeedback("");
+          setIsCorrect(null);
+          localStorage.setItem(
+            "level1AriviyalProgress",
+            JSON.stringify({ ...progress, completed: false, currentQuestionIndex: nextIndex })
+          );
+        } else {
+          setCompleted(true);
+          stopTimer();
+          localStorage.setItem(
+            "level1AriviyalProgress",
+            JSON.stringify({ ...progress, completed: true, currentQuestionIndex: 0, score: progress.score + currentQuestion.rewardPoints })
+          );
+        }
+      }, 1500);
+    } else {
+      setFeedback(
+        `Try again! The correct answer was ${currentQuestion.correctAnswer}.`
+      );
+      setIsCorrect(false);
+      playIncorrect();
+      setProgress((prev) => ({
+        ...prev,
+        incorrect: prev.incorrect + 1,
+        wrongAnswers: [...prev.wrongAnswers, currentQuestionIndex],
+      }));
+    }
+  };
+
+  const handleReattempt = () => {
+    setCompleted(false);
+    setCurrentQuestionIndex(0);
+    setProgress({ correct: 0, incorrect: 0, wrongAnswers: [], attempted: 0, score: 0 });
+    setUserAnswer("");
+    setFeedback("");
+    setIsCorrect(null);
+    setTimer(0);
+    setTimerActive(false);
+    localStorage.removeItem("level1AriviyalProgress");
+  };
+
+  const goToSubjectPage = () => {
+    window.location.href = `/grades/1/ariviyal`;
+  };
+
+  const pathname = usePathname();
+  const levelId = parseInt(pathname.split('/').pop());
 
   const particlesInit = useCallback(async (engine) => {
     await loadSlim(engine);
@@ -106,6 +198,41 @@ export default function Level1Content() {
   const particlesLoaded = useCallback(async (container) => {
     console.log(container);
   }, []);
+
+  if (loadingUser) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-50">
+        <Header />
+        <main className="flex-grow p-4">
+          <p>Loading user data...</p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (levelId > 2 && (!currentUser || !isPremiumUser)) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-50">
+        <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
+        <main className="flex-grow p-4 flex flex-col items-center justify-center text-white">
+          <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center backdrop-blur-sm">
+            <h2 className="text-3xl font-bold mb-4 text-red-500">Access Denied</h2>
+            <p className="text-gray-700 mb-4">This level is only available to Premium users.</p>
+            <button
+              onClick={() => router.push('/pricing')}
+              className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+            >
+              Upgrade to Premium
+            </button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  const currentQuestion = questions[currentQuestionIndex];
 
   return (
     <div className="flex flex-col min-h-screen relative">
@@ -116,7 +243,7 @@ export default function Level1Content() {
         options={{
           background: {
             color: {
-              value: "#000000", // Black background for stars
+              value: "#87CEEB",
             },
           },
           fpsLimit: 60,
@@ -128,30 +255,29 @@ export default function Level1Content() {
               },
               onHover: {
                 enable: true,
-                mode: "repulse",
+                mode: "bubble",
               },
               resize: true,
             },
             modes: {
+              bubble: {
+                distance: 200,
+                size: 40,
+                duration: 2,
+                opacity: 0.8,
+                speed: 3,
+              },
               push: {
                 quantity: 4,
-              },
-              repulse: {
-                distance: 200,
-                duration: 0.4,
               },
             },
           },
           particles: {
             color: {
-              value: "#ffffff", // White stars
+              value: "#FFFFFF",
             },
             links: {
-              color: "#ffffff",
-              distance: 150,
-              enable: true,
-              opacity: 0.5,
-              width: 1,
+              enable: false,
             },
             collisions: {
               enable: true,
@@ -177,10 +303,10 @@ export default function Level1Content() {
               value: 0.5,
             },
             shape: {
-              type: "star", // Stars
+              type: "circle",
             },
             size: {
-              value: { min: 1, max: 5 },
+              value: { min: 1, max: 10 },
             },
           },
           detectRetina: true,
@@ -191,157 +317,113 @@ export default function Level1Content() {
           left: 0,
           width: "100%",
           height: "100%",
-          zIndex: -1, // Ensure it's in the background
+          zIndex: -1,
         }}
       />
-      <Header />
-      <main className="flex-grow container mx-auto px-4 py-8 relative z-10">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-blue-600 animate__animated animate__fadeInDown">
-            Ariviyal - Level 1
-          </h1>
-          <p className="text-lg text-gray-600 mt-2 animate__animated animate__fadeInUp">
-            Let&apos;s learn about fruits and vegetables!
-          </p>
+      <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
+      <main className="flex-grow p-4 flex flex-col items-center justify-center relative z-10">
+        <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 drop-shadow-lg">
+          Level 1: Science Basics!
+        </h1>
+        <div className="w-full max-w-md mx-auto mb-6">
+          <ProgressBar percentage={(progress.correct / questions.length) * 100} />
         </div>
 
-        <ProgressBar progress={progress} />
-
-        {!completed && (
-          <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto animate__animated animate__zoomIn">
-            <div className="flex items-center justify-center mb-6">
+        <div className="mt-4 sm:mt-8 bg-white bg-opacity-20 p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center backdrop-blur-sm">
+          {completed ? (
+            <div className="flex flex-col items-center">
               <Image
-                src={currentQuestion.image}
-                alt={currentQuestion.question}
-                width={currentQuestion.width}
-                height={currentQuestion.height}
-                className="rounded-lg"
+                src="/images/completed.avif"
+                alt="Completed"
+                width={180}
+                height={180}
+                className="rounded-full shadow-lg mb-4"
               />
-              <VoiceButton text={currentQuestion.question} />
-            </div>
-            <h2 className="text-2xl font-semibold text-center mb-6">
-              {currentQuestion.question}
-            </h2>
-            <div className="grid grid-cols-2 gap-4">
-              {currentQuestion.options.map((option) => (
+              <h2 className="text-2xl sm:text-3xl font-bold mt-4 text-yellow-300">
+                Awesome! You completed the level!
+              </h2>
+              <p className="text-white text-lg mt-2">Your score: {progress.score} points</p>
+              <p className="text-white text-lg mt-2">Time taken: {timer} seconds</p>
+              <div className="mt-6 flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
                 <button
-                  key={option}
-                  onClick={() => handleAnswer(option)}
-                  className={`p-4 rounded-lg text-white font-bold text-lg transition-transform transform hover:scale-105 ${
-                    optionColors[option] || "bg-gray-400"
-                  } ${
-                    selectedAnswer === option
-                      ? isCorrect
-                        ? "bg-green-500 animate__animated animate__bounceIn"
-                        : "bg-red-500 animate__animated animate__shakeX"
-                      : ""
-                  }`}
-                  disabled={isAnswered}
+                  onClick={handleReattempt}
+                  className="bg-yellow-400 text-white py-3 px-6 rounded-full shadow-lg hover:bg-yellow-500 transform hover:scale-105 transition-transform duration-300"
                 >
-                  {option}
+                  Play Again
                 </button>
-              ))}
-            </div>
-            {selectedAnswer && (
-              <FeedbackMessage
-                isCorrect={isCorrect}
-                correctMessage="Correct! Well done!"
-                incorrectMessage="Not quite, try again!"
-              />
-            )}
-          </div>
-        )}
-
-        {showModal && (
-          <Modal
-            isOpen={showModal}
-            onClose={() => setShowModal(false)}
-            title="Congratulations!"
-            message="You have successfully completed Level 1!"
-            buttonText="Next Level"
-            onButtonClick={() => router.push("/grades/1/ariviyal/levels/2")}
-          >
-            {/* Placeholder for Lottie animation */}
-            {completed && (
-              <div className="w-full h-48 flex items-center justify-center">
-                <Lottie
-                  animationData={{
-                    /* Your Lottie animation JSON data here */
-                    v: "5.7.4",
-                    fr: 60,
-                    ip: 0,
-                    op: 180,
-                    w: 500,
-                    h: 500,
-                    nm: "Confetti",
-                    ddd: 0,
-                    assets: [],
-                    layers: [
-                      {
-                        ind: 1,
-                        ty: 4,
-                        nm: "Confetti",
-                        sr: 1,
-                        ks: {
-                          o: { a: 0, k: [{ i: { x: 0.67, y: 0.67 }, o: { x: 0.33, y: 0.33 }, t: 0, s: [100] }, { t: 10, s: [0] }] },
-                          r: { a: 0, k: [{ i: { x: 0.67, y: 0.67 }, o: { x: 0.33, y: 0.33 }, t: 0, s: [0] }, { t: 10, s: [360] }] },
-                          p: { a: 1, k: [{ i: { x: 0.67, y: 0.67 }, o: { x: 0.33, y: 0.33 }, t: 0, s: [250, 250, 0] }, { t: 10, s: [250, 0, 0] }] },
-                          a: { a: 0, k: [0, 0, 0] },
-                          s: { a: 0, k: [100, 100, 100] },
-                        },
-                        ao: 0,
-                        shapes: [
-                          {
-                            ty: "gr",
-                            it: [
-                              {
-                                ind: 0,
-                                ty: "sh",
-                                ix: 1,
-                                ks: {
-                                  c: { a: 0, k: [0.96, 0.78, 0.0, 1] },
-                                  o: { a: 0, k: [100] },
-                                  s: { a: 0, k: [100, 100] },
-                                  p: { a: 0, k: [0, 0] },
-                                  a: { a: 0, k: [0, 0] },
-                                  r: { a: 0, k: [0] },
-                                  sk: { a: 0, k: [0] },
-                                  sa: { a: 0, k: [0] },
-                                },
-                                mn: "Shape 1",
-                                nm: "Shape 1",
-                                hd: false,
-                              },
-                            ],
-                            nm: "Group 1",
-                            np: 3,
-                            cix: 2,
-                            hd: false,
-                          },
-                        ],
-                        bm: 0,
-                        sc: "#ffffff",
-                        sh: 0,
-                        cl: "",
-                        ln: "",
-                        ip: 0,
-                        op: 180,
-                        st: 0,
-                        bm: 0,
-                      },
-                    ],
-                  }}
-                  loop={false}
-                  autoplay={true}
-                  style={{ width: 200, height: 200 }}
-                />
+                <button
+                  onClick={goToSubjectPage}
+                  className="bg-green-500 text-white py-3 px-6 rounded-full shadow-lg hover:bg-green-600 transform hover:scale-105 transition-transform duration-300"
+                >
+                  Back to Levels
+                </button>
               </div>
-            )}
-          </Modal>
-        )}
+            </div>
+          ) : (
+            <>
+              <p className="text-white text-lg mb-4">Time: {timer} seconds</p>
+              <h2 className="text-xl sm:text-2xl font-semibold mt-2 text-white">
+                {currentQuestion.question}
+              </h2>
+              {currentQuestion.image && (
+                <div className="flex justify-center my-4">
+                  <Image
+                    src={currentQuestion.image}
+                    alt="Question Image"
+                    width={200}
+                    height={200}
+                    className="rounded-lg"
+                  />
+                </div>
+              )}
+              <div className="flex flex-col items-center justify-center mt-4 space-y-3 sm:space-y-0 sm:space-x-4">
+                <VoiceButton questionText={currentQuestion.question} />
+                {currentQuestion.type === "mcq" ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xs">
+                    {currentQuestion.options.map((option, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setUserAnswer(option)}
+                        className={`py-3 px-6 rounded-full shadow-lg transition-colors duration-300
+                          ${userAnswer === option ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800 hover:bg-gray-300"}`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    value={userAnswer}
+                    onChange={(e) => setUserAnswer(e.target.value)}
+                    placeholder="Your answer"
+                    className="border-2 border-yellow-300 bg-transparent text-white rounded-full p-3 w-full max-w-xs text-center text-lg sm:text-xl focus:outline-none focus:ring-2 focus:ring-yellow-200"
+                  />
+                )}
+                <button
+                  onClick={validateAnswer}
+                  className="bg-pink-500 text-white py-3 px-8 rounded-full shadow-lg hover:bg-pink-600 transform hover:scale-105 transition-transform duration-300"
+                  disabled={!userAnswer}
+                >
+                  Submit
+                </button>
+              </div>
+              {feedback && (
+                <FeedbackMessage message={feedback} isCorrect={isCorrect} />
+              )}
+            </>
+          )}
+        </div>
       </main>
       <Footer />
       <BackToTop />
+      {isModalOpen && (
+        <Modal
+          setIsModalOpen={setIsModalOpen}
+          isRegister={isRegister}
+          setIsRegister={setIsRegister}
+        />
+      )}
     </div>
   );
 }

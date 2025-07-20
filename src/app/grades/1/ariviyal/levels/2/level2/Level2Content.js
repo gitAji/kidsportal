@@ -24,36 +24,36 @@ import ProgressBar from "@/components/ui/ProgressBar";
 
 const questions = [
   {
-    question: "What is the past tense of 'run'?",
+    question: "What is the main source of light on Earth?",
     type: "mcq",
-    options: ["Runned", "Ran", "Running", "Runs"],
-    correctAnswer: "Ran",
+    options: ["Moon", "Sun", "Stars", "Fireflies"],
+    correctAnswer: "Sun",
     rewardPoints: 10,
   },
   {
-    question: "Which word is an antonym for 'fast'?",
+    question: "Which animal lays eggs?",
     type: "mcq",
-    options: ["Quick", "Rapid", "Slow", "Speedy"],
-    correctAnswer: "Slow",
+    options: ["Cow", "Chicken", "Dog", "Cat"],
+    correctAnswer: "Chicken",
     rewardPoints: 10,
   },
   {
-    question: "Complete the sentence: 'The bird is ____ in the sky.'",
+    question: "What do plants need to grow?",
     type: "mcq",
-    options: ["Swimming", "Flying", "Walking", "Sleeping"],
-    correctAnswer: "Flying",
+    options: ["Candy", "Water", "Toys", "Balloons"],
+    correctAnswer: "Water",
     rewardPoints: 10,
   },
   {
-    question: "What is the plural of 'child'?",
+    question: "Which part of the plant is usually underground?",
     type: "mcq",
-    options: ["Childs", "Children", "Childes", "Childen"],
-    correctAnswer: "Children",
+    options: ["Leaf", "Flower", "Root", "Stem"],
+    correctAnswer: "Root",
     rewardPoints: 10,
   },
 ];
 
-export default function Level1Content() {
+export default function Level2Content() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
@@ -93,7 +93,7 @@ export default function Level1Content() {
   }, []);
 
   useEffect(() => {
-    const savedProgress = localStorage.getItem("level1EnglishProgress");
+    const savedProgress = localStorage.getItem("level2AriviyalProgress");
     if (savedProgress) {
       const { correct, incorrect, wrongAnswers, attempted, completed, score } =
         JSON.parse(savedProgress);
@@ -148,14 +148,14 @@ export default function Level1Content() {
           setFeedback("");
           setIsCorrect(null);
           localStorage.setItem(
-            "level1EnglishProgress",
+            "level2AriviyalProgress",
             JSON.stringify({ ...progress, completed: false, currentQuestionIndex: nextIndex })
           );
         } else {
           setCompleted(true);
           stopTimer();
           localStorage.setItem(
-            "level1EnglishProgress",
+            "level2AriviyalProgress",
             JSON.stringify({ ...progress, completed: true, currentQuestionIndex: 0, score: progress.score + currentQuestion.rewardPoints })
           );
         }
@@ -183,11 +183,11 @@ export default function Level1Content() {
     setIsCorrect(null);
     setTimer(0);
     setTimerActive(false);
-    localStorage.removeItem("level1EnglishProgress");
+    localStorage.removeItem("level2AriviyalProgress");
   };
 
   const goToSubjectPage = () => {
-    window.location.href = `/grades/2/english`;
+    window.location.href = `/grades/1/ariviyal`;
   };
 
   const pathname = usePathname();
@@ -325,7 +325,7 @@ export default function Level1Content() {
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
       <main className="flex-grow p-4 flex flex-col items-center justify-center relative z-10">
         <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 drop-shadow-lg">
-          Level 1: English Basics!
+          Level 2: Science Basics!
         </h1>
         <div className="w-full max-w-md mx-auto mb-6">
           <ProgressBar percentage={(progress.correct / questions.length) * 100} />

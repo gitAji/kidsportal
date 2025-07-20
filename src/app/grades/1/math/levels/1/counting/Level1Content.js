@@ -1,6 +1,6 @@
 "use client"; // Ensure this component is treated as a client component
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
 import Image from "next/image"; // Optimized images with Next.js
@@ -28,35 +28,35 @@ import ProgressBar from "@/components/ui/ProgressBar"; // Import ProgressBar
 const questions = [
   {
     question: "How many apples do you see?",
-    answer: "2",
-    count: 2,
+    type: "mcq",
+    options: ["1", "2", "3", "4"],
+    correctAnswer: "2",
     image: "/images/apple.png",
     width: 100,
     height: 100,
+    rewardPoints: 10,
   },
   {
-    question: "How many dogs are there?",
-    answer: "3",
-    count: 3,
-    image: "/images/dog.png",
-    width: 100,
-    height: 100,
+    question: "What is 2 + 2?",
+    type: "input",
+    correctAnswer: "4",
+    rewardPoints: 10,
   },
   {
-    question: "How many cats do you see?",
-    answer: "4",
-    count: 4,
-    image: "/images/cat.png",
+    question: "How many wheels does a bicycle have?",
+    type: "mcq",
+    options: ["1", "2", "3", "4"],
+    correctAnswer: "2",
+    image: "/images/hotwheels.png",
     width: 100,
     height: 100,
+    rewardPoints: 10,
   },
   {
-    question: "How many birds are flying?",
-    answer: "5",
-    count: 5,
-    image: "/images/bird.png",
-    width: 100,
-    height: 100,
+    question: "What number comes before 5?",
+    type: "input",
+    correctAnswer: "4",
+    rewardPoints: 10,
   },
 ];
 
@@ -70,6 +70,7 @@ export default function Level1Content() {
     incorrect: 0,
     wrongAnswers: [],
     attempted: 0,
+    score: 0,
   });
   const [completed, setCompleted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,6 +78,8 @@ export default function Level1Content() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isPremiumUser, setIsPremiumUser] = useState(false);
   const [loadingUser, setLoadingUser] = useState(true);
+  const [timer, setTimer] = useState(0);
+  const [timerActive, setTimerActive] = useState(false);
 
   const [playCorrect] = useSound(correctSound);
   const [playIncorrect] = useSound(incorrectSound);
@@ -97,67 +100,101 @@ export default function Level1Content() {
   }, []);
 
   useEffect(() => {
-    const savedProgress = localStorage.getItem("level1Progress");
+    const savedProgress = localStorage.getItem("level1MathProgress");
     if (savedProgress) {
-      const { correct, incorrect, wrongAnswers, attempted, completed } =
+      const { correct, incorrect, wrongAnswers, attempted, completed, score } =
         JSON.parse(savedProgress);
-      setProgress({ correct, incorrect, wrongAnswers, attempted });
+      setProgress({ correct, incorrect, wrongAnswers, attempted, score });
       setCompleted(completed);
       setCurrentQuestionIndex(0);
     }
   }, []);
 
+  useEffect(() => {
+    let interval = null;
+    if (timerActive && !completed) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer + 1);
+      }, 1000);
+    } else if (!timerActive && timer !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [timerActive, completed, timer]);
+
+  const startTimer = () => {
+    setTimerActive(true);
+  };
+
+  const stopTimer = () => {
+    setTimerActive(false);
+  };
+
   const validateAnswer = () => {
-    const trimmedAnswer = userAnswer.trim();
+    const currentQuestion = questions[currentQuestionIndex];
+    let isAnswerCorrect = false;
 
-    setProgress((prev) => ({ ...prev, attempted: prev.attempted + 1 })); // Increase attempt count
+    if (currentQuestion.type === "mcq") {
+      isAnswerCorrect = userAnswer === currentQuestion.correctAnswer;
+    } else {
+      isAnswerCorrect = userAnswer.trim().toLowerCase() === currentQuestion.correctAnswer.toLowerCase();
+    }
 
-    if (trimmedAnswer === questions[currentQuestionIndex].answer) {
+    setProgress((prev) => ({ ...prev, attempted: prev.attempted + 1 }));
+
+    if (isAnswerCorrect) {
       setFeedback("Correct! 🎉");
       setIsCorrect(true);
       playCorrect();
+      setProgress((prev) => ({ ...prev, correct: prev.correct + 1, score: prev.score + currentQuestion.rewardPoints }));
       setTimeout(() => {
         if (currentQuestionIndex < questions.length - 1) {
           const nextIndex = currentQuestionIndex + 1;
           setCurrentQuestionIndex(nextIndex);
-          setProgress((nextIndex / questions.length) * 100);
           setUserAnswer("");
           setFeedback("");
           setIsCorrect(null);
           localStorage.setItem(
-            "level1Progress",
-            JSON.stringify({ completed: false, currentQuestionIndex: nextIndex })
+            "level1MathProgress",
+            JSON.stringify({ ...progress, completed: false, currentQuestionIndex: nextIndex })
           );
         } else {
           setCompleted(true);
-          setProgress(100);
+          stopTimer();
           localStorage.setItem(
-            "level1Progress",
-            JSON.stringify({ completed: true, currentQuestionIndex: 0 })
+            "level1MathProgress",
+            JSON.stringify({ ...progress, completed: true, currentQuestionIndex: 0, score: progress.score + currentQuestion.rewardPoints })
           );
         }
       }, 1500);
     } else {
       setFeedback(
-        `Try again! The correct answer was ${questions[currentQuestionIndex].answer}.`
+        `Try again! The correct answer was ${currentQuestion.correctAnswer}.`
       );
       setIsCorrect(false);
       playIncorrect();
+      setProgress((prev) => ({
+        ...prev,
+        incorrect: prev.incorrect + 1,
+        wrongAnswers: [...prev.wrongAnswers, currentQuestionIndex],
+      }));
     }
   };
 
   const handleReattempt = () => {
     setCompleted(false);
     setCurrentQuestionIndex(0);
-    setProgress({ correct: 0, incorrect: 0, wrongAnswers: [], attempted: 0 });
+    setProgress({ correct: 0, incorrect: 0, wrongAnswers: [], attempted: 0, score: 0 });
     setUserAnswer("");
     setFeedback("");
     setIsCorrect(null);
-    localStorage.removeItem("level1Progress");
+    setTimer(0);
+    setTimerActive(false);
+    localStorage.removeItem("level1MathProgress");
   };
 
-  const goToMathPage = () => {
-    window.location.href = "/grades/1/math";
+  const goToSubjectPage = () => {
+    window.location.href = `/grades/1/math`;
   };
 
   const pathname = usePathname();
@@ -204,6 +241,8 @@ export default function Level1Content() {
     );
   }
 
+  const currentQuestion = questions[currentQuestionIndex];
+
   return (
     <div className="flex flex-col min-h-screen relative">
       <Particles
@@ -213,7 +252,7 @@ export default function Level1Content() {
         options={{
           background: {
             color: {
-              value: "#87CEEB", // Sky blue background
+              value: "#87CEEB",
             },
           },
           fpsLimit: 60,
@@ -244,7 +283,7 @@ export default function Level1Content() {
           },
           particles: {
             color: {
-              value: "#FFFFFF", // White bubbles
+              value: "#FFFFFF",
             },
             links: {
               enable: false,
@@ -273,7 +312,7 @@ export default function Level1Content() {
               value: 0.5,
             },
             shape: {
-              type: "circle", // Bubbles
+              type: "circle",
             },
             size: {
               value: { min: 1, max: 10 },
@@ -287,7 +326,7 @@ export default function Level1Content() {
           left: 0,
           width: "100%",
           height: "100%",
-          zIndex: -1, // Ensure it's in the background
+          zIndex: -1,
         }}
       />
       <Header setIsModalOpen={setIsModalOpen} setIsRegister={setIsRegister} />
@@ -296,17 +335,12 @@ export default function Level1Content() {
           Level 1: Counting Fun!
         </h1>
         <div className="w-full max-w-md mx-auto mb-6">
-          <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-green-400 transition-all duration-500 ease-out"
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
+          <ProgressBar percentage={(progress.correct / questions.length) * 100} />
         </div>
 
         <div className="mt-4 sm:mt-8 bg-white bg-opacity-20 p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center backdrop-blur-sm">
           {completed ? (
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center">
               <Image
                 src="/images/completed.avif"
                 alt="Completed"
@@ -315,8 +349,10 @@ export default function Level1Content() {
                 className="rounded-full shadow-lg mb-4"
               />
               <h2 className="text-2xl sm:text-3xl font-bold mt-4 text-yellow-300">
-                Awesome! You did it!
+                Awesome! You completed the level!
               </h2>
+              <p className="text-white text-lg mt-2">Your score: {progress.score} points</p>
+              <p className="text-white text-lg mt-2">Time taken: {timer} seconds</p>
               <div className="mt-6 flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
                 <button
                   onClick={handleReattempt}
@@ -325,7 +361,7 @@ export default function Level1Content() {
                   Play Again
                 </button>
                 <button
-                  onClick={goToMathPage}
+                  onClick={goToSubjectPage}
                   className="bg-green-500 text-white py-3 px-6 rounded-full shadow-lg hover:bg-green-600 transform hover:scale-105 transition-transform duration-300"
                 >
                   Back to Levels
@@ -334,37 +370,45 @@ export default function Level1Content() {
             </div>
           ) : (
             <>
-              <div className="flex flex-wrap justify-center items-center mb-6">
-                {[...Array(questions[currentQuestionIndex].count)].map(
-                  (_, index) => (
-                    <div
-                      key={index}
-                      className="transform hover:scale-110 transition-transform duration-300 m-1 sm:m-2"
-                    >
-                      <Image
-                        src={questions[currentQuestionIndex].image}
-                        alt={`Item ${index + 1}`}
-                        width={questions[currentQuestionIndex].width}
-                        height={questions[currentQuestionIndex].height}
-                      />
-                    </div>
-                  )
-                )}
-              </div>
+              <p className="text-white text-lg mb-4">Time: {timer} seconds</p>
               <h2 className="text-xl sm:text-2xl font-semibold mt-2 text-white">
-                {questions[currentQuestionIndex].question}
+                {currentQuestion.question}
               </h2>
-              <div className="flex flex-col sm:flex-row items-center justify-center mt-4 space-y-3 sm:space-y-0 sm:space-x-4">
-                <VoiceButton
-                  questionText={questions[currentQuestionIndex].question}
-                />
-                <input
-                  type="text"
-                  value={userAnswer}
-                  onChange={(e) => setUserAnswer(e.target.value)}
-                  placeholder="Your answer"
-                  className="border-2 border-yellow-300 bg-transparent text-white rounded-full p-3 w-full max-w-xs text-center text-lg sm:text-xl focus:outline-none focus:ring-2 focus:ring-yellow-200"
-                />
+              {currentQuestion.image && (
+                <div className="flex justify-center my-4">
+                  <Image
+                    src={currentQuestion.image}
+                    alt="Question Image"
+                    width={200}
+                    height={200}
+                    className="rounded-lg"
+                  />
+                </div>
+              )}
+              <div className="flex flex-col items-center justify-center mt-4 space-y-3 sm:space-y-0 sm:space-x-4">
+                <VoiceButton questionText={currentQuestion.question} />
+                {currentQuestion.type === "mcq" ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xs">
+                    {currentQuestion.options.map((option, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setUserAnswer(option)}
+                        className={`py-3 px-6 rounded-full shadow-lg transition-colors duration-300
+                          ${userAnswer === option ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800 hover:bg-gray-300"}`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    value={userAnswer}
+                    onChange={(e) => setUserAnswer(e.target.value)}
+                    placeholder="Your answer"
+                    className="border-2 border-yellow-300 bg-transparent text-white rounded-full p-3 w-full max-w-xs text-center text-lg sm:text-xl focus:outline-none focus:ring-2 focus:ring-yellow-200"
+                  />
+                )}
                 <button
                   onClick={validateAnswer}
                   className="bg-pink-500 text-white py-3 px-8 rounded-full shadow-lg hover:bg-pink-600 transform hover:scale-105 transition-transform duration-300"
