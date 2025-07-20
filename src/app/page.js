@@ -188,7 +188,7 @@ export default function HomePage() {
       </section>
 
       {/* Grade Cards Section */}
-      <section ref={gradeSectionRef} className="py-16 bg-gray-50">
+      <section ref={gradeSectionRef} id="gradesCard" className="py-16 bg-gray-50">
         <div className="container mx-auto text-center px-4">
           <h2 className="text-4xl font-extrabold text-blue-600 drop-shadow-lg">
             Explore Our Grades

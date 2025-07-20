@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import ProgressBar from "../../../../../components/ui/ProgressBar";
-
-import Breadcrumb from "../../../../../components/ui/BreadCrumb";
+import Timeline from "@/components/ui/Timeline";
 
 const TaskCard = ({ task }) => {
   const getStatusColor = (status) => {
@@ -77,8 +76,8 @@ const LevelPage = () => {
 
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] p-8">
+      <Timeline />
       <div className="max-w-7xl mx-auto">
-        <Breadcrumb />
         <h1 className="text-5xl font-extrabold text-center mb-8 text-[var(--heading-color)] drop-shadow-lg">
           Level {levelId} -{" "}
           {subjectId.charAt(0).toUpperCase() + subjectId.slice(1)}

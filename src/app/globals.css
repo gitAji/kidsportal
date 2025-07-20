@@ -18,15 +18,44 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #2c3e50;
-    --foreground: #ecf0f1;
-    --heading-color: #ffffff;
-    --primary-blue: #3498db;
-    --deep-ocean: #87ceeb;
-    --link-color: #3498db;
-    --success-green: #2ecc71;
-    --warning-orange: #f39c12;
-    --error-red: #e74c3c;
+    --background: #1a202c; /* Softer dark background */
+    --foreground: #e2e8f0; /* Softer light gray for text */
+    --heading-color: #ffffff; /* White for strong contrast */
+    --primary-blue: #63b3ed; /* Slightly brighter blue */
+    --deep-ocean: #90cdf4; /* Lighter blue for contrast */
+    --link-color: #63b3ed; /* Consistent with primary blue */
+    --success-green: #48bb78; /* Slightly brighter green */
+    --warning-orange: #f6ad55; /* Slightly brighter orange */
+    --error-red: #fc8181; /* Slightly brighter red */
+  }
+
+  .info-box {
+    background-color: #2d3748; /* Elevated background for info box in dark mode */
+    color: var(--foreground); /* Ensure text color is readable */
+  }
+
+  .info-box h2, .info-box p, .info-box strong {
+    color: var(--foreground); /* Ensure text within info box is readable */
+  }
+
+  .info-box .flex.items-center.p-4 {
+    background-color: #4a5568; /* Slightly lighter background for FAQ items */
+  }
+
+  .info-box .text-gray-700 {
+    color: var(--foreground); /* Adjust text color for readability */
+  }
+
+  .info-box .text-blue-500 {
+    color: var(--primary-blue); /* Ensure link color is consistent */
+  }
+
+  .info-box .close-btn {
+    background-color: #e53e3e; /* Adjusted close button color */
+  }
+
+  .info-box .close-btn:hover {
+    background-color: #c53030; /* Adjusted close button hover color */
   }
 }
 
@@ -65,31 +94,23 @@ button {
 }
 
 /* InfoBox styles */
-.info-link {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background-color: #3498db;
-  color: white;
-  font-size: 16px;
-  padding: 10px 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  z-index: 50;
-}
-
 .info-box {
   position: fixed;
   top: 0;
   right: 0;
-  width: 33%;
+  width: 100%; /* Full width on mobile */
   height: 100%;
   background-color: #ffffff;
   padding: 20px;
   box-shadow: -2px 0px 15px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
-  z-index: 9999; /* Ensure it's on top of other content */
+  z-index: 10000; /* Higher z-index */
+}
+
+@media (min-width: 768px) {
+  .info-box {
+    width: 33%; /* 1/3 width on larger screens */
+  }
 }
 
 .close-btn {

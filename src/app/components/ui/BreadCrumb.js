@@ -21,6 +21,7 @@ const Breadcrumb = () => {
     pathSegments.forEach((segment, index) => {
       const href = `/${pathSegments.slice(0, index + 1).join('/')}`;
       let name = decodeURIComponent(segment);
+      const isGradeOrLevel = name.includes('grade') || name.includes('level');
 
       // Custom naming for specific segments
       if (name.startsWith('grade')) {
@@ -32,7 +33,7 @@ const Breadcrumb = () => {
         name = name.charAt(0).toUpperCase() + name.slice(1);
       }
 
-      breadcrumbItems.push({ name: name, href: href });
+      breadcrumbItems.push({ name: name, href: href, isInactive: isGradeOrLevel });
     });
   }
 
@@ -41,10 +42,13 @@ const Breadcrumb = () => {
       <ol className="list-none p-0 inline-flex text-[var(--foreground)]">
         {breadcrumbItems.map((item, index) => {
           const isLast = index === breadcrumbItems.length - 1;
+          const isGradeOrLevel = item.name.includes('Grade') || item.name.includes('Level');
+          const isInactiveLink = isGradeOrLevel && !isLast; // Inactive if it's a grade/level and not the last item
+
           return (
             <li key={item.href} className="flex items-center">
               {index > 0 && <span className="mx-2 text-gray-400">/</span>}
-              {isLast ? (
+              {isLast || isInactiveLink ? (
                 <span className="text-[var(--heading-color)] font-semibold">{item.name}</span>
               ) : (
                 <Link href={item.href} className="text-[var(--foreground)] hover:text-[var(--primary-blue)] transition-colors duration-200">
