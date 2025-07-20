@@ -9,7 +9,7 @@ export default function TermsOfServicePage() {
       <Header />
       <main className="flex-grow p-4 md:p-8">
         <div className="container mx-auto py-16">
-          <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">Terms of Service</h1>
+          <h1 className="page-heading mb-6 text-center">Terms of Service</h1>
           <div className="bg-white p-8 rounded-lg shadow-md leading-relaxed text-gray-700">
             <p className="mb-4">Welcome to KidsPortal! These Terms of Service (&quot;Terms&quot;) govern your use of the KidsPortal website and services. By accessing or using our services, you agree to be bound by these Terms and all terms incorporated by reference.</p>
             <h2 className="text-2xl font-semibold text-gray-800 mb-3">1. Acceptance of Terms</h2>

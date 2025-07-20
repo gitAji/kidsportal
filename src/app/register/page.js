@@ -60,7 +60,7 @@ export default function RegisterPage() {
     <div className="flex flex-col min-h-screen bg-gray-50">
       <main className="flex-grow flex items-center justify-center p-4">
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto w-full sm:w-96 relative">
-          <h3 className="text-2xl font-bold mb-4 text-center">Register</h3>
+          <h3 className="page-heading mb-4 text-center">Register</h3>
           {error && <p className="text-red-500 text-center mb-4">{error}</p>}
           <form onSubmit={handleEmailRegister}>
             <div className="mb-4">

@@ -2,88 +2,63 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faHome,
-  faBook,
-  faCube,
-  faTasks,
-  faCheckCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBook, faCube, faTasks } from "@fortawesome/free-solid-svg-icons";
 
-const Timeline = () => {
+const SimpleTimeline = () => {
   const pathname = usePathname();
 
-  const getPathSegment = (index) => {
-    const segments = pathname.split("/").filter((s) => s);
-    return segments[index] || "";
-  };
+  const segments = pathname.split("/").filter(Boolean);
+  const grade = segments[1]; // e.g., "1"
+  const subject = segments[2]; // e.g., "tamil"
+  const level = segments[4]; // from /levels/1
+  const task = segments[5]; // task name
 
-  const grade = getPathSegment(1); // Grade
-  const subject = getPathSegment(2); // Subject
-  const level = getPathSegment(3); // Level
-  const task = getPathSegment(4); // Task
+  const subjectName = subject?.charAt(0).toUpperCase() + subject?.slice(1);
+  const taskName = task?.replace(/-/g, " ");
 
-  const stages = [
-    { name: "Home", href: "/", icon: faHome },
-    { name: `Grade ${grade}`, href: `/grades/${grade}`, icon: faBook },
+  const steps = [
     {
-      name: `Subject ${subject}`,
+      label: subjectName || "Subject",
+      icon: faBook,
       href: `/grades/${grade}/${subject}`,
-      icon: faCube,
+      active: pathname.includes(subject) && !pathname.includes("/levels"),
     },
-    { name: `Levels`, href: `/grades/${grade}/${subject}`, icon: faTasks },
-    { name: `Task ${task}`, href: pathname, icon: faTasks },
-  ].filter((stage) => stage.name.includes("undefined") === false);
+    {
+      label: level ? `Level ${level}` : "Level",
+      icon: faCube,
+      href: `/grades/${grade}/${subject}/levels/${level}`,
+      active: pathname.includes("/levels/") && !task,
+    },
+    {
+      label: task ? taskName : "Task",
+      icon: faTasks,
+      href: pathname,
+      active: !!task,
+    },
+  ];
 
   return (
-    <nav className="w-full bg-white p-4 shadow-md mb-4 overflow-x-auto">
-      <ol className="flex justify-center items-center space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8">
-        {stages.map((stage, index) => {
-          const isActive = pathname === stage.href;
-          const isCompleted =
-            pathname.startsWith(stage.href) && pathname !== stage.href;
-
-          return (
-            <li key={stage.href + index} className="flex items-center">
-              {index > 0 && (
-                <span className="text-gray-400 mx-1 sm:mx-2">
-                  {isCompleted ? (
-                    <FontAwesomeIcon
-                      icon={faCheckCircle}
-                      className="text-green-500 text-lg"
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      icon={faArrowRight}
-                      className="text-blue-500 text-lg"
-                    />
-                  )}
-                </span>
-              )}
-              <Link
-                href={stage.href}
-                className={`flex flex-col items-center p-3 rounded-lg transition-all duration-300
-                ${
-                  isActive
-                    ? "bg-blue-500 text-white shadow-lg scale-105"
-                    : "text-gray-700 hover:bg-gray-100"
-                }
-                ${isCompleted && !isActive ? "bg-green-100 text-green-700" : ""}
-                ${!isActive && !isCompleted ? "opacity-60" : ""}
-                hover:scale-105 transform transition-all duration-200 ease-in-out`}
-              >
-                <FontAwesomeIcon icon={stage.icon} className="text-xl mb-1" />
-                <span className="text-xs sm:text-sm font-medium whitespace-nowrap">
-                  {stage.name}
-                </span>
-              </Link>
-            </li>
-          );
-        })}
-      </ol>
-    </nav>
+    <div className="w-full bg-white p-3 shadow-md mb-4 rounded-lg">
+      <div className="flex justify-center gap-4 sm:gap-6">
+        {steps.map((step, idx) => (
+          <Link
+            key={idx}
+            href={step.href}
+            className={`flex flex-col items-center px-4 py-2 rounded-lg text-sm font-medium transition
+              ${
+                step.active
+                  ? "bg-blue-500 text-white scale-105"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }
+            `}
+          >
+            <FontAwesomeIcon icon={step.icon} className="text-lg mb-1" />
+            <span>{step.label}</span>
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 };
 
-export default Timeline;
+export default SimpleTimeline;

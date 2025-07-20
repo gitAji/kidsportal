@@ -28,7 +28,7 @@ export default function RightSidePanel({ children, isOpen, onClose, panelName })
   return (
     <div
       ref={panelRef}
-      className="info-box fixed top-0 right-0 w-full md:w-1/3 h-full bg-white p-6 shadow-lg transform transition-all duration-300 ease-in-out overflow-y-auto"
+      className="info-box fixed top-0 right-0 w-full md:w-1/3 h-full bg-white p-6 pb-12 shadow-lg transform transition-all duration-300 ease-in-out overflow-y-auto"
       style={{ transform: isOpen ? 'translateX(0)' : 'translateX(100%)' }}
     >
       <div className="relative h-full flex flex-col">

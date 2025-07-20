@@ -14,7 +14,7 @@ export default function LearningPage() {
     <>
       <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="container mx-auto text-center px-4">
-          <h1 className="text-5xl font-extrabold text-gray-800 mb-6 animate-fade-in-down">
+          <h1 className="page-heading mb-6 animate-fade-in-down">
             Discover a World of Knowledge!
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 animate-fade-in-up">

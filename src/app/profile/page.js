@@ -269,7 +269,7 @@ export default function ProfilePage() {
       <main className="flex-grow p-4 flex items-center justify-center">
         <Suspense fallback={<SkeletonLoader />}>
           <div className="w-full max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
-            <h1 className="text-4xl font-bold mb-6 text-center text-[var(--text-dark)]">
+            <h1 className="page-heading mb-6 text-center">
               User Profile
             </h1>
 

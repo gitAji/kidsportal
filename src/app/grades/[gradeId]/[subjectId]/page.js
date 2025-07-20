@@ -6,8 +6,11 @@ import LevelCard from "../../../components/ui/LevelCard"; // Adjust the import p
 import LevelPath from "../../../components/ui/LevelPath"; // Adjust the import path as necessary
 import Timeline from "@/components/ui/Timeline";
 
+import { useSubscription } from "@/hooks/useSubscription"; // Import the custom hook
+
 const LevelsPage = () => {
   const { gradeId, subjectId } = useParams();
+  const { isPremium } = useSubscription(); // Get user subscription status
   const [unlockedLevels, setUnlockedLevels] = React.useState([1]); // Initially, only level 1 is unlocked
   const levels = Array.from({ length: 12 }, (_, i) => i + 1);
   const [cardRefs] = React.useState(levels.map(() => React.createRef()));
@@ -30,7 +33,7 @@ const LevelsPage = () => {
       <Timeline />
       <div className="relative max-w-7xl mx-auto bg-white bg-opacity-80 rounded-xl shadow-lg p-8">
         <LevelPath cardRefs={cardRefs} />
-        <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
+        <h1 className="page-heading text-center mb-8">
           {subjectId.charAt(0).toUpperCase() + subjectId.slice(1)} - Grade{" "}
           {gradeId}
         </h1>
@@ -42,16 +45,19 @@ const LevelsPage = () => {
           {progress.toFixed(0)}% Completed
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {levels.map((level, i) => (
-            <LevelCard
-              key={level}
-              ref={cardRefs[i]}
-              grade={gradeId}
-              subject={subjectId}
-              level={level}
-              isUnlocked={unlockedLevels.includes(level)}
-            />
-          ))}
+          {levels.map((level, i) => {
+            const isUnlocked = level <= 2 || isPremium;
+            return (
+              <LevelCard
+                key={level}
+                ref={cardRefs[i]}
+                grade={gradeId}
+                subject={subjectId}
+                level={level}
+                isUnlocked={isUnlocked}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

@@ -151,7 +151,7 @@ const GradeOverviewPage = ({ params = {} }) => {
             Back to Home
           </button>
         </div>
-        <h1 key="welcome-message" className="text-5xl sm:text-6xl font-extrabold text-center text-blue-700 mb-8 drop-shadow-lg animate__animated animate__bounceIn">
+        <h1 key="welcome-message" className="page-heading text-center text-blue-700 mb-8 drop-shadow-lg animate__animated animate__bounceIn">
           Welcome to Grade {gradeId}!
         </h1>
         <div key="lottie-animation" className="flex justify-center mb-8">

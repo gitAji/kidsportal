@@ -31,7 +31,7 @@ export default function ForgotPasswordPage() {
       <Header />
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
-          <h3 className="text-2xl font-bold mb-4 text-center">Forgot Password</h3>
+          <h3 className="page-heading text-center mb-4">Forgot Password</h3>
           {message && <p className="text-green-500 text-center mb-4">{message}</p>}
           {error && <p className="text-red-500 text-center mb-4">{error}</p>}
           <form onSubmit={handlePasswordReset}>

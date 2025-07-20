@@ -28,13 +28,13 @@ export default function BackToTop() {
   }, []);
 
   return (
-    <div className="fixed bottom-4 right-4">
+    <div className="fixed bottom-16 right-4">
       {isVisible && (
         <button
-          className="bg-blue-600 text-white py-2 px-4 rounded-full shadow-lg hover:bg-blue-700 animate-bounce"
+          className="bg-gray-500 text-white py-2 px-3 rounded-full shadow-lg hover:bg-gray-600 animate-bounce"
           onClick={scrollToTop}
         >
-          <FontAwesomeIcon icon={faArrowUp} size="lg" />
+          <FontAwesomeIcon icon={faArrowUp} size="md" />
         </button>
       )}
     </div>

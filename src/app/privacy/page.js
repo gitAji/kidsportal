@@ -9,7 +9,7 @@ export default function PrivacyPolicyPage() {
       <Header />
       <main className="flex-grow p-4 md:p-8">
         <div className="container mx-auto py-16">
-          <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">Privacy Policy</h1>
+          <h1 className="page-heading mb-6 text-center">Privacy Policy</h1>
           <div className="bg-white p-8 rounded-lg shadow-md leading-relaxed text-gray-700">
             <p className="mb-4">Your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.</p>
             <h2 className="text-2xl font-semibold text-gray-800 mb-3">Information We Collect</h2>

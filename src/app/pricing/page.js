@@ -81,7 +81,7 @@ export default function PricingPage() {
           transition={{ duration: 0.5 }}
           className="text-center mb-10"
         >
-          <h1 className="text-5xl font-extrabold text-blue-700 mb-4">
+          <h1 className="page-heading mb-4">
             Choose Your Learning Adventure!
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">

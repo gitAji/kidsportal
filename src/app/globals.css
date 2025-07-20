@@ -18,9 +18,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1a202c; /* Softer dark background */
-    --foreground: #e2e8f0; /* Softer light gray for text */
-    --heading-color: #ffffff; /* White for strong contrast */
+    --background: #000000; /* Pure black for maximum contrast */
+    --foreground: #ffffff; /* Pure white for text */
+    --heading-color: #ffffff; /* Pure white for headings */
     --primary-blue: #63b3ed; /* Slightly brighter blue */
     --deep-ocean: #90cdf4; /* Lighter blue for contrast */
     --link-color: #63b3ed; /* Consistent with primary blue */
@@ -122,4 +122,18 @@ button {
 
 .close-btn:hover {
   background-color: #c0392b;
+}
+
+.page-heading {
+  font-size: 3rem; /* Equivalent to text-5xl */
+  font-weight: 800; /* Equivalent to font-extrabold */
+  color: var(--heading-color); /* Use the heading color variable */
+  margin-bottom: 1.5rem; /* Equivalent to mb-6 */
+  /* You can add animation classes here if they are consistent across all headings */
+}
+
+@media (min-width: 640px) {
+  .page-heading {
+    font-size: 3.75rem; /* Equivalent to sm:text-6xl */
+  }
 }

@@ -35,7 +35,7 @@ export default function LoginPage() {
     <div className="flex flex-col min-h-screen bg-gray-50">
       <main className="flex-grow flex items-center justify-center p-4">
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm mx-auto w-full sm:w-80">
-          <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
+          <h2 className="page-heading mb-4 text-center">Login</h2>
           {error && <p className="text-red-500 text-center mb-4">{error}</p>}
           <form onSubmit={handleEmailLogin}>
             <input

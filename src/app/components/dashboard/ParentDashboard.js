@@ -70,7 +70,7 @@ const ParentDashboard = () => {
         {/* Left Card: Parent Info */}
         <div className="bg-[var(--background)] p-6 rounded-lg shadow-md flex flex-col justify-between">
           <div className="text-center md:text-left">
-            <h1 className="text-4xl font-extrabold text-heading mb-3">Welcome, {auth.currentUser?.displayName || auth.currentUser?.email}!</h1>
+            <h1 className="page-heading text-center md:text-left mb-3">Welcome, {auth.currentUser?.displayName || auth.currentUser?.email}!</h1>
             <p className="text-xl text-gray-700 mb-3">Parent</p>
             <p className="text-lg text-gray-600 mb-4">Children: {parentData?.children ? parentData.children.length : 0}</p>
             
