@@ -8,10 +8,14 @@ const HowWeMakeLearningFunSection = dynamic(() => import("../components/learning
 const BackToTop = dynamic(() => import("../components/ui/BackToTop"), {
   ssr: false,
 });
+const Timeline = dynamic(() => import("../components/ui/Timeline"), {
+  ssr: false,
+});
 
 export default function LearningPage() {
   return (
     <>
+      <Timeline />
       <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="container mx-auto text-center px-4">
           <h1 className="page-heading mb-6 animate-fade-in-down">

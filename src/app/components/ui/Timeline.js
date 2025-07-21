@@ -6,36 +6,44 @@ import { faBook, faCube, faTasks } from "@fortawesome/free-solid-svg-icons";
 
 const SimpleTimeline = () => {
   const pathname = usePathname();
-
   const segments = pathname.split("/").filter(Boolean);
-  const grade = segments[1]; // e.g., "1"
-  const subject = segments[2]; // e.g., "tamil"
-  const level = segments[4]; // from /levels/1
-  const task = segments[5]; // task name
+
+  const grade = segments[1];
+  const subject = segments[2];
+  const level = segments[4];
+  const task = segments[5];
 
   const subjectName = subject?.charAt(0).toUpperCase() + subject?.slice(1);
   const taskName = task?.replace(/-/g, " ");
 
-  const steps = [
-    {
-      label: subjectName || "Subject",
+  const steps = [];
+
+  // Subject Step
+  if (grade && subject) {
+    steps.push({
+      label: subjectName,
       icon: faBook,
       href: `/grades/${grade}/${subject}`,
-      active: pathname.includes(subject) && !pathname.includes("/levels"),
-    },
-    {
-      label: level ? `Level ${level}` : "Level",
+    });
+  }
+
+  // Level Step
+  if (grade && subject && level) {
+    steps.push({
+      label: `Level ${level}`,
       icon: faCube,
       href: `/grades/${grade}/${subject}/levels/${level}`,
-      active: pathname.includes("/levels/") && !task,
-    },
-    {
-      label: task ? taskName : "Task",
+    });
+  }
+
+  // Task Step
+  if (grade && subject && level && task) {
+    steps.push({
+      label: taskName,
       icon: faTasks,
-      href: pathname,
-      active: !!task,
-    },
-  ];
+      href: `/grades/${grade}/${subject}/levels/${level}/${task}`,
+    });
+  }
 
   return (
     <div className="w-full bg-white p-3 shadow-md mb-4 rounded-lg">
@@ -46,7 +54,7 @@ const SimpleTimeline = () => {
             href={step.href}
             className={`flex flex-col items-center px-4 py-2 rounded-lg text-sm font-medium transition
               ${
-                step.active
+                pathname.startsWith(step.href)
                   ? "bg-blue-500 text-white scale-105"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }

@@ -1,13 +1,16 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
+import React from "react";
+import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+import Image from "next/image";
 
-const Header = dynamic(() => import('../../components/layout/header/Header'), { ssr: false });
-const Footer = dynamic(() => import('../../components/layout/footer/Footer'), { ssr: false });
-const BackToTop = dynamic(() => import('../../components/ui/BackToTop'), { ssr: false });
+const BackToTop = dynamic(() => import("../../components/ui/BackToTop"), {
+  ssr: false,
+});
+const Timeline = dynamic(() => import("../../components/ui/Timeline"), {
+  ssr: false,
+});
 
 export default function GradeSubjectsPage({ params }) {
   const router = useRouter();
@@ -18,7 +21,8 @@ export default function GradeSubjectsPage({ params }) {
     {
       id: "mathematics",
       name: "Mathematics",
-      description: "Explore the world of numbers, equations, and problem-solving.",
+      description:
+        "Explore the world of numbers, equations, and problem-solving.",
       image: "/images/math.jpg",
     },
     {
@@ -42,24 +46,27 @@ export default function GradeSubjectsPage({ params }) {
     {
       id: "art",
       name: "Art & Creativity",
-      description: "Express yourself through art, music, and creative projects.",
+      description:
+        "Express yourself through art, music, and creative projects.",
       image: "/images/art.jpg",
     },
     {
       id: "technology",
       name: "Technology",
-      description: "Discover the world of computers, programming, and innovation.",
+      description:
+        "Discover the world of computers, programming, and innovation.",
       image: "/images/tech.jpg",
     },
   ];
 
   return (
     <>
-      <Header />
-
+      <Timeline />
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto text-center px-4">
-          <h1 className="text-4xl font-bold text-blue-600">{gradeId.replace('grade', 'Grade ')} Subjects</h1>
+          <h1 className="text-4xl font-bold text-blue-600">
+            {gradeId.replace("grade", "Grade ")} Subjects
+          </h1>
           <p className="mt-4 text-gray-600">
             Select a subject to begin your learning journey.
           </p>
@@ -69,7 +76,9 @@ export default function GradeSubjectsPage({ params }) {
               <div
                 key={subject.id}
                 className="bg-white p-6 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 cursor-pointer"
-                onClick={() => router.push(`/learning/${gradeId}/${subject.id}`)}
+                onClick={() =>
+                  router.push(`/learning/${gradeId}/${subject.id}`)
+                }
               >
                 <div className="relative h-48 w-full overflow-hidden">
                   <Image
@@ -91,7 +100,6 @@ export default function GradeSubjectsPage({ params }) {
         </div>
       </section>
 
-      <Footer />
       <BackToTop />
     </>
   );
