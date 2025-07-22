@@ -1,11 +1,11 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import Timeline from "../../../../../../../components/ui/Timeline";
-import ContentCard from "../../../../../../../components/ui/ContentCard";
-import InteractiveQuiz from "../../../../../../../components/learning/InteractiveQuiz";
-import LessonViewer from "../../../../../../../components/learning/LessonViewer";
-import SkeletonLoader from "../../../../../../../components/ui/SkeletonLoader";
+import Timeline from "@/app/components/ui/Timeline";
+import ContentCard from "@/app/components/ui/ContentCard";
+import InteractiveQuiz from "@/app/components/learning/InteractiveQuiz";
+import LessonViewer from "@/app/components/learning/LessonViewer";
+import SkeletonLoader from "@/app/components/ui/SkeletonLoader";
 
 const TaskPage = () => {
   const { gradeId, subjectId, levelId, taskSlug } = useParams();
