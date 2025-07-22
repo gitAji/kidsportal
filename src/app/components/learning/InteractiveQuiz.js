@@ -1,12 +1,10 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-const InteractiveQuiz = ({ quizData, nextTaskPath }) => {
-  const router = useRouter();
+const InteractiveQuiz = ({ quizData, onCorrectAnswer }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
 
@@ -18,7 +16,11 @@ const InteractiveQuiz = ({ quizData, nextTaskPath }) => {
   useEffect(() => {
     correctSound.current = new Audio('/sounds/correct.mp3');
     incorrectSound.current = new Audio('/sounds/incorrect.mp3');
-  }, []);
+    
+    // Reset state when a new question is passed in
+    setSelectedAnswer(null);
+    setIsCorrect(null);
+  }, [quizData]);
 
   const handleAnswerClick = (option) => {
     if (isCorrect) return;
@@ -63,7 +65,7 @@ const InteractiveQuiz = ({ quizData, nextTaskPath }) => {
             key={option}
             onClick={() => handleAnswerClick(option)}
             className={`text-white px-8 py-4 rounded-lg text-4xl font-bold shadow-lg transform transition-transform duration-200 hover:scale-105 ${getButtonClass(option)}`}
-            disabled={isCorrect}
+            disabled={isCorrect !== null}
           >
             {option}
           </button>
@@ -77,12 +79,12 @@ const InteractiveQuiz = ({ quizData, nextTaskPath }) => {
         </div>
       )}
 
-      {isCorrect && nextTaskPath && (
+      {isCorrect && (
         <button
-          onClick={() => router.push(nextTaskPath)}
+          onClick={onCorrectAnswer}
           className="mt-8 bg-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-purple-700 transform hover:scale-105 transition-transform duration-300 flex items-center gap-2 text-xl"
         >
-          Next Task <FontAwesomeIcon icon={faArrowRight} />
+          Next <FontAwesomeIcon icon={faArrowRight} />
         </button>
       )}
     </div>

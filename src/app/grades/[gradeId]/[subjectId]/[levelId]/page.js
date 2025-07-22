@@ -1,49 +1,31 @@
-"use client";
+import React from 'react';
+import TaskCard from '../../../../../components/ui/TaskCard';
+import fs from 'fs';
+import path from 'path';
+import Timeline from '../../../../../components/ui/Timeline';
 
-import React, { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
-import TaskCard from "@/components/ui/TaskCard";
-import SkeletonLoader from "@/components/ui/SkeletonLoader";
-import Timeline from "@/components/ui/Timeline";
+async function getLevel(gradeId, subjectId, levelId) {
+  const dbPath = path.resolve(process.cwd(), 'public/db.json');
+  const dbData = fs.readFileSync(dbPath, 'utf-8');
+  const data = JSON.parse(dbData);
+  const grade = data.grades.find(g => g.gradeId === gradeId);
+  if (!grade) return null;
+  const subject = grade.subjects.find(s => s.subjectId === subjectId);
+  if (!subject) return null;
+  return subject.levels.find(l => l.levelId === levelId) || null;
+}
 
-const LevelDetailPage = () => {
-  const { gradeId, subjectId, levelId } = useParams();
-  const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const LevelDetailPage = async ({ params }) => {
+  const { gradeId, subjectId, levelId } = params;
+  const level = await getLevel(gradeId, subjectId, levelId);
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const res = await fetch(`/api/grades/${gradeId}/subjects/${subjectId}/${levelId}/tasks`);
-        if (!res.ok) {
-          throw new Error('Failed to fetch tasks');
-        }
-        const data = await res.json();
-        setTasks(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (gradeId && subjectId && levelId) {
-      fetchTasks();
-    }
-  }, [gradeId, subjectId, levelId]);
-
-  if (loading) {
-    return <SkeletonLoader />;
+  if (!level) {
+    return <div className="text-center text-lg">Level not found.</div>;
   }
 
-  if (error) {
-    return <div className="text-red-500 text-center p-8">{error}</div>;
-  }
-
-  const lessons = tasks.filter(task => task.type === 'lesson');
-  const quizzes = tasks.filter(task => task.type === 'quiz');
-  const exams = tasks.filter(task => task.type === 'exam');
+  const lessons = level.tasks.filter(task => task.type === 'lesson');
+  const quizzes = level.tasks.filter(task => task.type === 'quiz');
+  const exams = level.tasks.filter(task => task.type === 'exam');
 
   return (
     <div
@@ -52,11 +34,9 @@ const LevelDetailPage = () => {
     >
       <Timeline />
       <div className="relative max-w-7xl mx-auto bg-white bg-opacity-80 rounded-xl shadow-lg p-8">
-        <h1 className="page-heading text-center mb-8">
-          Level {levelId} Tasks
-        </h1>
+        <h1 className="text-4xl font-bold text-center mb-8">{level.levelName}</h1>
 
-        {tasks.length > 0 ? (
+        {level.tasks.length > 0 ? (
           <>
             {lessons.length > 0 && (
               <section className="mb-12">
@@ -69,7 +49,7 @@ const LevelDetailPage = () => {
                       subject={subjectId}
                       level={levelId}
                       task={task}
-                      isUnlocked={true}
+                      isUnlocked={!level.isLocked}
                     />
                   ))}
                 </div>
@@ -87,7 +67,7 @@ const LevelDetailPage = () => {
                       subject={subjectId}
                       level={levelId}
                       task={task}
-                      isUnlocked={true}
+                      isUnlocked={!level.isLocked}
                     />
                   ))}
                 </div>
@@ -105,7 +85,7 @@ const LevelDetailPage = () => {
                       subject={subjectId}
                       level={levelId}
                       task={task}
-                      isUnlocked={true}
+                      isUnlocked={!level.isLocked}
                     />
                   ))}
                 </div>
