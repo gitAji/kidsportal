@@ -35,8 +35,8 @@ export default function ClientLayoutWrapper({ children }) {
 
   useEffect(() => {
     const handleMouseLeave = (event) => {
-      // If user is logged in, don't show the modal
-      if (user) {
+      // If user is logged in, or modal has been shown, don't show it
+      if (user || sessionStorage.getItem('exitIntentShown')) {
         return;
       }
 
@@ -44,6 +44,7 @@ export default function ClientLayoutWrapper({ children }) {
       if (event.clientY < 50) {
         // Adjust 50px threshold as needed
         setShowExitIntentModal(true);
+        sessionStorage.setItem('exitIntentShown', 'true');
       }
     };
 
