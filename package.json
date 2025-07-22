@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "NODE_OPTIONS=--max-old-space-size=4096 next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "json-server": "json-server --watch db.json --host 0.0.0.0 --port 3001 --no-cors"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

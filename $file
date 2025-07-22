@@ -1,0 +1,8 @@
+"use client";
+import TaskPageComponent from "@/app/components/learning/TaskPage";
+
+const TaskPage = () => {
+  return <TaskPageComponent />;
+};
+
+export default TaskPage;

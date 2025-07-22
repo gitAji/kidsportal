@@ -1,19 +1,24 @@
 "use client"; // Ensure this component is treated as a client component
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, lazy, Suspense } from "react";
 import { useRouter } from "next/navigation";
 
 import { faGoogle, faArrowUp } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import AuthModal from "./components/ui/AuthModal"; // Modal component for login and register
-import GradeCard from "./components/ui/GradeCard"; // Import the GradeCard component
 import BackToTop from "./components/ui/BackToTop";
 import Link from "next/link";
+import SkeletonLoader from "./components/ui/SkeletonLoader";
+
+const GradeCard = lazy(() => import("./components/ui/GradeCard"));
 
 export default function HomePage() {
   const router = useRouter();
   const gradeSectionRef = useRef(null); // Ref for scrolling to grade section
+  const [grades, setGrades] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // State for the modal
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -52,29 +57,31 @@ export default function HomePage() {
     "border-[#D2691E]", // Chocolate
   ];
 
-  // Grade labels
-  const gradeLabels = [
-    "First Grade",
-    "Second Grade",
-    "Third Grade",
-    "Fourth Grade",
-    "Fifth Grade",
-    "Sixth Grade",
-    "Seventh Grade",
-    "Eighth Grade",
-    "Ninth Grade",
-    "Tenth Grade",
-    "Eleventh Grade",
-    "Twelfth Grade",
-  ];
+  // Color mapping for subjects by name
+  const subjectColorMapping = {
+    "Math": { color: "bg-[#FF6347]", textColor: "text-white" }, // Tomato
+    "Tamil": { color: "bg-[#32CD32]", textColor: "text-white" }, // Lime Green
+    "English": { color: "bg-[#1E90FF]", textColor: "text-white" }, // Dodger Blue
+    "அறிவியல் (Science)": { color: "bg-[#FFD700]", textColor: "text-black" }, // Gold
+  };
 
-  // Unique colors for subjects
-  const subjectColors = [
-    { subject: "Math", color: "bg-[#FF6347]", textColor: "text-white" }, // Tomato
-    { subject: "Tamil", color: "bg-[#32CD32]", textColor: "text-white" }, // Lime Green
-    { subject: "English", color: "bg-[#1E90FF]", textColor: "text-white" }, // Dodger Blue
-    { subject: "Ariviyal", color: "bg-[#FFD700]", textColor: "text-black" }, // Gold (Science in Tamil)
-  ];
+  useEffect(() => {
+    const fetchGrades = async () => {
+      try {
+        const res = await fetch('/api/grades');
+        if (!res.ok) {
+          throw new Error('Failed to fetch grades');
+        }
+        const data = await res.json();
+        setGrades(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchGrades();
+  }, []);
 
   // Function to scroll to the grade section
   const scrollToGradeSection = () => {
@@ -83,8 +90,8 @@ export default function HomePage() {
     }
   };
 
-  const generateLink = (grade, subject) => {
-    return `/grades/${grade}/${subject.toLowerCase()}`;
+  const generateLink = (gradeId, subjectId) => {
+    return `/grades/${gradeId}/${subjectId}`;
   };
 
   // Function to toggle modal for SignIn/SignUp
@@ -197,19 +204,21 @@ export default function HomePage() {
             Choose a grade to start your learning adventure!
           </p>
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-            {/* Loop through grades from 1-12 */}
-            {Array.from({ length: 12 }, (_, gradeIndex) => (
-              <GradeCard
-                key={gradeIndex}
-                gradeIndex={gradeIndex}
-                gradeLabel={gradeLabels[gradeIndex]}
-                borderColor={borderColors[gradeIndex]}
-                subjectColors={subjectColors}
-                generateLink={generateLink} // Pass generateLink function
-              />
-            ))}
-          </div>
+          {error && <p className="text-red-500">{error}</p>}
+          <Suspense fallback={<SkeletonLoader />}>
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+              {grades.map((grade, gradeIndex) => (
+                <GradeCard
+                  key={grade.gradeId}
+                  grade={grade}
+                  gradeIndex={gradeIndex}
+                  borderColor={borderColors[gradeIndex % borderColors.length]}
+                  subjectColorMapping={subjectColorMapping}
+                  generateLink={generateLink}
+                />
+              ))}
+            </div>
+          </Suspense>
         </div>
       </section>
 

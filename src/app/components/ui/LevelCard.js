@@ -17,7 +17,7 @@ const LevelCard = React.forwardRef(({ grade, subject, level, isUnlocked }, ref) 
 
   const content = (
     <div>
-      <h3 className="text-2xl font-bold text-white mb-2">Level {level}</h3>
+      <h3 className="text-2xl font-bold text-white mb-2">{level.levelName}</h3>
       {isUnlocked ? (
         <p className="text-white">Unlocked</p>
       ) : (
@@ -31,7 +31,7 @@ const LevelCard = React.forwardRef(({ grade, subject, level, isUnlocked }, ref) 
   );
 
   return isUnlocked ? (
-    <Link href={`/grades/${grade}/${subject}/levels/${level}`} ref={ref} className={cardClasses}>
+    <Link href={`/grades/${grade}/${subject}/${level.levelId}`} ref={ref} className={cardClasses}>
       {content}
     </Link>
   ) : (

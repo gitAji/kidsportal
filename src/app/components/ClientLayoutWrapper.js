@@ -61,7 +61,7 @@ export default function ClientLayoutWrapper({ children }) {
   });
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header
         setIsModalOpen={setIsModalOpen}
         setIsRegister={setIsRegister}
@@ -78,7 +78,7 @@ export default function ClientLayoutWrapper({ children }) {
           setIsOurTeamOpen(value);
         }}
       />
-      {children}
+      <main className="flex-grow">{children}</main>
       <FloatingChatButton onClick={() => setIsChatOpen(true)} />
       <Chat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
       <Footer />
@@ -105,6 +105,6 @@ export default function ClientLayoutWrapper({ children }) {
           setIsRegister={setIsRegister}
         />
       )}
-    </>
+    </div>
   );
 }

@@ -5,7 +5,9 @@
       "@/components/*": ["src/app/components/*"],
       "@/firebase/*": ["src/firebase/*"],
       "@/hooks/*": ["src/hooks/*"],
-      "@/public/*": ["public/*"]
+      "@/public/*": ["public/*"],
+      "@/data/*": ["src/app/data/*"],
+      "@/utils/*": ["src/utils/*"]
     }
   }
 }

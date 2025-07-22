@@ -6,7 +6,7 @@ import { db, auth } from "../../firebase/config";
 
 import SkeletonLoader from "../components/ui/SkeletonLoader";
 import ChildDashboard from "../components/dashboard/ChildDashboard"; // Import ChildDashboard
-import Breadcrumb from "../components/ui/BreadCrumb";
+import Timeline from "../components/ui/Timeline";
 
 export default function ChildDashboardPage() {
   const [childUser, setChildUser] = useState(null);
@@ -58,7 +58,7 @@ export default function ChildDashboardPage() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <main className="flex-grow p-4">
-        <Breadcrumb />
+        <Timeline />
         {deleteError && (
           <p className="text-red-500 text-center mb-4">{deleteError}</p>
         )}

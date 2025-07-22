@@ -1,112 +1,123 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
-import Link from "next/link";
-import ProgressBar from "@/components/ui/ProgressBar";
+import React, { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import TaskCard from "@/components/ui/TaskCard";
+import SkeletonLoader from "@/components/ui/SkeletonLoader";
 import Timeline from "@/components/ui/Timeline";
 
-const TaskCard = ({ task }) => {
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "Completed":
-        return "bg-green-500";
-      case "In Progress":
-        return "bg-yellow-500";
-      default:
-        return "bg-blue-500"; // Changed default to blue for 'Not Started'
-    }
-  };
-
-  return (
-    <Link
-      href={task.href}
-      className="block p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 bg-white hover:bg-gray-100 border-4 border-transparent hover:border-blue-400"
-    >
-      <h3 className="text-2xl font-bold text-gray-800">{task.name}</h3>
-      <div
-        className={`mt-4 text-sm font-bold text-white px-3 py-1 rounded-full inline-block ${getStatusColor(
-          task.status
-        )}`}
-      >
-        {task.status}
-      </div>
-    </Link>
-  );
-};
-
-const LevelPage = () => {
+const LevelDetailPage = () => {
   const { gradeId, subjectId, levelId } = useParams();
-  const router = useRouter();
   const [tasks, setTasks] = useState([]);
-  const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // In a real app, you would fetch the tasks for the level from a database.
   useEffect(() => {
-    const fetchedTasks = [
-      {
-        name: "Introduction to Alphabets",
-        href: `/grades/${gradeId}/${subjectId}/levels/${levelId}/tasks/alphabets`,
-        status: "Completed",
-      },
-      {
-        name: "Counting Numbers",
-        href: `/grades/${gradeId}/${subjectId}/levels/${levelId}/tasks/counting`,
-        status: "In Progress",
-      },
-      {
-        name: "Simple Words",
-        href: `/grades/${gradeId}/${subjectId}/levels/${levelId}/tasks/words`,
-        status: "Not Started",
-      },
-    ];
-    setTasks(fetchedTasks);
+    const fetchTasks = async () => {
+      try {
+        const res = await fetch(`/api/grades/${gradeId}/subjects/${subjectId}/${levelId}/tasks`);
+        if (!res.ok) {
+          throw new Error('Failed to fetch tasks');
+        }
+        const data = await res.json();
+        setTasks(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const completedTasks = fetchedTasks.filter(
-      (t) => t.status === "Completed"
-    ).length;
-    setProgress((completedTasks / fetchedTasks.length) * 100);
+    if (gradeId && subjectId && levelId) {
+      fetchTasks();
+    }
   }, [gradeId, subjectId, levelId]);
 
-  const handleTakeExam = () => {
-    router.push(`/grades/${gradeId}/${subjectId}/levels/${levelId}/exam`);
-  };
+  if (loading) {
+    return <SkeletonLoader />;
+  }
 
-  const allTasksCompleted = progress === 100;
+  if (error) {
+    return <div className="text-red-500 text-center p-8">{error}</div>;
+  }
+
+  const lessons = tasks.filter(task => task.type === 'lesson');
+  const quizzes = tasks.filter(task => task.type === 'quiz');
+  const exams = tasks.filter(task => task.type === 'exam');
 
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] p-8">
+    <div
+      className="min-h-screen bg-cover bg-center p-8"
+      style={{ backgroundImage: "url('/images/intro11.png')" }}
+    >
       <Timeline />
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-5xl font-extrabold text-center mb-8 text-[var(--heading-color)] drop-shadow-lg">
-          Level {levelId} -{" "}
-          {subjectId.charAt(0).toUpperCase() + subjectId.slice(1)}
+      <div className="relative max-w-7xl mx-auto bg-white bg-opacity-80 rounded-xl shadow-lg p-8">
+        <h1 className="page-heading text-center mb-8">
+          Level {levelId} Tasks
         </h1>
-        <div className="bg-gray-800 rounded-lg p-6 mb-8 shadow-xl">
-          <h2 className="text-2xl font-bold text-white mb-4">Your Progress</h2>
-          <ProgressBar percentage={progress} />
-          <p className="text-right text-white mt-2 text-lg">
-            {progress.toFixed(0)}% Completed
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {tasks.map((task) => (
-            <TaskCard key={task.name} task={task} />
-          ))}
-        </div>
-        {allTasksCompleted && (
-          <div className="text-center mt-12">
-            <button
-              onClick={handleTakeExam}
-              className="bg-[var(--success-green)] hover:bg-green-700 text-white font-extrabold py-4 px-10 rounded-full shadow-lg transform hover:scale-105 transition duration-300 text-xl tracking-wide"
-            >
-              Take Exam!
-            </button>
-          </div>
+
+        {tasks.length > 0 ? (
+          <>
+            {lessons.length > 0 && (
+              <section className="mb-12">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6">Lessons</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                  {lessons.map((task) => (
+                    <TaskCard
+                      key={task.taskId}
+                      grade={gradeId}
+                      subject={subjectId}
+                      level={levelId}
+                      task={task}
+                      isUnlocked={true}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {quizzes.length > 0 && (
+              <section className="mb-12">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6">Quizzes</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                  {quizzes.map((task) => (
+                    <TaskCard
+                      key={task.taskId}
+                      grade={gradeId}
+                      subject={subjectId}
+                      level={levelId}
+                      task={task}
+                      isUnlocked={true}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {exams.length > 0 && (
+              <section>
+                <h2 className="text-3xl font-bold text-gray-800 mb-6">Exams</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                  {exams.map((task) => (
+                    <TaskCard
+                      key={task.taskId}
+                      grade={gradeId}
+                      subject={subjectId}
+                      level={levelId}
+                      task={task}
+                      isUnlocked={true}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+          </>
+        ) : (
+          <p>No tasks for this level.</p>
         )}
       </div>
     </div>
   );
 };
 
-export default LevelPage;
+export default LevelDetailPage;
