@@ -4,7 +4,6 @@
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth"; // Import onAuthStateChanged
 import { auth } from "../../firebase/auth"; // Import auth
-import FloatingChatButton from "./ui/FloatingChatButton";
 import Chat from "./ui/Chat";
 import Header from "./layout/header/Header";
 import Footer from "./layout/footer/Footer";
@@ -17,7 +16,6 @@ import ExitIntentModal from "./ui/ExitIntentModal"; // Import the new ExitIntent
 
 export default function ClientLayoutWrapper({ children }) {
   const [user, setUser] = useState(null); // State to hold user session
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
@@ -80,8 +78,7 @@ export default function ClientLayoutWrapper({ children }) {
         }}
       />
       <main className="flex-grow">{children}</main>
-      <FloatingChatButton onClick={() => setIsChatOpen(true)} />
-      <Chat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+      <Chat />
       <Footer />
       <AuthModal
         isModalOpen={isModalOpen}

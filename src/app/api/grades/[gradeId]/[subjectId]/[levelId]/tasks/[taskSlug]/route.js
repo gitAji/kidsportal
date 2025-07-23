@@ -1,12 +1,8 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-import { slugify } from '../../../../../../../utils/slugify';
-
-const dbPath = path.resolve(process.cwd(), 'public/db.json');
+import { slugify } from '@/utils/slugify';
+import dbData from '@/../public/db.json';
 
 function findTaskBySlug(gradeId, subjectId, levelId, taskSlug) {
-  const dbData = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
   const grade = dbData.grades.find(g => g.gradeId === gradeId);
   if (grade) {
     const subject = grade.subjects.find(s => s.subjectId === subjectId);

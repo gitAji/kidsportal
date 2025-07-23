@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-const InteractiveQuiz = ({ quizData, onCorrectAnswer }) => {
+const InteractiveQuiz = ({ quizData, onCorrectAnswer, onWrongAnswer, currentQuestionNumber, totalQuestions }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
 
@@ -17,13 +17,12 @@ const InteractiveQuiz = ({ quizData, onCorrectAnswer }) => {
     correctSound.current = new Audio('/sounds/correct.mp3');
     incorrectSound.current = new Audio('/sounds/incorrect.mp3');
     
-    // Reset state when a new question is passed in
     setSelectedAnswer(null);
     setIsCorrect(null);
   }, [quizData]);
 
   const handleAnswerClick = (option) => {
-    if (isCorrect) return;
+    if (isCorrect !== null) return;
 
     setSelectedAnswer(option);
     const isAnswerCorrect = option === correctAnswer;
@@ -46,9 +45,18 @@ const InteractiveQuiz = ({ quizData, onCorrectAnswer }) => {
     return 'bg-blue-500 hover:bg-blue-600';
   };
 
+  const handleNext = () => {
+    if (isCorrect) {
+      onCorrectAnswer();
+    } else {
+      onWrongAnswer();
+    }
+  };
+
   return (
     <div className="flex-grow flex flex-col items-center justify-center text-center">
       <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">{quizData.title || 'Complete the Task'}</h1>
+      <p className="text-2xl text-gray-700 mb-2">Question {currentQuestionNumber} of {totalQuestions}</p>
       <p className="text-xl md:text-2xl text-gray-600 mb-8">{questionText}</p>
       
       {image && (
@@ -79,9 +87,9 @@ const InteractiveQuiz = ({ quizData, onCorrectAnswer }) => {
         </div>
       )}
 
-      {isCorrect && (
+      {isCorrect !== null && (
         <button
-          onClick={onCorrectAnswer}
+          onClick={handleNext}
           className="mt-8 bg-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-purple-700 transform hover:scale-105 transition-transform duration-300 flex items-center gap-2 text-xl"
         >
           Next <FontAwesomeIcon icon={faArrowRight} />

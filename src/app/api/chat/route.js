@@ -1,27 +1,62 @@
-import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
+// /src/app/api/chat/route.js
 
-const openai = new OpenAI({
-  apiKey: 'sk-proj-iAb9KlRC35pHpKNusk8YSn74yS3I0Zp--L9CeAYkPuwiNeoG4HSXMeJ1qfDE7woxZGYRBOfiaT3BlbkFJ0LA_2X-n_BTwW2VXAlf-hQMbRPC5LsJxz-ZM9iu_lVrTIhwp5OkRzFWsOjgsUUacdbDoJ2R0EA', // This should be loaded from environment variables in a production app
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({
+  vertexai: true,
+  project: "gen-lang-client-0120070959",
+  location: "global",
 });
 
-export async function POST(request) {
-  try {
-    const { message } = await request.json();
+const model = "gemini-2.5-flash-lite";
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4", // Updated to gpt-4
-      messages: [
-        { "role": "system", "content": "You are a helpful assistant for a tutoring platform." },
-        { "role": "user", "content": message }
-      ],
-      temperature: 0.7, // Added temperature parameter
+const siText1 = {
+  text: `KidsPortal is an online learning platform designed for children...`,
+};
+
+const generationConfig = {
+  maxOutputTokens: 1024,
+  temperature: 0.2,
+  topP: 0.8,
+  safetySettings: [
+    { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "OFF" },
+    { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "OFF" },
+    { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "OFF" },
+    { category: "HARM_CATEGORY_HARASSMENT", threshold: "OFF" },
+  ],
+  systemInstruction: { parts: [siText1] },
+};
+
+const chat = ai.chats.create({
+  model: model,
+  config: generationConfig,
+});
+
+// Handle POST request
+export const POST = async (req) => {
+  const { message } = await req.json(); // Parse the incoming request body
+
+  try {
+    const response = await chat.sendMessageStream({
+      message: [{ text: message }],
     });
 
-    const reply = completion.choices[0].message.content;
-    return NextResponse.json({ reply });
+    let resultText = "";
+    for await (const chunk of response) {
+      if (chunk.text) {
+        resultText += chunk.text;
+      }
+    }
+
+    return new Response(JSON.stringify({ response: resultText }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
-    console.error("Error calling OpenAI API:", error);
-    return NextResponse.json({ reply: "I am sorry, but I am unable to respond at the moment." }, { status: 500 });
+    console.error("Error handling the request:", error);
+    return new Response(
+      JSON.stringify({ error: "Failed to generate a response" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
-}
+};

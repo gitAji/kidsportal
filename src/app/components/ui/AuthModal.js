@@ -6,7 +6,7 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { signInWithGoogle, signInWithEmail, signUpWithEmail } from "../../../firebase/auth";
 import { useRouter } from "next/navigation";
 
-export default function ToggleModal({
+export default function AuthModal({
   isModalOpen,
   setIsModalOpen,
   isRegister,

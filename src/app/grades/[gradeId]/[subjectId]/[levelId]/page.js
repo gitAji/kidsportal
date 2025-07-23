@@ -1,14 +1,11 @@
 import React from 'react';
-import TaskCard from '../../../../../components/ui/TaskCard';
-import fs from 'fs';
-import path from 'path';
-import Timeline from '../../../../../components/ui/Timeline';
+import TaskCard from '@/components/ui/TaskCard';
+import Timeline from '@/components/ui/Timeline';
+import dbData from '@/../public/db.json';
+import { getBackgroundImage } from '@/utils/getBackgroundImage';
 
 async function getLevel(gradeId, subjectId, levelId) {
-  const dbPath = path.resolve(process.cwd(), 'public/db.json');
-  const dbData = fs.readFileSync(dbPath, 'utf-8');
-  const data = JSON.parse(dbData);
-  const grade = data.grades.find(g => g.gradeId === gradeId);
+  const grade = dbData.grades.find(g => g.gradeId === gradeId);
   if (!grade) return null;
   const subject = grade.subjects.find(s => s.subjectId === subjectId);
   if (!subject) return null;
@@ -18,6 +15,7 @@ async function getLevel(gradeId, subjectId, levelId) {
 const LevelDetailPage = async ({ params }) => {
   const { gradeId, subjectId, levelId } = params;
   const level = await getLevel(gradeId, subjectId, levelId);
+  const backgroundImage = getBackgroundImage();
 
   if (!level) {
     return <div className="text-center text-lg">Level not found.</div>;
@@ -30,7 +28,7 @@ const LevelDetailPage = async ({ params }) => {
   return (
     <div
       className="min-h-screen bg-cover bg-center p-8"
-      style={{ backgroundImage: "url('/images/intro11.png')" }}
+      style={{ backgroundImage: `url('${backgroundImage}')` }}
     >
       <Timeline />
       <div className="relative max-w-7xl mx-auto bg-white bg-opacity-80 rounded-xl shadow-lg p-8">

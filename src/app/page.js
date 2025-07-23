@@ -4,9 +4,9 @@ import Link from "next/link";
 import fs from 'fs';
 import path from 'path';
 
-import AuthModal from "./components/ui/AuthModal"; 
 import BackToTop from "./components/ui/BackToTop";
 import SkeletonLoader from "./components/ui/SkeletonLoader";
+import HomePageClient from "./components/HomePageClient";
 const GradeCard = lazy(() => import("./components/ui/GradeCard"));
 
 // Fetch data on the server
@@ -33,18 +33,12 @@ export default async function HomePage() {
     "அறிவியல் (Science)": { color: "bg-[#FFD700]", textColor: "text-black" },
   };
 
-  const testimonials = [
-    { text: "This platform helped me improve my math skills significantly. I feel more confident now.", author: "Nila" },
-    { text: "The interactive lessons are amazing! I enjoyed learning with them.", author: "Senthil" },
-    { text: "I love how the lessons are broken down step-by-step. It makes everything easier to understand.", author: "Anitha" },
-  ];
-
   const generateLink = (gradeId, subjectId) => {
     return `/grades/${gradeId}/${subjectId}`;
   };
 
   return (
-    <>
+    <HomePageClient>
       <section className="relative bg-blue-100 py-20 h-[500px] overflow-hidden">
         <Image src="/images/intro.png" alt="Hero Background" fill className="object-cover opacity-30" priority />
         <div className="absolute top-10 left-10 w-24 h-24 animate-pulse">
@@ -116,8 +110,6 @@ export default async function HomePage() {
       </section>
       
       <BackToTop />
-      {/* The AuthModal likely requires client-side logic, so it might need to be wrapped in a client component or handled differently. For now, this is a placeholder for where it would go. */}
-      {/* <AuthModal /> */}
-    </>
+    </HomePageClient>
   );
 }
