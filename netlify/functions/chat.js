@@ -2,8 +2,8 @@ const { GoogleGenAI } = require("@google/genai");
 
 const ai = new GoogleGenAI({
   vertexai: true,
-  project: "gen-lang-client-0120070959", // replace with your project ID
-  location: "global", // or your Vertex AI region
+  project: "gen-lang-client-0120070959", // Replace with your project ID
+  location: "global", // Adjust this if you have a specific region
 });
 
 const model = "gemini-2.5-flash-lite";
@@ -34,7 +34,7 @@ exports.handler = async function (event) {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
-      body: JSON.stringify({ error: "Method Not Allowed" }),
+      body: JSON.stringify({ error: "Method Not Allowed" }), // Allow only POST requests
     };
   }
 
@@ -52,13 +52,13 @@ exports.handler = async function (event) {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ response: resultText }),
+      body: JSON.stringify({ response: resultText }), // Return the generated response
     };
   } catch (error) {
-    console.error("Function error:", error);
+    console.error("Error in function:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Failed to generate a response" }),
+      body: JSON.stringify({ error: "Failed to generate a response" }), // Handle errors
     };
   }
 };

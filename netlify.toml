@@ -1,0 +1,8 @@
+[build]
+  functions = "netlify/functions"  # Where your Netlify functions live
+  publish = "public"  # The folder where your site is built (adjust if needed)
+
+[[redirects]]
+  from = "/api/chat/*"
+  to = "/.netlify/functions/chat"
+  status = 200
