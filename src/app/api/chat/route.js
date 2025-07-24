@@ -1,62 +1,41 @@
-// /src/app/api/chat/route.js
-
-import { GoogleGenAI } from "@google/genai";
-
-const ai = new GoogleGenAI({
-  vertexai: true,
-  project: "gen-lang-client-0120070959",
-  location: "global",
-});
-
-const model = "gemini-2.5-flash-lite";
-
-const siText1 = {
-  text: `KidsPortal is an online learning platform designed for children...`,
-};
-
-const generationConfig = {
-  maxOutputTokens: 1024,
-  temperature: 0.2,
-  topP: 0.8,
-  safetySettings: [
-    { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "OFF" },
-    { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "OFF" },
-    { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "OFF" },
-    { category: "HARM_CATEGORY_HARASSMENT", threshold: "OFF" },
-  ],
-  systemInstruction: { parts: [siText1] },
-};
-
-const chat = ai.chats.create({
-  model: model,
-  config: generationConfig,
-});
-
-// Handle POST request
 export const POST = async (req) => {
-  const { message } = await req.json(); // Parse the incoming request body
-
   try {
-    const response = await chat.sendMessageStream({
-      message: [{ text: message }],
+    const { message } = await req.json();
+
+    // Detect whether running on Netlify or local
+    const isLocal = process.env.NODE_ENV === "development";
+
+    const endpoint = isLocal
+      ? "http://localhost:8888/.netlify/functions/chat" // when running locally with `netlify dev`
+      : "/.netlify/functions/chat"; // works on deployed Netlify site
+
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message }),
     });
 
-    let resultText = "";
-    for await (const chunk of response) {
-      if (chunk.text) {
-        resultText += chunk.text;
-      }
+    const data = await res.json();
+
+    if (!res.ok) {
+      return new Response(JSON.stringify({ error: data.error }), {
+        status: res.status,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
-    return new Response(JSON.stringify({ response: resultText }), {
+    return new Response(JSON.stringify({ response: data.response }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error handling the request:", error);
+    console.error("route.js error:", error);
     return new Response(
-      JSON.stringify({ error: "Failed to generate a response" }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
+      JSON.stringify({ error: "Failed to process request." }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
     );
   }
 };
