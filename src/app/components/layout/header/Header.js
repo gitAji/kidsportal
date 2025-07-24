@@ -1,5 +1,4 @@
 "use client";
-"use client";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +9,6 @@ import {
   FaBell,
   FaUserCircle,
   FaCaretDown,
-  FaCommentDots,
 } from "react-icons/fa"; // Import icons
 import { collection, query, where, onSnapshot } from "firebase/firestore"; // Import Firestore functions
 import { db } from "../../../../firebase/config"; // Import db
@@ -129,25 +127,27 @@ export default function Header({
 
   return (
     <header className="bg-[#ffffff] shadow-md relative">
-      <div className="absolute top-0 right-0 p-4 pr-5 flex space-x-4 items-center">
-        <a
-          className="text-gray-600 text-xs uppercase font-semibold cursor-pointer pb-4"
-          onClick={() => setIsHowItWorksOpen(true)}
-        >
-          How It Works
-        </a>
-        <a
-          className="text-gray-600 text-xs uppercase font-semibold cursor-pointer pb-4"
-          onClick={() => setIsAboutUsOpen(true)}
-        >
-          About Us
-        </a>
-        <a
-          className="text-gray-600 text-xs uppercase font-semibold cursor-pointer pb-4"
-          onClick={() => setIsOurTeamOpen(true)}
-        >
-          Our Team
-        </a>
+      <div className="bg-gray-100 text-gray-600 text-xs uppercase font-semibold">
+        <div className="container mx-auto p-2 flex justify-end space-x-4 items-center">
+          <a
+            className="cursor-pointer hover:text-[var(--primary-blue)]"
+            onClick={() => setIsHowItWorksOpen(true)}
+          >
+            How It Works
+          </a>
+          <a
+            className="cursor-pointer hover:text-[var(--primary-blue)]"
+            onClick={() => setIsAboutUsOpen(true)}
+          >
+            About Us
+          </a>
+          <a
+            className="cursor-pointer hover:text-[var(--primary-blue)]"
+            onClick={() => setIsOurTeamOpen(true)}
+          >
+            Our Team
+          </a>
+        </div>
       </div>
       <div className="container mx-auto p-6 flex justify-between items-center">
         {/* Logo */}
@@ -200,12 +200,6 @@ export default function Header({
                 </div>
               )}
             </div>
-          )}
-          {user && (
-            <FaCommentDots
-              className="text-[var(--foreground)] text-xl cursor-pointer mr-4"
-              onClick={() => console.log("Chat icon clicked from mobile!")}
-            />
           )}
           <button
             className="text-[var(--foreground)] focus:outline-none p-3"
@@ -288,12 +282,6 @@ export default function Header({
                 )}
               </div>
 
-              {/* Chat Icon */}
-              <FaCommentDots
-                className="text-[var(--foreground)] text-xl cursor-pointer ml-4"
-                onClick={() => console.log("Chat icon clicked!")}
-              />
-
               {/* User Icon with Dropdown */}
               <div className="relative" ref={dropdownRef}>
                 <button
@@ -343,15 +331,26 @@ export default function Header({
               </div>
             </div>
           ) : (
-            <button
-              className="bg-[var(--primary-blue)] text-white py-2 px-4 rounded hover:bg-[var(--primary-blue)]/80 transition-colors duration-200"
-              onClick={() => {
-                setIsModalOpen(true);
-                setIsRegister(false);
-              }}
-            >
-              Sign In / Register
-            </button>
+            <>
+              <button
+                className="bg-gray-200 text-gray-800 py-2 px-4 rounded hover:bg-gray-300 transition-colors duration-200"
+                onClick={() => {
+                  setIsModalOpen(true);
+                  setIsRegister(false);
+                }}
+              >
+                Login
+              </button>
+              <button
+                className="bg-[var(--primary-blue)] text-white py-2 px-4 rounded hover:bg-[var(--primary-blue)]/80 transition-colors duration-200"
+                onClick={() => {
+                  setIsModalOpen(true);
+                  setIsRegister(true);
+                }}
+              >
+                Register
+              </button>
+            </>
           )}
         </div>
       </div>
@@ -478,16 +477,28 @@ export default function Header({
                 </div>
               )}
               {!user && (
-                <button
-                  className="text-[var(--foreground)] text-lg hover:text-[var(--primary-blue)] transition-colors duration-200 py-2 w-full"
-                  onClick={() => {
-                    setIsModalOpen(true);
-                    setIsRegister(false);
-                    setIsMenuOpen(false);
-                  }}
-                >
-                  Sign In / Register
-                </button>
+                <div className="flex flex-col space-y-4 w-full">
+                  <button
+                    className="bg-gray-200 text-gray-800 py-2 px-4 rounded hover:bg-gray-300 transition-colors duration-200"
+                    onClick={() => {
+                      setIsModalOpen(true);
+                      setIsRegister(false);
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Login
+                  </button>
+                  <button
+                    className="bg-[var(--primary-blue)] text-white py-2 px-4 rounded hover:bg-[var(--primary-blue)]/80 transition-colors duration-200"
+                    onClick={() => {
+                      setIsModalOpen(true);
+                      setIsRegister(true);
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Register
+                  </button>
+                </div>
               )}
             </nav>
           </div>

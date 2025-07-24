@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FaCcVisa, FaCcMastercard, FaPaypal } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function PaymentContent() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function PaymentContent() {
   const [cvv, setCvv] = useState("");
   const [cardType, setCardType] = useState(""); // 'visa', 'mastercard', 'other'
   const [saveCard, setSaveCard] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -62,6 +64,11 @@ export default function PaymentContent() {
         setErrorMessage("CVV must be 3 or 4 digits.");
         return;
       }
+    }
+
+    if (!agreed) {
+      setErrorMessage("You must agree to the Terms of Service and Privacy Policy.");
+      return;
     }
 
     // Simulate payment processing
@@ -235,6 +242,28 @@ export default function PaymentContent() {
             </button>
           </div>
         )}
+
+        <div className="mt-6">
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              className="form-checkbox"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+            />
+            <span className="ml-2 text-sm text-gray-700">
+              I agree to the{" "}
+              <Link href="/terms" className="text-blue-600 hover:underline">
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link href="/privacy" className="text-blue-600 hover:underline">
+                Privacy Policy
+              </Link>
+              .
+            </span>
+          </label>
+        </div>
 
         <button
           type="submit"

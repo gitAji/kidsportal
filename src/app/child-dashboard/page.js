@@ -2,11 +2,10 @@
 import React, { useEffect, useState, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { doc, deleteDoc } from "firebase/firestore";
-import { db, auth } from "../../firebase/config";
+import { db } from "../../firebase/config";
 
 import SkeletonLoader from "../components/ui/SkeletonLoader";
-import ChildDashboard from "../components/dashboard/ChildDashboard"; // Import ChildDashboard
-import Timeline from "../components/ui/Timeline";
+import ChildDashboard from "../components/dashboard/ChildDashboard";
 
 export default function ChildDashboardPage() {
   const [childUser, setChildUser] = useState(null);
@@ -18,26 +17,28 @@ export default function ChildDashboardPage() {
     const storedChildUser = sessionStorage.getItem("childUser");
     if (storedChildUser) {
       const parsedChildUser = JSON.parse(storedChildUser);
-      console.log("Child user from sessionStorage:", parsedChildUser);
       setChildUser(parsedChildUser);
     } else {
-      router.push("/child-login"); // Redirect to child login if no child user in session
+      router.push("/child-login");
     }
     setLoading(false);
   }, [router]);
 
   const handleDeleteChild = async (childId) => {
-    if (window.confirm("Are you sure you want to delete this child?")) {
-      try {
-        const parentUid = auth.currentUser.uid;
-        const childDocRef = doc(db, "users", parentUid, "children", childId);
-        await deleteDoc(childDocRef);
-        alert("Child deleted successfully!");
-        router.push("/dashboard"); // Redirect to parent dashboard after deletion
-      } catch (err) {
-        console.error("Error deleting child:", err);
-        setDeleteError("Failed to delete child. Please try again.");
-      }
+    if (!childUser || !childUser.parentUid) {
+      setDeleteError("Could not delete child. Parent information is missing.");
+      return;
+    }
+
+    try {
+      const parentUid = childUser.parentUid; // <-- FIX: Use the reliable parentUid from the childUser object
+      const childDocRef = doc(db, "users", parentUid, "children", childId);
+      await deleteDoc(childDocRef);
+      alert("Child deactivated successfully!");
+      router.push("/dashboard");
+    } catch (err) {
+      console.error("Error deleting child:", err);
+      setDeleteError("Failed to deactivate child. Please try again.");
     }
   };
 
@@ -52,13 +53,12 @@ export default function ChildDashboardPage() {
   }
 
   if (!childUser) {
-    return null; // Should redirect by useEffect
+    return null; // Redirecting
   }
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <main className="flex-grow p-4">
-        <Timeline />
         {deleteError && (
           <p className="text-red-500 text-center mb-4">{deleteError}</p>
         )}
@@ -67,6 +67,7 @@ export default function ChildDashboardPage() {
             key={childUser.id}
             child={childUser}
             onDelete={handleDeleteChild}
+            onClose={() => router.push('/dashboard')}
           />
         </Suspense>
       </main>

@@ -1,0 +1,23 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // This rule secures all parent and child data.
+    // It allows a logged-in user to read and write ONLY to their own documents
+    // and the subcollections within them (like their 'children').
+    match /users/{userId}/{documents=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // This rule manages the global directory of child usernames for fast, secure logins.
+    match /child_usernames/{username} {
+      // Allow anyone to check if a username exists (for login).
+      allow get: if true;
+
+      // Allow a logged-in parent to create, update, or delete a username
+      // ONLY IF the parent's ID in the document matches their own ID.
+      // This prevents one parent from modifying another parent's child data.
+      allow write: if request.auth != null && request.resource.data.parentUid == request.auth.uid;
+      allow delete: if request.auth != null && resource.data.parentUid == request.auth.uid;
+    }
+  }
+}

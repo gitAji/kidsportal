@@ -1,38 +1,45 @@
+"use client";
 import React from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { FaChartBar, FaBook, FaStar } from 'react-icons/fa';
 
 const ProgressTracker = ({ progress }) => {
-  const subjects = progress ? Object.keys(progress.subjects) : [];
+  if (!progress || !progress.subjects) {
+    return (
+      <div className="bg-white p-6 rounded-lg shadow-md text-center text-gray-500">
+        <FaChartBar className="text-6xl text-gray-300 mx-auto mb-4" />
+        <p>No progress to display yet. Start learning to see your progress!</p>
+      </div>
+    );
+  }
 
-  const getProgressBarColor = (score) => {
-    if (score >= 80) return 'bg-green-500';
-    if (score >= 50) return 'bg-yellow-500';
-    return 'bg-red-500';
-  };
+  const data = Object.entries(progress.subjects).map(([name, values]) => ({
+    name,
+    score: values.score,
+  }));
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      {subjects.length > 0 ? (
-        subjects.map((subject) => {
-          const subjectProgress = progress.subjects[subject];
-          return (
-            <div key={subject} className="mb-4">
-              <div className="flex justify-between mb-1">
-                <span className="text-lg font-medium text-gray-700 capitalize">{subject}</span>
-                <span className="text-sm text-gray-600">Score: {subjectProgress.score}%</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div
-                  className={`${getProgressBarColor(subjectProgress.score)} h-2.5 rounded-full`}
-                  style={{ width: `${subjectProgress.score}%` }}
-                ></div>
-              </div>
-              <p className="text-sm text-gray-500 mt-1">Grade: {subjectProgress.grade}, Level: {subjectProgress.level}</p>
-            </div>
-          );
-        })
-      ) : (
-        <p className="text-gray-700">No progress to display.</p>
-      )}
+      <h3 className="text-2xl font-semibold mb-4 text-indigo-600 flex items-center">
+        <FaChartBar className="mr-2" /> Your Progress
+      </h3>
+      <div style={{ width: '100%', height: 300 }}>
+        <ResponsiveContainer>
+          <BarChart
+            data={data}
+            margin={{
+              top: 5, right: 30, left: 20, bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="score" fill="#8884d8" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };

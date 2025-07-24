@@ -1,22 +1,18 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
-import { doc, onSnapshot, deleteDoc, setDoc, collection, query, getDocs } from "firebase/firestore";
+import { doc, onSnapshot, collection, query, getDocs } from "firebase/firestore";
 import { db } from '../../../firebase/config';
 import { auth } from '../../../firebase/auth';
 import { useRouter } from "next/navigation";
-
-// Lazy load these components
-const ChildrenList = lazy(() => import("./ChildrenList"));
-const AddChildForm = lazy(() => import("./AddChildForm"));
-const Notifications = lazy(() => import("./Notifications"));
-const SkeletonLoader = lazy(() => import("../ui/SkeletonLoader"));
-const Modal = lazy(() => import("../ui/Modal")); // Use generic Modal for AddChildForm
-const ChildDashboard = lazy(() => import("./ChildDashboard")); // Import ChildDashboard
-const GradesReport = lazy(() => import("./GradesReport"));
-const Subscription = lazy(() => import("./Subscription")); // Import Subscription
+import Subscription from "./Subscription";
+import ChildrenList from "./ChildrenList";
+import AddChildForm from "./AddChildForm";
+import Notifications from "./Notifications";
+import SkeletonLoader from "../ui/SkeletonLoader";
+import Modal from "../ui/Modal";
+import { FaPlus, FaBell, FaUserFriends } from 'react-icons/fa';
 
 const ParentDashboard = () => {
   const [showAddChildModal, setShowAddChildModal] = useState(false);
-  const [selectedChild, setSelectedChild] = useState(null);
   const [parentData, setParentData] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -27,10 +23,9 @@ const ParentDashboard = () => {
       const unsubscribe = onSnapshot(parentDocRef, async (docSnap) => {
         if (docSnap.exists()) {
           const data = docSnap.data();
-          // Fetch children subcollection
           const childrenCollectionRef = collection(db, 'users', auth.currentUser.uid, 'children');
           const q = query(childrenCollectionRef);
-          const childrenSnapshot = await getDocs(q); // Use getDocs for a one-time fetch
+          const childrenSnapshot = await getDocs(q);
           const childrenData = childrenSnapshot.docs.map(childDoc => ({
             id: childDoc.id,
             ...childDoc.data()
@@ -46,7 +41,6 @@ const ParentDashboard = () => {
   }, []);
 
   const handleAddChildClick = () => {
-    setSelectedChild(null); // Ensure no child is selected when adding a new one
     setShowAddChildModal(true);
   };
 
@@ -56,7 +50,6 @@ const ParentDashboard = () => {
 
   const handleSaveSuccess = () => {
     setShowAddChildModal(false);
-    setSelectedChild(null); // Clear selected child after save, or re-fetch children list
   };
 
   if (loading) {
@@ -64,75 +57,66 @@ const ParentDashboard = () => {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      {/* Parent Info & Subscription Card and Plan Card */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-        {/* Left Card: Parent Info */}
-        <div className="bg-[var(--background)] p-6 rounded-lg shadow-md flex flex-col justify-between">
-          <div className="text-center md:text-left">
-            <h1 className="page-heading text-center md:text-left mb-3">Welcome, {auth.currentUser?.displayName || auth.currentUser?.email}!</h1>
-            <p className="text-xl text-gray-700 mb-3">Parent</p>
-            <p className="text-lg text-gray-600 mb-4">Children: {parentData?.children ? parentData.children.length : 0}</p>
+    <div className="container mx-auto p-4 sm:p-6 bg-gray-50 min-h-screen">
+      {/* Header */}
+      <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-800">Parent Dashboard</h1>
+          <p className="text-lg text-gray-600">Welcome back, {auth.currentUser?.displayName || auth.currentUser?.email}!</p>
+        </div>
+        <button
+          onClick={handleAddChildClick}
+          className="mt-4 sm:mt-0 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 flex items-center"
+        >
+          <FaPlus className="mr-2" /> Add Child
+        </button>
+      </header>
+
+      {/* Main Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Left Column: Children List */}
+        <main className="lg:col-span-2">
+          <section>
+            <h2 className="text-2xl font-bold text-gray-700 mb-4 flex items-center">
+              <FaUserFriends className="mr-3" /> Your Children
+            </h2>
+            <Suspense fallback={<SkeletonLoader />}>
+              <ChildrenList />
+            </Suspense>
+          </section>
+        </main>
+
+        {/* Right Column: Subscription and Notifications */}
+        <aside>
+          <div className="space-y-8">
+            <section>
+              <h2 className="text-2xl font-bold text-gray-700 mb-4">Subscription</h2>
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <Suspense fallback={<SkeletonLoader />}>
+                  <Subscription />
+                </Suspense>
+              </div>
+            </section>
             
-            {/* Lessons and Quizzes Used */}
-            <div className="flex justify-center md:justify-start gap-6 mt-6">
-              <div className="text-center">
-                <p className="text-md text-gray-600">Lessons used:</p>
-                <p className="text-xl font-bold text-[var(--primary-blue)]">{parentData?.lessonsUsed || 0}/{parentData?.totalLessons || 0}</p>
+            <section>
+              <h2 className="text-2xl font-bold text-gray-700 mb-4 flex items-center">
+                <FaBell className="mr-3" /> Notifications
+              </h2>
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <Suspense fallback={<SkeletonLoader />}>
+                  <Notifications notifications={parentData?.notifications} />
+                </Suspense>
               </div>
-              <div className="text-center">
-                <p className="text-md text-gray-600">Quizzes:</p>
-                <p className="text-xl font-bold text-[var(--primary-blue)]">{parentData?.quizzesUsed || 0}/{parentData?.totalQuizzes || 0}</p>
-              </div>
-            </div>
+            </section>
           </div>
-        </div>
-
-        {/* Right Card: Subscription Info */}
-        <div className="bg-[var(--background)] p-6 rounded-lg shadow-md flex flex-col justify-between">
-          <Suspense fallback={<SkeletonLoader />}>
-            <Subscription />
-          </Suspense>
-        </div>
-      </section>
-
-      {/* Children Management Section */}
-      <section className="mb-8">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-3xl font-bold text-heading">Manage Your Children</h2>
-          <button
-            onClick={handleAddChildClick}
-            className="px-5 py-2 bg-primary-blue text-white rounded-md hover:bg-primary-blue/80 transition-colors duration-300 text-lg"
-          >
-            Add Child
-          </button>
-        </div>
-        <div className="overflow-x-auto pb-4">
-          <Suspense fallback={<SkeletonLoader />}>
-            <ChildrenList />
-          </Suspense>
-        </div>
-      </section>
-
-      {/* Grades Report Section */}
-      <section className="mb-8">
-        <Suspense fallback={<SkeletonLoader />}>
-          <GradesReport />
-        </Suspense>
-      </section>
-
-      {/* Notifications Section */}
-      <section className="mb-8">
-        <Suspense fallback={<SkeletonLoader />}>
-          <Notifications notifications={parentData?.notifications} />
-        </Suspense>
-      </section>
+        </aside>
+      </div>
 
       {/* Add Child Modal */}
       {showAddChildModal && (
         <Suspense fallback={<SkeletonLoader />}>
           <Modal onClose={handleCloseAddChildModal}>
-            <AddChildForm onClose={handleCloseAddChildModal} childToEdit={selectedChild} onSaveSuccess={handleSaveSuccess} />
+            <AddChildForm onClose={handleCloseAddChildModal} onSaveSuccess={handleSaveSuccess} />
           </Modal>
         </Suspense>
       )}

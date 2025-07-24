@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { signUpWithEmail, signInWithGoogle } from "../../firebase/auth";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -11,6 +12,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
 
@@ -30,6 +32,11 @@ export default function RegisterPage() {
 
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
+      return;
+    }
+
+    if (!agreed) {
+      setError("You must agree to the Terms of Service and Privacy Policy.");
       return;
     }
 
@@ -130,6 +137,27 @@ export default function RegisterPage() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
+            </div>
+            <div className="mb-6">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  className="form-checkbox"
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                />
+                <span className="ml-2 text-sm text-gray-700">
+                  I agree to the{" "}
+                  <Link href="/terms" className="text-blue-600 hover:underline">
+                    Terms of Service
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/privacy" className="text-blue-600 hover:underline">
+                    Privacy Policy
+                  </Link>
+                  .
+                </span>
+              </label>
             </div>
             <div className="text-center">
               <button

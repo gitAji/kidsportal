@@ -1,124 +1,167 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 
 export default function ChildLoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const childUsername = searchParams.get('username');
+    if (childUsername) {
+      setUsername(childUsername);
+    }
+  }, [searchParams]);
 
   const handleChildLogin = async (e) => {
     e.preventDefault();
     setError(null);
+    setLoading(true);
+    console.log(`Attempting to log in with username: "${username}"`);
+
+    if (!username || !password) {
+        setError("Please enter both username and password.");
+        setLoading(false);
+        return;
+    }
 
     try {
-      // Query all parent documents to find the child
-      const usersRef = collection(db, "users");
-      const userSnapshot = await getDocs(usersRef);
+      // Step 1: Look up the username in the global directory
+      console.log(`Step 1: Looking up username "${username}" in 'child_usernames' collection.`);
+      const usernameDocRef = doc(db, 'child_usernames', username);
+      const usernameDoc = await getDoc(usernameDocRef);
 
-      let foundChild = null;
-      let parentUid = null;
-
-      for (const userDoc of userSnapshot.docs) {
-        const childrenRef = collection(db, "users", userDoc.id, "children");
-        const q = query(
-          childrenRef,
-          where("username", "==", username),
-          where("password", "==", password) // In a real app, hash passwords!
-        );
-        const childSnapshot = await getDocs(q);
-
-        if (!childSnapshot.empty) {
-          foundChild = childSnapshot.docs[0].data();
-          parentUid = userDoc.id;
-          break;
-        }
+      if (!usernameDoc.exists()) {
+        console.error("Login Error: Username document not found in 'child_usernames'.");
+        setError("Invalid username or password. Please try again.");
+        setLoading(false);
+        return;
       }
+      console.log("Step 1 Success: Username document found.");
 
-      if (foundChild) {
-        // For demonstration, store child data in session storage
-        // In a real app, use a more secure token-based authentication
-        sessionStorage.setItem(
-          "childUser",
-          JSON.stringify({ ...foundChild, parentUid })
-        );
-        router.push("/child-dashboard"); // Redirect to the child's dashboard
-      } else {
-        setError("Invalid username or password.");
+      // Step 2: Get the parent and child IDs from the directory
+      const { parentUid, childId } = usernameDoc.data();
+      console.log(`Step 2: Retrieved parentUid: ${parentUid}, childId: ${childId}`);
+
+      // Step 3: Fetch the actual child document
+      console.log(`Step 3: Fetching child document from path: /users/${parentUid}/children/${childId}`);
+      const childDocRef = doc(db, 'users', parentUid, 'children', childId);
+      const childDoc = await getDoc(childDocRef);
+
+      if (!childDoc.exists()) {
+        console.error("Login Error: Child document not found at the specified path.");
+        setError("An unexpected error occurred. Child profile not found.");
+        setLoading(false);
+        return;
       }
+      console.log("Step 3 Success: Child document found.");
+
+      const childData = childDoc.data();
+
+      // Step 4: Verify the password and account status
+      console.log("Step 4: Verifying password and account status.");
+      if (childData.password !== password) {
+        console.error(`Login Error: Password mismatch. Entered: "${password}", Stored: "${childData.password}"`);
+        setError("Invalid username or password. Please try again.");
+        setLoading(false);
+        return;
+      }
+      console.log("Password match success.");
+
+      if (childData.loginEnabled === false) {
+        console.error("Login Error: Account is disabled.");
+        setError("Your account is currently disabled. Please ask your parent to enable it.");
+        setLoading(false);
+        return;
+      }
+      console.log("Account is enabled.");
+
+      // Step 5: Success! Store session and redirect.
+      console.log("Step 5: Login successful! Redirecting to /learning-zone.");
+      const foundChild = { id: childDoc.id, ...childData, parentUid };
+      sessionStorage.setItem("childUser", JSON.stringify(foundChild));
+      router.push("/learning-zone");
+
     } catch (err) {
-      console.error("Error during child login:", err);
-      setError("An error occurred during login. Please try again.");
+      console.error("A critical error occurred during the login process:", err);
+      setError("An error occurred during login. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      <main className="flex-grow p-4 flex items-center justify-center">
-        <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md w-full">
-          <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
-            Child Login
-          </h1>
-          {error && (
-            <div className="p-3 mb-4 rounded text-center bg-red-100 text-red-700">
-              {error}
-            </div>
-          )}
-          <form onSubmit={handleChildLogin}>
-            <div className="mb-4">
-              <label
-                htmlFor="username"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Username:
-              </label>
-              <input
-                type="text"
-                id="username"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="password"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Password:
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-              >
-                Login
-              </button>
-            </div>
-            <div className="mt-4 text-center">
-              <p className="text-gray-600">
-                Are you a parent?{" "}
-                <a href="/login" className="text-blue-600 hover:underline">
-                  Sign In/Sign Up here
-                </a>
-              </p>
-            </div>
-          </form>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+        <h1 className="text-3xl font-bold text-center text-gray-800">
+          Welcome Back!
+        </h1>
+        <p className="text-center text-gray-600">Enter your username and password to log in.</p>
+        
+        {error && (
+          <div className="p-3 rounded text-center bg-red-100 text-red-700">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleChildLogin} className="space-y-6">
+          <div>
+            <label
+              htmlFor="username"
+              className="text-sm font-bold text-gray-700"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="password"
+              className="text-sm font-bold text-gray-700"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              disabled={loading}
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </div>
+        </form>
+        <div className="text-center">
+          <p className="text-sm text-gray-600">
+            Are you a parent?{" "}
+            <a href="/login" className="font-medium text-blue-600 hover:underline">
+              Click here
+            </a>
+          </p>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

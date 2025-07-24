@@ -1,4 +1,3 @@
-// app/components/ClientLayoutWrapper.jsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -53,29 +52,14 @@ export default function ClientLayoutWrapper({ children }) {
     };
   }, [user]); // Add user to dependency array
 
-  console.log('ClientLayoutWrapper state (before render):', {
-    isHowItWorksOpen,
-    isAboutUsOpen,
-    isOurTeamOpen,
-  });
-
   return (
     <div className="flex flex-col min-h-screen">
       <Header
         setIsModalOpen={setIsModalOpen}
         setIsRegister={setIsRegister}
-        setIsHowItWorksOpen={(value) => {
-          console.log(`Attempting to set isHowItWorksOpen from ${isHowItWorksOpen} to ${value}`);
-          setIsHowItWorksOpen(value);
-        }}
-        setIsAboutUsOpen={(value) => {
-          console.log(`Attempting to set isAboutUsOpen from ${isAboutUsOpen} to ${value}`);
-          setIsAboutUsOpen(value);
-        }}
-        setIsOurTeamOpen={(value) => {
-          console.log(`Attempting to set isOurTeamOpen from ${isOurTeamOpen} to ${value}`);
-          setIsOurTeamOpen(value);
-        }}
+        setIsHowItWorksOpen={setIsHowItWorksOpen}
+        setIsAboutUsOpen={setIsAboutUsOpen}
+        setIsOurTeamOpen={setIsOurTeamOpen}
       />
       <main className="flex-grow">{children}</main>
       <Chat />

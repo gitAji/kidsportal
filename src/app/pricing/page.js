@@ -1,24 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
-
 import { motion } from "framer-motion";
 
 export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState("monthly"); // 'monthly' or 'yearly'
   const router = useRouter();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        // User is not logged in, redirect to login page
-        router.push("/login");
-      }
-    });
-    return () => unsubscribe();
-  }, [router]);
 
   const plans = [
     {

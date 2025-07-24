@@ -60,12 +60,12 @@ const Timeline = () => {
 
   return (
     <div className="w-full bg-white p-3 shadow-md mb-4 rounded-lg">
-      <div className="flex justify-center items-center gap-4 sm:gap-6">
+      <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4">
         {steps.map((step, idx) => (
           <React.Fragment key={idx}>
             <Link
               href={step.href}
-              className={`flex flex-col items-center px-4 py-2 rounded-lg text-sm font-medium transition
+              className={`flex flex-col items-center px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition
                 ${
                   pathname === step.href
                     ? "bg-green-500 text-white scale-105"
@@ -73,11 +73,11 @@ const Timeline = () => {
                 }
               `}
             >
-              <FontAwesomeIcon icon={step.icon} className="text-lg mb-1" />
+              <FontAwesomeIcon icon={step.icon} className="text-base sm:text-lg mb-1" />
               <span>{step.label}</span>
             </Link>
             {idx < steps.length - 1 && (
-              <div className="w-12 h-1 bg-gray-300"></div>
+              <div className="w-4 h-1 bg-gray-300 sm:w-8"></div>
             )}
           </React.Fragment>
         ))}

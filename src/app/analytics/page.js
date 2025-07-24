@@ -23,7 +23,7 @@ export default function AnalyticsPage() {
       {/* Analytics Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto text-center px-4">
-          <h1 className="text-4xl font-bold text-blue-600">
+          <h1 className="page-heading">
             Analytics Overview
           </h1>
           <p className="mt-4 text-gray-600">
