@@ -12,7 +12,7 @@ import path from "path";
 
 // Resolve the path to your db.json file
 // This assumes db.json is directly inside the 'public' directory at the root of your Next.js project.
-const dbPath = path.resolve(process.cwd(), "public/db.json");
+const dbPath = path.resolve(process.cwd(), "src/app/data/db.json");
 
 /**
  * Finds the tasks array for a specific grade, subject, and level from the db.json.

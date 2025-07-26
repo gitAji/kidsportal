@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { slugify } from '@/utils/slugify';
-import dbData from '@/../public/db.json';
+import dbData from '../../../../../../../data/db.json';
 
 function findTaskBySlug(gradeId, subjectId, levelId, taskSlug) {
   const grade = dbData.grades.find(g => g.gradeId === gradeId);

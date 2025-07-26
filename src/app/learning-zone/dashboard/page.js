@@ -3,7 +3,7 @@ import React, { useEffect, useState, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import SkeletonLoader from "../../components/ui/SkeletonLoader";
 import LearningZone from "../../components/learning/LearningZone";
-import dbData from '../../../../public/db.json';
+import dbData from '../../data/db.json';
 
 export default function LearningZoneDashboardPage() {
   const [childUser, setChildUser] = useState(null);

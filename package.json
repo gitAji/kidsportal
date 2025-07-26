@@ -28,7 +28,7 @@
     "express": "^5.1.0",
     "firebase": "^11.10.0",
     "firebase-admin": "^13.4.0",
-    "framer-motion": "^12.23.5",
+    "framer-motion": "^12.23.9",
     "howler": "^2.2.4",
     "jspdf": "^3.0.1",
     "lodash": "^4.17.21",

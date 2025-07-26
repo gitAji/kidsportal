@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-const dbPath = path.resolve(process.cwd(), 'public/db.json');
+const dbPath = path.resolve(process.cwd(), 'src/app/data/db.json');
 
 export async function GET(request, { params }) {
   const { gradeId } = params;

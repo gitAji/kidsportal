@@ -1,53 +1,66 @@
 "use client";
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import SkeletonLoader from "../components/ui/SkeletonLoader";
-import LearningZone from "../components/learning/LearningZone";
-import dbData from '../../../public/db.json';
+import Link from "next/link";
+import { motion } from "framer-motion"; // Import motion
+import { useChild } from '../providers/ChildProvider';
+import { getSubjectsByGrade } from '../utils/learningData'; // Import the new utility function
+
+// A map for sleek subject colors, matching parent site
+const subjectColorMap = {
+  "English": "bg-[#1E90FF] text-white",
+  "Math": "bg-[#FF6347] text-white",
+  "Tamil": "bg-[#32CD32] text-white",
+  "Science": "bg-[#FFD700] text-black",
+  "Ariviyal": "bg-[#FFD700] text-black", // Assuming Ariviyal uses Science color or similar
+  "default": "bg-gray-500 text-white",
+};
 
 export default function LearningZonePage() {
-  const [childUser, setChildUser] = useState(null);
-  const [learningContent, setLearningContent] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { childUser } = useChild();
+  const [subjects, setSubjects] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
-    const storedChildUser = sessionStorage.getItem("childUser");
-    if (storedChildUser) {
-      const parsedChildUser = JSON.parse(storedChildUser);
-      setChildUser(parsedChildUser);
-
-      const gradeData = dbData.grades.find(g => g.gradeName === parsedChildUser.grade);
-      if (gradeData) {
-        setLearningContent(gradeData.subjects);
-      }
-    } else {
-      router.push("/child-login");
+    if (childUser) {
+      const fetchedSubjects = getSubjectsByGrade(childUser.gradeId);
+      setSubjects(fetchedSubjects);
     }
-    setLoading(false);
-  }, [router]);
-
-  if (loading) {
-    return (
-      <div className="flex flex-col min-h-screen bg-blue-50">
-        <main className="flex-grow p-4">
-          <SkeletonLoader />
-        </main>
-      </div>
-    );
-  }
+  }, [childUser]);
 
   if (!childUser) {
-    return null; // Redirecting
+    return null; // The provider handles loading and redirection
   }
 
+  // Animation variants for cards
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hover: { scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)" },
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-purple-200">
-      <main className="container mx-auto p-4 sm:p-6">
-        <Suspense fallback={<SkeletonLoader />}>
-          <LearningZone child={childUser} subjects={learningContent} />
-        </Suspense>
-      </main>
+    <div className="p-4 sm:p-6 md:p-8">
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: { transition: { staggerChildren: 0.1 } },
+        }}
+      >
+        {subjects.map((subject) => (
+          <Link key={subject.subjectId} href={`/learning-zone/subjects/${subject.subjectId}`}>
+            <motion.div
+              className={`${subjectColorMap[subject.subjectName] || subjectColorMap.default} rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center h-48 cursor-pointer`}
+              variants={cardVariants}
+              whileHover="hover"
+            >
+              <h2 className="text-2xl font-bold text-center">{subject.subjectName}</h2>
+            </motion.div>
+          </Link>
+        ))}
+      </motion.div>
     </div>
   );
 }

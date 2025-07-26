@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import dbData from '@/public/db.json';
+import dbData from '../../../../data/db.json';
 
 export async function GET(request, { params }) {
   const { gradeId, subjectId } = params;

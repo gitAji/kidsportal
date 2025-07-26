@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import dbData from '../../../public/db.json'; // Use the local JSON data
+import dbData from '../../data/db.json'; // Use the local JSON data
 
 const AssignTaskForm = ({ child, onAssign, onClose }) => {
   const [selectedSubjectId, setSelectedSubjectId] = useState('');

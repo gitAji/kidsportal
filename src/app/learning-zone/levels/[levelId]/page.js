@@ -1,22 +1,22 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import dbData from '@/../public/db.json';
-import SkeletonLoader from '@/components/ui/SkeletonLoader';
+import dbData from '../../../data/db.json';
+import SkeletonLoader from '@/app/components/ui/SkeletonLoader';
 import { FaArrowLeft } from 'react-icons/fa';
-import InteractiveQuiz from '@/components/learning/InteractiveQuiz';
-import CompletionModal from '@/components/learning/CompletionModal';
-import LevelPath from '@/components/learning/LevelPath';
+import InteractiveQuiz from '@/app/components/learning/InteractiveQuiz';
+import CompletionModal from '@/app/components/learning/CompletionModal';
+import LevelPath from '@/app/components/learning/LevelPath';
 
-const LessonViewer = ({ task }) => {
+const LessonViewer = ({ task, subjectId }) => {
   const router = useRouter();
   return (
     <div>
       <button
-        onClick={() => router.back()}
+        onClick={() => router.push(`/learning-zone/subjects/${subjectId}`)}
         className="flex items-center text-lg font-semibold text-gray-700 hover:text-blue-600 mb-4"
       >
-        <FaArrowLeft className="mr-2" /> Back to Level
+        <FaArrowLeft className="mr-2" /> Back to Levels
       </button>
       <h2 className="text-2xl font-bold mb-4">{task.taskName}</h2>
       <div dangerouslySetInnerHTML={{ __html: task.content }} />
@@ -27,6 +27,7 @@ const LessonViewer = ({ task }) => {
 export default function LevelPage() {
     const [childUser, setChildUser] = useState(null);
     const [levelData, setLevelData] = useState(null);
+    const [subjectId, setSubjectId] = useState(null); // Add state for subjectId
     const [activeTask, setActiveTask] = useState(null);
     const [completedTasks, setCompletedTasks] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -49,16 +50,21 @@ export default function LevelPage() {
         }
 
         let foundLevel = null;
+        let foundSubjectId = null;
         for (const grade of dbData.grades) {
             for (const subject of grade.subjects) {
                 foundLevel = subject.levels.find(l => l.levelId === levelId);
-                if (foundLevel) break;
+                if (foundLevel) {
+                    foundSubjectId = subject.subjectId;
+                    break;
+                }
             }
             if (foundLevel) break;
         }
 
         if (foundLevel) {
             setLevelData(foundLevel);
+            setSubjectId(foundSubjectId); // Set the found subjectId
             // Set the first uncompleted task as active, or the first task overall
             const firstUncompleted = foundLevel.tasks.find(t => !completed.includes(t.taskId));
             setActiveTask(firstUncompleted || foundLevel.tasks[0]);
@@ -101,9 +107,12 @@ export default function LevelPage() {
     return (
         <div className="min-h-screen bg-gradient-to-b from-purple-100 to-teal-100 p-4 sm:p-8">
             <div className="max-w-7xl mx-auto">
-                <button onClick={() => router.push('/learning-zone')} className="flex items-center text-lg font-semibold text-gray-700 hover:text-blue-600 mb-6">
-                    <FaArrowLeft className="mr-2" /> Back to All Levels
-                </button>
+                <button
+        onClick={() => router.push(`/learning-zone/subjects/${levelData.subjectId}`)}
+        className="flex items-center text-lg font-semibold text-gray-700 hover:text-blue-600 mb-6"
+      >
+        <FaArrowLeft className="mr-2" /> Back to Levels
+      </button>
 
                 <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-6 mb-8">
                     <h2 className="text-3xl font-bold mb-4 text-gray-800 text-center">{levelData.levelName}</h2>
@@ -118,7 +127,7 @@ export default function LevelPage() {
                 <main className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-8">
                     {activeTask && (
                         <>
-                            {activeTask.type === 'lesson' && <LessonViewer task={activeTask} />}
+                            {activeTask.type === 'lesson' && <LessonViewer task={activeTask} subjectId={subjectId} />}
                             {(activeTask.type === 'quiz' || activeTask.type === 'exam') && 
                                 <InteractiveQuiz 
                                     task={activeTask} 

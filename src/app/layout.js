@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import localFont from "next/font/local";
 import "./globals.css";
 import SessionProviderWrapper from "./providers/SessionProviderWrapper";
-import ClientLayoutWrapper from "../app/components/ClientLayoutWrapper"; // 👈 create this
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,13 +28,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProviderWrapper>
-          <UIProvider>
-            <ClientLayoutWrapper>
-              <Suspense fallback={<div>Loading...</div>}>
-                {children}
-              </Suspense>
-            </ClientLayoutWrapper>
-          </UIProvider>
+          <UIProvider>{children}</UIProvider>
         </SessionProviderWrapper>
       </body>
     </html>

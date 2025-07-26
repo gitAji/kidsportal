@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, logout } from "../../../../firebase/auth";
+import { auth, logout } from "@/firebase/auth";
 import { FaBell, FaUserCircle, FaCaretDown } from "react-icons/fa";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
-import { db } from "../../../../firebase/config";
+import { db } from "@/firebase/config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChartBar,
