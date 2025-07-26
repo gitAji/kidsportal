@@ -1,19 +1,41 @@
 "use client"; // Ensure this component is treated as a client component
 
-import { useEffect } from "react"; // Import useEffect for side effects
-
+import { useState, useEffect } from "react"; // Import useState and useEffect
+import AnimatedNumber from "../components/ui/CountUp"; // Import the new component
 import BackToTop from "../components/ui/BackToTop"; // BackToTop component
 
 export default function AnalyticsPage() {
-  // Example of analytics data fetching
+  const [analyticsData, setAnalyticsData] = useState({
+    totalHoursStudied: 0,
+    subjectsCompleted: 0,
+    quizzesTaken: 0,
+    averageScore: 0,
+    goalsAchieved: 0,
+    recentActivity: [],
+  });
+
   useEffect(() => {
-    // This could be where you fetch analytics data
-    console.log("Fetching analytics data...");
-    // Example: Fetch analytics data from an API
-    // fetch('/api/analytics')
-    //   .then(response => response.json())
-    //   .then(data => console.log(data))
-    //   .catch(error => console.error('Error fetching analytics:', error));
+    // Simulate fetching analytics data
+    const fetchAnalyticsData = async () => {
+      // In a real application, you would fetch this from an API
+      // For now, we'll use a setTimeout to simulate network delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      setAnalyticsData({
+        totalHoursStudied: 50,
+        subjectsCompleted: 8,
+        quizzesTaken: 15,
+        averageScore: 85,
+        goalsAchieved: 3,
+        recentActivity: [
+          "Math - Completed Chapter 2",
+          "Science - Scored 90% on Quiz",
+          "English - Read 5 chapters",
+        ],
+      });
+    };
+
+    fetchAnalyticsData();
   }, []);
 
   return (
@@ -30,34 +52,42 @@ export default function AnalyticsPage() {
             Here you can view your childs learning analytics and progress.
           </p>
 
-          {/* Sample Analytics Data Display */}
+          {/* Analytics Data Display */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <h3 className="text-2xl font-bold text-blue-600">
                 Total Hours Studied
               </h3>
-              <p className="mt-4 text-lg text-gray-800">50 hours</p>
+              <p className="mt-4 text-lg text-gray-800">
+                <AnimatedNumber number={analyticsData.totalHoursStudied} /> hours
+              </p>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <h3 className="text-2xl font-bold text-blue-600">
                 Subjects Completed
               </h3>
-              <p className="mt-4 text-lg text-gray-800">8 subjects</p>
+              <p className="mt-4 text-lg text-gray-800">
+                <AnimatedNumber number={analyticsData.subjectsCompleted} /> subjects
+              </p>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <h3 className="text-2xl font-bold text-blue-600">
                 Quizzes Taken
               </h3>
-              <p className="mt-4 text-lg text-gray-800">15 quizzes</p>
+              <p className="mt-4 text-lg text-gray-800">
+                <AnimatedNumber number={analyticsData.quizzesTaken} /> quizzes
+              </p>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <h3 className="text-2xl font-bold text-blue-600">
                 Average Score
               </h3>
-              <p className="mt-4 text-lg text-gray-800">85%</p>
+              <p className="mt-4 text-lg text-gray-800">
+                <AnimatedNumber number={analyticsData.averageScore} />%
+              </p>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-lg">
@@ -65,9 +95,9 @@ export default function AnalyticsPage() {
                 Recent Activity
               </h3>
               <ul className="mt-4 text-gray-800">
-                <li>Math - Completed Chapter 2</li>
-                <li>Science - Scored 90% on Quiz</li>
-                <li>English - Read 5 chapters</li>
+                {analyticsData.recentActivity.map((activity, index) => (
+                  <li key={index}>{activity}</li>
+                ))}
               </ul>
             </div>
 
@@ -75,7 +105,9 @@ export default function AnalyticsPage() {
               <h3 className="text-2xl font-bold text-blue-600">
                 Goals Achieved
               </h3>
-              <p className="mt-4 text-lg text-gray-800">3 goals</p>
+              <p className="mt-4 text-lg text-gray-800">
+                <AnimatedNumber number={analyticsData.goalsAchieved} /> goals
+              </p>
             </div>
           </div>
         </div>

@@ -1,12 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { collection, query, onSnapshot } from 'firebase/firestore';
+import { collection, query, getDocs } from 'firebase/firestore'; // Import getDocs
 import { db } from '../../../firebase/config';
 import { auth } from '../../../firebase/auth';
 import { useRouter } from 'next/navigation';
-import { FaUser } from 'react-icons/fa';
-import Image from 'next/image';
+import CustomAvatar from '../ui/CustomAvatar';
 
 const ChildrenList = () => {
   const [children, setChildren] = useState([]);
@@ -15,32 +14,38 @@ const ChildrenList = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!auth.currentUser) {
-      setLoading(false);
-      setError("No user logged in.");
-      return;
-    }
+    const fetchChildren = async () => {
+      if (!auth.currentUser) {
+        setError("No user logged in.");
+        setLoading(false);
+        return;
+      }
 
-    const parentUid = auth.currentUser.uid;
-    const childrenCollectionRef = collection(db, 'users', parentUid, 'children');
-    const q = query(childrenCollectionRef);
+      try {
+        const parentUid = auth.currentUser.uid;
+        const childrenCollectionRef = collection(db, 'users', parentUid, 'children');
+        const q = query(childrenCollectionRef);
+        
+        // **THE FIX IS HERE:** Use a one-time fetch instead of a real-time listener.
+        const querySnapshot = await getDocs(q);
+        
+        const childrenData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+          parentUid: parentUid,
+        }));
+        
+        setChildren(childrenData);
+      } catch (err) {
+        console.error("Error fetching children:", err);
+        setError("Failed to load children data.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const childrenData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-        parentUid: parentUid, // <-- FIX: Add parentUid to each child object
-      }));
-      setChildren(childrenData);
-      setLoading(false);
-    }, (err) => {
-      console.error("Error fetching children:", err);
-      setError("Failed to load children data.");
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
+    fetchChildren();
+  }, []); // The empty dependency array means this runs once on component mount
 
   const handleManageChild = (child) => {
     sessionStorage.setItem('childUser', JSON.stringify(child));
@@ -56,7 +61,7 @@ const ChildrenList = () => {
   }
 
   if (children.length === 0) {
-    return <p className="text-gray-600">No children added yet. Click "Add Child" to get started!</p>;
+    return <p className="text-gray-600">No children added yet. Click &quot;Add Child&quot; to get started!</p>;
   }
 
   return (
@@ -70,17 +75,13 @@ const ChildrenList = () => {
           <div
             key={child.id}
             onClick={() => handleManageChild(child)}
-            title="Click to view dashboard"
+            title="Click to manage child"
             className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
           >
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mr-4 flex-shrink-0">
-                  {child.photoURL ? (
-                    <Image src={child.photoURL} alt={child.name} width={64} height={64} className="rounded-full object-cover" />
-                  ) : (
-                    <FaUser className="text-3xl text-gray-500" />
-                  )}
+                  <CustomAvatar child={child} size="text-5xl" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-gray-800">{child.name}</h3>

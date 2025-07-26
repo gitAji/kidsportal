@@ -30,7 +30,7 @@ export default async function HomePage() {
     "Math": { color: "bg-[#FF6347]", textColor: "text-white" },
     "Tamil": { color: "bg-[#32CD32]", textColor: "text-white" },
     "English": { color: "bg-[#1E90FF]", textColor: "text-white" },
-    "அறிவியல் (Science)": { color: "bg-[#FFD700]", textColor: "text-black" },
+    "Science": { color: "bg-[#FFD700]", textColor: "text-black" },
   };
 
   const generateLink = (gradeId, subjectId) => {

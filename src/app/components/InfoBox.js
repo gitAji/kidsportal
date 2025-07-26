@@ -40,13 +40,15 @@ const faqData = [
 
 export default function InfoBox() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentView, setCurrentView] = useState('home'); // 'home' or 'question'
+  const [currentView, setCurrentView] = useState('home');
   const [selectedQuestion, setSelectedQuestion] = useState(null);
 
   const toggleBox = () => {
     setIsOpen(!isOpen);
-    setCurrentView('home'); // Reset to home view when opening/closing
-    setSelectedQuestion(null);
+    if (!isOpen) {
+      setCurrentView('home');
+      setSelectedQuestion(null);
+    }
   };
 
   const handleQuestionClick = (item) => {
@@ -69,72 +71,63 @@ export default function InfoBox() {
       </a>
 
       {isOpen && (
-        <div
-          className="info-box fixed top-0 right-0 w-full md:w-1/3 h-full bg-white p-6 shadow-lg transform transition-all duration-300 ease-in-out overflow-y-auto"
-          style={{ transform: isOpen ? 'translateX(0)' : 'translateX(100%)' }}
-        >
-          <div className="relative h-full flex flex-col">
-            <button
-              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 text-2xl p-2 rounded-full hover:bg-gray-100"
-              onClick={toggleBox}
-              aria-label="Close FAQ"
-            >
-              <FontAwesomeIcon icon={faTimes} />
-            </button>
+        <>
+          {/* Overlay */}
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+            onClick={toggleBox}
+          ></div>
 
-            {currentView === 'home' ? (
-              <div className="flex-grow pt-4 pb-2">
-                <h2 className="text-3xl font-extrabold text-center mb-8 text-gray-800">How KidsPortal Works</h2>
-                <div className="space-y-6">
-                  {faqData.map((item) => (
-                    <div
-                      key={item.id}
-                      className="flex items-center p-4 bg-gray-50 rounded-lg shadow-sm hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
-                      onClick={() => handleQuestionClick(item)}
-                    >
-                      <FontAwesomeIcon
-                        icon={item.icon}
-                        className="text-blue-500 text-2xl mr-4"
-                      />
-                      <p className="text-lg font-semibold text-gray-700">
-                        {item.question}
-                      </p>
-                    </div>
-                  ))}
+          <div
+            className="info-box fixed top-0 right-0 w-full md:w-1/3 h-full bg-white p-6 shadow-lg transform transition-transform duration-300 ease-in-out overflow-y-auto z-50"
+          >
+            <div className="relative h-full flex flex-col">
+              {currentView === 'home' ? (
+                <div className="flex-grow pt-4 pb-2">
+                  <h2 className="text-3xl font-extrabold text-center mb-8 text-gray-800">How KidsPortal Works</h2>
+                  <div className="space-y-6">
+                    {faqData.map((item) => (
+                      <div
+                        key={item.id}
+                        className="flex items-center p-4 bg-gray-50 rounded-lg shadow-sm hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
+                        onClick={() => handleQuestionClick(item)}
+                      >
+                        <FontAwesomeIcon
+                          icon={item.icon}
+                          className="text-blue-500 text-2xl mr-4"
+                        />
+                        <p className="text-lg font-semibold text-gray-700">
+                          {item.question}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className="flex-grow pt-4 pb-2">
-                <button
-                  className="text-gray-600 hover:text-gray-800 text-lg mb-4 p-2 rounded-full hover:bg-gray-100"
-                  onClick={handleGoHome}
-                  aria-label="Back to FAQ Home"
-                >
-                  <FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Back to Home
-                </button>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">{selectedQuestion?.question}</h2>
-                <p className="text-gray-700 leading-relaxed">{selectedQuestion?.answer}</p>
-              </div>
-            )}
-
-            <div className="mt-8 flex justify-between items-center border-t pt-4 border-gray-200">
-              {currentView === 'question' && (
-                <button
-                  className="bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition-colors duration-200 flex items-center"
-                  onClick={handleGoHome}
-                >
-                  <FontAwesomeIcon icon={faHome} className="mr-2" /> Home
-                </button>
+              ) : (
+                <div className="flex-grow pt-4 pb-2">
+                  <button
+                    className="text-gray-600 hover:text-gray-800 text-lg mb-4 p-2 rounded-full hover:bg-gray-100"
+                    onClick={handleGoHome}
+                    aria-label="Back to FAQ Home"
+                  >
+                    <FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Back to Home
+                  </button>
+                  <h2 className="text-2xl font-bold text-gray-800 mb-4">{selectedQuestion?.question}</h2>
+                  <p className="text-gray-700 leading-relaxed">{selectedQuestion?.answer}</p>
+                </div>
               )}
-              <button
-                className="close-btn bg-red-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-600 transition-colors duration-200 ml-auto flex items-center"
-                onClick={toggleBox}
-              >
-                <FontAwesomeIcon icon={faTimes} className="mr-2" /> Close
-              </button>
+
+              <div className="mt-8 border-t pt-4 border-gray-200">
+                <button
+                  className="w-full bg-gray-200 text-gray-800 py-3 px-4 rounded-lg shadow-md hover:bg-gray-300 transition-colors duration-200 flex items-center justify-center"
+                  onClick={toggleBox}
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

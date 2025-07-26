@@ -1,30 +1,36 @@
-'use client';
-import React from 'react';
-import { FaBookOpen, FaLock, FaCheckCircle } from 'react-icons/fa';
-import { useRouter } from 'next/navigation';
+"use client";
+import React from "react";
+import { FaLock, FaCheckCircle, FaStar, FaPaintBrush } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const SubjectCard = ({ subject, onLevelClick }) => (
   <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-    <h3 className="text-3xl font-bold text-gray-800 mb-4">{subject.subjectName}</h3>
+    <h3 className="text-3xl font-bold text-gray-800 mb-4">
+      {subject.subjectName}
+    </h3>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {subject.levels.map(level => (
-        <LevelCard key={level.levelId} level={level} onClick={() => onLevelClick(level)} />
+      {subject.levels.map((level) => (
+        <LevelCard
+          key={level.levelId}
+          level={level}
+          onClick={() => onLevelClick(level)}
+        />
       ))}
     </div>
   </div>
 );
 
 const LevelCard = ({ level, onClick }) => {
-  const isCompleted = level.tasks.every(task => task.status === 'completed');
+  const isCompleted = level.tasks.every((task) => task.status === "completed");
 
   return (
     <button
       onClick={onClick}
       disabled={level.isLocked}
       className={`relative p-6 text-left w-full rounded-xl shadow-md transition-all duration-300 transform ${
-        level.isLocked 
-          ? 'bg-gray-200 text-gray-500 cursor-not-allowed' 
-          : 'bg-blue-500 text-white hover:bg-blue-600 hover:scale-105'
+        level.isLocked
+          ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+          : "bg-blue-500 text-white hover:bg-blue-600 hover:scale-105"
       }`}
     >
       {level.isLocked && (
@@ -48,27 +54,52 @@ const LearningZone = ({ child, subjects }) => {
 
   const handleLevelClick = (level) => {
     if (!level.isLocked) {
-      // For now, we can just log it. Later this will navigate to a task page.
-      console.log("Navigating to level:", level.levelId);
-      // router.push(`/learning-zone/${level.levelId}`);
+      router.push(`/learning-zone/levels/${level.levelId}`);
     }
   };
 
   return (
     <div>
       <header className="text-center mb-10">
-        <h1 className="text-5xl font-extrabold text-gray-800">Hello, {child.name}!</h1>
-        <p className="text-xl text-gray-600 mt-2">Ready for a new adventure in learning?</p>
+        <h1 className="text-5xl font-extrabold text-gray-800">
+          Hello, {child.name}!
+        </h1>
+        <p className="text-xl text-gray-600 mt-2">
+          Ready for a new adventure in learning?
+        </p>
+        <div className="flex justify-center gap-4 mt-4">
+          <button
+            onClick={() => router.push("/sticker-book")}
+            className="px-6 py-2 bg-yellow-400 text-white font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-300 flex items-center"
+          >
+            <FaStar className="mr-2" /> View My Sticker Book
+          </button>
+          <button
+            onClick={() => router.push("/avatar-customizer")}
+            className="px-6 py-2 bg-pink-500 text-white font-bold rounded-full shadow-lg hover:bg-pink-600 transition-colors duration-300 flex items-center"
+          >
+            <FaPaintBrush className="mr-2" /> Customize Avatar
+          </button>
+        </div>
       </header>
 
       {!subjects || subjects.length === 0 ? (
         <div className="text-center bg-white p-10 rounded-2xl shadow-lg">
-          <h2 className="text-3xl font-bold text-gray-700">No adventures here yet!</h2>
-          <p className="text-lg text-gray-500 mt-2">It looks like there are no subjects or levels ready for your grade. Please ask your parent to check back later!</p>
+          <h2 className="text-3xl font-bold text-gray-700">
+            No adventures here yet!
+          </h2>
+          <p className="text-lg text-gray-500 mt-2">
+            It looks like there are no subjects or levels ready for your grade.
+            Please ask your parent to check back later!
+          </p>
         </div>
       ) : (
-        subjects.map(subject => (
-          <SubjectCard key={subject.subjectId} subject={subject} onLevelClick={handleLevelClick} />
+        subjects.map((subject) => (
+          <SubjectCard
+            key={subject.subjectId}
+            subject={subject}
+            onLevelClick={handleLevelClick}
+          />
         ))
       )}
     </div>

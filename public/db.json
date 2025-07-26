@@ -784,7 +784,7 @@
         },
         {
           "subjectId": "ariviyal-1",
-          "subjectName": "அறிவியல் (Science)",
+          "subjectName": "Science",
           "levels": [
             {
               "levelId": "ariviyal-1-level-1",
@@ -1188,7 +1188,7 @@
         },
         {
           "subjectId": "ariviyal-2",
-          "subjectName": "அறிவியல் (Science)",
+          "subjectName": "Science",
           "levels": [
             {
               "levelId": "ariviyal-2-level-1",
@@ -1441,7 +1441,7 @@
         },
         {
           "subjectId": "ariviyal-3",
-          "subjectName": "அறிவியல் (Science)",
+          "subjectName": "Science",
           "levels": [
             {
               "levelId": "ariviyal-3-level-1",
@@ -1651,7 +1651,7 @@
         },
         {
           "subjectId": "ariviyal-4",
-          "subjectName": "அறிவியல் (Science)",
+          "subjectName": "Science",
           "levels": [
             {
               "levelId": "ariviyal-4-level-1",

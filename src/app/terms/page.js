@@ -1,9 +1,12 @@
 // src/app/terms/page.js
 import Link from "next/link";
+import Header from "../components/layout/header/Header";
+import Footer from "../components/layout/footer/Footer";
 
 export default function TermsOfServicePage() {
   return (
     <>
+      <Header />
       <main className="flex-grow bg-gray-50">
         <div className="container mx-auto py-16 px-4 md:px-8">
           <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">Terms of Service</h1>
@@ -30,6 +33,7 @@ export default function TermsOfServicePage() {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 }

@@ -1,8 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { collection, addDoc, doc, updateDoc, getDoc, setDoc } from 'firebase/firestore';
-import { db, auth } from '../../../firebase/config';
+import React, { useState, useEffect, useRef } from 'react';
+import { doc, getDoc, setDoc, updateDoc, collection, runTransaction } from 'firebase/firestore';
+import { auth } from '../../../firebase/auth'; // Import auth to get current user UID
+import { app } from '../../../firebase/config';
+import { getFirestore } from 'firebase/firestore';
 import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile } from 'react-icons/fa';
 import { debounce } from 'lodash';
+import SaveMessage from '../ui/SaveMessage'; // Import SaveMessage
+
 
 const avatars = [
   { id: 'paw', icon: <FaPaw /> },
@@ -21,6 +25,7 @@ const generatePassword = () => {
 };
 
 const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
+  const db = getFirestore(app);
   const [name, setName] = useState(childToEdit?.name || '');
   const [age, setAge] = useState(childToEdit?.age || '');
   const [grade, setGrade] = useState(childToEdit?.grade || '');
@@ -30,29 +35,33 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [usernameStatus, setUsernameStatus] = useState({ status: 'idle', message: '' });
+  const [saveStatus, setSaveStatus] = useState(null); // Add saveStatus
+  const [errorMessage, setErrorMessage] = useState(''); // Add errorMessage
 
-  const checkUsername = useCallback(debounce(async (uname) => {
-    if (!uname) {
-      setUsernameStatus({ status: 'idle', message: '' });
-      return;
-    }
-    if (childToEdit && uname === childToEdit.username) {
-      setUsernameStatus({ status: 'idle', message: '' });
-      return;
-    }
-    setUsernameStatus({ status: 'checking', message: 'Checking...' });
-    const usernameDocRef = doc(db, 'child_usernames', uname);
-    const usernameDoc = await getDoc(usernameDocRef);
-    if (usernameDoc.exists()) {
-      setUsernameStatus({ status: 'taken', message: 'Username is already taken.' });
-    } else {
-      setUsernameStatus({ status: 'available', message: 'Username is available!' });
-    }
-  }, 500), [childToEdit]);
+  const debouncedCheckUsernameRef = useRef(
+    debounce(async (uname, currentChildToEdit) => {
+      if (!uname || (currentChildToEdit && uname === currentChildToEdit.username)) {
+        setUsernameStatus({ status: 'idle', message: '' });
+        return;
+      }
+      setUsernameStatus({ status: 'checking', message: 'Checking...' });
+      const usernameDocRef = doc(db, 'child_usernames', uname);
+      const usernameDoc = await getDoc(usernameDocRef);
+      setUsernameStatus(
+        usernameDoc.exists()
+          ? { status: 'taken', message: 'Username is already taken.' }
+          : { status: 'available', message: 'Username is available!' }
+      );
+    }, 500)
+  );
 
   useEffect(() => {
-    checkUsername(username);
-  }, [username, checkUsername]);
+    const debounced = debouncedCheckUsernameRef.current;
+    debounced(username, childToEdit);
+    return () => {
+      debounced.cancel();
+    };
+  }, [username, childToEdit]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,60 +77,91 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
     }
 
     setLoading(true);
-
-    if (!auth.currentUser) {
-      setError("No user logged in.");
-      setLoading(false);
-      return;
-    }
+    setSaveStatus(null); // Clear previous status
+    setErrorMessage(''); // Clear previous error message
+    const parentUid = auth.currentUser.uid; // Get the current parent's UID
 
     try {
-      const parentUid = auth.currentUser.uid;
-      const childData = { 
-        name, 
-        age: parseInt(age), 
-        grade, 
-        username,
-        avatar: selectedAvatar,
-        loginEnabled: true,
-      };
-
-      if (password) {
-        childData.password = password; 
-      }
+      let childRef;
+      let usernameDocRef = doc(db, 'child_usernames', username);
 
       if (childToEdit) {
-        // If username is changed, we need to update the usernames collection
-        if (username !== childToEdit.username) {
-          const oldUsernameDocRef = doc(db, 'child_usernames', childToEdit.username);
-          await deleteDoc(oldUsernameDocRef);
-          const newUsernameDocRef = doc(db, 'child_usernames', username);
-          await setDoc(newUsernameDocRef, { parentUid, childId: childToEdit.id });
+        // Update existing child
+        childRef = doc(db, "users", parentUid, "children", childToEdit.id);
+        const updates = {
+          name,
+          age: parseInt(age),
+          grade,
+          username,
+          avatar: selectedAvatar,
+        };
+        if (password) {
+          updates.password = password;
         }
-        const childDocRef = doc(db, 'users', parentUid, 'children', childToEdit.id);
-        await updateDoc(childDocRef, childData);
+
+        if (username !== childToEdit.username) {
+          // Username changed, perform transaction
+          const oldUsernameDocRef = doc(db, 'child_usernames', childToEdit.username);
+          await runTransaction(db, async (t) => {
+            const newUsernameDoc = await t.get(usernameDocRef);
+            if (newUsernameDoc.exists()) {
+              throw new Error("This username is already taken.");
+            }
+            t.delete(oldUsernameDocRef);
+            t.set(usernameDocRef, { parentUid, childId: childToEdit.id });
+            t.update(childRef, updates);
+          });
+        } else {
+          // No username change, just update child document
+          await updateDoc(childRef, updates);
+        }
+        if (onSaveSuccess) {
+          onSaveSuccess({ id: childToEdit.id, ...childToEdit, ...updates }); // Pass updated child data
+        }
+        setSaveStatus('success');
+        setErrorMessage('Child profile updated successfully!');
       } else {
-        const childrenCollectionRef = collection(db, 'users', parentUid, 'children');
-        const newChildDoc = await addDoc(childrenCollectionRef, {
-          ...childData,
+        // Create new child
+        childRef = doc(collection(db, "users", parentUid, "children")); // Generate a new ID within the children subcollection
+        const newChildData = {
+          name,
+          age: parseInt(age),
+          grade,
+          username,
+          avatar: selectedAvatar,
+          password,
+          loginEnabled: true,
           photoURL: '',
           assignedTasks: [],
           points: 0,
           stickers: [],
           progress: { overall: 0, subjects: {} },
+          parentUid, // Store parentUid in child document
+        };
+
+        await runTransaction(db, async (t) => {
+          const usernameDoc = await t.get(usernameDocRef);
+          if (usernameDoc.exists()) {
+            throw new Error("This username is already taken.");
+          }
+          t.set(childRef, newChildData);
+          t.set(usernameDocRef, { parentUid, childId: childRef.id });
         });
-        // Create entry in the usernames collection
-        const usernameDocRef = doc(db, 'child_usernames', username);
-        await setDoc(usernameDocRef, { parentUid, childId: newChildDoc.id });
+        if (onSaveSuccess) {
+          onSaveSuccess({ id: childRef.id, ...newChildData });
+        }
+        setSaveStatus('success');
+        setErrorMessage('New child profile created successfully!');
       }
-      
-      if (onSaveSuccess) onSaveSuccess();
       onClose();
     } catch (err) {
       console.error("Error saving child:", err);
-      setError("Failed to save child. Please try again.");
+      setError(err.message || "Failed to save child. Please try again.");
+      setSaveStatus('error');
+      setErrorMessage(err.message || "Failed to save child. Please try again.");
     } finally {
       setLoading(false);
+      setTimeout(() => setSaveStatus(null), 3000);
     }
   };
 
@@ -131,6 +171,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
         {childToEdit ? 'Edit Child Profile' : 'Create a New Profile'}
       </h2>
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+      <SaveMessage status={saveStatus} message={errorMessage} />
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="text-center">
@@ -154,24 +195,24 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label htmlFor="childName" className="block text-sm font-bold mb-1 text-gray-700">Name</label>
-            <input type="text" id="childName" className="form-input" value={name} onChange={(e) => setName(e.target.value)} required />
+            <input type="text" id="childName" className="form-input w-full px-4 py-2 border border-gray-300 rounded-md" value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
           <div>
             <label htmlFor="childAge" className="block text-sm font-bold mb-1 text-gray-700">Age</label>
-            <input type="number" id="childAge" className="form-input" value={age} onChange={(e) => setAge(e.target.value)} required />
+            <input type="number" id="childAge" className="form-input w-full px-4 py-2 border border-gray-300 rounded-md" value={age} onChange={(e) => setAge(e.target.value)} required />
           </div>
         </div>
         
         <div>
           <label htmlFor="childGrade" className="block text-sm font-bold mb-1 text-gray-700">Grade</label>
-          <input type="text" id="childGrade" className="form-input" value={grade} onChange={(e) => setGrade(e.target.value)} required />
+          <input type="text" id="childGrade" className="form-input w-full px-4 py-2 border border-gray-300 rounded-md" value={grade} onChange={(e) => setGrade(e.target.value)} required />
         </div>
         
         <hr className="my-4"/>
 
         <div>
           <label htmlFor="childUsername" className="block text-sm font-bold mb-1 text-gray-700">Username</label>
-          <input type="text" id="childUsername" className="form-input" value={username} onChange={(e) => setUsername(e.target.value)} required />
+          <input type="text" id="childUsername" className="form-input w-full px-4 py-2 border border-gray-300 rounded-md" value={username} onChange={(e) => setUsername(e.target.value)} required />
           {usernameStatus.status !== 'idle' && (
             <p className={`text-sm mt-1 ${usernameStatus.status === 'available' ? 'text-green-600' : 'text-red-600'}`}>
               {usernameStatus.message}
@@ -185,7 +226,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
             <input 
               type="text" 
               id="childPassword" 
-              className="form-input flex-grow" 
+              className="form-input flex-grow w-full px-4 py-2 border border-gray-300 rounded-md" 
               placeholder={childToEdit ? "Leave blank to keep current" : "Click generate or type a password"} 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 

@@ -6,23 +6,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 export default function RightSidePanel({ children, isOpen, onClose, panelName }) {
   const panelRef = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (panelRef.current && !panelRef.current.contains(event.target)) {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen, onClose]);
+  
 
   console.log(`RightSidePanel (${panelName}) rendering. isOpen:`, isOpen);
   return (
@@ -33,7 +17,7 @@ export default function RightSidePanel({ children, isOpen, onClose, panelName })
     >
       <div className="relative h-full flex flex-col">
         <button
-          className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 text-2xl p-2 rounded-full hover:bg-gray-100"
+          className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 text-2xl p-2 rounded-full hover:bg-gray-100 bg-white z-50"
           onClick={onClose}
           aria-label="Close Panel"
         >

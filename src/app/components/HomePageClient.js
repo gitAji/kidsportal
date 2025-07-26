@@ -1,30 +1,39 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useUI } from "../providers/UIProvider";
 import AuthModal from "./ui/AuthModal";
+import RightSidePanel from "./RightSidePanel";
+import OurTeamContent from "./OurTeamContent";
+import HowItWorksContent from "./HowItWorksContent";
+import AboutUsContent from "./AboutUsContent";
 
 export default function HomePageClient({ children }) {
-  const router = useRouter();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isRegister, setIsRegister] = useState(false);
-
-  const toggleModal = (register = false) => {
-    setIsRegister(register);
-    setIsModalOpen(!isModalOpen);
-  };
+  const { panelState, closeModal, closePanel, modalState } = useUI();
 
   return (
     <>
-      {/* This is a placeholder for where the buttons to open the modal would be.
-          Since the header is not provided, I'll assume they are there. */}
       {children}
+
       <AuthModal
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        isRegister={isRegister}
-        setIsRegister={setIsRegister}
+        isModalOpen={modalState.auth}
+        setIsModalOpen={(isOpen) => {
+          if (!isOpen) closeModal();
+        }}
+        isRegister={modalState.isRegister}
+        setIsRegister={() => {}} // The context now handles this
       />
+
+      <RightSidePanel isOpen={panelState.team} onClose={() => closePanel('team')} panelName="Our Team">
+        <OurTeamContent />
+      </RightSidePanel>
+      
+      <RightSidePanel isOpen={panelState.howItWorks} onClose={() => closePanel('howItWorks')} panelName="How It Works">
+        <HowItWorksContent />
+      </RightSidePanel>
+
+      <RightSidePanel isOpen={panelState.about} onClose={() => closePanel('about')} panelName="About Us">
+        <AboutUsContent />
+      </RightSidePanel>
     </>
   );
 }

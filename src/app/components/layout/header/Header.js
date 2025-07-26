@@ -1,17 +1,13 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Import usePathname
+import { usePathname } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, logout } from "../../../../firebase/auth";
-import {
-  FaBell,
-  FaUserCircle,
-  FaCaretDown,
-} from "react-icons/fa"; // Import icons
-import { collection, query, where, onSnapshot } from "firebase/firestore"; // Import Firestore functions
-import { db } from "../../../../firebase/config"; // Import db
+import { FaBell, FaUserCircle, FaCaretDown } from "react-icons/fa";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { db } from "../../../../firebase/config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChartBar,
@@ -20,24 +16,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header({
-  setIsModalOpen = () => {},
-  setIsRegister = () => {},
-  setIsHowItWorksOpen = () => {},
-  setIsAboutUsOpen = () => {},
-  setIsOurTeamOpen = () => {},
+  setIsModalOpen,
+  setIsRegister,
+  setIsHowItWorksOpen,
+  setIsAboutUsOpen,
+  setIsOurTeamOpen,
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isNotificationDropdownOpen, setIsNotificationDropdownOpen] =
     useState(false);
-  const [notifications, setNotifications] = useState([]); // State for notifications
+  const [notifications, setNotifications] = useState([]);
   const [notificationCount, setNotificationCount] = useState(0);
 
   const dropdownRef = useRef(null);
   const notificationRef = useRef(null);
-  const pathname = usePathname(); // Get current pathname
+  const pathname = usePathname();
 
+  // Use useEffect to manage authentication state
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -45,6 +42,7 @@ export default function Header({
     return () => unsubscribeAuth();
   }, []);
 
+  // Fetch notifications for authenticated users
   useEffect(() => {
     if (user) {
       const notificationsCollectionRef = collection(db, "notifications");
@@ -75,6 +73,7 @@ export default function Header({
     }
   }, [user]);
 
+  // Close dropdowns if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -94,15 +93,15 @@ export default function Header({
     };
   }, []);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const toggleDropdown = useCallback(() => {
+    setIsDropdownOpen((prevState) => !prevState);
     setIsNotificationDropdownOpen(false);
-  };
+  }, []);
 
-  const toggleNotificationDropdown = () => {
-    setIsNotificationDropdownOpen(!isNotificationDropdownOpen);
+  const toggleNotificationDropdown = useCallback(() => {
+    setIsNotificationDropdownOpen((prevState) => !prevState);
     setIsDropdownOpen(false);
-  };
+  }, []);
 
   const handleLogout = async () => {
     await logout();
@@ -126,29 +125,32 @@ export default function Header({
   };
 
   return (
-    <header className="bg-[#ffffff] shadow-md relative">
+    <header className="bg-white shadow-md relative">
+      {/* Top Bar with Links */}
       <div className="bg-gray-100 text-gray-600 text-xs uppercase font-semibold">
         <div className="container mx-auto p-2 flex justify-end space-x-4 items-center">
           <a
             className="cursor-pointer hover:text-[var(--primary-blue)]"
-            onClick={() => setIsHowItWorksOpen(true)}
+            onClick={setIsHowItWorksOpen}
           >
             How It Works
           </a>
           <a
             className="cursor-pointer hover:text-[var(--primary-blue)]"
-            onClick={() => setIsAboutUsOpen(true)}
+            onClick={setIsAboutUsOpen}
           >
             About Us
           </a>
           <a
             className="cursor-pointer hover:text-[var(--primary-blue)]"
-            onClick={() => setIsOurTeamOpen(true)}
+            onClick={setIsOurTeamOpen}
           >
             Our Team
           </a>
         </div>
       </div>
+
+      {/* Main Header Content */}
       <div className="container mx-auto p-6 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
@@ -163,7 +165,7 @@ export default function Header({
           </Link>
         </div>
 
-        {/* Hamburger icon for mobile */}
+        {/* Hamburger for Mobile */}
         <div className="md:hidden flex items-center">
           {user && (
             <div className="relative mr-4">
@@ -242,11 +244,10 @@ export default function Header({
           </Link>
         </nav>
 
-        {/* User Info or Sign In/Sign Up Buttons */}
+        {/* User Info or Sign In/Sign Up */}
         <div className="hidden md:flex space-x-4 items-center">
           {user ? (
             <div className="relative flex items-center space-x-4">
-              {/* Notification Icon */}
               <div className="relative" ref={notificationRef}>
                 <FaBell
                   className="text-[var(--foreground)] text-xl cursor-pointer"
@@ -282,7 +283,7 @@ export default function Header({
                 )}
               </div>
 
-              {/* User Icon with Dropdown */}
+              {/* User Dropdown */}
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={toggleDropdown}
@@ -335,7 +336,7 @@ export default function Header({
               <button
                 className="bg-gray-200 text-gray-800 py-2 px-4 rounded hover:bg-gray-300 transition-colors duration-200"
                 onClick={() => {
-                  setIsModalOpen(true);
+                  setIsModalOpen(false);
                   setIsRegister(false);
                 }}
               >
@@ -355,19 +356,15 @@ export default function Header({
         </div>
       </div>
 
-      {/* Full-page Slide-in Mobile Menu */}
+      {/* Full-page Mobile Menu */}
       {isMenuOpen && (
         <>
-          {/* Overlay */}
           <div
             className="fixed inset-0 bg-black opacity-50 z-40"
             onClick={() => setIsMenuOpen(false)}
           />
-
-          {/* Full-page Slide-in Menu */}
           <div className="fixed inset-0 bg-[var(--background)] z-50 transform translate-x-0 transition-transform duration-300 ease-in-out">
             <div className="flex justify-between items-center p-6">
-              {/* Logo inside the slide menu */}
               <Link href="/" passHref>
                 <Image
                   src="/logo.png"
@@ -377,8 +374,6 @@ export default function Header({
                   className="mr-2"
                 />
               </Link>
-
-              {/* Close button */}
               <button
                 className="text-[var(--foreground)] focus:outline-none p-3"
                 onClick={() => setIsMenuOpen(false)}
@@ -400,8 +395,6 @@ export default function Header({
                 </svg>
               </button>
             </div>
-
-            {/* Menu Links */}
             <nav className="flex flex-col items-center space-y-4 p-6 w-full">
               <Link
                 href="/"
@@ -481,7 +474,7 @@ export default function Header({
                   <button
                     className="bg-gray-200 text-gray-800 py-2 px-4 rounded hover:bg-gray-300 transition-colors duration-200"
                     onClick={() => {
-                      setIsModalOpen(true);
+                      setIsModalOpen(false);
                       setIsRegister(false);
                       setIsMenuOpen(false);
                     }}

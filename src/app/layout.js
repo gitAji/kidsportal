@@ -1,4 +1,4 @@
-// app/layout.js
+import { Suspense } from "react";
 import localFont from "next/font/local";
 import "./globals.css";
 import SessionProviderWrapper from "./providers/SessionProviderWrapper";
@@ -20,6 +20,8 @@ export const metadata = {
   description: "A platform for kids to learn and explore",
 };
 
+import { UIProvider } from "./providers/UIProvider";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -27,7 +29,13 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProviderWrapper>
-          <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+          <UIProvider>
+            <ClientLayoutWrapper>
+              <Suspense fallback={<div>Loading...</div>}>
+                {children}
+              </Suspense>
+            </ClientLayoutWrapper>
+          </UIProvider>
         </SessionProviderWrapper>
       </body>
     </html>

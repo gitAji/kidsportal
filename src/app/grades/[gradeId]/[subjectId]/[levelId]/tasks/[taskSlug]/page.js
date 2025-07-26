@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import Timeline from "@/components/ui/Timeline";
 import ContentCard from "@/components/ui/ContentCard";
 import InteractiveQuiz from "@/components/learning/InteractiveQuiz";
-import LessonViewer from "@/components/learning/LessonViewer";
+import LessonViewer from '@/components/learning/LessonViewer';
 import SkeletonLoader from "@/components/ui/SkeletonLoader";
 import Timer from "@/components/ui/Timer";
-import QuizResults from "@/components/learning/QuizResults";
+import QuizResults from '@/components/learning/QuizResults';
 
 const TaskPage = () => {
   const { gradeId, subjectId, levelId, taskSlug } = useParams();

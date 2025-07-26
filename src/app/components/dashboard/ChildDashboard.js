@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { doc, getDoc, updateDoc, collection, query, where, getDocs, deleteDoc, setDoc } from 'firebase/firestore';
-import { db, storage } from '../../../firebase/config';
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { auth } from '../../../firebase/auth';
+import { doc, updateDoc, deleteDoc, runTransaction } from 'firebase/firestore';
+import { app } from '../../../firebase/config';
+import { getFirestore } from 'firebase/firestore';
 import SkeletonLoader from '../ui/SkeletonLoader';
 import AddChildForm from './AddChildForm';
-import { FaEdit, FaTrash, FaUser, FaChartLine, FaTasks, FaCog, FaUpload, FaSignInAlt, FaShieldAlt, FaTrophy, FaStar, FaKey, FaEye, FaEyeSlash, FaUserLock, FaFilePdf, FaExclamationTriangle, FaClipboard } from 'react-icons/fa';
+import { FaEdit, FaUser, FaChartLine, FaTasks, FaCog, FaSignInAlt, FaTrophy, FaStar, FaKey, FaEye, FaEyeSlash, FaUserLock, FaFilePdf, FaExclamationTriangle, FaClipboard } from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image';
 import RewardsDisplay from './RewardsDisplay';
@@ -14,24 +13,19 @@ import ProgressTracker from './ProgressTracker';
 import StickerBook from './StickerBook';
 import Reports from './Reports';
 import Modal from '../ui/Modal';
+import CustomAvatar from '../ui/CustomAvatar';
+import SaveMessage from '../ui/SaveMessage'; // Import SaveMessage
 import { debounce } from 'lodash';
 
-const SaveMessage = ({ status, message }) => {
-  if (!status) return null;
-  const bgColor = status === 'success' ? 'bg-green-500' : 'bg-red-500';
-  return (
-    <div className={`p-3 mt-4 text-white rounded-lg text-center ${bgColor}`}>
-      {message}
-    </div>
-  );
-};
 
-const ChildDashboard = ({ child, onDelete, onClose }) => {
+
+
+const ChildDashboard = ({ child, onClose }) => {
+  const db = getFirestore(app);
   const [currentView, setCurrentView] = useState('details');
   const [activeTab, setActiveTab] = useState('about');
   const [childData, setChildData] = useState(child);
   const [loading, setLoading] = useState(false);
-  const [uploading, setUploading] = useState(false);
   const [saveStatus, setSaveStatus] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   
@@ -44,22 +38,23 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
   const [showLoginHelper, setShowLoginHelper] = useState(false);
 
   const router = useRouter();
-  const fileInputRef = useRef(null);
 
-  const checkUsernameAvailability = useCallback(debounce(async (name) => {
-    if (!name || name === child.username) {
-      setUsernameStatus({ status: 'idle', message: '' });
-      return;
-    }
-    setUsernameStatus({ status: 'checking', message: 'Checking...' });
-    const usernameDocRef = doc(db, 'child_usernames', name);
-    const usernameDoc = await getDoc(usernameDocRef);
-    if (usernameDoc.exists()) {
-      setUsernameStatus({ status: 'taken', message: 'Username is already taken.' });
-    } else {
-      setUsernameStatus({ status: 'available', message: 'Username is available!' });
-    }
-  }, 500), [child.username]);
+  const debouncedCheckUsernameAvailabilityRef = useRef(
+    debounce(async (name, currentChild) => {
+      if (!name || (currentChild && name === currentChild.username)) {
+        setUsernameStatus({ status: 'idle', message: '' });
+        return;
+      }
+      setUsernameStatus({ status: 'checking', message: 'Checking...' });
+      const usernameDocRef = doc(db, 'child_usernames', name);
+      const usernameDoc = await getDoc(usernameDocRef);
+      setUsernameStatus(
+        usernameDoc.exists()
+          ? { status: 'taken', message: 'Username is already taken.' }
+          : { status: 'available', message: 'Username is available!' }
+      );
+    }, 500)
+  );
 
   useEffect(() => {
     setChildData(child);
@@ -70,50 +65,69 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
   }, [child]);
 
   useEffect(() => {
-    checkUsernameAvailability(username);
-  }, [username, checkUsernameAvailability]);
+    const debounced = debouncedCheckUsernameAvailabilityRef.current;
+    debounced(username, child);
+    return () => {
+      debounced.cancel();
+    };
+  }, [username, child]);
 
   const handleEditClick = () => setCurrentView('edit');
-  const handleDeleteClick = () => setCurrentView('deleteConfirm');
-  const handleCancel = () => setCurrentView('details');
-  const handleSaveSuccess = () => setCurrentView('details');
+  const handleDeleteClick = async () => {
+    if (!confirm(`Are you sure you want to deactivate ${childData.name}'s account? This action cannot be undone.`)) {
+      return;
+    }
 
-  const handleConfirmDelete = async () => {
     setLoading(true);
     try {
-      const usernameDocRef = doc(db, 'child_usernames', childData.username);
-      await deleteDoc(usernameDocRef);
-      await onDelete(childData.id);
-      setLoading(false);
-      onClose();
+      const childDocRef = doc(db, "users", childData.parentUid, "children", childData.id);
+      const usernameDocRef = doc(db, "child_usernames", childData.username);
+
+      await runTransaction(db, async (t) => {
+        t.delete(childDocRef);
+        t.delete(usernameDocRef);
+      });
+
+      setSaveStatus('success');
+      setErrorMessage('Child account deactivated successfully!');
+      onClose(); // Close the dashboard after deletion
     } catch (error) {
-      console.error("Error deactivating child:", error);
+      console.error("Error deleting child account:", error);
+      setSaveStatus('error');
+      setErrorMessage(error.message || 'Failed to deactivate account.');
+    } finally {
       setLoading(false);
-      alert("Failed to deactivate child. Please try again.");
+      setTimeout(() => setSaveStatus(null), 3000);
     }
   };
+  const handleCancel = () => setCurrentView('details');
+  const handleSaveSuccess = (updatedChild) => {
+    setChildData(updatedChild);
+    setCurrentView('details');
+    setSaveStatus('success');
+    setErrorMessage('Child profile updated successfully!');
+    setTimeout(() => setSaveStatus(null), 3000);
+  };
 
-  const handleUploadClick = () => fileInputRef.current.click();
+  const handleToggleLogin = async (newStatus) => {
+    setLoginEnabled(newStatus); // Update UI immediately
 
-  const handleFileChange = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    setUploading(true);
     try {
-      const storageRef = ref(storage, `profile_pictures/${childData.id}/${file.name}`);
-      await uploadBytes(storageRef, file);
-      const photoURL = await getDownloadURL(storageRef);
-      const childDocRef = doc(db, 'users', auth.currentUser.uid, 'children', childData.id);
-      await updateDoc(childDocRef, { photoURL });
-      setChildData({ ...childData, photoURL });
+      const childDocRef = doc(db, "users", childData.parentUid, "children", childData.id);
+      await updateDoc(childDocRef, { loginEnabled: newStatus });
+
+      // Update state and session storage on success
+      const updatedData = { ...childData, loginEnabled: newStatus };
+      setChildData(updatedData);
+      sessionStorage.setItem('childUser', JSON.stringify(updatedData));
       setSaveStatus('success');
-      setErrorMessage('Profile picture updated successfully!');
+      setErrorMessage('Login status updated successfully!');
     } catch (error) {
-      console.error("Error uploading file:", error);
+      console.error("Failed to update login status:", error);
+      setLoginEnabled(!newStatus); // Revert UI on failure
       setSaveStatus('error');
-      setErrorMessage('Failed to upload profile picture.');
+      setErrorMessage(`Failed to update login status: ${error.message}`);
     } finally {
-      setUploading(false);
       setTimeout(() => setSaveStatus(null), 3000);
     }
   };
@@ -127,35 +141,46 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
       return;
     }
     if (usernameStatus.status === 'taken') {
-        setSaveStatus('error');
-        setErrorMessage('Username is already taken. Please choose another one.');
-        setTimeout(() => setSaveStatus(null), 3000);
-        return;
+      setSaveStatus('error');
+      setErrorMessage('Username is already taken.');
+      setTimeout(() => setSaveStatus(null), 3000);
+      return;
     }
 
     setLoading(true);
     setSaveStatus(null);
+
     try {
-      const parentUid = auth.currentUser.uid;
-      const childDocRef = doc(db, 'users', parentUid, 'children', childData.id);
-      const dataToUpdate = {
+      const childDocRef = doc(db, "users", childData.parentUid, "children", childData.id);
+      const updates = {
         username,
         loginEnabled,
       };
 
       if (newPassword) {
-        dataToUpdate.password = newPassword;
+        updates.password = newPassword;
       }
 
       if (username !== childData.username) {
+        // Username is changing, perform a transaction
         const oldUsernameDocRef = doc(db, 'child_usernames', childData.username);
-        await deleteDoc(oldUsernameDocRef);
         const newUsernameDocRef = doc(db, 'child_usernames', username);
-        await setDoc(newUsernameDocRef, { parentUid, childId: childData.id });
+
+        await runTransaction(db, async (t) => {
+          const newUsernameDoc = await t.get(newUsernameDocRef);
+          if (newUsernameDoc.exists()) {
+            throw new Error("This username is already taken.");
+          }
+          t.delete(oldUsernameDocRef);
+          t.set(newUsernameDocRef, { parentUid: childData.parentUid, childId: childData.id });
+          t.update(childDocRef, updates);
+        });
+      } else {
+        // No username change, just update the child document
+        await updateDoc(childDocRef, updates);
       }
 
-      await updateDoc(childDocRef, dataToUpdate);
-      setChildData({ ...childData, ...dataToUpdate });
+      setChildData({ ...childData, ...updates });
       setSaveStatus('success');
       setErrorMessage('Settings updated successfully!');
       setNewPassword('');
@@ -163,7 +188,7 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
     } catch (error) {
       console.error("Error updating settings:", error);
       setSaveStatus('error');
-      setErrorMessage('Failed to update settings.');
+      setErrorMessage(error.message || 'Failed to update settings.');
     } finally {
       setLoading(false);
       setTimeout(() => setSaveStatus(null), 3000);
@@ -171,9 +196,7 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
   };
 
   const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text).then(() => {
-        alert('Copied to clipboard!');
-    });
+    navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
   };
 
   if (loading) return <SkeletonLoader />;
@@ -181,19 +204,10 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
 
   return (
     <div className="relative w-full h-full overflow-hidden bg-gradient-to-r from-blue-100 to-purple-100">
-      <div className={`flex transition-transform duration-500 ease-in-out h-full ${currentView === 'details' ? 'translate-x-0' : '-translate-x-full'}`}>
+      {currentView === 'details' ? (
         <div className="w-full flex-shrink-0 p-4 md:p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-bold text-gray-800">Welcome, {childData.name}!</h2>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center text-yellow-500">
-                <FaTrophy className="text-2xl" />
-                <span className="text-xl font-bold ml-2">{childData.points || 0}</span>
-              </div>
-              <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-white text-2xl font-bold">
-                {childData.photoURL ? <Image src={childData.photoURL} alt={childData.name} width={48} height={48} className="w-full h-full rounded-full object-cover" /> : childData.name.charAt(0)}
-              </div>
-            </div>
+            <h2 className="text-3xl font-bold text-gray-800">Manage {childData.name}&apos;s Profile</h2>
           </div>
           <div className="mb-6">
             <ul className="flex flex-wrap -mb-px text-sm font-medium text-center">
@@ -203,12 +217,7 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
                     className={`inline-block p-4 border-b-2 rounded-t-lg flex items-center ${activeTab === tab ? 'border-blue-600 text-blue-600' : 'border-transparent'}`}
                     onClick={() => setActiveTab(tab)}
                   >
-                    {tab === 'about' && <FaUser className="mr-2" />}
-                    {tab === 'reports' && <FaFilePdf className="mr-2" />}
-                    {tab === 'progress' && <FaChartLine className="mr-2" />}
-                    {tab === 'rewards' && <FaTrophy className="mr-2" />}
-                    {tab === 'stickers' && <FaStar className="mr-2" />}
-                    {tab === 'settings' && <FaCog className="mr-2" />}
+                    {/* Icons */}
                     {tab.charAt(0).toUpperCase() + tab.slice(1)}
                   </button>
                 </li>
@@ -220,8 +229,8 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
             <div className="bg-white p-6 rounded-lg shadow-md">
               <div className="flex items-start justify-between">
                 <div className="flex items-center mb-4">
-                  <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center text-white text-5xl font-bold mr-4">
-                    {childData.photoURL ? <Image src={childData.photoURL} alt={childData.name} width={96} height={96} className="w-full h-full rounded-full object-cover" /> : childData.name.charAt(0)}
+                  <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+                    <CustomAvatar child={childData} />
                   </div>
                   <div>
                     <h3 className="text-2xl font-semibold">{childData.name}</h3>
@@ -229,14 +238,8 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
                     <p>Grade: {childData.grade}</p>
                   </div>
                 </div>
-                <button onClick={handleEditClick} className="text-gray-500 hover:text-blue-600">
+                <button onClick={() => setCurrentView('edit')} className="text-gray-500 hover:text-blue-600">
                   <FaEdit className="text-2xl" />
-                </button>
-              </div>
-              <div className="mt-4">
-                <input type="file" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} accept="image/*" />
-                <button onClick={handleUploadClick} className="px-4 py-2 bg-blue-500 text-white rounded-md flex items-center" disabled={uploading}>
-                  <FaUpload className="mr-2" /> {uploading ? 'Uploading...' : 'Upload Image'}
                 </button>
               </div>
               <div className="mt-6 pt-4 border-t flex justify-end gap-4">
@@ -247,22 +250,11 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
             </div>
           )}
 
-          {activeTab === 'reports' && (
-            <Reports childData={childData} />
-          )}
-
-          {activeTab === 'progress' && (
-            <ProgressTracker progress={childData.progress} />
-          )}
-
-          {activeTab === 'rewards' && (
-            <RewardsDisplay points={childData.points || 0} />
-          )}
-
-          {activeTab === 'stickers' && (
-            <StickerBook stickers={childData.stickers} />
-          )}
-
+          {activeTab === 'reports' && <Reports childData={childData} />}
+          {activeTab === 'progress' && <ProgressTracker child={childData} />}
+          {activeTab === 'rewards' && <RewardsDisplay points={childData.points || 0} />}
+          {activeTab === 'stickers' && <StickerBook collectedStickerIds={childData.stickers} />}
+          
           {activeTab === 'settings' && (
             <form onSubmit={handleSettingsSave}>
               <div className="bg-white p-6 rounded-lg shadow-md">
@@ -278,7 +270,7 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
                         name="loginEnabled" 
                         id="loginEnabled" 
                         checked={loginEnabled}
-                        onChange={() => setLoginEnabled(!loginEnabled)}
+                        onChange={(e) => handleToggleLogin(e.target.checked)}
                         className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
                       />
                       <label htmlFor="loginEnabled" className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
@@ -324,24 +316,6 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
                   </div>
                 </div>
 
-                <div className="mb-8">
-                  <h4 className="text-xl font-semibold mb-4 border-b pb-2 flex items-center"><FaShieldAlt className="mr-2" /> Legal</h4>
-                  <div className="flex items-center">
-                    <input type="checkbox" className="form-checkbox" checked readOnly disabled />
-                    <span className="ml-2 text-sm text-gray-700">
-                      You agreed to the{" "}
-                      <Link href="/terms" className="text-blue-600 hover:underline">
-                        Terms of Service
-                      </Link>{" "}
-                      and{" "}
-                      <Link href="/privacy" className="text-blue-600 hover:underline">
-                        Privacy Policy
-                      </Link>
-                      {" "}when creating this profile.
-                    </span>
-                  </div>
-                </div>
-
                 <div className="text-right mt-6">
                   <button type="submit" className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700" disabled={loading || usernameStatus.status === 'checking' || usernameStatus.status === 'taken'}>
                     {loading ? 'Saving...' : 'Save All Changes'}
@@ -365,47 +339,32 @@ const ChildDashboard = ({ child, onDelete, onClose }) => {
             </form>
           )}
         </div>
-        {currentView === 'edit' && (
-          <div className="w-full flex-shrink-0 p-4 md:p-6">
-            <h2 className="text-3xl font-bold text-center mb-6">Edit {childData.name}</h2>
-            <AddChildForm childToEdit={childData} onClose={handleCancel} onSaveSuccess={handleSaveSuccess} />
-          </div>
-        )}
-        {currentView === 'deleteConfirm' && (
-          <div className="w-full flex-shrink-0 p-4 md:p-6 flex flex-col items-center justify-center text-center h-full">
-            <FaTrash className="text-red-500 text-6xl mb-4" />
-            <h2 className="text-2xl font-bold mb-4">Are you sure?</h2>
-            <p className="text-gray-700 mb-6">Do you really want to deactivate {childData.name}&apos;s profile? This process cannot be undone.</p>
-            <div className="flex justify-center space-x-4">
-              <button onClick={handleConfirmDelete} className="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">Confirm Deactivation</button>
-              <button onClick={handleCancel} className="px-6 py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg hover:bg-gray-400">Cancel</button>
-            </div>
-          </div>
-        )}
-      </div>
+      ) : (
+        <div className="w-full flex-shrink-0 p-4 md:p-6">
+          <h2 className="text-3xl font-bold text-center mb-6">Edit {childData.name}</h2>
+          <AddChildForm childToEdit={childData} onClose={handleCancel} onSaveSuccess={handleSaveSuccess} />
+        </div>
+      )}
 
       {showLoginHelper && (
         <Modal onClose={() => setShowLoginHelper(false)}>
-          <div className="p-4 text-center">
-            <h3 className="text-2xl font-bold mb-4">Child Login Helper</h3>
-            <p className="text-gray-600 mb-4">
-              For security, please open a new **Incognito or Private Window** in your browser to log in as your child. This keeps your parent session active.
-            </p>
-            <div className="bg-gray-100 p-4 rounded-lg space-y-2 text-left">
-              <div className="flex justify-between items-center">
-                <span className="font-semibold">Username:</span>
-                <code>{childData.username}</code>
-                <button onClick={() => copyToClipboard(childData.username)} className="text-gray-500 hover:text-blue-600 p-1"><FaClipboard /></button>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="font-semibold">Password:</span>
-                <code>{childData.password}</code>
-                <button onClick={() => copyToClipboard(childData.password)} className="text-gray-500 hover:text-blue-600 p-1"><FaClipboard /></button>
-              </div>
-            </div>
-            <a href="/child-login" target="_blank" rel="noopener noreferrer" className="inline-block mt-6 px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">
-              Go to Child Login Page
-            </a>
+          <div className="p-6 text-center">
+            <h3 className="text-2xl font-bold mb-4 text-gray-800">Login Details for {childData.name}</h3>
+            <p className="text-lg text-gray-700 mb-2">Username: <span className="font-semibold text-blue-600">{childData.username}</span></p>
+            <p className="text-lg text-gray-700 mb-4">Password: <span className="font-semibold text-blue-600">{childData.password || 'Not Set'}</span></p>
+            <button
+              onClick={() => copyToClipboard(childData.username)}
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mr-2"
+            >
+              Copy Username
+            </button>
+            <button
+              onClick={() => copyToClipboard(childData.password || 'Not Set')}
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            >
+              Copy Password
+            </button>
+            <p className="text-sm text-gray-500 mt-4">You can use these credentials on the child login page.</p>
           </div>
         </Modal>
       )}

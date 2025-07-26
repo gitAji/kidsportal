@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { CorrectAnswerAnimation, IncorrectAnswerAnimation, LevelCompleteAnimation } from '../../components/ui/FeedbackAnimations';
-import ProgressBar from '../../components/ui/ProgressBar';
-import db from '../../../../public/db.json';
+import { CorrectAnswerAnimation, IncorrectAnswerAnimation, LevelCompleteAnimation } from '../../../../components/ui/FeedbackAnimations';
+import ProgressBar from '../../../../components/ui/ProgressBar';
+import db from '@/public/db.json';
 
 const TaskPage = () => {
   const { subjectId, levelId, taskId } = useParams();

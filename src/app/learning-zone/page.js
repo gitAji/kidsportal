@@ -3,7 +3,7 @@ import React, { useEffect, useState, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import SkeletonLoader from "../components/ui/SkeletonLoader";
 import LearningZone from "../components/learning/LearningZone";
-import dbData from '../../../public/db.json'; // Import the local JSON data
+import dbData from '../../../public/db.json';
 
 export default function LearningZonePage() {
   const [childUser, setChildUser] = useState(null);
@@ -17,7 +17,6 @@ export default function LearningZonePage() {
       const parsedChildUser = JSON.parse(storedChildUser);
       setChildUser(parsedChildUser);
 
-      // Find the learning content for the child's grade
       const gradeData = dbData.grades.find(g => g.gradeName === parsedChildUser.grade);
       if (gradeData) {
         setLearningContent(gradeData.subjects);

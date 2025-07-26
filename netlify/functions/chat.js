@@ -2,7 +2,7 @@ const { GoogleGenAI } = require("@google/genai");
 
 const ai = new GoogleGenAI({
   vertexai: true,
-  project: "gen-lang-client-0120070959", // Replace with your project ID
+  project: process.env.GCP_PROJECT_ID, // Use environment variables
   location: "global", // Adjust this if you have a specific region
 });
 
@@ -15,13 +15,7 @@ const siText1 = {
 const generationConfig = {
   maxOutputTokens: 1024,
   temperature: 0.2,
-  topP: 0.8,
-  safetySettings: [
-    { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "OFF" },
-    { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "OFF" },
-    { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "OFF" },
-    { category: "HARM_CATEGORY_HARASSMENT", threshold: "OFF" },
-  ],
+  topP: 0.8, // Default safety settings will be used. Adjust as needed.
   systemInstruction: { parts: [siText1] },
 };
 

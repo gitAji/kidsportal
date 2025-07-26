@@ -1,35 +1,24 @@
-"use client"; // Ensure this component is treated as a client component
+import React from 'react';
+import SubjectsSection from '../components/learning/SubjectsSection';
+import HowWeMakeLearningFunSection from '../components/learning/HowWeMakeLearningFunSection';
 
-import React from "react";
-import dynamic from "next/dynamic";
-
-const SubjectsSection = dynamic(() => import("../components/learning/SubjectsSection"), { ssr: false });
-const HowWeMakeLearningFunSection = dynamic(() => import("../components/learning/HowWeMakeLearningFunSection"), { ssr: false });
-const BackToTop = dynamic(() => import("../components/ui/BackToTop"), {
-  ssr: false,
-});
-const Timeline = dynamic(() => import("../components/ui/Timeline"), {
-  ssr: false,
-});
+// This is the public-facing page that showcases what the platform offers.
+// It does not require a user to be logged in.
 
 export default function LearningPage() {
   return (
-    <>
-      <Timeline />
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="container mx-auto text-center px-4">
-          <h1 className="page-heading mb-6 animate-fade-in-down">
-            Discover a World of Knowledge!
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 animate-fade-in-up">
-            Engaging and interactive learning experiences across a variety of
-            subjects, designed for young minds.
-          </p>
-        </div>
-        <SubjectsSection />
-        <HowWeMakeLearningFunSection />
-      </section>
-      <BackToTop />
-    </>
+    <div className="container mx-auto px-4 py-12">
+      <header className="text-center mb-12">
+        <h1 className="text-5xl font-extrabold text-gray-800">Explore Our Subjects</h1>
+        <p className="text-xl text-gray-600 mt-4">
+          A world of fun and interactive learning awaits!
+        </p>
+      </header>
+
+      <SubjectsSection />
+
+      <HowWeMakeLearningFunSection />
+      
+    </div>
   );
 }

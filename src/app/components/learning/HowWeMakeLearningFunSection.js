@@ -1,73 +1,43 @@
-'use client';
+"use client";
 import React from 'react';
-import {
-  FaBookOpen,
-  FaTasks,
-  FaGraduationCap,
-  FaLaptopCode,
-  FaChalkboardTeacher,
-  FaClock,
-} from "react-icons/fa";
+import { FaGamepad, FaTrophy, FaPaintBrush } from 'react-icons/fa';
 
-const learningSteps = [
+const features = [
   {
-    icon: <FaBookOpen className="text-4xl text-blue-500 mb-4" />,
-    title: "Interactive Lessons & Levels",
-    description:
-      "Our curriculum is broken down into engaging lessons and progressive levels, ensuring a smooth learning journey.",
+    icon: <FaGamepad />,
+    title: 'Game-Like Adventures',
+    description: 'We turn learning into a journey with visual paths and interactive challenges that feel like playing a game.'
   },
   {
-    icon: <FaTasks className="text-4xl text-green-500 mb-4" />,
-    title: "Hands-on Tasks & Quizzes",
-    description:
-      "Reinforce learning with practical tasks and fun quizzes designed to test understanding and build confidence.",
+    icon: <FaTrophy />,
+    title: 'Rewards & Collectibles',
+    description: "Children earn points and unlock cool stickers for completing tasks, giving them a sense of accomplishment."
   },
   {
-    icon: <FaGraduationCap className="text-4xl text-purple-500 mb-4" />,
-    title: "Comprehensive Exams",
-    description:
-      "Regular assessments and comprehensive exams help track progress and identify areas for improvement.",
-  },
-  {
-    icon: <FaLaptopCode className="text-4xl text-red-500 mb-4" />,
-    title: "Interactive Learning",
-    description:
-      "Our platform uses gamification and interactive elements to make learning an exciting adventure.",
-  },
-  {
-    icon: <FaChalkboardTeacher className="text-4xl text-yellow-500 mb-4" />,
-    title: "Expert Teachers",
-    description:
-      "Learn from experienced and passionate educators who make complex topics easy to understand.",
-  },
-  {
-    icon: <FaClock className="text-4xl text-teal-500 mb-4" />,
-    title: "24/7 Online Help",
-    description:
-      "Get support whenever you need it with our round-the-clock online assistance.",
-  },
+    icon: <FaPaintBrush />,
+    title: 'Avatar Customization',
+    description: "Kids can spend their points in the Avatar Shop to personalize their character and express their creativity."
+  }
 ];
 
-export default function HowWeMakeLearningFunSection() {
+const HowWeMakeLearningFunSection = () => {
   return (
-    <div className="container mx-auto text-center px-4">
-      <h2 className="text-4xl font-bold text-blue-700 mt-20 mb-10">
-        How We Make Learning Fun
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {learningSteps.map((step, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-200"
-          >
-            {step.icon}
-            <h3 className="text-2xl font-bold text-gray-800 mb-3">
-              {step.title}
-            </h3>
-            <p className="text-gray-600">{step.description}</p>
+    <section>
+      <div className="text-center mb-12">
+        <h2 className="text-4xl font-extrabold text-gray-800">How We Make Learning Fun</h2>
+        <p className="text-lg text-gray-600 mt-2">Our platform is more than just lessons; it&apos;s an experience.</p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {features.map((feature, index) => (
+          <div key={index} className="bg-white p-8 rounded-lg shadow-md text-center">
+            <div className="text-5xl text-blue-500 mb-4 inline-block">{feature.icon}</div>
+            <h3 className="text-2xl font-bold text-gray-700 mb-2">{feature.title}</h3>
+            <p className="text-gray-600">{feature.description}</p>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
-}
+};
+
+export default HowWeMakeLearningFunSection;

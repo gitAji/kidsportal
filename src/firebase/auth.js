@@ -18,6 +18,7 @@ export const signInWithGoogle = async (onSuccess) => {
     await setDoc(userRef, {
       email: result.user.email,
       displayName: result.user.displayName,
+      photoURL: result.user.photoURL, // <-- ADD THIS LINE
       role: 'parent', // Default role for new sign-ups
     }, { merge: true }); // Use merge: true to avoid overwriting existing data
     if (onSuccess) onSuccess();

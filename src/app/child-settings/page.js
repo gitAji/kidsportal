@@ -36,7 +36,7 @@ const ChildSettingsPage = () => {
       setChildUser(user);
       setFormData({ ...formData, username: user.username });
     }
-  }, [router]);
+  }, [router, formData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
