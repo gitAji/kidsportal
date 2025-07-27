@@ -74,7 +74,13 @@ export default function ChildLoginForm() {
       router.push("/learning-zone"); // Redirect to new learning zone dashboard
 
     } catch (err) {
-      console.error("Error during child login:", err);
+      console.error("Child login error details:", err);
+      if (err.code) {
+        console.error("Firebase Error Code:", err.code);
+      }
+      if (err.message) {
+        console.error("Firebase Error Message:", err.message);
+      }
       setError("An error occurred during login. Please try again later.");
     } finally {
       setLoading(false);

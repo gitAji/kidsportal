@@ -22,8 +22,10 @@ export default function LearningZonePage() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log("LearningZonePage: childUser changed", childUser);
     if (childUser) {
       const fetchedSubjects = getSubjectsByGrade(childUser.gradeId);
+      console.log("LearningZonePage: fetchedSubjects", fetchedSubjects);
       setSubjects(fetchedSubjects);
     }
   }, [childUser]);
@@ -40,9 +42,9 @@ export default function LearningZonePage() {
   };
 
   return (
-    <div className="p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-gradient-to-br from-blue-100 to-purple-100">
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full max-w-6xl"
         initial="hidden"
         animate="visible"
         variants={{
@@ -52,11 +54,12 @@ export default function LearningZonePage() {
         {subjects.map((subject) => (
           <Link key={subject.subjectId} href={`/learning-zone/subjects/${subject.subjectId}`}>
             <motion.div
-              className={`${subjectColorMap[subject.subjectName] || subjectColorMap.default} rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center h-48 cursor-pointer`}
+              className={`${subjectColorMap[subject.subjectName] || subjectColorMap.default} text-white rounded-3xl shadow-xl p-8 flex flex-col items-center justify-center h-64 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl border-b-8 border-opacity-50`}
               variants={cardVariants}
               whileHover="hover"
             >
-              <h2 className="text-2xl font-bold text-center">{subject.subjectName}</h2>
+              <h2 className="text-3xl font-extrabold text-center drop-shadow-md">{subject.subjectName}</h2>
+              <p className="mt-2 text-lg opacity-90">Start your adventure!</p>
             </motion.div>
           </Link>
         ))}

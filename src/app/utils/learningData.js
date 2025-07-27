@@ -6,6 +6,7 @@ import db from '../data/db.json';
  * @returns {Array} An array of subjects for the given grade.
  */
 export function getSubjectsByGrade(gradeString) {
+  console.log("getSubjectsByGrade: received gradeString", gradeString);
   if (!gradeString) {
     console.warn("getSubjectsByGrade: gradeString is undefined or null.");
     return [];
