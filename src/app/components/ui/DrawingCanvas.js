@@ -85,6 +85,9 @@ export default function DrawingCanvas({ width = 600, height = 400 }) {
         onMouseMove={draw}
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
+        onTouchStart={startDrawing}
+        onTouchMove={draw}
+        onTouchEnd={stopDrawing}
         className="bg-white border border-gray-200 rounded-md"
         style={{ touchAction: 'none' }} // Disable default touch actions for drawing
       />

@@ -35,34 +35,42 @@ export default function ChildLoginForm() {
     }
 
     try {
+      console.log("Attempting to fetch username document for:", username);
       const usernameDocRef = doc(db, 'child_usernames', username);
       const usernameDoc = await getDoc(usernameDocRef);
 
       if (!usernameDoc.exists()) {
+        console.error("Username document does not exist.");
         setError("Invalid username or password. Please try again.");
         setLoading(false);
         return;
       }
+      console.log("Username document data:", usernameDoc.data());
 
       const { parentUid, childId } = usernameDoc.data();
+      console.log("Attempting to fetch child document for parentUid:", parentUid, "childId:", childId);
       const childDocRef = doc(db, 'users', parentUid, 'children', childId);
       const childDoc = await getDoc(childDocRef);
 
       if (!childDoc.exists()) {
+        console.error("Child document does not exist.");
         setError("An unexpected error occurred. Child profile not found.");
         setLoading(false);
         return;
       }
+      console.log("Child document data:", childDoc.data());
 
       const childData = childDoc.data();
 
       if (childData.password !== password) {
+        console.error("Password mismatch.");
         setError("Invalid username or password. Please try again.");
         setLoading(false);
         return;
       }
 
       if (childData.loginEnabled === false) {
+        console.error("Child account disabled.");
         setError("Your account is currently disabled. Please ask your parent to enable it.");
         setLoading(false);
         return;

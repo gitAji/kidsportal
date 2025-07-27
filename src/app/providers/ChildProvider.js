@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { doc, getDoc } from 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
 import { app } from '@/firebase/config';
-import SkeletonLoader from '../components/ui/SkeletonLoader';
+import KidFriendlyLoader from '../components/ui/KidFriendlyLoader';
 
 const ChildContext = createContext();
 
@@ -71,10 +71,7 @@ export function ChildProvider({ children }) {
 
   if (loading) {
     return (
-      <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 items-center justify-center">
-        <SkeletonLoader />
-        <p className="text-gray-600 mt-4">Loading learning zone...</p>
-      </div>
+      <KidFriendlyLoader message="Loading your learning adventure..." />
     );
   }
 

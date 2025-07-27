@@ -25,10 +25,11 @@ const avatars = [
   { id: 'default', icon: <FaUserCircle /> },
 ];
 
+import { useChild } from '../../providers/ChildProvider'; // Import the context hook
+
 export default function SettingsPage() {
   const db = getFirestore(app);
-  const [childUser, setChildUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { childUser, setChildUser: setGlobalChildUser } = useChild(); // Get childUser and the setter from context
   const [selectedAvatar, setSelectedAvatar] = useState('default');
   const [selectedTheme, setSelectedTheme] = useState('default');
   const [saveStatus, setSaveStatus] = useState(null);
@@ -36,27 +37,19 @@ export default function SettingsPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const storedChildUser = sessionStorage.getItem("childUser");
-    if (storedChildUser) {
-      const parsedUser = JSON.parse(storedChildUser);
-      setChildUser(parsedUser);
-      setSelectedAvatar(parsedUser.avatar || 'default');
-      setSelectedTheme(parsedUser.theme || 'default');
-    } else {
-      router.push("/child-login");
+    if (childUser) {
+      setSelectedAvatar(childUser.avatar || 'default');
+      setSelectedTheme(childUser.theme || 'default');
     }
-    setLoading(false);
-  }, [router]);
+  }, [childUser]);
 
   const handleSaveChanges = async () => {
-    setLoading(true);
     setSaveStatus(null);
     setErrorMessage('');
 
     if (!childUser) {
       setSaveStatus('error');
       setErrorMessage('No child user data found.');
-      setLoading(false);
       return;
     }
 
@@ -68,10 +61,14 @@ export default function SettingsPage() {
       };
       await updateDoc(childDocRef, updates);
 
-      // Update session storage with new data
       const updatedChild = { ...childUser, ...updates };
-      sessionStorage.setItem("childUser", JSON.stringify(updatedChild));
-      setChildUser(updatedChild); // Update local state
+      // Update both local storage (if rememberMe was checked) and global context
+      if (localStorage.getItem("childUser")) {
+        localStorage.setItem("childUser", JSON.stringify(updatedChild));
+      } else if (sessionStorage.getItem("childUser")) {
+        sessionStorage.setItem("childUser", JSON.stringify(updatedChild));
+      }
+      setGlobalChildUser(updatedChild); // Update the global state
 
       setSaveStatus('success');
       setErrorMessage('Settings saved successfully!');
@@ -80,13 +77,11 @@ export default function SettingsPage() {
       setSaveStatus('error');
       setErrorMessage(error.message || 'Failed to save settings.');
     } finally {
-      setLoading(false);
       setTimeout(() => setSaveStatus(null), 3000);
     }
   };
 
-  if (loading) return <SkeletonLoader />;
-  if (!childUser) return null; // Redirecting
+  if (!childUser) return <SkeletonLoader />;
 
   return (
     <div className="p-4">

@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../../data/db.json';
-import SkeletonLoader from '../../../../components/ui/SkeletonLoader';
-import { FaArrowLeft } from 'react-icons/fa';
+import KidFriendlyLoader from '../../../../components/ui/KidFriendlyLoader';
+import { FaArrowLeft, FaHome } from 'react-icons/fa';
 import { useChild } from '../../../../providers/ChildProvider';
 import { motion } from "framer-motion";
 
@@ -35,8 +35,7 @@ export default function LevelTasksPage() {
     setLoading(false);
   }, [childUser, subjectId, levelId, router]);
 
-  if (loading) return <SkeletonLoader />;
-  if (!childUser) return null;
+  if (loading) return <KidFriendlyLoader />;
   if (!levelData) return <div className="text-center p-10">Level not found.</div>;
 
   const cardVariants = {
@@ -47,9 +46,14 @@ export default function LevelTasksPage() {
 
   return (
     <div className="p-4">
-      <button onClick={() => router.back()} className="flex items-center text-lg font-semibold text-gray-700 hover:text-blue-600 mb-6">
-        <FaArrowLeft className="mr-2" /> Back to Levels
-      </button>
+      <div className="flex items-center justify-between mb-6">
+        <button onClick={() => router.back()} className="p-3 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700">
+          <FaArrowLeft className="text-xl" />
+        </button>
+        <button onClick={() => router.push('/learning-zone')} className="p-3 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700">
+          <FaHome className="text-xl" />
+        </button>
+      </div>
       <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">{levelData.levelName} Tasks</h1>
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"

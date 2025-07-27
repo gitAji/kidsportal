@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../../../data/db.json';
 import SkeletonLoader from '../../../../../components/ui/SkeletonLoader';
-import { FaArrowLeft, FaCheckCircle, FaTimesCircle, FaRedo, FaForward, FaVolumeUp, FaPaintBrush, FaKeyboard } from 'react-icons/fa';
+import { FaArrowLeft, FaCheckCircle, FaTimesCircle, FaRedo, FaForward, FaVolumeUp, FaPaintBrush, FaKeyboard, FaHome } from 'react-icons/fa';
 import { useChild } from '../../../../../providers/ChildProvider';
 import AudioPlayer from '../../../../../components/ui/AudioPlayer';
 import DrawingCanvas from '../../../../../components/ui/DrawingCanvas';
@@ -32,9 +32,9 @@ export default function TaskContentPage() {
   const [showKeyboard, setShowKeyboard] = useState(false); // State for virtual keyboard
 
   // Audio elements
-  const correctSound = typeof Audio !== 'undefined' ? new Audio('/sounds/correct.mp3') : null;
-  const incorrectSound = typeof Audio !== 'undefined' ? new Audio('/sounds/incorrect.mp3') : null;
-  const completionSound = typeof Audio !== 'undefined' ? new Audio('/sounds/completed.mp3') : null;
+  const correctSound = React.useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/correct.mp3') : null, []);
+  const incorrectSound = React.useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/incorrect.mp3') : null, []);
+  const completionSound = React.useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/completed.mp3') : null, []);
 
   useEffect(() => {
     if (childUser && childUser.gradeId) {
@@ -195,9 +195,14 @@ export default function TaskContentPage() {
 
   return (
     <div className="p-4">
-      <button onClick={() => router.back()} className="flex items-center text-lg font-semibold text-gray-700 hover:text-blue-600 mb-6">
-        <FaArrowLeft className="mr-2" /> Back to Tasks
-      </button>
+      <div className="flex items-center justify-between mb-6">
+        <button onClick={() => router.back()} className="p-3 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700">
+          <FaArrowLeft className="text-xl" />
+        </button>
+        <button onClick={() => router.push('/learning-zone')} className="p-3 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700">
+          <FaHome className="text-xl" />
+        </button>
+      </div>
       <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">{taskData.taskName}</h1>
 
       {(taskData.type === 'quiz' || taskData.type === 'exam') && (
