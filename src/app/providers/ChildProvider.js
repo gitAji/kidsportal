@@ -31,7 +31,6 @@ export function ChildProvider({ children }) {
           const childDoc = await getDoc(childDocRef);
           if (childDoc.exists()) {
             const freshData = { id: childDoc.id, ...childDoc.data(), parentUid: parsedUser.parentUid };
-            console.log("ChildProvider: Original childUser.grade", freshData.grade);
             // Ensure gradeId matches db.json format (e.g., "grade-1" from 1 or "Grade 1")
             if (freshData.grade) {
                 const gradeNum = parseInt(freshData.grade.toString().replace('Grade ', ''), 10);
@@ -41,7 +40,6 @@ export function ChildProvider({ children }) {
                     freshData.gradeId = freshData.grade.toLowerCase().replace(' ', '-'); // Fallback for other formats
                 }
             }
-            console.log("ChildProvider: Processed childUser.gradeId", freshData.gradeId);
             setChildUser(freshData);
             // Re-set the storage item to keep it fresh
             if (localStorage.getItem("childUser")) {

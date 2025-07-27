@@ -22,10 +22,8 @@ export default function LearningZonePage() {
   const router = useRouter();
 
   useEffect(() => {
-    console.log("LearningZonePage: childUser changed", childUser);
     if (childUser) {
       const fetchedSubjects = getSubjectsByGrade(childUser.gradeId);
-      console.log("LearningZonePage: fetchedSubjects", fetchedSubjects);
       setSubjects(fetchedSubjects);
     }
   }, [childUser]);
@@ -42,7 +40,21 @@ export default function LearningZonePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-gradient-to-br from-blue-100 to-purple-100">
+    <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 md:p-8 bg-gradient-to-br from-blue-100 to-purple-100">
+      <motion.h1
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2 text-center leading-tight drop-shadow-lg"
+      >
+        <span className="text-blue-600">Hello,</span> {childUser.name}!
+      </motion.h1>
+      <p className="text-xl text-gray-700 mb-8 text-center">
+        You are in {childUser.grade} - Let&apos;s learn something new!
+      </p>
+      <p className="text-xl text-gray-700 mb-12 text-center max-w-2xl">
+        Dive into a world of exciting subjects and fun challenges!&apos;
+      </p>
       <motion.div
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full max-w-6xl"
         initial="hidden"

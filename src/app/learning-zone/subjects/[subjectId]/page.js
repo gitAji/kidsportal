@@ -7,6 +7,14 @@ import { FaArrowLeft, FaHome } from 'react-icons/fa';
 import { useChild } from '../../../providers/ChildProvider'; // Import useChild
 import { motion } from "framer-motion"; // Import motion
 
+// A map for sleek level colors
+const levelColorMap = {
+  "Level 1": "from-blue-400 to-blue-600",
+  "Level 2": "from-green-400 to-green-600",
+  "Level 3": "from-yellow-400 to-yellow-600",
+  "default": "from-gray-400 to-gray-600",
+};
+
 export default function SubjectLevelsPage() {
   const { childUser } = useChild(); // Get childUser from context
   const [subjectData, setSubjectData] = useState(null);
@@ -22,7 +30,7 @@ export default function SubjectLevelsPage() {
         const foundSubject = gradeData.subjects.find(s => s.subjectId === subjectId);
         setSubjectData(foundSubject);
       } else {
-        console.warn(`Grade data not found for gradeId: ${childUser.gradeId}`);
+        // Grade data not found, subject not found
       }
     } else if (!childUser) {
       router.push("/child-login"); // Redirect if no child user
@@ -64,12 +72,12 @@ export default function SubjectLevelsPage() {
             <motion.div
               key={level.levelId}
               onClick={() => router.push(`/learning-zone/subjects/${subjectId}/${level.levelId}`)}
-              className="bg-white rounded-xl shadow-lg p-6 text-center transform transition-transform duration-200 hover:scale-105 hover:shadow-xl cursor-pointer flex flex-col items-center justify-center min-h-[200px]"
+              className={`bg-gradient-to-br ${levelColorMap[level.levelName] || levelColorMap.default} text-white rounded-xl shadow-lg p-6 text-center transform transition-transform duration-200 hover:scale-105 hover:shadow-xl cursor-pointer flex flex-col items-center justify-center min-h-[200px]`}
               variants={cardVariants}
               whileHover="hover"
             >
-              <h2 className="text-2xl font-semibold text-purple-600 mb-2">{level.levelName}</h2>
-              <p className="text-gray-600">{level.description}</p>
+              <h2 className="text-2xl font-semibold mb-2">{level.levelName}</h2>
+              {level.description && <p className="text-lg opacity-90">{level.description}</p>}
             </motion.div>
           ))
         ) : (

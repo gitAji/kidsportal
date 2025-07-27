@@ -8,7 +8,7 @@ export default function RightSidePanel({ children, isOpen, onClose, panelName })
 
   
 
-  console.log(`RightSidePanel (${panelName}) rendering. isOpen:`, isOpen);
+  
   return (
     <div
       ref={panelRef}

@@ -59,7 +59,7 @@ export default function RegisterPage() {
   };
 
   const handleVippsRegister = () => {
-    console.log("Vipps registration triggered");
+    
     // Add Vipps registration logic here later
   };
 

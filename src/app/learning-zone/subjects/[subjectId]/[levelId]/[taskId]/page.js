@@ -54,8 +54,6 @@ export default function TaskContentPage() {
           } else {
             console.warn(`Level data not found for levelId: ${levelId}`);
           }
-        } else {
-          console.warn(`Subject data not found for subjectId: ${subjectId}`);
         }
       }
     } else if (!childUser) {

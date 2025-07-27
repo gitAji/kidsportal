@@ -16,10 +16,7 @@ const FeedbackMessage = ({ message, isCorrect }) => {
   // Play sound based on the feedback
   useEffect(() => {
     if (isCorrect) {
-      console.log("Correct answer sound playing...");
-      playCorrect(); // Play sound for correct answer
-    } else if (isCorrect === false) {
-      console.log("Incorrect answer sound playing...");
+      
       playIncorrect(); // Play sound for incorrect answer
     }
   }, [isCorrect, playCorrect, playIncorrect]);

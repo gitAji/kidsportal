@@ -10,371 +10,95 @@
           "levels": [
             {
               "levelId": "english-1-level-1",
-              "levelName": "Level 1: Introduction to Letters",
+              "levelName": "Level 1: Alphabet Adventures",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "english-1-level-1-lesson-1",
-                  "taskName": "Identify Uppercase Letters",
+                  "taskName": "Meet the Uppercase Letters",
                   "type": "lesson",
-                  "status": "completed",
-                  "content": "Learn to recognize and say the uppercase letters from A to Z. Example: 'A' as in Apple, 'B' as in Ball. Practice saying them aloud!",
+                  "content": "Hello, little learner! Let's meet the big, strong uppercase letters from A to Z. Say them with me: A, B, C... Each letter has a special shape and sound. Look at the pictures and try to say the letter names!",
+                  "questions": []
+                },
+                {
+                  "taskId": "english-1-level-1-quiz-1",
+                  "taskName": "Match the Big Letters",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Can you match the uppercase letter to its name? Choose the correct letter!",
                   "questions": [
                     {
-                      "questionId": "lesson-q1",
-                      "questionText": "Which letter is 'D'?",
+                      "questionId": "eng1-q1",
+                      "questionText": "Which is the letter 'D'?",
                       "options": ["A", "B", "D"],
                       "correctAnswer": "D",
-                      "type": "identification"
+                      "type": "multiple-choice"
                     },
                     {
-                      "questionId": "lesson-q2",
+                      "questionId": "eng1-q2",
                       "questionText": "What is this letter: M?",
                       "options": ["N", "M", "P"],
                       "correctAnswer": "M",
-                      "type": "identification"
+                      "type": "multiple-choice"
                     },
                     {
-                      "questionId": "lesson-q3",
-                      "questionText": "Point to the letter 'S'.",
+                      "questionId": "eng1-q3",
+                      "questionText": "Find the letter 'S'.",
                       "options": ["R", "S", "T"],
                       "correctAnswer": "S",
-                      "type": "identification"
+                      "type": "multiple-choice"
                     }
                   ]
                 },
                 {
                   "taskId": "english-1-level-1-lesson-2",
-                  "taskName": "Trace Letters and Write Names",
+                  "taskName": "Meet the Lowercase Letters",
                   "type": "lesson",
-                  "content": "Practice tracing the uppercase and lowercase letters provided. Then, try writing your name using the letters you've learned!",
+                  "content": "Now let's meet their little friends, the lowercase letters! They look a bit different but make the same sounds. Practice saying 'a', 'b', 'c'...",
                   "questions": []
-                },
-                {
-                  "taskId": "english-1-level-1-quiz-1",
-                  "taskName": "Match Lowercase Letters (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Drag and drop the lowercase letter to its matching uppercase letter.",
-                  "questions": [
-                    {
-                      "questionId": "q1",
-                      "questionText": "Match 'a' with:",
-                      "options": ["A", "B", "C"],
-                      "correctAnswer": "A"
-                    },
-                    {
-                      "questionId": "q2",
-                      "questionText": "Match 'e' with:",
-                      "options": ["E", "F", "D"],
-                      "correctAnswer": "E"
-                    },
-                    {
-                      "questionId": "q3",
-                      "questionText": "Match 'i' with:",
-                      "options": ["G", "I", "H"],
-                      "correctAnswer": "I"
-                    },
-                    {
-                      "questionId": "q4",
-                      "questionText": "Match 'o' with:",
-                      "options": ["M", "N", "O"],
-                      "correctAnswer": "O"
-                    },
-                    {
-                      "questionId": "q5",
-                      "questionText": "Match 'u' with:",
-                      "options": ["T", "U", "V"],
-                      "correctAnswer": "U"
-                    }
-                  ]
                 },
                 {
                   "taskId": "english-1-level-1-quiz-2",
-                  "taskName": "Letter Sound Recognition (Quiz)",
+                  "taskName": "Big and Little Letter Match",
                   "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Listen to the sound and click on the corresponding letter that makes that sound.",
+                  "timeLimit": 180,
+                  "content": "Match the big letter to its little letter friend!",
                   "questions": [
                     {
-                      "questionId": "q6",
-                      "questionText": "What letter makes the /b/ sound?",
-                      "options": ["P", "B", "D"],
-                      "correctAnswer": "B"
+                      "questionId": "eng1-q4",
+                      "questionText": "Match 'A' with:",
+                      "options": ["a", "b", "c"],
+                      "correctAnswer": "a",
+                      "type": "multiple-choice"
                     },
                     {
-                      "questionId": "q7",
-                      "questionText": "What letter makes the /s/ sound?",
-                      "options": ["C", "F", "S"],
-                      "correctAnswer": "S"
-                    },
-                    {
-                      "questionId": "q8",
-                      "questionText": "Which letter sounds like /k/?",
-                      "options": ["G", "K", "L"],
-                      "correctAnswer": "K"
-                    },
-                    {
-                      "questionId": "q9",
-                      "questionText": "What is the sound of 'R'?",
-                      "options": ["/p/", "/r/", "/l/"],
-                      "correctAnswer": "/r/"
+                      "questionId": "eng1-q5",
+                      "questionText": "Match 'E' with:",
+                      "options": ["e", "f", "d"],
+                      "correctAnswer": "e",
+                      "type": "multiple-choice"
                     }
                   ]
                 },
                 {
-                  "taskId": "english-1-level-1-exam",
-                  "taskName": "Level 1 English Exam",
+                  "taskId": "english-1-level-1-exam-1",
+                  "taskName": "Alphabet Challenge!",
                   "type": "exam",
-                  "timeLimit": 600,
-                  "content": "This exam tests your knowledge of letters and their sounds. Complete it to unlock the next level!",
-                  "questions": [
-                    {
-                      "questionId": "ex1-q1",
-                      "questionText": "Which is the uppercase letter 'G'?",
-                      "options": ["g", "G", "j"],
-                      "correctAnswer": "G"
-                    },
-                    {
-                      "questionId": "ex1-q2",
-                      "questionText": "What sound does the letter 'M' make?",
-                      "options": ["/n/", "/m/", "/l/"],
-                      "correctAnswer": "/m/"
-                    },
-                    {
-                      "questionId": "ex1-q3",
-                      "questionText": "Select the letter that comes after 'T'.",
-                      "options": ["S", "U", "V"],
-                      "correctAnswer": "U"
-                    },
-                    {
-                      "questionId": "ex1-q4",
-                      "questionText": "Which letter is a vowel?",
-                      "options": ["D", "E", "F"],
-                      "correctAnswer": "E"
-                    },
-                    {
-                      "questionId": "ex1-q5",
-                      "questionText": "What is the lowercase of 'Z'?",
-                      "options": ["y", "x", "z"],
-                      "correctAnswer": "z"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "levelId": "english-1-level-2",
-              "levelName": "Level 2: Basic Sight Words",
-              "isLocked": false,
-              "tasks": [
-                {
-                  "taskId": "english-1-level-2-lesson-1",
-                  "taskName": "Sight Word Introduction",
-                  "type": "lesson",
-                  "content": "Learn common sight words like 'the', 'and', 'is', 'a', 'it', 'I'. Practice reading them quickly. Example: 'The cat is big.'",
-                  "questions": []
-                },
-                {
-                  "taskId": "english-1-level-2-lesson-2",
-                  "taskName": "Build a Simple Sentence",
-                  "type": "lesson",
-                  "content": "Arrange the given sight words to form a simple sentence. For example, arrange 'is', 'cat', 'the', 'big' to form 'The cat is big.'",
-                  "questions": []
-                },
-                {
-                  "taskId": "english-1-level-2-quiz-1",
-                  "taskName": "Sight Word Flashcards (Quiz)",
-                  "type": "quiz",
                   "timeLimit": 300,
-                  "content": "Look at the word and select the correct picture or meaning.",
+                  "content": "It's time for your Alphabet Challenge! Show what you've learned about all the letters!",
                   "questions": [
                     {
-                      "questionId": "sw-q1",
-                      "questionText": "Which word is 'the'?",
-                      "options": ["and", "the", "is"],
-                      "correctAnswer": "the"
+                      "questionId": "eng1-ex1-q1",
+                      "questionText": "What letter comes after 'F'?",
+                      "options": ["E", "G", "H"],
+                      "correctAnswer": "G",
+                      "type": "multiple-choice"
                     },
                     {
-                      "questionId": "sw-q2",
-                      "questionText": "Which word means 'one'?",
-                      "options": ["a", "it", "and"],
-                      "correctAnswer": "a"
-                    },
-                    {
-                      "questionId": "sw-q3",
-                      "questionText": "Select the word 'and'.",
-                      "options": ["at", "an", "and"],
-                      "correctAnswer": "and"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "english-1-level-2-quiz-2",
-                  "taskName": "Fill in the Blanks (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Choose the correct sight word to complete the sentence.",
-                  "questions": [
-                    {
-                      "questionId": "fib-q1",
-                      "questionText": "____ dog ran.",
-                      "options": ["Is", "The", "And"],
-                      "correctAnswer": "The"
-                    },
-                    {
-                      "questionId": "fib-q2",
-                      "questionText": "I ____ a girl.",
-                      "options": ["am", "is", "are"],
-                      "correctAnswer": "am"
-                    },
-                    {
-                      "questionId": "fib-q3",
-                      "questionText": "She ____ tall.",
-                      "options": ["are", "is", "am"],
-                      "correctAnswer": "is"
-                    },
-                    {
-                      "questionId": "fib-q4",
-                      "questionText": "Fish live in ____ water.",
-                      "options": ["a", "the", "it"],
-                      "correctAnswer": "the"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "english-1-level-2-exam",
-                  "taskName": "Level 2 English Exam",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "Test your knowledge of basic sight words and simple sentence formation.",
-                  "questions": [
-                    {
-                      "questionId": "ex2-q1",
-                      "questionText": "Which word completes the sentence: 'A bird ____ fly.'?",
-                      "options": ["can", "run", "eat"],
-                      "correctAnswer": "can"
-                    },
-                    {
-                      "questionId": "ex2-q2",
-                      "questionText": "Select the sight word: 'go'.",
-                      "options": ["went", "gone", "go"],
-                      "correctAnswer": "go"
-                    },
-                    {
-                      "questionId": "ex2-q3",
-                      "questionText": "Which sentence is correct?",
-                      "options": ["He is good.", "Is he good.", "Good he is."],
-                      "correctAnswer": "He is good."
-                    },
-                    {
-                      "questionId": "ex2-q4",
-                      "questionText": "Choose the word that describes 'me'.",
-                      "options": ["them", "I", "you"],
-                      "correctAnswer": "I"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "levelId": "english-1-level-3",
-              "levelName": "Level 3: Simple Sentences",
-              "isLocked": true,
-              "lockMessage": "Finish previous level to unlock or upgrade to Premium.",
-              "tasks": [
-                {
-                  "taskId": "english-1-level-3-lesson-1",
-                  "taskName": "Sentence Structure Basics",
-                  "type": "lesson",
-                  "content": "Learn about subjects and verbs in simple sentences. Example: 'The cat (subject) sleeps (verb).'",
-                  "questions": []
-                },
-                {
-                  "taskId": "english-1-level-3-lesson-2",
-                  "taskName": "Write Your Own Simple Sentences",
-                  "type": "lesson",
-                  "content": "Write three simple sentences using different subjects and verbs. For example: 'The sun shines.'",
-                  "questions": []
-                },
-                {
-                  "taskId": "english-1-level-3-quiz-1",
-                  "taskName": "Identify Subject and Verb (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "In the given sentence, identify the subject and the verb.",
-                  "questions": [
-                    {
-                      "questionId": "q-sub-verb1",
-                      "questionText": "In 'Birds fly', what is the subject?",
-                      "options": ["Birds", "fly", "in"],
-                      "correctAnswer": "Birds"
-                    },
-                    {
-                      "questionId": "q-sub-verb2",
-                      "questionText": "In 'The boy eats', what is the verb?",
-                      "options": ["The", "boy", "eats"],
-                      "correctAnswer": "eats"
-                    },
-                    {
-                      "questionId": "q-sub-verb3",
-                      "questionText": "What is the subject in 'The car moves fast'?",
-                      "options": ["car", "moves", "fast"],
-                      "correctAnswer": "car"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "english-1-level-3-quiz-2",
-                  "taskName": "Match Pictures to Sentences (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Match the simple sentence to the picture that describes it.",
-                  "questions": [
-                    {
-                      "questionId": "q-pic-sent1",
-                      "questionText": "Which sentence matches a picture of a girl reading?",
-                      "options": ["The boy plays.", "The girl reads.", "The dog barks."],
-                      "correctAnswer": "The girl reads."
-                    },
-                    {
-                      "questionId": "q-pic-sent2",
-                      "questionText": "Which sentence matches a picture of a cat sleeping?",
-                      "options": ["The cat eats.", "The cat sleeps.", "The cat jumps."],
-                      "correctAnswer": "The cat sleeps."
-                    }
-                  ]
-                },
-                {
-                  "taskId": "english-1-level-3-exam",
-                  "taskName": "Level 3 English Exam",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "This exam assesses your understanding of simple sentence formation and identifying sentence parts.",
-                  "questions": [
-                    {
-                      "questionId": "ex3-q1",
-                      "questionText": "Which of these is a complete simple sentence?",
-                      "options": ["Running fast.", "The cat sleeps.", "Big red car."],
-                      "correctAnswer": "The cat sleeps."
-                    },
-                    {
-                      "questionId": "ex3-q2",
-                      "questionText": "What is the missing word: 'The flowers ____.'",
-                      "options": ["sing", "bloom", "jump"],
-                      "correctAnswer": "bloom"
-                    },
-                    {
-                      "questionId": "ex3-q3",
-                      "questionText": "Identify the verb: 'The children play outside.'",
-                      "options": ["children", "play", "outside"],
-                      "correctAnswer": "play"
-                    },
-                    {
-                      "questionId": "ex3-q4",
-                      "questionText": "Which sentence has a subject and a verb?",
-                      "options": ["Under the tree.", "Happy dog.", "Birds sing."],
-                      "correctAnswer": "Birds sing."
+                      "questionId": "eng1-ex1-q2",
+                      "questionText": "Type the letter that starts 'apple'.",
+                      "correctAnswer": "a",
+                      "type": "identification"
                     }
                   ]
                 }
@@ -388,101 +112,65 @@
           "levels": [
             {
               "levelId": "math-1-level-1",
-              "levelName": "Level 1: Introduction to Numbers",
+              "levelName": "Level 1: Counting Fun!",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "math-1-level-1-lesson-1",
-                  "taskName": "Counting 1-10",
+                  "taskName": "Count to 10",
                   "type": "lesson",
-                  "content": "Learn to count numbers from 1 to 10. See how many apples are there! Practice counting everyday objects around you.",
-                  "questions": []
-                },
-                {
-                  "taskId": "math-1-level-1-lesson-2",
-                  "taskName": "Number Ordering",
-                  "type": "lesson",
-                  "content": "Learn to arrange numbers from smallest to largest. For example: 3, 1, 5, 2, 4 -> 1, 2, 3, 4, 5.",
+                  "content": "Let's count from 1 to 10! Look at the pictures and count the objects. One apple, two apples... Practice counting your fingers and toes!",
                   "questions": []
                 },
                 {
                   "taskId": "math-1-level-1-quiz-1",
-                  "taskName": "Number Recognition (Quiz)",
+                  "taskName": "How Many?",
                   "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Identify the written number for a given quantity or picture.",
+                  "timeLimit": 120,
+                  "content": "Look at the picture and tell me how many objects you see!",
                   "questions": [
                     {
-                      "questionId": "q1",
-                      "questionText": "How many fingers are shown? (Image of 5 fingers)",
-                      "options": ["Three", "Four", "Five"],
-                      "correctAnswer": "Five"
+                      "questionId": "math1-q1",
+                      "questionText": "How many birds? (Image of 3 birds)",
+                      "options": ["2", "3", "4"],
+                      "correctAnswer": "3",
+                      "type": "multiple-choice"
                     },
                     {
-                      "questionId": "q2",
-                      "questionText": "Which number is '7'?",
-                      "options": ["six", "seven", "eight"],
-                      "correctAnswer": "seven"
-                    },
-                    {
-                      "questionId": "q3",
-                      "questionText": "Select the numeral '2'.",
-                      "options": ["1", "2", "3"],
-                      "correctAnswer": "2"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "math-1-level-1-quiz-2",
-                  "taskName": "Count and Match (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Count the objects in the picture and select the correct number.",
-                  "questions": [
-                    {
-                      "questionId": "q4",
-                      "questionText": "How many balls are there? (Image of 8 balls)",
-                      "options": ["6", "7", "8"],
-                      "correctAnswer": "8"
-                    },
-                    {
-                      "questionId": "q5",
-                      "questionText": "How many flowers? (Image of 3 flowers)",
-                      "options": ["Two", "Three", "Four"],
-                      "correctAnswer": "Three"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "math-1-level-1-exam",
-                  "taskName": "Level 1 Math Exam",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "This exam tests your ability to count and recognize numbers up to 10.",
-                  "questions": [
-                    {
-                      "questionId": "mex1-q1",
-                      "questionText": "What number comes after 9?",
-                      "options": ["8", "10", "11"],
-                      "correctAnswer": "10"
-                    },
-                    {
-                      "questionId": "mex1-q2",
-                      "questionText": "Which group has 4 items? (Show images of groups with 3, 4, 5 items)",
-                      "options": ["Group A", "Group B", "Group C"],
-                      "correctAnswer": "Group B"
-                    },
-                    {
-                      "questionId": "mex1-q3",
-                      "questionText": "Count the total: 🍎🍎 + 🍎🍎🍎",
+                      "questionId": "math1-q2",
+                      "questionText": "Count the flowers. (Image of 5 flowers)",
                       "options": ["4", "5", "6"],
-                      "correctAnswer": "5"
+                      "correctAnswer": "5",
+                      "type": "multiple-choice"
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-1-level-1-lesson-2",
+                  "taskName": "Numbers 1-10",
+                  "type": "lesson",
+                  "content": "Each number has a special symbol. Let's learn to recognize the numbers 1 through 10. Practice writing them in the drawing tool!",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-1-level-1-exam-1",
+                  "taskName": "Number Recognition Test",
+                  "type": "exam",
+                  "timeLimit": 240,
+                  "content": "Show what you know about numbers 1-10!",
+                  "questions": [
+                    {
+                      "questionId": "math1-ex1-q1",
+                      "questionText": "Which is the number '7'?",
+                      "options": ["5", "7", "9"],
+                      "correctAnswer": "7",
+                      "type": "multiple-choice"
                     },
                     {
-                      "questionId": "mex1-q4",
-                      "questionText": "What is the smallest number: 6, 2, 9?",
-                      "options": ["6", "2", "9"],
-                      "correctAnswer": "2"
+                      "questionId": "math1-ex1-q2",
+                      "questionText": "Type the number that comes after 4.",
+                      "correctAnswer": "5",
+                      "type": "identification"
                     }
                   ]
                 }
@@ -490,204 +178,58 @@
             },
             {
               "levelId": "math-1-level-2",
-              "levelName": "Level 2: Basic Addition",
+              "levelName": "Level 2: Time Explorers",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "math-1-level-2-lesson-1",
-                  "taskName": "Adding with Pictures (Lesson)",
+                  "taskName": "What Time Is It?",
                   "type": "lesson",
-                  "content": "Learn to add numbers by counting pictures. Example: 🍎 + 🍎🍎 = 🍎🍎🍎 (1 + 2 = 3).",
-                  "questions": []
-                },
-                {
-                  "taskId": "math-1-level-2-lesson-2",
-                  "taskName": "Counting On (Lesson)",
-                  "type": "lesson",
-                  "content": "Use counting on your fingers or a number line to find the sum. Example: For 3 + 2, start at 3 and count up 2 more.",
+                  "content": "Clocks help us tell time! Let's learn about the hour hand and the minute hand. When the big hand is on 12, it's 'o'clock'!",
                   "questions": []
                 },
                 {
                   "taskId": "math-1-level-2-quiz-1",
-                  "taskName": "Addition within 5 (Quiz)",
+                  "taskName": "Match the Clock",
                   "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Solve simple addition problems up to 5.",
+                  "timeLimit": 180,
+                  "content": "Look at the clock and choose the correct time!",
                   "questions": [
                     {
-                      "questionId": "add-q1",
-                      "questionText": "2 + 1 = ?",
-                      "options": ["2", "3", "4"],
-                      "correctAnswer": "3"
+                      "questionId": "time-q1",
+                      "questionText": "What time is shown? (Image of clock showing 3:00)",
+                      "options": ["2 o'clock", "3 o'clock", "4 o'clock"],
+                      "correctAnswer": "3 o'clock",
+                      "type": "multiple-choice"
                     },
                     {
-                      "questionId": "add-q2",
-                      "questionText": "3 + 2 = ?",
-                      "options": ["4", "5", "6"],
-                      "correctAnswer": "5"
-                    },
-                    {
-                      "questionId": "add-q3",
-                      "questionText": "4 + 0 = ?",
-                      "options": ["0", "4", "5"],
-                      "correctAnswer": "4"
+                      "questionId": "time-q2",
+                      "questionText": "What time is shown? (Image of clock showing 6:00)",
+                      "options": ["5 o'clock", "6 o'clock", "7 o'clock"],
+                      "correctAnswer": "6 o'clock",
+                      "type": "multiple-choice"
                     }
                   ]
                 },
                 {
-                  "taskId": "math-1-level-2-quiz-2",
-                  "taskName": "Addition Word Problems (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Solve simple word problems involving addition.",
-                  "questions": [
-                    {
-                      "questionId": "wp-q1",
-                      "questionText": "You have 3 apples and get 2 more. How many apples do you have now?",
-                      "options": ["4", "5", "6"],
-                      "correctAnswer": "5"
-                    },
-                    {
-                      "questionId": "wp-q2",
-                      "questionText": "There are 4 birds on a branch. 1 more bird comes. How many birds are there now?",
-                      "options": ["3", "4", "5"],
-                      "correctAnswer": "5"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "math-1-level-2-exam",
-                  "taskName": "Level 2 Math Exam",
+                  "taskId": "math-1-level-2-exam-1",
+                  "taskName": "Time Master Challenge!",
                   "type": "exam",
-                  "timeLimit": 600,
-                  "content": "This exam assesses your understanding of basic addition within 10.",
-                  "questions": [
-                    {
-                      "questionId": "mex2-q1",
-                      "questionText": "4 + 3 = ?",
-                      "options": ["6", "7", "8"],
-                      "correctAnswer": "7"
-                    },
-                    {
-                      "questionId": "mex2-q2",
-                      "questionText": "If you have 5 candies and your friend gives you 3 more, how many candies do you have in total?",
-                      "options": ["7", "8", "9"],
-                      "correctAnswer": "8"
-                    },
-                    {
-                      "questionId": "mex2-q3",
-                      "questionText": "Which sum is equal to 9?",
-                      "options": ["5 + 3", "6 + 2", "7 + 2"],
-                      "correctAnswer": "7 + 2"
-                    },
-                    {
-                      "questionId": "mex2-q4",
-                      "questionText": "What is 1 + 1 + 1?",
-                      "options": ["2", "3", "4"],
-                      "correctAnswer": "3"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "levelId": "math-1-level-3",
-              "levelName": "Level 3: Basic Subtraction",
-              "isLocked": true,
-              "lockMessage": "Finish previous level to unlock or upgrade to Premium.",
-              "tasks": [
-                {
-                  "taskId": "math-1-level-3-lesson-1",
-                  "taskName": "Subtracting with Pictures (Lesson)",
-                  "type": "lesson",
-                  "content": "Learn to subtract numbers by taking away pictures. Example: 🍎🍎🍎 - 🍎 = 🍎🍎 (3 - 1 = 2).",
-                  "questions": []
-                },
-                {
-                  "taskId": "math-1-level-3-lesson-2",
-                  "taskName": "Number Line Subtraction (Lesson)",
-                  "type": "lesson",
-                  "content": "Use a number line to subtract. Example: For 5 - 2, start at 5 and jump back 2 spaces.",
-                  "questions": []
-                },
-                {
-                  "taskId": "math-1-level-3-quiz-1",
-                  "taskName": "Subtraction within 5 (Quiz)",
-                  "type": "quiz",
                   "timeLimit": 300,
-                  "content": "Solve simple subtraction problems up to 5.",
+                  "content": "Show what you've learned about telling time!",
                   "questions": [
                     {
-                      "questionId": "sub-q1",
-                      "questionText": "5 - 2 = ?",
-                      "options": ["2", "3", "4"],
-                      "correctAnswer": "3"
+                      "questionId": "time-ex1-q1",
+                      "questionText": "If the big hand is on 12 and the little hand is on 9, what time is it?",
+                      "options": ["8 o'clock", "9 o'clock", "10 o'clock"],
+                      "correctAnswer": "9 o'clock",
+                      "type": "multiple-choice"
                     },
                     {
-                      "questionId": "sub-q2",
-                      "questionText": "4 - 1 = ?",
-                      "options": ["2", "3", "5"],
-                      "correctAnswer": "3"
-                    },
-                    {
-                      "questionId": "sub-q3",
-                      "questionText": "3 - 0 = ?",
-                      "options": ["0", "2", "3"],
-                      "correctAnswer": "3"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "math-1-level-3-quiz-2",
-                  "taskName": "Subtraction Word Problems (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Solve simple word problems involving subtraction.",
-                  "questions": [
-                    {
-                      "questionId": "swp-q1",
-                      "questionText": "You have 5 cookies and eat 2. How many cookies are left?",
-                      "options": ["2", "3", "4"],
-                      "correctAnswer": "3"
-                    },
-                    {
-                      "questionId": "swp-q2",
-                      "questionText": "There are 6 balloons. 3 fly away. How many are left?",
-                      "options": ["2", "3", "4"],
-                      "correctAnswer": "3"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "math-1-level-3-exam",
-                  "taskName": "Level 3 Math Exam",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "This exam assesses your understanding of basic subtraction within 10.",
-                  "questions": [
-                    {
-                      "questionId": "mex3-q1",
-                      "questionText": "8 - 3 = ?",
-                      "options": ["4", "5", "6"],
-                      "correctAnswer": "5"
-                    },
-                    {
-                      "questionId": "mex3-q2",
-                      "questionText": "There are 7 birds on a tree. 3 fly away. How many birds are left?",
-                      "options": ["3", "4", "5"],
-                      "correctAnswer": "4"
-                    },
-                    {
-                      "questionId": "mex3-q3",
-                      "questionText": "Which subtraction is equal to 4?",
-                      "options": ["9 - 6", "7 - 3", "8 - 5"],
-                      "correctAnswer": "7 - 3"
-                    },
-                    {
-                      "questionId": "mex3-q4",
-                      "questionText": "You have 10 pencils. You give 4 to a friend. How many do you have now?",
-                      "options": ["5", "6", "7"],
-                      "correctAnswer": "6"
+                      "questionId": "time-ex1-q2",
+                      "questionText": "Type the time shown. (Image of clock showing 1:00)",
+                      "correctAnswer": "1 o'clock",
+                      "type": "identification"
                     }
                   ]
                 }
@@ -703,82 +245,7 @@
               "levelId": "tamil-1-level-1",
               "levelName": "Level 1: உயிரெழுத்துக்கள் (Vowels)",
               "isLocked": false,
-              "tasks": [
-                {
-                  "taskId": "tamil-1-level-1-lesson-1",
-                  "taskName": "உயிரெழுத்துக்கள் அறிமுகம் (Introduction to Vowels)",
-                  "type": "lesson",
-                  "content": "தமிழ் உயிரெழுத்துக்களை அறியவும் பயிற்சி செய்யவும். 'அ' அன்னாசி, 'ஆ' ஆமை. (Learn and practice Tamil vowels. 'A' as in Pineapple, 'Aa' as in Tortoise).",
-                  "questions": []
-                },
-                {
-                  "taskId": "tamil-1-level-1-lesson-2",
-                  "taskName": "உயிரெழுத்து ஒலிப்புப் பயிற்சி (Vowel Pronunciation Practice)",
-                  "type": "lesson",
-                  "content": "ஒவ்வொரு உயிரெழுத்தையும் சரியாக உச்சரித்துப் பழகுங்கள். (Practice pronouncing each vowel correctly).",
-                  "questions": []
-                },
-                {
-                  "taskId": "tamil-1-level-1-quiz-1",
-                  "taskName": "பொருத்துக (Matching Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "உயிரெழுத்துக்களை அதனுடன் தொடங்கும் படங்களுடன் பொருத்துக. (Match the vowels with pictures starting with them).",
-                  "questions": [
-                    {
-                      "questionId": "tamil-q1",
-                      "questionText": "அன்னாசி படத்துடன் பொருத்தமான உயிரெழுத்து எது? (Which vowel matches the pineapple picture?)",
-                      "options": ["அ", "ஆ", "இ"],
-                      "correctAnswer": "அ"
-                    },
-                    {
-                      "questionId": "tamil-q2",
-                      "questionText": "ஆமையுடன் பொருத்தமான உயிரெழுத்து எது? (Which vowel matches the tortoise picture?)",
-                      "options": ["அ", "ஆ", "இ"],
-                      "correctAnswer": "ஆ"
-                    },
-                    {
-                      "questionId": "tamil-q3",
-                      "questionText": "இலை படத்துடன் பொருத்தமான உயிரெழுத்து எது? (Which vowel matches the leaf picture?)",
-                      "options": ["இ", "ஈ", "உ"],
-                      "correctAnswer": "இ"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "tamil-1-level-1-exam",
-                  "taskName": "நிலை 1 தமிழ் தேர்வு (Level 1 Tamil Exam)",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "இந்த தேர்வு உங்கள் உயிரெழுத்து அறிவை சோதிக்கும். (This exam will test your vowel knowledge).",
-                  "questions": [
-                    {
-                      "questionId": "tex1-q1",
-                      "questionText": "கீழ்க்கண்டவற்றுள் 'இ' உயிரெழுத்து எது? (Which of the following is the vowel 'I'?)",
-                      "options": ["அ", "இ", "ஈ"],
-                      "correctAnswer": "இ"
-                    },
-                    {
-                      "questionId": "tex1-q2",
-                      "questionText": "உழவன் படத்துடன் தொடங்கும் உயிரெழுத்து எது? (Which vowel starts with the farmer picture?)",
-                      "options": ["உ", "ஊ", "எ"],
-                      "correctAnswer": "உ"
-                    },
-                    {
-                      "questionId": "tex1-q3",
-                      "questionText": "கீழ்க்கண்டவற்றுள் 'எ' உயிரெழுத்து எது? (Which of the following is the vowel 'E'?)",
-                      "options": ["ஏ", "ஐ", "எ"],
-                      "correctAnswer": "எ"
-                    },
-                    {
-                      "questionId": "tex1-q4",
-                      "questionText": "ஓடம் படத்துடன் தொடங்கும் உயிரெழுத்து எது? (Which vowel starts with the boat picture?)",
-                      "options": ["ஒ", "���", "ஔ"],
-                      "correctAnswer": "ஓ"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         },
@@ -790,75 +257,7 @@
               "levelId": "ariviyal-1-level-1",
               "levelName": "Level 1: எனது உடல் (My Body)",
               "isLocked": false,
-              "tasks": [
-                {
-                  "taskId": "ariviyal-1-level-1-lesson-1",
-                  "taskName": "உடல் உறுப்புகள் (Body Parts)",
-                  "type": "lesson",
-                  "content": "மனித உடல் உறுப்புகள் மற்றும் அவற்றின் பயன்கள் பற்றி அறியவும். தலை, கை, கால் போன்றவற்றை அடையாளம் காணவும். (Learn about human body parts and their uses. Identify head, hand, leg, etc.).",
-                  "questions": []
-                },
-                {
-                  "taskId": "ariviyal-1-level-1-quiz-1",
-                  "taskName": "உடல் உறுப்பு��ளை அடையாளம் காண்க (Identify Body Parts - Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "படத்தைப் பார்த்து சரியான உடல் உறுப்பின் பெயரைத் தேர்ந்தெடுக்கவும். (Look at the picture and select the correct body part name).",
-                  "questions": [
-                    {
-                      "questionId": "sci-q1",
-                      "questionText": "இந்த படம் எதைக் காட்டுகிறது? (Image of an eye)",
-                      "options": ["கண் (Eye)", "காது (Ear)", "மூக்கு (Nose)"],
-                      "correctAnswer": "கண் (Eye)"
-                    },
-                    {
-                      "questionId": "sci-q2",
-                      "questionText": "நடக்கப் பயன்படும் உடல் உறுப்பு எது? (Which body part is used for walking?)",
-                      "options": ["கை (Hand)", "கால் (Leg)", "தலை (Head)"],
-                      "correctAnswer": "கால் (Leg)"
-                    },
-                    {
-                      "questionId": "sci-q3",
-                      "questionText": "உணவு சுவைக்க உதவும் உறுப்பு எது? (Which organ helps in tasting food?)",
-                      "options": ["மூக்கு (Nose)", "நாக்கு (Tongue)", "கண் (Eye)"],
-                      "correctAnswer": "நாக்கு (Tongue)"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "ariviyal-1-level-1-exam",
-                  "taskName": "நிலை 1 அறிவியல் தேர்வு (Level 1 Science Exam)",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "இந்த தேர்வு உடல் உறுப்புகள் பற்றிய உங்கள் அறிவை சோதிக்கும். (This exam will test your knowledge about body parts).",
-                  "questions": [
-                    {
-                      "questionId": "sciex1-q1",
-                      "questionText": "நாம் கேட்கப் பயன்படுத்தும் உடல் உறுப்பு எது? (Which body part do we use to hear?)",
-                      "options": ["கண் (Eye)", "காது (Ear)", "மூக்கு (Nose)"],
-                      "correctAnswer": "காது (Ear)"
-                    },
-                    {
-                      "questionId": "sciex1-q2",
-                      "questionText": "உடல் முழுவதையும் மூடியிருப்பது எது? (What covers the entire body?)",
-                      "options": ["முடி (Hair)", "தோல் (Skin)", "எலும்பு (Bone)"],
-                      "correctAnswer": "தோல் (Skin)"
-                    },
-                    {
-                      "questionId": "sciex1-q3",
-                      "questionText": "மூளையைப் பாதுகாக்கும் உடல் உறுப்பு எது? (Which body part protects the brain?)",
-                      "options": ["வயிறு (Stomach)", "தலை (Head)", "கால் (Leg)"],
-                      "correctAnswer": "தலை (Head)"
-                    },
-                    {
-                      "questionId": "sciex1-q4",
-                      "questionText": "நாம் சுவாசிக்கப் பயன்படும் உறுப்பு எது? (Which organ do we use for breathing?)",
-                      "options": ["இதயம் (Heart)", "நுரையீரல் (Lungs)", "சிறுநீரகம் (Kidney)"],
-                      "correctAnswer": "நுரையீரல் (Lungs)"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         }
@@ -877,109 +276,7 @@
               "levelName": "Level 1: Phonics and Blends",
               "isLocked": true,
               "lockMessage": "Finish previous level to unlock or upgrade to Premium.",
-              "tasks": [
-                {
-                  "taskId": "english-2-level-1-lesson-1",
-                  "taskName": "Consonant Blends (Lesson)",
-                  "type": "lesson",
-                  "content": "Learn about consonant blends like 'bl', 'cl', 'fl', 'gr', 'tr'. Practice saying words with these blends. Example: 'blue', 'clap', 'frog'.",
-                  "questions": []
-                },
-                {
-                  "taskId": "english-2-level-1-lesson-2",
-                  "taskName": "Read Words with Blends (Lesson)",
-                  "type": "lesson",
-                  "content": "Read a list of words containing different consonant blends and practice their pronunciation.",
-                  "questions": []
-                },
-                {
-                  "taskId": "english-2-level-1-quiz-1",
-                  "taskName": "Blends Identification (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Listen to the word and choose the correct starting blend.",
-                  "questions": [
-                    {
-                      "questionId": "blend-q1",
-                      "questionText": "What is the blend in 'tree'?",
-                      "options": ["tr", "te", "re"],
-                      "correctAnswer": "tr"
-                    },
-                    {
-                      "questionId": "blend-q2",
-                      "questionText": "Choose the word with the 'bl' blend.",
-                      "options": ["ball", "blue", "bell"],
-                      "correctAnswer": "blue"
-                    },
-                    {
-                      "questionId": "blend-q3",
-                      "questionText": "Which word starts with 'fl'?",
-                      "options": ["frog", "flower", "fly"],
-                      "correctAnswer": "flower"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "english-2-level-1-quiz-2",
-                  "taskName": "Sentence Completion with Blends (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Fill in the blank with a word that uses the correct blend.",
-                  "questions": [
-                    {
-                      "questionId": "blend-sent-q1",
-                      "questionText": "The ____ is green. (Hint: a fruit)",
-                      "options": ["grape", "apple", "banana"],
-                      "correctAnswer": "grape"
-                    },
-                    {
-                      "questionId": "blend-sent-q2",
-                      "questionText": "The bird wants to ____. (fly)",
-                      "options": ["run", "fly", "sing"],
-                      "correctAnswer": "fly"
-                    },
-                    {
-                      "questionId": "blend-sent-q3",
-                      "questionText": "He ate a ____ of bread. (slice)",
-                      "options": ["small", "slice", "large"],
-                      "correctAnswer": "slice"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "english-2-level-1-exam",
-                  "taskName": "Level 1 English Exam",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "This exam tests your understanding and identification of consonant blends.",
-                  "questions": [
-                    {
-                      "questionId": "e2ex1-q1",
-                      "questionText": "Which word has the 'gr' blend?",
-                      "options": ["grow", "go", "glad"],
-                      "correctAnswer": "grow"
-                    },
-                    {
-                      "questionId": "e2ex1-q2",
-                      "questionText": "What blend completes '____ow'? (snow)",
-                      "options": ["sn", "sl", "sp"],
-                      "correctAnswer": "sn"
-                    },
-                    {
-                      "questionId": "e2ex1-q3",
-                      "questionText": "Which word has a consonant blend?",
-                      "options": ["cat", "dog", "clap"],
-                      "correctAnswer": "clap"
-                    },
-                    {
-                      "questionId": "e2ex1-q4",
-                      "questionText": "The word 'drum' starts with which blend?",
-                      "options": ["dr", "du", "ru"],
-                      "correctAnswer": "dr"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         },
@@ -992,109 +289,7 @@
               "levelName": "Level 1: Two-Digit Addition",
               "isLocked": true,
               "lockMessage": "Finish previous level to unlock or upgrade to Premium.",
-              "tasks": [
-                {
-                  "taskId": "math-2-level-1-lesson-1",
-                  "taskName": "Adding Tens and Ones (Lesson)",
-                  "type": "lesson",
-                  "content": "Learn to add two-digit numbers without regrouping, by adding tens first, then ones. Example: 23 + 14 = (20+10) + (3+4) = 30 + 7 = 37.",
-                  "questions": []
-                },
-                {
-                  "taskId": "math-2-level-1-lesson-2",
-                  "taskName": "Column Addition (Lesson)",
-                  "type": "lesson",
-                  "content": "Practice adding two-digit numbers using the column method on provided worksheets.",
-                  "questions": []
-                },
-                {
-                  "taskId": "math-2-level-1-quiz-1",
-                  "taskName": "Two-Digit Addition Practice (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Solve two-digit addition problems without regrouping.",
-                  "questions": [
-                    {
-                      "questionId": "2dadd-q1",
-                      "questionText": "21 + 15 = ?",
-                      "options": ["35", "36", "37"],
-                      "correctAnswer": "36"
-                    },
-                    {
-                      "questionId": "2dadd-q2",
-                      "questionText": "40 + 25 = ?",
-                      "options": ["60", "65", "70"],
-                      "correctAnswer": "65"
-                    },
-                    {
-                      "questionId": "2dadd-q3",
-                      "questionText": "13 + 16 = ?",
-                      "options": ["28", "29", "30"],
-                      "correctAnswer": "29"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "math-2-level-1-quiz-2",
-                  "taskName": "Word Problems: Two-Digit Addition (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Solve word problems involving two-digit addition.",
-                  "questions": [
-                    {
-                      "questionId": "2dadd-wp-q1",
-                      "questionText": "There are 12 red balls and 15 blue balls. How many balls in total?",
-                      "options": ["25", "27", "30"],
-                      "correctAnswer": "27"
-                    },
-                    {
-                      "questionId": "2dadd-wp-q2",
-                      "questionText": "Lisa has 20 stickers. Tom has 18 stickers. How many stickers do they have together?",
-                      "options": ["37", "38", "39"],
-                      "correctAnswer": "38"
-                    },
-                    {
-                      "questionId": "2dadd-wp-q3",
-                      "questionText": "A bus has 31 passengers. At the next stop, 11 more get on. How many passengers are now on the bus?",
-                      "options": ["40", "41", "42"],
-                      "correctAnswer": "42"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "math-2-level-1-exam",
-                  "taskName": "Level 1 Math Exam",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "This exam tests your ability to add two-digit numbers without regrouping.",
-                  "questions": [
-                    {
-                      "questionId": "m2ex1-q1",
-                      "questionText": "32 + 17 = ?",
-                      "options": ["48", "49", "50"],
-                      "correctAnswer": "49"
-                    },
-                    {
-                      "questionId": "m2ex1-q2",
-                      "questionText": "If you have 24 stickers and get 35 more, how many do you have?",
-                      "options": ["58", "59", "60"],
-                      "correctAnswer": "59"
-                    },
-                    {
-                      "questionId": "m2ex1-q3",
-                      "questionText": "Which sum is incorrect?",
-                      "options": ["10 + 10 = 20", "22 + 11 = 33", "15 + 14 = 28"],
-                      "correctAnswer": "15 + 14 = 28"
-                    },
-                    {
-                      "questionId": "m2ex1-q4",
-                      "questionText": "Find the total: 53 + 26 = ?",
-                      "options": ["78", "79", "80"],
-                      "correctAnswer": "79"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         },
@@ -1107,82 +302,7 @@
               "levelName": "Level 1: மெய்யெழுத்துக்கள் (Consonants)",
               "isLocked": true,
               "lockMessage": "Finish previous level to unlock or upgrade to Premium.",
-              "tasks": [
-                {
-                  "taskId": "tamil-2-level-1-lesson-1",
-                  "taskName": "மெய்யெழுத்துக்கள் அறிமுகம் (Introduction to Consonants)",
-                  "type": "lesson",
-                  "content": "தமிழ் மெய்யெழுத்துக்களை அறியவும் பயிற்சி செய்யவும். 'க்' - அக்னி, 'ங்' - ���ுங்கு. (Learn and practice Tamil consonants. 'K' as in Agni, 'Ng' as in Nungu).",
-                  "questions": []
-                },
-                {
-                  "taskId": "tamil-2-level-1-lesson-2",
-                  "taskName": "மெய்யெழுத்து ஒலிப்புப் பயிற்சி (Consonant Pronunciation Practice)",
-                  "type": "lesson",
-                  "content": "ஒவ்வொரு மெய்யெழுத்தையும் சரியாக உச்சரித்துப் பழகுங்கள். (Practice pronouncing each consonant correctly).",
-                  "questions": []
-                },
-                {
-                  "taskId": "tamil-2-level-1-quiz-1",
-                  "taskName": "படத்துடன் மெய்யெழுத்துக்களை பொருத்துக (Match Consonants with Pictures - Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "படங்களைப் பார்த்து சரியான மெய்யெழுத்துக்களைத் தேர்ந்தெடுக்கவும். (Look at the pictures and select the correct consonants).",
-                  "questions": [
-                    {
-                      "questionId": "tamil2-q1",
-                      "questionText": "சங்கு படத்துடன் தொடங்கும் மெய்யெழுத்து எது? (Which consonant starts with the conch picture?)",
-                      "options": ["ச்", "ஞ்", "ங்"],
-                      "correctAnswer": "ங்"
-                    },
-                    {
-                      "questionId": "tamil2-q2",
-                      "questionText": "கண் படத்துடன் தொடங்கும் மெய்யெழுத்து எது? (Which consonant starts with the eye picture?)",
-                      "options": ["ண்", "ன்", "ந்"],
-                      "correctAnswer": "ண்"
-                    },
-                    {
-                      "questionId": "tamil2-q3",
-                      "questionText": "அம்பு படத்துடன் தொடங்கும் மெய்யெழுத்து எது? (Which consonant starts with the arrow picture?)",
-                      "options": ["ப்", "ம்", "வ்"],
-                      "correctAnswer": "ம்"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "tamil-2-level-1-exam",
-                  "taskName": "நிலை 1 தமிழ் தேர்வு (Level 1 Tamil Exam)",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "இந்த தேர்வு மெய்யெழுத்துக்கள் பற்றிய உங்கள் அறிவை சோதிக்கும். (This exam will test your knowledge about consonants).",
-                  "questions": [
-                    {
-                      "questionId": "t2ex1-q1",
-                      "questionText": "பச்சை நிறத்தைக் குறிக்கும் மெய்யெழுத்து எது? (Which consonant indicates the green color?)",
-                      "options": ["ப்", "ச்", "ம்"],
-                      "correctAnswer": "ச்"
-                    },
-                    {
-                      "questionId": "t2ex1-q2",
-                      "questionText": "யானை என்ற சொல்லில் உள்ள மெய்யெழுத்து எது? (Which consonant is in the word 'Elephant' (Yaanai)?)",
-                      "options": ["ய்", "ர்", "ல்"],
-                      "correctAnswer": "ய்"
-                    },
-                    {
-                      "questionId": "t2ex1-q3",
-                      "questionText": "கீழ்க்கண்டவற்றுள் வல்லின மெய்யெழுத்து எது? (Which of the following is a hard consonant?)",
-                      "options": ["ங்", "ஞ்", "க்"],
-                      "correctAnswer": "க்"
-                    },
-                    {
-                      "questionId": "t2ex1-q4",
-                      "questionText": "கால்பந்து என்ற சொல்லில் உள்ள மெய்யெழுத்து எது? (Which consonant is in the word 'Football' (Kaaipandhu)?)",
-                      "options": ["ற்", "ட்", "ல்"],
-                      "correctAnswer": "ல்"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         },
@@ -1192,85 +312,10 @@
           "levels": [
             {
               "levelId": "ariviyal-2-level-1",
-              "levelName": "Level 1: விலங்குகள��� (Animals)",
+              "levelName": "Level 1: விலங்குகள (Animals)",
               "isLocked": true,
               "lockMessage": "Finish previous level to unlock or upgrade to Premium.",
-              "tasks": [
-                {
-                  "taskId": "ariviyal-2-level-1-lesson-1",
-                  "taskName": "வீட்டு விலங்குகள் (Domestic Animals)",
-                  "type": "lesson",
-                  "content": "வீட்டில் வளர்க்கப்படும் விலங்குகள் மற்றும் அவற்றின் பயன்கள் பற்றி அறியவும். நாய், பூனை, மாடு. (Learn about domestic animals and their uses. Dog, cat, cow).",
-                  "questions": []
-                },
-                {
-                  "taskId": "ariviyal-2-level-1-lesson-2",
-                  "taskName": "விலங்குகள் வாழும் இடங்கள் (Animal Habitats - Lesson)",
-                  "type": "lesson",
-                  "content": "பல்வேறு விலங்குகள் எங்கு வாழ்கின்றன என்பதை அறியவும். காடு, நீர், வீடு. (Learn where various animals live. Forest, water, home).",
-                  "questions": []
-                },
-                {
-                  "taskId": "ariviyal-2-level-1-quiz-1",
-                  "taskName": "விலங்கு ஒலிகளை அடையாளம் காண்க (Identify Animal Sounds - Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "விலங்குகளின் ஒலிகளைக் கேட்டு, சரியான விலங்கின் பெயரைத் தேர்ந்தெடுக்கவும். (Listen to animal sounds and select the correct animal name).",
-                  "questions": [
-                    {
-                      "questionId": "sci2-q1",
-                      "questionText": "இது எந்த விலங்கின் ஒலி? (Sound of a dog barking)",
-                      "options": ["நாய் (Dog)", "பூனை (Cat)", "ஆடு (Goat)"],
-                      "correctAnswer": "நாய் (Dog)"
-                    },
-                    {
-                      "questionId": "sci2-q2",
-                      "questionText": "மியாவு என்று கத்தும் விலங்கு எது? (Which animal meows?)",
-                      "options": ["நாய் (Dog)", "பூனை (Cat)", "மாடு (Cow)"],
-                      "correctAnswer": "பூனை (Cat)"
-                    },
-                    {
-                      "questionId": "sci2-q3",
-                      "questionText": "அம்..மா.. என்று கத்தும் விலங்கு எது? (Which animal says moo?)",
-                      "options": ["ஆடு (Goat)", "மாடு (Cow)", "சிங்கம் (Lion)"],
-                      "correctAnswer": "மாடு (Cow)"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "ariviyal-2-level-1-exam",
-                  "taskName": "நிலை 1 அறிவியல் தேர்வு (Level 1 Science Exam)",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "இந்த தேர்வு விலங்குகள் பற்றிய உங்கள் அறிவை சோதிக்கும். (This exam will test your knowledge about animals).",
-                  "questions": [
-                    {
-                      "questionId": "sci2ex1-q1",
-                      "questionText": "பால் தரும் விலங்கு எது? (Which animal gives milk?)",
-                      "options": ["குரங்கு (Monkey)", "மாடு (Cow)", "சிங்கம் (Lion)"],
-                      "correctAnswer": "மாடு (Cow)"
-                    },
-                    {
-                      "questionId": "sci2ex1-q2",
-                      "questionText": "காட்டில் வாழும் விலங்கு எது? (Which animal lives in the forest?)",
-                      "options": ["நாய் (Dog)", "சிங்கம் (Lion)", "பூனை (Cat)"],
-                      "correctAnswer": "சிங்கம் (Lion)"
-                    },
-                    {
-                      "questionId": "sci2ex1-q3",
-                      "questionText": "நாம் வீட்டுக் காவலனாக வளர்க்கும் விலங்கு எது? (Which animal do we raise as a pet for guarding?)",
-                      "options": ["பூனை (Cat)", "நாய் (Dog)", "ஆடு (Goat)"],
-                      "correctAnswer": "நாய் (Dog)"
-                    },
-                    {
-                      "questionId": "sci2ex1-q4",
-                      "questionText": "நீர்வாழ் விலங்கு எது? (Which is an aquatic animal?)",
-                      "options": ["யானை (Elephant)", "மீன் (Fish)", "புலி (Tiger)"],
-                      "correctAnswer": "மீன் (Fish)"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         }
@@ -1289,51 +334,7 @@
               "levelName": "Level 1: Reading Comprehension",
               "isLocked": true,
               "lockMessage": "Upgrade to Premium to unlock.",
-              "tasks": [
-                {
-                  "taskId": "english-3-level-1-lesson-1",
-                  "taskName": "Short Stories and Questions (Lesson)",
-                  "type": "lesson",
-                  "content": "Read a short story and understand its main idea and characters.",
-                  "questions": []
-                },
-                {
-                  "taskId": "english-3-level-1-quiz-1",
-                  "taskName": "Story Comprehension Quiz",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Answer questions based on the short story read.",
-                  "questions": [
-                    {
-                      "questionId": "e3rc-q1",
-                      "questionText": "Who was the main character in the story 'The Little Red Hen'?",
-                      "options": ["The dog", "The cat", "The Little Red Hen"],
-                      "correctAnswer": "The Little Red Hen"
-                    },
-                    {
-                      "questionId": "e3rc-q2",
-                      "questionText": "What did the Little Red Hen want to do?",
-                      "options": ["Go on a trip", "Bake bread", "Sleep all day"],
-                      "correctAnswer": "Bake bread"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "english-3-level-1-exam",
-                  "taskName": "Level 1 English Exam",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "This exam assesses your ability to understand and interpret short passages.",
-                  "questions": [
-                    {
-                      "questionId": "e3ex1-q1",
-                      "questionText": "Based on the passage, what did the boy do first?",
-                      "options": ["A", "B", "C"],
-                      "correctAnswer": "A"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         },
@@ -1346,45 +347,7 @@
               "levelName": "Level 1: Multiplication Basics",
               "isLocked": true,
               "lockMessage": "Upgrade to Premium to unlock.",
-              "tasks": [
-                {
-                  "taskId": "math-3-level-1-lesson-1",
-                  "taskName": "Introduction to Multiplication (Lesson)",
-                  "type": "lesson",
-                  "content": "Understand multiplication as repeated addition. Example: 2 x 3 = 2 + 2 + 2 = 6.",
-                  "questions": []
-                },
-                {
-                  "taskId": "math-3-level-1-quiz-1",
-                  "taskName": "Multiplication Facts (2s and 5s) (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Practice multiplication tables for 2 and 5.",
-                  "questions": [
-                    {
-                      "questionId": "m3mul-q1",
-                      "questionText": "2 x 4 = ?",
-                      "options": ["6", "8", "10"],
-                      "correctAnswer": "8"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "math-3-level-1-exam",
-                  "taskName": "Level 1 Math Exam",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "This exam tests your basic multiplication knowledge.",
-                  "questions": [
-                    {
-                      "questionId": "m3ex1-q1",
-                      "questionText": "5 x 3 = ?",
-                      "options": ["10", "15", "20"],
-                      "correctAnswer": "15"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         },
@@ -1397,45 +360,7 @@
               "levelName": "Level 1: தமிழ் இலக்கணம் (Tamil Grammar)",
               "isLocked": true,
               "lockMessage": "Upgrade to Premium to unlock.",
-              "tasks": [
-                {
-                  "taskId": "tamil-3-level-1-lesson-1",
-                  "taskName": "பெயர்ச்சொல் மற்றும் வினைச்சொல் (Nouns and Verbs - Lesson)",
-                  "type": "lesson",
-                  "content": "தமிழ் இலக்கணத்தில் பெயர்ச்சொல் (Noun) மற்றும் வின��ச்சொல் (Verb) என்றால் என்னவென்று அறியவும். (Learn what Nouns and Verbs are in Tamil grammar).",
-                  "questions": []
-                },
-                {
-                  "taskId": "tamil-3-level-1-quiz-1",
-                  "taskName": "பெயர்ச்சொல்/வினைச்சொல் கண்டறிதல் (Identify Noun/Verb - Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "கொடுக்கப்பட்ட வாக்கியத்தில் பெயர்ச்சொல் அல்லது வினைச்சொல்லைக் கண்டறியவும். (Identify the Noun or Verb in the given sentence).",
-                  "questions": [
-                    {
-                      "questionId": "tamil3-q1",
-                      "questionText": "'அவன் பாடுகிறான்' - இதில் வினைச்சொல் எது? ('He sings' - What is the verb here?)",
-                      "options": ["அவன்", "பாடுகிறான்", "இல்லை"],
-                      "correctAnswer": "பாடுகிறான்"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "tamil-3-level-1-exam",
-                  "taskName": "நிலை 1 தமிழ் தேர்வு (Level 1 Tamil Exam)",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "இந்த தேர்வு தமிழ் இலக்கணம் பற்றிய உங்கள் அடிப்படை அறிவை சோதிக்கும். (This exam will test your basic knowledge of Tamil grammar).",
-                  "questions": [
-                    {
-                      "questionId": "t3ex1-q1",
-                      "questionText": "'நான் படிக்கிறேன்' - இதில் பெயர்ச்சொல் எது? ('I am reading' - What is the noun here?)",
-                      "options": ["நான்", "படிக்கிறேன்", "இல்லை"],
-                      "correctAnswer": "நான்"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         },
@@ -1448,45 +373,7 @@
               "levelName": "Level 1: தாவரங்கள் (Plants)",
               "isLocked": true,
               "lockMessage": "Upgrade to Premium to unlock.",
-              "tasks": [
-                {
-                  "taskId": "ariviyal-3-level-1-lesson-1",
-                  "taskName": "தாவரங்களின் பாகங்கள் (Parts of Plants - Lesson)",
-                  "type": "lesson",
-                  "content": "தாவரங்களின் வெவ்வேறு பாகங்கள் (வேர், தண்டு, இலை, பூ, பழம்) மற்றும் அவற்றின் செயல்பாடுகள் பற்றி அறியவும். (Learn about different parts of plants (root, stem, leaf, flower, fruit) and their functions).",
-                  "questions": []
-                },
-                {
-                  "taskId": "ariviyal-3-level-1-quiz-1",
-                  "taskName": "தாவர பாகங்களை அடையாளம் காண்க (Identify Plant Parts - Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "படத்தைப் பார்த்து சரியான தாவர பாகத்தின் பெயரைத் தேர்ந்தெடுக்கவும். (Look at the picture and select the correct plant part name).",
-                  "questions": [
-                    {
-                      "questionId": "sci3-q1",
-                      "questionText": "இது எந்த தாவர பாகம்? (Image of a leaf)",
-                      "options": ["வேர் (Root)", "இலை (Leaf)", "தண்டு (Stem)"],
-                      "correctAnswer": "இலை (Leaf)"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "ariviyal-3-level-1-exam",
-                  "taskName": "நிலை 1 அறிவியல் தேர்வு (Level 1 Science Exam)",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "இந்த தேர்வு தாவரங்களின் பாகங்கள் பற்றிய உங்கள் அறிவை சோதிக்கும். (This exam will test your knowledge about parts of plants).",
-                  "questions": [
-                    {
-                      "questionId": "sci3ex1-q1",
-                      "questionText": "தாவரம் மண்ணில் நிலையாக நிற்க உதவும் பாகம் எது? (Which part helps the plant stand firmly in the soil?)",
-                      "options": ["தண்டு (Stem)", "இலை (Leaf)", "வேர் (Root)"],
-                      "correctAnswer": "வேர் (Root)"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         }
@@ -1505,45 +392,7 @@
               "levelName": "Level 1: Advanced Grammar",
               "isLocked": true,
               "lockMessage": "Upgrade to Premium to unlock.",
-              "tasks": [
-                {
-                  "taskId": "english-4-level-1-lesson-1",
-                  "taskName": "Adjectives and Adverbs (Lesson)",
-                  "type": "lesson",
-                  "content": "Understand the difference between adjectives (describe nouns) and adverbs (describe verbs, adjectives, or other adverbs).",
-                  "questions": []
-                },
-                {
-                  "taskId": "english-4-level-1-quiz-1",
-                  "taskName": "Identify Adjectives/Adverbs (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "In the given sentence, identify whether the highlighted word is an adjective or an adverb.",
-                  "questions": [
-                    {
-                      "questionId": "e4gram-q1",
-                      "questionText": "The **quickly** running boy. Is 'quickly' an adjective or adverb?",
-                      "options": ["Adjective", "Adverb"],
-                      "correctAnswer": "Adverb"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "english-4-level-1-exam",
-                  "taskName": "Level 1 English Exam",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "This exam assesses your understanding of advanced grammar concepts like adjectives and adverbs.",
-                  "questions": [
-                    {
-                      "questionId": "e4ex1-q1",
-                      "questionText": "Which word describes a noun?",
-                      "options": ["Adverb", "Adjective", "Verb"],
-                      "correctAnswer": "Adjective"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         },
@@ -1556,45 +405,7 @@
               "levelName": "Level 1: Division Concepts",
               "isLocked": true,
               "lockMessage": "Upgrade to Premium to unlock.",
-              "tasks": [
-                {
-                  "taskId": "math-4-level-1-lesson-1",
-                  "taskName": "Introduction to Division (Lesson)",
-                  "type": "lesson",
-                  "content": "Understand division as sharing equally or repeated subtraction. Example: 6 ÷ 2 = 3 (6 shared by 2 groups is 3 each).",
-                  "questions": []
-                },
-                {
-                  "taskId": "math-4-level-1-quiz-1",
-                  "taskName": "Division Facts (Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "Practice basic division facts.",
-                  "questions": [
-                    {
-                      "questionId": "m4div-q1",
-                      "questionText": "10 ÷ 2 = ?",
-                      "options": ["4", "5", "6"],
-                      "correctAnswer": "5"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "math-4-level-1-exam",
-                  "taskName": "Level 1 Math Exam",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "This exam tests your basic division knowledge.",
-                  "questions": [
-                    {
-                      "questionId": "m4ex1-q1",
-                      "questionText": "12 apples shared equally among 3 friends. How many apples does each friend get?",
-                      "options": ["3", "4", "6"],
-                      "correctAnswer": "4"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         },
@@ -1607,45 +418,7 @@
               "levelName": "Level 1: செய்யுள் (Poetry)",
               "isLocked": true,
               "lockMessage": "Upgrade to Premium to unlock.",
-              "tasks": [
-                {
-                  "taskId": "tamil-4-level-1-lesson-1",
-                  "taskName": "குறள் விளக்கம் (Kural Explanation - Lesson)",
-                  "type": "lesson",
-                  "content": "திருக்குறளில் ஒரு குறளைப் படித்து அதன் பொருளை அறியவும். (Read a Kural from Thirukkural and understand its meaning).",
-                  "questions": []
-                },
-                {
-                  "taskId": "tamil-4-level-1-quiz-1",
-                  "taskName": "குறள் பொருள் தேர்வு (Kural Meaning Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "கொடுக்கப்பட்ட குறளின் சரியான பொருளைத் தேர்ந்தெடுக்கவும். (Select the correct meaning of the given Kural).",
-                  "questions": [
-                    {
-                      "questionId": "tamil4-q1",
-                      "questionText": "'அகர முதல எழுத்தெல்லாம் ஆதி பகவன் முதற்றே உலகு.' இதன் பொருள் என்ன? (What is the meaning of this Kural?)",
-                      "options": ["உலகு கடவுளால் உருவாக்கப்பட்டது.", "எழுத்துக்கள் எல்லாம் பகவானால் படைக்கப்பட்டன.", "அகர எழுத்து உலகிற்கு முதல், அதுபோல ஆதிபகவனே உலகுக்கு முதல்."],
-                      "correctAnswer": "அகர எழுத்து உலகிற்கு முதல், அதுபோல ஆதிபகவனே உலகுக்கு முதல்."
-                    }
-                  ]
-                },
-                {
-                  "taskId": "tamil-4-level-1-exam",
-                  "taskName": "நிலை 1 தமிழ் தேர்வு (Level 1 Tamil Exam)",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "இந்த தேர்வு செய்யுள் விளக்கம் பற்றிய உங்கள் அறிவை சோதிக்கும். (This exam will test your knowledge of poetry explanation).",
-                  "questions": [
-                    {
-                      "questionId": "t4ex1-q1",
-                      "questionText": "ஒரு செய்யுளின் மையக்கருத்து என்ன? (What is the central theme of a poem?)",
-                      "options": ["தலைப்பு (Title)", "ஒலி (Sound)", "பொருள் (Meaning)"],
-                      "correctAnswer": "பொருள் (Meaning)"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         },
@@ -1658,45 +431,7 @@
               "levelName": "Level 1: சுற்றுச்சூழல் (Environment)",
               "isLocked": true,
               "lockMessage": "Upgrade to Premium to unlock.",
-              "tasks": [
-                {
-                  "taskId": "ariviyal-4-level-1-lesson-1",
-                  "taskName": "சுற்றுச்சூழல் பாதுகாப்பு (Environmental Protection - Lesson)",
-                  "type": "lesson",
-                  "content": "சுற்றுச்சூழலை எவ்வாறு பாதுகாப்பது (மர��் நடுதல், குப்பைகளைக் குறைத்தல், நீரை சேமித்தல்) என்பதை அறியவும். (Learn how to protect the environment (planting trees, reducing waste, saving water)).",
-                  "questions": []
-                },
-                {
-                  "taskId": "ariviyal-4-level-1-quiz-1",
-                  "taskName": "சுற்றுச்சூழல் விழிப்புணர்வு (Environmental Awareness - Quiz)",
-                  "type": "quiz",
-                  "timeLimit": 300,
-                  "content": "சுற்றுச்சூழல் பாதுகாப்பு பற்றிய கேள்விகளுக்கு பதிலளிக்கவும். (Answer questions about environmental protection).",
-                  "questions": [
-                    {
-                      "questionId": "sci4-q1",
-                      "questionText": "காடுகளை அழிப்பதால் என்ன நடக்கும்? (What happens when forests are destroyed?)",
-                      "options": ["மழை அதிகரிக்கும்", "விலங்குகள் அழிந்துவிடும்", "காற்ற��� சுத்தமாகும்"],
-                      "correctAnswer": "விலங்குகள் அழிந்துவிடும்"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "ariviyal-4-level-1-exam",
-                  "taskName": "நிலை 1 அறிவியல் தேர்வு (Level 1 Science Exam)",
-                  "type": "exam",
-                  "timeLimit": 600,
-                  "content": "இந்த தேர்வு சுற்றுச்சூழல் பாதுகாப்பு பற்றிய உங்கள் அறிவை சோதிக்கும். (This exam will test your knowledge about environmental protection).",
-                  "questions": [
-                    {
-                      "questionId": "sci4ex1-q1",
-                      "questionText": "நீரைச் சேமிக்க நாம் என்ன செய்ய வேண்டும்? (What should we do to save water?)",
-                      "options": ["குளிக்காமல் இருக்க வேண்டும்", "குழாயை திறந்து விட வேண்டும்", "குழாயை மூடி வைக்க வேண்ட��ம்"],
-                      "correctAnswer": "குழாயை மூடி வைக்க வேண்டும்"
-                    }
-                  ]
-                }
-              ]
+              "tasks": []
             }
           ]
         }

@@ -18,7 +18,7 @@ export default function VirtualKeyboard({ onKeyPress }) {
           {row.map((key, keyIndex) => (
             <button
               key={keyIndex}
-              onClick={() => onKeyPress(key)}
+              onClick={() => { console.log("Virtual Keyboard: Key pressed", key); onKeyPress(key); }}
               className={`m-1 p-3 rounded-md font-semibold text-lg transition-colors duration-150
                 ${key === 'Backspace' ? 'bg-red-400 hover:bg-red-500 text-white w-24' :
                   key === ' ' ? 'bg-blue-400 hover:bg-blue-500 text-white flex-grow' :

@@ -7,6 +7,14 @@ import { FaArrowLeft, FaHome } from 'react-icons/fa';
 import { useChild } from '../../../../providers/ChildProvider';
 import { motion } from "framer-motion";
 
+// A map for sleek task colors
+const taskColorMap = {
+  "lesson": "from-green-400 to-green-600",
+  "quiz": "from-blue-400 to-blue-600",
+  "exam": "from-red-400 to-red-600",
+  "default": "from-gray-400 to-gray-600",
+};
+
 export default function LevelTasksPage() {
   const { childUser } = useChild();
   const [levelData, setLevelData] = useState(null);
@@ -24,10 +32,10 @@ export default function LevelTasksPage() {
           const foundLevel = foundSubject.levels.find(l => l.levelId === levelId);
           setLevelData(foundLevel);
         } else {
-          console.warn(`Subject data not found for subjectId: ${subjectId}`);
+          // Subject data not found
         }
       } else {
-        console.warn(`Grade data not found for gradeId: ${childUser.gradeId}`);
+        // Grade data not found
       }
     } else if (!childUser) {
       router.push("/child-login");
@@ -68,12 +76,12 @@ export default function LevelTasksPage() {
             <motion.div
               key={task.taskId}
               onClick={() => router.push(`/learning-zone/subjects/${subjectId}/${levelId}/${task.taskId}`)}
-              className="bg-white rounded-xl shadow-lg p-6 text-center transform transition-transform duration-200 hover:scale-105 hover:shadow-xl cursor-pointer flex flex-col items-center justify-center min-h-[150px]"
+              className={`bg-gradient-to-br ${taskColorMap[task.type] || taskColorMap.default} text-white rounded-xl shadow-lg p-6 text-center transform transition-transform duration-200 hover:scale-105 hover:shadow-xl cursor-pointer flex flex-col items-center justify-center min-h-[150px]`}
               variants={cardVariants}
               whileHover="hover"
             >
-              <h2 className="text-xl font-semibold text-blue-600 mb-2">{task.taskName}</h2>
-              <p className="text-gray-600 text-sm">Type: {task.type}</p>
+              <h2 className="text-xl font-semibold mb-2">{task.taskName}</h2>
+              <p className="text-lg opacity-90">Type: {task.type}</p>
             </motion.div>
           ))
         ) : (

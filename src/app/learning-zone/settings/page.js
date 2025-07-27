@@ -33,6 +33,7 @@ export default function SettingsPage() {
   const [selectedTheme, setSelectedTheme] = useState('default');
   const [saveStatus, setSaveStatus] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false); // Re-declare local loading state
   const router = useRouter();
 
   useEffect(() => {

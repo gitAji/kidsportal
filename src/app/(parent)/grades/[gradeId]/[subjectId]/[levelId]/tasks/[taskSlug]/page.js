@@ -23,22 +23,8 @@ const TaskPage = () => {
     const fetchTaskData = async () => {
       if (!gradeId || !subjectId || !levelId || !taskSlug) return;
 
-      console.log("Fetching data for taskSlug:", taskSlug);
-      const apiUrl = `/api/grades/${gradeId}/${subjectId}/${levelId}/tasks/${taskSlug}`;
-      console.log("API URL:", apiUrl);
-
-      try {
-        const res = await fetch(apiUrl);
-        console.log("API Response Status:", res.status);
-
-        if (!res.ok) {
-          const errorText = await res.text();
-          console.error("API Error Response:", errorText);
-          throw new Error(`Failed to fetch task. Status: ${res.status}`);
-        }
-        
-        const task = await res.json();
-        console.log("Fetched Task Data:", task);
+      
+        try {
         setTaskData(task);
       } catch (err) {
         console.error("Fetch Error:", err);

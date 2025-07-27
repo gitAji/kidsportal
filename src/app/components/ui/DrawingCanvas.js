@@ -30,7 +30,13 @@ export default function DrawingCanvas({ width = 600, height = 400 }) {
   }, [color, brushSize]);
 
   const startDrawing = (event) => {
-    const { offsetX, offsetY } = event.nativeEvent.touches ? event.nativeEvent.touches[0] : event.nativeEvent;
+    const { clientX, clientY } = event.nativeEvent.touches ? event.nativeEvent.touches[0] : event.nativeEvent;
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const offsetX = clientX - rect.left;
+    const offsetY = clientY - rect.top;
+    console.log("startDrawing: clientX, clientY", clientX, clientY);
+    console.log("startDrawing: offsetX, offsetY", offsetX, offsetY);
     contextRef.current.beginPath();
     contextRef.current.moveTo(offsetX, offsetY);
     setIsDrawing(true);
@@ -38,7 +44,13 @@ export default function DrawingCanvas({ width = 600, height = 400 }) {
 
   const draw = (event) => {
     if (!isDrawing) return;
-    const { offsetX, offsetY } = event.nativeEvent.touches ? event.nativeEvent.touches[0] : event.nativeEvent;
+    const { clientX, clientY } = event.nativeEvent.touches ? event.nativeEvent.touches[0] : event.nativeEvent;
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const offsetX = clientX - rect.left;
+    const offsetY = clientY - rect.top;
+    console.log("draw: clientX, clientY", clientX, clientY);
+    console.log("draw: offsetX, offsetY", offsetX, offsetY);
     contextRef.current.lineTo(offsetX, offsetY);
     contextRef.current.stroke();
   };

@@ -54,7 +54,7 @@ export default function AuthModal({
   };
 
   const handleVippsLogin = () => {
-    console.log("Vipps login triggered");
+    
     // Add Vipps login logic here later
   };
 

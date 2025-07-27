@@ -44,12 +44,11 @@ export default function ChildLearningZoneHeader() {
         </Link>
       </div>
       <div className="flex-grow text-center">
-         <h1 className="text-2xl font-bold text-purple-600">Welcome, {childUser.name}!</h1>
-         <p className='text-gray-500'>Grade: {childUser.grade}</p>
+         {/* Removed greeting from header */}
       </div>
       <div className="relative" ref={dropdownRef}>
         <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center focus:outline-none">
-          <Image src={avatarSrc} alt="Avatar" width={50} height={50} className="rounded-full" />
+          <Image src={childUser.photoURL || '/images/cat.png'} alt="Avatar" width={50} height={50} className="rounded-full" />
         </button>
         {dropdownOpen && (
           <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
