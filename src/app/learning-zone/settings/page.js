@@ -4,10 +4,11 @@ import { useRouter } from 'next/navigation';
 import { doc, updateDoc } from 'firebase/firestore';
 import { app } from '../../../firebase/config';
 import { getFirestore } from 'firebase/firestore';
-import SkeletonLoader from '../../components/ui/SkeletonLoader';
+import KidFriendlyLoader from '../../components/ui/KidFriendlyLoader';
 import { FaArrowLeft, FaPalette, FaUserCircle, FaSave, FaPaw, FaRocket, FaCar, FaTree, FaSmile } from 'react-icons/fa';
 import CustomAvatar from '../../components/ui/CustomAvatar';
 import SaveMessage from '../../components/ui/SaveMessage';
+import { useChild } from '../../providers/ChildProvider'; // Import the context hook
 
 const themes = [
   { id: 'default', name: 'Default', colors: { primary: '#3B82F6', background: '#DBEAFE' } }, // blue-600, blue-100
@@ -24,8 +25,6 @@ const avatars = [
   { id: 'smile', icon: <FaSmile /> },
   { id: 'default', icon: <FaUserCircle /> },
 ];
-
-import { useChild } from '../../providers/ChildProvider'; // Import the context hook
 
 export default function SettingsPage() {
   const db = getFirestore(app);
@@ -81,7 +80,7 @@ export default function SettingsPage() {
     }
   };
 
-  if (!childUser) return <SkeletonLoader />;
+  if (!childUser) return <KidFriendlyLoader />;
 
   return (
     <div className="p-4">

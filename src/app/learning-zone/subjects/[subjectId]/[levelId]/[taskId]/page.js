@@ -1,8 +1,8 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../../../data/db.json';
-import SkeletonLoader from '../../../../../components/ui/SkeletonLoader';
+import KidFriendlyLoader from '../../../../../components/ui/KidFriendlyLoader';
 import { FaArrowLeft, FaCheckCircle, FaTimesCircle, FaRedo, FaForward, FaVolumeUp, FaPaintBrush, FaKeyboard, FaHome } from 'react-icons/fa';
 import { useChild } from '../../../../../providers/ChildProvider';
 import AudioPlayer from '../../../../../components/ui/AudioPlayer';
@@ -32,9 +32,9 @@ export default function TaskContentPage() {
   const [showKeyboard, setShowKeyboard] = useState(false); // State for virtual keyboard
 
   // Audio elements
-  const correctSound = React.useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/correct.mp3') : null, []);
-  const incorrectSound = React.useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/incorrect.mp3') : null, []);
-  const completionSound = React.useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/completed.mp3') : null, []);
+  const correctSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/correct.mp3') : null, []);
+  const incorrectSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/incorrect.mp3') : null, []);
+  const completionSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/completed.mp3') : null, []);
 
   useEffect(() => {
     if (childUser && childUser.gradeId) {
@@ -151,7 +151,7 @@ export default function TaskContentPage() {
     }
   };
 
-  if (loading) return <SkeletonLoader />;
+  if (loading) return <KidFriendlyLoader />;
   if (!childUser) return null;
   if (!taskData) return <div className="text-center p-10">Task not found.</div>;
   if (!taskData.questions || taskData.questions.length === 0) return <div className="text-center p-10">No questions found for this task.</div>;
