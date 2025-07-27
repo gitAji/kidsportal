@@ -29,16 +29,16 @@ export default function DrawingCanvas({ width = 600, height = 400 }) {
     }
   }, [color, brushSize]);
 
-  const startDrawing = ({ nativeEvent }) => {
-    const { offsetX, offsetY } = nativeEvent;
+  const startDrawing = (event) => {
+    const { offsetX, offsetY } = event.nativeEvent.touches ? event.nativeEvent.touches[0] : event.nativeEvent;
     contextRef.current.beginPath();
     contextRef.current.moveTo(offsetX, offsetY);
     setIsDrawing(true);
   };
 
-  const draw = ({ nativeEvent }) => {
+  const draw = (event) => {
     if (!isDrawing) return;
-    const { offsetX, offsetY } = nativeEvent;
+    const { offsetX, offsetY } = event.nativeEvent.touches ? event.nativeEvent.touches[0] : event.nativeEvent;
     contextRef.current.lineTo(offsetX, offsetY);
     contextRef.current.stroke();
   };

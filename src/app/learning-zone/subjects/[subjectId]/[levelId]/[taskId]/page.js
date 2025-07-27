@@ -286,9 +286,17 @@ export default function TaskContentPage() {
         </div>
 
         {showDrawingTool && (
-          <div className="mt-4">
-            <DrawingCanvas width={600} height={400} />
-            <p className="text-sm text-gray-500 mt-2">Use this space to practice writing. Your drawing will not be submitted as an answer.</p>
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-xl shadow-lg p-6 relative w-full max-w-3xl h-3/4 flex flex-col">
+              <button
+                onClick={() => setShowDrawingTool(false)}
+                className="absolute top-2 right-2 p-2 rounded-full bg-red-500 text-white hover:bg-red-600 z-10"
+              >
+                <FaTimesCircle />
+              </button>
+              <DrawingCanvas width={window.innerWidth * 0.7} height={window.innerHeight * 0.5} />
+              <p className="text-sm text-gray-500 mt-2 text-center">Use this space to practice writing. Your drawing will not be submitted as an answer.</p>
+            </div>
           </div>
         )}
 
