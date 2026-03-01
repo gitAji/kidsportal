@@ -6,8 +6,7 @@ import { getStripe } from '@/lib/stripe';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
 
-// Must disable body parsing — Stripe needs the raw body for signature verification
-export const config = { api: { bodyParser: false } };
+// In App Router, body parsing is not automatic — use request.text() for raw body
 
 async function updateSubscriptionInFirestore(uid, subscription, plan) {
     if (!uid) {
