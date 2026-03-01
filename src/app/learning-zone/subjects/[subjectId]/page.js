@@ -5,6 +5,7 @@ import dbData from '../../../data/db.json';
 import SkeletonLoader from '../../../components/ui/SkeletonLoader';
 import { FaArrowLeft, FaHome, FaLock, FaStar, FaTrophy } from 'react-icons/fa';
 import { useChild } from '../../../providers/ChildProvider';
+import { useLanguage } from '../../../providers/LanguageProvider';
 import { motion, AnimatePresence } from "framer-motion";
 
 const colorPalette = [
@@ -20,6 +21,7 @@ const colorPalette = [
 
 export default function SubjectLevelsPage() {
   const { childUser } = useChild();
+  const { t } = useLanguage();
   const [subjectData, setSubjectData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [alertMessage, setAlertMessage] = useState(null);
@@ -45,11 +47,11 @@ export default function SubjectLevelsPage() {
       <SkeletonLoader variant="page" message="Getting your levels ready..." />
     </div>
   );
-  if (!subjectData) return <div className="text-center p-10 font-bold text-2xl text-gray-600">Subject not found.</div>;
+  if (!subjectData) return <div className="text-center p-10 font-bold text-2xl text-gray-600">{t('subject_not_found')}</div>;
 
   const handleLevelClick = (level) => {
     if (level.isLocked) {
-      setAlertMessage(level.lockMessage || "This level is locked! Keep learning to unlock it.");
+      setAlertMessage(level.lockMessage || t('locked'));
       setTimeout(() => setAlertMessage(null), 3000);
     } else {
       router.push(`/learning-zone/subjects/${subjectId}/${level.levelId}`);
@@ -63,6 +65,9 @@ export default function SubjectLevelsPage() {
     hover: { scale: 1.05, y: -5, transition: { type: "spring", stiffness: 300, damping: 20 } },
     tap: { scale: 0.95 }
   };
+
+  // Get translated subject name
+  const subjectDisplayName = t(`subjects.${subjectData.subjectName}`) || subjectData.subjectName;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 p-4 sm:p-6 md:p-8 relative overflow-hidden">
@@ -99,10 +104,10 @@ export default function SubjectLevelsPage() {
         className="text-center z-10 relative mb-12"
       >
         <span className="inline-block bg-white px-6 py-1 rounded-full text-sm font-bold text-cyan-600 mb-4 shadow-sm uppercase tracking-wider">
-          {childUser?.grade} • {subjectData.subjectName}
+          {childUser?.grade} • {subjectDisplayName}
         </span>
         <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 drop-shadow-sm">
-          Select a Level
+          {t('select_level')}
         </h1>
       </motion.div>
 
@@ -143,12 +148,12 @@ export default function SubjectLevelsPage() {
                 </h2>
 
                 <p className="text-lg font-medium opacity-95 z-10">
-                  {level.levelName.includes(':') ? level.levelName.split(':')[1].trim() : (level.description || "Ready to play!")}
+                  {level.levelName.includes(':') ? level.levelName.split(':')[1].trim() : (level.description || t('ready_to_play'))}
                 </p>
 
                 {isLocked && (
                   <div className="mt-4 bg-gray-600/50 px-4 py-1 rounded-full text-sm font-semibold backdrop-blur-sm z-10">
-                    Locked
+                    {t('locked')}
                   </div>
                 )}
               </motion.div>
@@ -156,7 +161,7 @@ export default function SubjectLevelsPage() {
           })
         ) : (
           <p className="text-center text-gray-600 col-span-full font-bold text-xl bg-white p-8 rounded-2xl shadow-sm">
-            No levels found for this subject yet. Come back later!
+            {t('no_levels')}
           </p>
         )}
       </motion.div>

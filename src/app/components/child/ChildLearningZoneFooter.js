@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { FaChalkboardTeacher, FaRegCopyright } from 'react-icons/fa';
+import { useLanguage } from '@/app/providers/LanguageProvider';
 
 export default function ChildLearningZoneFooter() {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className="w-full px-6 py-8 mt-auto">
@@ -15,13 +17,13 @@ export default function ChildLearningZoneFooter() {
           <FaRegCopyright className="text-slate-300" />
           <span>{currentYear} KidsPortal World</span>
           <span className="hidden sm:inline opacity-30">•</span>
-          <span className="hidden sm:inline">Crafted for Excellence</span>
+          <span className="hidden sm:inline">{t('crafted')}</span>
         </div>
 
         {/* Center: Brand Tagline (Optional, keep it clean) */}
         <div className="hidden lg:block">
           <p className="text-[10px] font-black text-slate-300 uppercase tracking-[4px]">
-            Inspiring the next generation
+            {t('inspiring')}
           </p>
         </div>
 
@@ -40,7 +42,7 @@ export default function ChildLearningZoneFooter() {
       {/* Bottom Minimal Info */}
       <div className="text-center mt-4">
         <p className="text-[9px] font-medium text-slate-300 uppercase tracking-[2px]">
-          Safety & Privacy Guaranteed
+          {t('safety')}
         </p>
       </div>
     </footer>

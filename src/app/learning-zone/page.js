@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useChild } from '../providers/ChildProvider';
+import { useLanguage } from '../providers/LanguageProvider';
 import { getSubjectsByGrade } from '../utils/learningData';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
 import { FaBookOpen, FaCalculator, FaMicroscope, FaLanguage, FaStar, FaPlay } from 'react-icons/fa';
@@ -71,6 +72,7 @@ const floatingAnimation = {
 
 export default function LearningZonePage() {
   const { childUser } = useChild();
+  const { t } = useLanguage();
   const [subjects, setSubjects] = useState([]);
   const [subjectsLoading, setSubjectsLoading] = useState(true);
   const router = useRouter();
@@ -104,16 +106,16 @@ export default function LearningZonePage() {
           className="bg-white p-12 rounded-[3rem] shadow-xl border border-slate-200 max-w-xl w-full"
         >
           <div className="text-7xl mb-6">🏜️</div>
-          <h1 className="text-4xl font-black text-slate-800 mb-4">Adventure on Hold!</h1>
+          <h1 className="text-4xl font-black text-slate-800 mb-4">{t('adventure_on_hold')}</h1>
           <p className="text-lg text-slate-600 mb-8 font-medium">
-            Your learning trial has come to an end. Ask your parents to renew your plan so you can continue your quest!
+            {t('trial_ended')}
           </p>
           <div className="flex flex-col gap-4">
             <button
               onClick={() => router.push('/child-login')}
               className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-black shadow-lg hover:bg-blue-700 transition-all font-mono tracking-widest text-sm"
             >
-              LOG OUT
+              {t('log_out')}
             </button>
           </div>
         </motion.div>
@@ -138,15 +140,15 @@ export default function LearningZonePage() {
         <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-6 py-2 rounded-full shadow-sm border border-slate-100 mb-6">
           <FaStar className="text-yellow-400" />
           <p className="text-sm sm:text-base font-bold text-slate-700 uppercase tracking-widest">
-            {childUser.grade} Explorer
+            {childUser.grade} {t('explorer')}
           </p>
           <FaStar className="text-yellow-400" />
         </div>
         <h1 className="text-5xl md:text-7xl font-black text-slate-800 mb-6 tracking-tight">
-          Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">{childUser.name}!</span>
+          {t('welcome')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">{childUser.name}!</span>
         </h1>
         <p className="text-xl md:text-2xl text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
-          Ready for today&apos;s adventure? Choose a subject below to explore new levels and earn stars!
+          {t('ready_adventure')}
         </p>
       </motion.div>
 
@@ -166,6 +168,8 @@ export default function LearningZonePage() {
           {subjects.map((subject) => {
             const Icon = subjectIconMap[subject.subjectName] || subjectIconMap.default;
             const style = subjectStyleMap[subject.subjectName] || subjectStyleMap.default;
+            // Show translated subject name
+            const displayName = t(`subjects.${subject.subjectName}`) || subject.subjectName;
 
             return (
               <Link key={subject.subjectId} href={`/learning-zone/subjects/${subject.subjectId}`}>
@@ -188,13 +192,13 @@ export default function LearningZonePage() {
                       <Icon size={32} className="text-white drop-shadow-sm" />
                     </div>
                     <h2 className="text-3xl font-extrabold text-white drop-shadow-md tracking-tight leading-tight">
-                      {subject.subjectName}
+                      {displayName}
                     </h2>
                   </div>
 
                   <div className="relative z-10">
                     <div className="flex items-center gap-2 text-white font-bold bg-black/20 w-fit px-4 py-2 rounded-full backdrop-blur-md group-hover:bg-black/30 transition-colors text-sm">
-                      <FaPlay className="text-xs" /> Play Now
+                      <FaPlay className="text-xs" /> {t('play_now')}
                     </div>
                   </div>
                 </motion.div>
