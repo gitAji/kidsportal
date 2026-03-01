@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -17,7 +17,15 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, collectionGroup, query, where, getDocs, limit } from "firebase/firestore";
 import CustomAvatar from "@/app/components/ui/CustomAvatar";
 
-export default function UnifiedLoginPage() {
+export default function LoginPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center p-8"><div className="w-full max-w-4xl"><SkeletonLoader variant="page" message="Loading login..." /></div></div>}>
+            <UnifiedLoginPage />
+        </Suspense>
+    );
+}
+
+function UnifiedLoginPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [activeRole, setActiveRole] = useState("parent"); // parent, student
