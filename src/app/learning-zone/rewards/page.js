@@ -1,79 +1,161 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaArrowLeft, FaStar, FaTrophy } from 'react-icons/fa';
-import Image from 'next/image';
+import { useChild } from '../../providers/ChildProvider';
+import { ACHIEVEMENTS, loadUnlockedAchievements, loadStats } from '../../utils/achievements';
+import { getChildAchievements, getChildStats } from '../../utils/firestoreService';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaTrophy, FaLock, FaHome } from 'react-icons/fa';
+import Link from 'next/link';
 import SkeletonLoader from '../../components/ui/SkeletonLoader';
 
 export default function RewardsPage() {
-  const [childUser, setChildUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [stickers, setStickers] = useState([]);
-  const [trophies, setTrophies] = useState([]);
+  const { childUser } = useChild();
   const router = useRouter();
+  const [unlockedIds, setUnlockedIds] = useState(new Set());
+  const [stats, setStats] = useState({});
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedChildUser = sessionStorage.getItem("childUser");
-    if (storedChildUser) {
-      const parsedUser = JSON.parse(storedChildUser);
-      setChildUser(parsedUser);
+    if (!childUser) { router.push('/child-login'); return; }
 
-      // For now, use sample data if no real data is available
-      // In a real app, you'd fetch parsedUser.stickers and parsedUser.trophies from Firestore
-      setStickers(parsedUser.stickers || [
-        { id: 'sample-sticker-1', name: 'First Star', image: '/images/star.png' },
-        { id: 'sample-sticker-2', name: 'Happy Learner', image: '/images/smile.png' },
-      ]);
-      setTrophies(parsedUser.trophies || [
-        { id: 'sample-trophy-1', name: 'Bronze Medal', description: 'Completed 5 tasks' },
-        { id: 'sample-trophy-2', name: 'Silver Cup', description: 'Scored 90% on a quiz' },
-      ]);
+    const loadData = async () => {
+      const localUnlocked = loadUnlockedAchievements(childUser.uid);
+      const localStats = loadStats(childUser.uid);
+      setUnlockedIds(new Set(localUnlocked));
+      setStats(localStats);
+      setLoading(false);
+      try {
+        const [fsAchs, fsStats] = await Promise.all([
+          getChildAchievements(childUser.uid),
+          getChildStats(childUser.uid),
+        ]);
+        if (fsAchs.length > 0) setUnlockedIds(new Set(fsAchs.map(a => a.achievementId)));
+        if (Object.keys(fsStats).length > 0) setStats(fsStats);
+      } catch (e) { /* use local */ }
+    };
 
-    } else {
-      router.push("/child-login");
-    }
-    setLoading(false);
-  }, [router]);
+    loadData();
+  }, [childUser, router]);
 
-  if (loading) return <SkeletonLoader />;
-  if (!childUser) return null; // Redirecting
+  const unlockedCount = ACHIEVEMENTS.filter(a => unlockedIds.has(a.id)).length;
+  const total = ACHIEVEMENTS.length;
+
+  const filters = [
+    { key: 'all', label: '🎖 All' },
+    { key: 'unlocked', label: '✅ Earned' },
+    { key: 'locked', label: '🔒 Locked' },
+  ];
+
+  const displayed = ACHIEVEMENTS.filter(a => {
+    if (activeFilter === 'unlocked') return unlockedIds.has(a.id);
+    if (activeFilter === 'locked') return !unlockedIds.has(a.id);
+    return true;
+  });
 
   return (
-    <div className="p-4">
-      <button onClick={() => router.back()} className="flex items-center text-lg font-semibold text-gray-700 hover:text-blue-600 mb-6">
-        <FaArrowLeft className="mr-2" /> Back to Dashboard
-      </button>
-      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Your Achievements</h1>
-
-      <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-        <h2 className="text-2xl font-semibold text-blue-600 mb-4 flex items-center"><FaStar className="mr-2 text-yellow-500" /> Your Stickers</h2>
-        {stickers.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {stickers.map(sticker => (
-              <div key={sticker.id} className="flex flex-col items-center p-3 bg-gray-50 rounded-lg shadow-sm">
-                {sticker.image && <Image src={sticker.image} alt={sticker.name} width={64} height={64} className="w-16 h-16 object-contain mb-2" />}
-                <p className="text-sm font-medium text-gray-700 text-center">{sticker.name}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-gray-600 text-center">No stickers collected yet. Keep learning!</p>
-        )}
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-indigo-100">
+      <div className="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-cyan-100 shadow-sm px-4 py-3 flex items-center justify-between">
+        <button onClick={() => router.back()} className="px-4 py-2 rounded-full hover:bg-cyan-50 transition-colors text-cyan-600 font-semibold text-sm">← Back</button>
+        <h1 className="text-xl font-extrabold text-cyan-700 flex items-center gap-2"><FaTrophy /> My Rewards</h1>
+        <Link href="/learning-zone" className="p-2 rounded-full hover:bg-cyan-50 transition-colors text-cyan-600"><FaHome /></Link>
       </div>
 
-      <div className="bg-white rounded-xl shadow-lg p-6">
-        <h2 className="text-2xl font-semibold text-blue-600 mb-4 flex items-center"><FaTrophy className="mr-2 text-orange-500" /> Your Trophies</h2>
-        {trophies.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {trophies.map(trophy => (
-              <div key={trophy.id} className="p-4 bg-gray-50 rounded-lg shadow-sm">
-                <h3 className="text-lg font-semibold text-gray-800">{trophy.name}</h3>
-                <p className="text-gray-600 text-sm">{trophy.description}</p>
-              </div>
-            ))}
+      <div className="max-w-3xl mx-auto px-4 py-8">
+        {/* Stats Banner */}
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-r from-cyan-600 to-indigo-600 rounded-3xl p-6 text-white mb-8 shadow-xl shadow-cyan-200 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="text-center sm:text-left">
+            <p className="text-cyan-200 text-sm font-semibold uppercase tracking-widest mb-1">Achievements</p>
+            <p className="text-6xl font-black">{unlockedCount}<span className="text-cyan-300 text-3xl">/{total}</span></p>
+          </div>
+          <div className="grid grid-cols-3 gap-4 text-center">
+            <div className="bg-white/20 rounded-2xl p-3">
+              <div className="text-2xl font-black">{stats.totalScore || 0}</div>
+              <div className="text-xs text-cyan-200 font-semibold">Points</div>
+            </div>
+            <div className="bg-white/20 rounded-2xl p-3">
+              <div className="text-2xl font-black">{stats.totalTasksCompleted || 0}</div>
+              <div className="text-xs text-cyan-200 font-semibold">Tasks</div>
+            </div>
+            <div className="bg-white/20 rounded-2xl p-3">
+              <div className="text-2xl font-black">{stats.uniqueDays || 0}</div>
+              <div className="text-xs text-cyan-200 font-semibold">🔥 Days</div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Progress bar */}
+        <div className="mb-8">
+          <div className="flex justify-between text-sm font-bold text-cyan-700 mb-2">
+            <span>Collection Progress</span>
+            <span>{Math.round((unlockedCount / total) * 100)}%</span>
+          </div>
+          <div className="h-4 bg-cyan-100 rounded-full overflow-hidden">
+            <motion.div initial={{ width: 0 }} animate={{ width: `${(unlockedCount / total) * 100}%` }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="h-full bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full" />
+          </div>
+        </div>
+
+        {/* Filter tabs */}
+        <div className="flex gap-2 mb-6 flex-wrap">
+          {filters.map(f => (
+            <button key={f.key} onClick={() => setActiveFilter(f.key)}
+              className={`px-5 py-2 rounded-full font-bold text-sm transition-all ${activeFilter === f.key ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-200' : 'bg-white text-cyan-600 border border-cyan-200 hover:bg-cyan-50'}`}>
+              {f.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Achievement grid */}
+        {loading ? (
+          <div className="flex justify-center py-12">
+            <SkeletonLoader variant="subjects" message="Unlocking your rewards..." />
           </div>
         ) : (
-          <p className="text-gray-600 text-center">No trophies earned yet. Keep up the great work!</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <AnimatePresence mode="popLayout">
+              {displayed.map((ach, i) => {
+                const isUnlocked = unlockedIds.has(ach.id);
+                return (
+                  <motion.div key={ach.id} layout
+                    initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ delay: i * 0.03 }}
+                    className={`relative rounded-3xl p-5 text-center border-2 shadow-md transition-all duration-300 overflow-hidden ${isUnlocked
+                      ? `bg-gradient-to-br ${ach.color} ${ach.border} shadow-lg`
+                      : 'bg-white border-gray-200 opacity-60'
+                      }`}>
+                    {!isUnlocked && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gray-100/80 backdrop-blur-[2px] rounded-3xl">
+                        <FaLock className="text-gray-400 text-3xl" />
+                      </div>
+                    )}
+                    <div className="text-5xl mb-3">{isUnlocked ? ach.emoji : '❓'}</div>
+                    <p className={`font-extrabold text-sm leading-tight ${isUnlocked ? 'text-white drop-shadow' : 'text-gray-400'}`}>
+                      {isUnlocked ? ach.name : 'Locked'}
+                    </p>
+                    {isUnlocked && <p className="text-white/80 text-xs mt-1 leading-snug">{ach.description}</p>}
+                    {isUnlocked && (
+                      <div className="absolute -top-2 -right-2 bg-yellow-400 text-yellow-900 rounded-full w-7 h-7 flex items-center justify-center shadow-md text-sm font-black border-2 border-white">✓</div>
+                    )}
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
+        )}
+
+        {displayed.length === 0 && !loading && (
+          <div className="text-center py-16">
+            <div className="text-6xl mb-4">🎯</div>
+            <p className="text-xl font-bold text-cyan-600">No achievements yet!</p>
+            <p className="text-gray-500 mt-2">Complete tasks to earn rewards.</p>
+            <Link href="/learning-zone" className="mt-6 inline-block bg-cyan-600 text-white font-bold px-8 py-3 rounded-full hover:bg-cyan-700 transition-colors shadow-lg shadow-cyan-200">
+              Start Learning →
+            </Link>
+          </div>
         )}
       </div>
     </div>

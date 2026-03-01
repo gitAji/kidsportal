@@ -17,11 +17,18 @@ export default function ChildLoginForm() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    // Check if the user is already logged in
+    const storedChildUser = localStorage.getItem("childUser") || sessionStorage.getItem("childUser");
+    if (storedChildUser) {
+      router.push("/learning-zone");
+      return;
+    }
+
     const childUsername = searchParams.get('username');
     if (childUsername) {
       setUsername(childUsername);
     }
-  }, [searchParams]);
+  }, [searchParams, router]);
 
   const handleChildLogin = async (e) => {
     e.preventDefault();
@@ -29,13 +36,13 @@ export default function ChildLoginForm() {
     setLoading(true);
 
     if (!username || !password) {
-        setError("Please enter both username and password.");
-        setLoading(false);
-        return;
+      setError("Please enter both username and password.");
+      setLoading(false);
+      return;
     }
 
     try {
-      const usernameDocRef = doc(db, 'child_usernames', username);
+      const usernameDocRef = doc(db, 'child_usernames', username.toLowerCase());
       const usernameDoc = await getDoc(usernameDocRef);
 
       if (!usernameDoc.exists()) {
@@ -88,13 +95,13 @@ export default function ChildLoginForm() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-200 to-purple-200 p-4">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-200 to-cyan-200 p-4">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-105">
         <div className="text-center mb-6">
-            <Image src="/logo.png" alt="Logo" width={60} height={60} className="mx-auto mb-4" />
-            <h1 className="text-4xl font-extrabold text-center text-gray-800">
-              Student Login
-            </h1>
+          <Image src="/logo.png" alt="Logo" width={60} height={60} className="mx-auto mb-4" />
+          <h1 className="text-4xl font-extrabold text-center text-gray-800">
+            Student Login
+          </h1>
         </div>
         {error && (
           <div className="p-3 rounded-lg text-center bg-red-100 text-red-700 border border-red-300 animate-fade-in">

@@ -8,7 +8,7 @@ export const useChildTheme = () => useContext(ChildThemeContext);
 const themes = [
   { id: 'default', name: 'Default', colors: { primary: '#3B82F6', background: '#DBEAFE' } },
   { id: 'green', name: 'Forest Green', colors: { primary: '#10B981', background: '#D1FAE5' } },
-  { id: 'purple', name: 'Royal Purple', colors: { primary: '#8B5CF6', background: '#EDE9FE' } },
+  { id: 'cyan', name: 'Royal Purple', colors: { primary: '#8B5CF6', background: '#EDE9FE' } },
   { id: 'orange', name: 'Sunset Orange', colors: { primary: '#F97316', background: '#FFEDD5' } },
 ];
 

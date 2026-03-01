@@ -76,7 +76,7 @@ const LearningZone = ({ child, subjects }) => {
           </button>
           <button
             onClick={() => router.push("/avatar-customizer")}
-            className="px-6 py-2 bg-pink-500 text-white font-bold rounded-full shadow-lg hover:bg-pink-600 transition-colors duration-300 flex items-center"
+            className="px-6 py-2 bg-teal-500 text-white font-bold rounded-full shadow-lg hover:bg-teal-600 transition-colors duration-300 flex items-center"
           >
             <FaPaintBrush className="mr-2" /> Customize Avatar
           </button>

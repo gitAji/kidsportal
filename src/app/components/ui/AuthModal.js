@@ -1,10 +1,12 @@
-// app/src/components/ToggleModal.js
+"use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope, faLock, faUser, faTimes, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { signInWithGoogle, signInWithEmail, signUpWithEmail } from "../../../firebase/auth";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function AuthModal({
   isModalOpen,
@@ -18,19 +20,31 @@ export default function AuthModal({
   const [lastName, setLastName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isModalOpen]);
 
   const handleEmailAuth = async (e) => {
     e.preventDefault();
-    setError(null); // Clear previous errors
+    setIsLoading(true);
+    setError(null);
     try {
       if (isRegister) {
         if (!firstName || !lastName || !email || !password || !confirmPassword) {
           setError("All fields are required.");
+          setIsLoading(false);
           return;
         }
         if (password !== confirmPassword) {
           setError("Passwords do not match.");
+          setIsLoading(false);
           return;
         }
         await signUpWithEmail(email, password, firstName, lastName, () => setIsModalOpen(false));
@@ -40,180 +54,215 @@ export default function AuthModal({
       router.push("/");
     } catch (err) {
       setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleGoogleAuth = async () => {
-    setError(null); // Clear previous errors
+    setIsLoading(true);
+    setError(null);
     try {
       await signInWithGoogle(() => setIsModalOpen(false));
       router.push("/");
     } catch (err) {
       setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleVippsLogin = () => {
-    
-    // Add Vipps login logic here later
-  };
-
   return (
-    <>
+    <AnimatePresence>
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[9999]">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
-            <button
-              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
-              onClick={() => setIsModalOpen(false)} // Close the modal on click
-            >
-              &times;
-            </button>
-            <h3 className="text-2xl font-bold mb-4 text-center">
-              {isRegister ? "Register" : "Login"}
-            </h3>
-            {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-            <form onSubmit={handleEmailAuth}>
-              {isRegister && (
-                <>
-                  <div className="mb-4">
-                    <label
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                      htmlFor="firstName"
-                    >
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      className="border border-gray-300 rounded w-full py-2 px-3"
-                      placeholder="Enter your first name"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                      htmlFor="lastName"
-                    >
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      className="border border-gray-300 rounded w-full py-2 px-3"
-                      placeholder="Enter your last name"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      required
-                    />
-                  </div>
-                </>
+        <div className="fixed inset-0 flex justify-center items-center z-[9999] p-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsModalOpen(false)}
+            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+          />
+
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden relative"
+          >
+            {/* Header with Background Gradient */}
+            <div className="bg-gradient-to-r from-blue-600 to-cyan-500 p-8 text-white relative">
+              <button
+                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+                onClick={() => setIsModalOpen(false)}
+              >
+                <FontAwesomeIcon icon={faTimes} className="text-xl" />
+              </button>
+
+              <h3 className="text-3xl font-black mb-2">
+                {isRegister ? "Start Your Journey" : "Welcome Back!"}
+              </h3>
+              <p className="text-blue-100 text-sm font-medium">
+                {isRegister
+                  ? "Join the smartest learning community for kids."
+                  : "Pick up where you left off and keep learning."}
+              </p>
+            </div>
+
+            <div className="p-8">
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="bg-red-50 text-red-600 p-3 rounded-xl text-sm mb-6 border border-red-100 font-medium text-center"
+                >
+                  {error}
+                </motion.div>
               )}
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="email"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="border border-gray-300 rounded w-full py-2 px-3"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="password"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  className="border border-gray-300 rounded w-full py-2 px-3"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              {isRegister && (
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="confirmPassword"
-                  >
-                    Confirm Password
-                  </label>
-                  <input
-                    type="password"
-                    id="confirmPassword"
-                    className="border border-gray-300 rounded w-full py-2 px-3"
-                    placeholder="Confirm your password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                  />
+
+              <form onSubmit={handleEmailAuth} className="space-y-4">
+                <AnimatePresence mode="wait">
+                  {isRegister && (
+                    <motion.div
+                      key="register-fields"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="grid grid-cols-2 gap-4"
+                    >
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-slate-500 uppercase ml-1">First Name</label>
+                        <div className="relative">
+                          <FontAwesomeIcon icon={faUser} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
+                          <input
+                            type="text"
+                            className="bg-slate-50 border-2 border-slate-100 rounded-2xl w-full py-3.5 pl-10 pr-4 text-sm focus:border-blue-500 focus:bg-white transition-all outline-none text-slate-700"
+                            placeholder="Alex"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-slate-500 uppercase ml-1">Last Name</label>
+                        <div className="relative">
+                          <FontAwesomeIcon icon={faUser} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
+                          <input
+                            type="text"
+                            className="bg-slate-50 border-2 border-slate-100 rounded-2xl w-full py-3.5 pl-10 pr-4 text-sm focus:border-blue-500 focus:bg-white transition-all outline-none text-slate-700"
+                            placeholder="Smith"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required
+                          />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-500 uppercase ml-1">Email Address</label>
+                  <div className="relative">
+                    <FontAwesomeIcon icon={faEnvelope} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
+                    <input
+                      type="email"
+                      className="bg-slate-50 border-2 border-slate-100 rounded-2xl w-full py-3.5 pl-10 pr-4 text-sm focus:border-blue-500 focus:bg-white transition-all outline-none text-slate-700"
+                      placeholder="alex@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
                 </div>
-              )}
-              <div className="text-center">
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-500 uppercase ml-1">Password</label>
+                  <div className="relative">
+                    <FontAwesomeIcon icon={faLock} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
+                    <input
+                      type="password"
+                      className="bg-slate-50 border-2 border-slate-100 rounded-2xl w-full py-3.5 pl-10 pr-4 text-sm focus:border-blue-500 focus:bg-white transition-all outline-none text-slate-700"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+
+                {isRegister && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-1.5"
+                  >
+                    <label className="text-xs font-bold text-slate-500 uppercase ml-1">Confirm Password</label>
+                    <div className="relative">
+                      <FontAwesomeIcon icon={faLock} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
+                      <input
+                        type="password"
+                        className="bg-slate-50 border-2 border-slate-100 rounded-2xl w-full py-3.5 pl-10 pr-4 text-sm focus:border-blue-500 focus:bg-white transition-all outline-none text-slate-700"
+                        placeholder="••••••••"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                      />
+                    </div>
+                  </motion.div>
+                )}
+
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 w-full"
+                  disabled={isLoading}
+                  className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-4 rounded-2xl font-bold w-full transition-all hover:shadow-lg hover:shadow-cyan-500/20 active:scale-[0.98] disabled:opacity-70 disabled:active:scale-100 mt-2 flex items-center justify-center space-x-2"
                 >
-                  {isRegister ? "Register" : "Login"}
+                  {isLoading ? (
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  ) : (
+                    <>
+                      <span>{isRegister ? "Create Account" : "Sign In"}</span>
+                      <FontAwesomeIcon icon={faArrowRight} className="text-xs" />
+                    </>
+                  )}
+                </button>
+              </form>
+
+              <div className="relative my-8 text-center">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-slate-100"></div>
+                </div>
+                <span className="relative px-4 bg-white text-xs font-bold text-slate-400 uppercase">Or continue with</span>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4">
+                <button
+                  onClick={handleGoogleAuth}
+                  disabled={isLoading}
+                  className="bg-white text-slate-700 border-2 border-slate-100 py-3.5 rounded-2xl font-bold w-full flex items-center justify-center transition-all hover:bg-slate-50 hover:border-slate-200 active:scale-[0.98]"
+                >
+                  <FontAwesomeIcon icon={faGoogle} className="text-red-500 mr-3 text-lg" />
+                  Google
                 </button>
               </div>
-            </form>
 
-            <div className="flex items-center justify-center mt-4">
-              <span className="bg-gray-300 h-px w-full"></span>
-              <span className="text-gray-600 px-3">OR</span>
-              <span className="bg-gray-300 h-px w-full"></span>
+              <p className="mt-8 text-center text-sm text-slate-500 font-medium">
+                {isRegister
+                  ? "Already have an account?"
+                  : "New to KidsPortal?"}{" "}
+                <button
+                  className="text-blue-600 font-bold hover:underline"
+                  onClick={() => setIsRegister(!isRegister)}
+                >
+                  {isRegister ? "Sign In" : "Register Now"}
+                </button>
+              </p>
             </div>
-
-            <div className="mt-4 text-center">
-              <button
-                className="bg-red-500 text-white py-2 px-4 rounded w-full flex items-center justify-center"
-                onClick={handleGoogleAuth}
-              >
-                <FontAwesomeIcon icon={faGoogle} className="mr-2" />
-                Sign {isRegister ? "Up" : "In"} with Google
-              </button>
-            </div>
-
-            <div className="mt-4 text-center">
-              <button
-                className="bg-orange-500 text-white py-2 px-4 rounded w-full flex items-center justify-center"
-                onClick={handleVippsLogin} // Placeholder for Vipps integration
-              >
-                Sign {isRegister ? "Up" : "In"} with Vipps
-              </button>
-            </div>
-
-            <p className="mt-4 text-center text-sm text-gray-600">
-              {isRegister
-                ? "Already have an account?"
-                : "Don't have an account?"}{" "}
-              <button
-                className="text-blue-600 hover:underline"
-                onClick={() => setIsRegister(!isRegister)} // Toggle between login and register
-              >
-                {isRegister ? "Login here" : "Register here"}
-              </button>
-            </p>
-          </div>
+          </motion.div>
         </div>
       )}
-    </>
+    </AnimatePresence>
   );
 }

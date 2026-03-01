@@ -4,6 +4,7 @@ import { ChildProvider, useChild } from "../providers/ChildProvider";
 import ChildLearningZoneHeader from "../components/child/ChildLearningZoneHeader";
 import ChildLearningZoneFooter from "../components/child/ChildLearningZoneFooter";
 import { ChildThemeProvider } from "../providers/ChildThemeProvider";
+import { LanguageProvider } from "../providers/LanguageProvider";
 
 function LearningZoneCore({ children }) {
     const { childUser } = useChild(); // Now gets user from context
@@ -26,9 +27,11 @@ function LearningZoneCore({ children }) {
 }
 
 export default function LearningZoneLayout({ children }) {
-  return (
-    <ChildProvider>
-        <LearningZoneCore>{children}</LearningZoneCore>
-    </ChildProvider>
-  );
+    return (
+        <ChildProvider>
+            <LanguageProvider>
+                <LearningZoneCore>{children}</LearningZoneCore>
+            </LanguageProvider>
+        </ChildProvider>
+    );
 }

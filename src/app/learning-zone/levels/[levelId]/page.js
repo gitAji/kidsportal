@@ -105,7 +105,7 @@ export default function LevelPage() {
     if (!levelData) return <div className="text-center p-10">Level not found.</div>;
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-purple-100 to-teal-100 p-4 sm:p-8">
+        <div className="min-h-screen bg-gradient-to-b from-cyan-100 to-teal-100 p-4 sm:p-8">
             <div className="max-w-7xl mx-auto">
                 <button
         onClick={() => router.push(`/learning-zone/subjects/${levelData.subjectId}`)}

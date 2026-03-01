@@ -1,32 +1,62 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // This rule secures all parent and child data.
-    // It allows a logged-in user to read and write ONLY to their own documents
-    // and the subcollections within them (like their 'children').
+    
+    // ── 1. STUDENT LOGIN FLOW (PUBLIC ACCESS) ────────────────────────
+    // These must be accessible without Firebase Auth for student login.
+    
+    match /child_usernames/{username} {
+      allow get: if true;
+      // Writing usernames requires parent auth
+      allow write, delete: if request.auth != null && (request.resource.data.parentUid == request.auth.uid || resource.data.parentUid == request.auth.uid);
+    }
+    
+    match /users/{userId} {
+      // Required for subscription status check in ChildProvider & login checks
+      allow get: if true;
+      
+      match /children/{childId} {
+        // Required to fetch child profile for PIN verification & progress loading
+        allow get: if true;
+        
+        // Subcollections like stats, achievements, etc. 
+        // We open these for the child session to save progress.
+        match /{allChildrenSubcollections=**} {
+           allow read, write: if true; 
+        }
+      }
+    }
+
+    // ── 2. PARENT & TEACHER SECURE ACCESS ────────────────────────────
+    // Locked down by Firebase Auth ID (UID)
+    
     match /users/{userId}/{documents=**} {
-      allow read: if request.auth != null && request.auth.uid == userId;
+      allow read: if request.auth != null && (
+        request.auth.uid == userId || 
+        exists(/databases/$(database)/documents/teachers/$(request.auth.token.email)) ||
+        request.auth.token.email == "kontaktaone@gmail.com"
+      );
       allow create: if request.auth != null && request.auth.uid == userId;
       allow update, delete: if request.auth != null && request.auth.uid == userId;
     }
 
-    // This rule manages the global directory of child usernames for fast, secure logins.
-    match /child_usernames/{username} {
-      // Allow anyone to check if a username exists (for login).
-      allow get: if true;
-
-      // Allow a logged-in parent to create, update, or delete a username
-      // ONLY IF the parent's ID in the document matches their own ID.
-      // This prevents one parent from modifying another parent's child data.
-      allow write: if request.auth != null && request.resource.data.parentUid == request.auth.uid;
-      allow delete: if request.auth != null && resource.data.parentUid == request.auth.uid;
-    }
-
-    // This rule secures the notifications collection.
-    // It allows a user to read a notification ONLY IF their own user ID
-    // is stored in the 'userId' field of the notification document.
+    // ── 3. OTHER COLLECTIONS ──────────────────────────────────────────
+    
     match /notifications/{notificationId} {
       allow read: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    match /teachers/{teacherEmail} {
+      allow get: if request.auth != null && request.auth.token.email == teacherEmail;
+      allow read, write: if request.auth != null && request.auth.token.email == "kontaktaone@gmail.com";
+    }
+
+    match /levels/{levelId} {
+      allow read: if true;
+      allow write: if request.auth != null && (
+        exists(/databases/$(database)/documents/teachers/$(request.auth.token.email)) ||
+        request.auth.token.email == "kontaktaone@gmail.com"
+      );
     }
   }
 }

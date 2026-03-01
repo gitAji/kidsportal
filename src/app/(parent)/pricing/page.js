@@ -2,159 +2,287 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "@/firebase/config";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaCheck, FaStar, FaRocket, FaShieldAlt, FaSpinner, FaGlobe, FaChevronDown } from "react-icons/fa";
+import { CURRENCY_PRICES, NATIVE_CURRENCIES } from "@/lib/pricingConfig";
 
+// ─── Currency Selector ────────────────────────────────────────────────────────
+function CurrencySelector({ selected, onChange }) {
+  const [open, setOpen] = useState(false);
+  const cur = CURRENCY_PRICES[selected];
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setOpen((p) => !p)}
+        className="flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:shadow-md transition-all"
+      >
+        <FaGlobe className="text-blue-500" />
+        <span>{cur.flag} {selected}</span>
+        <FaChevronDown className={`text-slate-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -8, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.95 }}
+            transition={{ duration: 0.15 }}
+            className="absolute right-0 top-12 z-50 w-64 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-100 overflow-hidden"
+          >
+            <div className="max-h-72 overflow-y-auto scrollbar-hide py-2">
+              {Object.entries(CURRENCY_PRICES).map(([code, c]) => (
+                <button
+                  key={code}
+                  onClick={() => { onChange(code); setOpen(false); }}
+                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left hover:bg-blue-50 transition-colors ${selected === code ? "bg-blue-50 text-blue-600 font-bold" : "text-slate-700"
+                    }`}
+                >
+                  <span className="text-lg">{c.flag}</span>
+                  <span className="font-semibold w-10 flex-shrink-0">{code}</span>
+                  <span className="text-slate-400">{c.name}</span>
+                  {!NATIVE_CURRENCIES.has(code) && (
+                    <span className="ml-auto text-xs text-slate-300">~USD</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// ─── Main Page ─────────────────────────────────────────────────────────────────
 export default function PricingPage() {
-  const [billingCycle, setBillingCycle] = useState("monthly"); // 'monthly' or 'yearly'
+  const [billingCycle, setBillingCycle] = useState("monthly");
+  const [currencyCode, setCurrencyCode] = useState("USD");
+  const [loadingPlan, setLoadingPlan] = useState(null);
   const router = useRouter();
+
+  const currency = CURRENCY_PRICES[currencyCode];
+  const monthlyDisplay = currency.monthly;
+  const yearlyDisplay = currency.yearly;
 
   const plans = [
     {
-      name: "Free Plan",
-      priceMonthly: "$0",
-      priceYearly: "$0",
+      name: "Free Trial",
+      icon: <FaShieldAlt className="text-slate-400 text-3xl" />,
+      price: "Free",
+      period: "for 1 month",
+      tagline: "Try out our platform",
       features: [
-        "Limited access to grades and subjects",
+        "Access to selected grades & subjects",
         "Basic practice sessions",
-        "Up to 5 children accounts",
+        "Up to 2 children accounts",
         "Standard support",
+        "Trial expires after 30 days",
       ],
-      isCurrent: true,
-      isPremium: false,
+      isFree: true,
     },
     {
-      name: "Premium Plan",
-      priceMonthly: "$9.99",
-      priceYearly: "$99.99",
+      name: "Premium",
+      icon: <FaRocket className="text-cyan-400 text-3xl" />,
+      price: billingCycle === "monthly" ? monthlyDisplay : yearlyDisplay,
+      period: billingCycle === "monthly" ? "/month" : "/year",
+      tagline: "Everything your family needs",
       features: [
-        "Full access to all grades and subjects",
+        "Full access to all grades & subjects",
         "Unlimited practice sessions",
-        "Detailed progress reports",
-        "Up to 3 children accounts",
+        "Detailed progress & analytics",
+        "Up to 5 children accounts",
         "Priority support",
-        "Exclusive content",
+        "Exclusive premium content",
       ],
-      isCurrent: false,
-      isPremium: true,
+      isFree: false,
     },
   ];
 
-  const handleChoosePlan = (planName) => {
+  const handleChoosePlan = async () => {
     if (!auth.currentUser) {
       router.push("/login");
       return;
     }
 
-    if (planName === "Premium Plan") {
-      router.push(`/profile?tab=payment`);
-    } else {
-      // Handle downgrade or other actions for Free Plan if necessary
-      alert(
-        "You are already on the Free Plan or cannot downgrade to it directly from here."
-      );
+    setLoadingPlan("Premium");
+    try {
+      const res = await fetch("/api/stripe/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          uid: auth.currentUser.uid,
+          email: auth.currentUser.email,
+          billingCycle,
+          // Use native currency if supported, otherwise Stripe charges USD
+          currency: NATIVE_CURRENCIES.has(currencyCode) ? currencyCode : "USD",
+        }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        console.error("Stripe error:", data.error);
+      }
+    } catch (err) {
+      console.error("Checkout error:", err);
+    } finally {
+      setLoadingPlan(null);
     }
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      <main className="flex-grow p-4 flex flex-col items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-10"
-        >
-          <h1 className="page-heading mb-4">
-            Choose Your Learning Adventure!
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Unlock a world of knowledge with our flexible plans. Select the best
-            option that fits your family&apos;s learning journey.
-          </p>
-        </motion.div>
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 relative overflow-hidden">
+      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none" />
+      <div className="absolute bottom-20 right-10 w-80 h-80 bg-cyan-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none" />
 
-        {/* Billing Cycle Toggle */}
-        <div className="flex justify-center items-center mb-8 space-x-4 bg-gray-200 rounded-full p-2 shadow-inner">
+      <main className="flex-grow px-4 py-16 flex flex-col items-center justify-center relative z-10">
+
+        {/* Header + currency picker row */}
+        <div className="w-full max-w-3xl flex items-start justify-between mb-8 flex-wrap gap-4">
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-blue-100 text-blue-600 text-sm font-semibold px-4 py-2 rounded-full shadow-sm mb-3">
+              <FaStar className="text-yellow-400" /> Simple Pricing
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-black text-slate-800 tracking-tight leading-tight">
+              Choose Your Learning
+              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent"> Adventure</span>
+            </h1>
+            <p className="text-slate-500 mt-2">
+              Showing prices in{" "}
+              <span className="font-bold text-slate-700">{currency.flag} {currency.name}</span>
+              {!NATIVE_CURRENCIES.has(currencyCode) && (
+                <span className="text-slate-400 text-sm ml-1">(indicative · charged in USD)</span>
+              )}
+            </p>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="flex-shrink-0 pt-1">
+            <CurrencySelector selected={currencyCode} onChange={setCurrencyCode} />
+          </motion.div>
+        </div>
+
+        {/* Billing toggle */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4, delay: 0.2 }}
+          className="flex items-center gap-2 bg-white/70 backdrop-blur-sm border border-slate-200 rounded-full p-1.5 shadow-md mb-6"
+        >
           <button
             onClick={() => setBillingCycle("monthly")}
-            className={`px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 ${
-              billingCycle === "monthly"
-                ? "bg-blue-600 text-white shadow-md"
-                : "text-gray-700 hover:bg-gray-300"
-            }`}
+            className={`px-7 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${billingCycle === "monthly"
+              ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md"
+              : "text-slate-500 hover:text-slate-700"
+              }`}
           >
             Monthly
           </button>
           <button
             onClick={() => setBillingCycle("yearly")}
-            className={`px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 ${
-              billingCycle === "yearly"
-                ? "bg-blue-600 text-white shadow-md"
-                : "text-gray-700 hover:bg-gray-300"
-            }`}
+            className={`px-7 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${billingCycle === "yearly"
+              ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md"
+              : "text-slate-500 hover:text-slate-700"
+              }`}
           >
-            Yearly{" "}
-            <span className="text-lime-400 text-sm ml-2">(Save 17%)</span>
+            Yearly
+            <span className="bg-lime-100 text-lime-600 text-xs font-bold px-2 py-0.5 rounded-full">Save ~26%</span>
           </button>
-        </div>
+        </motion.div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+        {/* Yearly savings note */}
+        <AnimatePresence>
+          {billingCycle === "yearly" && (
+            <motion.p
+              key="yearly-note"
+              initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
+              className="text-sm text-emerald-600 font-semibold mb-6 bg-emerald-50 px-5 py-2 rounded-full border border-emerald-100"
+            >
+              🎉 Yearly plan — best value! Pay once, learn all year.
+            </motion.p>
+          )}
+        </AnimatePresence>
+
+        {/* Plan cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
           {plans.map((plan, index) => (
             <motion.div
-              key={index}
-              variants={cardVariants}
-              initial="hidden"
-              animate="visible"
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`bg-white p-8 rounded-xl shadow-lg border-4 ${
-                plan.isPremium ? "border-blue-500" : "border-gray-200"
-              } flex flex-col justify-between transform transition-transform duration-300 hover:scale-105`}
+              key={plan.name}
+              initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: index * 0.1 }}
+              className={`relative bg-white/70 backdrop-blur-md rounded-2xl p-8 shadow-xl border flex flex-col justify-between ${!plan.isFree ? "border-blue-300 ring-2 ring-blue-400/30" : "border-slate-200"
+                }`}
             >
+              {!plan.isFree && (
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-xs font-bold px-5 py-1.5 rounded-full shadow whitespace-nowrap">
+                  ✦ Most Popular
+                </div>
+              )}
+
               <div>
-                <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                  {plan.name}
-                </h2>
-                <p className="text-5xl font-extrabold text-blue-600 mb-6">
-                  {billingCycle === "monthly"
-                    ? plan.priceMonthly
-                    : plan.priceYearly}
-                  <span className="text-lg font-medium text-gray-500">
-                    / {billingCycle === "monthly" ? "month" : "year"}
-                  </span>
-                </p>
-                <ul className="text-left text-gray-700 space-y-3 mb-8">
+                <div className="flex items-center gap-3 mb-5">
+                  {plan.icon}
+                  <div>
+                    <h2 className="text-2xl font-black text-slate-800">{plan.name}</h2>
+                    <p className="text-slate-400 text-sm">{plan.tagline}</p>
+                  </div>
+                </div>
+
+                {/* Price — animates on currency/billing change */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`${plan.name}-${currencyCode}-${billingCycle}`}
+                    initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6 }}
+                    transition={{ duration: 0.18 }}
+                    className="mb-6 flex items-end gap-1"
+                  >
+                    <span className="text-5xl font-black text-slate-800">{plan.price}</span>
+                    <span className="text-slate-400 text-sm mb-1.5">{plan.period}</span>
+                  </motion.div>
+                </AnimatePresence>
+
+                <ul className="space-y-3 mb-8">
                   {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center">
-                      <span className="text-green-500 mr-3 text-xl">✔</span>
+                    <li key={idx} className="flex items-start gap-3 text-slate-600 text-sm">
+                      <span className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs ${!plan.isFree ? "bg-cyan-100 text-cyan-600" : "bg-slate-100 text-slate-500"
+                        }`}>
+                        <FaCheck />
+                      </span>
                       {feature}
                     </li>
                   ))}
                 </ul>
               </div>
-              {plan.isCurrent ? (
+
+              {plan.isFree ? (
                 <button
-                  className="w-full bg-gray-400 text-white py-3 px-6 rounded-lg font-bold cursor-not-allowed"
-                  disabled
+                  onClick={() => router.push('/register')}
+                  className="w-full bg-slate-100 text-slate-600 py-3 px-6 rounded-xl font-bold hover:bg-slate-200 transition-colors"
                 >
-                  Current Plan
+                  Start Free Trial
                 </button>
               ) : (
                 <button
-                  onClick={() => handleChoosePlan(plan.name)}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-bold focus:outline-none focus:shadow-outline transition-colors duration-300"
+                  onClick={handleChoosePlan}
+                  disabled={loadingPlan === "Premium"}
+                  className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:scale-105 active:scale-95 disabled:opacity-70 disabled:cursor-wait text-white py-3 px-6 rounded-xl font-bold shadow-lg hover:shadow-cyan-500/40 transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  Choose Plan
+                  {loadingPlan === "Premium" ? (
+                    <><FaSpinner className="animate-spin" /> Redirecting to Stripe...</>
+                  ) : (
+                    <>Get Premium · {plan.price}{plan.period}</>
+                  )}
                 </button>
               )}
             </motion.div>
           ))}
         </div>
+
+        <motion.p
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
+          className="mt-10 text-slate-400 text-xs text-center max-w-md"
+        >
+          Secured by <span className="font-bold text-slate-500">Stripe</span>. Cancel anytime.
+          {!NATIVE_CURRENCIES.has(currencyCode) && " Indicative prices — card will be charged in USD."}
+        </motion.p>
       </main>
     </div>
   );

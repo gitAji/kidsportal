@@ -1,34 +1,44 @@
+// src/hooks/useSubscription.js
+// React hook to read subscription status from Firestore in real-time
 "use client";
+import { useState, useEffect } from 'react';
+import { auth, db } from '@/firebase/config';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 
-import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../firebase/config";
-
-export const useSubscription = () => {
-  const [isPremium, setIsPremium] = useState(false);
+export function useSubscription() {
+  const [subscription, setSubscription] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const checkSubscription = async (user) => {
-      if (user) {
-        const userDocRef = doc(db, "users", user.uid);
-        const userDoc = await getDoc(userDocRef);
-        if (userDoc.exists() && userDoc.data().isPremium) {
-          setIsPremium(true);
-        } else {
-          setIsPremium(false);
-        }
-      } else {
-        setIsPremium(false);
-      }
-    };
+    let unsubscribeSnapshot = null;
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      checkSubscription(user);
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        setSubscription(null);
+        setLoading(false);
+        return;
+      }
+
+      const userRef = doc(db, 'users', user.uid);
+      unsubscribeSnapshot = onSnapshot(userRef, (snap) => {
+        const data = snap.data();
+        setSubscription(data?.subscription || null);
+        setLoading(false);
+      });
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribeAuth();
+      if (unsubscribeSnapshot) unsubscribeSnapshot();
+    };
   }, []);
 
-  return { isPremium };
-};
+  const isPremium =
+    subscription?.status === 'active' || subscription?.status === 'trialing';
+
+  return { subscription, isPremium, loading };
+}
+
+// Backwards-compatible default export
+export default useSubscription;

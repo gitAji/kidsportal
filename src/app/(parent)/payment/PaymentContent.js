@@ -1,9 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FaCcVisa, FaCcMastercard, FaPaypal } from "react-icons/fa";
+import { FaCcVisa, FaCcMastercard, FaPaypal, FaLock, FaCheckCircle, FaTimesCircle, FaMobileAlt } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function PaymentContent() {
   const router = useRouter();
@@ -21,6 +22,7 @@ export default function PaymentContent() {
   const [agreed, setAgreed] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
     const plan = searchParams.get("plan");
@@ -31,7 +33,6 @@ export default function PaymentContent() {
   }, [searchParams]);
 
   useEffect(() => {
-    // Determine card type based on card number
     if (cardNumber.startsWith("4")) {
       setCardType("visa");
     } else if (cardNumber.startsWith("5")) {
@@ -46,7 +47,6 @@ export default function PaymentContent() {
     setErrorMessage("");
     setSuccessMessage("");
 
-    // Basic validation (more robust validation would be needed for production)
     if (paymentMethod === "card") {
       if (!cardNumber || !cardName || !expiryDate || !cvv) {
         setErrorMessage("Please fill in all card details.");
@@ -71,207 +71,239 @@ export default function PaymentContent() {
       return;
     }
 
-    // Simulate payment processing
+    setIsProcessing(true);
     setTimeout(() => {
       setSuccessMessage("Payment successful! Redirecting...");
-      // In a real app, you'd integrate with a payment gateway here
-      // On success, redirect to a confirmation page or dashboard
-      router.push("/dashboard");
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1500);
     }, 2000);
   };
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
-        Complete Your Purchase
-      </h1>
-      {selectedPlan && (
-        <p className="text-center text-lg text-gray-600 mb-4">
-          You are purchasing the <span className="font-semibold">{selectedPlan}</span> ({billingCycle})
-        </p>
-      )}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="bg-white/80 backdrop-blur-xl p-8 sm:p-10 rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] border border-white/50 w-full max-w-xl mx-auto relative overflow-hidden"
+    >
+      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-cyan-500 to-teal-500"></div>
 
-      {errorMessage && (
-        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
-          <p>{errorMessage}</p>
-        </div>
-      )}
-      {successMessage && (
-        <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
-          <p>{successMessage}</p>
-        </div>
-      )}
+      <div className="text-center mb-8">
+        <h1 className="text-3xl sm:text-4xl font-black text-slate-800 tracking-tight flex items-center justify-center gap-3">
+          <FaLock className="text-blue-500" /> Secure Checkout
+        </h1>
+        {selectedPlan && (
+          <p className="text-slate-500 font-medium mt-3 text-lg">
+            Upgrading to <span className="font-bold text-blue-600">{selectedPlan}</span> ({billingCycle})
+          </p>
+        )}
+      </div>
 
-      <form onSubmit={handlePaymentSubmit}>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Select Payment Method:</label>
-          <div className="flex space-x-4">
+      <AnimatePresence>
+        {errorMessage && (
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="mb-6">
+            <div className="bg-red-50 text-red-600 px-4 py-3 rounded-2xl border border-red-100 flex items-center gap-3">
+              <FaTimesCircle className="flex-shrink-0 text-xl" />
+              <p className="text-sm font-semibold">{errorMessage}</p>
+            </div>
+          </motion.div>
+        )}
+        {successMessage && (
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="mb-6">
+            <div className="bg-green-50 text-green-600 px-4 py-3 rounded-2xl border border-green-100 flex items-center gap-3">
+              <FaCheckCircle className="flex-shrink-0 text-xl" />
+              <p className="text-sm font-semibold">{successMessage}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <form onSubmit={handlePaymentSubmit} className="space-y-6">
+
+        {/* Payment Methods */}
+        <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-100">
+          <label className="block text-xs font-bold uppercase tracking-wider mb-4 text-slate-500">Select Payment Method</label>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <button
               type="button"
-              className={`flex-1 py-2 px-4 rounded-md text-lg font-semibold ${
-                paymentMethod === "card" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
-              }`}
+              className={`flex-1 py-4 px-4 rounded-2xl text-lg font-bold flex items-center justify-center gap-2 transition-all duration-300 border-2 ${paymentMethod === "card" ? "bg-blue-50 border-blue-500 text-blue-700 shadow-sm" : "bg-white border-slate-200 text-slate-500 hover:border-blue-300"
+                }`}
               onClick={() => setPaymentMethod("card")}
             >
-              Card
+              <FaCcVisa className="text-2xl" /> Card
             </button>
             <button
               type="button"
-              className={`flex-1 py-2 px-4 rounded-md text-lg font-semibold ${
-                paymentMethod === "paypal" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
-              }`}
+              className={`flex-1 py-4 px-4 rounded-2xl text-lg font-bold flex items-center justify-center gap-2 transition-all duration-300 border-2 ${paymentMethod === "paypal" ? "bg-blue-50 border-blue-500 text-blue-700 shadow-sm" : "bg-white border-slate-200 text-slate-500 hover:border-blue-300"
+                }`}
               onClick={() => setPaymentMethod("paypal")}
             >
-              PayPal
+              <FaPaypal className="text-2xl" /> PayPal
             </button>
             <button
               type="button"
-              className={`flex-1 py-2 px-4 rounded-md text-lg font-semibold ${
-                paymentMethod === "vipps" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
-              }`}
+              className={`flex-1 py-4 px-4 rounded-2xl text-lg font-bold flex items-center justify-center gap-2 transition-all duration-300 border-2 ${paymentMethod === "vipps" ? "bg-orange-50 border-orange-500 text-orange-700 shadow-sm" : "bg-white border-slate-200 text-slate-500 hover:border-orange-300"
+                }`}
               onClick={() => setPaymentMethod("vipps")}
             >
-              Vipps
+              <FaMobileAlt className="text-2xl" /> Vipps
             </button>
           </div>
         </div>
 
-        {paymentMethod === "card" && (
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="cardNumber" className="block text-gray-700 text-sm font-bold mb-2">Card Number:</label>
-              <input
-                type="text"
-                id="cardNumber"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="**** **** **** ****"
-                value={cardNumber}
-                onChange={(e) => setCardNumber(e.target.value.replace(/[^0-9]/g, ''))}
-                maxLength="16"
-                required
-              />
-              <div className="flex justify-end mt-2">
-                {cardType === "visa" && <FaCcVisa className="text-blue-600 text-3xl" />}
-                {cardType === "mastercard" && <FaCcMastercard className="text-orange-600 text-3xl" />}
+        {/* Card Forms */}
+        <AnimatePresence mode="wait">
+          {paymentMethod === "card" && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
+              className="bg-slate-50/50 p-6 rounded-3xl border border-slate-100 space-y-4"
+            >
+              <div>
+                <label htmlFor="cardNumber" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">Card Number</label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="cardNumber"
+                    className="w-full px-4 py-3 pr-12 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800"
+                    placeholder="**** **** **** ****"
+                    value={cardNumber}
+                    onChange={(e) => setCardNumber(e.target.value.replace(/[^0-9]/g, ''))}
+                    maxLength="16"
+                    required
+                  />
+                  <div className="absolute right-4 top-3.5">
+                    {cardType === "visa" && <FaCcVisa className="text-blue-600 text-2xl" />}
+                    {cardType === "mastercard" && <FaCcMastercard className="text-orange-600 text-2xl" />}
+                  </div>
+                </div>
               </div>
-            </div>
-            <div>
-              <label htmlFor="cardName" className="block text-gray-700 text-sm font-bold mb-2">Name on Card:</label>
-              <input
-                type="text"
-                id="cardName"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Full Name"
-                value={cardName}
-                onChange={(e) => setCardName(e.target.value)}
-                required
-              />
-            </div>
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <div className="w-full sm:w-1/2">
-                <label htmlFor="expiryDate" className="block text-gray-700 text-sm font-bold mb-2">Expiry Date (MM/YY):</label>
+
+              <div>
+                <label htmlFor="cardName" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">Name on Card</label>
                 <input
                   type="text"
-                  id="expiryDate"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="MM/YY"
-                  value={expiryDate}
-                  onChange={(e) => {
-                  const value = e.target.value.replace(/[^0-9]/g, '');
-                  if (value.length > 2) {
-                    setExpiryDate(`${value.slice(0, 2)}/${value.slice(2, 4)}`);
-                  } else {
-                    setExpiryDate(value);
-                  }
-                }}
-                  maxLength="5"
+                  id="cardName"
+                  className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800"
+                  placeholder="John Doe"
+                  value={cardName}
+                  onChange={(e) => setCardName(e.target.value)}
                   required
                 />
               </div>
-              <div className="w-full sm:w-1/2">
-                <label htmlFor="cvv" className="block text-gray-700 text-sm font-bold mb-2">CVV:</label>
-                <input
-                  type="text"
-                  id="cvv"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="123" 
-                  value={cvv}
-                  onChange={(e) => setCvv(e.target.value.replace(/[^0-9]/g, ''))}
-                  maxLength="4"
-                  required
-                />
+
+              <div className="flex gap-4">
+                <div className="flex-1">
+                  <label htmlFor="expiryDate" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">Expiry (MM/YY)</label>
+                  <input
+                    type="text"
+                    id="expiryDate"
+                    className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800 text-center"
+                    placeholder="MM/YY"
+                    value={expiryDate}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/[^0-9]/g, '');
+                      if (value.length > 2) {
+                        setExpiryDate(`${value.slice(0, 2)}/${value.slice(2, 4)}`);
+                      } else {
+                        setExpiryDate(value);
+                      }
+                    }}
+                    maxLength="5"
+                    required
+                  />
+                </div>
+                <div className="flex-1">
+                  <label htmlFor="cvv" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">CVV</label>
+                  <input
+                    type="text"
+                    id="cvv"
+                    className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800 text-center"
+                    placeholder="123"
+                    value={cvv}
+                    onChange={(e) => setCvv(e.target.value.replace(/[^0-9]/g, ''))}
+                    maxLength="4"
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div className="flex items-center mt-4">
-              <input
-                type="checkbox"
-                id="saveCard"
-                className="form-checkbox h-5 w-5 text-blue-600"
-                checked={saveCard}
-                onChange={(e) => setSaveCard(e.target.checked)}
-              />
-              <label htmlFor="saveCard" className="ml-2 text-gray-700">Save card for future payments</label>
-            </div>
-          </div>
-        )}
 
-        {paymentMethod === "paypal" && (
-          <div className="text-center py-8">
-            <FaPaypal className="text-blue-700 text-6xl mx-auto mb-4" />
-            <p className="text-gray-700 text-lg">You will be redirected to PayPal to complete your purchase.</p>
-            <button
-              type="button"
-              className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline"
-              onClick={() => alert("Redirecting to PayPal...")}
-            >
-              Continue with PayPal
-            </button>
-          </div>
-        )}
+              <div className="flex items-center mt-2 pl-2">
+                <input
+                  type="checkbox"
+                  id="saveCard"
+                  className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  checked={saveCard}
+                  onChange={(e) => setSaveCard(e.target.checked)}
+                />
+                <label htmlFor="saveCard" className="ml-3 text-sm font-semibold text-slate-600 cursor-pointer">Securely save card for future purchases</label>
+              </div>
+            </motion.div>
+          )}
 
-        {paymentMethod === "vipps" && (
-          <div className="text-center py-8">
-            <Image src="/images/vipps-logo.png" alt="Vipps Logo" width={100} height={100} className="mx-auto mb-4" />
-            <p className="text-gray-700 text-lg">You will be redirected to Vipps to complete your purchase.</p>
-            <button
-              type="button"
-              className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline"
-              onClick={() => alert("Redirecting to Vipps...")}
-            >
-              Continue with Vipps
-            </button>
-          </div>
-        )}
+          {paymentMethod === "paypal" && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center py-10 bg-slate-50/50 rounded-3xl border border-slate-100">
+              <FaPaypal className="text-blue-600 text-6xl mx-auto mb-4" />
+              <p className="text-slate-600 font-medium px-8 mb-6">You will be securely redirected to PayPal to complete your purchase.</p>
+              <button
+                type="button"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all"
+                onClick={() => alert("Redirecting to PayPal...")}
+              >
+                Proceed to PayPal
+              </button>
+            </motion.div>
+          )}
 
-        <div className="mt-6">
-          <label className="flex items-center">
+          {paymentMethod === "vipps" && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center py-10 bg-slate-50/50 rounded-3xl border border-slate-100">
+              <div className="bg-orange-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <FaMobileAlt className="text-white text-3xl" />
+              </div>
+              <p className="text-slate-600 font-medium px-8 mb-6">Open the Vipps app on your phone to approve the payment safely.</p>
+              <button
+                type="button"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all"
+                onClick={() => alert("Sending to Vipps...")}
+              >
+                Pay with Vipps
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="mt-4 pl-2">
+          <label className="flex items-start cursor-pointer">
             <input
               type="checkbox"
-              className="form-checkbox"
+              className="mt-1 w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               checked={agreed}
               onChange={(e) => setAgreed(e.target.checked)}
             />
-            <span className="ml-2 text-sm text-gray-700">
+            <span className="ml-3 text-sm text-slate-600 font-medium leading-relaxed">
               I agree to the{" "}
-              <Link href="/terms" className="text-blue-600 hover:underline">
+              <Link href="/terms" className="text-blue-600 hover:text-blue-700 font-bold underline decoration-blue-200 underline-offset-4">
                 Terms of Service
               </Link>{" "}
               and{" "}
-              <Link href="/privacy" className="text-blue-600 hover:underline">
+              <Link href="/privacy" className="text-blue-600 hover:text-blue-700 font-bold underline decoration-blue-200 underline-offset-4">
                 Privacy Policy
-              </Link>
-              .
+              </Link>.
             </span>
           </label>
         </div>
 
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           type="submit"
-          className="mt-8 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline transition-colors duration-300"
+          disabled={isProcessing}
+          className={`w-full font-black text-lg py-4 rounded-2xl text-white shadow-xl transition-all ${isProcessing ? "bg-slate-400 cursor-wait opacity-80" : "bg-gradient-to-r from-green-400 to-green-600 hover:shadow-green-500/30"
+            }`}
         >
-          Pay Now
-        </button>
+          {isProcessing ? "Processing Securely..." : "Confirm & Pay Now"}
+        </motion.button>
       </form>
-    </div>
+    </motion.div>
   );
 }

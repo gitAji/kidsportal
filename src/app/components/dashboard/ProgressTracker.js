@@ -57,7 +57,7 @@ const ProgressTracker = ({ child }) => {
             <p className="text-sm text-gray-600">Pending</p>
           </div>
           <div className="bg-gray-100 p-4 rounded-lg">
-            <p className="text-3xl font-bold text-purple-600">{overallCompletion}%</p>
+            <p className="text-3xl font-bold text-cyan-600">{overallCompletion}%</p>
             <p className="text-sm text-gray-600">Completion</p>
           </div>
         </div>

@@ -20,7 +20,7 @@ const TaskCard = ({ grade, subject, level, task, isUnlocked }) => {
       case "lesson":
         return "bg-blue-500 hover:bg-blue-600";
       case "quiz":
-        return "bg-purple-500 hover:bg-purple-600";
+        return "bg-cyan-500 hover:bg-cyan-600";
       case "exam":
         return "bg-red-500 hover:bg-red-600";
       default:

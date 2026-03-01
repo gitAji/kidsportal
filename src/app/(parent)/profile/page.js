@@ -1,758 +1,618 @@
 "use client";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState } from "react";
 import {
   onAuthStateChanged,
   updateProfile,
   updateEmail,
   updatePassword,
 } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { auth, db, app } from "@/firebase/config";
-import { useRouter } from "next/navigation";
-
-import SkeletonLoader from "@/app/components/ui/SkeletonLoader";
+import { doc, getDoc, setDoc, onSnapshot } from "firebase/firestore";
+import { auth, db } from "@/firebase/config";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaCcVisa, FaCcMastercard, FaPaypal } from "react-icons/fa";
-import Image from "next/image";
+import {
+  FaUserCircle, FaCreditCard, FaCheckCircle,
+  FaSpinner, FaShieldAlt, FaPaypal, FaLock,
+  FaToggleOn, FaToggleOff, FaSave, FaExclamationTriangle,
+} from "react-icons/fa";
+import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
+import { CURRENCY_PRICES, NATIVE_CURRENCIES, countryToCurrency, checkoutCurrency } from "@/lib/pricingConfig";
 
-export default function ProfilePage() {
+// ── Shared input style ─────────────────────────────────────────────
+const inputCls = "w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-blue-400 block px-4 py-3 transition-all outline-none placeholder:text-slate-300";
+const labelCls = "block text-xs font-black text-slate-500 uppercase tracking-wider mb-1.5";
+
+// ── Helpers ────────────────────────────────────────────────────────
+function getPlanInfo(plan) {
+  switch (plan) {
+    case "premium_monthly": return { label: "Premium Monthly", isPaid: true };
+    case "premium_yearly": return { label: "Premium Yearly", isPaid: true };
+    case "trial": return { label: "Free Trial", isPaid: false };
+    default: return { label: "Free", isPaid: false };
+  }
+}
+
+function formatDate(ts) {
+  if (!ts) return "—";
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+}
+
+// ── Tab button ─────────────────────────────────────────────────────
+function TabBtn({ label, icon, active, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${active
+        ? "bg-white text-blue-600 shadow-sm border border-slate-100"
+        : "text-slate-400 hover:text-slate-700"
+        }`}
+    >
+      {icon} {label}
+    </button>
+  );
+}
+
+// ── Field wrapper ──────────────────────────────────────────────────
+function Field({ label, children }) {
+  return (
+    <div>
+      <label className={labelCls}>{label}</label>
+      {children}
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════════
+export default function SettingsPage() {
   const router = useRouter();
-  const [user, setUser] = useState(null);
-  const [activeTab, setActiveTab] = useState("profile");
-  const [paymentMethod, setPaymentMethod] = useState("card");
+  const searchParams = useSearchParams();
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tab = urlParams.get("tab");
-    if (tab) {
-      setActiveTab(tab);
-    }
-  }, []);
-  const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("profile");
+
+  // Profile fields
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [stateProvince, setStateProvince] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
-  const [hasPaymentMethod, setHasPaymentMethod] = useState(false);
-  const [message, setMessage] = useState("");
-  const [cardNumber, setCardNumber] = useState("");
-  const [expiryDate, setExpiryDate] = useState("");
-  const [cvv, setCvv] = useState("");
-  const [cardHolderName, setCardHolderName] = useState("");
-  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isGoogleSignIn, setIsGoogleSignIn] = useState(false);
-  const [isProfileComplete, setIsProfileComplete] = useState(false);
-  const [isPremiumUser, setIsPremiumUser] = useState(false);
+
+  // Profile save state
+  const [saving, setSaving] = useState(false);
+  const [saveMsg, setSaveMsg] = useState({ type: "", text: "" });
+
+  // Billing
+  const [sub, setSub] = useState(null);
+  const [billingCycle, setBillingCycle] = useState("monthly");
+  const [paymentTab, setPaymentTab] = useState("stripe");
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState("");
+  const [portalLoading, setPortalLoading] = useState(false);
+
+  // ── Auth + data fetch ──────────────────────────────────────────
+  useEffect(() => {
+    // Read tab from query string
+    const t = searchParams?.get("tab");
+    if (t === "billing") setActiveTab("billing");
+  }, [searchParams]);
 
   useEffect(() => {
-    const checkProfileCompletion = () => {
-      if (user) {
-        const requiredFields = [
-          firstName,
-          lastName,
-          address,
-          country,
-          phoneNumber,
-        ];
-        const complete = requiredFields.every(
-          (field) => field && field.trim() !== ""
-        );
-        setIsProfileComplete(complete);
-      }
-    };
-    checkProfileCompletion();
-  }, [user, firstName, lastName, address, country, phoneNumber]);
+    const unsub = onAuthStateChanged(auth, async (u) => {
+      if (!u) { router.push("/login"); return; }
+      setUser(u);
+      setDisplayName(u.displayName || "");
+      setEmail(u.email || "");
+      setIsGoogleSignIn(u.providerData.some(p => p.providerId === "google.com"));
 
-  useEffect(() => {
-    const checkSubscriptionStatus = async () => {
-      if (user) {
-        try {
-          const userDocRef = doc(db, "users", user.uid);
-          const userDocSnap = await getDoc(userDocRef);
-          if (userDocSnap.exists()) {
-            setIsPremiumUser(userDocSnap.data().isPremium || false);
-          }
-        } catch (error) {
-          console.error("Error checking subscription status:", error);
+      // Load Firestore profile
+      try {
+        const snap = await getDoc(doc(db, "users", u.uid));
+        if (snap.exists()) {
+          const d = snap.data();
+          setFirstName(d.firstName || "");
+          setLastName(d.lastName || "");
+          setPhoneNumber(d.phoneNumber || "");
+          setAddress(d.address || "");
+          setCity(d.city || "");
+          setStateProvince(d.stateProvince || "");
+          setPostalCode(d.postalCode || "");
+          setCountry(d.country || "");
         }
+      } catch (err) {
+        console.error(err);
       }
-    };
-    checkSubscriptionStatus();
-  }, [user]);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        setDisplayName(currentUser.displayName || "");
-        setEmail(currentUser.email || "");
+      // Live subscription listener
+      const ref = doc(db, "users", u.uid);
+      const unsubSnap = onSnapshot(ref, (snap) => {
+        const data = snap.data() || {};
+        const createdAt = data.createdAt?.toDate
+          ? data.createdAt.toDate()
+          : data.createdAt ? new Date(data.createdAt) : null;
 
-        const isGoogle = currentUser.providerData.some(
-          (provider) => provider.providerId === "google.com"
-        );
-        setIsGoogleSignIn(isGoogle);
-
-        try {
-          const userDocRef = doc(db, "users", currentUser.uid);
-          const userDocSnap = await getDoc(userDocRef);
-          if (userDocSnap.exists()) {
-            const userData = userDocSnap.data();
-            setPhoneNumber(userData.phoneNumber || "");
-            setFirstName(userData.firstName || "");
-            setLastName(userData.lastName || "");
-            setAddress(userData.address || "");
-            setCity(userData.city || "");
-            setStateProvince(userData.stateProvince || "");
-            setPostalCode(userData.postalCode || "");
-            setCountry(userData.country || "");
-            setHasPaymentMethod(userData.hasPaymentMethod || false);
-            setIsPremiumUser(userData.isPremium || false);
-          }
-        } catch (error) {
-          console.error("Error fetching phone number:", error);
+        if (!data.subscription) {
+          const base = createdAt || new Date();
+          const trialEnd = new Date(base);
+          trialEnd.setMonth(trialEnd.getMonth() + 1);
+          setSub({ plan: "trial", status: trialEnd > new Date() ? "active" : "expired", currentPeriodEnd: trialEnd });
+        } else {
+          setSub(data.subscription);
         }
-      } else {
-        router.push("/login");
-      }
+      });
+
+      setLoading(false);
+      return () => unsubSnap();
     });
-    return () => unsubscribe();
+    return () => unsub();
   }, [router]);
 
-  const handleUpdateProfile = async (e) => {
+  // ── Save profile ───────────────────────────────────────────────
+  const handleSaveProfile = async (e) => {
     e.preventDefault();
-    setMessage("");
-
-    if (password !== confirmPassword) {
-      setMessage("Passwords do not match.");
+    setSaveMsg({ type: "", text: "" });
+    if (password && password !== confirmPassword) {
+      setSaveMsg({ type: "error", text: "Passwords do not match." });
       return;
     }
-
-    const requiredFields = [
-      { value: firstName, name: "First Name" },
-      { value: lastName, name: "Last Name" },
-      { value: address, name: "Address" },
-      { value: city, name: "City" },
-      { value: stateProvince, name: "State/Province" },
-      { value: postalCode, name: "Postal Code" },
-      { value: country, name: "Country" },
-      { value: phoneNumber, name: "Phone Number" },
-    ];
-
-    for (const field of requiredFields) {
-      if (!field.value || field.value.trim() === "") {
-        setMessage(`Please fill in the ${field.name} field.`);
-        return;
-      }
-    }
-
+    setSaving(true);
     try {
-      if (user) {
-        await updateProfile(user, {
-          displayName: displayName,
-        });
-
-        if (email !== user.email && !isGoogleSignIn) {
-          await updateEmail(user, email);
-        }
-
-        if (password && !isGoogleSignIn) {
-          await updatePassword(user, password);
-        }
-
-        const userDocRef = doc(db, "users", user.uid);
-        await setDoc(
-          userDocRef,
-          {
-            phoneNumber: phoneNumber,
-            firstName: firstName,
-            lastName: lastName,
-            address: address,
-            city: city,
-            stateProvince: stateProvince,
-            postalCode: postalCode,
-            country: country,
-            hasPaymentMethod: hasPaymentMethod,
-          },
-          { merge: true }
-        );
-
-        setMessage("Profile updated successfully!");
-        // Re-fetch the user to ensure the latest data is reflected
-        await user.reload();
-        setUser(auth.currentUser);
-      }
-    } catch (error) {
-      setMessage(`Error updating profile: ${error.message}`);
-      console.error("Error updating profile:", error);
+      await updateProfile(user, { displayName });
+      if (!isGoogleSignIn && email !== user.email) await updateEmail(user, email);
+      if (!isGoogleSignIn && password) await updatePassword(user, password);
+      await setDoc(doc(db, "users", user.uid), {
+        firstName, lastName, phoneNumber,
+        address, city, stateProvince, postalCode, country,
+      }, { merge: true });
+      setSaveMsg({ type: "success", text: "Profile saved successfully!" });
+    } catch (err) {
+      setSaveMsg({ type: "error", text: err.message });
+    } finally {
+      setSaving(false);
+      setPassword("");
+      setConfirmPassword("");
     }
   };
 
-  const handlePaymentSubmit = async (e) => {
-    e.preventDefault();
-    setMessage("");
-
-    if (paymentMethod === "card") {
-      if (!cardNumber || !expiryDate || !cvv || !cardHolderName) {
-        setMessage("Please fill in all card details.");
-        return;
-      }
-      // Basic card validation (add more robust validation as needed)
-      if (!/^[0-9]{16}$/.test(cardNumber)) {
-        setMessage("Card number must be 16 digits.");
-        return;
-      }
-      if (!/^(0[1-9]|1[0-2])\/?([0-9]{2})$/.test(expiryDate)) {
-        setMessage("Expiry date must be in MM/YY format.");
-        return;
-      }
-      if (!/^[0-9]{3,4}$/.test(cvv)) {
-        setMessage("CVV must be 3 or 4 digits.");
-        return;
-      }
-    } else if (paymentMethod === "paypal") {
-      // No specific form fields for PayPal, just proceed
-    } else if (paymentMethod === "vipps") {
-      // No specific form fields for Vipps, just proceed
-    }
-
-    if (!termsAccepted) {
-      setMessage("You must agree to the Terms and Conditions.");
-      return;
-    }
-
-    // Simulate payment processing
+  // ── Stripe Checkout ────────────────────────────────────────────
+  const handleStripeCheckout = async () => {
+    setCheckoutError("");
+    setCheckoutLoading(true);
     try {
-      // In a real application, you would integrate with a payment gateway here
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate network request
-
-      const paymentSuccess = Math.random() > 0.1; // 90% success rate for demo
-
-      if (paymentSuccess) {
-        // Update user's premium status and hasPaymentMethod in Firestore
-        const userDocRef = doc(db, "users", user.uid);
-        await setDoc(
-          userDocRef,
-          { isPremium: true, hasPaymentMethod: true },
-          { merge: true }
-        );
-        setMessage("Payment successful! You are now a Premium user.");
-        setIsPremiumUser(true);
-        setHasPaymentMethod(true);
-      } else {
-        throw new Error("Payment failed. Please check your details.");
-      }
-    } catch (error) {
-      setMessage(`Payment failed: ${error.message}. Please try again.`);
-      console.error("Payment error:", error);
+      const res = await fetch("/api/stripe/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uid: user.uid, email: user.email, billingCycle, currency: checkoutCurrency(country) }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+      else setCheckoutError(data.error || "Could not create checkout session.");
+    } catch (err) {
+      setCheckoutError("Network error. Please try again.");
+    } finally {
+      setCheckoutLoading(false);
     }
   };
 
-  if (!user) {
-    return null;
-  }
-
-  const tabVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: 50 },
+  // ── Stripe Portal ──────────────────────────────────────────────
+  const openPortal = async () => {
+    setPortalLoading(true);
+    try {
+      const res = await fetch("/api/stripe/create-portal-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uid: user.uid }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setPortalLoading(false);
+    }
   };
+
+  if (loading) return <DashboardSkeleton />;
+
+  const planInfo = getPlanInfo(sub?.plan);
+  const isPaid = planInfo.isPaid && sub?.status === "active";
+  const isExpired = sub?.status === "expired";
+  const cardBrand = sub?.card?.brand || sub?.cardBrand || null;
+  const cardLast4 = sub?.card?.last4 || sub?.cardLast4 || null;
+
+  // ── Prices display ─────────────────────────────────────────────
+  const currencyCode = countryToCurrency(country);
+  const currencyInfo = CURRENCY_PRICES[currencyCode] || CURRENCY_PRICES.USD;
+  const displayPrice = billingCycle === "yearly" ? currencyInfo.yearly : currencyInfo.monthly;
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--background)]">
-      <main className="flex-grow p-4 flex items-center justify-center">
-        <Suspense fallback={<SkeletonLoader />}>
-          <div className="w-full max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
-            <h1 className="page-heading mb-6 text-center">
-              User Profile
-            </h1>
+    <div className="min-h-screen bg-slate-50">
 
-            {!isProfileComplete && (
-              <div
-                className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4"
-                role="alert"
-              >
-                <p className="font-bold">Profile Incomplete!</p>
-                <p>
-                  Please complete your profile details to unlock all features.
-                </p>
-              </div>
-            )}
+      {/* ── Page Header ── */}
+      <div className="bg-white border-b border-slate-100 px-8 py-6">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-xl font-black text-slate-800 tracking-tight">Settings</h1>
+          <p className="text-sm text-slate-400 font-medium mt-0.5">Manage your account and payment details</p>
+        </div>
+      </div>
 
-            {!isPremiumUser && (
-              <div
-                className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4"
-                role="alert"
-              >
-                <p className="font-bold">Upgrade to Premium!</p>
-                <p>
-                  Enjoy exclusive content and features.{" "}
-                  <a href="/pricing" className="font-semibold underline">
-                    Learn More
-                  </a>
-                </p>
-              </div>
-            )}
+      <div className="max-w-3xl mx-auto px-8 py-8">
 
-            <div className="flex justify-center mb-6">
-              <button
-                className={`py-2 px-4 rounded-l-lg text-lg font-semibold transition-colors duration-200 ${
-                  activeTab === "profile"
-                    ? "bg-[var(--primary-blue)] text-white"
-                    : "bg-gray-200 text-[var(--foreground)] hover:bg-gray-300"
-                }`}
-                onClick={() => setActiveTab("profile")}
-              >
-                Profile
-              </button>
-              <button
-                className={`py-2 px-4 rounded-r-lg text-lg font-semibold transition-colors duration-200 ${
-                  activeTab === "payment"
-                    ? "bg-[var(--primary-blue)] text-white"
-                    : "bg-gray-200 text-[var(--foreground)] hover:bg-gray-300"
-                }`}
-                onClick={() => setActiveTab("payment")}
-              >
-                Payment
-              </button>
-            </div>
+        {/* ── Tabs ── */}
+        <div className="bg-slate-100/70 rounded-2xl p-1.5 inline-flex gap-1 mb-6">
+          <TabBtn
+            label="Profile"
+            icon={<FaUserCircle className="text-xs" />}
+            active={activeTab === "profile"}
+            onClick={() => setActiveTab("profile")}
+          />
+          <TabBtn
+            label="Billing & Payment"
+            icon={<FaCreditCard className="text-xs" />}
+            active={activeTab === "billing"}
+            onClick={() => setActiveTab("billing")}
+          />
+        </div>
 
-            <AnimatePresence mode="wait">
-              {activeTab === "profile" && (
-                <motion.div
-                  key="profile"
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 50 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {message && (
-                    <div
-                      className={`p-3 mb-4 rounded text-center text-lg ${
-                        message.includes("Error") || message.includes("match")
-                          ? "bg-red-100 text-red-700"
-                          : "bg-green-100 text-green-700"
-                      }`}
-                    >
-                      {message}
-                    </div>
-                  )}
-                  <form onSubmit={handleUpdateProfile}>
-                    <div className="mb-4">
-                      <label className="block text-[var(--foreground)] text-base font-semibold mb-2">
-                        First Name:
-                      </label>
+        <AnimatePresence mode="wait">
+
+          {/* ════════════ PROFILE TAB ════════════ */}
+          {activeTab === "profile" && (
+            <motion.div
+              key="profile"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2 }}
+            >
+              <form onSubmit={handleSaveProfile} className="space-y-5">
+
+                {/* Save message */}
+                {saveMsg.text && (
+                  <div className={`flex items-center gap-2 p-3.5 rounded-xl text-sm font-bold border ${saveMsg.type === "error"
+                    ? "bg-red-50 text-red-600 border-red-100"
+                    : "bg-green-50 text-green-600 border-green-100"
+                    }`}>
+                    {saveMsg.type === "error" ? <FaExclamationTriangle /> : <FaCheckCircle />}
+                    {saveMsg.text}
+                  </div>
+                )}
+
+                {/* Name */}
+                <Card title="Personal Details">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Field label="First Name">
+                      <input className={inputCls} value={firstName} onChange={e => setFirstName(e.target.value)} placeholder="Jane" />
+                    </Field>
+                    <Field label="Last Name">
+                      <input className={inputCls} value={lastName} onChange={e => setLastName(e.target.value)} placeholder="Smith" />
+                    </Field>
+                    <Field label="Display Name">
+                      <input className={inputCls} value={displayName} onChange={e => setDisplayName(e.target.value)} placeholder="What should we call you?" />
+                    </Field>
+                    <Field label="Phone Number">
+                      <input className={inputCls} type="tel" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)} placeholder="+47 000 00 000" />
+                    </Field>
+                  </div>
+                </Card>
+
+                {/* Account */}
+                <Card title="Account">
+                  <div className="space-y-4">
+                    <Field label="Email Address">
                       <input
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-[var(--foreground)] text-base font-semibold mb-2">
-                        Last Name:
-                      </label>
-                      <input
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-[var(--foreground)] text-base font-semibold mb-2">
-                        Display Name:
-                      </label>
-                      <input
-                        type="text"
-                        value={displayName}
-                        onChange={(e) => setDisplayName(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-[var(--foreground)] text-base font-semibold mb-2">
-                        Email:
-                      </label>
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] ${
-                          isGoogleSignIn ? "bg-gray-200" : ""
-                        }`}
+                        className={`${inputCls} ${isGoogleSignIn ? "opacity-50 cursor-not-allowed" : ""}`}
+                        type="email" value={email}
+                        onChange={e => setEmail(e.target.value)}
                         disabled={isGoogleSignIn}
                       />
-                    </div>
-                    {!isGoogleSignIn && (
-                      <>
-                        <div className="mb-4">
-                          <label className="block text-[var(--foreground)] text-base font-semibold mb-2">
-                            Password (leave blank to keep current):
-                          </label>
-                          <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
-                            placeholder="********"
-                          />
-                        </div>
-                        <div className="mb-4">
-                          <label className="block text-[var(--foreground)] text-base font-semibold mb-2">
-                            Confirm Password:
-                          </label>
-                          <input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
-                            placeholder="********"
-                          />
-                        </div>
-                      </>
-                    )}
-                    <div className="mb-4">
-                      <label className="block text-[var(--foreground)] text-base font-semibold mb-2">
-                        Address:
-                      </label>
-                      <input
-                        type="text"
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
-                        placeholder="Enter your address line 1"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-[var(--foreground)] text-base font-semibold mb-2">
-                        City:
-                      </label>
-                      <input
-                        type="text"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
-                        placeholder="Enter your city"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-[var(--foreground)] text-base font-semibold mb-2">
-                        State/Province:
-                      </label>
-                      <input
-                        type="text"
-                        value={stateProvince}
-                        onChange={(e) => setStateProvince(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
-                        placeholder="Enter your state or province"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-[var(--foreground)] text-base font-semibold mb-2">
-                        Postal Code:
-                      </label>
-                      <input
-                        type="text"
-                        value={postalCode}
-                        onChange={(e) => setPostalCode(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
-                        placeholder="Enter your postal code"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-[var(--foreground)] text-base font-semibold mb-2">
-                        Country:
-                      </label>
-                      <select
-                        value={country}
-                        onChange={(e) => setCountry(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
-                        required
-                      >
-                        <option value="">Select your country</option>
-                        <option value="Denmark">Denmark</option>
-                        <option value="Finland">Finland</option>
-                        <option value="Iceland">Iceland</option>
-                        <option value="Norway">Norway</option>
-                        <option value="Sweden">Sweden</option>
-                        <option value="United Kingdom">United Kingdom</option>
-                        <option value="Switzerland">Switzerland</option>
-                        <option value="France">France</option>
-                        <option value="Germany">Germany</option>
-                      </select>
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-[var(--foreground)] text-base font-semibold mb-2">
-                        Phone Number:
-                      </label>
-                      <input
-                        type="tel"
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-[var(--foreground)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
-                        placeholder="Enter phone number"
-                      />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <button
-                        type="submit"
-                        className="bg-[var(--primary-blue)] hover:bg-[var(--primary-blue)]/80 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-200"
-                      >
-                        Update Profile
-                      </button>
-                    </div>
-                  </form>
-                </motion.div>
-              )}
+                      {isGoogleSignIn && (
+                        <p className="text-[10px] text-slate-400 font-bold mt-1 ml-1">Managed by Google Sign-In</p>
+                      )}
+                    </Field>
 
-              {activeTab === "payment" && (
-                <motion.div
-                  key="payment"
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <h2 className="text-2xl font-bold mb-4">
-                    Upgrade to Premium
-                  </h2>
-                  <p className="mb-4 text-gray-700">
-                    Enter your payment details to subscribe to our Premium plan.
-                  </p>
-                  {message && (
-                    <div
-                      className={`p-3 mb-4 rounded text-center text-lg ${
-                        message.includes("Error") || message.includes("match")
-                          ? "bg-red-100 text-red-700"
-                          : "bg-green-100 text-green-700"
-                      }`}
-                    >
-                      {message}
+                    {!isGoogleSignIn && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-50">
+                        <Field label="New Password">
+                          <input className={inputCls} type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Leave blank to keep current" />
+                        </Field>
+                        <Field label="Confirm Password">
+                          <input className={inputCls} type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Repeat new password" />
+                        </Field>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+
+                {/* Address */}
+                <Card title="Address">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="sm:col-span-2">
+                      <Field label="Street Address">
+                        <input className={inputCls} value={address} onChange={e => setAddress(e.target.value)} placeholder="123 Learning Lane" />
+                      </Field>
+                    </div>
+                    <Field label="City">
+                      <input className={inputCls} value={city} onChange={e => setCity(e.target.value)} placeholder="Oslo" />
+                    </Field>
+                    <Field label="State / Province">
+                      <input className={inputCls} value={stateProvince} onChange={e => setStateProvince(e.target.value)} placeholder="Province" />
+                    </Field>
+                    <Field label="Postal Code">
+                      <input className={inputCls} value={postalCode} onChange={e => setPostalCode(e.target.value)} placeholder="0001" />
+                    </Field>
+                    <Field label="Country">
+                      <select className={inputCls} value={country} onChange={e => setCountry(e.target.value)}>
+                        <option value="">Select country</option>
+                        {["Denmark", "Finland", "Iceland", "Norway", "Sweden", "United Kingdom", "Switzerland", "France", "Germany"].map(c => (
+                          <option key={c} value={c}>{c}</option>
+                        ))}
+                      </select>
+                    </Field>
+                  </div>
+                </Card>
+
+                <div className="flex justify-end">
+                  <button
+                    type="submit"
+                    disabled={saving}
+                    className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white text-sm font-black rounded-xl shadow-md shadow-blue-100 hover:bg-blue-700 transition-all disabled:opacity-60"
+                  >
+                    {saving ? <FaSpinner className="animate-spin" /> : <FaSave />}
+                    {saving ? "Saving…" : "Save Changes"}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          )}
+
+          {/* ════════════ BILLING TAB ════════════ */}
+          {activeTab === "billing" && (
+            <motion.div
+              key="billing"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2 }}
+              className="space-y-5"
+            >
+              {/* Current Plan Summary */}
+              <div className="mb-6">
+                <h2 className="text-lg font-black text-slate-800">Welcome to Billing</h2>
+                <p className="text-xs text-slate-400 font-medium">Manage your subscription and payment methods here.</p>
+              </div>
+              <Card title="Current Plan">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-base font-black text-slate-800">{planInfo.label}</p>
+                    <p className="text-xs text-slate-400 font-medium mt-0.5">
+                      {isPaid
+                        ? `Renews ${formatDate(sub?.currentPeriodEnd)}`
+                        : isExpired
+                          ? "Plan has expired"
+                          : `Trial ends ${formatDate(sub?.currentPeriodEnd)}`}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full ${isPaid ? "bg-green-100 text-green-600" :
+                      sub?.status === "active" ? "bg-amber-100 text-amber-600" :
+                        "bg-red-100 text-red-500"
+                      }`}>
+                      {isExpired ? "Expired" : sub?.status === "active" ? "Active" : "—"}
+                    </span>
+                    {isPaid && (
+                      <button
+                        onClick={openPortal}
+                        disabled={portalLoading}
+                        className="text-xs font-bold text-blue-500 hover:text-blue-700 disabled:opacity-50"
+                      >
+                        {portalLoading ? "…" : "Manage →"}
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Card on file */}
+                {cardLast4 && (
+                  <div className="mt-4 pt-4 border-t border-slate-50 flex items-center gap-3">
+                    <div className="w-10 h-6 bg-slate-800 rounded flex items-end pb-1 px-1.5 flex-shrink-0">
+                      <div className="flex gap-0.5">{[...Array(4)].map((_, i) => <div key={i} className="w-0.5 h-0.5 rounded-full bg-white/50" />)}</div>
+                    </div>
+                    <p className="text-sm font-black text-slate-700 capitalize flex-grow">
+                      {cardBrand} •••• {cardLast4}
+                    </p>
+                    <button onClick={openPortal} className="text-xs font-bold text-slate-400 hover:text-blue-500">Update</button>
+                  </div>
+                )}
+              </Card>
+
+              {/* Only show upgrade section if not already on a paid plan */}
+              {!isPaid && (
+                <>
+                  {/* Billing cycle toggle */}
+                  <Card title="Choose Your Plan">
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-1.5 bg-slate-100 rounded-xl p-1">
+                        <button
+                          onClick={() => setBillingCycle("monthly")}
+                          className={`px-4 py-2 rounded-lg text-xs font-black transition-all ${billingCycle === "monthly" ? "bg-white text-blue-600 shadow-sm" : "text-slate-400"}`}
+                        >
+                          Monthly
+                        </button>
+                        <button
+                          onClick={() => setBillingCycle("yearly")}
+                          className={`px-4 py-2 rounded-lg text-xs font-black transition-all ${billingCycle === "yearly" ? "bg-white text-blue-600 shadow-sm" : "text-slate-400"}`}
+                        >
+                          Yearly
+                          <span className="ml-1.5 text-[9px] bg-green-100 text-green-600 px-1.5 py-0.5 rounded-full">Save 25%</span>
+                        </button>
+                      </div>
+                      <p className="text-2xl font-black text-slate-800">
+                        {displayPrice}
+                        <span className="text-xs font-bold text-slate-400 ml-1">/{billingCycle === "yearly" ? "yr" : "mo"}</span>
+                      </p>
+                    </div>
+
+                    {/* What's included */}
+                    <div className="grid grid-cols-2 gap-2 mb-5">
+                      {[
+                        "Full access all grades",
+                        "Up to 5 children accounts",
+                        "Detailed analytics",
+                        "Priority support",
+                      ].map(f => (
+                        <div key={f} className="flex items-center gap-2 text-xs text-slate-600 font-medium">
+                          <FaCheckCircle className="text-blue-400 flex-shrink-0 text-[10px]" /> {f}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Payment method tabs */}
+                    <div className="flex gap-2 mb-5">
+                      {[
+                        { id: "stripe", label: "Card", icon: <FaCreditCard /> },
+                        { id: "paypal", label: "PayPal", icon: <FaPaypal /> },
+                        { id: "vipps", label: "Vipps", icon: <span className="font-black text-[10px]">V</span> },
+                      ].map(pm => (
+                        <button
+                          key={pm.id}
+                          onClick={() => { setPaymentTab(pm.id); setCheckoutError(""); }}
+                          className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black border transition-all ${paymentTab === pm.id
+                            ? "bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-100"
+                            : "bg-white text-slate-500 border-slate-200 hover:border-blue-300"
+                            }`}
+                        >
+                          {pm.icon} {pm.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Stripe */}
+                    {paymentTab === "stripe" && (
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2 p-3.5 bg-blue-50 border border-blue-100 rounded-xl text-xs text-blue-600 font-bold">
+                          <FaShieldAlt className="flex-shrink-0" />
+                          Your card details are entered securely on Stripe's checkout page — we never store card numbers.
+                        </div>
+                        {checkoutError && (
+                          <p className="text-xs text-red-500 font-bold bg-red-50 border border-red-100 p-3 rounded-xl">
+                            {checkoutError}
+                          </p>
+                        )}
+                        <button
+                          onClick={handleStripeCheckout}
+                          disabled={checkoutLoading}
+                          className="w-full py-3.5 bg-blue-600 text-white text-sm font-black rounded-xl hover:bg-blue-700 transition-all flex items-center justify-center gap-2 disabled:opacity-60 shadow-md shadow-blue-100"
+                        >
+                          {checkoutLoading
+                            ? <><FaSpinner className="animate-spin" /> Redirecting to Stripe…</>
+                            : <><FaCreditCard /> Subscribe with Card</>}
+                        </button>
+                      </div>
+                    )}
+
+                    {/* PayPal */}
+                    {paymentTab === "paypal" && (
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2 p-3.5 bg-blue-50 border border-blue-100 rounded-xl text-xs text-blue-600 font-bold">
+                          <FaPaypal className="flex-shrink-0 text-[#003087]" />
+                          You'll be redirected to PayPal to complete your recurring subscription.
+                        </div>
+                        <button
+                          onClick={() => alert("PayPal integration: configure your PayPal subscription plan IDs in .env and wire the /api/paypal/create-subscription endpoint.")}
+                          className="w-full py-3.5 bg-[#003087] text-white text-sm font-black rounded-xl hover:bg-[#002070] transition-all flex items-center justify-center gap-2 shadow-md"
+                        >
+                          <FaPaypal /> Pay with PayPal
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Vipps */}
+                    {paymentTab === "vipps" && (
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2 p-3.5 bg-orange-50 border border-orange-100 rounded-xl text-xs text-orange-600 font-bold">
+                          <span className="font-black text-sm">V</span>
+                          Available for Norwegian users. You'll be redirected to Vipps to complete your subscription.
+                        </div>
+                        <button
+                          onClick={() => alert("Vipps integration: configure your Vipps merchant credentials in .env and wire the /api/vipps/create-subscription endpoint.")}
+                          className="w-full py-3.5 text-white text-sm font-black rounded-xl transition-all flex items-center justify-center gap-2 shadow-md"
+                          style={{ backgroundColor: "#FF5B24" }}
+                        >
+                          <span className="font-black">Vipps</span> — Pay with Vipps
+                        </button>
+                      </div>
+                    )}
+                  </Card>
+
+                  {/* 1-month trial note */}
+                  {sub?.plan === "trial" && sub?.status === "active" && (
+                    <div className="flex items-start gap-3 p-4 bg-amber-50 border border-amber-100 rounded-2xl">
+                      <FaExclamationTriangle className="text-amber-500 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-sm font-black text-amber-700">You're on a free trial</p>
+                        <p className="text-xs text-amber-600 font-medium mt-0.5">
+                          Your trial includes a 1-month free period before any charge. Subscribing now won't charge you until your trial ends.
+                        </p>
+                      </div>
                     </div>
                   )}
-                  <form onSubmit={handlePaymentSubmit} className="space-y-4">
-                    <div className="mb-6">
-                      <label className="block text-gray-700 text-sm font-bold mb-2">
-                        Select Payment Method:
-                      </label>
-                      <div className="flex space-x-4">
-                        <button
-                          type="button"
-                          className={`flex-1 py-2 px-4 rounded-md text-lg font-semibold ${
-                            paymentMethod === "card"
-                              ? "bg-blue-600 text-white"
-                              : "bg-gray-200 text-gray-700"
-                          }`}
-                          onClick={() => setPaymentMethod("card")}
-                        >
-                          Card
-                        </button>
-                        <button
-                          type="button"
-                          className={`flex-1 py-2 px-4 rounded-md text-lg font-semibold ${
-                            paymentMethod === "paypal"
-                              ? "bg-blue-600 text-white"
-                              : "bg-gray-200 text-gray-700"
-                          }`}
-                          onClick={() => setPaymentMethod("paypal")}
-                        >
-                          PayPal
-                        </button>
-                        <button
-                          type="button"
-                          className={`flex-1 py-2 px-4 rounded-md text-lg font-semibold ${
-                            paymentMethod === "vipps"
-                              ? "bg-blue-600 text-white"
-                              : "bg-gray-200 text-gray-700"
-                          }`}
-                          onClick={() => setPaymentMethod("vipps")}
-                        >
-                          Vipps
-                        </button>
-                      </div>
-                    </div>
-
-                    {paymentMethod === "card" && (
-                      <div className="space-y-4">
-                        <div>
-                          <label
-                            htmlFor="cardNumber"
-                            className="block text-left text-gray-700 text-sm font-bold mb-2"
-                          >
-                            Card Number:
-                          </label>
-                          <input
-                            type="text"
-                            id="cardNumber"
-                            value={cardNumber}
-                            onChange={(e) =>
-                              setCardNumber(
-                                e.target.value.replace(/[^0-9]/g, "")
-                              )
-                            }
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="**** **** **** ****"
-                            maxLength="16"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label
-                            htmlFor="cardHolderName"
-                            className="block text-left text-gray-700 text-sm font-bold mb-2"
-                          >
-                            Cardholder Name:
-                          </label>
-                          <input
-                            type="text"
-                            id="cardHolderName"
-                            value={cardHolderName}
-                            onChange={(e) => setCardHolderName(e.target.value)}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="Full Name"
-                            required
-                          />
-                        </div>
-                        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                          <div className="w-full sm:w-1/2">
-                            <label
-                              htmlFor="expiryDate"
-                              className="block text-left text-gray-700 text-sm font-bold mb-2"
-                            >
-                              Expiry Date (MM/YY):
-                            </label>
-                            <input
-                              type="text"
-                              id="expiryDate"
-                              value={expiryDate}
-                              onChange={(e) => {
-                                const value = e.target.value.replace(
-                                  /[^0-9]/g,
-                                  ""
-                                );
-                                if (value.length > 2) {
-                                  setExpiryDate(
-                                    `${value.slice(0, 2)}/${value.slice(2, 4)}`
-                                  );
-                                } else {
-                                  setExpiryDate(value);
-                                }
-                              }}
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              placeholder="MM/YY"
-                              maxLength="5"
-                              required
-                            />
-                          </div>
-                          <div className="w-full sm:w-1/2">
-                            <label
-                              htmlFor="cvv"
-                              className="block text-left text-gray-700 text-sm font-bold mb-2"
-                            >
-                              CVV:
-                            </label>
-                            <input
-                              type="text"
-                              id="cvv"
-                              value={cvv}
-                              onChange={(e) =>
-                                setCvv(e.target.value.replace(/[^0-9]/g, ""))
-                              }
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              placeholder="123"
-                              maxLength="4"
-                              required
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {paymentMethod === "paypal" && (
-                      <div className="text-center py-8">
-                        <FaPaypal className="text-blue-700 text-6xl mx-auto mb-4" />
-                        <p className="text-gray-700 text-lg">
-                          You will be redirected to PayPal to complete your
-                          purchase.
-                        </p>
-                        <button
-                          type="button"
-                          className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline"
-                          onClick={() => alert("Redirecting to PayPal...")}
-                        >
-                          Continue with PayPal
-                        </button>
-                      </div>
-                    )}
-
-                    {paymentMethod === "vipps" && (
-                      <div className="text-center py-8">
-                        <Image
-                          src="/images/vipps-logo.png"
-                          alt="Vipps Logo"
-                          width={100}
-                          height={100}
-                          className="mx-auto mb-4"
-                        />
-                        <p className="text-gray-700 text-lg">
-                          You will be redirected to Vipps to complete your
-                          purchase.
-                        </p>
-                        <button
-                          type="button"
-                          className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline"
-                          onClick={() => alert("Redirecting to Vipps...")}
-                        >
-                          Continue with Vipps
-                        </button>
-                      </div>
-                    )}
-
-                    <div className="mb-4 flex items-center">
-                      <input
-                        type="checkbox"
-                        id="termsAccepted"
-                        checked={termsAccepted}
-                        onChange={(e) => setTermsAccepted(e.target.checked)}
-                        className="mr-2"
-                        required
-                      />
-                      <label
-                        htmlFor="termsAccepted"
-                        className="text-[var(--foreground)] text-base font-semibold"
-                      >
-                        I agree to the{" "}
-                        <a
-                          href="/terms"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-500 hover:underline"
-                        >
-                          Terms and Conditions
-                        </a>
-                      </label>
-                    </div>
-                    <button
-                      type="submit"
-                      className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline transition-colors duration-300"
-                    >
-                      Upgrade and Pay
-                    </button>
-                  </form>
-                </motion.div>
+                </>
               )}
-            </AnimatePresence>
-          </div>
-        </Suspense>
-      </main>
+
+              {/* Already subscribed — manage in portal */}
+              {isPaid && (
+                <div className="space-y-3">
+                  <button
+                    onClick={openPortal}
+                    disabled={portalLoading}
+                    className="w-full py-3.5 bg-slate-800 text-white text-sm font-black rounded-xl hover:bg-blue-600 transition-all flex items-center justify-center gap-2 disabled:opacity-60"
+                  >
+                    {portalLoading ? <><FaSpinner className="animate-spin" /> Opening portal…</> : <><FaCreditCard /> Manage Billing on Stripe</>}
+                  </button>
+                  <div className="text-center">
+                    <button
+                      onClick={openPortal}
+                      disabled={portalLoading}
+                      className="text-[11px] text-slate-300 hover:text-red-400 transition-colors font-medium underline underline-offset-2 decoration-dashed"
+                    >
+                      Cancel membership
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Security footer */}
+              <div className="flex items-center justify-center gap-2 text-slate-300 pt-2">
+                <FaLock className="text-xs" />
+                <p className="text-[10px] font-bold">256-bit SSL · Payments secured by Stripe</p>
+              </div>
+            </motion.div>
+          )}
+
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
+// ── Shared card wrapper ────────────────────────────────────────────
+function Card({ title, children }) {
+  return (
+    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+      <div className="px-6 py-4 border-b border-slate-50">
+        <h3 className="text-xs font-black text-slate-500 uppercase tracking-wider">{title}</h3>
+      </div>
+      <div className="p-6">{children}</div>
     </div>
   );
 }

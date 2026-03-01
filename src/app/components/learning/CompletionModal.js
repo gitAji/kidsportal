@@ -32,7 +32,7 @@ const CompletionModal = ({ isOpen, onClose, results }) => {
             <span>+{results.pointsEarned} Points Earned</span>
           </div>
           {results.stickerAwarded && (
-            <div className="flex items-center justify-center text-xl font-semibold text-purple-500 mt-2">
+            <div className="flex items-center justify-center text-xl font-semibold text-cyan-500 mt-2">
               <FaStar className="mr-2" />
               <span>New Sticker Unlocked!</span>
             </div>

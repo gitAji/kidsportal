@@ -1,24 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { doc, getDoc, setDoc, updateDoc, collection, runTransaction } from 'firebase/firestore';
-import { auth } from '../../../firebase/auth'; // Import auth to get current user UID
+import { auth } from '../../../firebase/auth';
 import { app } from '../../../firebase/config';
 import { getFirestore } from 'firebase/firestore';
-import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile } from 'react-icons/fa';
+import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaMagic, FaCheckCircle, FaTimesCircle, FaAsterisk } from 'react-icons/fa';
 import { debounce } from 'lodash';
-import SaveMessage from '../ui/SaveMessage'; // Import SaveMessage
-
+import SaveMessage from '../ui/SaveMessage';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const avatars = [
-  { id: 'paw', icon: <FaPaw /> },
-  { id: 'rocket', icon: <FaRocket /> },
-  { id: 'car', icon: <FaCar /> },
-  { id: 'tree', icon: <FaTree /> },
-  { id: 'smile', icon: <FaSmile /> },
-  { id: 'default', icon: <FaUserCircle /> },
+  { id: 'paw', icon: <FaPaw />, color: 'from-orange-400 to-red-400' },
+  { id: 'rocket', icon: <FaRocket />, color: 'from-blue-400 to-indigo-500' },
+  { id: 'car', icon: <FaCar />, color: 'from-red-400 to-rose-600' },
+  { id: 'tree', icon: <FaTree />, color: 'from-green-400 to-emerald-500' },
+  { id: 'smile', icon: <FaSmile />, color: 'from-yellow-400 to-amber-500' },
+  { id: 'default', icon: <FaUserCircle />, color: 'from-indigo-400 to-cyan-500' },
 ];
 
 const generatePassword = () => {
-  const adjectives = ['Happy', 'Sunny', 'Brave', 'Clever', 'Gentle'];
+  const adjectives = ['Happy', 'Sunny', 'Brave', 'Clever', 'Fast'];
   const nouns = ['Fox', 'Lion', 'Bear', 'Tiger', 'Panda'];
   const number = Math.floor(Math.random() * 100);
   return `${adjectives[Math.floor(Math.random() * adjectives.length)]}${nouns[Math.floor(Math.random() * nouns.length)]}${number}`;
@@ -35,8 +35,8 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [usernameStatus, setUsernameStatus] = useState({ status: 'idle', message: '' });
-  const [saveStatus, setSaveStatus] = useState(null); // Add saveStatus
-  const [errorMessage, setErrorMessage] = useState(''); // Add errorMessage
+  const [saveStatus, setSaveStatus] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const debouncedCheckUsernameRef = useRef(
     debounce(async (uname, currentChildToEdit) => {
@@ -44,12 +44,12 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
         setUsernameStatus({ status: 'idle', message: '' });
         return;
       }
-      setUsernameStatus({ status: 'checking', message: 'Checking...' });
+      setUsernameStatus({ status: 'checking', message: 'Checking availability...' });
       const usernameDocRef = doc(db, 'child_usernames', uname);
       const usernameDoc = await getDoc(usernameDocRef);
       setUsernameStatus(
         usernameDoc.exists()
-          ? { status: 'taken', message: 'Username is already taken.' }
+          ? { status: 'taken', message: 'Username is taken!' }
           : { status: 'available', message: 'Username is available!' }
       );
     }, 500)
@@ -58,9 +58,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
   useEffect(() => {
     const debounced = debouncedCheckUsernameRef.current;
     debounced(username, childToEdit);
-    return () => {
-      debounced.cancel();
-    };
+    return () => debounced.cancel();
   }, [username, childToEdit]);
 
   const handleSubmit = async (e) => {
@@ -72,88 +70,60 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
       return;
     }
     if (!password && !childToEdit) {
-        setError("A password is required for a new child profile.");
-        return;
+      setError("A password is required for a new child profile.");
+      return;
     }
 
     setLoading(true);
-    setSaveStatus(null); // Clear previous status
-    setErrorMessage(''); // Clear previous error message
-    const parentUid = auth.currentUser.uid; // Get the current parent's UID
+    setSaveStatus(null);
+    setErrorMessage('');
+    const parentUid = auth.currentUser.uid;
 
     try {
       let childRef;
       let usernameDocRef = doc(db, 'child_usernames', username);
 
       if (childToEdit) {
-        // Update existing child
+        // Update existing
         childRef = doc(db, "users", parentUid, "children", childToEdit.id);
-        const updates = {
-          name,
-          age: parseInt(age),
-          grade,
-          username,
-          avatar: selectedAvatar,
-        };
-        if (password) {
-          updates.password = password;
-        }
+        const updates = { name, age: parseInt(age), grade, username, avatar: selectedAvatar };
+        if (password) updates.password = password;
 
         if (username !== childToEdit.username) {
-          // Username changed, perform transaction
           const oldUsernameDocRef = doc(db, 'child_usernames', childToEdit.username);
           await runTransaction(db, async (t) => {
             const newUsernameDoc = await t.get(usernameDocRef);
-            if (newUsernameDoc.exists()) {
-              throw new Error("This username is already taken.");
-            }
+            if (newUsernameDoc.exists()) throw new Error("This username is already taken.");
             t.delete(oldUsernameDocRef);
             t.set(usernameDocRef, { parentUid, childId: childToEdit.id });
             t.update(childRef, updates);
           });
         } else {
-          // No username change, just update child document
           await updateDoc(childRef, updates);
         }
-        if (onSaveSuccess) {
-          onSaveSuccess({ id: childToEdit.id, ...childToEdit, ...updates }); // Pass updated child data
-        }
+        if (onSaveSuccess) onSaveSuccess({ id: childToEdit.id, ...childToEdit, ...updates });
         setSaveStatus('success');
         setErrorMessage('Child profile updated successfully!');
       } else {
-        // Create new child
-        childRef = doc(collection(db, "users", parentUid, "children")); // Generate a new ID within the children subcollection
+        // Create new
+        childRef = doc(collection(db, "users", parentUid, "children"));
         const newChildData = {
-          name,
-          age: parseInt(age),
-          grade,
-          username,
-          avatar: selectedAvatar,
-          password,
-          loginEnabled: true,
-          photoURL: '',
-          assignedTasks: [],
-          points: 0,
-          stickers: [],
-          progress: { overall: 0, subjects: {} },
-          parentUid, // Store parentUid in child document
+          name, age: parseInt(age), grade, username, avatar: selectedAvatar,
+          password, loginEnabled: true, photoURL: '', assignedTasks: [], points: 0,
+          stickers: [], progress: { overall: 0, subjects: {} }, parentUid,
         };
 
         await runTransaction(db, async (t) => {
           const usernameDoc = await t.get(usernameDocRef);
-          if (usernameDoc.exists()) {
-            throw new Error("This username is already taken.");
-          }
+          if (usernameDoc.exists()) throw new Error("This username is already taken.");
           t.set(childRef, newChildData);
           t.set(usernameDocRef, { parentUid, childId: childRef.id });
         });
-        if (onSaveSuccess) {
-          onSaveSuccess({ id: childRef.id, ...newChildData });
-        }
+        if (onSaveSuccess) onSaveSuccess({ id: childRef.id, ...newChildData });
         setSaveStatus('success');
         setErrorMessage('New child profile created successfully!');
       }
-      onClose();
+      setTimeout(() => onClose(), 800); // give time to show success message
     } catch (err) {
       console.error("Error saving child:", err);
       setError(err.message || "Failed to save child. Please try again.");
@@ -166,100 +136,162 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
   };
 
   return (
-    <div className="bg-white p-6 sm:p-8 rounded-lg shadow-xl w-full max-w-lg mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
-        {childToEdit ? 'Edit Child Profile' : 'Create a New Profile'}
-      </h2>
-      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95, y: 20 }}
+      className="bg-white/95 backdrop-blur-xl p-6 sm:p-10 rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] border border-white/50 w-full max-w-xl mx-auto overflow-y-auto max-h-[90vh] relative scrollbar-hide"
+    >
+      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-cyan-500 to-teal-500"></div>
+
+      <div className="text-center mb-8">
+        <h2 className="text-3xl sm:text-4xl font-black text-slate-800 tracking-tight">
+          {childToEdit ? 'Edit Hero Profile' : 'Create Hero Profile'}
+        </h2>
+        <p className="text-slate-500 font-medium mt-2">Let&apos;s set up their learning adventure!</p>
+      </div>
+
+      <AnimatePresence>
+        {error && (
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="mb-6">
+            <div className="bg-red-50 text-red-600 px-4 py-3 rounded-2xl border border-red-100 flex items-center gap-3">
+              <FaTimesCircle className="flex-shrink-0" />
+              <p className="text-sm font-semibold">{error}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <SaveMessage status={saveStatus} message={errorMessage} />
-      
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="text-center">
-          <label className="block text-sm font-bold mb-2 text-gray-700">Choose an Avatar</label>
-          <div className="flex justify-center gap-3 sm:gap-4">
-            {avatars.map(({ id, icon }) => (
-              <button
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Avatar Selection */}
+        <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-100">
+          <label className="flex items-center gap-2 text-sm font-black uppercase tracking-wider mb-4 text-slate-700">
+            <span className="bg-blue-100 text-blue-600 w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
+            Choose an Avatar
+          </label>
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+            {avatars.map(({ id, icon, color }) => (
+              <motion.button
                 type="button"
                 key={id}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={() => setSelectedAvatar(id)}
-                className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-3xl transition-all duration-200 ${
-                  selectedAvatar === id ? 'bg-blue-500 text-white ring-4 ring-blue-300' : 'bg-gray-200 text-gray-500 hover:bg-gray-300'
-                }`}
+                className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-3xl transition-all duration-300 ${selectedAvatar === id
+                  ? `bg-gradient-to-br ${color} text-white shadow-lg ring-4 ring-offset-2 ring-blue-300`
+                  : 'bg-white text-slate-400 border-2 border-slate-200 hover:border-blue-300'
+                  }`}
               >
                 {icon}
-              </button>
+                {selectedAvatar === id && (
+                  <motion.div
+                    initial={{ scale: 0 }} animate={{ scale: 1 }}
+                    className="absolute -top-1 -right-1 bg-white text-green-500 rounded-full text-sm ring-2 ring-white"
+                  >
+                    <FaCheckCircle />
+                  </motion.div>
+                )}
+              </motion.button>
             ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="childName" className="block text-sm font-bold mb-1 text-gray-700">Name</label>
-            <input type="text" id="childName" className="form-input w-full px-4 py-2 border border-gray-300 rounded-md" value={name} onChange={(e) => setName(e.target.value)} required />
-          </div>
-          <div>
-            <label htmlFor="childAge" className="block text-sm font-bold mb-1 text-gray-700">Age</label>
-            <input type="number" id="childAge" className="form-input w-full px-4 py-2 border border-gray-300 rounded-md" value={age} onChange={(e) => setAge(e.target.value)} required />
-          </div>
-        </div>
-        
-        <div>
-          <label htmlFor="childGrade" className="block text-sm font-bold mb-1 text-gray-700">Grade</label>
-          <input type="text" id="childGrade" className="form-input w-full px-4 py-2 border border-gray-300 rounded-md" value={grade} onChange={(e) => setGrade(e.target.value)} required />
-        </div>
-        
-        <hr className="my-4"/>
+        {/* Basic Info */}
+        <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-100 space-y-4">
+          <label className="flex items-center gap-2 text-sm font-black uppercase tracking-wider mb-2 text-slate-700">
+            <span className="bg-cyan-100 text-cyan-600 w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
+            Basic Details
+          </label>
 
-        <div>
-          <label htmlFor="childUsername" className="block text-sm font-bold mb-1 text-gray-700">Username</label>
-          <input type="text" id="childUsername" className="form-input w-full px-4 py-2 border border-gray-300 rounded-md" value={username} onChange={(e) => setUsername(e.target.value)} required />
-          {usernameStatus.status !== 'idle' && (
-            <p className={`text-sm mt-1 ${usernameStatus.status === 'available' ? 'text-green-600' : 'text-red-600'}`}>
-              {usernameStatus.message}
-            </p>
-          )}
-        </div>
-        
-        <div>
-          <label htmlFor="childPassword" className="block text-sm font-bold mb-1 text-gray-700">Password</label>
-          <div className="flex gap-2">
-            <input 
-              type="text" 
-              id="childPassword" 
-              className="form-input flex-grow w-full px-4 py-2 border border-gray-300 rounded-md" 
-              placeholder={childToEdit ? "Leave blank to keep current" : "Click generate or type a password"} 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-            />
-            <button 
-              type="button" 
-              onClick={() => setPassword(generatePassword())}
-              className="px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700"
-            >
-              Generate
-            </button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="childName" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">First Name</label>
+              <input type="text" id="childName" className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800" placeholder="e.g. Leo" value={name} onChange={(e) => setName(e.target.value)} required />
+            </div>
+            <div className="flex gap-4">
+              <div className="flex-1">
+                <label htmlFor="childAge" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">Age</label>
+                <input type="number" id="childAge" className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800" placeholder="7" value={age} onChange={(e) => setAge(e.target.value)} required />
+              </div>
+              <div className="flex-1">
+                <label htmlFor="childGrade" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">Grade</label>
+                <input type="text" id="childGrade" className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800" placeholder="2nd" value={grade} onChange={(e) => setGrade(e.target.value)} required />
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-4 pt-4">
-          <button 
-            type="button" 
-            onClick={onClose} 
-            className="px-6 py-2 bg-gray-200 text-gray-800 font-bold rounded-lg hover:bg-gray-300"
+        {/* Login Credentials */}
+        <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-100 space-y-4">
+          <label className="flex items-center gap-2 text-sm font-black uppercase tracking-wider mb-2 text-slate-700">
+            <span className="bg-teal-100 text-teal-600 w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
+            Login Credentials
+          </label>
+
+          <div>
+            <label htmlFor="childUsername" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">Secret Username</label>
+            <div className="relative">
+              <input type="text" id="childUsername" className={`w-full px-4 py-3 pr-10 bg-white border-2 rounded-2xl focus:ring-0 transition-colors font-semibold text-slate-800 ${usernameStatus.status === 'taken' ? 'border-red-400 focus:border-red-500' : usernameStatus.status === 'available' ? 'border-green-400 focus:border-green-500' : 'border-slate-200 focus:border-teal-500'}`} placeholder="e.g. superleo99" value={username} onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/\s+/g, ''))} required />
+              <div className="absolute right-3 top-3.5">
+                {usernameStatus.status === 'checking' && <span className="animate-spin inline-block w-5 h-5 border-2 border-slate-300 border-t-teal-500 rounded-full"></span>}
+                {usernameStatus.status === 'taken' && <FaTimesCircle className="text-red-500 text-xl" />}
+                {usernameStatus.status === 'available' && <FaCheckCircle className="text-green-500 text-xl" />}
+              </div>
+            </div>
+            {usernameStatus.status !== 'idle' && usernameStatus.status !== 'checking' && (
+              <p className={`text-xs font-bold mt-1.5 pl-1 ${usernameStatus.status === 'available' ? 'text-green-600' : 'text-red-600'}`}>
+                {usernameStatus.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="childPassword" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">Password</label>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                id="childPassword"
+                className="flex-grow w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-teal-500 transition-colors font-semibold text-slate-800"
+                placeholder={childToEdit ? "Leave empty to keep current" : "Type or generate"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                onClick={() => setPassword(generatePassword())}
+                className="px-5 py-3 bg-slate-800 text-white font-bold rounded-2xl hover:bg-slate-700 transition-colors flex items-center gap-2 group whitespace-nowrap"
+              >
+                <FaMagic className="group-hover:rotate-12 transition-transform text-teal-400" />
+                <span className="hidden sm:inline">Magic Gen</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex items-center justify-end gap-4 pt-2">
+          <button
+            type="button"
+            onClick={onClose}
+            className="px-6 py-4 bg-slate-100 text-slate-600 font-bold rounded-2xl hover:bg-slate-200 transition-colors"
             disabled={loading}
           >
             Cancel
           </button>
-          <button 
-            type="submit" 
-            className="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700"
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            type="submit"
+            className={`px-8 py-4 font-black rounded-2xl text-white shadow-xl shadow-blue-500/20 transition-all ${loading || usernameStatus.status === 'checking' || usernameStatus.status === 'taken' ? 'bg-slate-400 cursor-not-allowed opacity-70' : 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:shadow-blue-500/40'}`}
             disabled={loading || usernameStatus.status === 'checking' || usernameStatus.status === 'taken'}
           >
-            {loading ? 'Saving...' : (childToEdit ? 'Update Profile' : 'Create Profile')}
-          </button>
+            {loading ? 'Saving...' : (childToEdit ? 'Update Hero' : 'Launch Profile!')}
+          </motion.button>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 };
 

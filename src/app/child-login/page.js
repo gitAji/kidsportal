@@ -1,11 +1,11 @@
 "use client";
-import { Suspense } from 'react';
-import ChildLoginForm from "../components/child/ChildLoginForm";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-export default function ChildLoginPage() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ChildLoginForm />
-    </Suspense>
-  );
+export default function RedirectToUnifiedLogin() {
+  const router = useRouter();
+  useEffect(() => {
+    router.replace("/login?role=student");
+  }, [router]);
+  return null;
 }

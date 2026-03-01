@@ -28,7 +28,7 @@ const ChildDashboard = ({ child, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [saveStatus, setSaveStatus] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  
+
   const [username, setUsername] = useState(child?.username || '');
   const [usernameStatus, setUsernameStatus] = useState({ status: 'idle', message: '' });
   const [newPassword, setNewPassword] = useState('');
@@ -203,7 +203,7 @@ const ChildDashboard = ({ child, onClose }) => {
   if (!childData) return <div>No Child Data Available</div>;
 
   return (
-    <div className="relative w-full h-full overflow-hidden bg-gradient-to-r from-blue-100 to-purple-100">
+    <div className="relative w-full h-full overflow-hidden bg-gradient-to-r from-blue-100 to-cyan-100">
       {currentView === 'details' ? (
         <div className="w-full flex-shrink-0 p-4 md:p-6">
           <div className="flex justify-between items-center mb-6">
@@ -224,7 +224,7 @@ const ChildDashboard = ({ child, onClose }) => {
               ))}
             </ul>
           </div>
-          
+
           {activeTab === 'about' && (
             <div className="bg-white p-6 rounded-lg shadow-md">
               <div className="flex items-start justify-between">
@@ -254,12 +254,12 @@ const ChildDashboard = ({ child, onClose }) => {
           {activeTab === 'progress' && <ProgressTracker child={childData} />}
           {activeTab === 'rewards' && <RewardsDisplay points={childData.points || 0} />}
           {activeTab === 'stickers' && <StickerBook collectedStickerIds={childData.stickers} />}
-          
+
           {activeTab === 'settings' && (
             <form onSubmit={handleSettingsSave}>
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-2xl font-semibold mb-6">Settings & Controls</h3>
-                
+
                 <div className="mb-8">
                   <h4 className="text-xl font-semibold mb-4 border-b pb-2 flex items-center"><FaUserLock className="mr-2" /> Account Access</h4>
                   <div className="flex items-center justify-between">
@@ -290,14 +290,14 @@ const ChildDashboard = ({ child, onClose }) => {
                       )}
                     </div>
                     <div>
-                      <label htmlFor="currentPassword"  className="block text-md font-medium text-gray-700 mb-2">Current Password</label>
+                      <label htmlFor="currentPassword" className="block text-md font-medium text-gray-700 mb-2">Current Password</label>
                       <div className="relative">
-                        <input 
-                          type={showCurrentPassword ? 'text' : 'password'} 
-                          id="currentPassword" 
+                        <input
+                          type={showCurrentPassword ? 'text' : 'password'}
+                          id="currentPassword"
                           value={childData.password || 'Not Set'}
                           readOnly
-                          className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-100" 
+                          className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-100"
                         />
                         <button type="button" onClick={() => setShowCurrentPassword(!showCurrentPassword)} className="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500">
                           {showCurrentPassword ? <FaEyeSlash /> : <FaEye />}
@@ -305,11 +305,11 @@ const ChildDashboard = ({ child, onClose }) => {
                       </div>
                     </div>
                     <div>
-                      <label htmlFor="newPassword"  className="block text-md font-medium text-gray-700 mb-2">New Password</label>
+                      <label htmlFor="newPassword" className="block text-md font-medium text-gray-700 mb-2">New Password</label>
                       <input type="password" id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Leave blank to keep current" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                     </div>
                     <div>
-                      <label htmlFor="confirmPassword"  className="block text-md font-medium text-gray-700 mb-2">Confirm New Password</label>
+                      <label htmlFor="confirmPassword" className="block text-md font-medium text-gray-700 mb-2">Confirm New Password</label>
                       <input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm new password" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                     </div>
                   </div>
@@ -323,16 +323,16 @@ const ChildDashboard = ({ child, onClose }) => {
                 <SaveMessage status={saveStatus} message={errorMessage} />
 
                 <div className="mt-10 pt-6 border-t border-red-300">
-                    <h4 className="text-xl font-semibold mb-4 border-b pb-2 flex items-center text-red-600"><FaExclamationTriangle className="mr-2" /> Danger Zone</h4>
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="font-semibold">Deactivate this account</p>
-                            <p className="text-sm text-gray-600">Once you deactivate this account, it cannot be undone.</p>
-                        </div>
-                        <button type="button" onClick={handleDeleteClick} className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">
-                            Deactivate Account
-                        </button>
+                  <h4 className="text-xl font-semibold mb-4 border-b pb-2 flex items-center text-red-600"><FaExclamationTriangle className="mr-2" /> Danger Zone</h4>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-semibold">Deactivate this account</p>
+                      <p className="text-sm text-gray-600">Once you deactivate this account, it cannot be undone.</p>
                     </div>
+                    <button type="button" onClick={handleDeleteClick} className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">
+                      Deactivate Account
+                    </button>
+                  </div>
                 </div>
               </div>
             </form>
@@ -347,23 +347,51 @@ const ChildDashboard = ({ child, onClose }) => {
 
       {showLoginHelper && (
         <Modal onClose={() => setShowLoginHelper(false)}>
-          <div className="p-6 text-center">
-            <h3 className="text-2xl font-bold mb-4 text-gray-800">Login Details for {childData.name}</h3>
-            <p className="text-lg text-gray-700 mb-2">Username: <span className="font-semibold text-blue-600">{childData.username}</span></p>
-            <p className="text-lg text-gray-700 mb-4">Password: <span className="font-semibold text-blue-600">{childData.password || 'Not Set'}</span></p>
-            <button
-              onClick={() => copyToClipboard(childData.username)}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mr-2"
-            >
-              Copy Username
-            </button>
-            <button
-              onClick={() => copyToClipboard(childData.password || 'Not Set')}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-            >
-              Copy Password
-            </button>
-            <p className="text-sm text-gray-500 mt-4">You can use these credentials on the child login page.</p>
+          <div className="p-8 text-center">
+            <div className="w-20 h-20 bg-blue-100 text-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-6 text-3xl">
+              <FaSignInAlt />
+            </div>
+            <h3 className="text-2xl font-black text-slate-800 mb-2">Login Details for {childData.name}</h3>
+            <p className="text-slate-500 mb-8 font-medium">Use these credentials to sign in as your learner.</p>
+
+            <div className="bg-slate-50 rounded-2xl p-6 mb-8 border border-slate-100">
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Username</p>
+              <p className="text-2xl font-black text-blue-600">{childData.username}</p>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={() => {
+                  const storage = localStorage; // Use localStorage for consistent login
+                  storage.setItem("childUser", JSON.stringify(childData));
+                  router.push("/learning-zone");
+                }}
+                className="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black uppercase tracking-widest text-xs rounded-xl shadow-lg hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-2 group"
+              >
+                <FaSignInAlt className="group-hover:translate-x-1 transition-transform" /> Launch Student Zone
+              </button>
+              <button
+                onClick={() => {
+                  copyToClipboard(childData.username);
+                }}
+                className="w-full py-3 bg-white text-slate-400 font-bold uppercase tracking-widest text-[10px] rounded-xl border border-slate-100 hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
+              >
+                <FaClipboard /> Copy Username
+              </button>
+              <button
+                onClick={() => {
+                  setActiveTab('settings');
+                  setShowLoginHelper(false);
+                }}
+                className="w-full py-3 bg-white text-slate-400 font-bold uppercase tracking-widest text-[10px] rounded-xl border border-slate-100 hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
+              >
+                <FaKey /> Manage PIN in Settings
+              </button>
+            </div>
+
+            <p className="text-[10px] text-slate-400 mt-8 font-bold flex items-center justify-center gap-2">
+              <FaUserLock className="text-blue-500" /> Security first: Passwords are only visible in Settings.
+            </p>
           </div>
         </Modal>
       )}

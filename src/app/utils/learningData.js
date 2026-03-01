@@ -16,8 +16,15 @@ export function getSubjectsByGrade(gradeString) {
   const gradeData = db.grades.find(g => g.gradeId === gradeIdToMatch);
 
   if (gradeData) {
-    return gradeData.subjects;
+    // Deduplicate by subjectName — keeps the first occurrence only
+    const seen = new Set();
+    return gradeData.subjects.filter(s => {
+      if (seen.has(s.subjectName)) return false;
+      seen.add(s.subjectName);
+      return true;
+    });
   } else {
     return [];
   }
 }
+
