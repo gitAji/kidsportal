@@ -10,7 +10,7 @@ import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 const googleProvider = new GoogleAuthProvider();
 
-export const signInWithGoogle = async (onSuccess) => {
+export const signInWithGoogle = async (onSuccess, isTeacherFlow = false) => {
   const db = getFirestore(app);
   try {
     if (auth.currentUser) {
@@ -19,35 +19,50 @@ export const signInWithGoogle = async (onSuccess) => {
     }
 
     const result = await signInWithPopup(auth, googleProvider);
-    // Create user document in Firestore if it doesn't exist
-    const userRef = doc(db, "users", result.user.uid);
+    const email = result.user.email.toLowerCase();
 
-    // Calculate 1 month from now for trial
-    const trialEnd = new Date();
-    trialEnd.setMonth(trialEnd.getMonth() + 1);
+    // ── TEACHER SECURITY CHECK ──
+    const teacherDoc = await getDoc(doc(db, "teachers", email));
 
-    const userData = {
-      email: result.user.email,
-      displayName: result.user.displayName,
-      photoURL: result.user.photoURL,
-      // Only set role and subscription if it's a new user
-      // or if they don't have a role yet.
-      lastLogin: new Date(),
-    };
-
-    const existingDoc = await getDoc(userRef);
-    if (!existingDoc.exists() || !existingDoc.data().role) {
-      userData.role = 'parent';
-      userData.subscription = {
-        plan: 'trial',
-        status: 'active',
-        currentPeriodEnd: trialEnd,
-        trialStartedAt: new Date(),
-      };
+    // If they are a teacher but trying to login via parent/child flow
+    if (teacherDoc.exists() && !isTeacherFlow) {
+      await signOut(auth);
+      throw new Error("TEACHER_PROHIBITED");
     }
 
-    await setDoc(userRef, userData, { merge: true });
+    // If they are NOT a teacher but trying to login via teacher flow
+    // We let the teacher login page handle the registration/denial specifically
+
+    // ── PARENT DOCUMENT SYNC ──
+    // Only happens if NOT in teacher flow
+    if (!isTeacherFlow) {
+      const userRef = doc(db, "users", result.user.uid);
+      const trialEnd = new Date();
+      trialEnd.setMonth(trialEnd.getMonth() + 1);
+
+      const userData = {
+        email: email,
+        displayName: result.user.displayName,
+        photoURL: result.user.photoURL,
+        lastLogin: new Date(),
+      };
+
+      const existingDoc = await getDoc(userRef);
+      if (!existingDoc.exists() || !existingDoc.data().role) {
+        userData.role = 'parent';
+        userData.subscription = {
+          plan: 'trial',
+          status: 'active',
+          currentPeriodEnd: trialEnd,
+          trialStartedAt: new Date(),
+        };
+      }
+
+      await setDoc(userRef, userData, { merge: true });
+    }
+
     if (onSuccess) onSuccess();
+    return result;
   } catch (error) {
     console.error("Error signing in with Google", error);
     throw error;
@@ -88,7 +103,7 @@ export const signUpWithEmail = async (email, password, name, onSuccess) => {
   }
 };
 
-export const signInWithEmail = async (email, password) => {
+export const signInWithEmail = async (email, password, isTeacherFlow = false) => {
   const db = getFirestore(app);
   try {
     if (auth.currentUser) {
@@ -96,7 +111,19 @@ export const signInWithEmail = async (email, password) => {
       sessionStorage.removeItem("childUser");
     }
 
-    await signInWithEmailAndPassword(auth, email, password);
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    const userEmail = result.user.email.toLowerCase();
+
+    // ── TEACHER SECURITY CHECK ──
+    const teacherDoc = await getDoc(doc(db, "teachers", userEmail));
+
+    // If they are a teacher but trying to login via parent/child flow
+    if (teacherDoc.exists() && !isTeacherFlow) {
+      await signOut(auth);
+      throw new Error("TEACHER_PROHIBITED");
+    }
+
+    return result;
   } catch (error) {
     console.error("Error signing in with email and password", error);
     throw error;

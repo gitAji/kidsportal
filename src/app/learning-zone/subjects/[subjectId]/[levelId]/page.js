@@ -22,30 +22,45 @@ const taskIconMap = {
   "default": FaStar,
 };
 
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../../../firebase/config';
+
 export default function LevelTasksPage() {
   const { childUser } = useChild();
   const [levelData, setLevelData] = useState(null);
-  const [subjectData, setSubjectData] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const params = useParams();
   const { subjectId, levelId } = params;
 
   useEffect(() => {
-    if (childUser && childUser.gradeId) {
-      const gradeData = dbData.grades.find(g => g.gradeId === childUser.gradeId);
-      if (gradeData) {
-        const foundSubject = gradeData.subjects.find(s => s.subjectId === subjectId);
-        if (foundSubject) {
-          setSubjectData(foundSubject);
-          const foundLevel = foundSubject.levels.find(l => l.levelId === levelId);
-          setLevelData(foundLevel);
+    const fetchLevelData = async () => {
+      if (!childUser || !childUser.gradeId) {
+        if (!childUser && !sessionStorage.getItem("childUser")) {
+          router.push("/child-login");
         }
+        return;
       }
-    } else if (!childUser) {
-      router.push("/child-login");
-    }
-    setLoading(false);
+
+      setLoading(true);
+      try {
+        // Doc ID is `${gradeId}_${subjectId}_${levelId}`
+        const docRef = doc(db, 'levels', `${childUser.gradeId}_${subjectId}_${levelId}`);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setLevelData(docSnap.data());
+        } else {
+          console.log("No such level document in Firestore!");
+        }
+      } catch (err) {
+        console.error("Error fetching level details:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLevelData();
   }, [childUser, subjectId, levelId, router]);
 
   if (loading) return (
@@ -83,10 +98,10 @@ export default function LevelTasksPage() {
         className="text-center z-10 relative mb-12"
       >
         <span className="inline-block bg-white px-6 py-1 rounded-full text-sm font-bold text-cyan-600 mb-4 shadow-sm uppercase tracking-wider">
-          {subjectData?.subjectName} • {levelData.levelName.split(':')[0]}
+          {subjectId.toUpperCase()} • {levelData.levelName?.split(':')[0] || 'Level'}
         </span>
         <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 drop-shadow-sm leading-tight max-w-4xl mx-auto">
-          {levelData.levelName.includes(':') ? levelData.levelName.split(':')[1].trim() : levelData.levelName}
+          {levelData.levelName?.includes(':') ? levelData.levelName.split(':')[1].trim() : levelData.levelName}
         </h1>
       </motion.div>
 

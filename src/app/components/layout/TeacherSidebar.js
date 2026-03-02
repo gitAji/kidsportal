@@ -20,7 +20,6 @@ import { signOut } from "firebase/auth";
 
 const menuItems = [
     { name: "Curriculum", icon: <FaBook />, path: "/teacher-admin" },
-    { name: "Students", icon: <FaUsers />, path: "/teacher-admin/students" },
     { name: "Reports", icon: <FaChartLine />, path: "/teacher-admin/reports" },
     { name: "Settings", icon: <FaCog />, path: "/teacher-admin/settings" },
 ];
@@ -105,14 +104,6 @@ export default function TeacherSidebar() {
 
             {/* Footer / Logout - Fixed at bottom */}
             <div className="p-4 border-t border-slate-50 mt-auto space-y-1">
-                {/* Back to main site */}
-                <Link href="/" className="w-full flex items-center gap-4 px-4 py-3 rounded-2xl text-slate-300 hover:bg-slate-50 hover:text-slate-500 transition-all group">
-                    <div className="text-base">
-                        <FaExternalLinkAlt />
-                    </div>
-                    {!isCollapsed && <span className="text-xs font-bold">Main Site</span>}
-                </Link>
-
                 <button
                     onClick={handleLogout}
                     className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-slate-400 hover:bg-red-50 hover:text-red-500 transition-all group"

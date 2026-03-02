@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-    FaUserGraduate, FaUsers, FaArrowRight, FaLock, FaEnvelope, FaKey, FaHome
+    FaUserGraduate, FaUsers, FaArrowRight, FaLock, FaEnvelope, FaKey, FaHome, FaChalkboardTeacher
 } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import {
@@ -255,16 +255,42 @@ function UnifiedLoginPage() {
                         </div>
                     </div>
 
-                    {error && (
+                    {error === "TEACHER_PROHIBITED" ? (
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="bg-red-50 border border-red-100 p-4 rounded-2xl flex gap-3 items-center text-red-600 font-bold text-sm mb-8"
+                            className="bg-amber-50 border border-amber-200 p-6 rounded-3xl mb-8"
                         >
-                            <FaLock className="flex-shrink-0" />
-                            <span>{error}</span>
+                            <div className="flex gap-4">
+                                <div className="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-xl text-amber-600 flex-shrink-0">
+                                    <FaChalkboardTeacher />
+                                </div>
+                                <div className="flex-1">
+                                    <h4 className="text-amber-900 font-black text-base mb-1">Educator portal required</h4>
+                                    <p className="text-amber-800/70 text-sm font-medium leading-relaxed mb-4">
+                                        Your account is registered as a Teacher. Please use our dedicated educator portal for management features.
+                                    </p>
+                                    <button
+                                        onClick={() => router.push('/teacher-admin/login')}
+                                        className="bg-amber-600 text-white px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-amber-700 transition-all flex items-center justify-center gap-2"
+                                    >
+                                        Go to Educator Login <FaArrowRight />
+                                    </button>
+                                </div>
+                            </div>
                         </motion.div>
-                    )}
+                    ) : error ? (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="bg-rose-50 border border-rose-100 p-4 rounded-2xl mb-8 flex items-center gap-3"
+                        >
+                            <div className="w-8 h-8 bg-rose-100 rounded-xl flex items-center justify-center text-rose-600">
+                                <FaLock size={14} />
+                            </div>
+                            <span className="text-rose-600 text-sm font-bold">{error}</span>
+                        </motion.div>
+                    ) : null}
 
                     <form onSubmit={activeRole === 'student' && lookupStep === 'search' ? handleStudentSearch : handleAuth} className="space-y-6">
                         {activeRole === 'student' ? (

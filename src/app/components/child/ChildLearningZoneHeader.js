@@ -134,7 +134,7 @@ export default function ChildLearningZoneHeader() {
           <div className="flex items-center">
             <Link href="/learning-zone" className="group flex items-center gap-3 transition-transform hover:scale-[1.02] active:scale-[0.98]">
               <div className="relative">
-                <Image src="/logo.png" alt="KidsPortal" width={140} height={44} className="w-auto h-11 object-contain" />
+                <Image src="/logo.png" alt="KidsPortal" width={180} height={56} className="w-auto h-14 object-contain" />
                 <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300" />
               </div>
             </Link>

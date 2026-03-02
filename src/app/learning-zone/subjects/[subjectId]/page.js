@@ -19,10 +19,13 @@ const colorPalette = [
   "bg-gradient-to-br from-indigo-400 to-indigo-600 border-indigo-500",
 ];
 
+import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
+import { db } from '@/firebase/config';
+
 export default function SubjectLevelsPage() {
   const { childUser } = useChild();
   const { t } = useLanguage();
-  const [subjectData, setSubjectData] = useState(null);
+  const [levels, setLevels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [alertMessage, setAlertMessage] = useState(null);
   const router = useRouter();
@@ -30,16 +33,39 @@ export default function SubjectLevelsPage() {
   const { subjectId } = params;
 
   useEffect(() => {
-    if (childUser && childUser.gradeId) {
-      const gradeData = dbData.grades.find(g => g.gradeId === childUser.gradeId);
-      if (gradeData) {
-        const foundSubject = gradeData.subjects.find(s => s.subjectId === subjectId);
-        setSubjectData(foundSubject);
+    const fetchFirestoreLevels = async () => {
+      if (!childUser || !childUser.gradeId) {
+        if (!childUser && !sessionStorage.getItem("childUser")) {
+          router.push("/child-login");
+        }
+        return;
       }
-    } else if (!childUser) {
-      router.push("/child-login");
-    }
-    setLoading(false);
+
+      setLoading(true);
+      try {
+        const q = query(
+          collection(db, 'levels'),
+          where('gradeId', '==', childUser.gradeId),
+          where('subjectId', '==', subjectId),
+          orderBy('levelId', 'asc')
+        );
+
+        const snap = await getDocs(q);
+        const data = snap.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+
+        setLevels(data);
+      } catch (err) {
+        console.error("Error fetching levels:", err);
+        // Fallback or error state
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFirestoreLevels();
   }, [childUser, subjectId, router]);
 
   if (loading) return (
@@ -47,7 +73,6 @@ export default function SubjectLevelsPage() {
       <SkeletonLoader variant="page" message="Getting your levels ready..." />
     </div>
   );
-  if (!subjectData) return <div className="text-center p-10 font-bold text-2xl text-gray-600">{t('subject_not_found')}</div>;
 
   const handleLevelClick = (level) => {
     if (level.isLocked) {
@@ -65,9 +90,6 @@ export default function SubjectLevelsPage() {
     hover: { scale: 1.05, y: -5, transition: { type: "spring", stiffness: 300, damping: 20 } },
     tap: { scale: 0.95 }
   };
-
-  // Get translated subject name
-  const subjectDisplayName = t(`subjects.${subjectData.subjectName}`) || subjectData.subjectName;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 p-4 sm:p-6 md:p-8 relative overflow-hidden">
@@ -104,67 +126,99 @@ export default function SubjectLevelsPage() {
         className="text-center z-10 relative mb-12"
       >
         <span className="inline-block bg-white px-6 py-1 rounded-full text-sm font-bold text-cyan-600 mb-4 shadow-sm uppercase tracking-wider">
-          {childUser?.grade} • {subjectDisplayName}
+          {childUser?.grade} • {subjectId.toUpperCase()}
         </span>
         <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 drop-shadow-sm">
           {t('select_level')}
         </h1>
       </motion.div>
 
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full max-w-6xl mx-auto z-10 relative pb-20"
-        initial="hidden"
-        animate="visible"
-        variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
-      >
-        {subjectData.levels.length > 0 ? (
-          subjectData.levels.map((level, index) => {
-            const isLocked = level.isLocked;
-            const colorClass = colorPalette[index % colorPalette.length];
-            const cardBg = isLocked ? "bg-gray-300 border-gray-400" : colorClass;
+      <div className="w-full max-w-6xl mx-auto z-10 relative pb-20 space-y-12">
+        {Object.entries(
+          levels.reduce((acc, level) => {
+            const module = level.moduleName || 'Standard Lessons';
+            if (!acc[module]) acc[module] = [];
+            acc[module].push(level);
+            return acc;
+          }, {})
+        ).map(([moduleTitle, moduleLevels]) => (
+          <div key={moduleTitle} className="space-y-6">
+            <div className="flex items-center gap-4">
+              <div className="h-0.5 flex-grow bg-gradient-to-r from-transparent via-blue-200 to-transparent"></div>
+              <h2 className="text-2xl font-black text-slate-400 uppercase tracking-[0.3em] bg-white/50 px-6 py-2 rounded-full backdrop-blur-sm shadow-sm">{moduleTitle}</h2>
+              <div className="h-0.5 flex-grow bg-gradient-to-r from-transparent via-cyan-200 to-transparent"></div>
+            </div>
 
-            return (
-              <motion.div
-                key={level.levelId}
-                onClick={() => handleLevelClick(level)}
-                className={`${cardBg} text-white rounded-[2rem] shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[220px] relative overflow-hidden group border-b-8 ${isLocked ? 'opacity-80' : ''}`}
-                variants={cardVariants}
-                whileHover={!isLocked ? "hover" : { scale: 1.02 }}
-                whileTap="tap"
-              >
-                {/* Decorative overlay for unlocked cards */}
-                {!isLocked && (
-                  <div className="absolute -top-10 -right-10 text-white opacity-20 transform rotate-45 group-hover:rotate-90 transition-transform duration-700 ease-in-out">
-                    <FaStar size={120} />
-                  </div>
-                )}
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+            >
+              {moduleLevels.map((level, index) => {
+                const isLocked = level.isLocked;
+                const colorClass = colorPalette[index % colorPalette.length];
+                const cardBg = isLocked ? "bg-slate-300 border-slate-400" : colorClass;
 
-                <div className={`p-4 rounded-full mb-4 shadow-inner ${isLocked ? 'bg-gray-400 text-gray-600' : 'bg-white/20 text-white group-hover:scale-110 transition-transform duration-300'}`}>
-                  {isLocked ? <FaLock size={40} /> : <FaStar size={40} />}
-                </div>
+                return (
+                  <motion.div
+                    key={level.levelId}
+                    onClick={() => handleLevelClick(level)}
+                    className={`${cardBg} text-white rounded-[2.5rem] shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[260px] relative overflow-hidden group border-b-8 ${isLocked ? 'opacity-80 grayscale-[0.5]' : ''}`}
+                    variants={cardVariants}
+                    whileHover={!isLocked ? "hover" : { scale: 1.02 }}
+                    whileTap="tap"
+                  >
+                    {!isLocked && (
+                      <div className="absolute -top-10 -right-10 text-white opacity-20 transform rotate-45 group-hover:rotate-90 transition-transform duration-700 ease-in-out">
+                        <FaStar size={120} />
+                      </div>
+                    )}
 
-                <h2 className="text-3xl font-extrabold mb-2 drop-shadow-md tracking-wide z-10">
-                  {level.levelName.split(':')[0]}
-                </h2>
+                    <div className={`w-20 h-20 rounded-3xl mb-6 shadow-inner flex items-center justify-center text-4xl ${isLocked ? 'bg-slate-400 text-slate-200' : 'bg-white/20 text-white group-hover:rotate-12 transition-transform duration-300'}`}>
+                      {isLocked ? <FaLock /> : (level.badgeEmoji || <FaStar />)}
+                    </div>
 
-                <p className="text-lg font-medium opacity-95 z-10">
-                  {level.levelName.includes(':') ? level.levelName.split(':')[1].trim() : (level.description || t('ready_to_play'))}
-                </p>
+                    <div>
+                      <h3 className="text-2xl font-black mb-2 drop-shadow-md tracking-tight z-10">
+                        {level.levelName?.split(':')[0] || `Level ${index + 1}`}
+                      </h3>
+                      <p className="text-sm font-bold opacity-90 z-10 leading-relaxed max-w-[200px] line-clamp-2">
+                        {level.levelName?.includes(':') ? level.levelName.split(':')[1].trim() : (level.description || 'Embark on a new learning adventure!')}
+                      </p>
+                    </div>
 
-                {isLocked && (
-                  <div className="mt-4 bg-gray-600/50 px-4 py-1 rounded-full text-sm font-semibold backdrop-blur-sm z-10">
-                    {t('locked')}
-                  </div>
-                )}
-              </motion.div>
-            )
-          })
-        ) : (
-          <p className="text-center text-gray-600 col-span-full font-bold text-xl bg-white p-8 rounded-2xl shadow-sm">
-            {t('no_levels')}
-          </p>
+                    <div className="mt-6 flex items-center gap-2">
+                      <span className="bg-black/10 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">
+                        {level.tasks?.length || 0} Tasks
+                      </span>
+                      <span className="bg-yellow-400/20 text-yellow-100 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">
+                        {level.xpReward || 50} XP
+                      </span>
+                    </div>
+
+                    {isLocked && (
+                      <div className="mt-4 bg-slate-800/40 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-md z-10 border border-white/10">
+                        {t('locked')}
+                      </div>
+                    )}
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+        ))}
+
+        {levels.length === 0 && (
+          <div className="bg-white/80 backdrop-blur-md rounded-[3rem] p-16 text-center border-4 border-white shadow-2xl">
+            <div className="text-7xl mb-6">🚀</div>
+            <h2 className="text-3xl font-black text-slate-800 mb-2">Ready to Start?</h2>
+            <p className="text-slate-500 font-bold mb-8">Your teacher is preparing some awesome levels for you!</p>
+            <button onClick={() => router.push('/learning-zone')} className="bg-blue-500 text-white font-black px-10 py-4 rounded-full text-xl hover:bg-blue-600 transition-all shadow-lg hover:scale-105 active:scale-95">Go Back Home</button>
+          </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 }

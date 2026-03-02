@@ -13,23 +13,47 @@ import {
 } from 'react-icons/fa';
 import TeacherAdminGuard from './TeacherAdminGuard';
 
-// ── Static metadata (matching db.json) ──────────────────────────────────────
+// ── Static metadata ──────────────────────────────────────────────
 const GRADES = [
-    { id: 'grade1', name: 'Grade 1' }, { id: 'grade2', name: 'Grade 2' },
-    { id: 'grade3', name: 'Grade 3' }, { id: 'grade4', name: 'Grade 4' },
-    { id: 'grade5', name: 'Grade 5' },
+    { id: 'grade-1', name: 'Grade 1' },
+    { id: 'grade-2', name: 'Grade 2' },
+    { id: 'grade-3', name: 'Grade 3' },
+    { id: 'grade-4', name: 'Grade 4' },
+    { id: 'grade-5', name: 'Grade 5' },
 ];
 const SUBJECTS = [
-    { id: 'english', name: 'English' }, { id: 'math', name: 'Mathematics' },
-    { id: 'science', name: 'Science' }, { id: 'tamil', name: 'Tamil' },
+    { id: 'english', name: 'English' },
+    { id: 'math', name: 'Mathematics' },
+    { id: 'science', name: 'Science' },
+    { id: 'tamil', name: 'Tamil' },
 ];
 const TASK_TYPES = ['lesson', 'quiz', 'exam'];
 
-const EMPTY_QUESTION = { questionText: '', type: 'multiple-choice', options: ['', '', '', ''], correctAnswer: '' };
-const EMPTY_TASK = { taskId: '', taskName: '', type: 'lesson', timeLimit: 0, content: '', questions: [] };
+const EMPTY_QUESTION = {
+    questionText: '',
+    type: 'multiple-choice',
+    options: ['', '', '', ''],
+    correctAnswer: ''
+};
+
+const EMPTY_TASK = {
+    taskId: '',
+    taskName: '',
+    type: 'lesson',
+    timeLimit: 0,
+    content: '',
+    questions: []
+};
+
 const EMPTY_LEVEL = {
-    levelId: '', levelName: '', isLocked: false, xpReward: 50, tasks: [],
-    description: '', badgeEmoji: '⭐',
+    levelId: '',
+    levelName: '',
+    moduleName: '', // Added module support
+    isLocked: false,
+    xpReward: 50,
+    tasks: [],
+    description: '',
+    badgeEmoji: '⭐',
 };
 
 // ── Question Editor ──────────────────────────────────────────────────────────
@@ -89,62 +113,92 @@ function TaskEditor({ task, onChange, onRemove, index }) {
                     </div>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button onClick={e => { e.stopPropagation(); onRemove(); }} className="text-red-300 hover:text-red-500 transition-colors"><FaTrash size={12} /></button>
-                    {open ? <FaChevronUp className="text-slate-300" size={12} /> : <FaChevronDown className="text-slate-300" size={12} />}
+                    <button onClick={e => { e.stopPropagation(); onRemove(); }} className="text-red-300 hover:text-red-500 transition-colors p-2"><FaTrash size={14} /></button>
+                    <div className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}>
+                        <FaChevronDown className="text-slate-300" size={12} />
+                    </div>
                 </div>
             </div>
 
-            {open && (
-                <div className="px-4 pb-4 bg-slate-50/50 space-y-4 pt-4 border-t border-slate-100">
-                    <div className="grid grid-cols-2 gap-3">
-                        <div>
-                            <label className="text-xs font-bold text-slate-400 mb-1 block">Task ID</label>
-                            <input value={task.taskId} onChange={e => onChange({ ...task, taskId: e.target.value })}
-                                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300" />
-                        </div>
-                        <div>
-                            <label className="text-xs font-bold text-slate-400 mb-1 block">Task Name</label>
-                            <input value={task.taskName} onChange={e => onChange({ ...task, taskName: e.target.value })}
-                                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300" />
-                        </div>
-                        <div>
-                            <label className="text-xs font-bold text-slate-400 mb-1 block">Type</label>
-                            <select value={task.type} onChange={e => onChange({ ...task, type: e.target.value })}
-                                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
-                                {TASK_TYPES.map(t => <option key={t} value={t}>{t.toUpperCase()}</option>)}
-                            </select>
-                        </div>
-                        <div>
-                            <label className="text-xs font-bold text-slate-400 mb-1 block">Time Limit (sec)</label>
-                            <input type="number" value={task.timeLimit || 0} onChange={e => onChange({ ...task, timeLimit: parseInt(e.target.value) || 0 })}
-                                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300" />
-                        </div>
-                    </div>
-                    <div>
-                        <label className="text-xs font-bold text-slate-400 mb-1 block">Content</label>
-                        <textarea value={task.content} onChange={e => onChange({ ...task, content: e.target.value })} rows={3}
-                            className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 resize-none" />
-                    </div>
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                    >
+                        <div className="px-4 pb-4 bg-slate-50/50 space-y-4 pt-4 border-t border-slate-100">
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                                <div className="col-span-1">
+                                    <label className="text-xs font-bold text-slate-400 mb-1 block uppercase tracking-tighter">Task Type</label>
+                                    <select value={task.type} onChange={e => onChange({ ...task, type: e.target.value })}
+                                        className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-300 ${task.type === 'lesson' ? 'text-green-600' : task.type === 'quiz' ? 'text-blue-600' : 'text-red-600'}`}>
+                                        {TASK_TYPES.map(t => <option key={t} value={t}>{t.toUpperCase()}</option>)}
+                                    </select>
+                                </div>
+                                <div className="col-span-1 lg:col-span-2">
+                                    <label className="text-xs font-bold text-slate-400 mb-1 block uppercase tracking-tighter">Task Name</label>
+                                    <input value={task.taskName} onChange={e => onChange({ ...task, taskName: e.target.value })}
+                                        placeholder="e.g. Master the Vowels" className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300" />
+                                </div>
+                                <div className="col-span-1">
+                                    <label className="text-xs font-bold text-slate-400 mb-1 block uppercase tracking-tighter">Time Limit (s)</label>
+                                    <div className="relative">
+                                        <FaClock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 text-xs" />
+                                        <input type="number" value={task.timeLimit || 0} onChange={e => onChange({ ...task, timeLimit: parseInt(e.target.value) || 0 })}
+                                            className="w-full border border-slate-200 rounded-xl pl-8 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300" />
+                                    </div>
+                                </div>
+                            </div>
 
-                    {/* Questions */}
-                    <div className="space-y-3">
-                        <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-                            <label className="text-xs font-bold text-slate-500 uppercase tracking-widest">Questions ({task.questions?.length || 0})</label>
-                            <button onClick={() => onChange({ ...task, questions: [...(task.questions || []), { ...EMPTY_QUESTION }] })}
-                                className="text-[10px] bg-blue-500 text-white px-2 py-1 rounded-full font-bold hover:bg-blue-600 transition-colors flex items-center gap-1">
-                                <FaPlus size={8} /> Add
-                            </button>
+                            <div>
+                                <label className="text-xs font-bold text-slate-400 mb-1 block uppercase tracking-tighter">Internal Task ID</label>
+                                <input value={task.taskId} onChange={e => onChange({ ...task, taskId: e.target.value })}
+                                    placeholder="short-slug-id" className="w-full border border-slate-200 rounded-xl px-3 py-1 text-[10px] font-mono focus:outline-none focus:ring-2 focus:ring-blue-300" />
+                            </div>
+
+                            <div>
+                                <div className="flex items-center gap-2 mb-1">
+                                    <FaBookOpen className="text-slate-400 text-xs" />
+                                    <label className="text-xs font-bold text-slate-400 uppercase tracking-tighter">Teaching Content / Instructions</label>
+                                </div>
+                                <textarea value={task.content} onChange={e => onChange({ ...task, content: e.target.value })} rows={3}
+                                    placeholder="Enter the lesson text or instructions for the quiz..."
+                                    className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 resize-none" />
+                            </div>
+
+                            {/* Questions Section - Only for Quiz/Exam */}
+                            {(task.type === 'quiz' || task.type === 'exam') && (
+                                <div className="space-y-3 pt-2 border-t border-slate-100">
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center gap-2">
+                                            <FaCheckSquare className="text-blue-500 text-sm" />
+                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Questions ({task.questions?.length || 0})</label>
+                                        </div>
+                                        <button onClick={() => onChange({ ...task, questions: [...(task.questions || []), { ...EMPTY_QUESTION }] })}
+                                            className="text-[10px] bg-blue-500 text-white px-3 py-1.5 rounded-full font-bold hover:bg-blue-600 transition-all shadow-sm flex items-center gap-1">
+                                            <FaPlus size={8} /> Add Question
+                                        </button>
+                                    </div>
+                                    <div className="space-y-3">
+                                        {(task.questions || []).map((q, qi) => (
+                                            <QuestionEditor key={qi} question={q} index={qi}
+                                                onChange={updated => { const qs = [...task.questions]; qs[qi] = updated; onChange({ ...task, questions: qs }); }}
+                                                onRemove={() => { const qs = task.questions.filter((_, i) => i !== qi); onChange({ ...task, questions: qs }); }} />
+                                        ))}
+                                        {(!task.questions || task.questions.length === 0) && (
+                                            <div className="text-center py-6 bg-slate-100/50 rounded-2xl border border-dashed border-slate-200 text-slate-400 text-xs font-bold">
+                                                No questions added yet.
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                        <div className="space-y-3">
-                            {(task.questions || []).map((q, qi) => (
-                                <QuestionEditor key={qi} question={q} index={qi}
-                                    onChange={updated => { const qs = [...task.questions]; qs[qi] = updated; onChange({ ...task, questions: qs }); }}
-                                    onRemove={() => { const qs = task.questions.filter((_, i) => i !== qi); onChange({ ...task, questions: qs }); }} />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }
@@ -152,7 +206,7 @@ function TaskEditor({ task, onChange, onRemove, index }) {
 // ── Teacher Admin Content ────────────────────────────────────────────────────
 function TeacherAdminPageContent() {
     const router = useRouter();
-    const [selectedGrade, setSelectedGrade] = useState('grade1');
+    const [selectedGrade, setSelectedGrade] = useState('grade-1');
     const [selectedSubject, setSelectedSubject] = useState('english');
     const [levels, setLevels] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -234,22 +288,25 @@ function TeacherAdminPageContent() {
         <div className="min-h-screen bg-slate-50">
             {/* Header */}
             <div className="bg-white border-b border-slate-200 shadow-sm px-6 py-4 flex items-center justify-between sticky top-0 z-40">
-                <button onClick={() => router.back()} className="flex items-center gap-2 text-slate-600 hover:text-slate-900 font-semibold text-sm transition-colors">
-                    <FaArrowLeft /> Back
-                </button>
                 <div className="flex items-center gap-3">
                     <FaGraduationCap className="text-blue-500 text-xl" />
                     <h1 className="text-xl font-extrabold text-gray-800">Teacher Admin — Curriculum Builder</h1>
                 </div>
-                <button onClick={saveAll}
-                    className={`flex items-center gap-2 px-5 py-2 rounded-full font-bold text-sm text-white transition-all shadow-md ${saveStatus === 'saving' ? 'bg-yellow-500' :
-                        saveStatus === 'success' ? 'bg-green-500' :
-                            saveStatus === 'error' ? 'bg-red-500' :
-                                'bg-blue-600 hover:bg-blue-700'
-                        }`}>
-                    <FaSave />
-                    {saveStatus === 'saving' ? 'Saving...' : saveStatus === 'success' ? 'Saved!' : saveStatus === 'error' ? 'Error!' : 'Save All'}
-                </button>
+                <div className="flex items-center gap-3">
+                    <div className="hidden md:flex flex-col items-end mr-2">
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Logged in as</span>
+                        <span className="text-xs font-bold text-slate-600">Educator</span>
+                    </div>
+                    <button onClick={saveAll}
+                        className={`flex items-center gap-2 px-5 py-2 rounded-full font-bold text-sm text-white transition-all shadow-md ${saveStatus === 'saving' ? 'bg-yellow-500' :
+                            saveStatus === 'success' ? 'bg-green-500' :
+                                saveStatus === 'error' ? 'bg-red-500' :
+                                    'bg-blue-600 hover:bg-blue-700'
+                            }`}>
+                        <FaSave />
+                        {saveStatus === 'saving' ? 'Saving...' : saveStatus === 'success' ? 'Saved!' : saveStatus === 'error' ? 'Error!' : 'Save All'}
+                    </button>
+                </div>
             </div>
 
             <div className="max-w-4xl mx-auto px-4 py-8">
@@ -331,7 +388,7 @@ function TeacherAdminPageContent() {
                                     {/* Level body */}
                                     {expandedLevel === li && (
                                         <div className="px-6 pb-6 border-t border-slate-100 space-y-4 pt-4">
-                                            <div className="grid grid-cols-3 gap-3">
+                                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                                                 <div>
                                                     <label className="text-xs font-bold text-gray-500 mb-1 block">Level ID</label>
                                                     <input value={level.levelId} onChange={e => updateLevel(li, { ...level, levelId: e.target.value })}
@@ -343,24 +400,37 @@ function TeacherAdminPageContent() {
                                                         placeholder="The Alphabet" className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300" />
                                                 </div>
                                                 <div>
+                                                    <label className="text-xs font-bold text-gray-500 mb-1 block">Module Name</label>
+                                                    <input value={level.moduleName || ''} onChange={e => updateLevel(li, { ...level, moduleName: e.target.value })}
+                                                        placeholder="Basics" className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300" />
+                                                </div>
+                                                <div>
                                                     <label className="text-xs font-bold text-gray-500 mb-1 block">Badge Emoji</label>
                                                     <input value={level.badgeEmoji} onChange={e => updateLevel(li, { ...level, badgeEmoji: e.target.value })}
                                                         placeholder="⭐" className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300" />
                                                 </div>
                                             </div>
-                                            <div className="grid grid-cols-2 gap-3">
-                                                <div>
-                                                    <label className="text-xs font-bold text-gray-500 mb-1 block">XP Reward</label>
-                                                    <input type="number" value={level.xpReward || 50} min={0}
-                                                        onChange={e => updateLevel(li, { ...level, xpReward: parseInt(e.target.value) || 0 })}
-                                                        className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300" />
+                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                                <div className="md:col-span-2">
+                                                    <label className="text-xs font-bold text-gray-500 mb-1 block">Level Description</label>
+                                                    <textarea value={level.description || ''} onChange={e => updateLevel(li, { ...level, description: e.target.value })}
+                                                        placeholder="Briefly describe what students will learn..." rows={2}
+                                                        className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 resize-none" />
                                                 </div>
-                                                <div>
-                                                    <label className="text-xs font-bold text-gray-500 mb-1 block">Status</label>
-                                                    <button onClick={() => updateLevel(li, { ...level, isLocked: !level.isLocked })}
-                                                        className={`w-full py-2 rounded-xl text-sm font-bold transition-all ${level.isLocked ? 'bg-red-100 text-red-600 hover:bg-red-200' : 'bg-green-100 text-green-600 hover:bg-green-200'}`}>
-                                                        {level.isLocked ? '🔒 Mark as Open' : '🔓 Mark as Locked'}
-                                                    </button>
+                                                <div className="space-y-3">
+                                                    <div>
+                                                        <label className="text-xs font-bold text-gray-500 mb-1 block">XP Reward</label>
+                                                        <input type="number" value={level.xpReward || 50} min={0}
+                                                            onChange={e => updateLevel(li, { ...level, xpReward: parseInt(e.target.value) || 0 })}
+                                                            className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300" />
+                                                    </div>
+                                                    <div>
+                                                        <label className="text-xs font-bold text-gray-500 mb-1 block">Status</label>
+                                                        <button onClick={() => updateLevel(li, { ...level, isLocked: !level.isLocked })}
+                                                            className={`w-full py-2 rounded-xl text-[10px] font-bold transition-all ${level.isLocked ? 'bg-red-100 text-red-600 hover:bg-red-200' : 'bg-green-100 text-green-600 hover:bg-green-200'}`}>
+                                                            {level.isLocked ? '🔒 Locked' : '🔓 Open'}
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
 
