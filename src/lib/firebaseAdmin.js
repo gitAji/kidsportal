@@ -9,7 +9,11 @@ function initAdmin() {
 
     const projectId = process.env.FIREBASE_ADMIN_PROJECT_ID;
     const clientEmail = process.env.FIREBASE_ADMIN_CLIENT_EMAIL;
-    const privateKey = process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, '\n');
+    let privateKeyRaw = process.env.FIREBASE_ADMIN_PRIVATE_KEY;
+    if (privateKeyRaw && privateKeyRaw.startsWith('"') && privateKeyRaw.endsWith('"')) {
+        privateKeyRaw = privateKeyRaw.substring(1, privateKeyRaw.length - 1);
+    }
+    const privateKey = privateKeyRaw?.replace(/\\n/g, '\n');
 
     if (!projectId || !clientEmail || !privateKey ||
         clientEmail.startsWith('REPLACE') || privateKey.startsWith('REPLACE')) {
