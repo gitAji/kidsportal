@@ -15,27 +15,29 @@ export default function GradeCard({ grade, gradeIndex, themeColor }) {
   return (
     <div
       id={`grade-${grade.gradeId}`}
-      className={`bg-white rounded-3xl overflow-hidden border-2 ${isExpanded ? "border-blue-400 ring-4 ring-blue-50" : "border-slate-100 hover:border-slate-200"
-        } transition-all duration-300 flex flex-col group shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]`}
+      className={`bg-white rounded-3xl overflow-hidden border-2 ${isExpanded ? "border-blue-300 ring-4 ring-blue-50/50" : "border-slate-50 border-b-[6px] hover:border-blue-100 hover:-translate-y-2 hover:border-b-blue-500"
+        } transition-all duration-300 flex flex-col group shadow-sm hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)]`}
     >
       <div
-        className="h-3 w-full"
+        className="h-3 w-full opacity-80 group-hover:opacity-100 transition-opacity"
         style={{ background: `linear-gradient(90deg, ${themeColor}, #60a5fa)` }}
       />
 
-      <div className="p-6 text-center">
-        <h3 className="text-3xl font-black text-slate-800 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+      <div className="p-8 text-center relative">
+        <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700 opacity-50 z-0" style={{ backgroundColor: themeColor, opacity: 0.1 }} />
+
+        <h3 className="text-3xl font-black text-slate-800 mb-2 group-hover:text-blue-600 transition-colors duration-300 relative z-10">
           {grade.gradeName}
         </h3>
-        <p className="text-slate-500 font-medium mb-6 italic text-sm">
-          {grade.subjects?.length || 0} Subjects · Curriculum View
+        <p className="text-slate-400 font-bold mb-6 text-sm uppercase tracking-widest relative z-10">
+          {grade.subjects?.length || 0} Subjects · Curriculum
         </p>
 
         <button
           onClick={toggleExpand}
-          className={`w-full py-4 px-6 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 shadow-sm ${isExpanded
+          className={`w-full py-4 px-6 rounded-2xl font-black transition-all flex items-center justify-center gap-2 shadow-sm relative z-10 ${isExpanded
             ? "bg-slate-800 text-white"
-            : "bg-white text-blue-600 border-2 border-blue-50 hover:bg-gradient-to-br hover:from-blue-500 hover:to-cyan-400 hover:border-transparent hover:text-white hover:shadow-cyan-500/30 hover:scale-[1.02]"
+            : "bg-white text-blue-600 border-2 border-slate-100 hover:bg-gradient-to-br hover:from-blue-500 hover:to-indigo-500 hover:border-transparent hover:text-white hover:shadow-lg hover:shadow-blue-500/20 hover:scale-[1.02]"
             }`}
         >
           {isExpanded ? "Close Preview" : "Explore Levels 🚀"}

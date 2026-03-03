@@ -2,28 +2,60 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/firebase/config";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "@/firebase/config";
 
-// Super Admin Whitelist — only these emails can access the admin panel
+// Fallback super admin email (always has access)
 const SUPER_ADMIN_EMAILS = [
     "kontaktaone@gmail.com",
 ];
 
+/**
+ * SuperAdminGuard checks:
+ * 1. User is authenticated
+ * 2. User email is in SUPER_ADMIN_EMAILS whitelist, OR
+ * 3. User has an entry in the 'admins' collection with an active status
+ *
+ * Provides the user's roles to children via context-like prop drilling.
+ */
 export default function SuperAdminGuard({ children }) {
     const router = useRouter();
     const [checking, setChecking] = useState(true);
+    const [adminRoles, setAdminRoles] = useState([]);
 
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 router.replace("/super-admin/login");
-            } else {
-                if (!SUPER_ADMIN_EMAILS.includes(user.email.toLowerCase())) {
-                    router.replace("/super-admin/login");
-                } else {
-                    setChecking(false);
-                }
+                return;
             }
+
+            const email = user.email?.toLowerCase();
+
+            // Check if super admin by whitelist
+            if (SUPER_ADMIN_EMAILS.includes(email)) {
+                setAdminRoles(["super_admin"]);
+                setChecking(false);
+                return;
+            }
+
+            // Check Firestore admins collection for role-based access
+            try {
+                const adminSnap = await getDoc(doc(db, "admins", user.uid));
+                if (adminSnap.exists()) {
+                    const data = adminSnap.data();
+                    if (data.status === "active" && data.roles?.length > 0) {
+                        setAdminRoles(data.roles);
+                        setChecking(false);
+                        return;
+                    }
+                }
+            } catch (err) {
+                console.error("Error checking admin roles:", err);
+            }
+
+            // Not authorized
+            router.replace("/super-admin/login");
         });
         return () => unsub();
     }, [router]);
@@ -41,5 +73,6 @@ export default function SuperAdminGuard({ children }) {
         );
     }
 
-    return children;
+    // Pass roles down to children
+    return typeof children === 'function' ? children(adminRoles) : children;
 }

@@ -5,8 +5,9 @@ import { motion } from "framer-motion";
 import { FaUserShield, FaLock, FaHome, FaShieldAlt, FaFingerprint, FaChalkboardTeacher, FaArrowRight } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithGoogle } from "@/firebase/auth";
-import { auth } from "@/firebase/config";
+import { auth, db } from "@/firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import Image from "next/image";
 
 const SUPER_ADMIN_EMAILS = [
@@ -20,9 +21,24 @@ export default function SuperAdminLoginPage() {
     const [verifying, setVerifying] = useState(true);
 
     useEffect(() => {
-        const unsub = onAuthStateChanged(auth, (user) => {
-            if (user && SUPER_ADMIN_EMAILS.includes(user.email)) {
-                router.replace("/super-admin");
+        const unsub = onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const email = user.email?.toLowerCase();
+                // Check whitelist
+                if (SUPER_ADMIN_EMAILS.includes(email)) {
+                    router.replace("/super-admin");
+                    setVerifying(false);
+                    return;
+                }
+                // Check admins collection
+                try {
+                    const adminSnap = await getDoc(doc(db, "admins", user.uid));
+                    if (adminSnap.exists() && adminSnap.data().status === "active" && adminSnap.data().roles?.length > 0) {
+                        router.replace("/super-admin");
+                        setVerifying(false);
+                        return;
+                    }
+                } catch { }
             }
             setVerifying(false);
         });
@@ -42,20 +58,33 @@ export default function SuperAdminLoginPage() {
                 return;
             }
 
-            // Also check if they are a teacher to block them from Super Admin
-            const teacherDoc = await getDoc(doc(db, "teachers", user.email.toLowerCase()));
-            if (teacherDoc.exists()) {
-                await auth.signOut();
-                setError("TEACHER_PROHIBITED");
+            // Check if they are a teacher — block from admin panel
+            try {
+                const teacherDoc = await getDoc(doc(db, "teachers", user.email.toLowerCase()));
+                if (teacherDoc.exists()) {
+                    await auth.signOut();
+                    setError("TEACHER_PROHIBITED");
+                    setLoading(false);
+                    return;
+                }
+            } catch { }
+
+            // Check admin access: whitelist OR admins collection
+            if (SUPER_ADMIN_EMAILS.includes(user.email?.toLowerCase())) {
+                router.push("/super-admin");
                 return;
             }
 
-            if (SUPER_ADMIN_EMAILS.includes(user.email)) {
-                router.push("/super-admin");
-            } else {
-                await auth.signOut();
-                setError("ACCESS_DENIED");
-            }
+            try {
+                const adminSnap = await getDoc(doc(db, "admins", user.uid));
+                if (adminSnap.exists() && adminSnap.data().status === "active" && adminSnap.data().roles?.length > 0) {
+                    router.push("/super-admin");
+                    return;
+                }
+            } catch { }
+
+            await auth.signOut();
+            setError("ACCESS_DENIED");
         } catch (err) {
             console.error("Super Admin auth error:", err);
             setError(err.message || "Something went wrong.");

@@ -315,7 +315,15 @@ export default function AnalyticsPage() {
       setSelectedChild(child);
       setSelectedStats(stats);
     } catch (e) {
-      console.error(e);
+      console.error("Error fetching child data details:", e);
+      // Fallback safely to show modal even if DB fetch permissions fail
+      setSelectedAchievements(
+        loadUnlockedAchievements(child.id)
+          .map(id => ACHIEVEMENTS.find(a => a.id === id))
+          .filter(Boolean)
+      );
+      setSelectedChild(child);
+      setSelectedStats(stats);
     }
   };
 

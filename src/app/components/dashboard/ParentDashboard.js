@@ -66,12 +66,12 @@ const ParentDashboard = () => {
 
           <div className="flex items-center gap-3">
             <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setShowAddChildModal(true)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white font-bold rounded-xl shadow-md shadow-blue-100 hover:bg-blue-700 transition-all text-sm"
+              className="group flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black rounded-full shadow-lg hover:shadow-cyan-400/40 transition-all text-sm uppercase tracking-widest border-2 border-transparent hover:border-white/20"
             >
-              <FaPlus className="text-xs" /> Add Child
+              <FaPlus className="text-xs group-hover:rotate-90 transition-transform duration-300" /> Add Learner
             </motion.button>
           </div>
         </div>
@@ -138,15 +138,20 @@ function SectionCard({ icon, title, children, flex = false }) {
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden ${flex ? 'flex flex-col flex-grow' : ''}`}
+      whileHover={{ y: -4, shadow: "0 25px 50px -12px rgba(0, 0, 0, 0.05)" }}
+      transition={{ type: "spring", stiffness: 100, damping: 15 }}
+      className={`bg-white rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/20 overflow-hidden ${flex ? 'flex flex-col flex-grow' : 'flex flex-col'}`}
     >
       {/* Card header */}
-      <div className="flex items-center gap-2.5 px-6 py-4 border-b border-slate-50">
-        <span className="text-base">{icon}</span>
-        <h2 className="text-sm font-black text-slate-700 uppercase tracking-wider">{title}</h2>
+      <div className="flex items-center gap-3 px-8 py-5 bg-gradient-to-b from-white to-slate-50/50 border-b border-slate-100/60 relative">
+        <div className="w-10 h-10 rounded-xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-lg relative z-10">
+          {icon}
+        </div>
+        <h2 className="text-sm font-black text-slate-800 uppercase tracking-widest relative z-10">{title}</h2>
+        <div className="absolute right-0 top-0 w-32 h-32 bg-gradient-to-bl from-slate-100 to-transparent opacity-50 rounded-bl-[100px]" />
       </div>
       {/* Card body */}
-      <div className={`p-6 ${flex ? 'flex-grow' : ''}`}>
+      <div className={`p-8 ${flex ? 'flex-grow flex flex-col' : ''}`}>
         {children}
       </div>
     </motion.div>

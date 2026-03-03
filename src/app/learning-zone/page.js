@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { useChild } from '../providers/ChildProvider';
 import { useLanguage } from '../providers/LanguageProvider';
 import { getSubjectsByGrade } from '../utils/learningData';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/firebase/config';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
 import { FaBookOpen, FaCalculator, FaMicroscope, FaLanguage, FaStar, FaPlay } from 'react-icons/fa';
 
@@ -78,13 +80,29 @@ export default function LearningZonePage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (childUser) {
+    const loadSubjects = async () => {
+      if (!childUser) return;
       setSubjectsLoading(true);
-      const fetchedSubjects = getSubjectsByGrade(childUser.gradeId);
+
+      // Fetch the parent's selected learning subjects
+      let learningSubjects = null;
+      try {
+        if (childUser.parentUid) {
+          const parentSnap = await getDoc(doc(db, 'users', childUser.parentUid));
+          if (parentSnap.exists()) {
+            learningSubjects = parentSnap.data().learningSubjects || null;
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching parent subject preferences:', err);
+      }
+
+      const fetchedSubjects = getSubjectsByGrade(childUser.gradeId, learningSubjects);
       setSubjects(fetchedSubjects);
-      // Small artificially delay for smoother feel if loading too fast
       setTimeout(() => setSubjectsLoading(false), 800);
-    }
+    };
+
+    loadSubjects();
   }, [childUser]);
 
   if (!childUser) {

@@ -1,11 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { doc, updateDoc, deleteDoc, runTransaction } from 'firebase/firestore';
+import { doc, updateDoc, deleteDoc, runTransaction, getDoc } from 'firebase/firestore';
 import { app } from '../../../firebase/config';
 import { getFirestore } from 'firebase/firestore';
 import SkeletonLoader from '../ui/SkeletonLoader';
 import AddChildForm from './AddChildForm';
-import { FaEdit, FaUser, FaChartLine, FaTasks, FaCog, FaSignInAlt, FaTrophy, FaStar, FaKey, FaEye, FaEyeSlash, FaUserLock, FaFilePdf, FaExclamationTriangle, FaClipboard } from 'react-icons/fa';
+import {
+  FaEdit, FaUser, FaChartLine, FaTasks, FaCog, FaSignInAlt,
+  FaTrophy, FaStar, FaKey, FaEye, FaEyeSlash, FaUserLock,
+  FaFilePdf, FaExclamationTriangle, FaClipboard, FaArrowLeft,
+  FaBookOpen, FaAward, FaGamepad, FaShieldAlt, FaCheck,
+  FaSpinner, FaTimes
+} from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image';
 import RewardsDisplay from './RewardsDisplay';
@@ -14,11 +20,18 @@ import StickerBook from './StickerBook';
 import Reports from './Reports';
 import Modal from '../ui/Modal';
 import CustomAvatar from '../ui/CustomAvatar';
-import SaveMessage from '../ui/SaveMessage'; // Import SaveMessage
+import SaveMessage from '../ui/SaveMessage';
 import { debounce } from 'lodash';
+import { motion, AnimatePresence } from 'framer-motion';
 
-
-
+const tabs = [
+  { id: 'about', label: 'Overview', icon: <FaUser /> },
+  { id: 'reports', label: 'Reports', icon: <FaFilePdf /> },
+  { id: 'progress', label: 'Progress', icon: <FaChartLine /> },
+  { id: 'rewards', label: 'Rewards', icon: <FaTrophy /> },
+  { id: 'stickers', label: 'Stickers', icon: <FaAward /> },
+  { id: 'settings', label: 'Settings', icon: <FaCog /> },
+];
 
 const ChildDashboard = ({ child, onClose }) => {
   const db = getFirestore(app);
@@ -67,30 +80,22 @@ const ChildDashboard = ({ child, onClose }) => {
   useEffect(() => {
     const debounced = debouncedCheckUsernameAvailabilityRef.current;
     debounced(username, child);
-    return () => {
-      debounced.cancel();
-    };
+    return () => { debounced.cancel(); };
   }, [username, child]);
 
-  const handleEditClick = () => setCurrentView('edit');
   const handleDeleteClick = async () => {
-    if (!confirm(`Are you sure you want to deactivate ${childData.name}'s account? This action cannot be undone.`)) {
-      return;
-    }
-
+    if (!confirm(`Are you sure you want to deactivate ${childData.name}'s account? This action cannot be undone.`)) return;
     setLoading(true);
     try {
       const childDocRef = doc(db, "users", childData.parentUid, "children", childData.id);
       const usernameDocRef = doc(db, "child_usernames", childData.username);
-
       await runTransaction(db, async (t) => {
         t.delete(childDocRef);
         t.delete(usernameDocRef);
       });
-
       setSaveStatus('success');
       setErrorMessage('Child account deactivated successfully!');
-      onClose(); // Close the dashboard after deletion
+      onClose();
     } catch (error) {
       console.error("Error deleting child account:", error);
       setSaveStatus('error');
@@ -100,6 +105,7 @@ const ChildDashboard = ({ child, onClose }) => {
       setTimeout(() => setSaveStatus(null), 3000);
     }
   };
+
   const handleCancel = () => setCurrentView('details');
   const handleSaveSuccess = (updatedChild) => {
     setChildData(updatedChild);
@@ -110,13 +116,10 @@ const ChildDashboard = ({ child, onClose }) => {
   };
 
   const handleToggleLogin = async (newStatus) => {
-    setLoginEnabled(newStatus); // Update UI immediately
-
+    setLoginEnabled(newStatus);
     try {
       const childDocRef = doc(db, "users", childData.parentUid, "children", childData.id);
       await updateDoc(childDocRef, { loginEnabled: newStatus });
-
-      // Update state and session storage on success
       const updatedData = { ...childData, loginEnabled: newStatus };
       setChildData(updatedData);
       sessionStorage.setItem('childUser', JSON.stringify(updatedData));
@@ -124,7 +127,7 @@ const ChildDashboard = ({ child, onClose }) => {
       setErrorMessage('Login status updated successfully!');
     } catch (error) {
       console.error("Failed to update login status:", error);
-      setLoginEnabled(!newStatus); // Revert UI on failure
+      setLoginEnabled(!newStatus);
       setSaveStatus('error');
       setErrorMessage(`Failed to update login status: ${error.message}`);
     } finally {
@@ -146,40 +149,25 @@ const ChildDashboard = ({ child, onClose }) => {
       setTimeout(() => setSaveStatus(null), 3000);
       return;
     }
-
     setLoading(true);
     setSaveStatus(null);
-
     try {
       const childDocRef = doc(db, "users", childData.parentUid, "children", childData.id);
-      const updates = {
-        username,
-        loginEnabled,
-      };
-
-      if (newPassword) {
-        updates.password = newPassword;
-      }
-
+      const updates = { username, loginEnabled };
+      if (newPassword) updates.password = newPassword;
       if (username !== childData.username) {
-        // Username is changing, perform a transaction
         const oldUsernameDocRef = doc(db, 'child_usernames', childData.username);
         const newUsernameDocRef = doc(db, 'child_usernames', username);
-
         await runTransaction(db, async (t) => {
           const newUsernameDoc = await t.get(newUsernameDocRef);
-          if (newUsernameDoc.exists()) {
-            throw new Error("This username is already taken.");
-          }
+          if (newUsernameDoc.exists()) throw new Error("This username is already taken.");
           t.delete(oldUsernameDocRef);
           t.set(newUsernameDocRef, { parentUid: childData.parentUid, childId: childData.id });
           t.update(childDocRef, updates);
         });
       } else {
-        // No username change, just update the child document
         await updateDoc(childDocRef, updates);
       }
-
       setChildData({ ...childData, ...updates });
       setSaveStatus('success');
       setErrorMessage('Settings updated successfully!');
@@ -196,163 +184,373 @@ const ChildDashboard = ({ child, onClose }) => {
   };
 
   const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
+    navigator.clipboard.writeText(text).then(() => {
+      setSaveStatus('success');
+      setErrorMessage('Copied to clipboard!');
+      setTimeout(() => setSaveStatus(null), 2000);
+    });
   };
 
   if (loading) return <SkeletonLoader />;
   if (!childData) return <div>No Child Data Available</div>;
 
+  // Quick-stat cards for the overview
+  const stats = [
+    { label: "Stars Earned", value: childData.points || 0, icon: <FaStar />, color: "amber" },
+    { label: "Stickers", value: childData.stickers?.length || 0, icon: <FaAward />, color: "violet" },
+    { label: "Grade", value: childData.grade || "—", icon: <FaBookOpen />, color: "blue" },
+    { label: "Status", value: loginEnabled ? "Active" : "Paused", icon: <FaShieldAlt />, color: loginEnabled ? "emerald" : "rose" },
+  ];
+
+  const inputCls = "w-full bg-white border-2 border-slate-100 text-slate-800 text-sm font-medium rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all placeholder:text-slate-300";
+
   return (
-    <div className="relative w-full h-full overflow-hidden bg-gradient-to-r from-blue-100 to-cyan-100">
+    <div className="relative w-full min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+      {/* Floating notification */}
+      <AnimatePresence>
+        {saveStatus && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-2xl shadow-xl border text-sm font-bold ${saveStatus === 'error'
+                ? "bg-rose-50 border-rose-200 text-rose-600"
+                : "bg-emerald-50 border-emerald-200 text-emerald-600"
+              }`}
+          >
+            {saveStatus === 'error' ? <FaTimes /> : <FaCheck />} {errorMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {currentView === 'details' ? (
-        <div className="w-full flex-shrink-0 p-4 md:p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-bold text-gray-800">Manage {childData.name}&apos;s Profile</h2>
-          </div>
-          <div className="mb-6">
-            <ul className="flex flex-wrap -mb-px text-sm font-medium text-center">
-              {['about', 'reports', 'progress', 'rewards', 'stickers', 'settings'].map(tab => (
-                <li key={tab} className="me-2">
-                  <button
-                    className={`inline-block p-4 border-b-2 rounded-t-lg flex items-center ${activeTab === tab ? 'border-blue-600 text-blue-600' : 'border-transparent'}`}
-                    onClick={() => setActiveTab(tab)}
-                  >
-                    {/* Icons */}
-                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                  </button>
-                </li>
-              ))}
-            </ul>
+        <div className="max-w-6xl mx-auto px-4 py-8 sm:py-10">
+
+          {/* ── Top Bar ── */}
+          <div className="flex items-center justify-between mb-8">
+            <button
+              onClick={onClose}
+              className="flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors font-bold text-sm"
+            >
+              <FaArrowLeft /> Back to Dashboard
+            </button>
+            <button
+              onClick={() => setCurrentView('edit')}
+              className="flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-slate-100 text-slate-500 text-xs font-black uppercase tracking-widest rounded-xl hover:border-blue-200 hover:text-blue-600 transition-all shadow-sm"
+            >
+              <FaEdit /> Edit Profile
+            </button>
           </div>
 
-          {activeTab === 'about' && (
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center mb-4">
-                  <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center mr-4">
-                    <CustomAvatar child={childData} />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-semibold">{childData.name}</h3>
-                    <p>Age: {childData.age}</p>
-                    <p>Grade: {childData.grade}</p>
-                  </div>
-                </div>
-                <button onClick={() => setCurrentView('edit')} className="text-gray-500 hover:text-blue-600">
-                  <FaEdit className="text-2xl" />
-                </button>
+          {/* ── Profile Hero ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-white rounded-[2rem] shadow-xl shadow-blue-100/30 border border-slate-100 p-8 sm:p-10 mb-8 overflow-hidden relative"
+          >
+            {/* Decorative background circles */}
+            <div className="absolute -top-20 -right-20 w-60 h-60 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full opacity-40 pointer-events-none" />
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-br from-violet-100 to-blue-100 rounded-full opacity-30 pointer-events-none" />
+
+            <div className="relative z-10 flex flex-col sm:flex-row items-center sm:items-start gap-6">
+              {/* Avatar */}
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-[1.5rem] bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-blue-200/50 overflow-hidden flex-shrink-0">
+                <CustomAvatar child={childData} />
               </div>
-              <div className="mt-6 pt-4 border-t flex justify-end gap-4">
-                <button onClick={() => setShowLoginHelper(true)} className="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 flex items-center">
-                  <FaSignInAlt className="mr-2" /> Login as {childData.name}
+
+              {/* Info */}
+              <div className="text-center sm:text-left flex-grow">
+                <h1 className="text-3xl sm:text-4xl font-black text-slate-800 tracking-tight mb-1">{childData.name}</h1>
+                <p className="text-slate-400 font-bold text-sm mb-4">
+                  Age {childData.age} • Grade {childData.grade} • @{childData.username}
+                </p>
+
+                {/* Quick Stats Row */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {stats.map(s => (
+                    <div key={s.label} className="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                      <div className={`text-lg mb-0.5 text-${s.color}-500`}>{s.icon}</div>
+                      <p className="text-lg font-black text-slate-800">{s.value}</p>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Launch Button */}
+              <div className="flex-shrink-0">
+                <button
+                  onClick={() => setShowLoginHelper(true)}
+                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black text-xs uppercase tracking-widest rounded-xl shadow-lg shadow-blue-200/50 hover:shadow-blue-300/60 hover:scale-[1.02] transition-all"
+                >
+                  <FaSignInAlt /> Launch Zone
                 </button>
               </div>
             </div>
-          )}
+          </motion.div>
 
-          {activeTab === 'reports' && <Reports childData={childData} />}
-          {activeTab === 'progress' && <ProgressTracker child={childData} />}
-          {activeTab === 'rewards' && <RewardsDisplay points={childData.points || 0} />}
-          {activeTab === 'stickers' && <StickerBook collectedStickerIds={childData.stickers} />}
+          {/* ── Tab Navigation ── */}
+          <div className="flex gap-1.5 mb-6 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
+            {tabs.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-black uppercase tracking-widest whitespace-nowrap transition-all border-2 ${activeTab === tab.id
+                    ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-200/40"
+                    : "bg-white text-slate-400 border-slate-100 hover:border-blue-100 hover:text-blue-500"
+                  }`}
+              >
+                {tab.icon} {tab.label}
+              </button>
+            ))}
+          </div>
 
-          {activeTab === 'settings' && (
-            <form onSubmit={handleSettingsSave}>
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-2xl font-semibold mb-6">Settings & Controls</h3>
-
-                <div className="mb-8">
-                  <h4 className="text-xl font-semibold mb-4 border-b pb-2 flex items-center"><FaUserLock className="mr-2" /> Account Access</h4>
-                  <div className="flex items-center justify-between">
-                    <label htmlFor="loginEnabled" className="block text-md font-medium text-gray-700">Enable Child Login</label>
-                    <label className="relative inline-flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        id="loginEnabled"
-                        className="sr-only peer"
-                        checked={loginEnabled}
-                        onChange={(e) => handleToggleLogin(e.target.checked)}
-                      />
-                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                    </label>
-                  </div>
-                </div>
-
-                <div className="mb-8">
-                  <h4 className="text-xl font-semibold mb-4 border-b pb-2 flex items-center"><FaKey className="mr-2" /> Login Credentials</h4>
+          {/* ── Tab Content ── */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2 }}
+            >
+              {/* ABOUT TAB */}
+              {activeTab === 'about' && (
+                <div className="space-y-6">
+                  {/* Info Cards Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="username" className="block text-md font-medium text-gray-700 mb-2">Username</label>
-                      <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
-                      {usernameStatus.status !== 'idle' && (
-                        <p className={`text-sm mt-1 ${usernameStatus.status === 'available' ? 'text-green-600' : 'text-red-600'}`}>
-                          {usernameStatus.message}
-                        </p>
-                      )}
+                    {/* Child Details Card */}
+                    <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                      <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-5">Learner Details</h3>
+                      <div className="space-y-4">
+                        {[
+                          { label: "Full Name", value: childData.name },
+                          { label: "Age", value: `${childData.age} years old` },
+                          { label: "Grade Level", value: childData.grade },
+                          { label: "Username", value: `@${childData.username}` },
+                        ].map(item => (
+                          <div key={item.label} className="flex items-center justify-between">
+                            <span className="text-sm text-slate-400 font-bold">{item.label}</span>
+                            <span className="text-sm text-slate-700 font-black">{item.value}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <div>
-                      <label htmlFor="currentPassword" className="block text-md font-medium text-gray-700 mb-2">Current Password</label>
-                      <div className="relative">
-                        <input
-                          type={showCurrentPassword ? 'text' : 'password'}
-                          id="currentPassword"
-                          value={childData.password || 'Not Set'}
-                          readOnly
-                          className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-100"
-                        />
-                        <button type="button" onClick={() => setShowCurrentPassword(!showCurrentPassword)} className="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500">
-                          {showCurrentPassword ? <FaEyeSlash /> : <FaEye />}
+
+                    {/* Account Status Card */}
+                    <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                      <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-5">Account Status</h3>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-slate-400 font-bold">Login Access</span>
+                          <span className={`px-3 py-1 rounded-lg text-xs font-black uppercase tracking-widest ${loginEnabled
+                              ? "bg-emerald-50 text-emerald-600 border border-emerald-200"
+                              : "bg-rose-50 text-rose-600 border border-rose-200"
+                            }`}>
+                            {loginEnabled ? "Enabled" : "Disabled"}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-slate-400 font-bold">Stars Earned</span>
+                          <span className="text-sm text-amber-500 font-black flex items-center gap-1"><FaStar /> {childData.points || 0}</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-slate-400 font-bold">Stickers Collected</span>
+                          <span className="text-sm text-violet-500 font-black flex items-center gap-1"><FaAward /> {childData.stickers?.length || 0}</span>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-5 border-t border-slate-50">
+                        <button
+                          onClick={() => setShowLoginHelper(true)}
+                          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-600 font-black text-xs uppercase tracking-widest rounded-xl border-2 border-blue-100 hover:border-blue-200 transition-all"
+                        >
+                          <FaSignInAlt /> Login as {childData.name}
                         </button>
                       </div>
                     </div>
-                    <div>
-                      <label htmlFor="newPassword" className="block text-md font-medium text-gray-700 mb-2">New Password</label>
-                      <input type="password" id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Leave blank to keep current" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                    </div>
-                    <div>
-                      <label htmlFor="confirmPassword" className="block text-md font-medium text-gray-700 mb-2">Confirm New Password</label>
-                      <input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm new password" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                    </div>
                   </div>
                 </div>
+              )}
 
-                <div className="text-right mt-6">
-                  <button type="submit" className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700" disabled={loading || usernameStatus.status === 'checking' || usernameStatus.status === 'taken'}>
-                    {loading ? 'Saving...' : 'Save All Changes'}
-                  </button>
+              {/* REPORTS TAB */}
+              {activeTab === 'reports' && (
+                <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                  <Reports childData={childData} />
                 </div>
-                <SaveMessage status={saveStatus} message={errorMessage} />
+              )}
 
-                <div className="mt-10 pt-6 border-t border-red-300">
-                  <h4 className="text-xl font-semibold mb-4 border-b pb-2 flex items-center text-red-600"><FaExclamationTriangle className="mr-2" /> Danger Zone</h4>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-semibold">Deactivate this account</p>
-                      <p className="text-sm text-gray-600">Once you deactivate this account, it cannot be undone.</p>
+              {/* PROGRESS TAB */}
+              {activeTab === 'progress' && (
+                <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                  <ProgressTracker child={childData} />
+                </div>
+              )}
+
+              {/* REWARDS TAB */}
+              {activeTab === 'rewards' && (
+                <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                  <RewardsDisplay points={childData.points || 0} />
+                </div>
+              )}
+
+              {/* STICKERS TAB */}
+              {activeTab === 'stickers' && (
+                <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                  <StickerBook collectedStickerIds={childData.stickers} />
+                </div>
+              )}
+
+              {/* SETTINGS TAB */}
+              {activeTab === 'settings' && (
+                <form onSubmit={handleSettingsSave} className="space-y-6">
+                  {/* Account Access */}
+                  <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                    <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-5 flex items-center gap-2">
+                      <FaUserLock className="text-blue-500" /> Account Access
+                    </h3>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-bold text-slate-700">Enable Child Login</p>
+                        <p className="text-xs text-slate-400 font-medium">Allow this child to log in to the Student Zone</p>
+                      </div>
+                      <label className="relative inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          className="sr-only peer"
+                          checked={loginEnabled}
+                          onChange={(e) => handleToggleLogin(e.target.checked)}
+                        />
+                        <div className="w-12 h-7 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-200 after:border after:rounded-full after:h-6 after:w-6 after:transition-all after:shadow-sm peer-checked:bg-blue-600"></div>
+                      </label>
                     </div>
-                    <button type="button" onClick={handleDeleteClick} className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">
-                      Deactivate Account
-                    </button>
                   </div>
-                </div>
-              </div>
-            </form>
-          )}
+
+                  {/* Login Credentials */}
+                  <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                    <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-5 flex items-center gap-2">
+                      <FaKey className="text-amber-500" /> Login Credentials
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-500 mb-2">Username</label>
+                        <input
+                          type="text"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                          className={inputCls}
+                          required
+                        />
+                        {usernameStatus.status !== 'idle' && (
+                          <p className={`text-xs mt-2 font-bold ${usernameStatus.status === 'available' ? 'text-emerald-500' : usernameStatus.status === 'taken' ? 'text-rose-500' : 'text-slate-400'
+                            }`}>
+                            {usernameStatus.message}
+                          </p>
+                        )}
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-500 mb-2">Current Password</label>
+                        <div className="relative">
+                          <input
+                            type={showCurrentPassword ? 'text' : 'password'}
+                            value={childData.password || 'Not Set'}
+                            readOnly
+                            className={`${inputCls} bg-slate-50`}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                            className="absolute inset-y-0 right-0 px-4 flex items-center text-slate-400 hover:text-slate-600"
+                          >
+                            {showCurrentPassword ? <FaEyeSlash /> : <FaEye />}
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-500 mb-2">New Password</label>
+                        <input
+                          type="password"
+                          value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                          placeholder="Leave blank to keep current"
+                          className={inputCls}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-500 mb-2">Confirm New Password</label>
+                        <input
+                          type="password"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          placeholder="Confirm new password"
+                          className={inputCls}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex justify-end mt-6">
+                      <button
+                        type="submit"
+                        disabled={loading || usernameStatus.status === 'checking' || usernameStatus.status === 'taken'}
+                        className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-black text-xs uppercase tracking-widest rounded-xl hover:bg-blue-700 transition-all disabled:opacity-40 shadow-lg shadow-blue-200/40"
+                      >
+                        {loading ? <FaSpinner className="animate-spin" /> : <FaCheck />}
+                        {loading ? "Saving..." : "Save Changes"}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Danger Zone */}
+                  <div className="bg-white rounded-2xl p-7 shadow-sm border-2 border-rose-100">
+                    <h3 className="text-xs font-black text-rose-400 uppercase tracking-widest mb-5 flex items-center gap-2">
+                      <FaExclamationTriangle /> Danger Zone
+                    </h3>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                      <div>
+                        <p className="text-sm font-bold text-slate-700">Deactivate this account</p>
+                        <p className="text-xs text-slate-400 font-medium">Once you deactivate this account, it cannot be undone.</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleDeleteClick}
+                        className="flex items-center gap-2 px-5 py-2.5 bg-rose-50 text-rose-600 font-black text-xs uppercase tracking-widest rounded-xl border-2 border-rose-200 hover:bg-rose-100 transition-all flex-shrink-0"
+                      >
+                        <FaExclamationTriangle /> Deactivate
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
       ) : (
-        <div className="w-full flex-shrink-0 p-4 md:p-6">
-          <h2 className="text-3xl font-bold text-center mb-6">Edit {childData.name}</h2>
-          <AddChildForm childToEdit={childData} onClose={handleCancel} onSaveSuccess={handleSaveSuccess} />
+        /* ── EDIT VIEW ── */
+        <div className="max-w-4xl mx-auto px-4 py-8 sm:py-10">
+          <div className="flex items-center gap-4 mb-8">
+            <button
+              onClick={handleCancel}
+              className="flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors font-bold text-sm"
+            >
+              <FaArrowLeft /> Cancel
+            </button>
+            <h2 className="text-2xl font-black text-slate-800">Edit {childData.name}&apos;s Profile</h2>
+          </div>
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
+            <AddChildForm childToEdit={childData} onClose={handleCancel} onSaveSuccess={handleSaveSuccess} />
+          </div>
         </div>
       )}
 
+      {/* ── Login Helper Modal ── */}
       {showLoginHelper && (
         <Modal onClose={() => setShowLoginHelper(false)}>
           <div className="p-8 text-center">
-            <div className="w-20 h-20 bg-blue-100 text-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-6 text-3xl">
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-400 text-white rounded-[1.5rem] flex items-center justify-center mx-auto mb-6 text-3xl shadow-lg shadow-blue-200/50">
               <FaSignInAlt />
             </div>
             <h3 className="text-2xl font-black text-slate-800 mb-2">Login Details for {childData.name}</h3>
-            <p className="text-slate-500 mb-8 font-medium">Use these credentials to sign in as your learner.</p>
+            <p className="text-slate-400 mb-8 font-medium text-sm">Use these credentials to sign in as your learner.</p>
 
             <div className="bg-slate-50 rounded-2xl p-6 mb-8 border border-slate-100">
               <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Username</p>
@@ -362,7 +560,7 @@ const ChildDashboard = ({ child, onClose }) => {
             <div className="flex flex-col gap-3">
               <button
                 onClick={() => {
-                  const storage = localStorage; // Use localStorage for consistent login
+                  const storage = localStorage;
                   storage.setItem("childUser", JSON.stringify(childData));
                   router.push("/learning-zone");
                 }}
@@ -371,9 +569,7 @@ const ChildDashboard = ({ child, onClose }) => {
                 <FaSignInAlt className="group-hover:translate-x-1 transition-transform" /> Launch Student Zone
               </button>
               <button
-                onClick={() => {
-                  copyToClipboard(childData.username);
-                }}
+                onClick={() => copyToClipboard(childData.username)}
                 className="w-full py-3 bg-white text-slate-400 font-bold uppercase tracking-widest text-[10px] rounded-xl border border-slate-100 hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
               >
                 <FaClipboard /> Copy Username

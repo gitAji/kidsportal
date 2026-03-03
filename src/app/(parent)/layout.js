@@ -76,7 +76,7 @@ export default function ParentLayout({ children }) {
     return (
       <div className="flex bg-slate-50 h-screen overflow-hidden">
         <ParentSidebar />
-        <div className="flex-grow flex flex-col h-full overflow-hidden">
+        <div className="flex-grow flex flex-col h-full overflow-hidden min-w-0">
           <main className="flex-grow overflow-y-auto bg-slate-50/50 flex flex-col">
             <div className="flex-grow">
               <Suspense fallback={<DashboardSkeleton />}>

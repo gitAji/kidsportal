@@ -83,9 +83,15 @@ export default function SettingsPage() {
   const [stateProvince, setStateProvince] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
+  const [learningLanguage, setLearningLanguage] = useState("English");
+  const [learningSubjects, setLearningSubjects] = useState(["English", "Math", "Science"]);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isGoogleSignIn, setIsGoogleSignIn] = useState(false);
+
+  // Platform config from Super Admin
+  const [platformLanguages, setPlatformLanguages] = useState(null);
+  const [platformSubjects, setPlatformSubjects] = useState(null);
 
   // Profile save state
   const [saving, setSaving] = useState(false);
@@ -127,9 +133,23 @@ export default function SettingsPage() {
           setStateProvince(d.stateProvince || "");
           setPostalCode(d.postalCode || "");
           setCountry(d.country || "");
+          setLearningLanguage(d.learningLanguage || "English");
+          setLearningSubjects(d.learningSubjects || ["English", "Math", "Science"]);
         }
       } catch (err) {
         console.error(err);
+      }
+
+      // Load platform config (admin-managed languages & subjects)
+      try {
+        const configSnap = await getDoc(doc(db, "settings", "platformConfig"));
+        if (configSnap.exists()) {
+          const cfg = configSnap.data();
+          if (cfg.enabledLanguages) setPlatformLanguages(cfg.enabledLanguages);
+          if (cfg.enabledSubjects) setPlatformSubjects(cfg.enabledSubjects);
+        }
+      } catch (err) {
+        console.error("Error fetching platform config:", err);
       }
 
       // Live subscription listener
@@ -172,6 +192,7 @@ export default function SettingsPage() {
       await setDoc(doc(db, "users", user.uid), {
         firstName, lastName, phoneNumber,
         address, city, stateProvince, postalCode, country,
+        learningLanguage, learningSubjects,
       }, { merge: true });
       setSaveMsg({ type: "success", text: "Profile saved successfully!" });
     } catch (err) {
@@ -302,7 +323,86 @@ export default function SettingsPage() {
                     <Field label="Phone Number">
                       <input className={inputCls} type="tel" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)} placeholder="+47 000 00 000" />
                     </Field>
+                    <Field label="Learning Language">
+                      <select className={inputCls} value={learningLanguage} onChange={e => setLearningLanguage(e.target.value)}>
+                        {[
+                          { value: "English", label: "🇬🇧 English" },
+                          { value: "Tamil", label: "🇮🇳 Tamil (தமிழ்)" },
+                          { value: "Norwegian", label: "🇳🇴 Norwegian (Norsk)" },
+                          { value: "French", label: "🇫🇷 French (Français)" },
+                          { value: "Spanish", label: "🇪🇸 Spanish (Español)" },
+                          { value: "German", label: "🇩🇪 German (Deutsch)" },
+                          { value: "Arabic", label: "🇸🇦 Arabic (العربية)" },
+                          { value: "Mandarin", label: "🇨🇳 Mandarin (中文)" },
+                          { value: "Hindi", label: "🇮🇳 Hindi (हिन्दी)" },
+                          { value: "Sinhala", label: "🇱🇰 Sinhala (සිංහල)" },
+                          { value: "Malay", label: "🇲🇾 Malay (Bahasa Melayu)" },
+                          { value: "Swedish", label: "🇸🇪 Swedish (Svenska)" },
+                          { value: "Danish", label: "🇩🇰 Danish (Dansk)" },
+                          { value: "Finnish", label: "🇫🇮 Finnish (Suomi)" },
+                          { value: "Portuguese", label: "🇵🇹 Portuguese (Português)" },
+                          { value: "Japanese", label: "🇯🇵 Japanese (日本語)" },
+                          { value: "Korean", label: "🇰🇷 Korean (한국어)" },
+                        ]
+                          .filter(lang => !platformLanguages || platformLanguages.includes(lang.value))
+                          .map(lang => (
+                            <option key={lang.value} value={lang.value}>{lang.label}</option>
+                          ))}
+                      </select>
+                      <p className="text-[10px] text-slate-400 font-bold mt-1 ml-1">Controls the display language of the Learning Zone UI</p>
+                    </Field>
                   </div>
+                </Card>
+
+                {/* Learning Subjects */}
+                <Card title="Learning Subjects">
+                  <p className="text-xs text-slate-500 font-medium mb-4">Choose which subjects your child will see in the Learning Zone. You can mix languages — for example, select Norwegian UI above and still include Tamil as a subject below.</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {[
+                      { id: "English", label: "🇬🇧 English", color: "blue" },
+                      { id: "Tamil", label: "🇮🇳 Tamil", color: "orange" },
+                      { id: "Math", label: "🔢 Math", color: "purple" },
+                      { id: "Science", label: "🔬 Science", color: "green" },
+                      { id: "Art", label: "🎨 Art", color: "pink" },
+                      { id: "Music", label: "🎵 Music", color: "indigo" },
+                      { id: "History", label: "📜 History", color: "amber" },
+                      { id: "Geography", label: "🌍 Geography", color: "teal" },
+                      { id: "Computer Science", label: "💻 Computer Science", color: "cyan" },
+                      { id: "Physical Education", label: "⚽ Physical Education", color: "red" },
+                      { id: "Norwegian", label: "🇳🇴 Norwegian", color: "blue" },
+                      { id: "French", label: "🇫🇷 French", color: "blue" },
+                      { id: "Spanish", label: "🇪🇸 Spanish", color: "yellow" },
+                      { id: "German", label: "🇩🇪 German", color: "slate" },
+                    ]
+                      .filter(subj => !platformSubjects || platformSubjects.includes(subj.id))
+                      .map(subj => {
+                        const isSelected = learningSubjects.includes(subj.id);
+                        return (
+                          <button
+                            type="button"
+                            key={subj.id}
+                            onClick={() => {
+                              setLearningSubjects(prev =>
+                                prev.includes(subj.id)
+                                  ? prev.filter(s => s !== subj.id)
+                                  : [...prev, subj.id]
+                              );
+                            }}
+                            className={`flex items-center gap-2 px-4 py-3 rounded-xl border-2 text-sm font-bold transition-all ${isSelected
+                              ? `bg-${subj.color}-50 border-${subj.color}-400 text-${subj.color}-700 shadow-sm`
+                              : "bg-white border-slate-200 text-slate-400 hover:border-slate-300"
+                              }`}
+                          >
+                            <span className="text-base">{subj.label.split(" ")[0]}</span>
+                            <span>{subj.label.split(" ").slice(1).join(" ")}</span>
+                            {isSelected && <span className="ml-auto text-xs">✓</span>}
+                          </button>
+                        );
+                      })}
+                  </div>
+                  {learningSubjects.length === 0 && (
+                    <p className="text-xs text-red-500 font-bold mt-2">⚠️ Please select at least one subject</p>
+                  )}
                 </Card>
 
                 {/* Account */}
@@ -353,7 +453,7 @@ export default function SettingsPage() {
                     <Field label="Country">
                       <select className={inputCls} value={country} onChange={e => setCountry(e.target.value)}>
                         <option value="">Select country</option>
-                        {["Denmark", "Finland", "Iceland", "Norway", "Sweden", "United Kingdom", "Switzerland", "France", "Germany"].map(c => (
+                        {["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"].map(c => (
                           <option key={c} value={c}>{c}</option>
                         ))}
                       </select>

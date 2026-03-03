@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, logout } from "@/firebase/auth";
-import { FaBell, FaUserCircle, FaCaretDown, FaQuestionCircle, FaInfoCircle, FaUsers, FaStar } from "react-icons/fa";
+import { FaBell, FaUserCircle, FaCaretDown, FaQuestionCircle, FaInfoCircle, FaUsers, FaStar, FaHome, FaGraduationCap, FaEnvelope } from "react-icons/fa";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { motion, AnimatePresence } from "framer-motion";
@@ -201,15 +201,6 @@ export default function Header({
                 <span className="text-[9px] sm:text-[10px]">How It Works</span>
               </button>
               <button
-                className="flex items-center gap-1.5 sm:gap-2 cursor-pointer hover:text-white transition-colors group"
-                onClick={setIsAboutUsOpen}
-              >
-                <div className="w-5 h-5 rounded-lg bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500 transition-all">
-                  <FaInfoCircle className="text-[10px] text-emerald-400 group-hover:text-white" />
-                </div>
-                <span className="text-[9px] sm:text-[10px]">About Us</span>
-              </button>
-              <button
                 className="hidden md:flex items-center gap-2 cursor-pointer hover:text-white transition-colors group"
                 onClick={setIsOurTeamOpen}
               >
@@ -243,6 +234,9 @@ export default function Header({
           <nav className="hidden lg:flex items-center space-x-10">
             <Link href="/" className={getLinkClassName("/")}>
               Home
+            </Link>
+            <Link href="/about" className={getLinkClassName("/about")}>
+              About Us
             </Link>
             {!user && (
               <Link href="/learning" className={getLinkClassName("/learning")}>
@@ -401,138 +395,158 @@ export default function Header({
           </div>
         </div>
 
-        {/* Full-page Mobile Menu */}
-        {
-          isMenuOpen && (
-            <>
-              <div
-                className="fixed inset-0 bg-black opacity-50 z-40"
-                onClick={() => setIsMenuOpen(false)}
-              />
-              <div className="fixed inset-0 bg-[var(--background)] z-50 transform translate-x-0 transition-transform duration-300 ease-in-out">
-                <div className="flex justify-between items-center p-6">
-                  <Link href="/" passHref>
+      </header>
+
+      {/* Full-page Mobile Menu - rendered outside header to avoid stacking context clip */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[200]"
+              onClick={() => setIsMenuOpen(false)}
+            />
+
+            {/* Slide-in Panel */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 28, stiffness: 300 }}
+              className="fixed inset-y-0 right-0 w-full max-w-[320px] bg-white z-[300] shadow-2xl flex flex-col overflow-y-auto"
+            >
+              {/* Header */}
+              <div className="flex justify-between items-center p-5 border-b border-slate-100">
+                <Link href="/" passHref onClick={() => setIsMenuOpen(false)}>
+                  <div className="p-1.5 bg-slate-50 rounded-xl">
                     <Image
                       src="/logo.png"
                       alt="Logo"
-                      width={80}
-                      height={50}
-                      className="mr-2"
+                      width={100}
+                      height={35}
+                      className="w-auto h-8 object-contain"
                     />
-                  </Link>
-                  <button
-                    className="text-[var(--foreground)] focus:outline-none p-3"
-                    onClick={() => setIsMenuOpen(false)}
-                    aria-label="Close mobile menu"
-                  >
-                    <svg
-                      className="w-8 h-8"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <nav className="flex flex-col items-center space-y-4 p-6 w-full">
-                  <Link
-                    href="/"
-                    className={getMobileLinkClassName("/")}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Home
-                  </Link>
-                  {!user && (
-                    <Link
-                      href="/learning"
-                      className={getMobileLinkClassName("/learning")}
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Learning
-                    </Link>
-                  )}
-                  <Link
-                    href="/help"
-                    className={getMobileLinkClassName("/help")}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Help
-                  </Link>
+                  </div>
+                </Link>
+                <button
+                  className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-all"
+                  onClick={() => setIsMenuOpen(false)}
+                  aria-label="Close mobile menu"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
 
-                  {/* User Info in mobile menu */}
-                  {user && (
-                    <div className="mt-4">
-                      <span className="text-[var(--foreground)] text-xl block mb-2">
-                        Hello, {user.displayName || user.email}!
-                      </span>
+              {/* Navigation Links */}
+              <nav className="flex flex-col p-4 space-y-1 flex-grow">
+                {[
+                  { href: "/", label: "Home", icon: <FaHome /> },
+                  { href: "/about", label: "About Us", icon: <FaInfoCircle /> },
+                  ...(!user ? [{ href: "/learning", label: "Learning", icon: <FaGraduationCap /> }] : []),
+                  { href: "/help", label: "Help", icon: <FaQuestionCircle /> },
+                  { href: "/contact", label: "Contact", icon: <FaEnvelope /> },
+                ].map((item, idx) => (
+                  item.isButton ? (
+                    <button
+                      key={idx}
+                      onClick={item.action}
+                      className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-all text-left w-full"
+                    >
+                      <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center text-slate-400 text-sm flex-shrink-0">
+                        {item.icon}
+                      </div>
+                      <span className="text-sm font-bold">{item.label}</span>
+                    </button>
+                  ) : (
+                    <Link
+                      key={idx}
+                      href={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all ${pathname === item.href
+                        ? "bg-blue-50 text-blue-600"
+                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-800"
+                        }`}
+                    >
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm flex-shrink-0 ${pathname === item.href ? "bg-blue-100 text-blue-600" : "bg-slate-50 text-slate-400"
+                        }`}>
+                        {item.icon}
+                      </div>
+                      <span className="text-sm font-bold">{item.label}</span>
+                    </Link>
+                  )
+                ))}
+
+                {/* Authenticated User Section */}
+                {user && (
+                  <>
+                    <div className="pt-4 mt-2 border-t border-slate-100">
+                      <div className="px-4 py-3 mb-2">
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Signed in as</p>
+                        <p className="text-xs font-bold text-slate-700 truncate">{user.displayName || user.email}</p>
+                      </div>
                       <Link
                         href="/dashboard"
-                        className="flex items-center justify-center text-[var(--foreground)] text-xl hover:text-[var(--primary-blue)] mb-2"
                         onClick={() => setIsMenuOpen(false)}
+                        className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-all"
                       >
-                        <FontAwesomeIcon icon={faChartBar} className="mr-2" />
-                        Dashboard
+                        <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-500 text-sm flex-shrink-0">
+                          <FontAwesomeIcon icon={faChartBar} />
+                        </div>
+                        <span className="text-sm font-bold">Dashboard</span>
                       </Link>
                       <Link
                         href="/profile"
-                        className="flex items-center justify-center text-[var(--foreground)] text-xl hover:text-[var(--primary-blue)] mb-2"
                         onClick={() => setIsMenuOpen(false)}
+                        className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all"
                       >
-                        <FontAwesomeIcon icon={faUser} className="mr-2" />
-                        Profile
+                        <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-500 text-sm flex-shrink-0">
+                          <FontAwesomeIcon icon={faUser} />
+                        </div>
+                        <span className="text-sm font-bold">My Profile</span>
                       </Link>
+                    </div>
+
+                    <div className="mt-auto pt-4 border-t border-slate-100">
                       <button
-                        onClick={() => {
-                          handleLogout();
-                          setIsMenuOpen(false);
-                        }}
-                        className="flex items-center justify-center bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 text-lg mt-4 mx-auto w-full"
+                        onClick={() => { handleLogout(); setIsMenuOpen(false); }}
+                        className="flex items-center gap-4 w-full px-4 py-3.5 rounded-2xl text-slate-400 hover:bg-rose-50 hover:text-rose-600 transition-all"
                       >
-                        <FontAwesomeIcon
-                          icon={faSignOutAlt}
-                          className="mr-2 text-xl"
-                        />
-                        Sign Out
+                        <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center text-slate-400 text-sm flex-shrink-0">
+                          <FontAwesomeIcon icon={faSignOutAlt} />
+                        </div>
+                        <span className="text-sm font-bold">Sign Out</span>
                       </button>
                     </div>
-                  )}
-                  {!user && (
-                    <div className="flex flex-col space-y-4 w-full pt-4 border-t border-slate-100">
-                      <button
-                        className="bg-slate-50 text-slate-700 border-2 border-slate-200 py-4 px-6 rounded-3xl font-bold text-lg hover:bg-slate-100 transition-all duration-200 w-full"
-                        onClick={() => {
-                          setIsModalOpen(true);
-                          setIsRegister(false);
-                          setIsMenuOpen(false);
-                        }}
-                      >
-                        Log In
-                      </button>
-                      <button
-                        className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-4 px-6 rounded-3xl font-bold text-lg shadow-lg w-full"
-                        onClick={() => {
-                          setIsModalOpen(true);
-                          setIsRegister(true);
-                          setIsMenuOpen(false);
-                        }}
-                      >
-                        Sign Up
-                      </button>
-                    </div>
-                  )}
-                </nav>
-              </div>
-            </>
-          )
-        }
-      </header>
+                  </>
+                )}
+
+                {/* Not Authenticated - Auth Buttons */}
+                {!user && (
+                  <div className="mt-auto pt-6 border-t border-slate-100 space-y-3 px-2">
+                    <button
+                      className="w-full py-4 bg-white text-slate-700 border-2 border-slate-200 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-slate-50 transition-all"
+                      onClick={() => { setIsModalOpen(true); setIsRegister(false); setIsMenuOpen(false); }}
+                    >
+                      Log In
+                    </button>
+                    <button
+                      className="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-lg shadow-blue-200/40 hover:shadow-blue-300/50 transition-all"
+                      onClick={() => { setIsModalOpen(true); setIsRegister(true); setIsMenuOpen(false); }}
+                    >
+                      Join Adventure
+                    </button>
+                  </div>
+                )}
+              </nav>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }

@@ -323,13 +323,21 @@ export default function SuperAdminDashboard() {
                             <FaUserShield size={120} />
                         </div>
                         <h2 className="text-2xl font-black text-white tracking-tight mb-4 leading-tight relative z-10">Admin Control</h2>
-                        <p className="text-blue-100/70 text-sm font-medium mb-8 relative z-10">Manage educators and platform access.</p>
-                        <Link
-                            href="/super-admin/teachers"
-                            className="block w-full text-center bg-white text-blue-700 py-4 rounded-2xl font-black text-sm shadow-xl shadow-blue-800/20 hover:scale-[1.02] active:scale-[0.98] transition-all relative z-10"
-                        >
-                            Open Teacher Registry
-                        </Link>
+                        <p className="text-blue-100/70 text-sm font-medium mb-6 relative z-10">Manage educators and platform access.</p>
+                        <div className="space-y-3 relative z-10">
+                            <Link
+                                href="/super-admin/teachers"
+                                className="block w-full text-center bg-white text-blue-700 py-4 rounded-2xl font-black text-sm shadow-xl shadow-blue-800/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                            >
+                                Open Teacher Registry
+                            </Link>
+                            <Link
+                                href="/super-admin/learning-config"
+                                className="block w-full text-center bg-white/10 backdrop-blur text-white border border-white/20 py-4 rounded-2xl font-black text-sm hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                            >
+                                ⚙️ Learning Configuration
+                            </Link>
+                        </div>
                     </div>
 
                     {/* System Health */}

@@ -29,60 +29,74 @@ export default async function HomePage() {
       <HeroSection />
 
       {/* Stats Section / By the Numbers */}
-      <section className="py-12 bg-slate-50 border-y border-slate-100">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-black text-blue-600 mb-1">1-8</div>
-              <div className="text-xs md:text-sm font-bold text-slate-500 uppercase tracking-widest">Active Grades</div>
+      <section className="py-16 bg-white border-y border-slate-100 relative overflow-hidden">
+        {/* Soft decorative blur */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-50/50 rounded-full blur-[100px] -z-10" />
+
+        <div className="container mx-auto px-4 z-10 relative">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            <div className="text-center group p-6 rounded-3xl bg-white border-2 border-slate-50 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-blue-100 hover:-translate-y-1 transition-all duration-300">
+              <div className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-indigo-500 mb-2 group-hover:scale-105 transition-transform">1-8</div>
+              <div className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-[0.2em]">Active Grades</div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-black text-cyan-500 mb-1">360+</div>
-              <div className="text-xs md:text-sm font-bold text-slate-500 uppercase tracking-widest">Learning Levels</div>
+            <div className="text-center group p-6 rounded-3xl bg-white border-2 border-slate-50 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-cyan-100 hover:-translate-y-1 transition-all duration-300">
+              <div className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-cyan-500 to-teal-400 mb-2 group-hover:scale-105 transition-transform">360+</div>
+              <div className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-[0.2em]">Learning Levels</div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-black text-purple-500 mb-1">10k+</div>
-              <div className="text-xs md:text-sm font-bold text-slate-500 uppercase tracking-widest">Happy Kids</div>
+            <div className="text-center group p-6 rounded-3xl bg-white border-2 border-slate-50 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-purple-100 hover:-translate-y-1 transition-all duration-300">
+              <div className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-purple-500 to-fuchsia-500 mb-2 group-hover:scale-105 transition-transform">10k+</div>
+              <div className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-[0.2em]">Happy Kids</div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-black text-orange-500 mb-1">4.9/5</div>
-              <div className="text-xs md:text-sm font-bold text-slate-500 uppercase tracking-widest">Avg. Rating</div>
+            <div className="text-center group p-6 rounded-3xl bg-white border-2 border-slate-50 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-orange-100 hover:-translate-y-1 transition-all duration-300">
+              <div className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-amber-500 mb-2 group-hover:scale-105 transition-transform">4.9/5</div>
+              <div className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-[0.2em]">Avg. Rating</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Key Features Section */}
-      <section className="py-24 bg-white relative">
+      <section className="py-32 bg-slate-50 relative border-t border-slate-100">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-black text-slate-800 mb-4">Master Every Subject <span className="text-blue-600">With Joy</span></h2>
-            <p className="text-slate-600 text-lg">Our portal is designed by educators to ensure your child stays engaged, motivated, and ahead of the curve.</p>
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-indigo-50 text-indigo-600 rounded-full text-sm font-bold uppercase tracking-wider">
+              <span>🚀</span> For Parents & Kids
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-800 mb-6 tracking-tight leading-tight">
+              Master Every Subject <br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">With Absolute Joy</span>
+            </h2>
+            <p className="text-slate-500 text-lg md:text-xl font-medium leading-relaxed">
+              Our portal is designed by educators to ensure your child stays engaged, motivated, and ahead of the curve.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="group bg-white p-8 rounded-3xl border-2 border-slate-50 hover:border-blue-100 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300">
-              <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <span className="text-2xl">✨</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-2 md:px-0">
+            <div className="group bg-white p-10 rounded-[2.5rem] border-2 border-slate-100 border-b-[6px] hover:border-blue-100 hover:border-b-blue-500 hover:-translate-y-2 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700 opacity-50" />
+              <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-8 group-hover:rotate-12 group-hover:scale-110 group-hover:bg-blue-100 transition-all duration-300 relative z-10">
+                <span className="text-3xl">✨</span>
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Interactive Journey</h3>
-              <p className="text-slate-600 leading-relaxed">Gamified lessons that turn complex concepts into fun adventures. Kids don't just learn; they play and grow.</p>
+              <h3 className="text-2xl font-black text-slate-800 mb-4 group-hover:text-blue-600 transition-colors relative z-10">Interactive Journey</h3>
+              <p className="text-slate-500 text-lg leading-relaxed relative z-10 font-medium">Gamified lessons that turn complex concepts into fun adventures. Kids don't just learn; they play and grow.</p>
             </div>
 
-            <div className="group bg-white p-8 rounded-3xl border-2 border-slate-50 hover:border-green-100 hover:shadow-xl hover:shadow-green-500/5 transition-all duration-300">
-              <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <span className="text-2xl">👩‍🏫</span>
+            <div className="group bg-white p-10 rounded-[2.5rem] border-2 border-slate-100 border-b-[6px] hover:border-green-100 hover:border-b-green-500 hover:-translate-y-2 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-green-50 rounded-full blur-3xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700 opacity-50" />
+              <div className="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-8 group-hover:rotate-12 group-hover:scale-110 group-hover:bg-green-100 transition-all duration-300 relative z-10">
+                <span className="text-3xl">👩‍🏫</span>
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Expert Curriculum</h3>
-              <p className="text-slate-600 leading-relaxed">Aligned with national standards for grades 1-8, developed by top-tier educators with decades of experience.</p>
+              <h3 className="text-2xl font-black text-slate-800 mb-4 group-hover:text-green-600 transition-colors relative z-10">Expert Curriculum</h3>
+              <p className="text-slate-500 text-lg leading-relaxed relative z-10 font-medium">Aligned with national standards for grades 1-8, developed by top-tier educators with decades of experience.</p>
             </div>
 
-            <div className="group bg-white p-8 rounded-3xl border-2 border-slate-50 hover:border-purple-100 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-300">
-              <div className="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <span className="text-2xl">📈</span>
+            <div className="group bg-white p-10 rounded-[2.5rem] border-2 border-slate-100 border-b-[6px] hover:border-purple-100 hover:border-b-purple-500 hover:-translate-y-2 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-full blur-3xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700 opacity-50" />
+              <div className="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center mb-8 group-hover:-rotate-12 group-hover:scale-110 group-hover:bg-purple-100 transition-all duration-300 relative z-10">
+                <span className="text-3xl">📈</span>
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Real-time Insights</h3>
-              <p className="text-slate-600 leading-relaxed">Track every milestone with a detailed parent dashboard. See exactly where your child excels and where they need a boost.</p>
+              <h3 className="text-2xl font-black text-slate-800 mb-4 group-hover:text-purple-600 transition-colors relative z-10">Real-time Insights</h3>
+              <p className="text-slate-500 text-lg leading-relaxed relative z-10 font-medium">Track every milestone with a detailed parent dashboard. See exactly where your child excels and where they need a boost.</p>
             </div>
           </div>
 

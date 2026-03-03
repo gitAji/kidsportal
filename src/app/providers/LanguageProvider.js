@@ -1,9 +1,35 @@
 "use client";
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useChild } from './ChildProvider';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/firebase/config';
 
 const LanguageContext = createContext();
 
-// Comprehensive Tamil translations for the entire learning zone
+// Map parent's learningLanguage setting to our language codes
+const LANGUAGE_CODE_MAP = {
+    English: 'en',
+    Tamil: 'ta',
+    Norwegian: 'no',
+    French: 'fr',
+    Spanish: 'es',
+    German: 'de',
+    Arabic: 'ar',
+    Mandarin: 'zh',
+    Hindi: 'hi',
+    Sinhala: 'si',
+    Malay: 'ms',
+    Swedish: 'sv',
+    Danish: 'da',
+    Finnish: 'fi',
+    Portuguese: 'pt',
+    Japanese: 'ja',
+    Korean: 'ko',
+};
+
+// ══════════════════════════════════════════════════════════════════
+// Comprehensive translations for the learning zone
+// ══════════════════════════════════════════════════════════════════
 export const translations = {
     en: {
         // Header
@@ -53,6 +79,7 @@ export const translations = {
         // Language toggle
         switch_lang: "தமிழ்"
     },
+
     ta: {
         // Header
         stars_earned: "பெற்ற நட்சத்திரங்கள்",
@@ -100,12 +127,186 @@ export const translations = {
 
         // Language toggle
         switch_lang: "English"
-    }
+    },
+
+    no: {
+        // Header
+        stars_earned: "Stjerner opptjent",
+        current_level: "Nåværende nivå",
+        achievements: "Prestasjoner",
+        settings: "Innstillinger",
+        logout: "Logg ut",
+        next_level: "Neste nivå",
+        explorer_rank: "Utforsker-rang",
+        see_you_soon: "Vi sees snart, Utforsker!",
+        preparing_logout: "Forbereder utlogging...",
+
+        // Main page
+        explorer: "Utforsker",
+        welcome: "Velkommen tilbake,",
+        ready_adventure: "Klar for dagens eventyr? Velg et fag nedenfor for å utforske nye nivåer og tjene stjerner!",
+        play_now: "Spill nå",
+        adventure_on_hold: "Eventyret er satt på pause!",
+        trial_ended: "Prøveperioden din er over. Be foreldrene dine om å fornye planen din slik at du kan fortsette!",
+        log_out: "LOGG UT",
+
+        // Subjects page
+        select_level: "Velg et nivå",
+        locked: "Låst",
+        ready_to_play: "Klar til å spille!",
+        no_levels: "Ingen nivåer funnet for dette faget ennå. Kom tilbake senere!",
+        subject_not_found: "Fag ikke funnet.",
+        back_to_dashboard: "Tilbake til dashbord",
+        your_subjects: "Dine fag",
+        no_subjects: "Ingen fag funnet for din klasse.",
+
+        // Subject names
+        subjects: {
+            "English": "Engelsk",
+            "Math": "Matematikk",
+            "Tamil": "Tamil",
+            "Science": "Naturfag",
+            "Ariviyal": "Naturfag"
+        },
+
+        // Footer
+        crafted: "Laget for kvalitet",
+        inspiring: "Inspirerer neste generasjon",
+        safety: "Sikkerhet og personvern garantert",
+
+        // Language toggle
+        switch_lang: "English"
+    },
+
+    fr: {
+        stars_earned: "Étoiles gagnées",
+        current_level: "Niveau actuel",
+        achievements: "Réalisations",
+        settings: "Paramètres",
+        logout: "Déconnexion",
+        next_level: "Niveau suivant",
+        explorer_rank: "Rang Explorateur",
+        see_you_soon: "À bientôt, Explorateur !",
+        preparing_logout: "Préparation de la déconnexion...",
+        explorer: "Explorateur",
+        welcome: "Bienvenue,",
+        ready_adventure: "Prêt pour l'aventure d'aujourd'hui ? Choisis une matière ci-dessous pour explorer de nouveaux niveaux et gagner des étoiles !",
+        play_now: "Jouer",
+        adventure_on_hold: "Aventure en pause !",
+        trial_ended: "Votre période d'essai est terminée. Demandez à vos parents de renouveler votre plan !",
+        log_out: "DÉCONNEXION",
+        select_level: "Choisir un niveau",
+        locked: "Verrouillé",
+        ready_to_play: "Prêt à jouer !",
+        no_levels: "Aucun niveau trouvé pour cette matière. Revenez plus tard !",
+        subject_not_found: "Matière introuvable.",
+        back_to_dashboard: "Retour au tableau de bord",
+        your_subjects: "Vos matières",
+        no_subjects: "Aucune matière trouvée pour votre classe.",
+        subjects: { "English": "Anglais", "Math": "Mathématiques", "Tamil": "Tamoul", "Science": "Sciences", "Ariviyal": "Sciences" },
+        crafted: "Conçu pour l'excellence",
+        inspiring: "Inspirer la prochaine génération",
+        safety: "Sécurité et confidentialité garanties",
+        switch_lang: "English"
+    },
+
+    es: {
+        stars_earned: "Estrellas ganadas",
+        current_level: "Nivel actual",
+        achievements: "Logros",
+        settings: "Configuración",
+        logout: "Cerrar sesión",
+        next_level: "Siguiente nivel",
+        explorer_rank: "Rango Explorador",
+        see_you_soon: "¡Hasta pronto, Explorador!",
+        preparing_logout: "Preparando cierre de sesión...",
+        explorer: "Explorador",
+        welcome: "Bienvenido de nuevo,",
+        ready_adventure: "¿Listo para la aventura de hoy? ¡Elige una materia para explorar nuevos niveles y ganar estrellas!",
+        play_now: "Jugar",
+        adventure_on_hold: "¡Aventura en pausa!",
+        trial_ended: "Tu periodo de prueba ha terminado. ¡Pide a tus padres que renueven tu plan!",
+        log_out: "CERRAR SESIÓN",
+        select_level: "Selecciona un nivel",
+        locked: "Bloqueado",
+        ready_to_play: "¡Listo para jugar!",
+        no_levels: "No se encontraron niveles para esta materia. ¡Vuelve más tarde!",
+        subject_not_found: "Materia no encontrada.",
+        back_to_dashboard: "Volver al panel",
+        your_subjects: "Tus materias",
+        no_subjects: "No se encontraron materias para tu grado.",
+        subjects: { "English": "Inglés", "Math": "Matemáticas", "Tamil": "Tamil", "Science": "Ciencias", "Ariviyal": "Ciencias" },
+        crafted: "Hecho con excelencia",
+        inspiring: "Inspirando a la próxima generación",
+        safety: "Seguridad y privacidad garantizadas",
+        switch_lang: "English"
+    },
+
+    de: {
+        stars_earned: "Verdiente Sterne",
+        current_level: "Aktuelles Level",
+        achievements: "Erfolge",
+        settings: "Einstellungen",
+        logout: "Abmelden",
+        next_level: "Nächstes Level",
+        explorer_rank: "Entdecker-Rang",
+        see_you_soon: "Bis bald, Entdecker!",
+        preparing_logout: "Abmeldung wird vorbereitet...",
+        explorer: "Entdecker",
+        welcome: "Willkommen zurück,",
+        ready_adventure: "Bereit für das heutige Abenteuer? Wähle ein Fach, um neue Level zu entdecken und Sterne zu sammeln!",
+        play_now: "Jetzt spielen",
+        adventure_on_hold: "Abenteuer pausiert!",
+        trial_ended: "Deine Testphase ist abgelaufen. Bitte deine Eltern, deinen Plan zu verlängern!",
+        log_out: "ABMELDEN",
+        select_level: "Wähle ein Level",
+        locked: "Gesperrt",
+        ready_to_play: "Bereit zum Spielen!",
+        no_levels: "Noch keine Level für dieses Fach gefunden. Komm später wieder!",
+        subject_not_found: "Fach nicht gefunden.",
+        back_to_dashboard: "Zurück zum Dashboard",
+        your_subjects: "Deine Fächer",
+        no_subjects: "Keine Fächer für deine Klasse gefunden.",
+        subjects: { "English": "Englisch", "Math": "Mathematik", "Tamil": "Tamil", "Science": "Naturwissenschaften", "Ariviyal": "Naturwissenschaften" },
+        crafted: "Für Spitzenleistung gemacht",
+        inspiring: "Die nächste Generation inspirieren",
+        safety: "Sicherheit und Datenschutz garantiert",
+        switch_lang: "English"
+    },
 };
 
+// ══════════════════════════════════════════════════════════════════
+// Provider Component
+// ══════════════════════════════════════════════════════════════════
 export function LanguageProvider({ children }) {
-    // Default to Tamil (ta) as requested
-    const [language, setLanguage] = useState('ta');
+    const [language, setLanguage] = useState('en');
+    const [languageLoaded, setLanguageLoaded] = useState(false);
+    const { childUser } = useChild();
+
+    // Auto-detect language from parent's learningLanguage setting
+    useEffect(() => {
+        const loadLanguage = async () => {
+            if (!childUser?.parentUid) {
+                setLanguageLoaded(true);
+                return;
+            }
+
+            try {
+                const parentSnap = await getDoc(doc(db, 'users', childUser.parentUid));
+                if (parentSnap.exists()) {
+                    const parentLang = parentSnap.data().learningLanguage || 'English';
+                    const code = LANGUAGE_CODE_MAP[parentLang] || 'en';
+                    // Only set if we have translations for it, otherwise fallback to 'en'
+                    setLanguage(translations[code] ? code : 'en');
+                }
+            } catch (err) {
+                console.error('Error loading parent language preference:', err);
+            }
+            setLanguageLoaded(true);
+        };
+
+        loadLanguage();
+    }, [childUser]);
 
     const t = (key) => {
         const keys = key.split('.');
@@ -134,7 +335,7 @@ export function LanguageProvider({ children }) {
     };
 
     return (
-        <LanguageContext.Provider value={{ language, setLanguage, t, toggleLanguage }}>
+        <LanguageContext.Provider value={{ language, setLanguage, t, toggleLanguage, languageLoaded }}>
             {children}
         </LanguageContext.Provider>
     );

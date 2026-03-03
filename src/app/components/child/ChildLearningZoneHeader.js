@@ -7,11 +7,11 @@ import { useChild } from '@/app/providers/ChildProvider';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaStar, FaTrophy, FaSignOutAlt, FaCog, FaMedal, FaGlobeAsia } from 'react-icons/fa';
+import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaStar, FaTrophy, FaSignOutAlt, FaCog, FaMedal } from 'react-icons/fa';
 
 export default function ChildLearningZoneHeader() {
   const { childUser } = useChild();
-  const { t, toggleLanguage, language } = useLanguage();
+  const { t } = useLanguage();
   const router = useRouter();
   const pathname = usePathname();
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -131,11 +131,11 @@ export default function ChildLearningZoneHeader() {
         <div className="max-w-7xl mx-auto bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-[2rem] px-6 py-2 flex items-center justify-between">
 
           {/* Left: Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center ml-2">
             <Link href="/learning-zone" className="group flex items-center gap-3 transition-transform hover:scale-[1.02] active:scale-[0.98]">
-              <div className="relative">
-                <Image src="/logo.png" alt="KidsPortal" width={180} height={56} className="w-auto h-14 object-contain" />
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300" />
+              <div className="relative flex items-center h-20">
+                <Image src="/logo.png" alt="KidsPortal" width={280} height={80} className="w-auto h-16 drop-shadow-sm object-contain" />
+                <div className="absolute -bottom-2 left-0 w-0 h-[3px] bg-gradient-to-r from-blue-500 to-indigo-500 group-hover:w-full transition-all duration-300 rounded-full" />
               </div>
             </Link>
           </div>
@@ -163,24 +163,8 @@ export default function ChildLearningZoneHeader() {
             </div>
           </div>
 
-          {/* Right: Language Toggle + Profile & Dropdown */}
+          {/* Right: Profile & Dropdown */}
           <div className="flex items-center gap-3">
-            {/* Language Toggle Button */}
-            <motion.button
-              onClick={toggleLanguage}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-3 py-2 rounded-2xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200/60 shadow-sm hover:shadow-md transition-all group"
-              title={language === 'ta' ? 'Switch to English' : 'தமிழுக்கு மாற்று'}
-            >
-              <div className="w-7 h-7 rounded-xl bg-emerald-500 flex items-center justify-center text-white shadow-inner group-hover:bg-emerald-600 transition-colors">
-                <FaGlobeAsia className="text-sm" />
-              </div>
-              <span className="text-xs font-black text-emerald-700 uppercase tracking-wider hidden sm:block">
-                {t('switch_lang')}
-              </span>
-            </motion.button>
-
             {/* Mobile Stars Indicator */}
             <div className="md:hidden flex items-center gap-1.5 bg-amber-100/50 px-3 py-1.5 rounded-full border border-amber-200">
               <FaStar className="text-amber-500 text-xs" />
