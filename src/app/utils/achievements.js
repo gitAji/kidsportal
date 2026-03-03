@@ -172,6 +172,7 @@ export function recordTaskCompletion(childId, taskResult) {
     // Basic counters
     stats.totalTasksCompleted = (stats.totalTasksCompleted || 0) + 1;
     stats.totalScore = (stats.totalScore || 0) + (taskResult.score || 0);
+    stats.totalTimeTaken = (stats.totalTimeTaken || 0) + (taskResult.timeTaken || 0);
     stats.lastTaskPerfect = pct === 1;
 
     // Medal tracking (exams only)

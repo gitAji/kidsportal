@@ -1,5 +1,7 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
+
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import {
@@ -45,25 +47,40 @@ export default function ParentSidebar() {
             animate={{ width: isCollapsed ? "80px" : "280px" }}
             className="relative h-screen bg-white border-r border-slate-100 flex flex-col transition-all duration-300 z-50 shadow-[4px_0_24px_rgba(0,0,0,0.02)]"
         >
+
             {/* Logo Section */}
-            <div className="p-6 flex items-center justify-between">
-                <Link href="/dashboard" className="block outline-none">
-                    {!isCollapsed ? (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="flex items-center gap-3"
-                        >
-                            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
-                                <span className="font-black text-xl">K</span>
+            <div className="p-6">
+                <Link href="/dashboard" className="block outline-none group">
+                    <div className={`transition-all duration-300 ${isCollapsed ? 'flex justify-center' : ''}`}>
+                        {!isCollapsed ? (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className="flex items-center gap-3"
+                            >
+                                <div className="p-2 bg-slate-50 rounded-xl group-hover:bg-blue-50 transition-colors">
+                                    <Image
+                                        src="/logo.png"
+                                        alt="KidsPortal"
+                                        width={120}
+                                        height={40}
+                                        className="w-auto h-10 object-contain"
+                                        priority
+                                    />
+                                </div>
+                            </motion.div>
+                        ) : (
+                            <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center group-hover:bg-blue-50 transition-all overflow-hidden p-1.5">
+                                <Image
+                                    src="/logo.png"
+                                    alt="K"
+                                    width={40}
+                                    height={40}
+                                    className="w-full h-full object-contain scale-150"
+                                />
                             </div>
-                            <span className="font-black text-xl text-slate-800 tracking-tight">KidsPortal</span>
-                        </motion.div>
-                    ) : (
-                        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 mx-auto">
-                            <span className="font-black text-xl">K</span>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </Link>
             </div>
 

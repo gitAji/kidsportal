@@ -3,7 +3,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "@/firebase/config";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaCheck, FaStar, FaRocket, FaShieldAlt, FaSpinner, FaGlobe, FaChevronDown } from "react-icons/fa";
+import {
+  FaCheck, FaStar, FaRocket, FaShieldAlt,
+  FaSpinner, FaGlobe, FaChevronDown, FaLock,
+  FaUserShield, FaCcStripe
+} from "react-icons/fa";
+import { SiStripe } from "react-icons/si";
+
 import { CURRENCY_PRICES, NATIVE_CURRENCIES } from "@/lib/pricingConfig";
 
 // ─── Currency Selector ────────────────────────────────────────────────────────
@@ -276,13 +282,46 @@ export default function PricingPage() {
           ))}
         </div>
 
-        <motion.p
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
-          className="mt-10 text-slate-400 text-xs text-center max-w-md"
+        {/* ── Trust Row ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-12 flex flex-wrap justify-center items-center gap-8 md:gap-16 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
         >
-          Secured by <span className="font-bold text-slate-500">Stripe</span>. Cancel anytime.
-          {!NATIVE_CURRENCIES.has(currencyCode) && " Indicative prices — card will be charged in USD."}
+          <div className="flex items-center gap-2 group cursor-default">
+            <SiStripe className="text-3xl text-slate-600 group-hover:text-[#635BFF] transition-colors" />
+            <div className="text-left">
+              <p className="text-[10px] font-black text-slate-800 uppercase leading-none">Powered by</p>
+              <p className="text-sm font-black text-slate-800 leading-none mt-1">Stripe</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 group cursor-default">
+            <FaLock className="text-xl text-slate-600 group-hover:text-green-600 transition-colors" />
+            <div className="text-left">
+              <p className="text-[10px] font-black text-slate-800 uppercase leading-none">Secure</p>
+              <p className="text-sm font-black text-slate-800 leading-none mt-1">SSL Encrypted</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 group cursor-default">
+            <FaUserShield className="text-2xl text-slate-600 group-hover:text-blue-600 transition-colors" />
+            <div className="text-left">
+              <p className="text-[10px] font-black text-slate-800 uppercase leading-none">Privacy</p>
+              <p className="text-sm font-black text-slate-800 leading-none mt-1">PCI-DSS Ready</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
+          className="mt-10 text-slate-400 text-[10px] font-bold text-center max-w-md uppercase tracking-wider"
+        >
+          Guaranteed Safe Checkout · Cancel Anytime with One Click
+          {!NATIVE_CURRENCIES.has(currencyCode) && <span className="block mt-1 font-medium italic opacity-70">Indicative prices — card charged in USD.</span>}
         </motion.p>
+
       </main>
     </div>
   );

@@ -10,8 +10,9 @@ import VirtualKeyboard from '../../../../../components/ui/VirtualKeyboard';
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from 'canvas-confetti';
 import { recordTaskCompletion, checkAchievements } from '../../../../../utils/achievements';
+import { saveChildStats, recordAchievement } from '../../../../../utils/firestoreService';
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../../../../firebase/clientApp';
+import { db } from '@/firebase/config';
 
 export default function TaskContentPage() {
   const { childUser } = useChild();
@@ -160,8 +161,18 @@ export default function TaskContentPage() {
           type: taskData.type, score, totalQuestions: total,
           correct: finalCorrect, timeTaken, levelId, subjectId, retried: retriedThisTask,
         });
+
+        // Sync to Firestore
+        saveChildStats(childUser.uid, updatedStats).catch(console.error);
+
         const unlocked = checkAchievements(childUser.uid, updatedStats);
-        if (unlocked.length > 0) setNewAchievements(unlocked);
+        if (unlocked.length > 0) {
+          setNewAchievements(unlocked);
+          // Sync achievements to Firestore
+          unlocked.forEach(ach => {
+            recordAchievement(childUser.uid, ach).catch(console.error);
+          });
+        }
       }
     }
   };

@@ -40,12 +40,32 @@ const Subscription = () => {
           ? data.createdAt.toDate()
           : data.createdAt ? new Date(data.createdAt) : null;
 
-        if (!data.subscription) {
-          const base = createdAt || new Date();
-          const trialEnd = new Date(base);
-          trialEnd.setMonth(trialEnd.getMonth() + 1);
-          setSub({ plan: 'trial', status: trialEnd > new Date() ? 'active' : 'expired', currentPeriodEnd: trialEnd });
-        } else {
+        if (data.planType === 'paid') {
+          // Paid plan from Stripe
+          setSub({
+            ...(data.subscription || {}),
+            status: data.subscriptionStatus || data.subscription?.status || 'inactive',
+            plan: data.subscriptionPlan || data.subscription?.plan,
+            currentPeriodEnd: data.subscriptionExpiresAt || data.subscription?.currentPeriodEnd
+          });
+        } else if (data.planType === 'free_trial' || (!data.subscription && data.createdAt)) {
+          // Application-level free trial
+          const trialEnd = data.trialEndDate?.toDate ? data.trialEndDate.toDate() : (data.trialEndDate ? new Date(data.trialEndDate) : null);
+
+          let finalTrialEnd = trialEnd;
+          if (!finalTrialEnd) {
+            const base = createdAt || new Date();
+            finalTrialEnd = new Date(base);
+            finalTrialEnd.setMonth(finalTrialEnd.getMonth() + 1);
+          }
+
+          setSub({
+            plan: 'trial',
+            status: finalTrialEnd > new Date() ? 'active' : 'expired',
+            currentPeriodEnd: finalTrialEnd,
+            ...(data.subscription || {}) // Keep customerId if it exists
+          });
+        } else if (data.subscription) {
           setSub(data.subscription);
         }
         setLoading(false);
@@ -72,10 +92,16 @@ const Subscription = () => {
   }
 
   const isPaid = ['premium_monthly', 'premium_yearly'].includes(sub?.plan);
+  const isStripeSubscription = !!sub?.stripeSubscriptionId;
   const isTrial = sub?.plan === 'trial';
-  const isActive = sub?.status === 'active';
+  const isActive = sub?.status === 'active' || sub?.status === 'trialing';
   const isExpired = sub?.status === 'expired';
   const days = daysLeft(sub?.currentPeriodEnd);
+
+  // Label logic
+  let statusLabel = sub?.status || '—';
+  if (isExpired) statusLabel = 'Expired';
+  else if (isActive) statusLabel = 'Active';
 
   return (
     <div className="space-y-3">
@@ -86,30 +112,46 @@ const Subscription = () => {
           <FaCrown />
         </div>
         <div className="flex-grow min-w-0">
-          <p className="text-sm font-black text-slate-800 leading-tight">{getPlanLabel(sub?.plan)}</p>
-          <p className="text-[10px] text-slate-400 font-medium mt-0.5 flex items-center gap-1">
-            <FaCalendarAlt className="text-[8px]" />
-            {isPaid && isActive
-              ? `Renews ${formatDate(sub?.currentPeriodEnd)}`
-              : `Expires ${formatDate(sub?.currentPeriodEnd)}`}
+          <p className="text-base font-black text-slate-800 leading-tight">
+            {isPaid ? getPlanLabel(sub?.plan) : (isStripeSubscription ? 'Premium Trial' : 'Free Trial')}
+          </p>
+          <p className="text-xs text-slate-400 font-medium mt-1 flex items-center gap-1">
+            <FaCalendarAlt className="text-[10px]" />
+            {isActive
+              ? `${isPaid ? 'Renews' : 'Expires'} ${formatDate(sub?.currentPeriodEnd)}`
+              : `Expired ${formatDate(sub?.currentPeriodEnd)}`}
           </p>
         </div>
 
         {/* Status pill */}
-        <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full flex-shrink-0 ${isPaid && isActive ? 'bg-green-100 text-green-600' :
-            isTrial && isActive ? 'bg-amber-100 text-amber-600' :
-              isExpired ? 'bg-red-100 text-red-500' :
-                'bg-slate-100 text-slate-400'
+        <span className={`text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full flex-shrink-0 ${isPaid && isActive ? 'bg-green-100 text-green-600' :
+          isActive ? 'bg-blue-100 text-blue-600' :
+            isExpired ? 'bg-red-100 text-red-500' :
+              'bg-slate-100 text-slate-400'
           }`}>
-          {isExpired ? 'Expired' : isActive ? 'Active' : sub?.status || '—'}
+          {statusLabel}
         </span>
       </div>
 
       {/* Trial warning */}
-      {isTrial && isActive && days !== null && days <= 10 && (
-        <div className="flex items-center gap-2 p-2.5 bg-amber-50 border border-amber-100 rounded-xl text-[10px] font-bold text-amber-600">
-          <FaExclamationTriangle className="flex-shrink-0 text-[9px]" />
-          Trial ends in {days} day{days !== 1 ? 's' : ''}
+      {isTrial && isActive && days !== null && (
+        <div className={`p-4 rounded-xl border flex flex-col gap-2.5 ${days <= 7 ? 'bg-red-50 border-red-100' : 'bg-amber-50 border-amber-100'}`}>
+          <div className="flex items-center gap-2.5">
+            <FaExclamationTriangle className={`flex-shrink-0 text-sm ${days <= 7 ? 'text-red-500' : 'text-amber-600'}`} />
+            <p className={`text-sm font-black ${days <= 7 ? 'text-red-600' : 'text-amber-700'}`}>
+              Trial Expiry Looming!
+            </p>
+          </div>
+          <p className="text-xs font-medium text-slate-500 leading-relaxed">
+            Your free trial has <span className="font-black text-slate-700">{days} day{days !== 1 ? 's' : ''}</span> left.
+            Upgrade now to ensure your children don&apos;t lose their progress!
+          </p>
+          <div className="w-full h-1 bg-slate-200 rounded-full mt-1 overflow-hidden">
+            <div
+              className={`h-full transition-all duration-500 ${days <= 7 ? 'bg-red-500' : 'bg-amber-500'}`}
+              style={{ width: `${Math.min(100, (days / 30) * 100)}%` }}
+            />
+          </div>
         </div>
       )}
 

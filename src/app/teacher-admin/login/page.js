@@ -27,6 +27,8 @@ function TeacherLoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const errorParam = searchParams.get("error");
@@ -339,8 +341,8 @@ function TeacherLoginPage() {
                                     type="submit"
                                     disabled={loading}
                                     className={`w-full h-16 rounded-2xl font-black text-white shadow-xl transition-all flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 mt-4 ${activeTab === "login"
-                                            ? "bg-indigo-600 shadow-indigo-900/40 hover:bg-indigo-500"
-                                            : "bg-emerald-600 shadow-emerald-900/40 hover:bg-emerald-500"
+                                        ? "bg-indigo-600 shadow-indigo-900/40 hover:bg-indigo-500"
+                                        : "bg-emerald-600 shadow-emerald-900/40 hover:bg-emerald-500"
                                         }`}
                                 >
                                     {loading ? (

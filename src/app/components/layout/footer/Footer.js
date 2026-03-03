@@ -17,16 +17,23 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 mb-6">
-          <Link href="/privacy" className="hover:underline text-xl text-white">
+          <Link href="/about" className="hover:text-blue-200 transition-colors text-base font-bold uppercase tracking-wider">
+            About Us
+          </Link>
+          <Link href="/safety" className="hover:text-blue-200 transition-colors text-base font-bold uppercase tracking-wider">
+            Safety
+          </Link>
+          <Link href="/privacy" className="hover:text-blue-200 transition-colors text-base font-bold uppercase tracking-wider">
             Privacy Policy
           </Link>
-          <Link href="/terms" className="hover:underline text-xl text-white">
+          <Link href="/terms" className="hover:text-blue-200 transition-colors text-base font-bold uppercase tracking-wider">
             Terms of Service
           </Link>
-          <Link href="/contact" className="hover:underline text-xl text-white">
+          <Link href="/contact" className="hover:text-blue-200 transition-colors text-base font-bold uppercase tracking-wider">
             Contact Us
           </Link>
         </div>
+
 
         <div className="flex justify-center space-x-6 mb-8">
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-400 transition-colors duration-200">

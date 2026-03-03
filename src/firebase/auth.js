@@ -50,6 +50,8 @@ export const signInWithGoogle = async (onSuccess, isTeacherFlow = false) => {
       const existingDoc = await getDoc(userRef);
       if (!existingDoc.exists() || !existingDoc.data().role) {
         userData.role = 'parent';
+        userData.planType = 'free_trial';
+        userData.trialEndDate = trialEnd;
         userData.subscription = {
           plan: 'trial',
           status: 'active',
@@ -89,6 +91,8 @@ export const signUpWithEmail = async (email, password, name, onSuccess) => {
       email: result.user.email,
       displayName: name,
       role: 'parent',
+      planType: 'free_trial',
+      trialEndDate: trialEnd,
       subscription: {
         plan: 'trial',
         status: 'active',

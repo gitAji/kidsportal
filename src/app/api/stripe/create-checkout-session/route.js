@@ -52,6 +52,9 @@ export async function POST(request) {
         }
 
         const stripe = getStripe();
+        if (process.env.STRIPE_SECRET_KEY?.includes('REPLACE_WITH_YOUR_SECRET_KEY')) {
+            return NextResponse.json({ error: 'Stripe Secret Key is not configured.' }, { status: 500 });
+        }
         let customerId;
 
         // Look up existing Stripe customer from Firestore
@@ -86,9 +89,15 @@ export async function POST(request) {
             line_items: [{ price: priceId, quantity: 1 }],
             success_url: `${baseUrl}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${baseUrl}/payment/cancel`,
-            metadata: { firebaseUid: uid },
+            metadata: {
+                firebaseUid: uid,
+                plan: billingCycle === 'yearly' ? 'premium_yearly' : 'premium_monthly'
+            },
             subscription_data: {
-                metadata: { firebaseUid: uid },
+                metadata: {
+                    firebaseUid: uid,
+                    plan: billingCycle === 'yearly' ? 'premium_yearly' : 'premium_monthly'
+                },
                 trial_period_days: 30, // 1-month free trial before first charge
             },
             allow_promotion_codes: true,

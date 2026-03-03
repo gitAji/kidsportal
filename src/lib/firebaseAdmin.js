@@ -14,11 +14,16 @@ function initAdmin() {
     if (!projectId || !clientEmail || !privateKey ||
         clientEmail.startsWith('REPLACE') || privateKey.startsWith('REPLACE')) {
         console.warn(
+            '[Firebase Admin] Missing Credentials Check:\n' +
+            `- Project ID: ${!!projectId}\n` +
+            `- Client Email: ${!!clientEmail}\n` +
+            `- Private Key: ${!!privateKey}\n`
+        );
+        console.warn(
             '[Firebase Admin] Service account credentials not set.\n' +
             'Go to Firebase Console → Project Settings → Service Accounts → Generate new private key\n' +
             'Then add FIREBASE_ADMIN_PROJECT_ID, FIREBASE_ADMIN_CLIENT_EMAIL, FIREBASE_ADMIN_PRIVATE_KEY to .env.local'
         );
-        // Return null — API routes will handle the missing admin gracefully
         return null;
     }
 

@@ -7,8 +7,9 @@ import { motion } from "framer-motion";
 import {
     FaCreditCard, FaCrown, FaCalendarAlt,
     FaSyncAlt, FaCheckCircle, FaSpinner,
-    FaExclamationTriangle, FaShieldAlt, FaLock
+    FaExclamationTriangle, FaShieldAlt, FaLock, FaFileInvoiceDollar, FaExternalLinkAlt
 } from "react-icons/fa";
+import { collection, query, orderBy, limit } from "firebase/firestore";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
 
 // ── Helpers ────────────────────────────────────────────────────────
@@ -57,12 +58,33 @@ function BillingRow({ icon, label, value, valueClass = "text-slate-800" }) {
     );
 }
 
-// ── Main ──────────────────────────────────────────────────────────
+// ── Main Page ──────────────────────────────────────────────────────
 export default function BillingPage() {
     const [sub, setSub] = useState(null);
     const [loading, setLoading] = useState(true);
     const [portalLoading, setPortalLoading] = useState(false);
     const [portalError, setPortalError] = useState("");
+    const [payments, setPayments] = useState([]);
+    const [paymentsLoading, setPaymentsLoading] = useState(true);
+    const [syncing, setSyncing] = useState(false);
+
+    const syncWithStripe = async () => {
+        setSyncing(true);
+        try {
+            const res = await fetch("/api/stripe/sync", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ uid: auth.currentUser?.uid }),
+            });
+            const data = await res.json();
+            if (!data.success) alert(data.error || "Sync failed.");
+        } catch (err) {
+            console.error("Sync error:", err);
+            alert("Network error during sync.");
+        } finally {
+            setSyncing(false);
+        }
+    };
 
     useEffect(() => {
         const unsubAuth = onAuthStateChanged(auth, (user) => {
@@ -71,27 +93,52 @@ export default function BillingPage() {
             const ref = doc(db, "users", user.uid);
             const unsubSnap = onSnapshot(ref, (snap) => {
                 const data = snap.data() || {};
-                const createdAt = data.createdAt?.toDate
-                    ? data.createdAt.toDate()
-                    : data.createdAt ? new Date(data.createdAt) : null;
 
-                if (!data.subscription) {
-                    // Default 1-month trial
-                    const base = createdAt || new Date();
-                    const trialEnd = new Date(base);
-                    trialEnd.setMonth(trialEnd.getMonth() + 1);
+                if (data.planType === 'paid') {
+                    setSub({
+                        ...(data.subscription || {}),
+                        status: data.subscriptionStatus || data.subscription?.status || 'inactive',
+                        plan: data.subscriptionPlan || data.subscription?.plan,
+                        currentPeriodEnd: data.subscriptionExpiresAt || data.subscription?.currentPeriodEnd,
+                        card: data.subscription?.card || null
+                    });
+                } else if (data.planType === 'free_trial' || (!data.subscription && data.createdAt)) {
+                    const trialEnd = data.trialEndDate?.toDate ? data.trialEndDate.toDate() : (data.trialEndDate ? new Date(data.trialEndDate) : null);
+                    let finalTrialEnd = trialEnd;
+                    if (!finalTrialEnd) {
+                        const base = data.createdAt?.toDate ? data.createdAt.toDate() : (data.createdAt ? new Date(data.createdAt) : new Date());
+                        finalTrialEnd = new Date(base);
+                        finalTrialEnd.setMonth(finalTrialEnd.getMonth() + 1);
+                    }
                     setSub({
                         plan: "trial",
-                        status: trialEnd > new Date() ? "active" : "expired",
-                        currentPeriodEnd: trialEnd,
-                        card: null,
+                        status: finalTrialEnd > new Date() ? "active" : "expired",
+                        currentPeriodEnd: finalTrialEnd,
+                        ...(data.subscription || {}),
+                        card: data.subscription?.card || null,
                     });
-                } else {
+                } else if (data.subscription) {
                     setSub(data.subscription);
                 }
                 setLoading(false);
             });
-            return () => unsubSnap();
+
+            // Fetch payments
+            const paymentsRef = collection(db, "users", user.uid, "payments");
+            const q = query(paymentsRef, orderBy("paymentDate", "desc"), limit(5));
+            const unsubPayments = onSnapshot(q, (snap) => {
+                const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setPayments(list);
+                setPaymentsLoading(false);
+            }, (err) => {
+                console.error("Error fetching payments:", err);
+                setPaymentsLoading(false);
+            });
+
+            return () => {
+                unsubSnap();
+                unsubPayments();
+            };
         });
         return () => unsubAuth();
     }, []);
@@ -121,7 +168,7 @@ export default function BillingPage() {
     const palette = PALETTE[planInfo.color];
     const isPaid = ["premium_monthly", "premium_yearly"].includes(sub?.plan);
     const isTrial = sub?.plan === "trial";
-    const isActive = sub?.status === "active";
+    const isActive = sub?.status === "active" || sub?.status === "trialing";
     const isExpired = sub?.status === "expired";
     const days = daysLeft(sub?.currentPeriodEnd);
 
@@ -132,28 +179,33 @@ export default function BillingPage() {
 
     return (
         <div className="min-h-screen bg-slate-50">
-
             {/* ── Page Header ── */}
             <div className="bg-white border-b border-slate-100 px-8 py-6">
-                <div className="max-w-3xl mx-auto">
-                    <h1 className="text-xl font-black text-slate-800 tracking-tight">Welcome to Billing</h1>
-                    <p className="text-sm text-slate-400 font-medium mt-0.5">Manage your family&apos;s subscription and payment methods</p>
+                <div className="max-w-3xl mx-auto flex items-center justify-between">
+                    <div>
+                        <h1 className="text-xl font-black text-slate-800 tracking-tight">Billing & Subscription</h1>
+                        <p className="text-sm text-slate-400 font-medium mt-0.5">Manage your family&apos;s membership and billing history</p>
+                    </div>
+                    <button
+                        onClick={syncWithStripe}
+                        disabled={syncing || loading}
+                        title="Sync with Stripe"
+                        className={`p-3 rounded-xl border border-slate-100 text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all ${syncing ? 'animate-spin' : ''}`}
+                    >
+                        <FaSyncAlt className="text-sm" />
+                    </button>
                 </div>
             </div>
 
             <div className="max-w-3xl mx-auto px-8 py-8 space-y-6">
-
                 {/* ── Plan Card ── */}
                 <motion.div
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden"
                 >
-                    {/* Coloured accent bar */}
                     <div className={`h-1.5 w-full ${palette.bg}`} />
-
                     <div className="p-6">
-                        {/* Plan header */}
                         <div className="flex items-start justify-between mb-6">
                             <div className="flex items-center gap-4">
                                 <div className={`w-12 h-12 ${palette.light} border ${palette.border} rounded-2xl flex items-center justify-center ${palette.text} text-xl`}>
@@ -164,7 +216,6 @@ export default function BillingPage() {
                                     <p className="text-xs text-slate-400 font-medium mt-0.5">Up to {planInfo.children} children accounts</p>
                                 </div>
                             </div>
-
                             <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full ${isActive && isPaid ? "bg-green-100 text-green-600" :
                                 isActive && isTrial ? "bg-amber-100 text-amber-600" :
                                     isExpired ? "bg-red-100 text-red-500" :
@@ -174,13 +225,8 @@ export default function BillingPage() {
                             </span>
                         </div>
 
-                        {/* Billing rows */}
                         <div className="divide-y divide-slate-50">
-                            <BillingRow
-                                icon={<FaSyncAlt />}
-                                label="Billing cycle"
-                                value={planInfo.cycle}
-                            />
+                            <BillingRow icon={<FaSyncAlt />} label="Billing cycle" value={planInfo.cycle} />
                             <BillingRow
                                 icon={<FaCalendarAlt />}
                                 label={isPaid && isActive ? (planInfo.cycle === "Yearly" ? "Renews on" : "Next payment") : "Expires on"}
@@ -197,18 +243,17 @@ export default function BillingPage() {
                             )}
                         </div>
 
-                        {/* Trial expiry warning */}
                         {isTrial && isActive && days !== null && days <= 10 && (
                             <div className="mt-4 flex items-center gap-2.5 p-3 bg-amber-50 border border-amber-100 rounded-xl text-xs font-bold text-amber-600">
                                 <FaExclamationTriangle className="flex-shrink-0" />
-                                Your free trial expires in {days} day{days !== 1 ? "s" : ""}. Upgrade to keep access.
+                                Your free trial expires in {days} day{days !== 1 ? "s" : ""}.
                             </div>
                         )}
 
                         {isExpired && (
                             <div className="mt-4 flex items-center gap-2.5 p-3 bg-red-50 border border-red-100 rounded-xl text-xs font-bold text-red-500">
                                 <FaExclamationTriangle className="flex-shrink-0" />
-                                Your plan has expired. Upgrade to restore full access.
+                                Your plan has expired. Upgrade to restore access.
                             </div>
                         )}
                     </div>
@@ -225,34 +270,20 @@ export default function BillingPage() {
                         <FaCreditCard className="text-blue-400 text-base" />
                         <h2 className="text-sm font-black text-slate-700 uppercase tracking-wider">Payment Method</h2>
                     </div>
-
                     <div className="p-6">
                         {cardLast4 ? (
                             <div className="flex items-center gap-5">
-                                {/* Card art */}
                                 <div className="w-16 h-10 bg-gradient-to-br from-slate-800 to-slate-700 rounded-lg flex items-end pb-1.5 px-2 shadow-md flex-shrink-0">
                                     <div className="flex gap-0.5">
-                                        {[...Array(4)].map((_, i) => (
-                                            <div key={i} className="w-1 h-1 rounded-full bg-white/40" />
-                                        ))}
+                                        {[...Array(4)].map((_, i) => <div key={i} className="w-1 h-1 rounded-full bg-white/40" />)}
                                     </div>
                                 </div>
                                 <div className="flex-grow">
-                                    <p className="text-sm font-black text-slate-800 capitalize">
-                                        {cardBrand || "Card"} ending in {cardLast4}
-                                    </p>
-                                    {cardExpiry && (
-                                        <p className="text-xs text-slate-400 font-medium mt-0.5">Expires {cardExpiry}</p>
-                                    )}
+                                    <p className="text-sm font-black text-slate-800 capitalize">{cardBrand || "Card"} ending in {cardLast4}</p>
+                                    {cardExpiry && <p className="text-xs text-slate-400 font-medium mt-0.5">Expires {cardExpiry}</p>}
                                 </div>
                                 {isPaid && (
-                                    <button
-                                        onClick={openPortal}
-                                        disabled={portalLoading}
-                                        className="text-xs font-bold text-blue-500 hover:text-blue-700 transition-colors"
-                                    >
-                                        Update
-                                    </button>
+                                    <button onClick={openPortal} disabled={portalLoading} className="text-xs font-bold text-blue-500 hover:text-blue-700">Update</button>
                                 )}
                             </div>
                         ) : (
@@ -260,62 +291,69 @@ export default function BillingPage() {
                                 <div className="w-16 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
                                     <FaLock className="text-slate-300 text-lg" />
                                 </div>
-                                <div>
-                                    <p className="text-sm font-black text-slate-500">No card on file</p>
-                                    <p className="text-xs text-slate-400 font-medium mt-0.5">A card will be required when you upgrade</p>
-                                </div>
+                                <p className="text-sm font-black text-slate-500">No card on file</p>
                             </div>
                         )}
                     </div>
                 </motion.div>
 
-                {/* ── Action Buttons ── */}
+                {/* ── Invoice History ── */}
                 <motion.div
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.14 }}
-                    className="space-y-3"
+                    transition={{ delay: 0.12 }}
+                    className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden"
                 >
-                    {/* Primary CTA */}
+                    <div className="flex items-center gap-2.5 px-6 py-4 border-b border-slate-50">
+                        <FaFileInvoiceDollar className="text-green-400 text-base" />
+                        <h2 className="text-sm font-black text-slate-700 uppercase tracking-wider">Invoice History</h2>
+                    </div>
+                    <div className="p-6">
+                        {paymentsLoading ? (
+                            <div className="flex justify-center py-4"><FaSpinner className="animate-spin text-slate-200" /></div>
+                        ) : payments.length > 0 ? (
+                            <div className="space-y-4">
+                                {payments.map((p) => (
+                                    <div key={p.id} className="flex items-center justify-between py-4 border-b border-slate-50 last:border-0 px-2 -mx-2 rounded-xl hover:bg-slate-50 transition-all">
+                                        <div>
+                                            <p className="text-base font-black text-slate-800">{(p.currency || '$').toUpperCase()} {p.amountPaid?.toFixed(2)}</p>
+                                            <p className="text-xs text-slate-400 font-medium mt-0.5">{p.paymentDate?.toDate ? formatDate(p.paymentDate) : "Recent Payment"}</p>
+                                        </div>
+                                        {p.hostedInvoiceUrl && (
+                                            <a href={p.hostedInvoiceUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg text-xs font-black transition-all">
+                                                View PDF <FaExternalLinkAlt className="text-[10px]" />
+                                            </a>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="text-xs text-slate-400 font-medium text-center py-4 italic">No invoices found</p>
+                        )}
+                    </div>
+                </motion.div>
+
+                {/* ── Action Buttons ── */}
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.14 }} className="space-y-3">
                     {isPaid && isActive ? (
-                        <button
-                            onClick={openPortal}
-                            disabled={portalLoading}
-                            className="w-full py-3.5 bg-blue-600 text-white text-sm font-black rounded-2xl hover:bg-blue-700 transition-all flex items-center justify-center gap-2 disabled:opacity-60 shadow-md shadow-blue-100"
-                        >
-                            {portalLoading
-                                ? <><FaSpinner className="animate-spin" /> Opening portal…</>
-                                : <><FaCreditCard /> Manage Billing on Stripe</>}
+                        <button onClick={openPortal} disabled={portalLoading} className="w-full py-4 bg-blue-600 text-white text-sm font-black rounded-2xl hover:bg-blue-700 shadow-md shadow-blue-100 flex items-center justify-center gap-2">
+                            {portalLoading ? <FaSpinner className="animate-spin" /> : <FaCreditCard />} Manage Subscription
                         </button>
                     ) : (
-                        <a
-                            href="/pricing"
-                            className="w-full py-3.5 bg-blue-600 text-white text-sm font-black rounded-2xl hover:bg-blue-700 transition-all flex items-center justify-center gap-2 shadow-md shadow-blue-100 block text-center"
-                        >
+                        <a href="/pricing" className="w-full py-4 bg-blue-600 text-white text-sm font-black rounded-2xl hover:bg-blue-700 shadow-md shadow-blue-100 block text-center">
                             {isExpired ? "Renew Subscription" : "Upgrade Plan"}
                         </a>
                     )}
-
-                    {/* Security note */}
                     <div className="flex items-center justify-center gap-2 text-slate-300">
-                        <FaShieldAlt className="text-xs" />
-                        <p className="text-[10px] font-bold">Secured and encrypted by Stripe</p>
+                        <FaShieldAlt className="text-[10px]" />
+                        <p className="text-[10px] font-bold">Payments secured by Stripe</p>
                     </div>
-
-                    {/* Portal error */}
-                    {portalError && (
-                        <p className="text-xs text-red-500 font-bold text-center">{portalError}</p>
-                    )}
+                    {portalError && <p className="text-xs text-red-500 font-bold text-center">{portalError}</p>}
                 </motion.div>
 
-                {/* ── Subtle Cancel link ── */}
                 {isPaid && isActive && (
                     <div className="text-center pt-2">
-                        <button
-                            onClick={openPortal}
-                            disabled={portalLoading}
-                            className="text-[11px] text-slate-300 hover:text-red-400 transition-colors font-medium underline underline-offset-2 decoration-dashed"
-                        >
+                        <button onClick={openPortal} className="text-[11px] text-slate-300 hover:text-red-400 transition-colors underline underline-offset-4 decoration-dashed font-bold">
                             Cancel membership
                         </button>
                     </div>

@@ -21,7 +21,13 @@ const SubscriptionManagementPage = () => {
         const userDocRef = doc(db, 'users', currentUser.uid);
         const userDoc = await getDoc(userDocRef);
         if (userDoc.exists()) {
-          setSubscription(userDoc.data().subscription || { plan: 'Free', status: 'active' });
+          const data = userDoc.data();
+          const sub = data.subscription || {};
+          if (!sub.plan || !sub.status) {
+            setSubscription({ plan: 'Free', status: 'active', ...sub });
+          } else {
+            setSubscription(sub);
+          }
         }
 
         // Fetch Child Count
@@ -100,7 +106,7 @@ const SubscriptionManagementPage = () => {
                     <span className={`text-3xl font-black tracking-tight ${isPremium ? 'text-blue-600' : 'text-slate-700'}`}>
                       {isPremium ? (subscription.plan === 'premium_yearly' ? 'Premium Yearly' : 'Premium Monthly') : 'Free Plan'}
                     </span>
-                    {subscription?.status === 'active' && (
+                    {['active', 'trialing'].includes(subscription?.status) && (
                       <span className="bg-emerald-100 text-emerald-600 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
                         Active
                       </span>

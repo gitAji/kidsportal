@@ -15,16 +15,16 @@ export default function SubscriptionsManagement() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // These would typically come from your Stripe webhook synced collection
         const fetchSubs = async () => {
             try {
-                const snap = await getDocs(query(collection(db, 'users'), orderBy('createdAt', 'desc')));
+                // Fetch users who have a subscription object
+                const snap = await getDocs(query(collection(db, 'users'), orderBy('subscriptionExpiresAt', 'desc')));
                 const subscribers = snap.docs
                     .map(doc => ({ id: doc.id, ...doc.data() }))
-                    .filter(user => user.subscriptionStatus === 'active');
+                    .filter(user => user.subscriptionStatus); // Only those with a status (active, past_due, canceled)
                 setSubscriptions(subscribers);
             } catch (err) {
-                console.error(err);
+                console.error("Error fetching subscriptions:", err);
             } finally {
                 setLoading(false);
             }
@@ -52,9 +52,9 @@ export default function SubscriptionsManagement() {
             {/* ── Revenue Summary ── */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                    { label: 'Monthly Recurring Revenue', value: '$4,250', color: 'blue' },
-                    { label: 'Active Subscriptions', value: subscriptions.length || '12', color: 'emerald' },
-                    { label: 'Churn Rate', value: '1.2%', color: 'rose' },
+                    { label: 'Estimated Monthly Revenue', value: `$${subscriptions.reduce((acc, sub) => acc + (sub.subscriptionPlan === 'premium_monthly' ? 29 : (sub.subscriptionPlan === 'premium_yearly' ? 24 : 0)), 0)}`, color: 'blue' },
+                    { label: 'Active Subscriptions', value: subscriptions.filter(s => s.subscriptionStatus === 'active').length, color: 'emerald' },
+                    { label: 'Past Due / Issues', value: subscriptions.filter(s => s.subscriptionStatus === 'past_due').length, color: 'rose' },
                 ].map((stat, i) => (
                     <div key={i} className="bg-slate-950 border border-slate-800 p-8 rounded-[2rem]">
                         <p className="text-[10px] font-black uppercase tracking-[2px] text-slate-500 mb-2">{stat.label}</p>
@@ -85,40 +85,45 @@ export default function SubscriptionsManagement() {
                             <tr className="bg-slate-900/30">
                                 <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Customer</th>
                                 <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Plan</th>
-                                <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Amount</th>
+                                <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Last Payment</th>
                                 <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Next Billing</th>
                                 <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[3px] text-slate-500 text-right">Status</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-800/30">
-                            {[
-                                { name: 'Sarah Wilson', email: 'sarah@example.com', plan: 'Premium Monthly', amount: '$29.00', date: 'Mar 24, 2026', status: 'Active' },
-                                { name: 'Mark Thompson', email: 'mark@example.com', plan: 'Premium Yearly', amount: '$290.00', date: 'Feb 12, 2027', status: 'Active' },
-                                { name: 'Elena Rodriguez', email: 'elena@example.com', plan: 'Premium Monthly', amount: '$29.00', date: 'Mar 02, 2026', status: 'Past Due' },
-                            ].map((sub, i) => (
+                            {subscriptions.map((sub, i) => (
                                 <tr key={i} className="hover:bg-slate-900/50 transition-colors">
                                     <td className="px-10 py-6">
-                                        <div className="font-black text-white">{sub.name}</div>
+                                        <div className="font-black text-white">{sub.displayName || sub.name || 'User'}</div>
                                         <div className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{sub.email}</div>
                                     </td>
                                     <td className="px-10 py-6">
-                                        <span className="text-slate-300 font-bold text-sm">{sub.plan}</span>
+                                        <span className="text-slate-300 font-bold text-sm capitalize">{sub.subscriptionPlan?.replace('_', ' ')}</span>
                                     </td>
                                     <td className="px-10 py-6">
-                                        <span className="text-white font-black">{sub.amount}</span>
+                                        <span className="text-white font-black">
+                                            {sub.lastPayment ? `$${sub.lastPayment.amountPaid}` : '—'}
+                                        </span>
                                     </td>
                                     <td className="px-10 py-6 text-slate-400 font-bold text-sm">
-                                        {sub.date}
+                                        {sub.subscriptionExpiresAt?.toDate().toLocaleDateString()}
                                     </td>
                                     <td className="px-10 py-6 text-right">
-                                        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${sub.status === 'Active' ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-500 border border-rose-500/20'
+                                        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${sub.subscriptionStatus === 'active' ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-500 border border-rose-500/20'
                                             }`}>
-                                            {sub.status === 'Active' ? <FaCheckCircle /> : <FaExclamationCircle />}
-                                            {sub.status}
+                                            {sub.subscriptionStatus === 'active' ? <FaCheckCircle /> : <FaExclamationCircle />}
+                                            {sub.subscriptionStatus}
                                         </div>
                                     </td>
                                 </tr>
                             ))}
+                            {subscriptions.length === 0 && (
+                                <tr>
+                                    <td colSpan="5" className="px-10 py-20 text-center text-slate-500 font-bold">
+                                        No active subscriptions found.
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>

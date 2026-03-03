@@ -8,7 +8,9 @@ import { auth } from "@/firebase/auth";
 import { usePathname } from "next/navigation";
 import Header from "@/app/components/layout/header/Header";
 import Footer from "@/app/components/layout/footer/Footer";
+import DashboardFooter from "@/app/components/layout/footer/DashboardFooter";
 import { useUI } from "@/app/providers/UIProvider";
+
 
 // Dynamic imports for optimized loading
 const Chat = dynamic(() => import("@/app/components/ui/Chat"), { ssr: false });
@@ -75,11 +77,15 @@ export default function ParentLayout({ children }) {
       <div className="flex bg-slate-50 h-screen overflow-hidden">
         <ParentSidebar />
         <div className="flex-grow flex flex-col h-full overflow-hidden">
-          <main className="flex-grow overflow-y-auto bg-slate-50/50">
-            <Suspense fallback={<DashboardSkeleton />}>
-              {children}
-            </Suspense>
+          <main className="flex-grow overflow-y-auto bg-slate-50/50 flex flex-col">
+            <div className="flex-grow">
+              <Suspense fallback={<DashboardSkeleton />}>
+                {children}
+              </Suspense>
+            </div>
+            <DashboardFooter />
           </main>
+
         </div>
         <Chat />
         <AuthModal

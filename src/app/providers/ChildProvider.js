@@ -39,17 +39,27 @@ export function ChildProvider({ children }) {
             const freshData = { id: childDoc.id, ...childDoc.data(), parentUid: parsedUser.parentUid };
             const parentData = parentDoc.data();
 
-            // Subscription check - Include 'trialing' as an active state
+            // Subscription check - align with new planType logic
             let isSubActive = false;
-            if (parentData.subscription) {
+
+            if (parentData.planType === 'paid') {
+              // Paid plan is active if status is active or trialing
+              const status = parentData.subscription?.status || parentData.subscriptionStatus;
+              isSubActive = status === 'active' || status === 'trialing';
+            } else if (parentData.planType === 'free_trial') {
+              // Free trial is active if trialEndDate is in the future
+              const trialEndDate = parentData.trialEndDate?.toDate ? parentData.trialEndDate.toDate() : (parentData.trialEndDate ? new Date(parentData.trialEndDate) : null);
+              isSubActive = trialEndDate && trialEndDate > new Date();
+            } else if (parentData.subscription) {
+              // Legacy fallback
               const status = parentData.subscription.status;
               isSubActive = status === 'active' || status === 'trialing';
             } else {
-              // Default 3 month trial
+              // Final fallback for older accounts without planType
               const createdAt = parentData.createdAt?.toDate ? parentData.createdAt.toDate() : (parentData.createdAt ? new Date(parentData.createdAt) : null);
               const baseDate = createdAt || new Date();
               const trialEnd = new Date(baseDate);
-              trialEnd.setMonth(trialEnd.getMonth() + 3);
+              trialEnd.setMonth(trialEnd.getMonth() + 1); // Standard 1 month trial
               isSubActive = trialEnd > new Date();
             }
 

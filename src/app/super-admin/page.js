@@ -10,7 +10,7 @@ import {
     FaChalkboardTeacher, FaUsers, FaChild, FaCreditCard,
     FaArrowUp, FaCalendarPlus, FaUserShield,
     FaCheck, FaTimes, FaBell, FaChartLine, FaDatabase,
-    FaGlobe, FaClock, FaUserPlus
+    FaGlobe, FaClock, FaUserPlus, FaTicketAlt
 } from 'react-icons/fa';
 import Link from 'next/link';
 
@@ -27,6 +27,7 @@ export default function SuperAdminDashboard() {
     const [recentParents, setRecentParents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [actionLoading, setActionLoading] = useState(null);
+    const [tickets, setTickets] = useState([]);
 
     useEffect(() => {
         fetchAllData();
@@ -38,6 +39,7 @@ export default function SuperAdminDashboard() {
                 fetchStats(),
                 fetchPendingTeachers(),
                 fetchRecentParents(),
+                fetchTickets(),
             ]);
         } catch (error) {
             console.error("Dashboard data error:", error);
@@ -109,6 +111,20 @@ export default function SuperAdminDashboard() {
         }
     };
 
+    const fetchTickets = async () => {
+        try {
+            const q = query(
+                collection(db, 'tickets'),
+                orderBy('createdAt', 'desc'),
+                limit(5)
+            );
+            const snap = await getDocs(q);
+            setTickets(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        } catch (error) {
+            console.error("Error fetching tickets:", error);
+        }
+    };
+
     const handleAuthorize = async (id) => {
         setActionLoading(id);
         try {
@@ -168,12 +184,12 @@ export default function SuperAdminDashboard() {
             path: '/super-admin/parents'
         },
         {
-            name: 'Pending Approvals',
-            value: stats.pendingTeachers,
-            detail: stats.pendingTeachers > 0 ? 'Needs attention' : 'All clear',
-            icon: <FaClock />,
-            gradient: stats.pendingTeachers > 0 ? 'from-amber-500 to-amber-600' : 'from-slate-600 to-slate-700',
-            path: '/super-admin/teachers'
+            name: 'Open Tickets',
+            value: tickets.filter(t => t.status === 'open').length,
+            detail: 'Support requests',
+            icon: <FaTicketAlt />,
+            gradient: 'from-rose-600 to-rose-700',
+            path: '#'
         },
     ];
 
@@ -402,6 +418,60 @@ export default function SuperAdminDashboard() {
                                 <tr>
                                     <td colSpan="3" className="px-6 py-12 text-center text-slate-600 font-bold text-sm">
                                         No parent registrations yet.
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {/* ── Support Tickets ── */}
+            <div className="bg-slate-950 border border-slate-800 rounded-[3rem] p-10">
+                <div className="flex items-center justify-between mb-8">
+                    <div>
+                        <h2 className="text-2xl font-black text-white tracking-tight flex items-center gap-3">
+                            <FaTicketAlt className="text-rose-500 text-xl" />
+                            Support Tickets & Messages
+                        </h2>
+                        <p className="text-sm text-slate-500 font-medium mt-1">Recent inquiries from the contact form</p>
+                    </div>
+                </div>
+
+                <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                        <thead>
+                            <tr className="border-b border-slate-800/50">
+                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500">From</th>
+                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500">Subject</th>
+                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500">Message</th>
+                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-800/30">
+                            {tickets.map((ticket) => (
+                                <tr key={ticket.id} className="hover:bg-slate-900/50 transition-colors">
+                                    <td className="px-6 py-5">
+                                        <div>
+                                            <p className="text-white font-bold">{ticket.name}</p>
+                                            <p className="text-[10px] text-slate-500">{ticket.email}</p>
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-5">
+                                        <span className="text-blue-400 font-bold text-sm">{ticket.subject}</span>
+                                    </td>
+                                    <td className="px-6 py-5">
+                                        <p className="text-slate-400 text-sm line-clamp-2 max-w-md">{ticket.message}</p>
+                                    </td>
+                                    <td className="px-6 py-5 text-slate-500 text-xs font-bold uppercase tracking-wider">
+                                        {ticket.createdAt?.toDate?.() ? ticket.createdAt.toDate().toLocaleDateString() : 'Recently'}
+                                    </td>
+                                </tr>
+                            ))}
+                            {tickets.length === 0 && !loading && (
+                                <tr>
+                                    <td colSpan="4" className="px-6 py-12 text-center text-slate-600 font-bold text-sm">
+                                        No tickets found.
                                     </td>
                                 </tr>
                             )}

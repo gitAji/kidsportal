@@ -2,14 +2,41 @@
 import React, { useState } from 'react';
 import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaPaperPlane } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { db } from "@/firebase/config";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function ContactPage() {
   const [formStatus, setFormStatus] = useState('idle');
 
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormStatus('sending');
-    setTimeout(() => setFormStatus('success'), 1500);
+
+    try {
+      await addDoc(collection(db, "tickets"), {
+        ...formData,
+        type: 'contact',
+        status: 'open',
+        createdAt: serverTimestamp(),
+      });
+      setFormStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      console.error("Error sending ticket:", error);
+      setFormStatus('error');
+    }
   };
 
   return (
@@ -119,20 +146,52 @@ export default function ContactPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label className="text-xs font-bold text-slate-400 mb-2 block uppercase tracking-wide">Your Name</label>
-                        <input required type="text" className="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all" placeholder="Enter your name" />
+                        <input
+                          required
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          className="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all"
+                          placeholder="Enter your name"
+                        />
                       </div>
                       <div>
                         <label className="text-xs font-bold text-slate-400 mb-2 block uppercase tracking-wide">Email Address</label>
-                        <input required type="email" className="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all" placeholder="name@example.com" />
+                        <input
+                          required
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          className="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all"
+                          placeholder="name@example.com"
+                        />
                       </div>
                     </div>
                     <div>
                       <label className="text-xs font-bold text-slate-400 mb-2 block uppercase tracking-wide">Subject</label>
-                      <input required type="text" className="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all" placeholder="How can we help?" />
+                      <input
+                        required
+                        type="text"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        className="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all"
+                        placeholder="How can we help?"
+                      />
                     </div>
                     <div>
                       <label className="text-xs font-bold text-slate-400 mb-2 block uppercase tracking-wide">Message</label>
-                      <textarea required rows={5} className="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all resize-none" placeholder="Write your message here..." />
+                      <textarea
+                        required
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        rows={5}
+                        className="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all resize-none"
+                        placeholder="Write your message here..."
+                      />
                     </div>
                     <button
                       disabled={formStatus === 'sending'}
@@ -141,6 +200,9 @@ export default function ContactPage() {
                     >
                       {formStatus === 'sending' ? 'Sending...' : 'Send Message'} <FaPaperPlane />
                     </button>
+                    {formStatus === 'error' && (
+                      <p className="text-red-500 text-sm font-bold text-center mt-2">Failed to send message. Please try again.</p>
+                    )}
                   </form>
                 )}
               </div>
