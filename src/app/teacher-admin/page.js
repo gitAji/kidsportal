@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     FaPlus, FaTrash, FaSave, FaChevronDown, FaChevronUp,
     FaBookOpen, FaCheckSquare, FaClock, FaEdit, FaArrowLeft,
-    FaGraduationCap, FaLayerGroup, FaTimes
+    FaGraduationCap, FaLayerGroup, FaTimes, FaImage
 } from 'react-icons/fa';
 import TeacherAdminGuard from './TeacherAdminGuard';
 
@@ -33,7 +33,8 @@ const EMPTY_QUESTION = {
     questionText: '',
     type: 'multiple-choice',
     options: ['', '', '', ''],
-    correctAnswer: ''
+    correctAnswer: '',
+    imageUrl: ''
 };
 
 const EMPTY_TASK = {
@@ -69,6 +70,37 @@ function QuestionEditor({ question, onChange, onRemove, index }) {
                 <input value={question.questionText} onChange={e => onChange({ ...question, questionText: e.target.value })}
                     className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300" />
             </div>
+
+            {/* Image URL Field */}
+            <div>
+                <label className="text-xs font-bold text-slate-400 mb-1 flex items-center gap-1">
+                    <FaImage className="text-purple-400" /> Image URL <span className="text-slate-300 font-normal">(optional — paste a link to show a picture)</span>
+                </label>
+                <input
+                    value={question.imageUrl || ''}
+                    onChange={e => onChange({ ...question, imageUrl: e.target.value })}
+                    placeholder="https://example.com/image.png"
+                    className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300"
+                />
+                {question.imageUrl && (
+                    <div className="mt-2 relative group">
+                        <img
+                            src={question.imageUrl}
+                            alt="Question preview"
+                            className="max-h-40 rounded-xl border-2 border-purple-200 object-contain bg-white shadow-sm"
+                            onError={e => { e.target.style.display = 'none'; }}
+                            onLoad={e => { e.target.style.display = 'block'; }}
+                        />
+                        <button
+                            onClick={() => onChange({ ...question, imageUrl: '' })}
+                            className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
+                        >
+                            <FaTimes />
+                        </button>
+                    </div>
+                )}
+            </div>
+
             <div className="grid grid-cols-2 gap-3">
                 <div>
                     <label className="text-xs font-bold text-slate-400 mb-1 block">Type</label>
@@ -213,14 +245,22 @@ function TeacherAdminPageContent() {
     const [saveStatus, setSaveStatus] = useState(null);
     const [expandedLevel, setExpandedLevel] = useState(null);
 
+    // Derive grade-scoped subjectId to match the learning zone format
+    // e.g. grade-1 + english → english-1, grade-3 + math → math-3
+    const getFullSubjectId = useCallback(() => {
+        const gradeNum = selectedGrade.replace('grade-', '');
+        return `${selectedSubject}-${gradeNum}`;
+    }, [selectedGrade, selectedSubject]);
+
     // Fetch existing levels from Firestore
     const fetchLevels = useCallback(async () => {
         setLoading(true);
+        const fullSubjectId = getFullSubjectId();
         try {
             const q = query(
                 collection(db, 'levels'),
                 where('gradeId', '==', selectedGrade),
-                where('subjectId', '==', selectedSubject)
+                where('subjectId', '==', fullSubjectId)
             );
             const snap = await getDocs(q);
             const data = snap.docs.map(d => ({ _docId: d.id, ...d.data() }));
@@ -230,15 +270,16 @@ function TeacherAdminPageContent() {
             console.error('Fetch error:', e);
         }
         setLoading(false);
-    }, [selectedGrade, selectedSubject]);
+    }, [selectedGrade, selectedSubject, getFullSubjectId]);
 
     useEffect(() => { fetchLevels(); }, [fetchLevels]);
 
     const addLevel = () => {
         const n = levels.length + 1;
+        const fullSubjectId = getFullSubjectId();
         setLevels(ls => [...ls, {
             ...EMPTY_LEVEL,
-            levelId: `level${n}`,
+            levelId: `${fullSubjectId}-level-${n}`,
             levelName: `Level ${n}`,
             tasks: [],
         }]);
@@ -255,14 +296,15 @@ function TeacherAdminPageContent() {
 
     const saveAll = async () => {
         setSaveStatus('saving');
+        const fullSubjectId = getFullSubjectId();
         try {
             for (const level of levels) {
                 const { _docId, ...data } = level;
-                const id = `${selectedGrade}_${selectedSubject}_${level.levelId}`;
+                const id = `${selectedGrade}_${fullSubjectId}_${level.levelId}`;
                 await setDoc(doc(db, 'levels', id), {
                     ...data,
                     gradeId: selectedGrade,
-                    subjectId: selectedSubject,
+                    subjectId: fullSubjectId,
                     updatedAt: serverTimestamp(),
                 }, { merge: true });
             }

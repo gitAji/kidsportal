@@ -373,6 +373,20 @@ export default function TaskContentPage() {
           )}
 
           <div className="text-2xl font-bold mb-8 flex flex-col items-center text-center text-gray-800 mt-4">
+            {/* Question Image */}
+            {currentQuestion.imageUrl && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="mb-6 w-full flex justify-center"
+              >
+                <img
+                  src={currentQuestion.imageUrl}
+                  alt="Question visual"
+                  className="max-h-64 max-w-full rounded-3xl border-4 border-white shadow-xl object-contain bg-slate-50"
+                />
+              </motion.div>
+            )}
             {currentQuestion.questionText}
             <div className="mt-3 bg-blue-50 text-blue-500 rounded-full hover:bg-blue-100 transition-colors">
               <AudioPlayer text={currentQuestion.questionText} />
