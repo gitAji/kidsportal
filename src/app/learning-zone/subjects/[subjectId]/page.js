@@ -43,18 +43,25 @@ export default function SubjectLevelsPage() {
 
       setLoading(true);
       try {
+        // Query only on subjectId to avoid any composite index requirements, 
+        // since subjectId is already unique to the grade (e.g. english-1).
         const q = query(
           collection(db, 'levels'),
-          where('gradeId', '==', childUser.gradeId),
-          where('subjectId', '==', subjectId),
-          orderBy('levelId', 'asc')
+          where('subjectId', '==', subjectId)
         );
 
         const snap = await getDocs(q);
-        const data = snap.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
+        const data = snap.docs
+          .map(doc => ({ id: doc.id, ...doc.data() }))
+          // Fallback filter in memory just in case
+          .filter(doc => doc.gradeId === childUser.gradeId);
+
+        // Sort levels logically by the level number at the end of the levelId string
+        data.sort((a, b) => {
+          const numA = parseInt(a.levelId.split('-').pop()) || 0;
+          const numB = parseInt(b.levelId.split('-').pop()) || 0;
+          return numA - numB;
+        });
 
         setLevels(data);
       } catch (err) {
