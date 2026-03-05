@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { FaVolumeUp } from 'react-icons/fa';
+import React, { useEffect, useState, useCallback } from 'react';
+import { FaVolumeUp, FaStop } from 'react-icons/fa';
 
-export default function AudioPlayer({ text, lang = 'en-US' }) {
+export default function AudioPlayer({ text, lang = 'en-US', label, customClassName, icon }) {
   const [voices, setVoices] = useState([]);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     // Pre-load voices so they are ready when clicked
@@ -21,6 +22,23 @@ export default function AudioPlayer({ text, lang = 'en-US' }) {
     }
   }, []);
 
+  // Stop speech when text changes (slide navigation) or component unmounts (page navigation)
+  useEffect(() => {
+    return () => {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        setIsPlaying(false);
+      }
+    };
+  }, [text]);
+
+  const stopSpeech = useCallback(() => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      setIsPlaying(false);
+    }
+  }, []);
+
   const speakText = (e) => {
     if (e) {
       e.stopPropagation();
@@ -28,13 +46,25 @@ export default function AudioPlayer({ text, lang = 'en-US' }) {
     }
 
     if ('speechSynthesis' in window) {
+      // If already playing, stop it
+      if (isPlaying) {
+        stopSpeech();
+        return;
+      }
+
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
+      // Strip Markdown asterisks or hash characters so the voice doesn't read them out loud
+      const cleanText = (text || "").replace(/[*#_]/g, "");
+      const utterance = new SpeechSynthesisUtterance(cleanText);
       utterance.lang = lang;
 
       // Kid friendly settings
       utterance.rate = 0.85; // A bit slower so kids can understand
       utterance.pitch = 1.2; // Slightly higher pitch for a friendly tone
+
+      utterance.onstart = () => setIsPlaying(true);
+      utterance.onend = () => setIsPlaying(false);
+      utterance.onerror = () => setIsPlaying(false);
 
       if (voices.length > 0) {
         const englishVoices = voices.filter(v => v.lang.startsWith(lang.split('-')[0]));
@@ -62,10 +92,11 @@ export default function AudioPlayer({ text, lang = 'en-US' }) {
   return (
     <button
       onClick={speakText}
-      className="p-3 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition-all shadow-md active:scale-90"
-      aria-label="Play sound"
+      className={customClassName || `p-3 rounded-full ${isPlaying ? 'bg-red-100 text-red-600 hover:bg-red-200 animate-pulse' : 'bg-blue-100 text-blue-600 hover:bg-blue-200'} transition-all shadow-md active:scale-90`}
+      aria-label={isPlaying ? "Stop audio" : "Play sound"}
     >
-      <FaVolumeUp className="text-xl" />
+      {isPlaying ? <FaStop className="text-xl" /> : (icon || <FaVolumeUp className="text-xl" />)}
+      {label && <span>{isPlaying ? 'Stop' : label}</span>}
     </button>
   );
 }

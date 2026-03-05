@@ -14,7 +14,7 @@ import {
 import { auth, db } from "@/firebase/config";
 import SkeletonLoader from "@/app/components/ui/SkeletonLoader";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, collectionGroup, query, where, getDocs, limit } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import CustomAvatar from "@/app/components/ui/CustomAvatar";
 
 export default function LoginPage() {
@@ -35,12 +35,6 @@ function UnifiedLoginPage() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [verifying, setVerifying] = useState(true);
-
-    // Student Lookup State
-    const [studentSearchName, setStudentSearchName] = useState("");
-    const [matchingStudents, setMatchingStudents] = useState([]);
-    const [lookupStep, setLookupStep] = useState("search"); // search, pick, login
-    const [selectedStudent, setSelectedStudent] = useState(null);
 
     // Roles Configuration
     const roles = [
@@ -81,46 +75,6 @@ function UnifiedLoginPage() {
         }
     };
 
-    const handleStudentSearch = async (e) => {
-        e.preventDefault();
-        if (!studentSearchName.trim()) return;
-
-        setLoading(true);
-        setError("");
-        try {
-            // Collection group query to find children by name
-            const childrenQuery = query(
-                collectionGroup(db, 'children'),
-                where('name', '==', studentSearchName.trim()),
-                limit(10)
-            );
-
-            const querySnapshot = await getDocs(childrenQuery);
-            const found = querySnapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-
-            if (found.length === 0) {
-                throw new Error("No students found with that name. Please check the spelling or ask your parent.");
-            }
-
-            setMatchingStudents(found);
-            setLookupStep("pick");
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleSelectStudent = (student) => {
-        setSelectedStudent(student);
-        setUsername(student.username);
-        setLookupStep("login");
-        setError("");
-    };
-
     const handleGoogleSignIn = async () => {
         setLoading(true);
         try {
@@ -134,27 +88,20 @@ function UnifiedLoginPage() {
     };
 
     const loginAsStudent = async () => {
+        if (!username || !password) throw new Error("Please enter both username and password.");
         try {
-            const usernameDoc = await getDoc(doc(db, 'child_usernames', username.toLowerCase()));
-            if (!usernameDoc.exists()) throw new Error("Student username not found.");
+            const res = await fetch("/api/child-login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username: username.toLowerCase(), password })
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || "Login failed.");
 
-            const { parentUid, childId } = usernameDoc.data();
-            const childDoc = await getDoc(doc(db, 'users', parentUid, 'children', childId));
-
-            if (!childDoc.exists()) throw new Error("Student profile error.");
-
-            const childData = childDoc.data();
-            if (childData.password !== password) throw new Error("Invalid PIN. Please check with your parent.");
-            if (childData.loginEnabled === false) throw new Error("Account disabled.");
-            if (!childData.grade) throw new Error("Grade not assigned to profile.");
-
-            localStorage.setItem("childUser", JSON.stringify({ id: childId, ...childData, parentUid }));
+            localStorage.setItem("childUser", JSON.stringify(data.child));
             router.push("/learning-zone");
         } catch (err) {
-            console.error("Student Login Error Chain:", err);
-            if (err.code === 'permission-denied') {
-                throw new Error("Learning Zone access restricted. Please contact support.");
-            }
+            console.error("Student Login Error:", err);
             throw err;
         }
     };
@@ -292,116 +239,38 @@ function UnifiedLoginPage() {
                         </motion.div>
                     ) : null}
 
-                    <form onSubmit={activeRole === 'student' && lookupStep === 'search' ? handleStudentSearch : handleAuth} className="space-y-6">
+                    <form onSubmit={handleAuth} className="space-y-6">
                         {activeRole === 'student' ? (
-                            <AnimatePresence mode="wait">
-                                {lookupStep === 'search' && (
-                                    <motion.div
-                                        key="search"
-                                        initial={{ opacity: 0, x: 20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -20 }}
-                                        className="space-y-6"
-                                    >
-                                        <div className="space-y-2">
-                                            <label className="text-[11px] font-black uppercase tracking-[2px] text-slate-400 ml-1">Type your first name</label>
-                                            <div className="relative">
-                                                <FaUserGraduate className="absolute left-5 top-1/2 -translate-y-1/2 text-blue-500" />
-                                                <input
-                                                    type="text"
-                                                    value={studentSearchName}
-                                                    onChange={(e) => setStudentSearchName(e.target.value)}
-                                                    className="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl pl-14 pr-6 py-4 text-slate-800 focus:border-blue-500 focus:bg-white outline-none transition-all font-semibold placeholder:text-slate-300"
-                                                    placeholder="e.g. Leo"
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                        <button
-                                            type="submit"
-                                            disabled={loading}
-                                            className="w-full h-16 bg-blue-600 text-white rounded-2xl font-black shadow-lg shadow-blue-500/20 flex items-center justify-center gap-3 hover:bg-blue-700 transition-all"
-                                        >
-                                            {loading ? <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : "Find My Account 🚀"}
-                                        </button>
-                                    </motion.div>
-                                )}
-
-                                {lookupStep === 'pick' && (
-                                    <motion.div
-                                        key="pick"
-                                        initial={{ opacity: 0, x: 20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        className="space-y-6"
-                                    >
-                                        <div className="flex items-center justify-between mb-2">
-                                            <label className="text-[11px] font-black uppercase tracking-[2px] text-slate-400 ml-1">Which one is you?</label>
-                                            <button type="button" onClick={() => setLookupStep('search')} className="text-[10px] font-bold text-blue-600 hover:underline">Try another name</button>
-                                        </div>
-                                        <div className="grid grid-cols-1 gap-3 max-h-[300px] overflow-y-auto pr-2 scrollbar-hide">
-                                            {matchingStudents.map((child) => (
-                                                <button
-                                                    key={child.id}
-                                                    type="button"
-                                                    onClick={() => handleSelectStudent(child)}
-                                                    className="flex items-center gap-4 p-4 bg-slate-50 border-2 border-transparent hover:border-blue-500 hover:bg-white rounded-2xl transition-all text-left group"
-                                                >
-                                                    <div className="w-12 h-12 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-xl shadow-sm group-hover:scale-110 transition-transform">
-                                                        <CustomAvatar child={child} />
-                                                    </div>
-                                                    <div className="flex-grow">
-                                                        <p className="font-black text-slate-800">{child.name}</p>
-                                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Username: <span className="text-blue-500">{child.username}</span></p>
-                                                    </div>
-                                                    <FaArrowRight className="text-slate-300 group-hover:text-blue-500 transition-colors" />
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </motion.div>
-                                )}
-
-                                {lookupStep === 'login' && (
-                                    <motion.div
-                                        key="login"
-                                        initial={{ opacity: 0, x: 20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        className="space-y-6"
-                                    >
-                                        <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-2xl mb-6">
-                                            <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-xl shadow-sm">
-                                                <CustomAvatar child={selectedStudent} />
-                                            </div>
-                                            <div className="flex-grow">
-                                                <p className="text-xs font-black text-blue-600 uppercase tracking-widest">Welcome back,</p>
-                                                <p className="text-xl font-black text-slate-800">{selectedStudent?.name}!</p>
-                                            </div>
-                                            <button type="button" onClick={() => setLookupStep('pick')} className="text-xs font-bold text-slate-400 hover:text-blue-600">Change</button>
-                                        </div>
-                                        <div className="space-y-2">
-                                            <label className="text-[11px] font-black uppercase tracking-[2px] text-slate-400 ml-1">Your Secret PIN</label>
-                                            <div className="relative">
-                                                <FaKey className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400" />
-                                                <input
-                                                    type="password"
-                                                    value={password}
-                                                    onChange={(e) => setPassword(e.target.value)}
-                                                    className="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl pl-14 pr-6 py-4 text-slate-800 focus:border-blue-500 focus:bg-white outline-none transition-all font-semibold placeholder:text-slate-300"
-                                                    placeholder="••••"
-                                                    required
-                                                    autoFocus
-                                                />
-                                            </div>
-                                        </div>
-                                        <button
-                                            type="submit"
-                                            disabled={loading}
-                                            className="w-full h-16 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-2xl font-black shadow-lg shadow-blue-500/20 flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all"
-                                        >
-                                            {loading ? <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : "Start Learning! ✨"}
-                                        </button>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
+                            <>
+                                <div className="space-y-2">
+                                    <label className="text-[11px] font-black uppercase tracking-[2px] text-slate-400 ml-1">Username</label>
+                                    <div className="relative">
+                                        <FaUserGraduate className="absolute left-5 top-1/2 -translate-y-1/2 text-blue-500" />
+                                        <input
+                                            type="text"
+                                            value={username}
+                                            onChange={(e) => setUsername(e.target.value)}
+                                            className="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl pl-14 pr-6 py-4 text-slate-800 focus:border-blue-500 focus:bg-white outline-none transition-all font-semibold placeholder:text-slate-300"
+                                            placeholder="e.g. leo123"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-[11px] font-black uppercase tracking-[2px] text-slate-400 ml-1">Password</label>
+                                    <div className="relative">
+                                        <FaKey className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400" />
+                                        <input
+                                            type="password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            className="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl pl-14 pr-6 py-4 text-slate-800 focus:border-blue-500 focus:bg-white outline-none transition-all font-semibold placeholder:text-slate-300"
+                                            placeholder="Your secret password"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                            </>
                         ) : (
                             <>
                                 <div className="space-y-2">

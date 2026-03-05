@@ -7,6 +7,7 @@ import { useChild } from '../../../../../providers/ChildProvider';
 import AudioPlayer from '../../../../../components/ui/AudioPlayer';
 import DrawingCanvas from '../../../../../components/ui/DrawingCanvas';
 import VirtualKeyboard from '../../../../../components/ui/VirtualKeyboard';
+import InteractiveLesson from '../../../../../components/ui/InteractiveLesson';
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from 'canvas-confetti';
 import { recordTaskCompletion, checkAchievements } from '../../../../../utils/achievements';
@@ -160,6 +161,7 @@ export default function TaskContentPage() {
         const updatedStats = recordTaskCompletion(childUser.uid, {
           type: taskData.type, score, totalQuestions: total,
           correct: finalCorrect, timeTaken, levelId, subjectId, retried: retriedThisTask,
+          taskId: taskData.taskId
         });
 
         // Sync to Firestore
@@ -180,6 +182,34 @@ export default function TaskContentPage() {
   const handleSkip = () => { setWrongAnswersCount(c => c + 1); handleNextQuestion(); };
   const handleReview = () => { setFeedbackMessage(null); setShowReviewOption(false); setRetriedThisTask(true); setTimerActive(true); };
   const formatTime = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+
+  const handleLessonComplete = async () => {
+    completionSound?.play();
+    triggerConfetti(true);
+    if (!childUser?.uid) {
+      router.back();
+      return;
+    }
+
+    // 10 pts for completing a lesson
+    const updatedStats = recordTaskCompletion(childUser.uid, {
+      type: taskData.type, score: 10, totalQuestions: 1,
+      correct: 1, timeTaken: 0, levelId, subjectId, retried: false,
+      taskId: taskData.taskId
+    });
+
+    await saveChildStats(childUser.uid, updatedStats).catch(console.error);
+    const unlocked = checkAchievements(childUser.uid, updatedStats);
+
+    if (unlocked.length > 0) {
+      unlocked.forEach(ach => recordAchievement(childUser.uid, ach).catch(console.error));
+      setNewAchievements(unlocked);
+      setScore(10);
+      setQuizCompleted(true); // Re-use the summary screen
+    } else {
+      router.back();
+    }
+  };
   const handleKeyPress = (key) => {
     if (key === 'Backspace') setUserAnswer(a => a.slice(0, -1));
     else setUserAnswer(a => a + key);
@@ -194,12 +224,48 @@ export default function TaskContentPage() {
   if (!taskData) return <div className="text-center p-10">Task not found.</div>;
 
   if (!taskData.questions || taskData.questions.length === 0) {
+    if (quizCompleted) {
+      // Re-using the success screen for lesson completions with achievements
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-100 p-4 flex flex-col items-center justify-center gap-6">
+          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", bounce: 0.5 }}
+            className="p-10 text-center bg-white/80 backdrop-blur-md rounded-[3rem] shadow-2xl max-w-lg w-full border-4 border-white">
+            <FaStar size={100} className="text-yellow-400 mb-6 mx-auto drop-shadow-md" />
+            <h1 className="text-4xl font-extrabold mb-4 text-green-600">Lesson Complete!</h1>
+            <p className="text-xl text-gray-600 mb-8">+10 Points Added</p>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button onClick={() => router.back()} className="flex-1 bg-blue-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-blue-600 hover:scale-105 transition-all shadow-lg">Back to Map 🗺️</button>
+              <button onClick={() => router.push('/learning-zone/rewards')} className="flex-1 bg-cyan-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-cyan-600 hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2"><FaGift /> My Rewards</button>
+            </div>
+          </motion.div>
+
+          {newAchievements.length > 0 && (
+            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, type: "spring" }} className="w-full max-w-lg">
+              <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-6 border-4 border-cyan-300">
+                <h2 className="text-2xl font-extrabold text-cyan-700 mb-4">🎉 New Achievements!</h2>
+                <div className="grid grid-cols-2 gap-3">
+                  {newAchievements.map(ach => (
+                    <motion.div key={ach.id} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", bounce: 0.6 }}
+                      className={`bg-gradient-to-br ${ach.color} rounded-2xl p-4 text-center border-2 ${ach.border} shadow-md`}>
+                      <div className="text-4xl mb-2">{ach.emoji}</div>
+                      <p className="font-extrabold text-white text-sm leading-tight drop-shadow">{ach.name}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </div>
+      );
+    }
+
     return (
-      <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center p-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">{taskData.taskName}</h1>
-        <p className="text-xl mb-4 text-center max-w-2xl bg-white p-8 rounded-2xl shadow-md leading-relaxed">{taskData.content}</p>
-        <button onClick={() => router.back()} className="mt-8 bg-blue-500 text-white px-8 py-3 rounded-full text-lg hover:bg-blue-600 transition-colors shadow-lg">I&apos;m Done!</button>
-      </div>
+      <InteractiveLesson
+        taskData={taskData}
+        childUser={childUser}
+        onComplete={handleLessonComplete}
+      />
     );
   }
 

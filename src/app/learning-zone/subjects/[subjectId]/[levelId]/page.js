@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../../data/db.json';
 import SkeletonLoader from '../../../../components/ui/SkeletonLoader';
-import { FaArrowLeft, FaHome, FaBookOpen, FaQuestionCircle, FaAward, FaStar } from 'react-icons/fa';
+import { FaArrowLeft, FaHome, FaBookOpen, FaQuestionCircle, FaAward, FaStar, FaCheckCircle } from 'react-icons/fa';
 import { useChild } from '../../../../providers/ChildProvider';
+import { loadStats } from '../../../../utils/achievements';
 import { motion } from "framer-motion";
 
 // A map for sleek task colors
@@ -28,6 +29,7 @@ import { db } from '@/firebase/config';
 export default function LevelTasksPage() {
   const { childUser } = useChild();
   const [levelData, setLevelData] = useState(null);
+  const [childStats, setChildStats] = useState({});
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const params = useParams();
@@ -41,6 +43,7 @@ export default function LevelTasksPage() {
         }
         return;
       }
+      setChildStats(loadStats(childUser.uid));
 
       setLoading(true);
       try {
@@ -138,8 +141,11 @@ export default function LevelTasksPage() {
                   {task.taskName}
                 </h2>
 
-                <div className="mt-auto bg-black/20 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide z-10">
+                <div className="mt-auto bg-black/20 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide z-10 flex items-center gap-2">
                   {task.type}
+                  {childStats?.completedTasks_list?.includes(task.taskId) && (
+                    <FaCheckCircle className="text-green-300" title="Completed!" />
+                  )}
                 </div>
               </motion.div>
             );

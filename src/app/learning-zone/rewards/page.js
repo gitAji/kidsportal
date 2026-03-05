@@ -70,7 +70,7 @@ export default function RewardsPage() {
             <p className="text-cyan-200 text-sm font-semibold uppercase tracking-widest mb-1">Achievements</p>
             <p className="text-6xl font-black">{unlockedCount}<span className="text-cyan-300 text-3xl">/{total}</span></p>
           </div>
-          <div className="grid grid-cols-3 gap-4 text-center">
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 text-center mt-6 sm:mt-0">
             <div className="bg-white/20 rounded-2xl p-3">
               <div className="text-2xl font-black">{stats.totalScore || 0}</div>
               <div className="text-xs text-cyan-200 font-semibold">Points</div>
@@ -82,6 +82,18 @@ export default function RewardsPage() {
             <div className="bg-white/20 rounded-2xl p-3">
               <div className="text-2xl font-black">{stats.uniqueDays || 0}</div>
               <div className="text-xs text-cyan-200 font-semibold">🔥 Days</div>
+            </div>
+            <div className="bg-white/20 rounded-2xl p-3 border border-yellow-300">
+              <div className="text-2xl font-black text-yellow-300">{stats.goldMedals || 0}</div>
+              <div className="text-xs text-yellow-100 font-semibold">🏆 Gold</div>
+            </div>
+            <div className="bg-white/20 rounded-2xl p-3 border border-slate-300">
+              <div className="text-2xl font-black text-slate-300">{stats.silverMedals || 0}</div>
+              <div className="text-xs text-slate-100 font-semibold">🥈 Silver</div>
+            </div>
+            <div className="bg-white/20 rounded-2xl p-3 border border-orange-300">
+              <div className="text-2xl font-black text-orange-300">{stats.bronzeMedals || 0}</div>
+              <div className="text-xs text-orange-100 font-semibold">🥉 Bronze</div>
             </div>
           </div>
         </motion.div>

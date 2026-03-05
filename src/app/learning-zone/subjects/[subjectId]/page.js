@@ -1,11 +1,12 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../data/db.json';
 import SkeletonLoader from '../../../components/ui/SkeletonLoader';
 import { FaArrowLeft, FaHome, FaLock, FaStar, FaTrophy } from 'react-icons/fa';
 import { useChild } from '../../../providers/ChildProvider';
 import { useLanguage } from '../../../providers/LanguageProvider';
+import { loadStats } from '../../../utils/achievements';
 import { motion, AnimatePresence } from "framer-motion";
 
 const colorPalette = [
@@ -28,6 +29,7 @@ export default function SubjectLevelsPage() {
   const [levels, setLevels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [alertMessage, setAlertMessage] = useState(null);
+  const [childStats, setChildStats] = useState({});
   const router = useRouter();
   const params = useParams();
   const { subjectId } = params;
@@ -40,6 +42,7 @@ export default function SubjectLevelsPage() {
         }
         return;
       }
+      setChildStats(loadStats(childUser.uid));
 
       setLoading(true);
       try {
@@ -75,6 +78,33 @@ export default function SubjectLevelsPage() {
     fetchFirestoreLevels();
   }, [childUser, subjectId, router]);
 
+  const processedLevels = useMemo(() => {
+    let previousCompleted = true; // Level 1 is always unlocked
+
+    return levels.map((level, index) => {
+      const levelTasks = level.tasks || [];
+      const totalTasks = levelTasks.length;
+      const completedTaskIds = childStats?.completedTasks_list || [];
+      const completedCount = levelTasks.filter(t => completedTaskIds.includes(t.taskId)).length;
+      const isCompleted = totalTasks > 0 && completedCount === totalTasks;
+
+      // Override isLocked based on previous level's completion
+      const computedIsLocked = !previousCompleted;
+
+      // Update for the next level in the array
+      previousCompleted = isCompleted;
+
+      return {
+        ...level,
+        overrideIsLocked: computedIsLocked,
+        lockMessage: computedIsLocked ? "Finish the previous level to unlock!" : level.lockMessage,
+        completedCount,
+        totalTasks,
+        isCompleted
+      };
+    });
+  }, [levels, childStats]);
+
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center p-8">
       <SkeletonLoader variant="page" message="Getting your levels ready..." />
@@ -82,7 +112,7 @@ export default function SubjectLevelsPage() {
   );
 
   const handleLevelClick = (level) => {
-    if (level.isLocked) {
+    if (level.overrideIsLocked || level.isLocked) {
       setAlertMessage(level.lockMessage || t('locked'));
       setTimeout(() => setAlertMessage(null), 3000);
     } else {
@@ -142,7 +172,7 @@ export default function SubjectLevelsPage() {
 
       <div className="w-full max-w-6xl mx-auto z-10 relative pb-20 space-y-12">
         {Object.entries(
-          levels.reduce((acc, level) => {
+          processedLevels.reduce((acc, level) => {
             const module = level.moduleName || 'Standard Lessons';
             if (!acc[module]) acc[module] = [];
             acc[module].push(level);
@@ -164,9 +194,20 @@ export default function SubjectLevelsPage() {
               variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
             >
               {moduleLevels.map((level, index) => {
-                const isLocked = level.isLocked;
+                // If it's locked by previous progression OR hard-locked in DB
+                const isLocked = level.overrideIsLocked || level.isLocked;
                 const colorClass = colorPalette[index % colorPalette.length];
                 const cardBg = isLocked ? "bg-slate-300 border-slate-400" : colorClass;
+
+                const totalTasks = level.totalTasks;
+                const completedCount = level.completedCount;
+
+                let progressText = "";
+                if (level.isCompleted) {
+                  progressText = "⭐️ Completed ⭐️";
+                } else if (completedCount > 0) {
+                  progressText = `⏳ In Progress (${completedCount}/${totalTasks})`;
+                }
 
                 return (
                   <motion.div
@@ -198,16 +239,22 @@ export default function SubjectLevelsPage() {
 
                     <div className="mt-6 flex items-center gap-2">
                       <span className="bg-black/10 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">
-                        {level.tasks?.length || 0} Tasks
+                        {totalTasks} Tasks
                       </span>
                       <span className="bg-yellow-400/20 text-yellow-100 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">
                         {level.xpReward || 50} XP
                       </span>
                     </div>
 
+                    {progressText && !isLocked && (
+                      <div className={`mt-3 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest backdrop-blur-md z-10 border border-white/20 ${completedCount === totalTasks ? 'bg-green-500/80' : 'bg-blue-500/50'}`}>
+                        {progressText}
+                      </div>
+                    )}
+
                     {isLocked && (
                       <div className="mt-4 bg-slate-800/40 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-md z-10 border border-white/10">
-                        {t('locked')}
+                        {level.overrideIsLocked ? 'LOCKED' : t('locked')}
                       </div>
                     )}
                   </motion.div>

@@ -358,7 +358,14 @@ export default function Header({
                 </div>
               </div>
             ) : (
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                <Link
+                  href="/login?role=student"
+                  className="hidden sm:flex items-center gap-2 text-emerald-600 font-black uppercase tracking-[2px] text-[10px] px-5 py-3 rounded-2xl bg-emerald-50 hover:bg-emerald-100 transition-all"
+                >
+                  <FaGraduationCap className="text-sm" />
+                  Student Login
+                </Link>
                 <button
                   className="hidden sm:block text-slate-600 font-black uppercase tracking-[2px] text-[10px] px-6 py-3 rounded-2xl hover:bg-slate-50 transition-all"
                   onClick={() => {
@@ -528,11 +535,18 @@ export default function Header({
                 {/* Not Authenticated - Auth Buttons */}
                 {!user && (
                   <div className="mt-auto pt-6 border-t border-slate-100 space-y-3 px-2">
+                    <Link
+                      href="/login?role=student"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="w-full py-4 bg-emerald-50 text-emerald-700 border-2 border-emerald-200 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-emerald-100 transition-all flex items-center justify-center gap-2"
+                    >
+                      <FaGraduationCap /> Student Login
+                    </Link>
                     <button
                       className="w-full py-4 bg-white text-slate-700 border-2 border-slate-200 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-slate-50 transition-all"
                       onClick={() => { setIsModalOpen(true); setIsRegister(false); setIsMenuOpen(false); }}
                     >
-                      Log In
+                      Parent Log In
                     </button>
                     <button
                       className="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-lg shadow-blue-200/40 hover:shadow-blue-300/50 transition-all"

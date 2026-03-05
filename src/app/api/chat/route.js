@@ -3,15 +3,14 @@
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({
-  vertexai: true,
-  project: "gen-lang-client-0120070959",
-  location: "global",
+  apiKey: process.env.GEMINI_API_KEY,
 });
 
 const model = "gemini-2.5-flash-lite";
 
 const siText1 = {
-  text: `KidsPortal is an online learning platform designed for children...`,
+  text: `KidsPortal is an online learning platform designed for children...
+CRITICAL RULE: DO NOT use any markdown formatting, asterisks, or special characters like ** in your response. Keep it as pure plain text so it can be read out loud clearly by a voice synthesizer.`,
 };
 
 const generationConfig = {
@@ -48,7 +47,10 @@ export const POST = async (req) => {
       }
     }
 
-    return new Response(JSON.stringify({ response: resultText }), {
+    // Strip out any asterisks or hashtags that somehow slipped through
+    const cleanText = resultText.replace(/[*#]/g, "");
+
+    return new Response(JSON.stringify({ response: cleanText }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

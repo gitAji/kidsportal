@@ -41,7 +41,7 @@ export const ACHIEVEMENTS = [
     {
         id: "gold_medal",
         name: "Gold Medal",
-        description: "Earn a gold medal by scoring 100% on any exam.",
+        description: "Earn your very first gold medal by scoring 100%.",
         emoji: "🏆",
         color: "from-yellow-400 to-orange-400",
         border: "border-yellow-300",
@@ -50,7 +50,7 @@ export const ACHIEVEMENTS = [
     {
         id: "silver_medal",
         name: "Silver Medal",
-        description: "Score 75% or above on any exam.",
+        description: "Earn your first silver medal (75%+ score).",
         emoji: "🥈",
         color: "from-slate-300 to-slate-500",
         border: "border-slate-300",
@@ -59,7 +59,7 @@ export const ACHIEVEMENTS = [
     {
         id: "bronze_medal",
         name: "Bronze Medal",
-        description: "Score 50% or above on any exam.",
+        description: "Earn your first bronze medal (50%+ score).",
         emoji: "🥉",
         color: "from-orange-300 to-orange-500",
         border: "border-orange-300",
@@ -175,8 +175,8 @@ export function recordTaskCompletion(childId, taskResult) {
     stats.totalTimeTaken = (stats.totalTimeTaken || 0) + (taskResult.timeTaken || 0);
     stats.lastTaskPerfect = pct === 1;
 
-    // Medal tracking (exams only)
-    if (taskResult.type === "exam") {
+    // Medal tracking (exams and quizzes)
+    if (taskResult.type === "exam" || taskResult.type === "quiz") {
         if (pct === 1) stats.goldMedals = (stats.goldMedals || 0) + 1;
         else if (pct >= 0.75) stats.silverMedals = (stats.silverMedals || 0) + 1;
         else if (pct >= 0.5) stats.bronzeMedals = (stats.bronzeMedals || 0) + 1;
@@ -207,6 +207,13 @@ export function recordTaskCompletion(childId, taskResult) {
 
     // Retries
     if (taskResult.retried) stats.retries = (stats.retries || 0) + 1;
+
+    // Completed specific tasks
+    if (taskResult.taskId) {
+        const tasksSet = new Set(stats.completedTasks_list || []);
+        tasksSet.add(taskResult.taskId);
+        stats.completedTasks_list = [...tasksSet];
+    }
 
     // Daily streak — track dates
     const today = new Date().toDateString();

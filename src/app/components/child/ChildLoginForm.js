@@ -42,52 +42,30 @@ export default function ChildLoginForm() {
     }
 
     try {
-      const usernameDocRef = doc(db, 'child_usernames', username.toLowerCase());
-      const usernameDoc = await getDoc(usernameDocRef);
+      // Switch to Server-Side Login to bypass strict client-side Firestore rules (Insufficient Permissions)
+      const res = await fetch("/api/child-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
 
-      if (!usernameDoc.exists()) {
-        setError("Invalid username or password. Please try again.");
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Login failed");
         setLoading(false);
         return;
       }
 
-      const { parentUid, childId } = usernameDoc.data();
-      const childDocRef = doc(db, 'users', parentUid, 'children', childId);
-      const childDoc = await getDoc(childDocRef);
-
-      if (!childDoc.exists()) {
-        setError("An unexpected error occurred. Child profile not found.");
-        setLoading(false);
-        return;
-      }
-
-      const childData = childDoc.data();
-
-      if (childData.password !== password) {
-        setError("Invalid username or password. Please try again.");
-        setLoading(false);
-        return;
-      }
-
-      if (childData.loginEnabled === false) {
-        setError("Your account is currently disabled. Please ask your parent to enable it.");
-        setLoading(false);
-        return;
-      }
-
-      const foundChild = { id: childDoc.id, ...childData, parentUid };
+      const foundChild = data.child;
       const storage = rememberMe ? localStorage : sessionStorage;
       storage.setItem("childUser", JSON.stringify(foundChild));
+
       router.push("/learning-zone"); // Redirect to new learning zone dashboard
+
 
     } catch (err) {
       console.error("Child login error details:", err);
-      if (err.code) {
-        console.error("Firebase Error Code:", err.code);
-      }
-      if (err.message) {
-        console.error("Firebase Error Message:", err.message);
-      }
       setError("An error occurred during login. Please try again later.");
     } finally {
       setLoading(false);
