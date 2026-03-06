@@ -71,10 +71,16 @@ export default function TaskContentPage() {
 
       // Fallback: local db.json
       const dbData = (await import('../../../../../data/db.json')).default;
-      const gradeData = dbData.grades.find(g => g.gradeId === childUser.gradeId);
-      const subject = gradeData?.subjects?.find(s => s.subjectId === subjectId);
-      const level = subject?.levels?.find(l => l.levelId === levelId);
-      let task = level?.tasks?.find(t => t.taskId === taskId);
+      const cleanSubjectId = subjectId?.toLowerCase().replace(/ /g, '-');
+      const cleanLevelId = levelId?.toLowerCase().replace(/ /g, '-');
+      const cleanTaskId = taskId?.toLowerCase().replace(/ /g, '-');
+      const gradeData = dbData.grades.find(g => g.gradeId?.toLowerCase().replace(/-/g, '') === childUser.gradeId?.toLowerCase().replace(/-/g, ''));
+      const subject = gradeData?.subjects?.find(s =>
+        s.subjectId?.toLowerCase() === cleanSubjectId ||
+        s.subjectName?.toLowerCase() === cleanSubjectId
+      );
+      const level = subject?.levels?.find(l => l.levelId?.toLowerCase() === cleanLevelId);
+      let task = level?.tasks?.find(t => t.taskId?.toLowerCase() === cleanTaskId);
 
       // Vertex AI Generation Fallback: If task doesn't exist, customize a new one automatically based on user level
       if (!task) {

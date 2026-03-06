@@ -84,10 +84,35 @@ export default function LevelTasksPage() {
         if (docSnap.exists()) {
           setLevelData(docSnap.data());
         } else {
-          console.log("No such level document in Firestore!");
+          console.log("No such level document in Firestore! Falling back to local data...");
+          const cleanSubjectId = subjectId?.toLowerCase().replace(/ /g, '-');
+          const cleanLevelId = levelId?.toLowerCase().replace(/ /g, '-');
+
+          const gradeData = dbData.grades.find(g => g.gradeId?.toLowerCase().replace(/-/g, '') === childUser.gradeId?.toLowerCase().replace(/-/g, ''));
+          const subject = gradeData?.subjects?.find(s =>
+            s.subjectId?.toLowerCase() === cleanSubjectId ||
+            s.subjectName?.toLowerCase() === cleanSubjectId
+          );
+          const level = subject?.levels?.find(l => l.levelId?.toLowerCase() === cleanLevelId);
+          if (level) {
+            setLevelData(level);
+          } else {
+            console.log("Level not found in local data either. Searched for level", levelId, "in subject", subjectId);
+          }
         }
       } catch (err) {
         console.error("Error fetching level details:", err);
+        // Fallback to local on error
+        const cleanSubjectId = subjectId?.toLowerCase().replace(/ /g, '-');
+        const cleanLevelId = levelId?.toLowerCase().replace(/ /g, '-');
+
+        const gradeData = dbData.grades.find(g => g.gradeId?.toLowerCase().replace(/-/g, '') === childUser.gradeId?.toLowerCase().replace(/-/g, ''));
+        const subject = gradeData?.subjects?.find(s =>
+          s.subjectId?.toLowerCase() === cleanSubjectId ||
+          s.subjectName?.toLowerCase() === cleanSubjectId
+        );
+        const level = subject?.levels?.find(l => l.levelId?.toLowerCase() === cleanLevelId);
+        if (level) setLevelData(level);
       } finally {
         setLoading(false);
       }

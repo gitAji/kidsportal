@@ -103,12 +103,12 @@ export default function LearningZonePage() {
       setSubjectsLoading(true);
 
       // Fetch the parent's selected learning subjects
-      let learningSubjects = null;
+      let learningSubjects = childUser.learningSubjects || ['English', 'Math', 'Science', 'Tamil'];
       try {
         if (childUser.parentUid) {
           const parentSnap = await getDoc(doc(db, 'users', childUser.parentUid));
           if (parentSnap.exists()) {
-            learningSubjects = parentSnap.data().learningSubjects || null;
+            learningSubjects = parentSnap.data().learningSubjects || learningSubjects; // Use parent's preference, or fallback to childUser's/default
           }
         }
       } catch (err) {

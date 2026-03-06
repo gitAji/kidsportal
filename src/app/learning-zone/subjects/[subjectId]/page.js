@@ -89,15 +89,33 @@ export default function SubjectLevelsPage() {
           .map(doc => ({ id: doc.id, ...doc.data() }))
           .filter(doc => doc.gradeId === childUser.gradeId);
 
-        data.sort((a, b) => {
-          const numA = parseInt(a.levelId.split('-').pop()) || 0;
-          const numB = parseInt(b.levelId.split('-').pop()) || 0;
-          return numA - numB;
-        });
+        if (data.length === 0) {
+          // Fallback to local db.json
+          const cleanSubjectId = subjectId?.toLowerCase().replace(/ /g, '-');
+          const gradeData = dbData.grades.find(g => g.gradeId?.toLowerCase().replace(/-/g, '') === childUser.gradeId?.toLowerCase().replace(/-/g, ''));
+          const subject = gradeData?.subjects?.find(s =>
+            s.subjectId?.toLowerCase() === cleanSubjectId ||
+            s.subjectName?.toLowerCase() === cleanSubjectId
+          );
+          if (subject && subject.levels) {
+            setLevels(subject.levels);
+            return;
+          }
+        }
 
         setLevels(data);
       } catch (err) {
         console.error("Error fetching levels:", err);
+        // Fallback to local on error too
+        const cleanSubjectId = subjectId?.toLowerCase().replace(/ /g, '-');
+        const gradeData = dbData.grades.find(g => g.gradeId?.toLowerCase().replace(/-/g, '') === childUser.gradeId?.toLowerCase().replace(/-/g, ''));
+        const subject = gradeData?.subjects?.find(s =>
+          s.subjectId?.toLowerCase() === cleanSubjectId ||
+          s.subjectName?.toLowerCase() === cleanSubjectId
+        );
+        if (subject && subject.levels) {
+          setLevels(subject.levels);
+        }
       } finally {
         setLoading(false);
       }

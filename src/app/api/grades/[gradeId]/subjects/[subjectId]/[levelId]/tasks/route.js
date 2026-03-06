@@ -9,17 +9,23 @@ export async function GET(request, { params }) {
 
   try {
     const dbData = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
-    const grade = dbData.grades.find(g => g.gradeId === gradeId);
+    const cleanSubjectId = subjectId?.toLowerCase().replace(/ /g, '-');
+    const cleanLevelId = levelId?.toLowerCase().replace(/ /g, '-');
+
+    const grade = dbData.grades.find(g => g.gradeId?.toLowerCase().replace(/-/g, '') === gradeId?.toLowerCase().replace(/-/g, ''));
     if (!grade) {
       return NextResponse.json({ error: 'Grade not found' }, { status: 404 });
     }
 
-    const subject = grade.subjects.find(s => s.subjectId === subjectId);
+    const subject = grade.subjects.find(s =>
+      s.subjectId?.toLowerCase() === cleanSubjectId ||
+      s.subjectName?.toLowerCase() === cleanSubjectId
+    );
     if (!subject) {
       return NextResponse.json({ error: 'Subject not found' }, { status: 404 });
     }
 
-    const level = subject.levels.find(l => l.levelId === levelId);
+    const level = subject.levels.find(l => l.levelId?.toLowerCase() === cleanLevelId);
     if (!level) {
       return NextResponse.json({ error: 'Level not found' }, { status: 404 });
     }

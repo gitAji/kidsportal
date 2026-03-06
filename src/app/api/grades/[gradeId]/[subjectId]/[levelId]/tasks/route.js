@@ -23,19 +23,37 @@ const dbPath = path.resolve(process.cwd(), "src/app/data/db.json");
  */
 function findLevelTasks(gradeId, subjectId, levelId) {
   try {
-    const dbData = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
-    const grade = dbData.grades.find((g) => g.gradeId === gradeId);
+    const rawData = fs.readFileSync(dbPath, "utf-8");
+    const dbData = JSON.parse(rawData);
+
+    // Normalize search terms: lowercase and handle 'gradeX' vs 'grade-X'
+    const searchGrade = gradeId.toLowerCase().replace('grade', 'grade-').replace('--', '-');
+    const searchSubject = subjectId.toLowerCase();
+    const searchLevel = levelId.toLowerCase();
+
+    const grade = dbData.grades.find((g) =>
+      g.gradeId.toLowerCase() === searchGrade ||
+      g.gradeId.toLowerCase() === gradeId.toLowerCase()
+    );
 
     if (grade) {
-      const subject = grade.subjects.find((s) => s.subjectId === subjectId);
+      // Find subject, sometimes subjectId is 'tamil-1' vs 'tamil'
+      const subject = grade.subjects.find((s) =>
+        s.subjectId.toLowerCase() === searchSubject ||
+        s.subjectName.toLowerCase() === searchSubject
+      );
+
       if (subject) {
-        const level = subject.levels.find((l) => l.levelId === levelId);
+        const level = subject.levels.find((l) =>
+          l.levelId.toLowerCase() === searchLevel ||
+          l.levelName.toLowerCase().includes(searchLevel)
+        );
         if (level) {
-          return level.tasks; // Return the entire tasks array for the level
+          return level.tasks;
         }
       }
     }
-    return null; // Return null if grade, subject, or level not found
+    return null;
   } catch (error) {
     console.error("Error reading or parsing db.json:", error);
     return null;

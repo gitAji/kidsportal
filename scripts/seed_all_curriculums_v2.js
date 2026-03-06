@@ -20,19 +20,21 @@ const mathCurriculum = require('./curriculum_math_v2.js');
 const scienceCurriculum = require('./curriculum_science_v2.js');
 const tamilCurriculum = require('./curriculum_tamil_v2.js');
 
-async function seedSubject(subjectId, subjectName, data) {
+async function seedSubject(subjectName, data) {
     console.log(`Seeding levels for ${subjectName}...`);
     const levelsRef = db.collection('levels');
-    const batch = db.batch();
-    let count = 0;
 
     for (let gradeNum = 1; gradeNum <= 8; gradeNum++) {
+        const batch = db.batch();
         const gradeId = `grade-${gradeNum}`;
+        const subjectId = `${subjectName.toLowerCase()}-${gradeNum}`;
         const gradeLevels = data[gradeNum.toString()].levels;
+
+        console.log(`  Grade ${gradeNum} (${subjectId}): ${gradeLevels.length} levels`);
 
         for (let i = 0; i < gradeLevels.length; i++) {
             const level = gradeLevels[i];
-            const levelId = `${subjectId}-${gradeNum}-level-${i + 1}`;
+            const levelId = `${subjectId}-level-${i + 1}`;
             const docRef = levelsRef.doc(levelId);
 
             const tasks = [];
@@ -87,7 +89,7 @@ async function seedSubject(subjectId, subjectName, data) {
                 subjectName,
                 gradeId,
                 grade: `Grade ${gradeNum}`,
-                isLocked: i === 0 ? false : false, // Unlocking all for now as requested or to let student progress
+                isLocked: false,
                 xpReward: level.xpReward || 100,
                 badgeEmoji: level.badgeEmoji,
                 moduleName: level.moduleName,
@@ -97,18 +99,16 @@ async function seedSubject(subjectId, subjectName, data) {
             };
 
             batch.set(docRef, levelDoc);
-            count++;
         }
+        await batch.commit();
     }
-
-    await batch.commit();
-    console.log(`✅ Seeded ${count} levels for ${subjectName}`);
+    console.log(`✅ Finished seeding ${subjectName}`);
 }
 
 async function runSeeding() {
-    await seedSubject('math-1', 'Math', mathCurriculum);
-    await seedSubject('science-1', 'Science', scienceCurriculum);
-    await seedSubject('tamil-1', 'Tamil', tamilCurriculum);
+    await seedSubject('Math', mathCurriculum);
+    await seedSubject('Science', scienceCurriculum);
+    await seedSubject('Tamil', tamilCurriculum);
 }
 
 runSeeding().then(() => {

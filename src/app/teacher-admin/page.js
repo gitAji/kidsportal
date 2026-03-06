@@ -1,13 +1,15 @@
 "use client";
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import dbData from '../data/db.json';
 import {
     collection, doc, setDoc, getDocs, deleteDoc, query, where, serverTimestamp
 } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    FaGraduationCap, FaLayerGroup, FaTimes, FaImage, FaSync, FaLightbulb
+    FaGraduationCap, FaLayerGroup, FaTimes, FaImage, FaSync, FaLightbulb,
+    FaPlus, FaTrash, FaChevronDown, FaChevronUp, FaClock, FaBookOpen, FaCheckSquare, FaSave
 } from 'react-icons/fa';
 import TeacherAdminGuard from './TeacherAdminGuard';
 
@@ -298,13 +300,31 @@ function TeacherAdminPageContent() {
                 where('subjectId', '==', fullSubjectId)
             );
             const snap = await getDocs(q);
-            const data = snap.docs.map(d => ({ _docId: d.id, ...d.data() }));
+            let data = snap.docs.map(d => ({ _docId: d.id, ...d.data() }));
             data.sort((a, b) => a.levelId.localeCompare(b.levelId));
-            setLevels(data.length > 0 ? data : []);
-        } catch (e) {
-            console.error('Fetch error:', e);
+
+            if (data.length === 0) {
+                // Fallback to local db.json
+                console.log("No levels in Firestore, falling back to db.json...");
+                const gradeData = dbData.grades.find(g => g.gradeId === selectedGrade);
+                const subject = gradeData?.subjects?.find(s => s.subjectId === fullSubjectId);
+                if (subject && subject.levels) {
+                    setLevels(subject.levels);
+                    return;
+                }
+            }
+            setLevels(data);
+        } catch (error) {
+            console.error('Fetch levels error:', error);
+            // Fallback on error
+            const gradeData = dbData.grades.find(g => g.gradeId === selectedGrade);
+            const subject = gradeData?.subjects?.find(s => s.subjectId === fullSubjectId);
+            if (subject && subject.levels) {
+                setLevels(subject.levels);
+            }
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     }, [selectedGrade, selectedSubject, getFullSubjectId]);
 
     useEffect(() => { fetchLevels(); }, [fetchLevels]);
