@@ -265,22 +265,24 @@ export default function LearningZonePage() {
         </AnimatePresence>
 
         <div className="relative pointer-events-auto group mt-2">
-          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-30 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-40 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
             {professor.name}
           </div>
           <motion.div
-            animate={{ y: [0, -12, 0], rotate: [0, -3, 3, 0] }}
-            transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
-            className="w-28 h-28 md:w-36 md:h-36 flex items-center justify-center relative z-20"
+            animate={{ y: [0, -6, 0] }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            className="w-28 h-28 md:w-36 md:h-36 flex items-center justify-center relative z-20 group"
           >
-            <div className="relative w-full h-full">
-              <Image
-                src={professor.img}
-                alt={professor.name}
-                fill
-                className="object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:drop-shadow-[0_0_20px_rgba(99,102,241,0.6)]"
-                priority
-              />
+            <div className="relative w-full h-full bg-white rounded-full border-[5px] border-indigo-200 shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:border-indigo-400 group-hover:shadow-[0_15px_35px_rgba(99,102,241,0.3)]">
+              <div className="relative w-[85%] h-[85%] mt-3">
+                <Image
+                  src={professor.img}
+                  alt={professor.name}
+                  fill
+                  className="object-contain transition-transform duration-300 group-hover:scale-110"
+                  priority
+                />
+              </div>
             </div>
           </motion.div>
         </div>

@@ -905,28 +905,29 @@ export default function TaskContentPage() {
 
             <motion.div
               animate={isCheckingAnswer ? {
-                y: [0, -20, 0],
-                rotate: [0, -5, 5, -5, 0],
-                scale: [1, 1.15, 1]
+                y: [0, -10, 0],
+                rotate: [0, -3, 3, -3, 0],
+                scale: [1, 1.05, 1]
               } : {
-                y: [0, -12, 0],
-                rotate: [0, -3, 3, 0]
+                y: [0, -6, 0]
               }}
               transition={{
                 repeat: Infinity,
                 duration: isCheckingAnswer ? 0.6 : 3.5,
                 ease: "easeInOut"
               }}
-              className="w-28 h-28 md:w-44 md:h-44 flex items-center justify-center mr-2 relative z-20"
+              className="w-28 h-28 md:w-44 md:h-44 flex items-center justify-center mr-2 relative z-20 group"
             >
-              <div className="relative w-full h-full">
-                <Image
-                  src={professor.img}
-                  alt={professor.name}
-                  fill
-                  className={`object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.4)] transition-all duration-300 ${feedbackMessage?.type === 'correct' ? 'drop-shadow-[0_0_30px_rgba(74,222,128,0.8)]' : feedbackMessage?.type === 'wrong' ? 'drop-shadow-[0_0_30px_rgba(248,113,113,0.8)]' : ''}`}
-                  priority
-                />
+              <div className={`relative w-full h-full bg-white rounded-full border-[5px] shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex items-center justify-center transition-all duration-300 ${feedbackMessage?.type === 'correct' ? 'border-green-400 shadow-[0_15px_35px_rgba(74,222,128,0.3)]' : feedbackMessage?.type === 'wrong' ? 'border-red-400 shadow-[0_15px_35px_rgba(248,113,113,0.3)]' : 'border-indigo-200 group-hover:border-indigo-400 group-hover:shadow-[0_15px_35px_rgba(99,102,241,0.3)]'}`}>
+                <div className="relative w-[85%] h-[85%] mt-3">
+                  <Image
+                    src={professor.img}
+                    alt={professor.name}
+                    fill
+                    className="object-contain transition-transform duration-300 group-hover:scale-110"
+                    priority
+                  />
+                </div>
               </div>
             </motion.div>
           </div>
