@@ -396,35 +396,35 @@ const ChildDashboard = ({ child, onClose }) => {
 
               {/* REPORTS TAB */}
               {activeTab === 'reports' && (
-                <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                   <Reports childData={childData} />
                 </div>
               )}
 
               {/* PROGRESS TAB */}
               {activeTab === 'progress' && (
-                <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                   <ProgressTracker child={childData} />
                 </div>
               )}
 
               {/* REWARDS TAB */}
               {activeTab === 'rewards' && (
-                <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                   <RewardsDisplay points={childData.points || 0} />
                 </div>
               )}
 
               {/* STICKERS TAB */}
               {activeTab === 'stickers' && (
-                <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                   <StickerBook collectedStickerIds={childData.stickers} />
                 </div>
               )}
 
               {/* SETTINGS TAB */}
               {activeTab === 'settings' && (
-                <form onSubmit={handleSettingsSave} className="space-y-6">
+                <form onSubmit={handleSettingsSave} className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
                   {/* Account Access */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
