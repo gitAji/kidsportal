@@ -81,10 +81,16 @@ export default function LearningZonePage() {
   const [greeting, setGreeting] = useState(null);
   const router = useRouter();
 
+  const professor = React.useMemo(() => {
+    const char = childUser?.professorCharacter || 'owl';
+    if (char === 'panda') return { name: 'Smart Panda', img: '/images/smart-panda.png', emoji: '🐼' };
+    return { name: 'Professor Owl', img: '/images/professor-owl.png', emoji: '🦉' };
+  }, [childUser]);
+
   useEffect(() => {
     if (childUser && !subjectsLoading) {
       const timer = setTimeout(() => {
-        setGreeting(`Hey ${childUser.name}! Which adventure should we start today? 🦉`);
+        setGreeting(`Hey ${childUser.name}! Which adventure should we start today? ${professor.emoji}`);
       }, 2000);
       const clearTimer = setTimeout(() => setGreeting(null), 10000);
       return () => { clearTimeout(timer); clearTimeout(clearTimer); };
@@ -238,7 +244,7 @@ export default function LearningZonePage() {
         </motion.div>
       )}
 
-      {/* Persistent Professor Owl Guide */}
+      {/* Persistent Professor Guide */}
       <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none">
         <AnimatePresence>
           {greeting && (
@@ -246,7 +252,7 @@ export default function LearningZonePage() {
               initial={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
               animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
-              className="bg-white/95 backdrop-blur-md rounded-3xl rounded-br-sm shadow-2xl p-5 mb-4 max-w-xs border-4 border-indigo-200 pointer-events-auto relative"
+              className="bg-white/95 backdrop-blur-md rounded-3xl rounded-br-sm shadow-2xl p-5 mb-4 max-w-xs border-4 border-indigo-200 pointer-events-auto relative z-40"
             >
               <div className="absolute top-0 right-0 p-1 opacity-10">
                 <FaStar className="text-yellow-400 text-xs" />
@@ -258,21 +264,21 @@ export default function LearningZonePage() {
           )}
         </AnimatePresence>
 
-        <div className="relative pointer-events-auto group">
-          <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-10 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-            Professor Owl
+        <div className="relative pointer-events-auto group mt-2">
+          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-30 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+            {professor.name}
           </div>
           <motion.div
-            animate={{ y: [0, -5, 0], rotate: [0, 2, -2, 0] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center shadow-2xl border-4 border-white overflow-hidden bg-gradient-to-tr from-indigo-400 to-purple-600"
+            animate={{ y: [0, -12, 0], rotate: [0, -3, 3, 0] }}
+            transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
+            className="w-28 h-28 md:w-36 md:h-36 flex items-center justify-center relative z-20"
           >
-            <div className="relative w-full h-full p-2">
+            <div className="relative w-full h-full">
               <Image
-                src="/images/professor-owl.png"
-                alt="Professor Owl"
+                src={professor.img}
+                alt={professor.name}
                 fill
-                className="object-contain"
+                className="object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:drop-shadow-[0_0_20px_rgba(99,102,241,0.6)]"
                 priority
               />
             </div>

@@ -893,38 +893,38 @@ export default function TaskContentPage() {
           </AnimatePresence>
 
           {/* Professor Character */}
-          <div className="relative pointer-events-auto">
+          <div className="relative pointer-events-auto mt-2">
             {/* Name Tag */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="absolute -top-6 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-10 whitespace-nowrap"
+              className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-30 whitespace-nowrap"
             >
               {professor.name}
             </motion.div>
 
             <motion.div
               animate={isCheckingAnswer ? {
-                y: [0, -15, 0],
-                rotate: [0, 8, -8, 0],
-                scale: [1, 1.1, 1]
+                y: [0, -20, 0],
+                rotate: [0, -5, 5, -5, 0],
+                scale: [1, 1.15, 1]
               } : {
-                y: [0, -5, 0],
-                rotate: [0, 2, -2, 0]
+                y: [0, -12, 0],
+                rotate: [0, -3, 3, 0]
               }}
               transition={{
                 repeat: Infinity,
-                duration: isCheckingAnswer ? 0.8 : 3,
+                duration: isCheckingAnswer ? 0.6 : 3.5,
                 ease: "easeInOut"
               }}
-              className={`w-20 h-20 md:w-32 md:h-32 rounded-full flex items-center justify-center shadow-[0_15px_35px_rgba(0,0,0,0.3)] border-4 border-white mr-2 overflow-hidden bg-gradient-to-tr ${feedbackMessage?.type === 'correct' ? 'from-green-400 to-green-600' : feedbackMessage?.type === 'wrong' ? 'from-orange-400 to-red-500' : 'from-indigo-400 to-purple-500'}`}
+              className="w-28 h-28 md:w-44 md:h-44 flex items-center justify-center mr-2 relative z-20"
             >
-              <div className="relative w-full h-full p-2">
+              <div className="relative w-full h-full">
                 <Image
                   src={professor.img}
                   alt={professor.name}
                   fill
-                  className="object-contain"
+                  className={`object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.4)] transition-all duration-300 ${feedbackMessage?.type === 'correct' ? 'drop-shadow-[0_0_30px_rgba(74,222,128,0.8)]' : feedbackMessage?.type === 'wrong' ? 'drop-shadow-[0_0_30px_rgba(248,113,113,0.8)]' : ''}`}
                   priority
                 />
               </div>
