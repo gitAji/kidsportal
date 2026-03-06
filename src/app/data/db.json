@@ -21,6 +21,32 @@
                   "questions": []
                 },
                 {
+                  "taskId": "english-1-level-1-writing",
+                  "taskName": "Letter Tracing Fun!",
+                  "type": "quiz",
+                  "content": "Let's learn how to write! Use your mouse or finger to trace the letters beautifully. You can use any color you like!",
+                  "questions": [
+                    {
+                      "questionId": "q-trace-A",
+                      "questionText": "Can you trace the letter A?",
+                      "correctAnswer": "A",
+                      "type": "writing"
+                    },
+                    {
+                      "questionId": "q-trace-B",
+                      "questionText": "Now, let's try the letter B!",
+                      "correctAnswer": "B",
+                      "type": "writing"
+                    },
+                    {
+                      "questionId": "q-trace-C",
+                      "questionText": "Great job! Finally, trace the letter C.",
+                      "correctAnswer": "C",
+                      "type": "writing"
+                    }
+                  ]
+                },
+                {
                   "taskId": "english-1-level-1-quiz",
                   "taskName": "Practice Module",
                   "type": "quiz",

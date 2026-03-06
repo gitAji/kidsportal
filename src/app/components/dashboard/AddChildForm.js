@@ -111,6 +111,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
           name, age: parseInt(age), grade, username, avatar: selectedAvatar,
           password, loginEnabled: true, photoURL: '', assignedTasks: [], points: 0,
           stickers: [], progress: { overall: 0, subjects: {} }, parentUid,
+          professorCharacter: 'owl', timeAlertsEnabled: true
         };
 
         await runTransaction(db, async (t) => {

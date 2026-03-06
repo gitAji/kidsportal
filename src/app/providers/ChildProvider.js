@@ -27,17 +27,24 @@ export function ChildProvider({ children }) {
       if (storedChildUser) {
         const parsedUser = JSON.parse(storedChildUser);
         try {
-          // Fetch Child data
-          const childDocRef = doc(db, 'users', parsedUser.parentUid, 'children', parsedUser.id);
-          const childDoc = await getDoc(childDocRef);
+          // Fetch Child and Parent data via API to avoid permission issues
+          const response = await fetch('/api/child-profile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ parentUid: parsedUser.parentUid, childId: parsedUser.id })
+          });
 
-          // Fetch Parent data for subscription check
-          const parentDocRef = doc(db, 'users', parsedUser.parentUid);
-          const parentDoc = await getDoc(parentDocRef);
+          if (response.ok) {
+            const { parentData, childData } = await response.json();
 
-          if (childDoc.exists() && parentDoc.exists()) {
-            const freshData = { id: childDoc.id, ...childDoc.data(), parentUid: parsedUser.parentUid };
-            const parentData = parentDoc.data();
+            // To be compatible with old code, format the dates if they are Firebase Timestamps in JSON
+            const parseDate = (dateObj) => {
+              if (!dateObj) return null;
+              if (dateObj._seconds) return new Date(dateObj._seconds * 1000); // Admin SDK Timestamp format
+              return new Date(dateObj); // ISO string
+            };
+
+            const freshData = { id: parsedUser.id, ...childData, parentUid: parsedUser.parentUid };
 
             // Subscription check - align with new planType logic
             let isSubActive = false;
@@ -48,7 +55,7 @@ export function ChildProvider({ children }) {
               isSubActive = status === 'active' || status === 'trialing';
             } else if (parentData.planType === 'free_trial') {
               // Free trial is active if trialEndDate is in the future
-              const trialEndDate = parentData.trialEndDate?.toDate ? parentData.trialEndDate.toDate() : (parentData.trialEndDate ? new Date(parentData.trialEndDate) : null);
+              const trialEndDate = parseDate(parentData.trialEndDate);
               isSubActive = trialEndDate && trialEndDate > new Date();
             } else if (parentData.subscription) {
               // Legacy fallback
@@ -56,7 +63,7 @@ export function ChildProvider({ children }) {
               isSubActive = status === 'active' || status === 'trialing';
             } else {
               // Final fallback for older accounts without planType
-              const createdAt = parentData.createdAt?.toDate ? parentData.createdAt.toDate() : (parentData.createdAt ? new Date(parentData.createdAt) : null);
+              const createdAt = parseDate(parentData.createdAt);
               const baseDate = createdAt || new Date();
               const trialEnd = new Date(baseDate);
               trialEnd.setMonth(trialEnd.getMonth() + 1); // Standard 1 month trial

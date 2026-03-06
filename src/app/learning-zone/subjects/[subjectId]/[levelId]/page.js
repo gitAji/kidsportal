@@ -1,12 +1,13 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../../data/db.json';
 import SkeletonLoader from '../../../../components/ui/SkeletonLoader';
-import { FaArrowLeft, FaHome, FaBookOpen, FaQuestionCircle, FaAward, FaStar, FaCheckCircle } from 'react-icons/fa';
+import { FaArrowLeft, FaHome, FaBookOpen, FaQuestionCircle, FaAward, FaStar, FaCheckCircle, FaTrophy } from 'react-icons/fa';
 import { useChild } from '../../../../providers/ChildProvider';
 import { loadStats } from '../../../../utils/achievements';
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 // A map for sleek task colors
 const taskColorMap = {
@@ -34,7 +35,38 @@ export default function LevelTasksPage() {
   const router = useRouter();
   const params = useParams();
   const { subjectId, levelId } = params;
+  const [greeting, setGreeting] = useState(null);
 
+  useEffect(() => {
+    if (childUser && levelData && !loading) {
+      const timer = setTimeout(() => {
+        setGreeting(`You're doing great! Ready for some ${subjectId} tasks in Level ${levelId}? 🦉`);
+      }, 1500);
+      const clearTimer = setTimeout(() => setGreeting(null), 8500);
+      return () => { clearTimeout(timer); clearTimeout(clearTimer); };
+    }
+  }, [childUser, levelData, loading, subjectId, levelId]);
+
+  // ── Stats: refresh on mount, on focus, and on visibility change ───────────
+  const refreshStats = useCallback(() => {
+    const childId = childUser?.uid || childUser?.id;
+    if (childId) {
+      setChildStats(loadStats(childId));
+    }
+  }, [childUser]);
+
+  useEffect(() => {
+    refreshStats();
+    const onVisible = () => { if (document.visibilityState === 'visible') refreshStats(); };
+    window.addEventListener('focus', refreshStats);
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      window.removeEventListener('focus', refreshStats);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
+  }, [refreshStats]);
+
+  // ── Firestore level data: fetched once per level ──────────────────────────
   useEffect(() => {
     const fetchLevelData = async () => {
       if (!childUser || !childUser.gradeId) {
@@ -43,11 +75,9 @@ export default function LevelTasksPage() {
         }
         return;
       }
-      setChildStats(loadStats(childUser.uid));
 
       setLoading(true);
       try {
-        // Doc ID is `${gradeId}_${subjectId}_${levelId}`
         const docRef = doc(db, 'levels', `${childUser.gradeId}_${subjectId}_${levelId}`);
         const docSnap = await getDoc(docRef);
 
@@ -65,6 +95,13 @@ export default function LevelTasksPage() {
 
     fetchLevelData();
   }, [childUser, subjectId, levelId, router]);
+
+  // ── Compute whether the entire level is complete ──────────────────────────
+  const allTasksDone = useMemo(() => {
+    if (!levelData?.tasks || levelData.tasks.length === 0) return false;
+    const completedIds = childStats?.completedTasks_list || [];
+    return levelData.tasks.every(t => completedIds.includes(t.taskId));
+  }, [levelData, childStats]);
 
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center p-8">
@@ -86,14 +123,7 @@ export default function LevelTasksPage() {
       <div className="absolute top-40 right-10 text-blue-200 opacity-30 text-8xl transform rotate-12"><FaQuestionCircle /></div>
       <div className="absolute top-20 left-10 text-green-200 opacity-40 text-9xl transform -rotate-12"><FaBookOpen /></div>
 
-      <div className="flex items-center justify-between mb-8 z-20 relative">
-        <button onClick={() => router.back()} className="p-4 rounded-full bg-white shadow-md hover:bg-gray-50 text-blue-600 transition-transform hover:scale-110 active:scale-95">
-          <FaArrowLeft className="text-2xl" />
-        </button>
-        <button onClick={() => router.push('/learning-zone')} className="p-4 rounded-full bg-white shadow-md hover:bg-gray-50 text-cyan-600 transition-transform hover:scale-110 active:scale-95">
-          <FaHome className="text-2xl" />
-        </button>
-      </div>
+      {/* Navigation handled by Global Header */}
 
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -103,10 +133,42 @@ export default function LevelTasksPage() {
         <span className="inline-block bg-white px-6 py-1 rounded-full text-sm font-bold text-cyan-600 mb-4 shadow-sm uppercase tracking-wider">
           {subjectId.toUpperCase()} • {levelData.levelName?.split(':')[0] || 'Level'}
         </span>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 drop-shadow-sm leading-tight max-w-4xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 drop-shadow-sm leading-tight max-w-4xl mx-auto mb-4">
           {levelData.levelName?.includes(':') ? levelData.levelName.split(':')[1].trim() : levelData.levelName}
         </h1>
+        {levelData.xpReward > 0 && !allTasksDone && (
+          <div className="inline-flex justify-center items-center gap-2 bg-yellow-100 text-yellow-700 font-bold px-4 py-1.5 rounded-full text-sm border-2 border-yellow-300 shadow-sm uppercase tracking-widest mt-2">
+            <FaStar className="text-yellow-500" />
+            Finish to earn {levelData.xpReward} XP
+          </div>
+        )}
       </motion.div>
+
+      {/* Level Complete banner — shown when ALL tasks are done */}
+      {allTasksDone && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: "spring", bounce: 0.4 }}
+          className="max-w-3xl mx-auto mb-10 z-20 relative"
+        >
+          <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-[2rem] p-6 shadow-2xl border-b-8 border-green-700 flex flex-col sm:flex-row items-center gap-5 text-white">
+            <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 border-4 border-white/40">
+              <FaTrophy size={40} className="text-yellow-300 drop-shadow-md" />
+            </div>
+            <div className="text-center sm:text-left flex-grow">
+              <h2 className="text-2xl font-black drop-shadow">Level Complete! ✓</h2>
+              <p className="text-green-100 font-bold text-sm mt-1">All tasks finished — the next level is now unlocked!</p>
+            </div>
+            <button
+              onClick={() => router.push(`/learning-zone/subjects/${subjectId}`)}
+              className="bg-white text-green-700 font-black px-6 py-3 rounded-full text-base hover:bg-green-50 hover:scale-105 transition-all shadow-lg flex-shrink-0"
+            >
+              Next Level →
+            </button>
+          </div>
+        </motion.div>
+      )}
 
       <motion.div
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full max-w-7xl mx-auto z-10 relative pb-20"
@@ -118,6 +180,7 @@ export default function LevelTasksPage() {
           levelData.tasks.map(task => {
             const Icon = taskIconMap[task.type?.toLowerCase()] || taskIconMap.default;
             const taskColor = taskColorMap[task.type?.toLowerCase()] || taskColorMap.default;
+            const isDone = childStats?.completedTasks_list?.includes(task.taskId);
 
             return (
               <motion.div
@@ -133,6 +196,18 @@ export default function LevelTasksPage() {
                   <Icon size={100} />
                 </div>
 
+                {/* Thick checkmark overlay when task is done */}
+                {isDone && (
+                  <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] z-20 flex flex-col items-center justify-center gap-2">
+                    <div className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-xl border-[3px] border-white">
+                      <FaCheckCircle size={30} className="text-white drop-shadow-lg" />
+                    </div>
+                    <span className="bg-green-500 text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1 rounded-full shadow-lg border-2 border-green-300">
+                      Done ✓
+                    </span>
+                  </div>
+                )}
+
                 <div className="bg-white/20 p-4 rounded-full mb-4 shadow-inner group-hover:scale-110 transition-transform duration-300">
                   <Icon size={36} className="text-white" />
                 </div>
@@ -143,7 +218,7 @@ export default function LevelTasksPage() {
 
                 <div className="mt-auto bg-black/20 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide z-10 flex items-center gap-2">
                   {task.type}
-                  {childStats?.completedTasks_list?.includes(task.taskId) && (
+                  {isDone && (
                     <FaCheckCircle className="text-green-300" title="Completed!" />
                   )}
                 </div>

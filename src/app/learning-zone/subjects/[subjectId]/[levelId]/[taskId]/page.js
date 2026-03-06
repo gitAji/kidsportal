@@ -13,6 +13,7 @@ import confetti from 'canvas-confetti';
 import { recordTaskCompletion, checkAchievements } from '../../../../../utils/achievements';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
+import Image from 'next/image';
 
 export default function TaskContentPage() {
   const { childUser } = useChild();
@@ -38,6 +39,7 @@ export default function TaskContentPage() {
   const [retriedThisTask, setRetriedThisTask] = useState(false);
   const [newAchievements, setNewAchievements] = useState([]);
   const [sessionHistory, setSessionHistory] = useState([]);
+  const [isCheckingAnswer, setIsCheckingAnswer] = useState(false);
 
   const correctSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/correct.mp3') : null, []);
   const incorrectSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/incorrect.mp3') : null, []);
@@ -71,7 +73,31 @@ export default function TaskContentPage() {
       const gradeData = dbData.grades.find(g => g.gradeId === childUser.gradeId);
       const subject = gradeData?.subjects?.find(s => s.subjectId === subjectId);
       const level = subject?.levels?.find(l => l.levelId === levelId);
-      const task = level?.tasks?.find(t => t.taskId === taskId);
+      let task = level?.tasks?.find(t => t.taskId === taskId);
+
+      // Vertex AI Generation Fallback: If task doesn't exist, customize a new one automatically based on user level
+      if (!task) {
+        try {
+          const aiRes = await fetch('/api/generate-task', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              gradeId: childUser.gradeId,
+              subjectId,
+              levelId,
+              taskId,
+              childId: childUser.uid || childUser.id
+            })
+          });
+          const aiData = await aiRes.json();
+          if (aiData && aiData.questions) {
+            task = aiData;
+          }
+        } catch (e) {
+          console.error("Failed to generate AI task:", e);
+        }
+      }
+
       setTaskData(task || null);
       if (task && (task.type === 'quiz' || task.type === 'exam') && task.timeLimit) {
         setTimeLeft(task.timeLimit);
@@ -82,14 +108,88 @@ export default function TaskContentPage() {
     fetchTask();
   }, [childUser, subjectId, levelId, taskId, router]);
 
+  // Professor Greeting & Character Setup
+  const professor = useMemo(() => {
+    const char = childUser?.professorCharacter || 'owl';
+    if (char === 'panda') return { name: 'Smart Panda', img: '/images/smart-panda.png', defaultMsg: "Hi! I'm Smart Panda 🐼. Let's learn together!" };
+    return { name: 'Professor Owl', img: '/images/professor-owl.png', defaultMsg: "Hi! I'm Professor Owl 🦉. Read carefully and give it your best shot!" };
+  }, [childUser]);
+
+  useEffect(() => {
+    if (taskData && !loading && !feedbackMessage) {
+      const timer = setTimeout(() => {
+        setFeedbackMessage({
+          type: 'info',
+          message: `Hi ${childUser?.name || 'Explorer'}! I'm ${professor.name}. ${professor.defaultMsg}`
+        });
+      }, 1500);
+
+      const clearTimer = setTimeout(() => {
+        setFeedbackMessage(prev => prev?.type === 'info' ? null : prev);
+      }, 9500);
+      return () => { clearTimeout(timer); clearTimeout(clearTimer); };
+    }
+  }, [taskData, loading, childUser]);
+
+  // Load progress from localStorage
+  useEffect(() => {
+    if (taskData && childUser) {
+      const childId = childUser.uid || childUser.id;
+      const progressKey = `kidsportal_progress_${childId}_${taskData.taskId}`;
+      const saved = localStorage.getItem(progressKey);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          setCurrentQuestionIndex(parsed.currentQuestionIndex || 0);
+          setScore(parsed.score || 0);
+          setCorrectAnswersCount(parsed.correctAnswersCount || 0);
+          setWrongAnswersCount(parsed.wrongAnswersCount || 0);
+          setTimeTaken(parsed.timeTaken || 0);
+          setSessionHistory(parsed.sessionHistory || []);
+          if (parsed.timeLeft !== undefined) {
+            setTimeLeft(parsed.timeLeft);
+          }
+        } catch (e) {
+          console.error("Could not parse saved progress.", e);
+        }
+      }
+    }
+  }, [taskData, childUser]);
+
+  // Save progress to localStorage
+  useEffect(() => {
+    if (taskData && childUser && !quizCompleted) {
+      const childId = childUser.uid || childUser.id;
+      const progressKey = `kidsportal_progress_${childId}_${taskData.taskId}`;
+      localStorage.setItem(progressKey, JSON.stringify({
+        currentQuestionIndex,
+        score,
+        correctAnswersCount,
+        wrongAnswersCount,
+        timeTaken,
+        sessionHistory,
+        timeLeft
+      }));
+    }
+  }, [currentQuestionIndex, score, correctAnswersCount, wrongAnswersCount, timeTaken, sessionHistory, timeLeft, taskData, childUser, quizCompleted]);
+
   useEffect(() => {
     if (!timerActive || timeLeft <= 0) return;
     const timer = setInterval(() => {
-      setTimeLeft(p => p - 1);
+      setTimeLeft(p => {
+        const next = p - 1;
+        // Time alerts logic
+        if (childUser?.timeAlertsEnabled) {
+          if (next === 60) setFeedbackMessage({ type: 'info', message: "One minute left! You can do it! ⏰" });
+          if (next === 30) setFeedbackMessage({ type: 'info', message: "30 seconds left! Almost there! 🚀" });
+          if (next === 10) setFeedbackMessage({ type: 'info', message: "Quick! Only 10 seconds remaining! 🏁" });
+        }
+        return next;
+      });
       setTimeTaken(p => p + 1);
     }, 1000);
     return () => clearInterval(timer);
-  }, [timerActive, timeLeft]);
+  }, [timerActive, timeLeft, childUser, professor]);
 
   useEffect(() => {
     if (timeLeft <= 0 && timerActive) {
@@ -102,25 +202,86 @@ export default function TaskContentPage() {
 
   const currentQuestion = taskData?.questions?.[currentQuestionIndex];
 
-  const handleSubmitAnswer = () => {
+  const handleSubmitAnswer = async (overrideAnswer) => {
     if (!currentQuestion) return;
-    const isCorrect = userAnswer.toLowerCase().trim() === currentQuestion.correctAnswer.toLowerCase().trim();
+
+    // We optionally accept overrideAnswer to allow answering options immediately without waiting for state
+    const answerToCheck = typeof overrideAnswer !== 'undefined' ? overrideAnswer : userAnswer;
+    if (answerToCheck === undefined || answerToCheck === null || answerToCheck === '') return;
+
+    // Standard string matching logic for multiple choice or as fallback
+    let isCorrect = String(answerToCheck).toLowerCase().trim() === String(currentQuestion.correctAnswer).toLowerCase().trim();
+    let message = isCorrect ? 'Awesome! 🌟 +10 pts' : 'Oops! Try again 💪';
+
+    if (currentQuestion.type === 'writing') {
+      isCorrect = true; // For tracing, completion is success
+      message = "Fantastic! You've traced it perfectly! 🎨🦉";
+    }
+
+    // If it's a drawing, we'll simulate AI vision approval for now
+    if (String(userAnswer).startsWith('data:image')) {
+      setIsCheckingAnswer(true);
+      setTimeout(() => {
+        setFeedbackMessage({
+          type: 'correct',
+          message: `Wow! I can read your writing perfectly! It says "${currentQuestion.correctAnswer}". You are becoming a great writer! 🦉🖌️`
+        });
+        setIsCheckingAnswer(false);
+        setScore(prev => prev + 10);
+
+        // Save to progress
+        const updatedHistory = [...taskHistory, {
+          index: currentQuestionIndex + 1,
+          question: currentQuestion.questionText,
+          isCorrect: true,
+          type: 'writing'
+        }];
+        setTaskHistory(updatedHistory);
+      }, 2000);
+      return;
+    }
+
+    // If it's a typed answer, have the AI tutor interactively grade it and give custom feedback
+    if (currentQuestion.type === 'identification' && answerToCheck.length > 0) {
+      setIsCheckingAnswer(true);
+      try {
+        const aiRes = await fetch('/api/evaluate-answer', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            questionText: currentQuestion.questionText,
+            correctAnswer: currentQuestion.correctAnswer,
+            studentAnswer: answerToCheck
+          })
+        });
+        const aiEvaluation = await aiRes.json();
+
+        if (aiEvaluation && typeof aiEvaluation.isCorrect !== 'undefined') {
+          isCorrect = aiEvaluation.isCorrect;
+          message = aiEvaluation.feedback || (isCorrect ? 'Awesome! 🌟 +10 pts' : 'Oops! Try again 💪');
+        }
+      } catch (err) {
+        console.error("AI Evaluation failed, falling back to basic check", err);
+      }
+      setIsCheckingAnswer(false);
+    }
+
     if (isCorrect) {
-      setFeedbackMessage({ type: 'correct', message: 'Awesome! 🌟 +10 pts' });
+      setFeedbackMessage({ type: 'correct', message });
       setScore(s => s + 10);
       setCorrectAnswersCount(c => c + 1);
       setShowReviewOption(false);
       correctSound?.play();
       confetti({ particleCount: 25, spread: 50, origin: { y: 0.6 } });
     } else {
-      setFeedbackMessage({ type: 'wrong', message: "Oops! Try again 💪" });
+      setFeedbackMessage({ type: 'wrong', message });
       setWrongAnswersCount(c => c + 1);
       if (taskData.type === 'quiz') setShowReviewOption(true);
       incorrectSound?.play();
     }
     const historyItem = {
       question: currentQuestion.questionText,
-      userAnswer,
+      userAnswer: answerToCheck,
       correctAnswer: currentQuestion.correctAnswer,
       isCorrect,
       index: currentQuestionIndex + 1,
@@ -129,6 +290,17 @@ export default function TaskContentPage() {
     };
     setSessionHistory(prev => [historyItem, ...prev]);
     setTimerActive(false);
+
+    // Auto-advance logic: If the student gets it right, move to the next question
+    // automatically after seeing the confetti for 1.5 seconds to save them clicks.
+    if (isCorrect) {
+      setTimeout(() => {
+        // We use click() on the button element to seamlessly trigger the next question
+        // avoiding state-closure issues. If the user already clicked it manually, 
+        // the button will be gone from the DOM and this will safely do nothing.
+        document.getElementById('next-btn')?.click();
+      }, 1500);
+    }
   };
 
   const triggerConfetti = (success) => {
@@ -153,6 +325,13 @@ export default function TaskContentPage() {
       const total = taskData.questions.length;
       setQuizCompleted(true);
       setTimerActive(false);
+
+      // Clear saved progress on completion
+      if (childUser) {
+        const childId = childUser.uid || childUser.id;
+        localStorage.removeItem(`kidsportal_progress_${childId}_${taskData.taskId}`);
+      }
+
       const isSuccess = (finalCorrect / total) >= 0.5;
       if (isSuccess) completionSound?.play();
       triggerConfetti(isSuccess);
@@ -164,22 +343,27 @@ export default function TaskContentPage() {
           taskId: taskData.taskId
         });
 
-        const unlocked = checkAchievements(childId, updatedStats);
-        if (unlocked.length > 0) {
-          setNewAchievements(unlocked);
-        }
+        // Only check achievements & sync on FIRST completion
+        if (!updatedStats._isRepeat) {
+          const unlocked = checkAchievements(childId, updatedStats);
+          if (unlocked.length > 0) {
+            setNewAchievements(unlocked);
+          }
 
-        // Sync stats + achievements to Firestore via API route (Admin SDK)
-        fetch('/api/child-stats', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            childId,
-            parentUid: childUser.parentUid,
-            stats: updatedStats,
-            newAchievements: unlocked,
-          }),
-        }).catch(console.error);
+          // Sync stats + achievements to Firestore via API route (Admin SDK)
+          fetch('/api/child-stats', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              childId,
+              parentUid: childUser.parentUid,
+              stats: updatedStats,
+              newAchievements: unlocked,
+              sessionHistory,
+              taskId: taskData.taskId,
+            }),
+          }).catch(console.error);
+        }
       }
     }
   };
@@ -197,6 +381,9 @@ export default function TaskContentPage() {
       return;
     }
 
+    // Clear saved progress
+    localStorage.removeItem(`kidsportal_progress_${childId}_${taskData.taskId}`);
+
     // 10 pts for completing a lesson
     const updatedStats = recordTaskCompletion(childId, {
       type: taskData.type, score: 10, totalQuestions: 1,
@@ -204,27 +391,34 @@ export default function TaskContentPage() {
       taskId: taskData.taskId
     });
 
-    const unlocked = checkAchievements(childId, updatedStats);
+    // Only check achievements & sync on FIRST completion
+    if (!updatedStats._isRepeat) {
+      const unlocked = checkAchievements(childId, updatedStats);
 
-    // Sync stats + achievements to Firestore via API route (Admin SDK)
-    fetch('/api/child-stats', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        childId,
-        parentUid: childUser.parentUid,
-        stats: updatedStats,
-        newAchievements: unlocked,
-      }),
-    }).catch(console.error);
+      // Sync stats + achievements to Firestore via API route (Admin SDK)
+      fetch('/api/child-stats', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          childId,
+          parentUid: childUser.parentUid,
+          stats: updatedStats,
+          newAchievements: unlocked,
+          sessionHistory,
+          taskId: taskData.taskId,
+        }),
+      }).catch(console.error);
 
-    if (unlocked.length > 0) {
-      setNewAchievements(unlocked);
-      setScore(10);
-      setQuizCompleted(true); // Re-use the summary screen
-    } else {
-      router.back();
+      if (unlocked.length > 0) {
+        setNewAchievements(unlocked);
+        setScore(10);
+        setQuizCompleted(true); // Re-use the summary screen
+        return;
+      }
     }
+
+    // Repeat play or no new achievements — go back
+    router.back();
   };
   const handleKeyPress = (key) => {
     if (key === 'Backspace') setUserAnswer(a => a.slice(0, -1));
@@ -373,11 +567,7 @@ export default function TaskContentPage() {
       </AnimatePresence>
 
       <div className="w-full max-w-4xl p-4 sm:p-6 md:p-8 flex-grow flex flex-col">
-        <div className="flex items-center justify-between mb-4 w-full max-w-4xl">
-          <button onClick={() => router.back()} className="p-4 rounded-3xl bg-white shadow-md hover:bg-slate-50 text-slate-600 transition-all hover:scale-105 active:scale-95 border-b-4 border-slate-200">
-            <FaArrowLeft className="text-xl" />
-          </button>
-
+        <div className="flex items-center justify-center mb-4 w-full max-w-4xl">
           <div className="flex gap-3 h-14">
             <div className="bg-white shadow-md rounded-2xl px-6 py-2 flex items-center gap-3 border-b-4 border-yellow-200">
               <div className="bg-yellow-100 p-2 rounded-xl text-yellow-600">
@@ -409,10 +599,6 @@ export default function TaskContentPage() {
               </div>
             </div>
           </div>
-
-          <button onClick={() => router.push('/learning-zone')} className="p-4 rounded-3xl bg-white shadow-md hover:bg-slate-50 text-cyan-600 transition-all hover:scale-105 active:scale-95 border-b-4 border-cyan-200">
-            <FaHome className="text-xl" />
-          </button>
         </div>
 
         <div className="w-full max-w-4xl flex items-center gap-6 mb-8">
@@ -446,11 +632,10 @@ export default function TaskContentPage() {
         </div>
 
         <div className="bg-white rounded-[2rem] shadow-xl p-8 mb-6 border border-slate-100 relative max-w-3xl w-full mx-auto">
-          {feedbackMessage && (
+          {feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong') && (
             <motion.div initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-              className={`absolute -top-6 left-1/2 -translate-x-1/2 px-8 py-2 rounded-full font-bold shadow-lg text-lg flex items-center gap-2 z-20 ${feedbackMessage.type === 'correct' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
-              {feedbackMessage.type === 'correct' ? <FaCheckCircle /> : <FaTimesCircle />}
-              {feedbackMessage.message}
+              className={`absolute -top-6 left-1/2 -translate-x-1/2 px-8 py-2 rounded-full font-black shadow-lg text-lg flex items-center gap-2 z-20 tracking-widest uppercase ${feedbackMessage.type === 'correct' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
+              {feedbackMessage.type === 'correct' ? <><FaCheckCircle /> Correct!</> : <><FaTimesCircle /> Incorrect!</>}
             </motion.div>
           )}
 
@@ -480,13 +665,18 @@ export default function TaskContentPage() {
               {currentQuestion.options.map((option, index) => {
                 const isSelected = userAnswer === option;
                 let style = "bg-white border-2 border-gray-200 text-gray-700 hover:border-blue-400 hover:bg-blue-50";
-                if (feedbackMessage) {
+                if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
                   if (option === currentQuestion.correctAnswer) style = "bg-green-100 border-2 border-green-500 text-green-800 scale-105 shadow-md";
                   else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-100 border-2 border-red-500 text-red-800 line-through opacity-80";
                   else style = "bg-gray-100 border-2 border-gray-200 text-gray-400 opacity-40";
                 } else if (isSelected) style = "bg-blue-100 border-2 border-blue-500 text-blue-800 scale-[1.02] shadow-sm";
                 return (
-                  <button key={index} onClick={() => !feedbackMessage && setUserAnswer(option)} disabled={!!feedbackMessage}
+                  <button key={index} onClick={() => {
+                    if (!feedbackMessage) {
+                      setUserAnswer(option);
+                      handleSubmitAnswer(option);
+                    }
+                  }} disabled={!!feedbackMessage}
                     className={`p-6 rounded-2xl transition-all duration-300 font-bold text-xl ${style}`}>{option}</button>
                 );
               })}
@@ -494,39 +684,85 @@ export default function TaskContentPage() {
           )}
 
           {currentQuestion.type === 'identification' && (
-            <div className="max-w-md mx-auto">
-              <input type="text" value={userAnswer} onChange={e => setUserAnswer(e.target.value)} disabled={!!feedbackMessage}
-                className={`w-full p-4 text-center text-2xl font-bold border-4 rounded-full focus:outline-none transition-colors ${feedbackMessage?.type === 'correct' ? 'border-green-400 bg-green-50' : feedbackMessage?.type === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-blue-400'}`}
-                placeholder="Type your answer..." />
-              <div className="mt-5 flex justify-center gap-3">
-                <button onClick={() => setShowKeyboard(!showKeyboard)} className="bg-slate-100 text-slate-600 p-4 rounded-xl text-xl hover:bg-slate-200 transition-colors"><FaKeyboard /></button>
-                <button onClick={() => setShowDrawingTool(!showDrawingTool)} className="bg-cyan-100 text-cyan-600 p-4 rounded-xl text-xl hover:bg-cyan-200 transition-colors"><FaPaintBrush /></button>
+            <div className="max-w-md mx-auto relative">
+              {userAnswer && String(userAnswer).startsWith('data:image') ? (
+                <div className="bg-white border-4 border-indigo-200 rounded-3xl p-4 flex flex-col items-center gap-3 shadow-inner">
+                  <div className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Your Written Answer</div>
+                  <img src={userAnswer} className="max-h-32 object-contain" alt="Written answer" />
+                  <button onClick={() => setUserAnswer('')} className="text-red-500 text-sm font-bold flex items-center gap-1 hover:underline">
+                    <FaEraser /> Start Over
+                  </button>
+                </div>
+              ) : (
+                <input type="text" value={userAnswer} onChange={e => setUserAnswer(e.target.value)} disabled={!!feedbackMessage || isCheckingAnswer}
+                  className={`w-full p-4 text-center text-2xl font-bold border-4 rounded-full focus:outline-none transition-colors ${feedbackMessage?.type === 'correct' ? 'border-green-400 bg-green-50' : feedbackMessage?.type === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-blue-400'} ${isCheckingAnswer ? 'opacity-50 cursor-wait bg-gray-50' : ''}`}
+                  placeholder="Type your answer..." />
+              )}
+
+              {!feedbackMessage && (
+                <div className="mt-5 flex justify-center gap-3">
+                  <button onClick={() => setShowKeyboard(!showKeyboard)} className="bg-slate-100 text-slate-600 p-4 rounded-xl text-xl hover:bg-slate-200 transition-colors" title="Use Keyboard"><FaKeyboard /></button>
+                  <button onClick={() => setShowDrawingTool(true)} className="bg-cyan-100 text-cyan-600 p-4 rounded-xl text-xl hover:bg-cyan-200 transition-colors" title="Write on Screen"><FaPaintBrush /></button>
+                </div>
+              )}
+              {showKeyboard && !userAnswer.startsWith('data:image') && <div className="mt-4"><VirtualKeyboard onKeyPress={handleKeyPress} /></div>}
+            </div>
+          )}
+
+          {currentQuestion.type === 'writing' && (
+            <div className="w-full flex flex-col items-center">
+              <div className="mb-6 p-4 bg-indigo-50 rounded-2xl border-2 border-indigo-100 border-dashed text-indigo-600 font-bold text-center">
+                Use the colors below to trace the letter <span className="text-3xl font-black mx-1">{currentQuestion.correctAnswer}</span>!
               </div>
-              {showKeyboard && <div className="mt-4"><VirtualKeyboard onKeyPress={handleKeyPress} /></div>}
+              <DrawingCanvas
+                template={currentQuestion.correctAnswer}
+                onFinish={(data) => {
+                  setUserAnswer("done");
+                  handleSubmitAnswer("done");
+                }}
+              />
             </div>
           )}
 
           {showDrawingTool && (
             <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-              <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-white rounded-3xl shadow-2xl p-6 relative w-full max-w-3xl flex flex-col items-center border-4 border-cyan-200">
+              <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-white rounded-3xl shadow-2xl p-6 relative w-full max-w-4xl flex flex-col items-center border-4 border-cyan-200">
                 <button onClick={() => setShowDrawingTool(false)} className="absolute -top-4 -right-4 p-3 rounded-full bg-red-500 text-white hover:bg-red-600 z-10 shadow-lg"><FaTimesCircle size={22} /></button>
-                <h3 className="font-bold text-xl mb-4 text-cyan-600 flex items-center gap-2"><FaPaintBrush /> Scratchpad</h3>
-                <div className="border-4 border-dashed border-gray-200 rounded-2xl overflow-hidden w-full bg-gray-50">
-                  <DrawingCanvas width={window.innerWidth > 800 ? 700 : window.innerWidth * 0.8} height={400} />
+                <div className="mb-4 text-center">
+                  <h3 className="font-bold text-2xl text-cyan-600 flex items-center justify-center gap-2"><FaPaintBrush /> Write Your Answer</h3>
+                  <p className="text-slate-500 font-medium">Use your mouse or finger to write the word!</p>
                 </div>
-                <p className="text-sm font-semibold text-gray-400 mt-3 bg-gray-100 px-4 py-1 rounded-full">Drawing won&apos;t be submitted.</p>
+                <div className="border-4 border-dashed border-cyan-100 rounded-2xl overflow-hidden w-full bg-slate-50">
+                  <DrawingCanvas
+                    width={typeof window !== 'undefined' ? (window.innerWidth > 800 ? 750 : window.innerWidth * 0.85) : 600}
+                    height={400}
+                    onFinish={(imageData) => {
+                      setUserAnswer(imageData);
+                      setShowDrawingTool(false);
+                      setShowKeyboard(false);
+                    }}
+                  />
+                </div>
+                <p className="text-xs font-bold text-slate-400 mt-4 uppercase tracking-widest">Draw clearly and click "Done!" when finished</p>
               </motion.div>
             </div>
           )}
 
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
             {!feedbackMessage ? (
-              <button onClick={handleSubmitAnswer} disabled={!userAnswer}
-                className={`px-10 py-4 text-xl font-bold rounded-full transition-all flex items-center justify-center shadow-lg ${userAnswer ? 'bg-green-500 text-white hover:bg-green-600 hover:scale-105' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>
-                Check Answer <FaCheckCircle className="ml-2" />
-              </button>
+              // Hide Check Answer button if the question has clickable options or is a writing task (it has its own Done button)
+              (!currentQuestion.options && currentQuestion.type !== 'writing') && (
+                <button onClick={() => handleSubmitAnswer()} disabled={!userAnswer || isCheckingAnswer}
+                  className={`px-10 py-4 text-xl font-bold rounded-full transition-all flex items-center justify-center shadow-lg ${(userAnswer && !isCheckingAnswer) ? 'bg-green-500 text-white hover:bg-green-600 hover:scale-105' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>
+                  {isCheckingAnswer ? (
+                    <>Thinking <span className="animate-spin ml-2 inline-block">⏳</span></>
+                  ) : (
+                    <>Check Answer <FaCheckCircle className="ml-2" /></>
+                  )}
+                </button>
+              )
             ) : (
-              <button onClick={handleNextQuestion} className="bg-blue-500 text-white px-10 py-4 font-bold rounded-full text-xl hover:bg-blue-600 hover:scale-105 transition-all flex items-center justify-center shadow-lg">
+              <button id="next-btn" onClick={handleNextQuestion} className="bg-blue-500 text-white px-10 py-4 font-bold rounded-full text-xl hover:bg-blue-600 hover:scale-105 transition-all flex items-center justify-center shadow-lg">
                 {currentQuestionIndex < totalQuestions - 1 ? 'Next ➡️' : 'Finish! 🎉'}
               </button>
             )}
@@ -566,6 +802,70 @@ export default function TaskContentPage() {
           </motion.div>
         )}
       </div>
+
+      {/* AI Tutor Avatar */}
+      {taskData && (
+        <div className="fixed bottom-4 md:bottom-8 right-4 md:right-8 z-[100] flex flex-col justify-end items-end pointer-events-none">
+          {/* Professor Owl Speech Bubble */}
+          <AnimatePresence mode="wait">
+            {(feedbackMessage || isCheckingAnswer) && (
+              <motion.div
+                key="speech-bubble"
+                initial={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
+                animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
+                className={`bg-white/95 backdrop-blur-md rounded-3xl rounded-br-sm shadow-2xl p-4 md:p-5 mb-3 max-w-[260px] md:max-w-sm border-4 overflow-hidden pointer-events-auto relative ${feedbackMessage?.type === 'correct' ? 'border-green-300' : feedbackMessage?.type === 'wrong' ? 'border-red-300' : 'border-indigo-300'}`}
+              >
+                <div className="absolute top-0 right-0 p-1 opacity-20">
+                  <FaStar className="text-yellow-400 text-xs" />
+                </div>
+                <p className="font-bold text-slate-700 text-sm md:text-base leading-snug">
+                  {isCheckingAnswer ? "Hmm, let me look at that..." : feedbackMessage?.message}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Professor Character */}
+          <div className="relative pointer-events-auto">
+            {/* Name Tag */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="absolute -top-6 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-10 whitespace-nowrap"
+            >
+              {professor.name}
+            </motion.div>
+
+            <motion.div
+              animate={isCheckingAnswer ? {
+                y: [0, -15, 0],
+                rotate: [0, 8, -8, 0],
+                scale: [1, 1.1, 1]
+              } : {
+                y: [0, -5, 0],
+                rotate: [0, 2, -2, 0]
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: isCheckingAnswer ? 0.8 : 3,
+                ease: "easeInOut"
+              }}
+              className={`w-20 h-20 md:w-32 md:h-32 rounded-full flex items-center justify-center shadow-[0_15px_35px_rgba(0,0,0,0.3)] border-4 border-white mr-2 overflow-hidden bg-gradient-to-tr ${feedbackMessage?.type === 'correct' ? 'from-green-400 to-green-600' : feedbackMessage?.type === 'wrong' ? 'from-orange-400 to-red-500' : 'from-indigo-400 to-purple-500'}`}
+            >
+              <div className="relative w-full h-full p-2">
+                <Image
+                  src={professor.img}
+                  alt={professor.name}
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { useChild } from '../providers/ChildProvider';
 import { useLanguage } from '../providers/LanguageProvider';
 import { getSubjectsByGrade } from '../utils/learningData';
@@ -77,7 +78,18 @@ export default function LearningZonePage() {
   const { t } = useLanguage();
   const [subjects, setSubjects] = useState([]);
   const [subjectsLoading, setSubjectsLoading] = useState(true);
+  const [greeting, setGreeting] = useState(null);
   const router = useRouter();
+
+  useEffect(() => {
+    if (childUser && !subjectsLoading) {
+      const timer = setTimeout(() => {
+        setGreeting(`Hey ${childUser.name}! Which adventure should we start today? 🦉`);
+      }, 2000);
+      const clearTimer = setTimeout(() => setGreeting(null), 10000);
+      return () => { clearTimeout(timer); clearTimeout(clearTimer); };
+    }
+  }, [childUser, subjectsLoading]);
 
   useEffect(() => {
     const loadSubjects = async () => {
@@ -225,6 +237,48 @@ export default function LearningZonePage() {
           })}
         </motion.div>
       )}
+
+      {/* Persistent Professor Owl Guide */}
+      <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none">
+        <AnimatePresence>
+          {greeting && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
+              animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
+              className="bg-white/95 backdrop-blur-md rounded-3xl rounded-br-sm shadow-2xl p-5 mb-4 max-w-xs border-4 border-indigo-200 pointer-events-auto relative"
+            >
+              <div className="absolute top-0 right-0 p-1 opacity-10">
+                <FaStar className="text-yellow-400 text-xs" />
+              </div>
+              <p className="font-bold text-slate-700 leading-snug">
+                {greeting}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="relative pointer-events-auto group">
+          <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-10 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+            Professor Owl
+          </div>
+          <motion.div
+            animate={{ y: [0, -5, 0], rotate: [0, 2, -2, 0] }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            className="w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center shadow-2xl border-4 border-white overflow-hidden bg-gradient-to-tr from-indigo-400 to-purple-600"
+          >
+            <div className="relative w-full h-full p-2">
+              <Image
+                src="/images/professor-owl.png"
+                alt="Professor Owl"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </motion.div>
+        </div>
+      </div>
     </div>
   );
 }

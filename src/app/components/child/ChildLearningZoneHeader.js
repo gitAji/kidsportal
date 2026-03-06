@@ -7,7 +7,7 @@ import { useChild } from '@/app/providers/ChildProvider';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaStar, FaTrophy, FaSignOutAlt, FaCog, FaMedal } from 'react-icons/fa';
+import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaStar, FaTrophy, FaSignOutAlt, FaCog, FaMedal, FaArrowLeft, FaHome } from 'react-icons/fa';
 
 export default function ChildLearningZoneHeader() {
   const { childUser } = useChild();
@@ -126,21 +126,20 @@ export default function ChildLearningZoneHeader() {
         )}
       </AnimatePresence>
 
-      <header className="sticky top-0 z-[100] w-full px-4 py-3">
-        {/* Premium Glass Container */}
-        <div className="max-w-7xl mx-auto bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-[2rem] px-6 py-2 flex items-center justify-between">
+      <header className="sticky top-0 z-[400] w-full px-4 py-3">
+        {/* Main Header Bar (Row 1) */}
+        <div className="max-w-7xl mx-auto bg-white/80 backdrop-blur-2xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-full px-6 py-2 flex items-center justify-between mb-3 ring-8 ring-white/10">
 
           {/* Left: Logo */}
-          <div className="flex items-center ml-2">
+          <div className="flex items-center gap-4">
             <Link href="/learning-zone" className="group flex items-center gap-3 transition-transform hover:scale-[1.02] active:scale-[0.98]">
-              <div className="relative flex items-center h-20">
-                <Image src="/logo.png" alt="KidsPortal" width={280} height={80} className="w-auto h-16 drop-shadow-sm object-contain" />
-                <div className="absolute -bottom-2 left-0 w-0 h-[3px] bg-gradient-to-r from-blue-500 to-indigo-500 group-hover:w-full transition-all duration-300 rounded-full" />
+              <div className="relative flex items-center h-14 md:h-16">
+                <Image src="/logo.png" alt="KidsPortal" width={180} height={50} className="w-auto h-10 md:h-12 drop-shadow-sm object-contain" />
               </div>
             </Link>
           </div>
 
-          {/* Center: Dynamic Stats (Hidden on mobile) */}
+          {/* Center: Dynamic Stats (Visible on desktop) */}
           <div className="hidden md:flex items-center gap-6">
             <div className="flex items-center gap-3 bg-amber-50/50 border border-amber-100 rounded-2xl px-4 py-1.5 shadow-sm transition-transform hover:scale-105">
               <div className="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 shadow-inner">
@@ -177,16 +176,14 @@ export default function ChildLearningZoneHeader() {
                 className="flex items-center gap-2 p-1 rounded-2xl transition-all hover:bg-slate-50 active:scale-95 group"
               >
                 {renderAvatar()}
-                {childUser && (
-                  <div className="hidden sm:flex flex-col items-start px-1 mr-2">
-                    <span className="text-xs font-black text-slate-800 uppercase tracking-wider leading-none mb-1">
-                      {childUser.name}
-                    </span>
-                    <span className="text-[10px] font-bold text-slate-400 leading-none">
-                      {childUser.grade}
-                    </span>
-                  </div>
-                )}
+                <div className="hidden sm:flex flex-col items-start px-1 mr-2">
+                  <span className="text-xs font-black text-slate-800 uppercase tracking-wider leading-none mb-1">
+                    {childUser?.name || 'Explorer'}
+                  </span>
+                  <span className="text-[10px] font-bold text-slate-400 leading-none">
+                    {childUser?.grade || 'Lvl ' + stats.level}
+                  </span>
+                </div>
               </button>
 
               <AnimatePresence>
@@ -195,7 +192,7 @@ export default function ChildLearningZoneHeader() {
                     initial={{ opacity: 0, scale: 0.95, y: 10, x: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 10, x: 20 }}
-                    className="absolute right-0 top-full mt-4 w-72 bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden z-[110]"
+                    className="absolute right-0 top-full mt-4 w-72 bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden z-[500]"
                   >
                     {/* Dropdown Header */}
                     <div className="bg-gradient-to-br from-slate-50 to-white px-6 py-6 border-b border-slate-50">
@@ -253,6 +250,42 @@ export default function ChildLearningZoneHeader() {
                 )}
               </AnimatePresence>
             </div>
+          </div>
+        </div>
+
+        {/* Navigation Bar 'Under the Header' (Row 2) */}
+        <div className="max-w-5xl mx-auto flex items-center gap-3 mt-2 px-2">
+          {/* Home Button */}
+          <Link
+            href="/learning-zone"
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl font-black text-sm transition-all shadow-sm active:scale-95 ${pathname === '/learning-zone'
+              ? 'bg-blue-600 text-white shadow-lg shadow-blue-200'
+              : 'bg-white text-slate-600 hover:bg-blue-50 hover:text-blue-600 border border-slate-100'
+              }`}
+          >
+            <FaHome size={18} />
+            <span className="hidden sm:inline">Home</span>
+          </Link>
+
+          {/* Back Button (Conditional) */}
+          {pathname !== '/learning-zone' && (
+            <button
+              onClick={() => router.back()}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white text-slate-600 font-black text-sm border border-slate-100 hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm active:scale-95"
+            >
+              <FaArrowLeft size={16} />
+              <span className="hidden sm:inline">Back</span>
+            </button>
+          )}
+
+          {/* Breadcrumb / Status Indicator */}
+          <div className="flex-grow h-10 px-6 rounded-2xl bg-white/40 backdrop-blur-md border border-white/40 flex items-center gap-3 overflow-hidden">
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shrink-0" />
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] truncate">
+              {pathname === '/learning-zone' ? 'Learning Dashboard' : (
+                pathname.split('/').map(p => p.replace(/-/g, ' ')).filter(p => !['learning-zone', 'subjects', 'levels', ''].includes(p.toLowerCase())).join(' • ')
+              )}
+            </span>
           </div>
         </div>
       </header>

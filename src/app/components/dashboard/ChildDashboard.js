@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { doc, updateDoc, deleteDoc, runTransaction, getDoc } from 'firebase/firestore';
+import { doc, updateDoc, deleteDoc, runTransaction, getDoc, onSnapshot } from 'firebase/firestore';
 import { app } from '../../../firebase/config';
 import { getFirestore } from 'firebase/firestore';
 import SkeletonLoader from '../ui/SkeletonLoader';
@@ -10,7 +10,7 @@ import {
   FaTrophy, FaStar, FaKey, FaEye, FaEyeSlash, FaUserLock,
   FaFilePdf, FaExclamationTriangle, FaClipboard, FaArrowLeft,
   FaBookOpen, FaAward, FaGamepad, FaShieldAlt, FaCheck,
-  FaSpinner, FaTimes
+  FaSpinner, FaTimes, FaChalkboardTeacher, FaClock
 } from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -48,6 +48,8 @@ const ChildDashboard = ({ child, onClose }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [loginEnabled, setLoginEnabled] = useState(child?.loginEnabled ?? true);
+  const [professorCharacter, setProfessorCharacter] = useState(child?.professorCharacter || 'owl');
+  const [timeAlertsEnabled, setTimeAlertsEnabled] = useState(child?.timeAlertsEnabled ?? true);
   const [showLoginHelper, setShowLoginHelper] = useState(false);
 
   const router = useRouter();
@@ -73,6 +75,8 @@ const ChildDashboard = ({ child, onClose }) => {
     setChildData(child);
     setUsername(child?.username || '');
     setLoginEnabled(child?.loginEnabled ?? true);
+    setProfessorCharacter(child?.professorCharacter || 'owl');
+    setTimeAlertsEnabled(child?.timeAlertsEnabled ?? true);
     setCurrentView('details');
     setActiveTab('about');
   }, [child]);
@@ -82,6 +86,23 @@ const ChildDashboard = ({ child, onClose }) => {
     debounced(username, child);
     return () => { debounced.cancel(); };
   }, [username, child]);
+
+  // Real-time synchronization for child data
+  useEffect(() => {
+    if (!child?.id || !child?.parentUid) return;
+
+    const childDocRef = doc(db, "users", child.parentUid, "children", child.id);
+    const unsubscribe = onSnapshot(childDocRef, (doc) => {
+      if (doc.exists()) {
+        const freshData = { id: doc.id, ...doc.data(), parentUid: child.parentUid };
+        setChildData(prev => ({ ...prev, ...freshData }));
+      }
+    }, (error) => {
+      console.error("Error listening to child updates:", error);
+    });
+
+    return () => unsubscribe();
+  }, [child?.id, child?.parentUid, db]);
 
   const handleDeleteClick = async () => {
     if (!confirm(`Are you sure you want to deactivate ${childData.name}'s account? This action cannot be undone.`)) return;
@@ -153,7 +174,7 @@ const ChildDashboard = ({ child, onClose }) => {
     setSaveStatus(null);
     try {
       const childDocRef = doc(db, "users", childData.parentUid, "children", childData.id);
-      const updates = { username, loginEnabled };
+      const updates = { username, loginEnabled, professorCharacter, timeAlertsEnabled };
       if (newPassword) updates.password = newPassword;
       if (username !== childData.username) {
         const oldUsernameDocRef = doc(db, 'child_usernames', childData.username);
@@ -214,8 +235,8 @@ const ChildDashboard = ({ child, onClose }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-2xl shadow-xl border text-sm font-bold ${saveStatus === 'error'
-                ? "bg-rose-50 border-rose-200 text-rose-600"
-                : "bg-emerald-50 border-emerald-200 text-emerald-600"
+              ? "bg-rose-50 border-rose-200 text-rose-600"
+              : "bg-emerald-50 border-emerald-200 text-emerald-600"
               }`}
           >
             {saveStatus === 'error' ? <FaTimes /> : <FaCheck />} {errorMessage}
@@ -296,8 +317,8 @@ const ChildDashboard = ({ child, onClose }) => {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-black uppercase tracking-widest whitespace-nowrap transition-all border-2 ${activeTab === tab.id
-                    ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-200/40"
-                    : "bg-white text-slate-400 border-slate-100 hover:border-blue-100 hover:text-blue-500"
+                  ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-200/40"
+                  : "bg-white text-slate-400 border-slate-100 hover:border-blue-100 hover:text-blue-500"
                   }`}
               >
                 {tab.icon} {tab.label}
@@ -344,8 +365,8 @@ const ChildDashboard = ({ child, onClose }) => {
                         <div className="flex items-center justify-between">
                           <span className="text-sm text-slate-400 font-bold">Login Access</span>
                           <span className={`px-3 py-1 rounded-lg text-xs font-black uppercase tracking-widest ${loginEnabled
-                              ? "bg-emerald-50 text-emerald-600 border border-emerald-200"
-                              : "bg-rose-50 text-rose-600 border border-rose-200"
+                            ? "bg-emerald-50 text-emerald-600 border border-emerald-200"
+                            : "bg-rose-50 text-rose-600 border border-rose-200"
                             }`}>
                             {loginEnabled ? "Enabled" : "Disabled"}
                           </span>
@@ -405,24 +426,86 @@ const ChildDashboard = ({ child, onClose }) => {
               {activeTab === 'settings' && (
                 <form onSubmit={handleSettingsSave} className="space-y-6">
                   {/* Account Access */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                      <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-5 flex items-center gap-2">
+                        <FaUserLock className="text-blue-500" /> Account Access
+                      </h3>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-bold text-slate-700">Enable Child Login</p>
+                          <p className="text-xs text-slate-400 font-medium">Allow sign in to Student Zone</p>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            className="sr-only peer"
+                            checked={loginEnabled}
+                            onChange={(e) => handleToggleLogin(e.target.checked)}
+                          />
+                          <div className="w-12 h-7 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-200 after:border after:rounded-full after:h-6 after:w-6 after:transition-all after:shadow-sm peer-checked:bg-blue-600"></div>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                      <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-5 flex items-center gap-2">
+                        <FaClock className="text-amber-500" /> Exam Helpers
+                      </h3>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-bold text-slate-700">Professor Time Alerts</p>
+                          <p className="text-xs text-slate-400 font-medium">Professor alerts when time is low</p>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            className="sr-only peer"
+                            checked={timeAlertsEnabled}
+                            onChange={(e) => setTimeAlertsEnabled(e.target.checked)}
+                          />
+                          <div className="w-12 h-7 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-200 after:border after:rounded-full after:h-6 after:w-6 after:transition-all after:shadow-sm peer-checked:bg-amber-500"></div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Professor Customization */}
                   <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
                     <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-5 flex items-center gap-2">
-                      <FaUserLock className="text-blue-500" /> Account Access
+                      <FaChalkboardTeacher className="text-indigo-500" /> Professor Companion
                     </h3>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-bold text-slate-700">Enable Child Login</p>
-                        <p className="text-xs text-slate-400 font-medium">Allow this child to log in to the Student Zone</p>
-                      </div>
-                      <label className="relative inline-flex items-center cursor-pointer">
-                        <input
-                          type="checkbox"
-                          className="sr-only peer"
-                          checked={loginEnabled}
-                          onChange={(e) => handleToggleLogin(e.target.checked)}
-                        />
-                        <div className="w-12 h-7 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-200 after:border after:rounded-full after:h-6 after:w-6 after:transition-all after:shadow-sm peer-checked:bg-blue-600"></div>
-                      </label>
+                    <p className="text-sm text-slate-500 mb-6">Choose a character to guide your child through their learning journey.</p>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                      {[
+                        { id: 'owl', name: 'Professor Owl', img: '/images/professor-owl.png', color: 'from-blue-500 to-indigo-600' },
+                        { id: 'panda', name: 'Smart Panda', img: '/images/smart-panda.png', color: 'from-emerald-500 to-teal-600' }, // Updated placeholder to actual panda image
+                      ].map((prof) => (
+                        <button
+                          key={prof.id}
+                          type="button"
+                          onClick={() => setProfessorCharacter(prof.id)}
+                          className={`relative group p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-3 ${professorCharacter === prof.id
+                            ? 'border-indigo-500 bg-indigo-50/50'
+                            : 'border-slate-100 bg-white hover:border-indigo-200'
+                            }`}
+                        >
+                          <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${prof.color} p-1 shadow-md group-hover:scale-110 transition-transform`}>
+                            <div className="w-full h-full bg-white rounded-full overflow-hidden relative">
+                              <Image src={prof.img} alt={prof.name} fill className="object-contain p-1" />
+                            </div>
+                          </div>
+                          <span className={`text-[10px] font-black uppercase tracking-widest ${professorCharacter === prof.id ? 'text-indigo-600' : 'text-slate-400'}`}>
+                            {prof.name}
+                          </span>
+                          {professorCharacter === prof.id && (
+                            <div className="absolute -top-2 -right-2 bg-indigo-500 text-white rounded-full p-1 text-[10px] shadow-lg">
+                              <FaCheck />
+                            </div>
+                          )}
+                        </button>
+                      ))}
                     </div>
                   </div>
 

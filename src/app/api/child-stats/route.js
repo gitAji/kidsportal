@@ -42,7 +42,7 @@ export async function GET(request) {
 // POST — Save stats and/or record new achievements
 export async function POST(request) {
     try {
-        const { childId, parentUid, stats, newAchievements } = await request.json();
+        const { childId, parentUid, stats, newAchievements, sessionHistory, taskId } = await request.json();
 
         if (!childId || !parentUid) {
             return NextResponse.json({ error: 'Missing childId or parentUid' }, { status: 400 });
@@ -77,6 +77,19 @@ export async function POST(request) {
                     unlockedAt: FieldValue.serverTimestamp(),
                 });
             }
+        }
+
+        // Record user interaction history for AI analysis
+        if (sessionHistory && sessionHistory.length > 0) {
+            const historyRef = adminDb.collection(`childStats/${childId}/taskHistory`).doc();
+            batch.set(historyRef, {
+                taskId: taskId || (stats && stats.taskId) || "unknown_task",
+                subjectId: (stats && stats.subjectId) || "unknown_subject",
+                levelId: (stats && stats.levelId) || "unknown_level",
+                timestamp: FieldValue.serverTimestamp(),
+                history: sessionHistory,
+                score: (stats && stats.score) || 0
+            });
         }
 
         await batch.commit();

@@ -162,11 +162,38 @@ export function saveStats(childId, stats) {
 }
 
 /**
+ * Quick check: has this child already completed the given task?
+ */
+export function isTaskAlreadyCompleted(childId, taskId) {
+    if (!childId || !taskId) return false;
+    const stats = loadStats(childId);
+    return (stats.completedTasks_list || []).includes(taskId);
+}
+
+/**
  * Call after a task is completed.
- * taskResult = { type, score, totalQuestions, correct, timeTaken, levelId, subjectId, retried }
+ * taskResult = { type, score, totalQuestions, correct, timeTaken, levelId, subjectId, retried, taskId }
+ *
+ * DESIGN RULE:
+ *   - Stats & achievements are only recorded on the FIRST completion of a task.
+ *   - If the student replays a task they already finished, this function returns
+ *     the existing stats unchanged and sets stats._isRepeat = true so callers
+ *     know NOT to check achievements or sync to the server.
+ *   - The student can still play for practice — they see scores and confetti —
+ *     but nothing is persisted.
  */
 export function recordTaskCompletion(childId, taskResult) {
     const stats = loadStats(childId);
+
+    // ── Guard: repeat completion ────────────────────────────────────────────
+    const alreadyDone = (stats.completedTasks_list || []).includes(taskResult.taskId);
+    if (alreadyDone) {
+        stats._isRepeat = true;
+        return stats;              // nothing changes, no save
+    }
+    stats._isRepeat = false;
+    // ────────────────────────────────────────────────────────────────────────
+
     const pct = taskResult.correct / taskResult.totalQuestions;
 
     // Basic counters
@@ -208,12 +235,10 @@ export function recordTaskCompletion(childId, taskResult) {
     // Retries
     if (taskResult.retried) stats.retries = (stats.retries || 0) + 1;
 
-    // Completed specific tasks
-    if (taskResult.taskId) {
-        const tasksSet = new Set(stats.completedTasks_list || []);
-        tasksSet.add(taskResult.taskId);
-        stats.completedTasks_list = [...tasksSet];
-    }
+    // Completed specific tasks — first-time, so always adds
+    const tasksSet = new Set(stats.completedTasks_list || []);
+    tasksSet.add(taskResult.taskId);
+    stats.completedTasks_list = [...tasksSet];
 
     // Daily streak — track dates
     const today = new Date().toDateString();

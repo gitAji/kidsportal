@@ -22,7 +22,7 @@ const themes = [
   { id: 'green', name: 'Forest', primary: '#10B981', bg: '#D1FAE5', gradient: 'from-emerald-400 to-green-600' },
   { id: 'cyan', name: 'Galaxy', primary: '#8B5CF6', bg: '#EDE9FE', gradient: 'from-blue-400 to-cyan-600' },
   { id: 'orange', name: 'Sunset', primary: '#F97316', bg: '#FFEDD5', gradient: 'from-orange-400 to-red-500' },
-  { id: 'teal', name: 'Cotton Candy', primary: '#EC4899', bg: '#FCE7F3', gradient: 'from-teal-400 to-rose-500' },
+  { id: 'pink', name: 'Cotton Candy', primary: '#EC4899', bg: '#FCE7F3', gradient: 'from-pink-400 to-rose-500' },
   { id: 'teal', name: 'Ocean', primary: '#14B8A6', bg: '#CCFBF1', gradient: 'from-teal-400 to-cyan-600' },
 ];
 
