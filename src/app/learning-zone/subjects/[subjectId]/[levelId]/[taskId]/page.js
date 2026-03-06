@@ -11,7 +11,6 @@ import InteractiveLesson from '../../../../../components/ui/InteractiveLesson';
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from 'canvas-confetti';
 import { recordTaskCompletion, checkAchievements } from '../../../../../utils/achievements';
-import { saveChildStats, recordAchievement } from '../../../../../utils/firestoreService';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 
@@ -157,24 +156,30 @@ export default function TaskContentPage() {
       const isSuccess = (finalCorrect / total) >= 0.5;
       if (isSuccess) completionSound?.play();
       triggerConfetti(isSuccess);
-      if (childUser?.uid) {
-        const updatedStats = recordTaskCompletion(childUser.uid, {
+      if (childUser?.uid || childUser?.id) {
+        const childId = childUser.uid || childUser.id;
+        const updatedStats = recordTaskCompletion(childId, {
           type: taskData.type, score, totalQuestions: total,
           correct: finalCorrect, timeTaken, levelId, subjectId, retried: retriedThisTask,
           taskId: taskData.taskId
         });
 
-        // Sync to Firestore
-        saveChildStats(childUser.uid, updatedStats).catch(console.error);
-
-        const unlocked = checkAchievements(childUser.uid, updatedStats);
+        const unlocked = checkAchievements(childId, updatedStats);
         if (unlocked.length > 0) {
           setNewAchievements(unlocked);
-          // Sync achievements to Firestore
-          unlocked.forEach(ach => {
-            recordAchievement(childUser.uid, ach).catch(console.error);
-          });
         }
+
+        // Sync stats + achievements to Firestore via API route (Admin SDK)
+        fetch('/api/child-stats', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            childId,
+            parentUid: childUser.parentUid,
+            stats: updatedStats,
+            newAchievements: unlocked,
+          }),
+        }).catch(console.error);
       }
     }
   };
@@ -186,23 +191,34 @@ export default function TaskContentPage() {
   const handleLessonComplete = async () => {
     completionSound?.play();
     triggerConfetti(true);
-    if (!childUser?.uid) {
+    const childId = childUser?.uid || childUser?.id;
+    if (!childId) {
       router.back();
       return;
     }
 
     // 10 pts for completing a lesson
-    const updatedStats = recordTaskCompletion(childUser.uid, {
+    const updatedStats = recordTaskCompletion(childId, {
       type: taskData.type, score: 10, totalQuestions: 1,
       correct: 1, timeTaken: 0, levelId, subjectId, retried: false,
       taskId: taskData.taskId
     });
 
-    await saveChildStats(childUser.uid, updatedStats).catch(console.error);
-    const unlocked = checkAchievements(childUser.uid, updatedStats);
+    const unlocked = checkAchievements(childId, updatedStats);
+
+    // Sync stats + achievements to Firestore via API route (Admin SDK)
+    fetch('/api/child-stats', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        childId,
+        parentUid: childUser.parentUid,
+        stats: updatedStats,
+        newAchievements: unlocked,
+      }),
+    }).catch(console.error);
 
     if (unlocked.length > 0) {
-      unlocked.forEach(ach => recordAchievement(childUser.uid, ach).catch(console.error));
       setNewAchievements(unlocked);
       setScore(10);
       setQuizCompleted(true); // Re-use the summary screen

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useChild } from '../../providers/ChildProvider';
 import { ACHIEVEMENTS, loadUnlockedAchievements, loadStats } from '../../utils/achievements';
-import { getChildAchievements, getChildStats } from '../../utils/firestoreService';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTrophy, FaLock, FaHome } from 'react-icons/fa';
 import Link from 'next/link';
@@ -21,19 +20,23 @@ export default function RewardsPage() {
     if (!childUser) { router.push('/child-login'); return; }
 
     const loadData = async () => {
-      const localUnlocked = loadUnlockedAchievements(childUser.uid);
-      const localStats = loadStats(childUser.uid);
+      // Load from localStorage first for instant display
+      const childId = childUser.uid || childUser.id;
+      const localUnlocked = loadUnlockedAchievements(childId);
+      const localStats = loadStats(childId);
       setUnlockedIds(new Set(localUnlocked));
       setStats(localStats);
       setLoading(false);
+
+      // Then try to fetch from Firestore via API route (uses Admin SDK)
       try {
-        const [fsAchs, fsStats] = await Promise.all([
-          getChildAchievements(childUser.uid),
-          getChildStats(childUser.uid),
-        ]);
-        if (fsAchs.length > 0) setUnlockedIds(new Set(fsAchs.map(a => a.achievementId)));
-        if (Object.keys(fsStats).length > 0) setStats(fsStats);
-      } catch (e) { /* use local */ }
+        const res = await fetch(`/api/child-stats?childId=${childId}&parentUid=${childUser.parentUid}`);
+        if (res.ok) {
+          const { stats: fsStats, achievements: fsAchs } = await res.json();
+          if (fsAchs && fsAchs.length > 0) setUnlockedIds(new Set(fsAchs.map(a => a.achievementId)));
+          if (fsStats && Object.keys(fsStats).length > 0) setStats(fsStats);
+        }
+      } catch (e) { /* use local fallback */ }
     };
 
     loadData();
