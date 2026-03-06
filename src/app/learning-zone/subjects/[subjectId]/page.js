@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../data/db.json';
 import SkeletonLoader from '../../../components/ui/SkeletonLoader';
-import { FaArrowLeft, FaHome, FaLock, FaStar, FaTrophy, FaCheckCircle, FaUnlockAlt } from 'react-icons/fa';
+import { FaArrowLeft, FaHome, FaLock, FaStar, FaTrophy, FaCheckCircle, FaUnlockAlt, FaLanguage } from 'react-icons/fa';
 import { useChild } from '../../../providers/ChildProvider';
 import { useLanguage } from '../../../providers/LanguageProvider';
 import { loadStats } from '../../../utils/achievements';
@@ -26,7 +26,7 @@ import { db } from '@/firebase/config';
 
 export default function SubjectLevelsPage() {
   const { childUser } = useChild();
-  const { t } = useLanguage();
+  const { t, language, toggleLanguage, languageLoaded } = useLanguage();
   const [levels, setLevels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [alertMessage, setAlertMessage] = useState(null);
@@ -91,7 +91,7 @@ export default function SubjectLevelsPage() {
 
         if (data.length === 0) {
           // Fallback to local db.json
-          const cleanSubjectId = subjectId?.toLowerCase().replace(/ /g, '-');
+          const cleanSubjectId = decodeURIComponent(subjectId)?.toLowerCase().replace(/ /g, '-');
           const gradeData = dbData.grades.find(g => g.gradeId?.toLowerCase().replace(/-/g, '') === childUser.gradeId?.toLowerCase().replace(/-/g, ''));
           const subject = gradeData?.subjects?.find(s =>
             s.subjectId?.toLowerCase() === cleanSubjectId ||
@@ -107,7 +107,7 @@ export default function SubjectLevelsPage() {
       } catch (err) {
         console.error("Error fetching levels:", err);
         // Fallback to local on error too
-        const cleanSubjectId = subjectId?.toLowerCase().replace(/ /g, '-');
+        const cleanSubjectId = decodeURIComponent(subjectId)?.toLowerCase().replace(/ /g, '-');
         const gradeData = dbData.grades.find(g => g.gradeId?.toLowerCase().replace(/-/g, '') === childUser.gradeId?.toLowerCase().replace(/-/g, ''));
         const subject = gradeData?.subjects?.find(s =>
           s.subjectId?.toLowerCase() === cleanSubjectId ||
@@ -126,6 +126,8 @@ export default function SubjectLevelsPage() {
 
   const processedLevels = useMemo(() => {
     let previousCompleted = true; // Level 1 is always unlocked
+    const isTamilSubject = subjectId?.toLowerCase().includes('tamil');
+    const isPremiumAndTamil = isTamilSubject && childUser?.isSubscriptionActive;
 
     return levels.map((level, index) => {
       const levelTasks = level.tasks || [];
@@ -135,10 +137,21 @@ export default function SubjectLevelsPage() {
       const isCompleted = totalTasks > 0 && completedCount === totalTasks;
 
       // Override isLocked based on previous level's completion
-      const dynamicIsLocked = !previousCompleted;
+      let dynamicIsLocked = !previousCompleted;
 
       // Mark the first unlocked, non-completed level as "next up"
-      const isNextUp = previousCompleted && !isCompleted && !dynamicIsLocked;
+      let isNextUp = previousCompleted && !isCompleted && !dynamicIsLocked;
+
+      // Unlock everything for premium Tamil users
+      if (isPremiumAndTamil) {
+        dynamicIsLocked = false;
+        // Adjust isNextUp so that only the first non-completed one looks "next up"
+        if (!isCompleted && previousCompleted) {
+          isNextUp = true;
+        } else {
+          isNextUp = false;
+        }
+      }
 
       // Update for the next level in the array
       previousCompleted = isCompleted;
@@ -154,7 +167,7 @@ export default function SubjectLevelsPage() {
         isNextUp
       };
     });
-  }, [levels, childStats]);
+  }, [levels, childStats, subjectId, childUser?.isSubscriptionActive]);
 
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center p-8">
@@ -227,6 +240,19 @@ export default function SubjectLevelsPage() {
         <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 drop-shadow-sm">
           {t('select_level')}
         </h1>
+
+        {subjectId?.toLowerCase().includes('tamil') && languageLoaded && (
+          <div className="mt-6 flex justify-center">
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 px-6 py-2.5 rounded-2xl bg-white text-slate-800 font-extrabold text-sm shadow-md hover:bg-slate-50 transition-all hover:scale-[1.02] active:scale-[0.98] border-b-4 border-slate-200 group relative overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <FaLanguage className="text-purple-600 group-hover:rotate-12 transition-transform" size={20} />
+              <span>{language === 'en' ? 'தமிழ்' : 'English'}</span>
+            </button>
+          </div>
+        )}
       </motion.div>
 
       <div className="w-full max-w-6xl mx-auto z-10 relative pb-20 space-y-12">
@@ -316,11 +342,14 @@ export default function SubjectLevelsPage() {
                     </div>
 
                     <div>
-                      <h3 className="text-2xl font-black mb-2 drop-shadow-md tracking-tight z-10">
-                        {level.levelName?.split(':')[0] || `Level ${index + 1}`}
+                      <p className="text-sm font-bold opacity-90 z-10 leading-relaxed mb-1">
+                        {level.levelName?.includes(':') ? level.levelName.split(':')[0] : `Level ${index + 1}`}
+                      </p>
+                      <h3 className="text-2xl font-black mb-2 drop-shadow-md tracking-tight z-10 line-clamp-2">
+                        {level.levelName?.includes(':') ? level.levelName.split(':')[1].trim() : level.levelName || 'Untitled Topic'}
                       </h3>
-                      <p className="text-sm font-bold opacity-90 z-10 leading-relaxed max-w-[200px] line-clamp-2">
-                        {level.levelName?.includes(':') ? level.levelName.split(':')[1].trim() : (level.description || 'Embark on a new learning adventure!')}
+                      <p className="text-xs font-medium opacity-80 z-10 mt-auto">
+                        {level.description || 'Embark on a new learning adventure!'}
                       </p>
                     </div>
 

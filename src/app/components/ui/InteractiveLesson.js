@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome, FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap } from 'react-icons/fa';
+import { FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome, FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage } from 'react-icons/fa';
+import { useLanguage } from '@/app/providers/LanguageProvider';
 import { useRouter } from 'next/navigation';
 import AudioPlayer from './AudioPlayer';
 
@@ -12,6 +13,10 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const [isLoading, setIsLoading] = useState(false);
     const [currentPromptType, setCurrentPromptType] = useState(null);
     const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
+    const { language, toggleLanguage, languageLoaded } = useLanguage();
+    const isTamilSubject = taskData?.subjectId?.toLowerCase().includes('tamil') ||
+        taskData?.taskId?.toLowerCase().includes('tamil') ||
+        typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('tamil');
 
     // Safely split text into sentences, filter out empty strings, and remove Markdown characters like ** or #
     const cleanContent = (taskData.content || "").replace(/[*#_]/g, "");
@@ -69,17 +74,9 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
 
             {/* Sticky Top Navigation */}
             <div className="w-full sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/50 shadow-sm">
-                <div className="max-w-5xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3">
-                    <button
-                        onClick={() => router.back()}
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-100/80 hover:bg-slate-200/80 text-slate-600 transition-all hover:scale-105 active:scale-95 text-sm font-bold"
-                    >
-                        <FaArrowLeft className="text-sm" />
-                        <span className="hidden sm:inline">Back</span>
-                    </button>
-
+                <div className="max-w-5xl mx-auto flex items-center justify-center px-4 sm:px-6 py-3">
                     {/* Center: Compact Progress */}
-                    <div className="flex items-center gap-3 flex-1 max-w-xs mx-4">
+                    <div className="flex items-center gap-3 w-full max-w-sm">
                         <div className="flex-1 h-2 bg-slate-200/60 rounded-full overflow-hidden">
                             <motion.div
                                 className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"
@@ -92,14 +89,6 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             {currentSentenceIndex + 1}/{sentences.length}
                         </span>
                     </div>
-
-                    <button
-                        onClick={() => router.push('/learning-zone')}
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-cyan-50/80 hover:bg-cyan-100/80 text-cyan-600 transition-all hover:scale-105 active:scale-95 text-sm font-bold"
-                    >
-                        <FaHome className="text-sm" />
-                        <span className="hidden sm:inline">Home</span>
-                    </button>
                 </div>
             </div>
 
@@ -157,6 +146,19 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                 ))}
                             </div>
                         </div>
+
+                        {/* Card Language Toggle */}
+                        {isTamilSubject && languageLoaded && (
+                            <div className="absolute top-16 sm:top-20 right-5 sm:right-8 z-20">
+                                <button
+                                    onClick={toggleLanguage}
+                                    className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-black text-[10px] shadow drop-shadow-sm hover:scale-105 active:scale-95 transition-transform"
+                                >
+                                    <FaLanguage size={14} />
+                                    <span>{language === 'en' ? 'தமிழ்' : 'English'}</span>
+                                </button>
+                            </div>
+                        )}
 
                         {/* Content Area with Animation */}
                         <div className="px-5 sm:px-8 py-8 sm:py-12 md:py-16 min-h-[200px] sm:min-h-[280px] flex flex-col items-center justify-center">

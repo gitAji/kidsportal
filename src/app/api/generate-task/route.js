@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebaseAdmin';
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -63,9 +63,10 @@ For each question, provide:
 Respond ONLY with valid JSON matching this schema exactly.`;
 
         // We use JSON output format to ensure valid response
-        const genModel = ai.getGenerativeModel({
-            model: "gemini-1.5-flash",
-            generationConfig: {
+        const result = await ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: prompt,
+            config: {
                 temperature: 0.7,
                 responseMimeType: "application/json",
                 responseSchema: {
@@ -97,8 +98,7 @@ Respond ONLY with valid JSON matching this schema exactly.`;
             }
         });
 
-        const result = await genModel.generateContent(prompt);
-        const generatedTask = JSON.parse(result.response.text());
+        const generatedTask = JSON.parse(result.text);
 
         // Ensure we stamp it with the requested IDs
         generatedTask.taskId = taskId;
@@ -108,6 +108,6 @@ Respond ONLY with valid JSON matching this schema exactly.`;
 
     } catch (error) {
         console.error('Task Generation Error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return NextResponse.json({ error: error.message, stack: error.stack }, { status: 500 });
     }
 }

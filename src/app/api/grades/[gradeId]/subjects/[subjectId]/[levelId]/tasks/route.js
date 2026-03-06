@@ -5,12 +5,13 @@ import path from 'path';
 const dbPath = path.resolve(process.cwd(), 'src/app/data/db.json');
 
 export async function GET(request, { params }) {
-  const { gradeId, subjectId, levelId } = params;
+  const resolvedParams = await params;
+  const { gradeId, subjectId, levelId } = resolvedParams;
 
   try {
     const dbData = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
-    const cleanSubjectId = subjectId?.toLowerCase().replace(/ /g, '-');
-    const cleanLevelId = levelId?.toLowerCase().replace(/ /g, '-');
+    const cleanSubjectId = decodeURIComponent(subjectId)?.toLowerCase().replace(/ /g, '-');
+    const cleanLevelId = decodeURIComponent(levelId)?.toLowerCase().replace(/ /g, '-');
 
     const grade = dbData.grades.find(g => g.gradeId?.toLowerCase().replace(/-/g, '') === gradeId?.toLowerCase().replace(/-/g, ''));
     if (!grade) {

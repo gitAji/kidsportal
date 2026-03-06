@@ -9,6 +9,8 @@ import DrawingCanvas from '../../../../../components/ui/DrawingCanvas';
 import VirtualKeyboard from '../../../../../components/ui/VirtualKeyboard';
 import InteractiveLesson from '../../../../../components/ui/InteractiveLesson';
 import { motion, AnimatePresence } from "framer-motion";
+import { FaLanguage } from 'react-icons/fa';
+import { useLanguage } from '@/app/providers/LanguageProvider';
 import confetti from 'canvas-confetti';
 import { recordTaskCompletion, checkAchievements } from '../../../../../utils/achievements';
 import { doc, getDoc } from 'firebase/firestore';
@@ -22,6 +24,8 @@ export default function TaskContentPage() {
   const router = useRouter();
   const params = useParams();
   const { subjectId, levelId, taskId } = params;
+  const { language, toggleLanguage, languageLoaded } = useLanguage();
+  const isTamilSubject = subjectId?.toLowerCase().includes('tamil');
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
@@ -71,9 +75,9 @@ export default function TaskContentPage() {
 
       // Fallback: local db.json
       const dbData = (await import('../../../../../data/db.json')).default;
-      const cleanSubjectId = subjectId?.toLowerCase().replace(/ /g, '-');
-      const cleanLevelId = levelId?.toLowerCase().replace(/ /g, '-');
-      const cleanTaskId = taskId?.toLowerCase().replace(/ /g, '-');
+      const cleanSubjectId = decodeURIComponent(subjectId)?.toLowerCase().replace(/ /g, '-');
+      const cleanLevelId = decodeURIComponent(levelId)?.toLowerCase().replace(/ /g, '-');
+      const cleanTaskId = decodeURIComponent(taskId)?.toLowerCase().replace(/ /g, '-');
       const gradeData = dbData.grades.find(g => g.gradeId?.toLowerCase().replace(/-/g, '') === childUser.gradeId?.toLowerCase().replace(/-/g, ''));
       const subject = gradeData?.subjects?.find(s =>
         s.subjectId?.toLowerCase() === cleanSubjectId ||
@@ -453,7 +457,6 @@ export default function TaskContentPage() {
             <p className="text-xl text-gray-600 mb-8">+10 Points Added</p>
 
             <div className="flex flex-col sm:flex-row gap-3">
-              <button onClick={() => router.back()} className="flex-1 bg-blue-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-blue-600 hover:scale-105 transition-all shadow-lg">Back to Map 🗺️</button>
               <button onClick={() => router.push('/learning-zone/rewards')} className="flex-1 bg-cyan-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-cyan-600 hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2"><FaGift /> My Rewards</button>
             </div>
           </motion.div>
@@ -647,6 +650,16 @@ export default function TaskContentPage() {
             </motion.div>
           )}
 
+          {isTamilSubject && languageLoaded && !feedbackMessage && (
+            <button
+              onClick={toggleLanguage}
+              className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-black text-[10px] shadow drop-shadow-sm hover:scale-105 active:scale-95 transition-transform z-20"
+            >
+              <FaLanguage size={14} />
+              <span>{language === 'en' ? 'தமிழ்' : 'English'}</span>
+            </button>
+          )}
+
           <div className="text-2xl font-bold mb-8 flex flex-col items-center text-center text-gray-800 mt-4">
             {/* Question Image */}
             {currentQuestion.imageUrl && currentQuestion.type !== 'counting' && (
@@ -766,18 +779,36 @@ export default function TaskContentPage() {
                   </button>
                 </div>
               ) : (
-                <input type="text" value={userAnswer} onChange={e => setUserAnswer(e.target.value)} disabled={!!feedbackMessage || isCheckingAnswer}
-                  className={`w-full p-4 text-center text-2xl font-bold border-4 rounded-full focus:outline-none transition-colors ${feedbackMessage?.type === 'correct' ? 'border-green-400 bg-green-50' : feedbackMessage?.type === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-blue-400'} ${isCheckingAnswer ? 'opacity-50 cursor-wait bg-gray-50' : ''}`}
-                  placeholder="Type your answer..." />
-              )}
+                <div className="relative">
+                  <input type="text" value={userAnswer} onChange={e => setUserAnswer(e.target.value)} disabled={!!feedbackMessage || isCheckingAnswer}
+                    className={`w-full py-4 pl-14 pr-14 text-center text-2xl font-bold border-4 rounded-full focus:outline-none transition-colors ${feedbackMessage?.type === 'correct' ? 'border-green-400 bg-green-50' : feedbackMessage?.type === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-blue-400'} ${isCheckingAnswer ? 'opacity-50 cursor-wait bg-gray-50' : ''}`}
+                    placeholder="Type..." />
 
-              {!feedbackMessage && (
-                <div className="mt-5 flex justify-center gap-3">
-                  <button onClick={() => setShowKeyboard(!showKeyboard)} className="bg-slate-100 text-slate-600 p-4 rounded-xl text-xl hover:bg-slate-200 transition-colors" title="Use Keyboard"><FaKeyboard /></button>
-                  <button onClick={() => setShowDrawingTool(true)} className="bg-cyan-100 text-cyan-600 p-4 rounded-xl text-xl hover:bg-cyan-200 transition-colors" title="Write on Screen"><FaPaintBrush /></button>
+                  {!feedbackMessage && !isCheckingAnswer && (
+                    <>
+                      <button
+                        onClick={() => setShowKeyboard(!showKeyboard)}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-slate-100 text-slate-600 p-3 rounded-full hover:bg-slate-200 transition-colors shadow-sm cursor-pointer z-10"
+                        title="Use Virtual Keyboard"
+                        type="button"
+                      >
+                        <FaKeyboard size={18} />
+                      </button>
+
+                      <button
+                        onClick={() => setShowDrawingTool(true)}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-cyan-100 text-cyan-600 p-3 rounded-full hover:bg-cyan-200 transition-colors shadow-sm cursor-pointer z-10"
+                        title="Write on Screen"
+                        type="button"
+                      >
+                        <FaPaintBrush size={18} />
+                      </button>
+                    </>
+                  )}
                 </div>
               )}
-              {showKeyboard && !userAnswer.startsWith('data:image') && <div className="mt-4"><VirtualKeyboard onKeyPress={handleKeyPress} /></div>}
+
+              {showKeyboard && !String(userAnswer).startsWith('data:image') && <div className="mt-4"><VirtualKeyboard onKeyPress={handleKeyPress} /></div>}
             </div>
           )}
 

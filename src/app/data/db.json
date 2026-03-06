@@ -10,7 +10,7 @@
           "levels": [
             {
               "levelId": "english-1-level-1",
-              "levelName": "Level 1 Mastery",
+              "levelName": "Level 1: Alphabet Fun",
               "isLocked": false,
               "tasks": [
                 {
@@ -120,7 +120,7 @@
             },
             {
               "levelId": "english-1-level-2",
-              "levelName": "Level 2 Mastery",
+              "levelName": "Level 2: Vowels & Consonants",
               "isLocked": false,
               "tasks": [
                 {
@@ -204,7 +204,7 @@
             },
             {
               "levelId": "english-1-level-3",
-              "levelName": "Level 3 Mastery",
+              "levelName": "Level 3: Sight Words",
               "isLocked": false,
               "tasks": [
                 {
@@ -288,7 +288,7 @@
             },
             {
               "levelId": "english-1-level-4",
-              "levelName": "Level 4 Mastery",
+              "levelName": "Level 4: Nouns & Objects",
               "isLocked": false,
               "tasks": [
                 {
@@ -372,7 +372,7 @@
             },
             {
               "levelId": "english-1-level-5",
-              "levelName": "Level 5 Mastery",
+              "levelName": "Level 5: Sentence Building",
               "isLocked": false,
               "tasks": [
                 {
@@ -456,7 +456,7 @@
             },
             {
               "levelId": "english-1-level-6",
-              "levelName": "Level 6 Mastery",
+              "levelName": "Level 6: Action Verbs",
               "isLocked": false,
               "tasks": [
                 {
@@ -540,7 +540,7 @@
             },
             {
               "levelId": "english-1-level-7",
-              "levelName": "Level 7 Mastery",
+              "levelName": "Level 7: Describing Words",
               "isLocked": false,
               "tasks": [
                 {
@@ -624,7 +624,7 @@
             },
             {
               "levelId": "english-1-level-8",
-              "levelName": "Level 8 Mastery",
+              "levelName": "Level 8: Pronoun Play",
               "isLocked": false,
               "tasks": [
                 {
@@ -708,7 +708,7 @@
             },
             {
               "levelId": "english-1-level-9",
-              "levelName": "Level 9 Mastery",
+              "levelName": "Level 9: Question Words",
               "isLocked": false,
               "tasks": [
                 {
@@ -792,7 +792,7 @@
             },
             {
               "levelId": "english-1-level-10",
-              "levelName": "Level 10 Mastery",
+              "levelName": "Level 10: Story Adventures",
               "isLocked": false,
               "tasks": [
                 {
@@ -3883,7 +3883,7 @@
           "levels": [
             {
               "levelId": "english-2-level-1",
-              "levelName": "Level 1 Mastery",
+              "levelName": "Level 1: Nouns & Pronouns",
               "isLocked": false,
               "tasks": [
                 {
@@ -3967,7 +3967,7 @@
             },
             {
               "levelId": "english-2-level-2",
-              "levelName": "Level 2 Mastery",
+              "levelName": "Level 2: Singular & Plural",
               "isLocked": false,
               "tasks": [
                 {
@@ -4051,7 +4051,7 @@
             },
             {
               "levelId": "english-2-level-3",
-              "levelName": "Level 3 Mastery",
+              "levelName": "Level 3: Verbs & Tenses",
               "isLocked": false,
               "tasks": [
                 {
@@ -4135,7 +4135,7 @@
             },
             {
               "levelId": "english-2-level-4",
-              "levelName": "Level 4 Mastery",
+              "levelName": "Level 4: Adjectives & Adverbs",
               "isLocked": false,
               "tasks": [
                 {
@@ -4219,7 +4219,7 @@
             },
             {
               "levelId": "english-2-level-5",
-              "levelName": "Level 5 Mastery",
+              "levelName": "Level 5: Punctuation Fun",
               "isLocked": false,
               "tasks": [
                 {
@@ -4303,7 +4303,7 @@
             },
             {
               "levelId": "english-2-level-6",
-              "levelName": "Level 6 Mastery",
+              "levelName": "Level 6: Sentences & Phrases",
               "isLocked": false,
               "tasks": [
                 {
@@ -4387,7 +4387,7 @@
             },
             {
               "levelId": "english-2-level-7",
-              "levelName": "Level 7 Mastery",
+              "levelName": "Level 7: Conjunctions",
               "isLocked": false,
               "tasks": [
                 {
@@ -4471,7 +4471,7 @@
             },
             {
               "levelId": "english-2-level-8",
-              "levelName": "Level 8 Mastery",
+              "levelName": "Level 8: Prepositions",
               "isLocked": false,
               "tasks": [
                 {
@@ -4555,7 +4555,7 @@
             },
             {
               "levelId": "english-2-level-9",
-              "levelName": "Level 9 Mastery",
+              "levelName": "Level 9: Synonyms & Antonyms",
               "isLocked": false,
               "tasks": [
                 {
@@ -4639,7 +4639,7 @@
             },
             {
               "levelId": "english-2-level-10",
-              "levelName": "Level 10 Mastery",
+              "levelName": "Level 10: Creative Reading",
               "isLocked": false,
               "tasks": [
                 {
