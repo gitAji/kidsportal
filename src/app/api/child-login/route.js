@@ -19,7 +19,7 @@ export const POST = async (req) => {
         const childDoc = await adminDb.collection("users").doc(parentUid).collection("children").doc(childId).get();
 
         if (!childDoc.exists) {
-            return new Response(JSON.stringify({ error: "Child profile not found." }), { status: 404 });
+            return new Response(JSON.stringify({ error: `Child profile document missing (ID: ${childId})` }), { status: 404 });
         }
 
         const childData = childDoc.data();

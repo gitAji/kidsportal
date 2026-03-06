@@ -11,8 +11,11 @@ export const POST = async (req) => {
         const parentDoc = await adminDb.collection("users").doc(parentUid).get();
         const childDoc = await adminDb.collection("users").doc(parentUid).collection("children").doc(childId).get();
 
-        if (!parentDoc.exists || !childDoc.exists) {
-            return new Response(JSON.stringify({ error: "Profile not found" }), { status: 404 });
+        if (!parentDoc.exists) {
+            return new Response(JSON.stringify({ error: `Parent profile not found for UID: ${parentUid}` }), { status: 404 });
+        }
+        if (!childDoc.exists) {
+            return new Response(JSON.stringify({ error: `Child profile not found for ID: ${childId} under parent: ${parentUid}` }), { status: 404 });
         }
 
         return new Response(JSON.stringify({

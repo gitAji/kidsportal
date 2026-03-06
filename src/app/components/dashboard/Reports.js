@@ -84,10 +84,11 @@ const Reports = ({ childData }) => {
     const doc = new jsPDF('landscape');
 
     // Add decorative border
-    doc.setSetColor(30, 64, 175); // border color (blue-800)
+    doc.setTextColor(30, 64, 175); // Use setTextColor correctly
+    doc.setDrawColor(30, 64, 175); // Use setDrawColor for borders
     doc.setLineWidth(4);
     doc.rect(10, 10, 277, 190);
-    doc.setSetColor(59, 130, 246); // inner border (blue-500)
+    doc.setDrawColor(59, 130, 246); // inner border (blue-500)
     doc.setLineWidth(1);
     doc.rect(14, 14, 269, 182);
 

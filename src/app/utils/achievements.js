@@ -139,6 +139,71 @@ export const ACHIEVEMENTS = [
         border: "border-fuchsia-300",
         condition: (stats) => stats.totalScore >= 500,
     },
+    // ── Subject Mastery ─────────────────────────────────────────────────────────
+    {
+        id: "english_whiz",
+        name: "English Whiz",
+        description: "Complete 5 different levels in English.",
+        emoji: "🔤",
+        color: "from-blue-400 to-blue-600",
+        border: "border-blue-400",
+        condition: (stats) => (stats.subjectLevelCounts?.["english"] || 0) >= 5,
+    },
+    {
+        id: "math_master",
+        name: "Math Master",
+        description: "Complete 5 different levels in Math.",
+        emoji: "🔢",
+        color: "from-red-400 to-red-600",
+        border: "border-red-400",
+        condition: (stats) => (stats.subjectLevelCounts?.["math"] || 0) >= 5,
+    },
+    {
+        id: "science_star",
+        name: "Science Star",
+        description: "Complete 5 different levels in Science.",
+        emoji: "🧪",
+        color: "from-green-400 to-green-600",
+        border: "border-green-400",
+        condition: (stats) => (stats.subjectLevelCounts?.["science"] || 0) >= 5,
+    },
+    {
+        id: "tamil_talent",
+        name: "Tamil Talent",
+        description: "Complete 5 different levels in Tamil.",
+        emoji: "✍️",
+        color: "from-orange-400 to-orange-600",
+        border: "border-orange-400",
+        condition: (stats) => (stats.subjectLevelCounts?.["tamil"] || 0) >= 5,
+    },
+    // ── Time-based ─────────────────────────────────────────────────────────────
+    {
+        id: "early_bird",
+        name: "Early Bird",
+        description: "Complete a task before 8:00 AM.",
+        emoji: "🌅",
+        color: "from-yellow-200 to-yellow-500",
+        border: "border-yellow-200",
+        condition: (stats) => stats.lastCompletionHour !== undefined && stats.lastCompletionHour < 8,
+    },
+    {
+        id: "night_owl",
+        name: "Night Owl",
+        description: "Complete a task after 8:00 PM.",
+        emoji: "🦉",
+        color: "from-indigo-600 to-purple-900",
+        border: "border-purple-300",
+        condition: (stats) => stats.lastCompletionHour !== undefined && stats.lastCompletionHour >= 20,
+    },
+    {
+        id: "weekend_warrior",
+        name: "Weekend Warrior",
+        description: "Learn on a Saturday or Sunday.",
+        emoji: "🤺",
+        color: "from-indigo-400 to-blue-600",
+        border: "border-blue-300",
+        condition: (stats) => stats.lastCompletionDay !== undefined && (stats.lastCompletionDay === 0 || stats.lastCompletionDay === 6),
+    },
 ];
 
 const STORAGE_KEY = "kidsportal_achievements";
@@ -222,15 +287,29 @@ export function recordTaskCompletion(childId, taskResult) {
 
     // Unique levels
     const levelsSet = new Set(stats.levelsCompleted || []);
+    const levelNewlyAdded = !levelsSet.has(taskResult.levelId);
     levelsSet.add(taskResult.levelId);
     stats.levelsCompleted = [...levelsSet];
     stats.uniqueLevelsCompleted = levelsSet.size;
+
+    // Subject/Level tracking
+    if (levelNewlyAdded) {
+        if (!stats.subjectLevelCounts) stats.subjectLevelCounts = {};
+        // extract subject primary name (e.g. "english" from "english-1")
+        const baseSubject = taskResult.subjectId.split('-')[0].toLowerCase();
+        stats.subjectLevelCounts[baseSubject] = (stats.subjectLevelCounts[baseSubject] || 0) + 1;
+    }
 
     // Subjects explored
     const subjectsSet = new Set(stats.subjectsExplored_list || []);
     subjectsSet.add(taskResult.subjectId);
     stats.subjectsExplored_list = [...subjectsSet];
     stats.subjectsExplored = subjectsSet.size;
+
+    // Time-based stats for achievements
+    const now = new Date();
+    stats.lastCompletionHour = now.getHours();
+    stats.lastCompletionDay = now.getDay(); // 0-6 (Sun-Sat)
 
     // Retries
     if (taskResult.retried) stats.retries = (stats.retries || 0) + 1;
@@ -241,11 +320,15 @@ export function recordTaskCompletion(childId, taskResult) {
     stats.completedTasks_list = [...tasksSet];
 
     // Daily streak — track dates
-    const today = new Date().toDateString();
+    const today = now.toDateString();
     const daysSet = new Set(stats.uniqueDays_list || []);
     daysSet.add(today);
     stats.uniqueDays_list = [...daysSet];
     stats.uniqueDays = daysSet.size;
+
+    // Derived stats for UI display
+    stats.currentLevel = Math.floor((stats.totalScore || 0) / 100) + 1;
+    stats.totalStars = (stats.goldMedals || 0); // 1 star per 100% score
 
     saveStats(childId, stats);
     return stats;

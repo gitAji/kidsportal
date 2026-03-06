@@ -258,15 +258,16 @@ export default function SubjectLevelsPage() {
                       </div>
                     )}
 
-                    {/* Thick checkmark overlay when level is completed */}
+                    {/* Small checkmark badge when level is completed */}
                     {level.isCompleted && (
-                      <div className="absolute inset-0 bg-black/25 backdrop-blur-[2px] z-20 flex flex-col items-center justify-center gap-2">
-                        <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center shadow-2xl border-4 border-white">
-                          <FaCheckCircle size={36} className="text-white drop-shadow-lg" />
-                        </div>
-                        <span className="bg-green-500 text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full shadow-lg border-2 border-green-300">
-                          Completed ✓
-                        </span>
+                      <div className="absolute top-4 right-4 z-40">
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center shadow-lg border-2 border-white"
+                        >
+                          <FaCheckCircle size={20} className="text-white" />
+                        </motion.div>
                       </div>
                     )}
 

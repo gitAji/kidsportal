@@ -37,9 +37,19 @@ export async function POST(request) {
             }
         }
 
+        let researchContext = "";
+        // Fetch Level details for research context
+        const levelRefId = `${gradeId}_${subjectId}_${levelId}`;
+        const levelDoc = await adminDb.collection('levels').doc(levelRefId).get();
+        if (levelDoc.exists) {
+            researchContext = levelDoc.data().researchContext || "";
+        }
+
         const prompt = `You are an expert AI tutor creating a micro-task for a student in ${gradeId}.
 The subject is ${subjectId}.
 The task is part of level: ${levelId}, task: ${taskId}.
+
+${researchContext ? `RESEARCH CONTEXT: ${researchContext}\nUse the above research-driven concepts to inform the question themes and vocabulary.` : ''}
 
 ${pastPerformanceContext}
 
@@ -53,44 +63,42 @@ For each question, provide:
 Respond ONLY with valid JSON matching this schema exactly.`;
 
         // We use JSON output format to ensure valid response
-        const generationConfig = {
-            temperature: 0.7,
-            responseMimeType: "application/json",
-            responseSchema: {
-                type: Type.OBJECT,
-                properties: {
-                    taskName: { type: Type.STRING, description: "A fun title for this generated task" },
-                    description: { type: Type.STRING, description: "A short engaging instruction for the student" },
-                    type: { type: Type.STRING, description: "Always 'quiz'" },
-                    timeLimit: { type: Type.INTEGER, description: "Optional time limit in seconds, e.g., 60" },
-                    questions: {
-                        type: Type.ARRAY,
-                        items: {
-                            type: Type.OBJECT,
-                            properties: {
-                                questionText: { type: Type.STRING },
-                                type: { type: Type.STRING, description: "multiple-choice or identification" },
-                                options: {
-                                    type: Type.ARRAY,
-                                    items: { type: Type.STRING }
+        const genModel = ai.getGenerativeModel({
+            model: "gemini-1.5-flash",
+            generationConfig: {
+                temperature: 0.7,
+                responseMimeType: "application/json",
+                responseSchema: {
+                    type: "object",
+                    properties: {
+                        taskName: { type: "string", description: "A fun title for this generated task" },
+                        description: { type: "string", description: "A short engaging instruction for the student" },
+                        type: { type: "string", description: "Always 'quiz'" },
+                        timeLimit: { type: "number", description: "Optional time limit in seconds, e.g., 60" },
+                        questions: {
+                            type: "array",
+                            items: {
+                                type: "object",
+                                properties: {
+                                    questionText: { type: "string" },
+                                    type: { type: "string", description: "multiple-choice or identification" },
+                                    options: {
+                                        type: "array",
+                                        items: { type: "string" }
+                                    },
+                                    correctAnswer: { type: "string" }
                                 },
-                                correctAnswer: { type: Type.STRING }
-                            },
-                            required: ["questionText", "type", "correctAnswer"]
+                                required: ["questionText", "type", "correctAnswer"]
+                            }
                         }
-                    }
-                },
-                required: ["taskName", "description", "type", "questions"]
+                    },
+                    required: ["taskName", "description", "type", "questions"]
+                }
             }
-        };
-
-        const response = await ai.models.generateContent({
-            model: model,
-            contents: prompt,
-            config: generationConfig,
         });
 
-        const generatedTask = JSON.parse(response.text);
+        const result = await genModel.generateContent(prompt);
+        const generatedTask = JSON.parse(result.response.text());
 
         // Ensure we stamp it with the requested IDs
         generatedTask.taskId = taskId;

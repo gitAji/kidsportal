@@ -56,13 +56,44 @@ export async function POST(request) {
 
         const batch = adminDb.batch();
 
-        // Save stats
+        // 1. Save detailed stats to childStats collection
         if (stats) {
             const statsRef = adminDb.doc(`childStats/${childId}`);
             batch.set(statsRef, {
                 ...stats,
                 updatedAt: FieldValue.serverTimestamp(),
             }, { merge: true });
+
+            // 2. Sync to Child Profile for Parent Dashboard & Reports
+            // We update points, level, and stars in the child document
+            const childRef = adminDb.doc(`users/${parentUid}/children/${childId}`);
+
+            // Map our recordTaskCompletion stats to the child document fields
+            const syncData = {
+                points: stats.totalScore || 0,
+                level: stats.currentLevel || 1,
+                stars: stats.totalStars || 0,
+                lastActive: FieldValue.serverTimestamp()
+            };
+
+            // If we have task info, record it in the assignedTasks array (even if it wasn't pre-assigned)
+            if (taskId || stats.taskId) {
+                const taskEntry = {
+                    taskId: taskId || stats.taskId,
+                    taskName: stats.taskName || stats.taskId, // fallback
+                    subjectId: stats.subjectId,
+                    levelId: stats.levelId,
+                    status: 'completed',
+                    completedAt: new Date().toISOString(),
+                    score: stats.score || 0,
+                    type: stats.type || 'task'
+                };
+
+                // Use FieldValue.arrayUnion to add to assignedTasks
+                syncData.assignedTasks = FieldValue.arrayUnion(taskEntry);
+            }
+
+            batch.set(childRef, syncData, { merge: true });
         }
 
         // Record new achievements

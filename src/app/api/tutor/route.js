@@ -24,19 +24,19 @@ Ask them ONE fun, simple interactive thinking question to test their understandi
             prompt = `Explain "${content}" to a kid in ${gradeId || 'elementary school'}.`;
         }
 
-        const generationConfig = {
-            maxOutputTokens: 300,
-            temperature: 0.3,
-        };
-
-        const response = await ai.models.generateContent({
-            model: model,
-            contents: prompt + "\n\nCRITICAL RULE: DO NOT use any markdown formatting, asterisks, or special characters like ** in your response. Keep it as pure plain text so it can be read out loud clearly by a voice synthesizer.",
-            config: generationConfig,
+        const genModel = ai.getGenerativeModel({
+            model: "gemini-1.5-flash",
+            generationConfig: {
+                maxOutputTokens: 300,
+                temperature: 0.3,
+            }
         });
 
+        const result = await genModel.generateContent(prompt + "\n\nCRITICAL RULE: DO NOT use any markdown formatting, asterisks, or special characters like ** in your response. Keep it as pure plain text so it can be read out loud clearly by a voice synthesizer.");
+        const responseText = result.response.text();
+
         // Strip out any asterisks or hashtags that somehow slipped through
-        const cleanText = (response.text || "").replace(/[*#]/g, "");
+        const cleanText = (responseText || "").replace(/[*#]/g, "");
 
         return new Response(JSON.stringify({ response: cleanText }), {
             status: 200,

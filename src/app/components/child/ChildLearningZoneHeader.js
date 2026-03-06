@@ -7,7 +7,8 @@ import { useChild } from '@/app/providers/ChildProvider';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaStar, FaTrophy, FaSignOutAlt, FaCog, FaMedal, FaArrowLeft, FaHome } from 'react-icons/fa';
+import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaStar, FaTrophy, FaSignOutAlt, FaCog, FaMedal, FaArrowLeft, FaHome, FaBolt } from 'react-icons/fa';
+import { loadStats } from '@/app/utils/achievements';
 
 export default function ChildLearningZoneHeader() {
   const { childUser } = useChild();
@@ -18,12 +19,26 @@ export default function ChildLearningZoneHeader() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Stats from childUser (defaulting to 0 if not present)
-  const stats = {
-    stars: childUser?.stars || 0,
-    level: childUser?.level || 1,
-    points: childUser?.points || 0
-  };
+  const [stats, setStats] = useState({ stars: 0, level: 1, points: 0 });
+
+  useEffect(() => {
+    const refreshHeaderStats = () => {
+      const childId = childUser?.uid || childUser?.id;
+      if (childId) {
+        const localStats = loadStats(childId);
+        setStats({
+          stars: localStats.totalStars || 0,
+          level: localStats.currentLevel || 1,
+          points: localStats.totalScore || 0
+        });
+      }
+    };
+
+    refreshHeaderStats();
+    // Refresh on focus (helpful when coming back from a task)
+    window.addEventListener('focus', refreshHeaderStats);
+    return () => window.removeEventListener('focus', refreshHeaderStats);
+  }, [childUser]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -160,6 +175,16 @@ export default function ChildLearningZoneHeader() {
                 <span className="text-sm font-black text-blue-900 leading-none">{stats.level}</span>
               </div>
             </div>
+
+            <div className="flex items-center gap-3 bg-purple-50/50 border border-purple-100 rounded-2xl px-4 py-1.5 shadow-sm transition-transform hover:scale-105">
+              <div className="w-8 h-8 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 shadow-inner">
+                <FaBolt />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] font-black uppercase tracking-widest text-purple-700/60 leading-none mb-0.5">XP Points</span>
+                <span className="text-sm font-black text-purple-900 leading-none">{stats.points}</span>
+              </div>
+            </div>
           </div>
 
           {/* Right: Profile & Dropdown */}
@@ -253,41 +278,6 @@ export default function ChildLearningZoneHeader() {
           </div>
         </div>
 
-        {/* Navigation Bar 'Under the Header' (Row 2) */}
-        <div className="max-w-5xl mx-auto flex items-center gap-3 mt-2 px-2">
-          {/* Home Button */}
-          <Link
-            href="/learning-zone"
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl font-black text-sm transition-all shadow-sm active:scale-95 ${pathname === '/learning-zone'
-              ? 'bg-blue-600 text-white shadow-lg shadow-blue-200'
-              : 'bg-white text-slate-600 hover:bg-blue-50 hover:text-blue-600 border border-slate-100'
-              }`}
-          >
-            <FaHome size={18} />
-            <span className="hidden sm:inline">Home</span>
-          </Link>
-
-          {/* Back Button (Conditional) */}
-          {pathname !== '/learning-zone' && (
-            <button
-              onClick={() => router.back()}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white text-slate-600 font-black text-sm border border-slate-100 hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm active:scale-95"
-            >
-              <FaArrowLeft size={16} />
-              <span className="hidden sm:inline">Back</span>
-            </button>
-          )}
-
-          {/* Breadcrumb / Status Indicator */}
-          <div className="flex-grow h-10 px-6 rounded-2xl bg-white/40 backdrop-blur-md border border-white/40 flex items-center gap-3 overflow-hidden">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shrink-0" />
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] truncate">
-              {pathname === '/learning-zone' ? 'Learning Dashboard' : (
-                pathname.split('/').map(p => p.replace(/-/g, ' ')).filter(p => !['learning-zone', 'subjects', 'levels', ''].includes(p.toLowerCase())).join(' • ')
-              )}
-            </span>
-          </div>
-        </div>
       </header>
     </>
   );

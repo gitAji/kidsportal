@@ -31,26 +31,24 @@ Provide two things:
 
 Respond ONLY with valid JSON matching this schema exactly.`;
 
-        const generationConfig = {
-            temperature: 0.1, // low temp for accurate grading
-            responseMimeType: "application/json",
-            responseSchema: {
-                type: Type.OBJECT,
-                properties: {
-                    isCorrect: { type: Type.BOOLEAN, description: "Whether the answer is correct or not" },
-                    feedback: { type: Type.STRING, description: "Short supportive feedback" }
-                },
-                required: ["isCorrect", "feedback"]
+        const genModel = ai.getGenerativeModel({
+            model: "gemini-1.5-flash",
+            generationConfig: {
+                temperature: 0.1, // low temp for accurate grading
+                responseMimeType: "application/json",
+                responseSchema: {
+                    type: "object",
+                    properties: {
+                        isCorrect: { type: "boolean", description: "Whether the answer is correct or not" },
+                        feedback: { type: "string", description: "Short supportive feedback" }
+                    },
+                    required: ["isCorrect", "feedback"]
+                }
             }
-        };
-
-        const response = await ai.models.generateContent({
-            model: model,
-            contents: prompt,
-            config: generationConfig,
         });
 
-        const evaluation = JSON.parse(response.text);
+        const result = await genModel.generateContent(prompt);
+        const evaluation = JSON.parse(result.response.text());
 
         return NextResponse.json(evaluation);
 

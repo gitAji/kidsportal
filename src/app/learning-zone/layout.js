@@ -5,6 +5,7 @@ import ChildLearningZoneHeader from "../components/child/ChildLearningZoneHeader
 import ChildLearningZoneFooter from "../components/child/ChildLearningZoneFooter";
 import { ChildThemeProvider } from "../providers/ChildThemeProvider";
 import { LanguageProvider } from "../providers/LanguageProvider";
+import LearningZonePageNavigation from "../components/child/LearningZonePageNavigation";
 
 function LearningZoneCore({ children }) {
     const { childUser } = useChild(); // Now gets user from context
@@ -18,6 +19,7 @@ function LearningZoneCore({ children }) {
             <div className="flex flex-col min-h-screen bg-[var(--child-background)]">
                 <ChildLearningZoneHeader />
                 <main className="flex-grow p-4 sm:p-6 md:p-8">
+                    <LearningZonePageNavigation />
                     {children}
                 </main>
                 <ChildLearningZoneFooter />

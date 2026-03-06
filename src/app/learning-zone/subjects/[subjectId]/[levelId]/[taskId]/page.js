@@ -635,8 +635,8 @@ export default function TaskContentPage() {
 
         <div className="bg-white rounded-[2rem] shadow-xl p-8 mb-6 border border-slate-100 relative max-w-3xl w-full mx-auto">
           {feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong') && (
-            <motion.div initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-              className={`absolute -top-6 left-1/2 -translate-x-1/2 px-8 py-2 rounded-full font-black shadow-lg text-lg flex items-center gap-2 z-20 tracking-widest uppercase ${feedbackMessage.type === 'correct' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
+            <motion.div initial={{ scale: 0.5, opacity: 0, x: 20 }} animate={{ scale: 1, opacity: 1, x: 0 }}
+              className={`absolute top-4 right-4 px-4 py-1.5 rounded-2xl font-black shadow-lg text-sm flex items-center gap-2 z-20 tracking-widest uppercase border-2 border-white ${feedbackMessage.type === 'correct' ? 'bg-green-500 text-white shadow-green-200' : 'bg-red-500 text-white shadow-red-200'}`}>
               {feedbackMessage.type === 'correct' ? <><FaCheckCircle /> Correct!</> : <><FaTimesCircle /> Incorrect!</>}
             </motion.div>
           )}
@@ -796,7 +796,14 @@ export default function TaskContentPage() {
                 <button onClick={() => setShowDrawingTool(false)} className="absolute -top-4 -right-4 p-3 rounded-full bg-red-500 text-white hover:bg-red-600 z-10 shadow-lg"><FaTimesCircle size={22} /></button>
                 <div className="mb-4 text-center">
                   <h3 className="font-bold text-2xl text-cyan-600 flex items-center justify-center gap-2"><FaPaintBrush /> Write Your Answer</h3>
-                  <p className="text-slate-500 font-medium">Use your mouse or finger to write the word!</p>
+                  <div className="flex flex-col items-center gap-1">
+                    <p className="text-slate-500 font-medium">Use your mouse or finger to write the word!</p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <button className="flex items-center gap-2 px-4 py-2 bg-indigo-500 text-white rounded-full text-sm font-bold shadow-md hover:bg-indigo-600 transition-all active:scale-95">
+                        <FaPaintBrush className="text-xs" /> Pencil Tool
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <div className="border-4 border-dashed border-cyan-100 rounded-2xl overflow-hidden w-full bg-slate-50">
                   <DrawingCanvas

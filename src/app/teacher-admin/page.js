@@ -7,9 +7,7 @@ import {
 import { db } from '../../firebase/config';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    FaPlus, FaTrash, FaSave, FaChevronDown, FaChevronUp,
-    FaBookOpen, FaCheckSquare, FaClock, FaEdit, FaArrowLeft,
-    FaGraduationCap, FaLayerGroup, FaTimes, FaImage
+    FaGraduationCap, FaLayerGroup, FaTimes, FaImage, FaSync, FaLightbulb
 } from 'react-icons/fa';
 import TeacherAdminGuard from './TeacherAdminGuard';
 
@@ -55,6 +53,7 @@ const EMPTY_LEVEL = {
     tasks: [],
     description: '',
     badgeEmoji: '⭐',
+    researchContext: '',
 };
 
 // ── Question Editor ──────────────────────────────────────────────────────────
@@ -244,6 +243,8 @@ function TeacherAdminPageContent() {
     const [loading, setLoading] = useState(false);
     const [saveStatus, setSaveStatus] = useState(null);
     const [expandedLevel, setExpandedLevel] = useState(null);
+    const [isSyncing, setIsSyncing] = useState(false);
+    const [syncSuggestions, setSyncSuggestions] = useState(null);
 
     // Derive grade-scoped subjectId to match the learning zone format
     // e.g. grade-1 + english → english-1, grade-3 + math → math-3
@@ -251,6 +252,40 @@ function TeacherAdminPageContent() {
         const gradeNum = selectedGrade.replace('grade-', '');
         return `${selectedSubject}-${gradeNum}`;
     }, [selectedGrade, selectedSubject]);
+
+    const handleSyncResearch = async () => {
+        setIsSyncing(true);
+        try {
+            const res = await fetch('/api/sync-research', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ gradeId: selectedGrade, subjectId: selectedSubject }),
+            });
+            const data = await res.json();
+            setSyncSuggestions(data.suggestedLevels);
+        } catch (error) {
+            alert('Failed to sync research. Please check API settings.');
+        } finally {
+            setIsSyncing(false);
+        }
+    };
+
+    const addSuggestedLevel = (suggestion) => {
+        const newLevel = {
+            ...EMPTY_LEVEL,
+            levelId: `${selectedGrade}_${selectedSubject}_${suggestion.levelId}`,
+            levelName: suggestion.levelName,
+            description: suggestion.description,
+            researchContext: suggestion.researchContext,
+            tasks: Array.from({ length: suggestion.taskCount }, (_, i) => ({
+                ...EMPTY_TASK,
+                taskId: `task-${i + 1}`,
+                taskName: `Learning Task ${i + 1}`
+            }))
+        };
+        setLevels([...levels, newLevel]);
+        setSyncSuggestions(syncSuggestions.filter(s => s.levelId !== suggestion.levelId));
+    };
 
     // Fetch existing levels from Firestore
     const fetchLevels = useCallback(async () => {
@@ -387,11 +422,46 @@ function TeacherAdminPageContent() {
                         Levels for {GRADES.find(g => g.id === selectedGrade)?.name} · {SUBJECTS.find(s => s.id === selectedSubject)?.name}
                         <span className="ml-2 text-sm font-normal text-gray-400">({levels.length} levels)</span>
                     </h2>
-                    <button onClick={addLevel}
-                        className="flex items-center gap-2 bg-green-500 text-white px-5 py-2.5 rounded-full font-bold text-sm hover:bg-green-600 transition-colors shadow-md">
-                        <FaPlus /> Add Level
-                    </button>
+                    <div className="flex gap-2">
+                        <button onClick={handleSyncResearch} disabled={isSyncing}
+                            className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-md ${isSyncing ? 'bg-slate-200 text-slate-400' : 'bg-purple-500 text-white hover:bg-purple-600'}`}>
+                            <FaSync className={isSyncing ? 'animate-spin' : ''} />
+                            {isSyncing ? 'Researching...' : 'Sync from Research'}
+                        </button>
+                        <button onClick={addLevel}
+                            className="flex items-center gap-2 bg-green-500 text-white px-5 py-2.5 rounded-full font-bold text-sm hover:bg-green-600 transition-colors shadow-md">
+                            <FaPlus /> Add Level
+                        </button>
+                    </div>
                 </div>
+
+                {syncSuggestions && syncSuggestions.length > 0 && (
+                    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+                        className="bg-purple-50 border-2 border-purple-200 rounded-[2.5rem] p-6 mb-8 shadow-inner">
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="text-purple-900 font-extrabold flex items-center gap-2"><FaLightbulb className="text-amber-500" /> Research-Driven Suggestions</h3>
+                            <button onClick={() => setSyncSuggestions(null)} className="text-purple-300 hover:text-purple-600"><FaTimes /></button>
+                        </div>
+                        <div className="space-y-3">
+                            {syncSuggestions.map((suggestion, idx) => (
+                                <div key={idx} className="bg-white p-4 rounded-2xl flex items-center justify-between shadow-sm border border-purple-100">
+                                    <div>
+                                        <div className="font-bold text-purple-800">{suggestion.levelName}</div>
+                                        <p className="text-xs text-purple-500">{suggestion.description}</p>
+                                        <div className="mt-1 flex gap-2">
+                                            <span className="text-[10px] font-black uppercase text-purple-400 bg-purple-50 px-2 py-0.5 rounded-full">{suggestion.difficulty}</span>
+                                            <span className="text-[10px] font-black uppercase text-blue-400 bg-blue-50 px-2 py-0.5 rounded-full">{suggestion.taskType}</span>
+                                        </div>
+                                    </div>
+                                    <button onClick={() => addSuggestedLevel(suggestion)}
+                                        className="text-white bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md">
+                                        Add to Curriculum
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
 
                 {loading ? (
                     <div className="text-center py-16 text-gray-400 text-lg font-bold">Loading levels...</div>
