@@ -40,6 +40,7 @@ export default function TaskContentPage() {
   const [newAchievements, setNewAchievements] = useState([]);
   const [sessionHistory, setSessionHistory] = useState([]);
   const [isCheckingAnswer, setIsCheckingAnswer] = useState(false);
+  const [clickedCountingItems, setClickedCountingItems] = useState([]);
 
   const correctSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/correct.mp3') : null, []);
   const incorrectSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/incorrect.mp3') : null, []);
@@ -317,6 +318,7 @@ export default function TaskContentPage() {
     setUserAnswer('');
     setFeedbackMessage(null);
     setShowReviewOption(false);
+    setClickedCountingItems([]);
     if (currentQuestionIndex < taskData.questions.length - 1) {
       setCurrentQuestionIndex(i => i + 1);
       setTimerActive(true);
@@ -369,7 +371,7 @@ export default function TaskContentPage() {
   };
 
   const handleSkip = () => { setWrongAnswersCount(c => c + 1); handleNextQuestion(); };
-  const handleReview = () => { setFeedbackMessage(null); setShowReviewOption(false); setRetriedThisTask(true); setTimerActive(true); };
+  const handleReview = () => { setFeedbackMessage(null); setShowReviewOption(false); setRetriedThisTask(true); setTimerActive(true); setClickedCountingItems([]); };
   const formatTime = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 
   const handleLessonComplete = async () => {
@@ -641,7 +643,7 @@ export default function TaskContentPage() {
 
           <div className="text-2xl font-bold mb-8 flex flex-col items-center text-center text-gray-800 mt-4">
             {/* Question Image */}
-            {currentQuestion.imageUrl && (
+            {currentQuestion.imageUrl && currentQuestion.type !== 'counting' && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -654,22 +656,86 @@ export default function TaskContentPage() {
                 />
               </motion.div>
             )}
+
+            {currentQuestion.type === 'counting' && currentQuestion.imageUrl && (
+              <div className="mb-8 w-full flex justify-center gap-4 sm:gap-8 flex-wrap">
+                {Array.from({ length: parseInt(currentQuestion.correctAnswer) || parseInt(currentQuestion.count) || 1 }).map((_, idx) => {
+                  const isClicked = clickedCountingItems.includes(idx);
+                  return (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: idx * 0.1, type: 'spring', stiffness: 200, damping: 15 }}
+                      onClick={() => {
+                        if (isClicked) {
+                          setClickedCountingItems(prev => prev.filter(i => i !== idx));
+                        } else {
+                          setClickedCountingItems(prev => [...prev, idx]);
+                          if (typeof Audio !== 'undefined') {
+                            const popAudio = new Audio('/sounds/pop.mp3');
+                            popAudio.volume = 0.5;
+                            popAudio.play().catch(e => console.log('Audio play ignored'));
+                          }
+                        }
+                      }}
+                      className="relative cursor-pointer select-none"
+                    >
+                      <img
+                        src={currentQuestion.imageUrl}
+                        alt={`Item ${idx + 1}`}
+                        draggable={false}
+                        className={`h-24 w-24 sm:h-36 sm:w-36 md:h-48 md:w-48 object-contain transition-all duration-300 ${isClicked ? 'opacity-60 scale-95 saturate-50' : 'hover:scale-110 drop-shadow-xl hover:drop-shadow-2xl'}`}
+                      />
+                      {isClicked && (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full p-1 border-2 border-white shadow-md z-10"
+                        >
+                          <FaCheckCircle className="text-xl sm:text-2xl" />
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  );
+                })}
+              </div>
+            )}
+
             {currentQuestion.questionText}
+            {currentQuestion.type === 'counting' && (
+              <p className="text-base text-gray-500 mt-2 font-medium">Try clicking on each one!</p>
+            )}
             <div className="mt-3 bg-blue-50 text-blue-500 rounded-full hover:bg-blue-100 transition-colors">
               <AudioPlayer text={currentQuestion.questionText} />
             </div>
           </div>
 
           {currentQuestion.options && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className={currentQuestion.type === 'counting' ? "flex flex-wrap justify-center gap-4 bg-gray-100/50 p-6 rounded-[2rem] max-w-2xl mx-auto" : "grid grid-cols-1 md:grid-cols-2 gap-4"}>
               {currentQuestion.options.map((option, index) => {
                 const isSelected = userAnswer === option;
                 let style = "bg-white border-2 border-gray-200 text-gray-700 hover:border-blue-400 hover:bg-blue-50";
-                if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
-                  if (option === currentQuestion.correctAnswer) style = "bg-green-100 border-2 border-green-500 text-green-800 scale-105 shadow-md";
-                  else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-100 border-2 border-red-500 text-red-800 line-through opacity-80";
-                  else style = "bg-gray-100 border-2 border-gray-200 text-gray-400 opacity-40";
-                } else if (isSelected) style = "bg-blue-100 border-2 border-blue-500 text-blue-800 scale-[1.02] shadow-sm";
+
+                if (currentQuestion.type === 'counting') {
+                  // Specific styling for counting round number buttons
+                  style = "bg-blue-500 text-white border-4 border-blue-600 shadow-md hover:bg-blue-400 hover:scale-110";
+                  if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
+                    if (option === currentQuestion.correctAnswer) style = "bg-green-500 text-white border-4 border-green-600 scale-110 shadow-lg";
+                    else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-500 text-white border-4 border-red-600 opacity-80 scale-95";
+                    else style = "bg-gray-300 text-gray-500 border-4 border-gray-400 opacity-50";
+                  } else if (isSelected) {
+                    style = "bg-blue-600 text-white border-4 border-white shadow-inner scale-95";
+                  }
+                } else {
+                  // Standard styling for quiz buttons
+                  if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
+                    if (option === currentQuestion.correctAnswer) style = "bg-green-100 border-2 border-green-500 text-green-800 scale-105 shadow-md";
+                    else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-100 border-2 border-red-500 text-red-800 line-through opacity-80";
+                    else style = "bg-gray-100 border-2 border-gray-200 text-gray-400 opacity-40";
+                  } else if (isSelected) style = "bg-blue-100 border-2 border-blue-500 text-blue-800 scale-[1.02] shadow-sm";
+                }
+
                 return (
                   <button key={index} onClick={() => {
                     if (!feedbackMessage) {
@@ -677,7 +743,7 @@ export default function TaskContentPage() {
                       handleSubmitAnswer(option);
                     }
                   }} disabled={!!feedbackMessage}
-                    className={`p-6 rounded-2xl transition-all duration-300 font-bold text-xl ${style}`}>{option}</button>
+                    className={currentQuestion.type === 'counting' ? `w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full transition-all duration-300 font-black text-2xl sm:text-3xl md:text-4xl flex items-center justify-center ${style}` : `p-6 rounded-2xl transition-all duration-300 font-bold text-xl ${style}`}>{option}</button>
                 );
               })}
             </div>

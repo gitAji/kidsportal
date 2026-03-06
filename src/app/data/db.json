@@ -901,14 +901,15 @@
                   "questions": [
                     {
                       "questionId": "mat1-l1-q1",
-                      "questionText": "How many apples are here: 🍎🍎🍎?",
+                      "questionText": "How many owls? Try clicking on each owl.",
                       "options": [
-                        "3",
-                        "Airplane",
-                        "5"
+                        "1",
+                        "2",
+                        "3"
                       ],
-                      "correctAnswer": "3",
-                      "type": "multiple-choice"
+                      "correctAnswer": "2",
+                      "type": "counting",
+                      "imageUrl": "/images/professor-owl.png"
                     },
                     {
                       "questionId": "mat1-l1-q2",
