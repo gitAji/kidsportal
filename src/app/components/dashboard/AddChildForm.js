@@ -32,6 +32,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
   const [username, setUsername] = useState(childToEdit?.username || '');
   const [password, setPassword] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState(childToEdit?.avatar || 'default');
+  const [sequentialProgression, setSequentialProgression] = useState(childToEdit?.sequentialProgression !== undefined ? childToEdit.sequentialProgression : true);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [usernameStatus, setUsernameStatus] = useState({ status: 'idle', message: '' });
@@ -86,7 +87,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
       if (childToEdit) {
         // Update existing
         childRef = doc(db, "users", parentUid, "children", childToEdit.id);
-        const updates = { name, age: parseInt(age), grade, username, avatar: selectedAvatar };
+        const updates = { name, age: parseInt(age), grade, username, avatar: selectedAvatar, sequentialProgression };
         if (password) updates.password = password;
 
         if (username !== childToEdit.username) {
@@ -111,7 +112,8 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
           name, age: parseInt(age), grade, username, avatar: selectedAvatar,
           password, loginEnabled: true, photoURL: '', assignedTasks: [], points: 0,
           stickers: [], progress: { overall: 0, subjects: {} }, parentUid,
-          professorCharacter: 'owl', timeAlertsEnabled: true
+          professorCharacter: 'owl', timeAlertsEnabled: true,
+          sequentialProgression
         };
 
         await runTransaction(db, async (t) => {
@@ -268,6 +270,31 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
                 <span className="hidden sm:inline">Magic Gen</span>
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Learning Settings */}
+        <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-100 space-y-4">
+          <label className="flex items-center gap-2 text-sm font-black uppercase tracking-wider mb-2 text-slate-700">
+            <span className="bg-purple-100 text-purple-600 w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
+            Learning Settings
+          </label>
+
+          <div className="flex items-center justify-between p-4 bg-white rounded-2xl border-2 border-slate-100">
+            <div>
+              <h4 className="font-bold text-slate-800 text-sm">Sequential Progression</h4>
+              <p className="text-[10px] text-slate-500 font-medium">Children must finish one level to unlock the next.</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setSequentialProgression(!sequentialProgression)}
+              className={`w-14 h-8 rounded-full transition-colors relative ${sequentialProgression ? 'bg-green-500' : 'bg-slate-300'}`}
+            >
+              <motion.div
+                animate={{ x: sequentialProgression ? 24 : 4 }}
+                className="absolute top-1 w-6 h-6 bg-white rounded-full shadow-sm"
+              />
+            </button>
           </div>
         </div>
 

@@ -3,570 +3,570 @@ module.exports = {
     "levels": [
       {
         "name": "Counting to 100",
-        "description": "Master Counting to 100 through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Counting to 100. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Counting to 100.",
+        "lesson": "### Counting to 100 (Easy)\n\nThis level introduces you to Counting to 100. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Counting to 100 is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Counting to 100?",
-            "a": "The fundamental principle specific to Counting to 100.",
+            "q": "What is the first thing we should remember when talking about Counting to 100?",
+            "a": "The basic identification of Counting to 100.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Counting to 100 in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Counting to 100.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Counting to 100 in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Counting to 100 is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Counting to 100?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Counting to 100?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Counting to 100.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Counting to 100.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Place Value (Tens/Ones)",
-        "description": "Master Place Value (Tens/Ones) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Place Value (Tens/Ones). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Place Value (Tens/Ones).",
+        "lesson": "### Place Value (Tens/Ones) (Easy)\n\nThis level introduces you to Place Value (Tens/Ones). \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Place Value (Tens/Ones) is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Place Value (Tens/Ones)?",
-            "a": "The fundamental principle specific to Place Value (Tens/Ones).",
+            "q": "What is the first thing we should remember when talking about Place Value (Tens/Ones)?",
+            "a": "The basic identification of Place Value (Tens/Ones).",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Place Value (Tens/Ones) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Place Value (Tens/Ones).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Place Value (Tens/Ones) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Place Value (Tens/Ones) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Place Value (Tens/Ones)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Place Value (Tens/Ones)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Place Value (Tens/Ones).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Place Value (Tens/Ones).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Addition Fluency to 20",
-        "description": "Master Addition Fluency to 20 through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Addition Fluency to 20. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Addition Fluency to 20.",
+        "lesson": "### Addition Fluency to 20 (Easy)\n\nThis level introduces you to Addition Fluency to 20. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Addition Fluency to 20 is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Addition Fluency to 20?",
-            "a": "The fundamental principle specific to Addition Fluency to 20.",
+            "q": "What is the first thing we should remember when talking about Addition Fluency to 20?",
+            "a": "The basic identification of Addition Fluency to 20.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Addition Fluency to 20 in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Addition Fluency to 20.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Addition Fluency to 20 in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Addition Fluency to 20 is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Addition Fluency to 20?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Addition Fluency to 20?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Addition Fluency to 20.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Addition Fluency to 20.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Subtraction Fluency to 20",
-        "description": "Master Subtraction Fluency to 20 through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Subtraction Fluency to 20. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Subtraction Fluency to 20.",
+        "lesson": "### Subtraction Fluency to 20 (Medium)\n\nThis level introduces you to Subtraction Fluency to 20. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Subtraction Fluency to 20 is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Subtraction Fluency to 20?",
-            "a": "The fundamental principle specific to Subtraction Fluency to 20.",
+            "q": "How does Subtraction Fluency to 20 influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Subtraction Fluency to 20 in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Subtraction Fluency to 20.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Subtraction Fluency to 20 in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Subtraction Fluency to 20 is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Subtraction Fluency to 20?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Subtraction Fluency to 20?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Subtraction Fluency to 20.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Subtraction Fluency to 20.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Comparing Numbers",
-        "description": "Master Comparing Numbers through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Comparing Numbers. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Comparing Numbers.",
+        "lesson": "### Comparing Numbers (Medium)\n\nThis level introduces you to Comparing Numbers. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Comparing Numbers is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Comparing Numbers?",
-            "a": "The fundamental principle specific to Comparing Numbers.",
+            "q": "How does Comparing Numbers influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Comparing Numbers in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Comparing Numbers.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Comparing Numbers in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Comparing Numbers is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Comparing Numbers?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Comparing Numbers?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Comparing Numbers.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Comparing Numbers.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Identifying 2D Shapes",
-        "description": "Master Identifying 2D Shapes through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Identifying 2D Shapes. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Identifying 2D Shapes.",
+        "lesson": "### Identifying 2D Shapes (Medium)\n\nThis level introduces you to Identifying 2D Shapes. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Identifying 2D Shapes is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Identifying 2D Shapes?",
-            "a": "The fundamental principle specific to Identifying 2D Shapes.",
+            "q": "How does Identifying 2D Shapes influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Identifying 2D Shapes in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Identifying 2D Shapes.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Identifying 2D Shapes in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Identifying 2D Shapes is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Identifying 2D Shapes?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Identifying 2D Shapes?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Identifying 2D Shapes.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Identifying 2D Shapes.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Measuring Length (Inches)",
-        "description": "Master Measuring Length (Inches) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Measuring Length (Inches). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Measuring Length (Inches).",
+        "lesson": "### Measuring Length (Inches) (Medium)\n\nThis level introduces you to Measuring Length (Inches). \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Measuring Length (Inches) is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Measuring Length (Inches)?",
-            "a": "The fundamental principle specific to Measuring Length (Inches).",
+            "q": "How does Measuring Length (Inches) influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Measuring Length (Inches) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Measuring Length (Inches).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Measuring Length (Inches) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Measuring Length (Inches) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Measuring Length (Inches)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Measuring Length (Inches)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Measuring Length (Inches).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Measuring Length (Inches).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Telling Time (Hour/Half)",
-        "description": "Master Telling Time (Hour/Half) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Telling Time (Hour/Half). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Telling Time (Hour/Half).",
+        "lesson": "### Telling Time (Hour/Half) (Hard)\n\nThis level introduces you to Telling Time (Hour/Half). \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Telling Time (Hour/Half).\n\nKey Concept: Understanding Telling Time (Hour/Half) is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Telling Time (Hour/Half)?",
-            "a": "The fundamental principle specific to Telling Time (Hour/Half).",
+            "q": "How does Telling Time (Hour/Half) influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Telling Time (Hour/Half) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Telling Time (Hour/Half).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Telling Time (Hour/Half) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Telling Time (Hour/Half) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Telling Time (Hour/Half)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Telling Time (Hour/Half)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Telling Time (Hour/Half).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Telling Time (Hour/Half).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Counting Coins",
-        "description": "Master Counting Coins through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Counting Coins. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Counting Coins.",
+        "lesson": "### Counting Coins (Hard)\n\nThis level introduces you to Counting Coins. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Counting Coins.\n\nKey Concept: Understanding Counting Coins is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Counting Coins?",
-            "a": "The fundamental principle specific to Counting Coins.",
+            "q": "How does Counting Coins influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Counting Coins in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Counting Coins.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Counting Coins in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Counting Coins is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Counting Coins?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Counting Coins?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Counting Coins.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Counting Coins.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Data Graphs (Intro)",
-        "description": "Master Data Graphs (Intro) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Data Graphs (Intro). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Data Graphs (Intro).",
+        "lesson": "### Data Graphs (Intro) (Hard)\n\nThis level introduces you to Data Graphs (Intro). \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Data Graphs (Intro).\n\nKey Concept: Understanding Data Graphs (Intro) is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Expert Challenge",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Data Graphs (Intro)?",
-            "a": "The fundamental principle specific to Data Graphs (Intro).",
+            "q": "How does Data Graphs (Intro) influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Data Graphs (Intro) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Data Graphs (Intro).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Data Graphs (Intro) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Data Graphs (Intro) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Data Graphs (Intro)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Data Graphs (Intro)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Data Graphs (Intro).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Data Graphs (Intro).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
@@ -577,570 +577,570 @@ module.exports = {
     "levels": [
       {
         "name": "Counting to 1000",
-        "description": "Master Counting to 1000 through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Counting to 1000. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Counting to 1000.",
+        "lesson": "### Counting to 1000 (Easy)\n\nThis level introduces you to Counting to 1000. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Counting to 1000 is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Counting to 1000?",
-            "a": "The fundamental principle specific to Counting to 1000.",
+            "q": "What is the first thing we should remember when talking about Counting to 1000?",
+            "a": "The basic identification of Counting to 1000.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Counting to 1000 in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Counting to 1000.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Counting to 1000 in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Counting to 1000 is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Counting to 1000?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Counting to 1000?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Counting to 1000.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Counting to 1000.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "3-Digit Place Value",
-        "description": "Master 3-Digit Place Value through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of 3-Digit Place Value. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of 3-Digit Place Value.",
+        "lesson": "### 3-Digit Place Value (Easy)\n\nThis level introduces you to 3-Digit Place Value. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding 3-Digit Place Value is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of 3-Digit Place Value?",
-            "a": "The fundamental principle specific to 3-Digit Place Value.",
+            "q": "What is the first thing we should remember when talking about 3-Digit Place Value?",
+            "a": "The basic identification of 3-Digit Place Value.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply 3-Digit Place Value in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of 3-Digit Place Value.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of 3-Digit Place Value in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why 3-Digit Place Value is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving 3-Digit Place Value?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in 3-Digit Place Value?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying 3-Digit Place Value.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering 3-Digit Place Value.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Addition with Regrouping",
-        "description": "Master Addition with Regrouping through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Addition with Regrouping. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Addition with Regrouping.",
+        "lesson": "### Addition with Regrouping (Easy)\n\nThis level introduces you to Addition with Regrouping. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Addition with Regrouping is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Addition with Regrouping?",
-            "a": "The fundamental principle specific to Addition with Regrouping.",
+            "q": "What is the first thing we should remember when talking about Addition with Regrouping?",
+            "a": "The basic identification of Addition with Regrouping.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Addition with Regrouping in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Addition with Regrouping.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Addition with Regrouping in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Addition with Regrouping is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Addition with Regrouping?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Addition with Regrouping?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Addition with Regrouping.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Addition with Regrouping.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Subtraction with Regrouping",
-        "description": "Master Subtraction with Regrouping through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Subtraction with Regrouping. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Subtraction with Regrouping.",
+        "lesson": "### Subtraction with Regrouping (Medium)\n\nThis level introduces you to Subtraction with Regrouping. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Subtraction with Regrouping is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Subtraction with Regrouping?",
-            "a": "The fundamental principle specific to Subtraction with Regrouping.",
+            "q": "How does Subtraction with Regrouping influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Subtraction with Regrouping in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Subtraction with Regrouping.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Subtraction with Regrouping in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Subtraction with Regrouping is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Subtraction with Regrouping?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Subtraction with Regrouping?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Subtraction with Regrouping.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Subtraction with Regrouping.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Money (Dollars & Cents)",
-        "description": "Master Money (Dollars & Cents) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Money (Dollars & Cents). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Money (Dollars & Cents).",
+        "lesson": "### Money (Dollars & Cents) (Medium)\n\nThis level introduces you to Money (Dollars & Cents). \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Money (Dollars & Cents) is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Money (Dollars & Cents)?",
-            "a": "The fundamental principle specific to Money (Dollars & Cents).",
+            "q": "How does Money (Dollars & Cents) influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Money (Dollars & Cents) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Money (Dollars & Cents).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Money (Dollars & Cents) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Money (Dollars & Cents) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Money (Dollars & Cents)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Money (Dollars & Cents)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Money (Dollars & Cents).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Money (Dollars & Cents).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Measuring in CM/Metric",
-        "description": "Master Measuring in CM/Metric through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Measuring in CM/Metric. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Measuring in CM/Metric.",
+        "lesson": "### Measuring in CM/Metric (Medium)\n\nThis level introduces you to Measuring in CM/Metric. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Measuring in CM/Metric is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Measuring in CM/Metric?",
-            "a": "The fundamental principle specific to Measuring in CM/Metric.",
+            "q": "How does Measuring in CM/Metric influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Measuring in CM/Metric in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Measuring in CM/Metric.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Measuring in CM/Metric in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Measuring in CM/Metric is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Measuring in CM/Metric?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Measuring in CM/Metric?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Measuring in CM/Metric.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Measuring in CM/Metric.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Identifying 3D Shapes",
-        "description": "Master Identifying 3D Shapes through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Identifying 3D Shapes. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Identifying 3D Shapes.",
+        "lesson": "### Identifying 3D Shapes (Medium)\n\nThis level introduces you to Identifying 3D Shapes. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Identifying 3D Shapes is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Identifying 3D Shapes?",
-            "a": "The fundamental principle specific to Identifying 3D Shapes.",
+            "q": "How does Identifying 3D Shapes influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Identifying 3D Shapes in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Identifying 3D Shapes.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Identifying 3D Shapes in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Identifying 3D Shapes is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Identifying 3D Shapes?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Identifying 3D Shapes?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Identifying 3D Shapes.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Identifying 3D Shapes.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Fractions (Halves/Quarters)",
-        "description": "Master Fractions (Halves/Quarters) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Fractions (Halves/Quarters). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Fractions (Halves/Quarters).",
+        "lesson": "### Fractions (Halves/Quarters) (Hard)\n\nThis level introduces you to Fractions (Halves/Quarters). \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Fractions (Halves/Quarters).\n\nKey Concept: Understanding Fractions (Halves/Quarters) is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Fractions (Halves/Quarters)?",
-            "a": "The fundamental principle specific to Fractions (Halves/Quarters).",
+            "q": "How does Fractions (Halves/Quarters) influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Fractions (Halves/Quarters) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Fractions (Halves/Quarters).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Fractions (Halves/Quarters) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Fractions (Halves/Quarters) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Fractions (Halves/Quarters)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Fractions (Halves/Quarters)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Fractions (Halves/Quarters).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Fractions (Halves/Quarters).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Time (Nearest 5 Mins)",
-        "description": "Master Time (Nearest 5 Mins) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Time (Nearest 5 Mins). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Time (Nearest 5 Mins).",
+        "lesson": "### Time (Nearest 5 Mins) (Hard)\n\nThis level introduces you to Time (Nearest 5 Mins). \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Time (Nearest 5 Mins).\n\nKey Concept: Understanding Time (Nearest 5 Mins) is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Time (Nearest 5 Mins)?",
-            "a": "The fundamental principle specific to Time (Nearest 5 Mins).",
+            "q": "How does Time (Nearest 5 Mins) influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Time (Nearest 5 Mins) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Time (Nearest 5 Mins).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Time (Nearest 5 Mins) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Time (Nearest 5 Mins) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Time (Nearest 5 Mins)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Time (Nearest 5 Mins)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Time (Nearest 5 Mins).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Time (Nearest 5 Mins).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Even & Odd Numbers",
-        "description": "Master Even & Odd Numbers through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Even & Odd Numbers. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Even & Odd Numbers.",
+        "lesson": "### Even & Odd Numbers (Hard)\n\nThis level introduces you to Even & Odd Numbers. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Even & Odd Numbers.\n\nKey Concept: Understanding Even & Odd Numbers is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Expert Challenge",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Even & Odd Numbers?",
-            "a": "The fundamental principle specific to Even & Odd Numbers.",
+            "q": "How does Even & Odd Numbers influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Even & Odd Numbers in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Even & Odd Numbers.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Even & Odd Numbers in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Even & Odd Numbers is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Even & Odd Numbers?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Even & Odd Numbers?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Even & Odd Numbers.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Even & Odd Numbers.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
@@ -1151,570 +1151,570 @@ module.exports = {
     "levels": [
       {
         "name": "Multiplication Facts (1-10)",
-        "description": "Master Multiplication Facts (1-10) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Multiplication Facts (1-10). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Multiplication Facts (1-10).",
+        "lesson": "### Multiplication Facts (1-10) (Easy)\n\nThis level introduces you to Multiplication Facts (1-10). \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Multiplication Facts (1-10) is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Multiplication Facts (1-10)?",
-            "a": "The fundamental principle specific to Multiplication Facts (1-10).",
+            "q": "What is the first thing we should remember when talking about Multiplication Facts (1-10)?",
+            "a": "The basic identification of Multiplication Facts (1-10).",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Multiplication Facts (1-10) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Multiplication Facts (1-10).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Multiplication Facts (1-10) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Multiplication Facts (1-10) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Multiplication Facts (1-10)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Multiplication Facts (1-10)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Multiplication Facts (1-10).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Multiplication Facts (1-10).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Division Concepts",
-        "description": "Master Division Concepts through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Division Concepts. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Division Concepts.",
+        "lesson": "### Division Concepts (Easy)\n\nThis level introduces you to Division Concepts. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Division Concepts is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Division Concepts?",
-            "a": "The fundamental principle specific to Division Concepts.",
+            "q": "What is the first thing we should remember when talking about Division Concepts?",
+            "a": "The basic identification of Division Concepts.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Division Concepts in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Division Concepts.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Division Concepts in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Division Concepts is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Division Concepts?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Division Concepts?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Division Concepts.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Division Concepts.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Area & Perimeter",
-        "description": "Master Area & Perimeter through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Area & Perimeter. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Area & Perimeter.",
+        "lesson": "### Area & Perimeter (Easy)\n\nThis level introduces you to Area & Perimeter. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Area & Perimeter is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Area & Perimeter?",
-            "a": "The fundamental principle specific to Area & Perimeter.",
+            "q": "What is the first thing we should remember when talking about Area & Perimeter?",
+            "a": "The basic identification of Area & Perimeter.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Area & Perimeter in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Area & Perimeter.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Area & Perimeter in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Area & Perimeter is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Area & Perimeter?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Area & Perimeter?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Area & Perimeter.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Area & Perimeter.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Fractions on Number Line",
-        "description": "Master Fractions on Number Line through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Fractions on Number Line. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Fractions on Number Line.",
+        "lesson": "### Fractions on Number Line (Medium)\n\nThis level introduces you to Fractions on Number Line. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Fractions on Number Line is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Fractions on Number Line?",
-            "a": "The fundamental principle specific to Fractions on Number Line.",
+            "q": "How does Fractions on Number Line influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Fractions on Number Line in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Fractions on Number Line.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Fractions on Number Line in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Fractions on Number Line is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Fractions on Number Line?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Fractions on Number Line?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Fractions on Number Line.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Fractions on Number Line.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Equivalent Fractions",
-        "description": "Master Equivalent Fractions through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Equivalent Fractions. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Equivalent Fractions.",
+        "lesson": "### Equivalent Fractions (Medium)\n\nThis level introduces you to Equivalent Fractions. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Equivalent Fractions is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Equivalent Fractions?",
-            "a": "The fundamental principle specific to Equivalent Fractions.",
+            "q": "How does Equivalent Fractions influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Equivalent Fractions in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Equivalent Fractions.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Equivalent Fractions in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Equivalent Fractions is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Equivalent Fractions?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Equivalent Fractions?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Equivalent Fractions.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Equivalent Fractions.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Mass & Volume Measurement",
-        "description": "Master Mass & Volume Measurement through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Mass & Volume Measurement. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Mass & Volume Measurement.",
+        "lesson": "### Mass & Volume Measurement (Medium)\n\nThis level introduces you to Mass & Volume Measurement. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Mass & Volume Measurement is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Mass & Volume Measurement?",
-            "a": "The fundamental principle specific to Mass & Volume Measurement.",
+            "q": "How does Mass & Volume Measurement influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Mass & Volume Measurement in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Mass & Volume Measurement.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Mass & Volume Measurement in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Mass & Volume Measurement is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Mass & Volume Measurement?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Mass & Volume Measurement?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Mass & Volume Measurement.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Mass & Volume Measurement.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Data with Scale Graphs",
-        "description": "Master Data with Scale Graphs through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Data with Scale Graphs. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Data with Scale Graphs.",
+        "lesson": "### Data with Scale Graphs (Medium)\n\nThis level introduces you to Data with Scale Graphs. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Data with Scale Graphs is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Data with Scale Graphs?",
-            "a": "The fundamental principle specific to Data with Scale Graphs.",
+            "q": "How does Data with Scale Graphs influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Data with Scale Graphs in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Data with Scale Graphs.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Data with Scale Graphs in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Data with Scale Graphs is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Data with Scale Graphs?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Data with Scale Graphs?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Data with Scale Graphs.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Data with Scale Graphs.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Geometry: Categories of Shapes",
-        "description": "Master Geometry: Categories of Shapes through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Geometry: Categories of Shapes. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Geometry: Categories of Shapes.",
+        "lesson": "### Geometry: Categories of Shapes (Hard)\n\nThis level introduces you to Geometry: Categories of Shapes. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Geometry: Categories of Shapes.\n\nKey Concept: Understanding Geometry: Categories of Shapes is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Geometry: Categories of Shapes?",
-            "a": "The fundamental principle specific to Geometry: Categories of Shapes.",
+            "q": "How does Geometry: Categories of Shapes influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Geometry: Categories of Shapes in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Geometry: Categories of Shapes.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Geometry: Categories of Shapes in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Geometry: Categories of Shapes is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Geometry: Categories of Shapes?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Geometry: Categories of Shapes?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Geometry: Categories of Shapes.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Geometry: Categories of Shapes.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Rounding to Nearest 10/100",
-        "description": "Master Rounding to Nearest 10/100 through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Rounding to Nearest 10/100. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Rounding to Nearest 10/100.",
+        "lesson": "### Rounding to Nearest 10/100 (Hard)\n\nThis level introduces you to Rounding to Nearest 10/100. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Rounding to Nearest 10/100.\n\nKey Concept: Understanding Rounding to Nearest 10/100 is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Rounding to Nearest 10/100?",
-            "a": "The fundamental principle specific to Rounding to Nearest 10/100.",
+            "q": "How does Rounding to Nearest 10/100 influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Rounding to Nearest 10/100 in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Rounding to Nearest 10/100.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Rounding to Nearest 10/100 in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Rounding to Nearest 10/100 is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Rounding to Nearest 10/100?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Rounding to Nearest 10/100?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Rounding to Nearest 10/100.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Rounding to Nearest 10/100.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Elapsed Time Calculations",
-        "description": "Master Elapsed Time Calculations through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Elapsed Time Calculations. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Elapsed Time Calculations.",
+        "lesson": "### Elapsed Time Calculations (Hard)\n\nThis level introduces you to Elapsed Time Calculations. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Elapsed Time Calculations.\n\nKey Concept: Understanding Elapsed Time Calculations is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Expert Challenge",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Elapsed Time Calculations?",
-            "a": "The fundamental principle specific to Elapsed Time Calculations.",
+            "q": "How does Elapsed Time Calculations influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Elapsed Time Calculations in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Elapsed Time Calculations.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Elapsed Time Calculations in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Elapsed Time Calculations is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Elapsed Time Calculations?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Elapsed Time Calculations?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Elapsed Time Calculations.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Elapsed Time Calculations.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
@@ -1725,570 +1725,570 @@ module.exports = {
     "levels": [
       {
         "name": "Multi-Digit Multiplication",
-        "description": "Master Multi-Digit Multiplication through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Multi-Digit Multiplication. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Multi-Digit Multiplication.",
+        "lesson": "### Multi-Digit Multiplication (Easy)\n\nThis level introduces you to Multi-Digit Multiplication. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Multi-Digit Multiplication is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Multi-Digit Multiplication?",
-            "a": "The fundamental principle specific to Multi-Digit Multiplication.",
+            "q": "What is the first thing we should remember when talking about Multi-Digit Multiplication?",
+            "a": "The basic identification of Multi-Digit Multiplication.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Multi-Digit Multiplication in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Multi-Digit Multiplication.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Multi-Digit Multiplication in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Multi-Digit Multiplication is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Multi-Digit Multiplication?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Multi-Digit Multiplication?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Multi-Digit Multiplication.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Multi-Digit Multiplication.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Long Division Basics",
-        "description": "Master Long Division Basics through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Long Division Basics. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Long Division Basics.",
+        "lesson": "### Long Division Basics (Easy)\n\nThis level introduces you to Long Division Basics. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Long Division Basics is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Long Division Basics?",
-            "a": "The fundamental principle specific to Long Division Basics.",
+            "q": "What is the first thing we should remember when talking about Long Division Basics?",
+            "a": "The basic identification of Long Division Basics.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Long Division Basics in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Long Division Basics.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Long Division Basics in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Long Division Basics is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Long Division Basics?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Long Division Basics?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Long Division Basics.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Long Division Basics.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Adding/Subtracting Fractions",
-        "description": "Master Adding/Subtracting Fractions through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Adding/Subtracting Fractions. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Adding/Subtracting Fractions.",
+        "lesson": "### Adding/Subtracting Fractions (Easy)\n\nThis level introduces you to Adding/Subtracting Fractions. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Adding/Subtracting Fractions is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Adding/Subtracting Fractions?",
-            "a": "The fundamental principle specific to Adding/Subtracting Fractions.",
+            "q": "What is the first thing we should remember when talking about Adding/Subtracting Fractions?",
+            "a": "The basic identification of Adding/Subtracting Fractions.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Adding/Subtracting Fractions in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Adding/Subtracting Fractions.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Adding/Subtracting Fractions in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Adding/Subtracting Fractions is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Adding/Subtracting Fractions?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Adding/Subtracting Fractions?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Adding/Subtracting Fractions.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Adding/Subtracting Fractions.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Fraction Multiples",
-        "description": "Master Fraction Multiples through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Fraction Multiples. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Fraction Multiples.",
+        "lesson": "### Fraction Multiples (Medium)\n\nThis level introduces you to Fraction Multiples. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Fraction Multiples is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Fraction Multiples?",
-            "a": "The fundamental principle specific to Fraction Multiples.",
+            "q": "How does Fraction Multiples influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Fraction Multiples in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Fraction Multiples.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Fraction Multiples in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Fraction Multiples is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Fraction Multiples?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Fraction Multiples?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Fraction Multiples.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Fraction Multiples.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Decimals Intro (Tenths)",
-        "description": "Master Decimals Intro (Tenths) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Decimals Intro (Tenths). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Decimals Intro (Tenths).",
+        "lesson": "### Decimals Intro (Tenths) (Medium)\n\nThis level introduces you to Decimals Intro (Tenths). \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Decimals Intro (Tenths) is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Decimals Intro (Tenths)?",
-            "a": "The fundamental principle specific to Decimals Intro (Tenths).",
+            "q": "How does Decimals Intro (Tenths) influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Decimals Intro (Tenths) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Decimals Intro (Tenths).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Decimals Intro (Tenths) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Decimals Intro (Tenths) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Decimals Intro (Tenths)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Decimals Intro (Tenths)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Decimals Intro (Tenths).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Decimals Intro (Tenths).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Angles & Protractor Use",
-        "description": "Master Angles & Protractor Use through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Angles & Protractor Use. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Angles & Protractor Use.",
+        "lesson": "### Angles & Protractor Use (Medium)\n\nThis level introduces you to Angles & Protractor Use. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Angles & Protractor Use is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Angles & Protractor Use?",
-            "a": "The fundamental principle specific to Angles & Protractor Use.",
+            "q": "How does Angles & Protractor Use influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Angles & Protractor Use in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Angles & Protractor Use.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Angles & Protractor Use in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Angles & Protractor Use is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Angles & Protractor Use?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Angles & Protractor Use?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Angles & Protractor Use.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Angles & Protractor Use.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Symmetry & Lines",
-        "description": "Master Symmetry & Lines through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Symmetry & Lines. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Symmetry & Lines.",
+        "lesson": "### Symmetry & Lines (Medium)\n\nThis level introduces you to Symmetry & Lines. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Symmetry & Lines is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Symmetry & Lines?",
-            "a": "The fundamental principle specific to Symmetry & Lines.",
+            "q": "How does Symmetry & Lines influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Symmetry & Lines in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Symmetry & Lines.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Symmetry & Lines in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Symmetry & Lines is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Symmetry & Lines?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Symmetry & Lines?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Symmetry & Lines.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Symmetry & Lines.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Prime & Composite Numbers",
-        "description": "Master Prime & Composite Numbers through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Prime & Composite Numbers. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Prime & Composite Numbers.",
+        "lesson": "### Prime & Composite Numbers (Hard)\n\nThis level introduces you to Prime & Composite Numbers. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Prime & Composite Numbers.\n\nKey Concept: Understanding Prime & Composite Numbers is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Prime & Composite Numbers?",
-            "a": "The fundamental principle specific to Prime & Composite Numbers.",
+            "q": "How does Prime & Composite Numbers influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Prime & Composite Numbers in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Prime & Composite Numbers.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Prime & Composite Numbers in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Prime & Composite Numbers is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Prime & Composite Numbers?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Prime & Composite Numbers?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Prime & Composite Numbers.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Prime & Composite Numbers.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Unit Conversions",
-        "description": "Master Unit Conversions through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Unit Conversions. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Unit Conversions.",
+        "lesson": "### Unit Conversions (Hard)\n\nThis level introduces you to Unit Conversions. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Unit Conversions.\n\nKey Concept: Understanding Unit Conversions is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Unit Conversions?",
-            "a": "The fundamental principle specific to Unit Conversions.",
+            "q": "How does Unit Conversions influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Unit Conversions in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Unit Conversions.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Unit Conversions in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Unit Conversions is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Unit Conversions?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Unit Conversions?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Unit Conversions.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Unit Conversions.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Multi-Step Word Problems",
-        "description": "Master Multi-Step Word Problems through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Multi-Step Word Problems. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Multi-Step Word Problems.",
+        "lesson": "### Multi-Step Word Problems (Hard)\n\nThis level introduces you to Multi-Step Word Problems. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Multi-Step Word Problems.\n\nKey Concept: Understanding Multi-Step Word Problems is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Expert Challenge",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Multi-Step Word Problems?",
-            "a": "The fundamental principle specific to Multi-Step Word Problems.",
+            "q": "How does Multi-Step Word Problems influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Multi-Step Word Problems in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Multi-Step Word Problems.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Multi-Step Word Problems in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Multi-Step Word Problems is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Multi-Step Word Problems?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Multi-Step Word Problems?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Multi-Step Word Problems.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Multi-Step Word Problems.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
@@ -2299,570 +2299,570 @@ module.exports = {
     "levels": [
       {
         "name": "Multi-Digit Division",
-        "description": "Master Multi-Digit Division through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Multi-Digit Division. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Multi-Digit Division.",
+        "lesson": "### Multi-Digit Division (Easy)\n\nThis level introduces you to Multi-Digit Division. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Multi-Digit Division is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Multi-Digit Division?",
-            "a": "The fundamental principle specific to Multi-Digit Division.",
+            "q": "What is the first thing we should remember when talking about Multi-Digit Division?",
+            "a": "The basic identification of Multi-Digit Division.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Multi-Digit Division in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Multi-Digit Division.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Multi-Digit Division in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Multi-Digit Division is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Multi-Digit Division?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Multi-Digit Division?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Multi-Digit Division.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Multi-Digit Division.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Decimal Operations (+/-/x/÷)",
-        "description": "Master Decimal Operations (+/-/x/÷) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Decimal Operations (+/-/x/÷). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Decimal Operations (+/-/x/÷).",
+        "lesson": "### Decimal Operations (+/-/x/÷) (Easy)\n\nThis level introduces you to Decimal Operations (+/-/x/÷). \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Decimal Operations (+/-/x/÷) is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Decimal Operations (+/-/x/÷)?",
-            "a": "The fundamental principle specific to Decimal Operations (+/-/x/÷).",
+            "q": "What is the first thing we should remember when talking about Decimal Operations (+/-/x/÷)?",
+            "a": "The basic identification of Decimal Operations (+/-/x/÷).",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Decimal Operations (+/-/x/÷) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Decimal Operations (+/-/x/÷).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Decimal Operations (+/-/x/÷) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Decimal Operations (+/-/x/÷) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Decimal Operations (+/-/x/÷)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Decimal Operations (+/-/x/÷)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Decimal Operations (+/-/x/÷).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Decimal Operations (+/-/x/÷).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Adding Fractions with Unlike Denoms",
-        "description": "Master Adding Fractions with Unlike Denoms through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Adding Fractions with Unlike Denoms. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Adding Fractions with Unlike Denoms.",
+        "lesson": "### Adding Fractions with Unlike Denoms (Easy)\n\nThis level introduces you to Adding Fractions with Unlike Denoms. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Adding Fractions with Unlike Denoms is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Adding Fractions with Unlike Denoms?",
-            "a": "The fundamental principle specific to Adding Fractions with Unlike Denoms.",
+            "q": "What is the first thing we should remember when talking about Adding Fractions with Unlike Denoms?",
+            "a": "The basic identification of Adding Fractions with Unlike Denoms.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Adding Fractions with Unlike Denoms in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Adding Fractions with Unlike Denoms.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Adding Fractions with Unlike Denoms in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Adding Fractions with Unlike Denoms is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Adding Fractions with Unlike Denoms?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Adding Fractions with Unlike Denoms?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Adding Fractions with Unlike Denoms.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Adding Fractions with Unlike Denoms.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Multiplying/Dividing Fractions",
-        "description": "Master Multiplying/Dividing Fractions through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Multiplying/Dividing Fractions. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Multiplying/Dividing Fractions.",
+        "lesson": "### Multiplying/Dividing Fractions (Medium)\n\nThis level introduces you to Multiplying/Dividing Fractions. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Multiplying/Dividing Fractions is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Multiplying/Dividing Fractions?",
-            "a": "The fundamental principle specific to Multiplying/Dividing Fractions.",
+            "q": "How does Multiplying/Dividing Fractions influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Multiplying/Dividing Fractions in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Multiplying/Dividing Fractions.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Multiplying/Dividing Fractions in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Multiplying/Dividing Fractions is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Multiplying/Dividing Fractions?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Multiplying/Dividing Fractions?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Multiplying/Dividing Fractions.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Multiplying/Dividing Fractions.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Volume Calculations (L x W x H)",
-        "description": "Master Volume Calculations (L x W x H) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Volume Calculations (L x W x H). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Volume Calculations (L x W x H).",
+        "lesson": "### Volume Calculations (L x W x H) (Medium)\n\nThis level introduces you to Volume Calculations (L x W x H). \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Volume Calculations (L x W x H) is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Volume Calculations (L x W x H)?",
-            "a": "The fundamental principle specific to Volume Calculations (L x W x H).",
+            "q": "How does Volume Calculations (L x W x H) influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Volume Calculations (L x W x H) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Volume Calculations (L x W x H).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Volume Calculations (L x W x H) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Volume Calculations (L x W x H) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Volume Calculations (L x W x H)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Volume Calculations (L x W x H)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Volume Calculations (L x W x H).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Volume Calculations (L x W x H).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Coordinate Planes",
-        "description": "Master Coordinate Planes through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Coordinate Planes. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Coordinate Planes.",
+        "lesson": "### Coordinate Planes (Medium)\n\nThis level introduces you to Coordinate Planes. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Coordinate Planes is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Coordinate Planes?",
-            "a": "The fundamental principle specific to Coordinate Planes.",
+            "q": "How does Coordinate Planes influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Coordinate Planes in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Coordinate Planes.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Coordinate Planes in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Coordinate Planes is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Coordinate Planes?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Coordinate Planes?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Coordinate Planes.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Coordinate Planes.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Numerical Patterns",
-        "description": "Master Numerical Patterns through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Numerical Patterns. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Numerical Patterns.",
+        "lesson": "### Numerical Patterns (Medium)\n\nThis level introduces you to Numerical Patterns. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Numerical Patterns is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Numerical Patterns?",
-            "a": "The fundamental principle specific to Numerical Patterns.",
+            "q": "How does Numerical Patterns influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Numerical Patterns in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Numerical Patterns.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Numerical Patterns in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Numerical Patterns is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Numerical Patterns?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Numerical Patterns?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Numerical Patterns.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Numerical Patterns.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Line Plots & Data",
-        "description": "Master Line Plots & Data through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Line Plots & Data. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Line Plots & Data.",
+        "lesson": "### Line Plots & Data (Hard)\n\nThis level introduces you to Line Plots & Data. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Line Plots & Data.\n\nKey Concept: Understanding Line Plots & Data is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Line Plots & Data?",
-            "a": "The fundamental principle specific to Line Plots & Data.",
+            "q": "How does Line Plots & Data influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Line Plots & Data in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Line Plots & Data.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Line Plots & Data in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Line Plots & Data is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Line Plots & Data?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Line Plots & Data?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Line Plots & Data.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Line Plots & Data.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Order of Operations",
-        "description": "Master Order of Operations through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Order of Operations. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Order of Operations.",
+        "lesson": "### Order of Operations (Hard)\n\nThis level introduces you to Order of Operations. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Order of Operations.\n\nKey Concept: Understanding Order of Operations is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Order of Operations?",
-            "a": "The fundamental principle specific to Order of Operations.",
+            "q": "How does Order of Operations influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Order of Operations in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Order of Operations.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Order of Operations in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Order of Operations is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Order of Operations?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Order of Operations?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Order of Operations.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Order of Operations.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Graphing Points",
-        "description": "Master Graphing Points through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Graphing Points. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Graphing Points.",
+        "lesson": "### Graphing Points (Hard)\n\nThis level introduces you to Graphing Points. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Graphing Points.\n\nKey Concept: Understanding Graphing Points is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Expert Challenge",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Graphing Points?",
-            "a": "The fundamental principle specific to Graphing Points.",
+            "q": "How does Graphing Points influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Graphing Points in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Graphing Points.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Graphing Points in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Graphing Points is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Graphing Points?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Graphing Points?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Graphing Points.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Graphing Points.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
@@ -2873,570 +2873,570 @@ module.exports = {
     "levels": [
       {
         "name": "Ratios & Unit Rates",
-        "description": "Master Ratios & Unit Rates through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Ratios & Unit Rates. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Ratios & Unit Rates.",
+        "lesson": "### Ratios & Unit Rates (Easy)\n\nThis level introduces you to Ratios & Unit Rates. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Ratios & Unit Rates is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Ratios & Unit Rates?",
-            "a": "The fundamental principle specific to Ratios & Unit Rates.",
+            "q": "What is the first thing we should remember when talking about Ratios & Unit Rates?",
+            "a": "The basic identification of Ratios & Unit Rates.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Ratios & Unit Rates in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Ratios & Unit Rates.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Ratios & Unit Rates in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Ratios & Unit Rates is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Ratios & Unit Rates?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Ratios & Unit Rates?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Ratios & Unit Rates.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Ratios & Unit Rates.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Dividing Fractions by Fractions",
-        "description": "Master Dividing Fractions by Fractions through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Dividing Fractions by Fractions. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Dividing Fractions by Fractions.",
+        "lesson": "### Dividing Fractions by Fractions (Easy)\n\nThis level introduces you to Dividing Fractions by Fractions. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Dividing Fractions by Fractions is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Dividing Fractions by Fractions?",
-            "a": "The fundamental principle specific to Dividing Fractions by Fractions.",
+            "q": "What is the first thing we should remember when talking about Dividing Fractions by Fractions?",
+            "a": "The basic identification of Dividing Fractions by Fractions.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Dividing Fractions by Fractions in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Dividing Fractions by Fractions.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Dividing Fractions by Fractions in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Dividing Fractions by Fractions is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Dividing Fractions by Fractions?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Dividing Fractions by Fractions?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Dividing Fractions by Fractions.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Dividing Fractions by Fractions.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Negative Numbers & Integers",
-        "description": "Master Negative Numbers & Integers through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Negative Numbers & Integers. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Negative Numbers & Integers.",
+        "lesson": "### Negative Numbers & Integers (Easy)\n\nThis level introduces you to Negative Numbers & Integers. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Negative Numbers & Integers is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Negative Numbers & Integers?",
-            "a": "The fundamental principle specific to Negative Numbers & Integers.",
+            "q": "What is the first thing we should remember when talking about Negative Numbers & Integers?",
+            "a": "The basic identification of Negative Numbers & Integers.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Negative Numbers & Integers in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Negative Numbers & Integers.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Negative Numbers & Integers in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Negative Numbers & Integers is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Negative Numbers & Integers?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Negative Numbers & Integers?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Negative Numbers & Integers.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Negative Numbers & Integers.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Algebraic Expressions",
-        "description": "Master Algebraic Expressions through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Algebraic Expressions. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Algebraic Expressions.",
+        "lesson": "### Algebraic Expressions (Medium)\n\nThis level introduces you to Algebraic Expressions. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Algebraic Expressions is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Algebraic Expressions?",
-            "a": "The fundamental principle specific to Algebraic Expressions.",
+            "q": "How does Algebraic Expressions influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Algebraic Expressions in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Algebraic Expressions.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Algebraic Expressions in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Algebraic Expressions is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Algebraic Expressions?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Algebraic Expressions?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Algebraic Expressions.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Algebraic Expressions.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "One-Variable Equations",
-        "description": "Master One-Variable Equations through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of One-Variable Equations. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of One-Variable Equations.",
+        "lesson": "### One-Variable Equations (Medium)\n\nThis level introduces you to One-Variable Equations. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding One-Variable Equations is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of One-Variable Equations?",
-            "a": "The fundamental principle specific to One-Variable Equations.",
+            "q": "How does One-Variable Equations influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply One-Variable Equations in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of One-Variable Equations.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of One-Variable Equations in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why One-Variable Equations is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving One-Variable Equations?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in One-Variable Equations?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying One-Variable Equations.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering One-Variable Equations.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Area of Complex Shapes",
-        "description": "Master Area of Complex Shapes through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Area of Complex Shapes. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Area of Complex Shapes.",
+        "lesson": "### Area of Complex Shapes (Medium)\n\nThis level introduces you to Area of Complex Shapes. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Area of Complex Shapes is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Area of Complex Shapes?",
-            "a": "The fundamental principle specific to Area of Complex Shapes.",
+            "q": "How does Area of Complex Shapes influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Area of Complex Shapes in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Area of Complex Shapes.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Area of Complex Shapes in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Area of Complex Shapes is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Area of Complex Shapes?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Area of Complex Shapes?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Area of Complex Shapes.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Area of Complex Shapes.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Surface Area (Nets)",
-        "description": "Master Surface Area (Nets) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Surface Area (Nets). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Surface Area (Nets).",
+        "lesson": "### Surface Area (Nets) (Medium)\n\nThis level introduces you to Surface Area (Nets). \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Surface Area (Nets) is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Surface Area (Nets)?",
-            "a": "The fundamental principle specific to Surface Area (Nets).",
+            "q": "How does Surface Area (Nets) influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Surface Area (Nets) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Surface Area (Nets).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Surface Area (Nets) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Surface Area (Nets) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Surface Area (Nets)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Surface Area (Nets)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Surface Area (Nets).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Surface Area (Nets).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Mean, Median, Mode",
-        "description": "Master Mean, Median, Mode through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Mean, Median, Mode. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Mean, Median, Mode.",
+        "lesson": "### Mean, Median, Mode (Hard)\n\nThis level introduces you to Mean, Median, Mode. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Mean, Median, Mode.\n\nKey Concept: Understanding Mean, Median, Mode is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Mean, Median, Mode?",
-            "a": "The fundamental principle specific to Mean, Median, Mode.",
+            "q": "How does Mean, Median, Mode influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Mean, Median, Mode in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Mean, Median, Mode.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Mean, Median, Mode in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Mean, Median, Mode is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Mean, Median, Mode?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Mean, Median, Mode?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Mean, Median, Mode.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Mean, Median, Mode.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Statistical Variability",
-        "description": "Master Statistical Variability through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Statistical Variability. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Statistical Variability.",
+        "lesson": "### Statistical Variability (Hard)\n\nThis level introduces you to Statistical Variability. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Statistical Variability.\n\nKey Concept: Understanding Statistical Variability is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Statistical Variability?",
-            "a": "The fundamental principle specific to Statistical Variability.",
+            "q": "How does Statistical Variability influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Statistical Variability in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Statistical Variability.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Statistical Variability in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Statistical Variability is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Statistical Variability?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Statistical Variability?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Statistical Variability.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Statistical Variability.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Decimal/Fraction/Percent Link",
-        "description": "Master Decimal/Fraction/Percent Link through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Decimal/Fraction/Percent Link. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Decimal/Fraction/Percent Link.",
+        "lesson": "### Decimal/Fraction/Percent Link (Hard)\n\nThis level introduces you to Decimal/Fraction/Percent Link. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Decimal/Fraction/Percent Link.\n\nKey Concept: Understanding Decimal/Fraction/Percent Link is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Expert Challenge",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Decimal/Fraction/Percent Link?",
-            "a": "The fundamental principle specific to Decimal/Fraction/Percent Link.",
+            "q": "How does Decimal/Fraction/Percent Link influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Decimal/Fraction/Percent Link in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Decimal/Fraction/Percent Link.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Decimal/Fraction/Percent Link in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Decimal/Fraction/Percent Link is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Decimal/Fraction/Percent Link?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Decimal/Fraction/Percent Link?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Decimal/Fraction/Percent Link.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Decimal/Fraction/Percent Link.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
@@ -3447,570 +3447,570 @@ module.exports = {
     "levels": [
       {
         "name": "Rational Numbers Operations",
-        "description": "Master Rational Numbers Operations through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Rational Numbers Operations. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Rational Numbers Operations.",
+        "lesson": "### Rational Numbers Operations (Easy)\n\nThis level introduces you to Rational Numbers Operations. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Rational Numbers Operations is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Rational Numbers Operations?",
-            "a": "The fundamental principle specific to Rational Numbers Operations.",
+            "q": "What is the first thing we should remember when talking about Rational Numbers Operations?",
+            "a": "The basic identification of Rational Numbers Operations.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Rational Numbers Operations in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Rational Numbers Operations.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Rational Numbers Operations in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Rational Numbers Operations is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Rational Numbers Operations?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Rational Numbers Operations?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Rational Numbers Operations.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Rational Numbers Operations.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Proportional Relationships",
-        "description": "Master Proportional Relationships through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Proportional Relationships. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Proportional Relationships.",
+        "lesson": "### Proportional Relationships (Easy)\n\nThis level introduces you to Proportional Relationships. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Proportional Relationships is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Proportional Relationships?",
-            "a": "The fundamental principle specific to Proportional Relationships.",
+            "q": "What is the first thing we should remember when talking about Proportional Relationships?",
+            "a": "The basic identification of Proportional Relationships.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Proportional Relationships in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Proportional Relationships.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Proportional Relationships in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Proportional Relationships is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Proportional Relationships?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Proportional Relationships?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Proportional Relationships.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Proportional Relationships.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Linear Equations & Inequalities",
-        "description": "Master Linear Equations & Inequalities through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Linear Equations & Inequalities. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Linear Equations & Inequalities.",
+        "lesson": "### Linear Equations & Inequalities (Easy)\n\nThis level introduces you to Linear Equations & Inequalities. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Linear Equations & Inequalities is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Linear Equations & Inequalities?",
-            "a": "The fundamental principle specific to Linear Equations & Inequalities.",
+            "q": "What is the first thing we should remember when talking about Linear Equations & Inequalities?",
+            "a": "The basic identification of Linear Equations & Inequalities.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Linear Equations & Inequalities in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Linear Equations & Inequalities.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Linear Equations & Inequalities in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Linear Equations & Inequalities is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Linear Equations & Inequalities?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Linear Equations & Inequalities?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Linear Equations & Inequalities.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Linear Equations & Inequalities.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Circles: Area & Circumference",
-        "description": "Master Circles: Area & Circumference through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Circles: Area & Circumference. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Circles: Area & Circumference.",
+        "lesson": "### Circles: Area & Circumference (Medium)\n\nThis level introduces you to Circles: Area & Circumference. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Circles: Area & Circumference is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Circles: Area & Circumference?",
-            "a": "The fundamental principle specific to Circles: Area & Circumference.",
+            "q": "How does Circles: Area & Circumference influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Circles: Area & Circumference in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Circles: Area & Circumference.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Circles: Area & Circumference in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Circles: Area & Circumference is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Circles: Area & Circumference?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Circles: Area & Circumference?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Circles: Area & Circumference.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Circles: Area & Circumference.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "3D Figure Volume/Area",
-        "description": "Master 3D Figure Volume/Area through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of 3D Figure Volume/Area. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of 3D Figure Volume/Area.",
+        "lesson": "### 3D Figure Volume/Area (Medium)\n\nThis level introduces you to 3D Figure Volume/Area. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding 3D Figure Volume/Area is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of 3D Figure Volume/Area?",
-            "a": "The fundamental principle specific to 3D Figure Volume/Area.",
+            "q": "How does 3D Figure Volume/Area influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply 3D Figure Volume/Area in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of 3D Figure Volume/Area.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of 3D Figure Volume/Area in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why 3D Figure Volume/Area is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving 3D Figure Volume/Area?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in 3D Figure Volume/Area?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying 3D Figure Volume/Area.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering 3D Figure Volume/Area.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Random Sampling",
-        "description": "Master Random Sampling through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Random Sampling. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Random Sampling.",
+        "lesson": "### Random Sampling (Medium)\n\nThis level introduces you to Random Sampling. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Random Sampling is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Random Sampling?",
-            "a": "The fundamental principle specific to Random Sampling.",
+            "q": "How does Random Sampling influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Random Sampling in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Random Sampling.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Random Sampling in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Random Sampling is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Random Sampling?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Random Sampling?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Random Sampling.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Random Sampling.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Probability Models",
-        "description": "Master Probability Models through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Probability Models. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Probability Models.",
+        "lesson": "### Probability Models (Medium)\n\nThis level introduces you to Probability Models. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Probability Models is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Probability Models?",
-            "a": "The fundamental principle specific to Probability Models.",
+            "q": "How does Probability Models influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Probability Models in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Probability Models.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Probability Models in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Probability Models is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Probability Models?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Probability Models?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Probability Models.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Probability Models.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Scale Drawings",
-        "description": "Master Scale Drawings through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Scale Drawings. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Scale Drawings.",
+        "lesson": "### Scale Drawings (Hard)\n\nThis level introduces you to Scale Drawings. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Scale Drawings.\n\nKey Concept: Understanding Scale Drawings is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Scale Drawings?",
-            "a": "The fundamental principle specific to Scale Drawings.",
+            "q": "How does Scale Drawings influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Scale Drawings in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Scale Drawings.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Scale Drawings in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Scale Drawings is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Scale Drawings?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Scale Drawings?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Scale Drawings.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Scale Drawings.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Angle Relationships",
-        "description": "Master Angle Relationships through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Angle Relationships. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Angle Relationships.",
+        "lesson": "### Angle Relationships (Hard)\n\nThis level introduces you to Angle Relationships. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Angle Relationships.\n\nKey Concept: Understanding Angle Relationships is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Angle Relationships?",
-            "a": "The fundamental principle specific to Angle Relationships.",
+            "q": "How does Angle Relationships influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Angle Relationships in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Angle Relationships.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Angle Relationships in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Angle Relationships is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Angle Relationships?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Angle Relationships?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Angle Relationships.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Angle Relationships.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Percent Applications (Markup/Tax)",
-        "description": "Master Percent Applications (Markup/Tax) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Percent Applications (Markup/Tax). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Percent Applications (Markup/Tax).",
+        "lesson": "### Percent Applications (Markup/Tax) (Hard)\n\nThis level introduces you to Percent Applications (Markup/Tax). \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Percent Applications (Markup/Tax).\n\nKey Concept: Understanding Percent Applications (Markup/Tax) is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Expert Challenge",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Percent Applications (Markup/Tax)?",
-            "a": "The fundamental principle specific to Percent Applications (Markup/Tax).",
+            "q": "How does Percent Applications (Markup/Tax) influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Percent Applications (Markup/Tax) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Percent Applications (Markup/Tax).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Percent Applications (Markup/Tax) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Percent Applications (Markup/Tax) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Percent Applications (Markup/Tax)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Percent Applications (Markup/Tax)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Percent Applications (Markup/Tax).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Percent Applications (Markup/Tax).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
@@ -4021,570 +4021,570 @@ module.exports = {
     "levels": [
       {
         "name": "Linear Functions",
-        "description": "Master Linear Functions through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Linear Functions. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Linear Functions.",
+        "lesson": "### Linear Functions (Easy)\n\nThis level introduces you to Linear Functions. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Linear Functions is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Linear Functions?",
-            "a": "The fundamental principle specific to Linear Functions.",
+            "q": "What is the first thing we should remember when talking about Linear Functions?",
+            "a": "The basic identification of Linear Functions.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Linear Functions in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Linear Functions.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Linear Functions in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Linear Functions is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Linear Functions?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Linear Functions?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Linear Functions.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Linear Functions.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Systems of Equations",
-        "description": "Master Systems of Equations through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Systems of Equations. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Systems of Equations.",
+        "lesson": "### Systems of Equations (Easy)\n\nThis level introduces you to Systems of Equations. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Systems of Equations is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Systems of Equations?",
-            "a": "The fundamental principle specific to Systems of Equations.",
+            "q": "What is the first thing we should remember when talking about Systems of Equations?",
+            "a": "The basic identification of Systems of Equations.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Systems of Equations in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Systems of Equations.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Systems of Equations in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Systems of Equations is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Systems of Equations?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Systems of Equations?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Systems of Equations.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Systems of Equations.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Irrational Numbers",
-        "description": "Master Irrational Numbers through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Irrational Numbers. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
+        "description": "Easy: Explore the foundations and challenges of Irrational Numbers.",
+        "lesson": "### Irrational Numbers (Easy)\n\nThis level introduces you to Irrational Numbers. \n\nWe will start with the basic definitions and visual examples. Focus on identifying and recalling the primary terms.\n\nKey Concept: Understanding Irrational Numbers is essential for your growth in MATH.",
         "xpReward": 100,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Introduction",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Irrational Numbers?",
-            "a": "The fundamental principle specific to Irrational Numbers.",
+            "q": "What is the first thing we should remember when talking about Irrational Numbers?",
+            "a": "The basic identification of Irrational Numbers.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Irrational Numbers in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Irrational Numbers.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Irrational Numbers in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Irrational Numbers is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Irrational Numbers?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Irrational Numbers?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Irrational Numbers.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Irrational Numbers.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Exponents & Scientific Notation",
-        "description": "Master Exponents & Scientific Notation through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Exponents & Scientific Notation. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Exponents & Scientific Notation.",
+        "lesson": "### Exponents & Scientific Notation (Medium)\n\nThis level introduces you to Exponents & Scientific Notation. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Exponents & Scientific Notation is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Exponents & Scientific Notation?",
-            "a": "The fundamental principle specific to Exponents & Scientific Notation.",
+            "q": "How does Exponents & Scientific Notation influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Exponents & Scientific Notation in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Exponents & Scientific Notation.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Exponents & Scientific Notation in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Exponents & Scientific Notation is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Exponents & Scientific Notation?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Exponents & Scientific Notation?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Exponents & Scientific Notation.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Exponents & Scientific Notation.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Pythagorean Theorem",
-        "description": "Master Pythagorean Theorem through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Pythagorean Theorem. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Pythagorean Theorem.",
+        "lesson": "### Pythagorean Theorem (Medium)\n\nThis level introduces you to Pythagorean Theorem. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Pythagorean Theorem is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Foundation",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Pythagorean Theorem?",
-            "a": "The fundamental principle specific to Pythagorean Theorem.",
+            "q": "How does Pythagorean Theorem influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Pythagorean Theorem in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Pythagorean Theorem.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Pythagorean Theorem in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Pythagorean Theorem is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Pythagorean Theorem?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Pythagorean Theorem?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Pythagorean Theorem.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Pythagorean Theorem.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Geometric Transformations",
-        "description": "Master Geometric Transformations through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Geometric Transformations. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Geometric Transformations.",
+        "lesson": "### Geometric Transformations (Medium)\n\nThis level introduces you to Geometric Transformations. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Geometric Transformations is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Core Principles",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Geometric Transformations?",
-            "a": "The fundamental principle specific to Geometric Transformations.",
+            "q": "How does Geometric Transformations influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Geometric Transformations in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Geometric Transformations.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Geometric Transformations in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Geometric Transformations is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Geometric Transformations?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Geometric Transformations?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Geometric Transformations.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Geometric Transformations.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Volume of Spheres/Cones",
-        "description": "Master Volume of Spheres/Cones through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Volume of Spheres/Cones. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Medium: Explore the foundations and challenges of Volume of Spheres/Cones.",
+        "lesson": "### Volume of Spheres/Cones (Medium)\n\nThis level introduces you to Volume of Spheres/Cones. \n\nNow that you know the basics, we will apply those concepts to solve practical problems. Pay attention to the relationship between different parts of the topic.\n\nKey Concept: Understanding Volume of Spheres/Cones is essential for your growth in MATH.",
+        "xpReward": 150,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Volume of Spheres/Cones?",
-            "a": "The fundamental principle specific to Volume of Spheres/Cones.",
+            "q": "How does Volume of Spheres/Cones influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Volume of Spheres/Cones in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Volume of Spheres/Cones.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Volume of Spheres/Cones in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Volume of Spheres/Cones is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Volume of Spheres/Cones?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Volume of Spheres/Cones?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Volume of Spheres/Cones.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Volume of Spheres/Cones.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Bivariate Data (Scatter Plots)",
-        "description": "Master Bivariate Data (Scatter Plots) through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Bivariate Data (Scatter Plots). Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Bivariate Data (Scatter Plots).",
+        "lesson": "### Bivariate Data (Scatter Plots) (Hard)\n\nThis level introduces you to Bivariate Data (Scatter Plots). \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Bivariate Data (Scatter Plots).\n\nKey Concept: Understanding Bivariate Data (Scatter Plots) is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Bivariate Data (Scatter Plots)?",
-            "a": "The fundamental principle specific to Bivariate Data (Scatter Plots).",
+            "q": "How does Bivariate Data (Scatter Plots) influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Bivariate Data (Scatter Plots) in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Bivariate Data (Scatter Plots).",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Bivariate Data (Scatter Plots) in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Bivariate Data (Scatter Plots) is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Bivariate Data (Scatter Plots)?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Bivariate Data (Scatter Plots)?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Bivariate Data (Scatter Plots).",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Bivariate Data (Scatter Plots).",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Congruence & Similarity",
-        "description": "Master Congruence & Similarity through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Congruence & Similarity. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Congruence & Similarity.",
+        "lesson": "### Congruence & Similarity (Hard)\n\nThis level introduces you to Congruence & Similarity. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Congruence & Similarity.\n\nKey Concept: Understanding Congruence & Similarity is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Advanced Mastery",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Congruence & Similarity?",
-            "a": "The fundamental principle specific to Congruence & Similarity.",
+            "q": "How does Congruence & Similarity influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Congruence & Similarity in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Congruence & Similarity.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Congruence & Similarity in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Congruence & Similarity is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Congruence & Similarity?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Congruence & Similarity?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Congruence & Similarity.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Congruence & Similarity.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]
       },
       {
         "name": "Real-World Modeling",
-        "description": "Master Real-World Modeling through interactive lessons and challenges.",
-        "lesson": "This lesson covers the core principles of Real-World Modeling. Students will explore key concepts, practical examples, and historical or scientific context relevant to this level of study.",
-        "xpReward": 100,
+        "description": "Hard: Explore the foundations and challenges of Real-World Modeling.",
+        "lesson": "### Real-World Modeling (Hard)\n\nThis level introduces you to Real-World Modeling. \n\nIn this Elite Challenge, you will synthesize everything you've learned. We will look at complex scenarios and multi-step reasoning required to master Real-World Modeling.\n\nKey Concept: Understanding Real-World Modeling is essential for your growth in MATH.",
+        "xpReward": 250,
         "badgeEmoji": "🔢",
-        "moduleName": "Advanced mastery",
+        "moduleName": "Expert Challenge",
         "quiz": [
           {
-            "q": "Which of the following best describes a key concept of Real-World Modeling?",
-            "a": "The fundamental principle specific to Real-World Modeling.",
+            "q": "How does Real-World Modeling influence the performance of a system?",
+            "a": "By providing a structured framework for interaction.",
             "d": [
-              "A loosely related distractor",
-              "An opposite concept",
-              "Information from a different grade"
+              "A generic distractor",
+              "An unrelated concept",
+              "An incorrect definition"
             ]
           },
           {
-            "q": "How do we apply Real-World Modeling in a real-world scenario?",
-            "a": "By following the systematic approach taught in this lesson.",
+            "q": "Choose the most accurate example of Real-World Modeling.",
+            "a": "The scenario described specifically in the lesson summary.",
             "d": [
-              "Ignoring the rules",
-              "Guessing randomly",
-              "Using outdated methods"
+              "A random guess",
+              "Something from a different subject",
+              "A common misconception"
             ]
           }
         ],
         "exam": [
           {
-            "q": "Explain the importance of Real-World Modeling in the broader context of MATH.",
-            "a": "It provides a critical building block for advanced understanding.",
+            "q": "Critically analyze why Real-World Modeling is a fundamental pillar of MATH.",
+            "a": "It establishes the logic upon which subsequent levels are built.",
             "d": [
-              "It is not important at all",
-              "It only applies to small children",
-              "It has been replaced by modern tech"
+              "It's just a filler topic",
+              "It's only for temporary use",
+              "It doesn't have much impact"
             ]
           },
           {
-            "q": "What is the correct way to solve a challenge involving Real-World Modeling?",
-            "a": "Step-by-step application of the principles discovered.",
+            "q": "Which approach is best for tackling a difficult problem in Real-World Modeling?",
+            "a": "Breaking down the problem into smaller, logical parts as practiced.",
             "d": [
-              "Skipping the first step",
-              "Combining unrelated ideas",
-              "Doing nothing"
+              "Speeding through without thinking",
+              "Ignoring the hard parts",
+              "Asking a friend for the answer"
             ]
           },
           {
-            "q": "Identify the primary tool or method used when studying Real-World Modeling.",
-            "a": "Systematic observation and logic based on the lesson.",
+            "q": "Identify the long-term benefit of mastering Real-World Modeling.",
+            "a": "Enhanced problem-solving speed and deeper contextual understanding.",
             "d": [
-              "Using irrelevant data",
-              "Relying on luck",
-              "No tool is needed"
+              "Getting a one-time sticker",
+              "Finishing the level fast",
+              "No long-term benefit"
             ]
           }
         ]

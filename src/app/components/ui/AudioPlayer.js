@@ -67,16 +67,29 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
       utterance.onerror = () => setIsPlaying(false);
 
       if (voices.length > 0) {
-        const englishVoices = voices.filter(v => v.lang.startsWith(lang.split('-')[0]));
+        const langCode = lang.split('-')[0];
+        const langVoices = voices.filter(v => v.lang.startsWith(langCode));
 
-        let bestVoice =
-          englishVoices.find(v => v.name.includes('Google UK English Female')) ||
-          englishVoices.find(v => v.name.includes('Google US English')) ||
-          englishVoices.find(v => v.name.includes('Samantha')) ||
-          englishVoices.find(v => v.name.includes('Victoria')) ||
-          englishVoices.find(v => v.name.includes('Tessa')) ||
-          englishVoices.find(v => v.name.includes('Google')) ||
-          englishVoices[0];
+        let bestVoice;
+
+        if (langCode === 'en') {
+          bestVoice =
+            langVoices.find(v => v.name.includes('Google UK English Female')) ||
+            langVoices.find(v => v.name.includes('Google US English')) ||
+            langVoices.find(v => v.name.includes('Samantha')) ||
+            langVoices.find(v => v.name.includes('Victoria')) ||
+            langVoices.find(v => v.name.includes('Tessa')) ||
+            langVoices.find(v => v.name.includes('Google')) ||
+            langVoices[0];
+        } else if (langCode === 'ta') {
+          bestVoice =
+            langVoices.find(v => v.name.includes('Valluvar')) ||
+            langVoices.find(v => v.name.includes('Tamil')) ||
+            langVoices.find(v => v.name.includes('Google')) ||
+            langVoices[0];
+        } else {
+          bestVoice = langVoices[0];
+        }
 
         if (bestVoice) {
           utterance.voice = bestVoice;

@@ -103,7 +103,14 @@ export default function SubjectLevelsPage() {
           }
         }
 
-        setLevels(data);
+        // Numeric sort by level ID pattern math-1-level-X
+        const sortedData = data.sort((a, b) => {
+          const aId = parseInt(a.levelId.split('-').pop());
+          const bId = parseInt(b.levelId.split('-').pop());
+          return aId - bId;
+        });
+
+        setLevels(sortedData);
       } catch (err) {
         console.error("Error fetching levels:", err);
         // Fallback to local on error too
@@ -136,8 +143,13 @@ export default function SubjectLevelsPage() {
       const completedCount = levelTasks.filter(t => completedTaskIds.includes(t.taskId)).length;
       const isCompleted = totalTasks > 0 && completedCount === totalTasks;
 
-      // Override isLocked based on previous level's completion
-      let dynamicIsLocked = !previousCompleted;
+      // Decide if level should be locked based on progression setting
+      let dynamicIsLocked = false;
+      const isSequential = childUser?.sequentialProgression !== false; // Default to true if not set
+
+      if (isSequential) {
+        dynamicIsLocked = !previousCompleted;
+      }
 
       // Mark the first unlocked, non-completed level as "next up"
       let isNextUp = previousCompleted && !isCompleted && !dynamicIsLocked;

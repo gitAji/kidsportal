@@ -8,20 +8,22 @@ const model = "gemini-2.5-flash-lite";
 
 export const POST = async (req) => {
     try {
-        const { content, actionType, gradeId } = await req.json();
+        const { content, actionType, gradeId, aiContext } = await req.json();
 
         let prompt = "";
+        const personality = aiContext ? `Your personality for this task: ${aiContext}. ` : "";
+
         if (actionType === "simplify") {
-            prompt = `The student is an elementary student in ${gradeId || 'school'}. They are trying to learn this concept: "${content}". 
+            prompt = `${personality}The student is an elementary student in ${gradeId || 'school'}. They are trying to learn this concept: "${content}". 
 Rewrite this concept to be EXTREMELY simple, using shorter sentences, kid-friendly analogies, and very easy vocabulary. Respond with a short, highly encouraging message. Skip any greetings, just output the simpler explanation directly.`;
         } else if (actionType === "example") {
-            prompt = `The student is in ${gradeId || 'school'}. They are learning: "${content}". 
+            prompt = `${personality}The student is in ${gradeId || 'school'}. They are learning: "${content}". 
 Give ONE super fun, real-world example of this concept that a kid would absolutely love (think pizza, toys, superheroes, or animals). ONLY give the example, make it exciting, and keep it under 3 sentences.`;
         } else if (actionType === "practice") {
-            prompt = `The student is in ${gradeId || 'school'}. They just learned: "${content}". 
+            prompt = `${personality}The student is in ${gradeId || 'school'}. They just learned: "${content}". 
 Ask them ONE fun, simple interactive thinking question to test their understanding. Do not provide the answer. ONLY ask the question.`;
         } else {
-            prompt = `Explain "${content}" to a kid in ${gradeId || 'elementary school'}.`;
+            prompt = `${personality}Explain "${content}" to a kid in ${gradeId || 'elementary school'}.`;
         }
 
         const genModel = ai.getGenerativeModel({

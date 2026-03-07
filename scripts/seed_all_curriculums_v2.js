@@ -16,9 +16,10 @@ if (!admin.apps.length) {
 const db = admin.firestore();
 
 // Import curriculum data
-const mathCurriculum = require('./curriculum_math_v2.js');
-const scienceCurriculum = require('./curriculum_science_v2.js');
-const tamilCurriculum = require('./curriculum_tamil_v2.js');
+const mathCurriculum = require('./curriculum_math_v3.js');
+const scienceCurriculum = require('./curriculum_science_v3.js');
+const tamilCurriculum = require('./generate_real_tamil_curriculum.js');
+const englishCurriculum = require('./curriculum_english_v3.js');
 
 async function seedSubject(subjectName, data) {
     console.log(`Seeding levels for ${subjectName}...`);
@@ -56,13 +57,16 @@ async function seedSubject(subjectName, data) {
                 content: `Test your knowledge about ${level.name}.`,
                 timeLimit: 120,
                 xpReward: 30,
-                questions: level.quiz.map((q, qIndex) => ({
-                    questionId: `q-${levelId}-${qIndex}`,
-                    questionText: q.q,
-                    options: [...q.d, q.a].sort(() => Math.random() - 0.5),
-                    correctAnswer: q.a,
-                    type: 'multiple-choice'
-                }))
+                questions: level.quiz.map((q, qIndex) => {
+                    const options = [...q.d, q.a].sort(() => Math.random() - 0.5);
+                    return {
+                        questionId: `q-${levelId}-${qIndex}`,
+                        questionText: q.q,
+                        options: options,
+                        correctAnswer: q.a,
+                        type: 'multiple-choice'
+                    };
+                })
             });
 
             // Exam Task
@@ -73,13 +77,16 @@ async function seedSubject(subjectName, data) {
                 content: `Final challenge for ${level.name}.`,
                 timeLimit: 300,
                 xpReward: 50,
-                questions: level.exam.map((q, qIndex) => ({
-                    questionId: `e-${levelId}-${qIndex}`,
-                    questionText: q.q,
-                    options: [...q.d, q.a].sort(() => Math.random() - 0.5),
-                    correctAnswer: q.a,
-                    type: 'multiple-choice'
-                }))
+                questions: level.exam.map((q, qIndex) => {
+                    const options = [...q.d, q.a].sort(() => Math.random() - 0.5);
+                    return {
+                        questionId: `e-${levelId}-${qIndex}`,
+                        questionText: q.q,
+                        options: options,
+                        correctAnswer: q.a,
+                        type: 'multiple-choice'
+                    };
+                })
             });
 
             const levelDoc = {
@@ -109,6 +116,7 @@ async function runSeeding() {
     await seedSubject('Math', mathCurriculum);
     await seedSubject('Science', scienceCurriculum);
     await seedSubject('Tamil', tamilCurriculum);
+    await seedSubject('English', englishCurriculum);
 }
 
 runSeeding().then(() => {

@@ -15,25 +15,40 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
     const [translatedContent, setTranslatedContent] = useState(null);
     const [isTranslating, setIsTranslating] = useState(false);
-    const [contentLanguage, setContentLanguage] = useState('en');
-    const { languageLoaded } = useLanguage();
     const isTamilSubject = taskData?.subjectId?.toLowerCase().includes('tamil') ||
         taskData?.taskId?.toLowerCase().includes('tamil') ||
-        typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('tamil');
+        (typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('tamil'));
+
+    const [contentLanguage, setContentLanguage] = useState(isTamilSubject ? 'ta' : 'en');
+    const { languageLoaded } = useLanguage();
+
+    // Check if the current content appears to be English
+    const isEnglishContent = useCallback((text) => {
+        if (!text) return true;
+        const englishLetters = text.match(/[a-zA-Z]/g);
+        return englishLetters && englishLetters.length > (text.length * 0.2); // If > 20% are English letters
+    }, []);
 
     React.useEffect(() => {
         setTranslatedContent(null);
         setCurrentSentenceIndex(0);
         if (!taskData?.content) return;
 
-        if (isTamilSubject && contentLanguage === 'ta') {
+        // Force translation if target language differs from detected/likely source
+        // If content is English but user wants Tamil -> Translate to TA
+        // If content is Tamil but user wants English -> Translate to EN
+        const contentIsEn = isEnglishContent(taskData.content);
+        const needsTranslation = (contentIsEn && contentLanguage === 'ta') || (!contentIsEn && contentLanguage === 'en');
+        const targetLang = contentLanguage === 'ta' ? 'ta' : 'en';
+
+        if (needsTranslation) {
             const fetchTranslation = async () => {
                 setIsTranslating(true);
                 try {
                     const res = await fetch('/api/translate', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ text: taskData.content, targetLanguage: 'ta' })
+                        body: JSON.stringify({ text: taskData.content, targetLanguage: targetLang })
                     });
                     const data = await res.json();
                     if (data.translatedText) {
@@ -47,7 +62,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
             };
             fetchTranslation();
         }
-    }, [taskData, isTamilSubject, contentLanguage]);
+    }, [taskData, contentLanguage, isEnglishContent]);
 
     // Safely split text into sentences, filter out empty strings, and remove Markdown characters like ** or #
     const displayContent = translatedContent || taskData?.content || "";
@@ -81,7 +96,8 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                 body: JSON.stringify({
                     content: taskData.content,
                     actionType,
-                    gradeId: childUser?.gradeId || 'elementary school'
+                    gradeId: childUser?.gradeId || 'elementary school',
+                    aiContext: taskData.aiContext
                 })
             });
             const data = await res.json();
@@ -180,9 +196,22 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             </div>
                         </div>
 
+                        {/* Optional Video Header */}
+                        {taskData.videoUrl && (
+                            <div className="w-full aspect-video bg-slate-100 border-b border-slate-100 overflow-hidden relative group">
+                                <iframe
+                                    src={taskData.videoUrl}
+                                    className="w-full h-full"
+                                    title="Lesson Video"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                />
+                            </div>
+                        )}
+
                         {/* Card Language Toggle */}
-                        {isTamilSubject && languageLoaded && (
-                            <div className="absolute top-16 sm:top-20 right-5 sm:right-8 z-20">
+                        {languageLoaded && (
+                            <div className={`absolute ${taskData.videoUrl ? 'bottom-5' : 'top-16 sm:top-20'} right-5 sm:right-8 z-20`}>
                                 <button
                                     onClick={() => setContentLanguage(prev => prev === 'en' ? 'ta' : 'en')}
                                     className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-black text-[10px] shadow drop-shadow-sm hover:scale-105 active:scale-95 transition-transform"
@@ -216,7 +245,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             {/* Listen Button */}
                             <AudioPlayer
                                 text={sentences[validCurrentSentenceIndex]}
-                                lang={isTamilSubject && contentLanguage === 'ta' ? 'ta-IN' : 'en-US'}
+                                lang={contentLanguage === 'ta' ? 'ta-IN' : 'en-US'}
                                 label="Listen"
                                 icon={<FaVolumeUp />}
                                 customClassName="inline-flex items-center gap-2 bg-white px-4 sm:px-5 py-2.5 sm:py-3 text-blue-600 rounded-xl sm:rounded-2xl font-bold shadow-sm hover:shadow-md hover:bg-blue-50 transition-all cursor-pointer border border-blue-100 text-sm sm:text-base"

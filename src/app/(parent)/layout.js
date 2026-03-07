@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { PageLoader, DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/auth";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Header from "@/app/components/layout/header/Header";
 import Footer from "@/app/components/layout/footer/Footer";
 import DashboardFooter from "@/app/components/layout/footer/DashboardFooter";
@@ -27,14 +27,16 @@ export default function ParentLayout({ children }) {
   const [loadingAuth, setLoadingAuth] = useState(true);
   const [showExitIntentModal, setShowExitIntentModal] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   // Routes that should use the Workspace (Sidebar) Layout
-  const isWorkspace = pathname?.startsWith('/dashboard') ||
-    pathname?.startsWith('/analytics') ||
-    pathname?.startsWith('/child-dashboard') ||
-    pathname?.startsWith('/profile') ||
-    pathname?.startsWith('/billing') ||
-    pathname?.startsWith('/pricing');
+  const workspacePaths = [
+    '/dashboard', '/analytics', '/child-dashboard', '/profile',
+    '/billing', '/pricing', '/child-profile', '/child-settings',
+    '/subscription-management', '/avatar-customizer', '/avatar-shop',
+    '/sticker-book', '/payment', '/grades'
+  ];
+  const isWorkspace = workspacePaths.some(path => pathname?.startsWith(path));
 
   const { panelState, modalState, closeModal, closePanel, openModal, openPanel } = useUI();
 
@@ -45,6 +47,12 @@ export default function ParentLayout({ children }) {
     });
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (!loadingAuth && !user && isWorkspace) {
+      router.push("/login?role=parent");
+    }
+  }, [loadingAuth, user, isWorkspace, router]);
 
   useEffect(() => {
     const handleMouseLeave = (event) => {

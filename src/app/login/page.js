@@ -44,17 +44,26 @@ function UnifiedLoginPage() {
 
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                // If logged in, redirect to dashboard (actual routing handled by layout/guards)
+            if (user && activeRole === 'parent') {
+                // If logged in, redirect to dashboard 
+                router.push("/dashboard");
+            } else {
+                setVerifying(false);
             }
-            setVerifying(false);
         });
+
+        // Check for existing student session
+        const storedChild = localStorage.getItem("childUser") || sessionStorage.getItem("childUser");
+        if (storedChild && (!searchParams.get('role') || searchParams.get('role') === 'student')) {
+            router.push("/learning-zone");
+        }
+
         const role = searchParams.get('role');
         if (role && roles.map(r => r.id).includes(role)) {
             setActiveRole(role);
         }
         return () => unsub();
-    }, [searchParams]);
+    }, [searchParams, activeRole, router]);
 
     const handleAuth = async (e) => {
         if (e) e.preventDefault();

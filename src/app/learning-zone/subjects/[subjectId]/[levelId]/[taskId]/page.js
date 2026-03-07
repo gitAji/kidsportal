@@ -25,7 +25,7 @@ export default function TaskContentPage() {
   const params = useParams();
   const { subjectId, levelId, taskId } = params;
   const { language, toggleLanguage, languageLoaded, t } = useLanguage();
-  const isTamilSubject = subjectId?.toLowerCase().includes('tamil');
+  const isTamilSubject = subjectId?.toLowerCase().includes('tamil') || taskId?.toLowerCase().includes('tamil');
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
@@ -47,7 +47,7 @@ export default function TaskContentPage() {
   const [clickedCountingItems, setClickedCountingItems] = useState([]);
   const [translatedQuestion, setTranslatedQuestion] = useState(null);
   const [isTranslating, setIsTranslating] = useState(false);
-  const [contentLanguage, setContentLanguage] = useState('en');
+  const [contentLanguage, setContentLanguage] = useState(isTamilSubject ? 'ta' : 'en');
 
   const correctSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/correct.mp3') : null, []);
   const incorrectSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/incorrect.mp3') : null, []);
@@ -220,14 +220,18 @@ export default function TaskContentPage() {
     setTranslatedQuestion(null);
     if (!currentQuestion) return;
 
-    if (isTamilSubject && contentLanguage === 'ta') {
+    // Decide if we need translation
+    const needsTranslation = (isTamilSubject && contentLanguage === 'en') || (!isTamilSubject && contentLanguage === 'ta');
+    const targetLang = contentLanguage === 'ta' ? 'ta' : 'en';
+
+    if (needsTranslation) {
       const fetchTranslation = async () => {
         setIsTranslating(true);
         try {
           const res = await fetch('/api/translate-question', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question: currentQuestion, targetLanguage: 'ta' })
+            body: JSON.stringify({ question: currentQuestion, targetLanguage: targetLang })
           });
           const data = await res.json();
           if (data.translatedData) {
@@ -274,7 +278,9 @@ export default function TaskContentPage() {
           message: `Wow! I can read your writing perfectly! It says "${currentQuestion.correctAnswer}". You are becoming a great writer! 🦉🖌️`
         });
         setIsCheckingAnswer(false);
-        setScore(prev => prev + 10);
+        // Use custom question points or default to 10
+        const pointsToAdd = currentQuestion.points || 10;
+        setScore(prev => prev + pointsToAdd);
 
         // Save to progress
         const updatedHistory = [...taskHistory, {
@@ -315,7 +321,8 @@ export default function TaskContentPage() {
 
     if (isCorrect) {
       setFeedbackMessage({ type: 'correct', message });
-      setScore(s => s + 10);
+      const pointsToAdd = currentQuestion.points || 10;
+      setScore(s => s + pointsToAdd);
       setCorrectAnswersCount(c => c + 1);
       setShowReviewOption(false);
       correctSound?.play();
@@ -385,8 +392,12 @@ export default function TaskContentPage() {
       triggerConfetti(isSuccess);
       if (childUser?.uid || childUser?.id) {
         const childId = childUser.uid || childUser.id;
+        // If task has a flat xpReward, use that as the base score for 100% completion
+        // Otherwise use the calculated cumulative score
+        const finalScore = taskData.xpReward ? Math.floor((finalCorrect / total) * taskData.xpReward) : score;
+
         const updatedStats = recordTaskCompletion(childId, {
-          type: taskData.type, score, totalQuestions: total,
+          type: taskData.type, score: finalScore, totalQuestions: total,
           correct: finalCorrect, timeTaken, levelId, subjectId, retried: retriedThisTask,
           taskId: taskData.taskId
         });
@@ -433,8 +444,11 @@ export default function TaskContentPage() {
     localStorage.removeItem(`kidsportal_progress_${childId}_${taskData.taskId}`);
 
     // 10 pts for completing a lesson
+    // Use custom xpReward for lesson completion, or default to 10
+    const finalScore = taskData.xpReward || 10;
+
     const updatedStats = recordTaskCompletion(childId, {
-      type: taskData.type, score: 10, totalQuestions: 1,
+      type: taskData.type, score: finalScore, totalQuestions: 1,
       correct: 1, timeTaken: 0, levelId, subjectId, retried: false,
       taskId: taskData.taskId
     });
@@ -648,6 +662,32 @@ export default function TaskContentPage() {
           </div>
         </div>
 
+        {/* Task Media (Video/Audio) for non-lessons */}
+        {(taskData.type === 'quiz' || taskData.type === 'exam') && (taskData.videoUrl || taskData.audioUrl) && (
+          <div className="w-full max-w-4xl mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {taskData.videoUrl && (
+              <div className="bg-white rounded-3xl p-4 shadow-xl border border-slate-100 overflow-hidden aspect-video">
+                <iframe
+                  src={taskData.videoUrl}
+                  className="w-full h-full rounded-2xl"
+                  title="Task Media"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            )}
+            {taskData.audioUrl && (
+              <div className="bg-white rounded-3xl p-6 shadow-xl border border-slate-100 flex flex-col justify-center gap-4">
+                <p className="text-sm font-black text-slate-400 uppercase tracking-widest">Listen to Instructions</p>
+                <audio controls className="w-full">
+                  <source src={taskData.audioUrl} type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="w-full max-w-4xl flex items-center gap-6 mb-8">
           <div className="flex-grow flex flex-col gap-2">
             <div className="flex justify-between items-end px-1">
@@ -686,7 +726,7 @@ export default function TaskContentPage() {
             </motion.div>
           )}
 
-          {isTamilSubject && languageLoaded && !feedbackMessage && (
+          {languageLoaded && !feedbackMessage && (
             <button
               onClick={() => setContentLanguage(prev => prev === 'en' ? 'ta' : 'en')}
               className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-black text-[10px] shadow drop-shadow-sm hover:scale-105 active:scale-95 transition-transform z-20"
@@ -762,7 +802,10 @@ export default function TaskContentPage() {
               <p className="text-base text-gray-500 mt-2 font-medium">{t('counting_instruction')}</p>
             )}
             <div className="mt-3 bg-blue-50 text-blue-500 rounded-full hover:bg-blue-100 transition-colors">
-              <AudioPlayer text={displayQuestion?.questionText} lang={isTamilSubject && contentLanguage === 'ta' ? 'ta-IN' : 'en-US'} />
+              <AudioPlayer
+                text={displayQuestion?.questionText}
+                lang={contentLanguage === 'ta' ? 'ta-IN' : 'en-US'}
+              />
             </div>
             {isTranslating && <p className="text-xs text-indigo-500 font-bold mt-2 animate-pulse">Translating...</p>}
           </div>

@@ -1604,63 +1604,108 @@
               "tasks": [
                 {
                   "taskId": "tamil-1-level-1-lesson-1",
-                  "taskName": "Lesson: Uyir Ezuthukal (Vowels)",
+                  "taskName": "Lesson: The 12 Soul Letters (Vowels)",
                   "type": "lesson",
-                  "content": "Let's learn the soul of Tamil: அ, ஆ, இ, ஈ... these are the Vowels!",
-                  "questions": []
+                  "content": "Welcome to our first Tamil lesson! Tamil letters are unique. There are 12 'Soul letters' called Uyir Ezuthukal. Like our soul gives life to our body, these vowels give life to Tamil words! They are: அ, ஆ, இ, ஈ, உ, ஊ, எ, ஏ, ஐ, ஒ, ஓ, ஔ. There is also one special letter called Akkam: ஃ.",
+                  "xpReward": 30,
+                  "aiContext": "Teach like a friendly Tamil school teacher. Use examples like Amma for 'A'."
                 },
                 {
                   "taskId": "tamil-1-level-1-quiz-1",
-                  "taskName": "Practice Quiz",
+                  "taskName": "Practice the Vowels",
                   "type": "quiz",
-                  "timeLimit": 120,
-                  "content": "Let's learn our beautiful Tamil language!",
+                  "timeLimit": 180,
+                  "content": "Identify the basic vowels!",
                   "questions": [
                     {
                       "questionId": "tam1-l1-q1",
-                      "questionText": "Which is the first letter in Tamil?",
+                      "questionText": "Identify the letter 'அ' (Short A):",
                       "options": [
                         "அ",
-                        "Eye",
-                        "Neelam"
+                        "ஆ",
+                        "இ",
+                        "ஈ"
                       ],
                       "correctAnswer": "அ",
                       "type": "multiple-choice"
                     },
                     {
                       "questionId": "tam1-l1-q2",
-                      "questionText": "Fill: அ, ஆ, இ, ___?",
+                      "questionText": "Which letter makes the long 'Aaa' sound?",
+                      "options": [
+                        "அ",
+                        "ஆ",
+                        "உ",
+                        "ஊ"
+                      ],
+                      "correctAnswer": "ஆ",
+                      "type": "multiple-choice"
+                    },
+                    {
+                      "questionId": "tam1-l1-q3",
+                      "questionText": "Identify the vowel in 'Ilai' (Leaf):",
+                      "options": [
+                        "இ",
+                        "ஈ",
+                        "எ",
+                        "ஏ"
+                      ],
+                      "correctAnswer": "இ",
+                      "type": "multiple-choice"
+                    },
+                    {
+                      "questionId": "tam1-l1-q4",
+                      "questionText": "Fill the blank: அ, ஆ, இ, ___?",
                       "options": [
                         "ஈ",
-                        "Sivappu",
-                        "Green"
+                        "உ",
+                        "எ",
+                        "ஒ"
                       ],
                       "correctAnswer": "ஈ",
+                      "type": "multiple-choice"
+                    },
+                    {
+                      "questionId": "tam1-l1-q5",
+                      "questionText": "Which vowel represents 'Mother' (Amma)?",
+                      "options": [
+                        "அ",
+                        "ஆ",
+                        "இ",
+                        "ஈ"
+                      ],
+                      "correctAnswer": "அ",
                       "type": "multiple-choice"
                     }
                   ]
                 },
                 {
                   "taskId": "tamil-1-level-1-exam-1",
-                  "taskName": "Tamil Challenge!",
+                  "taskName": "Vowel Master Challenge",
                   "type": "exam",
-                  "timeLimit": 240,
-                  "content": "Show what you've learned in Tamil!",
+                  "timeLimit": 300,
                   "questions": [
                     {
-                      "questionId": "tam1-l1-ex-q1",
-                      "questionText": "Which is the first letter in Tamil?",
+                      "questionId": "tam1-l1-ex-1",
+                      "questionText": "Identify 'Aadu' (Goat) start letter:",
                       "options": [
                         "அ",
                         "ஆ",
-                        "Nose"
+                        "இ",
+                        "ஈ"
                       ],
-                      "correctAnswer": "அ",
+                      "correctAnswer": "ஆ",
                       "type": "multiple-choice"
                     },
                     {
-                      "questionId": "tam1-l1-ex-q2",
-                      "questionText": "Translate or identify: Fill: அ, ஆ, இ, ___?",
+                      "questionId": "tam1-l1-ex-2",
+                      "questionText": "Type the first letter of the Tamil alphabet:",
+                      "correctAnswer": "அ",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "tam1-l1-ex-3",
+                      "questionText": "What is the 4th vowel in the sequence?",
                       "correctAnswer": "ஈ",
                       "type": "identification"
                     }
@@ -1675,65 +1720,51 @@
               "tasks": [
                 {
                   "taskId": "tamil-1-level-2-lesson-1",
-                  "taskName": "Lesson: Mei Ezuthukal (Consonants)",
+                  "taskName": "Lesson: The 18 Body Letters (Consonants)",
                   "type": "lesson",
-                  "content": "Consonants make the sounds strong! க், ங், ச்...",
-                  "questions": []
+                  "content": "Consonants are called Mei Ezuthukal ('Body letters'). They always have a dot (Pulli) on top. There are 18 such letters. Let's look at the first few: க் (ik), ங் (ing), ச் (ich), ஞ் (inj). They need the help of vowels to make complete sounds like 'Ka', 'Ga', 'Sa'.",
+                  "xpReward": 30
                 },
                 {
                   "taskId": "tamil-1-level-2-quiz-1",
-                  "taskName": "Practice Quiz",
+                  "taskName": "Spot the Dots!",
                   "type": "quiz",
-                  "timeLimit": 120,
-                  "content": "Let's learn our beautiful Tamil language!",
                   "questions": [
                     {
                       "questionId": "tam1-l2-q1",
-                      "questionText": "Does க் have a dot on top?",
+                      "questionText": "What indicates a consonant (Mei Ezuthu)?",
                       "options": [
-                        "Yes",
-                        "Singam",
-                        "Mazhai"
+                        "A dot on top",
+                        "A curve",
+                        "A straight line",
+                        "Two dots"
                       ],
-                      "correctAnswer": "Yes",
+                      "correctAnswer": "A dot on top",
                       "type": "multiple-choice"
                     },
                     {
                       "questionId": "tam1-l2-q2",
-                      "questionText": "How many dots does க் have?",
+                      "questionText": "Pick the correct consonant 'ik':",
                       "options": [
-                        "1",
-                        "Sivappu",
-                        "Pazham"
+                        "அ",
+                        "க்",
+                        "ஆ",
+                        "ங்"
                       ],
-                      "correctAnswer": "1",
-                      "type": "multiple-choice"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "tamil-1-level-2-exam-1",
-                  "taskName": "Tamil Challenge!",
-                  "type": "exam",
-                  "timeLimit": 240,
-                  "content": "Show what you've learned in Tamil!",
-                  "questions": [
-                    {
-                      "questionId": "tam1-l2-ex-q1",
-                      "questionText": "Does க் have a dot on top?",
-                      "options": [
-                        "Vanakkam",
-                        "Green",
-                        "Yes"
-                      ],
-                      "correctAnswer": "Yes",
+                      "correctAnswer": "க்",
                       "type": "multiple-choice"
                     },
                     {
-                      "questionId": "tam1-l2-ex-q2",
-                      "questionText": "Translate or identify: How many dots does க் have?",
-                      "correctAnswer": "1",
-                      "type": "identification"
+                      "questionId": "tam1-l2-q3",
+                      "questionText": "Identify the 'ing' sound:",
+                      "options": [
+                        "க்",
+                        "ங்",
+                        "ச்",
+                        "ஞ்"
+                      ],
+                      "correctAnswer": "ங்",
+                      "type": "multiple-choice"
                     }
                   ]
                 }
@@ -1741,30 +1772,29 @@
             },
             {
               "levelId": "tamil-1-level-3",
-              "levelName": "Level 3: Meet Your Family (Amma, Appa)",
+              "levelName": "Level 3: Meet Your Family",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "tamil-1-level-3-lesson-1",
-                  "taskName": "Lesson: Meet Your Family (Amma, Appa)",
+                  "taskName": "Lesson: Tamil Family Names",
                   "type": "lesson",
-                  "content": "Amma is Mother. Appa is Father. Thambi is Brother.",
-                  "questions": []
+                  "content": "In Tamil, we call our family members with very beautiful names. 'Amma' is Mother. 'Appa' is Father. 'Thambi' is younger brother, and 'Thangai' is younger sister. 'Annai' is another word for Mother!",
+                  "xpReward": 30
                 },
                 {
                   "taskId": "tamil-1-level-3-quiz-1",
-                  "taskName": "Practice Quiz",
+                  "taskName": "Family Words Fun",
                   "type": "quiz",
-                  "timeLimit": 120,
-                  "content": "Let's learn our beautiful Tamil language!",
                   "questions": [
                     {
                       "questionId": "tam1-l3-q1",
-                      "questionText": "What do we call Mother in Tamil?",
+                      "questionText": "How do we call Mother in Tamil?",
                       "options": [
+                        "Appa",
                         "Amma",
-                        "Ondru",
-                        "Singam"
+                        "Thambi",
+                        "Thangai"
                       ],
                       "correctAnswer": "Amma",
                       "type": "multiple-choice"
@@ -1773,38 +1803,25 @@
                       "questionId": "tam1-l3-q2",
                       "questionText": "What is Father in Tamil?",
                       "options": [
+                        "Amma",
                         "Appa",
-                        "Pazham",
-                        "Yes"
+                        "Thangai",
+                        "Annai"
                       ],
                       "correctAnswer": "Appa",
-                      "type": "multiple-choice"
-                    }
-                  ]
-                },
-                {
-                  "taskId": "tamil-1-level-3-exam-1",
-                  "taskName": "Tamil Challenge!",
-                  "type": "exam",
-                  "timeLimit": 240,
-                  "content": "Show what you've learned in Tamil!",
-                  "questions": [
-                    {
-                      "questionId": "tam1-l3-ex-q1",
-                      "questionText": "What do we call Mother in Tamil?",
-                      "options": [
-                        "ஆ",
-                        "இ",
-                        "Amma"
-                      ],
-                      "correctAnswer": "Amma",
                       "type": "multiple-choice"
                     },
                     {
-                      "questionId": "tam1-l3-ex-q2",
-                      "questionText": "Translate or identify: What is Father in Tamil?",
-                      "correctAnswer": "Appa",
-                      "type": "identification"
+                      "questionId": "tam1-l3-q3",
+                      "questionText": "Identify the word for Younger Brother:",
+                      "options": [
+                        "Thangai",
+                        "Thambi",
+                        "Amma",
+                        "Appa"
+                      ],
+                      "correctAnswer": "Thambi",
+                      "type": "multiple-choice"
                     }
                   ]
                 }
@@ -8119,7 +8136,7 @@
           "levels": [
             {
               "levelId": "english-3-level-1",
-              "levelName": "Level 1 Mastery",
+              "levelName": "Level 1: Noun Types",
               "isLocked": false,
               "tasks": [
                 {
@@ -8203,7 +8220,7 @@
             },
             {
               "levelId": "english-3-level-2",
-              "levelName": "Level 2 Mastery",
+              "levelName": "Level 2: Verb Tenses (Adv)",
               "isLocked": false,
               "tasks": [
                 {
@@ -8287,7 +8304,7 @@
             },
             {
               "levelId": "english-3-level-3",
-              "levelName": "Level 3 Mastery",
+              "levelName": "Level 3: Sentence Structure",
               "isLocked": false,
               "tasks": [
                 {
@@ -8371,7 +8388,7 @@
             },
             {
               "levelId": "english-3-level-4",
-              "levelName": "Level 4 Mastery",
+              "levelName": "Level 4: Adjectives (Comp)",
               "isLocked": false,
               "tasks": [
                 {
@@ -8455,7 +8472,7 @@
             },
             {
               "levelId": "english-3-level-5",
-              "levelName": "Level 5 Mastery",
+              "levelName": "Level 5: Adverbs of Manner",
               "isLocked": false,
               "tasks": [
                 {
@@ -8539,7 +8556,7 @@
             },
             {
               "levelId": "english-3-level-6",
-              "levelName": "Level 6 Mastery",
+              "levelName": "Level 6: Subject-Verb Agreement",
               "isLocked": false,
               "tasks": [
                 {
@@ -8623,7 +8640,7 @@
             },
             {
               "levelId": "english-3-level-7",
-              "levelName": "Level 7 Mastery",
+              "levelName": "Level 7: Conjunctions & Joining",
               "isLocked": false,
               "tasks": [
                 {
@@ -8707,7 +8724,7 @@
             },
             {
               "levelId": "english-3-level-8",
-              "levelName": "Level 8 Mastery",
+              "levelName": "Level 8: Reading Comprehension",
               "isLocked": false,
               "tasks": [
                 {
@@ -8791,7 +8808,7 @@
             },
             {
               "levelId": "english-3-level-9",
-              "levelName": "Level 9 Mastery",
+              "levelName": "Level 9: Vocabulary Building",
               "isLocked": false,
               "tasks": [
                 {
@@ -8875,7 +8892,7 @@
             },
             {
               "levelId": "english-3-level-10",
-              "levelName": "Level 10 Mastery",
+              "levelName": "Level 10: Short Story Writing",
               "isLocked": false,
               "tasks": [
                 {
@@ -12355,7 +12372,7 @@
           "levels": [
             {
               "levelId": "english-4-level-1",
-              "levelName": "Level 1 Mastery",
+              "levelName": "Level 1: Proper & Common Nouns",
               "isLocked": false,
               "tasks": [
                 {
@@ -12439,7 +12456,7 @@
             },
             {
               "levelId": "english-4-level-2",
-              "levelName": "Level 2 Mastery",
+              "levelName": "Level 2: Helping Verbs",
               "isLocked": false,
               "tasks": [
                 {
@@ -12523,7 +12540,7 @@
             },
             {
               "levelId": "english-4-level-3",
-              "levelName": "Level 3 Mastery",
+              "levelName": "Level 3: Tenses",
               "isLocked": false,
               "tasks": [
                 {
@@ -12607,7 +12624,7 @@
             },
             {
               "levelId": "english-4-level-4",
-              "levelName": "Level 4 Mastery",
+              "levelName": "Level 4: Pronouns & Antecedents",
               "isLocked": false,
               "tasks": [
                 {
@@ -12691,7 +12708,7 @@
             },
             {
               "levelId": "english-4-level-5",
-              "levelName": "Level 5 Mastery",
+              "levelName": "Level 5: Punctuation Marks",
               "isLocked": false,
               "tasks": [
                 {
@@ -12775,7 +12792,7 @@
             },
             {
               "levelId": "english-4-level-6",
-              "levelName": "Level 6 Mastery",
+              "levelName": "Level 6: Sentence Types",
               "isLocked": false,
               "tasks": [
                 {
@@ -12859,7 +12876,7 @@
             },
             {
               "levelId": "english-4-level-7",
-              "levelName": "Level 7 Mastery",
+              "levelName": "Level 7: Similes & Metaphors",
               "isLocked": false,
               "tasks": [
                 {
@@ -12943,7 +12960,7 @@
             },
             {
               "levelId": "english-4-level-8",
-              "levelName": "Level 8 Mastery",
+              "levelName": "Level 8: Informational Texts",
               "isLocked": false,
               "tasks": [
                 {
@@ -13027,7 +13044,7 @@
             },
             {
               "levelId": "english-4-level-9",
-              "levelName": "Level 9 Mastery",
+              "levelName": "Level 9: Narrative Writing",
               "isLocked": false,
               "tasks": [
                 {
@@ -13111,7 +13128,7 @@
             },
             {
               "levelId": "english-4-level-10",
-              "levelName": "Level 10 Mastery",
+              "levelName": "Level 10: Poetry Basics",
               "isLocked": false,
               "tasks": [
                 {
@@ -16591,7 +16608,7 @@
           "levels": [
             {
               "levelId": "english-5-level-1",
-              "levelName": "Level 1 Mastery",
+              "levelName": "Level 1: Abstract & Concrete Nouns",
               "isLocked": false,
               "tasks": [
                 {
@@ -16675,7 +16692,7 @@
             },
             {
               "levelId": "english-5-level-2",
-              "levelName": "Level 2 Mastery",
+              "levelName": "Level 2: Irregular Verbs",
               "isLocked": false,
               "tasks": [
                 {
@@ -16759,7 +16776,7 @@
             },
             {
               "levelId": "english-5-level-3",
-              "levelName": "Level 3 Mastery",
+              "levelName": "Level 3: Perfect Tenses",
               "isLocked": false,
               "tasks": [
                 {
@@ -16843,7 +16860,7 @@
             },
             {
               "levelId": "english-5-level-4",
-              "levelName": "Level 4 Mastery",
+              "levelName": "Level 4: Intensive Pronouns",
               "isLocked": false,
               "tasks": [
                 {
@@ -16927,7 +16944,7 @@
             },
             {
               "levelId": "english-5-level-5",
-              "levelName": "Level 5 Mastery",
+              "levelName": "Level 5: Context Clues",
               "isLocked": false,
               "tasks": [
                 {
@@ -17011,7 +17028,7 @@
             },
             {
               "levelId": "english-5-level-6",
-              "levelName": "Level 6 Mastery",
+              "levelName": "Level 6: Sentence Combining",
               "isLocked": false,
               "tasks": [
                 {
@@ -17095,7 +17112,7 @@
             },
             {
               "levelId": "english-5-level-7",
-              "levelName": "Level 7 Mastery",
+              "levelName": "Level 7: Hyperbole & personification",
               "isLocked": false,
               "tasks": [
                 {
@@ -17179,7 +17196,7 @@
             },
             {
               "levelId": "english-5-level-8",
-              "levelName": "Level 8 Mastery",
+              "levelName": "Level 8: Summarizing Text",
               "isLocked": false,
               "tasks": [
                 {
@@ -17263,7 +17280,7 @@
             },
             {
               "levelId": "english-5-level-9",
-              "levelName": "Level 9 Mastery",
+              "levelName": "Level 9: Expository Writing",
               "isLocked": false,
               "tasks": [
                 {
@@ -17347,7 +17364,7 @@
             },
             {
               "levelId": "english-5-level-10",
-              "levelName": "Level 10 Mastery",
+              "levelName": "Level 10: Poetry Analysis",
               "isLocked": false,
               "tasks": [
                 {
@@ -19981,7 +19998,7 @@
           "levels": [
             {
               "levelId": "english-6-level-1",
-              "levelName": "Level 1 Mastery",
+              "levelName": "Level 1: Subject & Object Pronouns",
               "isLocked": false,
               "tasks": [
                 {
@@ -20065,7 +20082,7 @@
             },
             {
               "levelId": "english-6-level-2",
-              "levelName": "Level 2 Mastery",
+              "levelName": "Level 2: Active & Passive Voice",
               "isLocked": false,
               "tasks": [
                 {
@@ -20149,7 +20166,7 @@
             },
             {
               "levelId": "english-6-level-3",
-              "levelName": "Level 3 Mastery",
+              "levelName": "Level 3: Progressive Tenses",
               "isLocked": false,
               "tasks": [
                 {
@@ -20233,7 +20250,7 @@
             },
             {
               "levelId": "english-6-level-4",
-              "levelName": "Level 4 Mastery",
+              "levelName": "Level 4: Greek & Latin Roots",
               "isLocked": false,
               "tasks": [
                 {
@@ -20317,18 +20334,18 @@
             },
             {
               "levelId": "english-6-level-5",
-              "levelName": "Level 6 Mastery",
+              "levelName": "Level 5: Word Analogies",
               "isLocked": false,
               "tasks": [
                 {
-                  "taskId": "english-6-level-6-lesson",
-                  "taskName": "Interactive Lesson 6",
+                  "taskId": "english-6-level-5-lesson",
+                  "taskName": "Interactive Lesson 5",
                   "type": "lesson",
-                  "content": "Welcome to English Level 6! Prepare to learn some amazing new things today. This lesson prepares you for the varied interactive questions ahead!",
+                  "content": "Welcome to English Level 5! Prepare to learn some amazing new things today. This lesson prepares you for the varied interactive questions ahead!",
                   "questions": []
                 },
                 {
-                  "taskId": "english-6-level-6-quiz",
+                  "taskId": "english-6-level-5-quiz",
                   "taskName": "Practice Module",
                   "type": "quiz",
                   "timeLimit": 180,
@@ -20336,7 +20353,7 @@
                   "questions": [
                     {
                       "questionId": "q-English-6-l5-1",
-                      "questionText": "Which of these relates to English Level 6?",
+                      "questionText": "Which of these relates to English Level 5?",
                       "options": [
                         "Alpha",
                         "Beta",
@@ -20355,7 +20372,7 @@
                   ]
                 },
                 {
-                  "taskId": "english-6-level-6-exam",
+                  "taskId": "english-6-level-5-exam",
                   "taskName": "Final Challenge (Whistles!)",
                   "type": "exam",
                   "timeLimit": 300,
@@ -20363,7 +20380,7 @@
                   "questions": [
                     {
                       "questionId": "q-English-6-l5-1",
-                      "questionText": "Which of these relates to English Level 6?",
+                      "questionText": "Which of these relates to English Level 5?",
                       "options": [
                         "Alpha",
                         "Beta",
@@ -20381,7 +20398,7 @@
                     },
                     {
                       "questionId": "q-English-6-l5-3",
-                      "questionText": "Is it true that Level 6 is fun?",
+                      "questionText": "Is it true that Level 5 is fun?",
                       "options": [
                         "True",
                         "False"
@@ -20401,7 +20418,7 @@
             },
             {
               "levelId": "english-6-level-6",
-              "levelName": "Level 6 Mastery",
+              "levelName": "Level 6: Complex Clauses",
               "isLocked": false,
               "tasks": [
                 {
@@ -20485,7 +20502,7 @@
             },
             {
               "levelId": "english-6-level-7",
-              "levelName": "Level 7 Mastery",
+              "levelName": "Level 7: Irony & Tone",
               "isLocked": false,
               "tasks": [
                 {
@@ -20569,7 +20586,7 @@
             },
             {
               "levelId": "english-6-level-8",
-              "levelName": "Level 8 Mastery",
+              "levelName": "Level 8: Argumentative Reading",
               "isLocked": false,
               "tasks": [
                 {
@@ -20653,7 +20670,7 @@
             },
             {
               "levelId": "english-6-level-9",
-              "levelName": "Level 9 Mastery",
+              "levelName": "Level 9: Persuasive Essays",
               "isLocked": false,
               "tasks": [
                 {
@@ -20737,7 +20754,7 @@
             },
             {
               "levelId": "english-6-level-10",
-              "levelName": "Level 10 Mastery",
+              "levelName": "Level 10: Literary Genres",
               "isLocked": false,
               "tasks": [
                 {
@@ -23371,7 +23388,7 @@
           "levels": [
             {
               "levelId": "english-7-level-1",
-              "levelName": "Level 1 Mastery",
+              "levelName": "Level 1: Direct & Indirect Objects",
               "isLocked": false,
               "tasks": [
                 {
@@ -23455,7 +23472,7 @@
             },
             {
               "levelId": "english-7-level-2",
-              "levelName": "Level 2 Mastery",
+              "levelName": "Level 2: Transitive & Intransitive Verbs",
               "isLocked": false,
               "tasks": [
                 {
@@ -23539,7 +23556,7 @@
             },
             {
               "levelId": "english-7-level-3",
-              "levelName": "Level 3 Mastery",
+              "levelName": "Level 3: Participles & Phrases",
               "isLocked": false,
               "tasks": [
                 {
@@ -23623,7 +23640,7 @@
             },
             {
               "levelId": "english-7-level-4",
-              "levelName": "Level 4 Mastery",
+              "levelName": "Level 4: Word Origins",
               "isLocked": false,
               "tasks": [
                 {
@@ -23707,18 +23724,18 @@
             },
             {
               "levelId": "english-7-level-5",
-              "levelName": "Level 7 Mastery",
+              "levelName": "Level 5: Denotation & Connotation",
               "isLocked": false,
               "tasks": [
                 {
-                  "taskId": "english-7-level-7-lesson",
-                  "taskName": "Interactive Lesson 7",
+                  "taskId": "english-7-level-5-lesson",
+                  "taskName": "Interactive Lesson 5",
                   "type": "lesson",
-                  "content": "Welcome to English Level 7! Prepare to learn some amazing new things today. This lesson prepares you for the varied interactive questions ahead!",
+                  "content": "Welcome to English Level 5! Prepare to learn some amazing new things today. This lesson prepares you for the varied interactive questions ahead!",
                   "questions": []
                 },
                 {
-                  "taskId": "english-7-level-7-quiz",
+                  "taskId": "english-7-level-5-quiz",
                   "taskName": "Practice Module",
                   "type": "quiz",
                   "timeLimit": 180,
@@ -23726,7 +23743,7 @@
                   "questions": [
                     {
                       "questionId": "q-English-7-l5-1",
-                      "questionText": "Which of these relates to English Level 7?",
+                      "questionText": "Which of these relates to English Level 5?",
                       "options": [
                         "Alpha",
                         "Beta",
@@ -23745,7 +23762,7 @@
                   ]
                 },
                 {
-                  "taskId": "english-7-level-7-exam",
+                  "taskId": "english-7-level-5-exam",
                   "taskName": "Final Challenge (Whistles!)",
                   "type": "exam",
                   "timeLimit": 300,
@@ -23753,7 +23770,7 @@
                   "questions": [
                     {
                       "questionId": "q-English-7-l5-1",
-                      "questionText": "Which of these relates to English Level 7?",
+                      "questionText": "Which of these relates to English Level 5?",
                       "options": [
                         "Alpha",
                         "Beta",
@@ -23771,7 +23788,7 @@
                     },
                     {
                       "questionId": "q-English-7-l5-3",
-                      "questionText": "Is it true that Level 7 is fun?",
+                      "questionText": "Is it true that Level 5 is fun?",
                       "options": [
                         "True",
                         "False"
@@ -23791,7 +23808,7 @@
             },
             {
               "levelId": "english-7-level-6",
-              "levelName": "Level 6 Mastery",
+              "levelName": "Level 6: Complex Sentences",
               "isLocked": false,
               "tasks": [
                 {
@@ -23875,7 +23892,7 @@
             },
             {
               "levelId": "english-7-level-7",
-              "levelName": "Level 7 Mastery",
+              "levelName": "Level 7: Mood & Style",
               "isLocked": false,
               "tasks": [
                 {
@@ -23959,7 +23976,7 @@
             },
             {
               "levelId": "english-7-level-8",
-              "levelName": "Level 8 Mastery",
+              "levelName": "Level 8: Analyzing Evidence",
               "isLocked": false,
               "tasks": [
                 {
@@ -24043,7 +24060,7 @@
             },
             {
               "levelId": "english-7-level-9",
-              "levelName": "Level 9 Mastery",
+              "levelName": "Level 9: Research Papers",
               "isLocked": false,
               "tasks": [
                 {
@@ -24127,7 +24144,7 @@
             },
             {
               "levelId": "english-7-level-10",
-              "levelName": "Level 10 Mastery",
+              "levelName": "Level 10: Classic Literature",
               "isLocked": false,
               "tasks": [
                 {
@@ -26761,7 +26778,7 @@
           "levels": [
             {
               "levelId": "english-8-level-1",
-              "levelName": "Level 1 Mastery",
+              "levelName": "Level 1: Clause Types",
               "isLocked": false,
               "tasks": [
                 {
@@ -26845,7 +26862,7 @@
             },
             {
               "levelId": "english-8-level-2",
-              "levelName": "Level 2 Mastery",
+              "levelName": "Level 2: Gerunds & Infinitives",
               "isLocked": false,
               "tasks": [
                 {
@@ -26929,7 +26946,7 @@
             },
             {
               "levelId": "english-8-level-3",
-              "levelName": "Level 3 Mastery",
+              "levelName": "Level 3: Punctuation Patterns",
               "isLocked": false,
               "tasks": [
                 {
@@ -27013,7 +27030,7 @@
             },
             {
               "levelId": "english-8-level-4",
-              "levelName": "Level 4 Mastery",
+              "levelName": "Level 4: Context & Etymology",
               "isLocked": false,
               "tasks": [
                 {
@@ -27097,18 +27114,18 @@
             },
             {
               "levelId": "english-8-level-5",
-              "levelName": "Level 8 Mastery",
+              "levelName": "Level 5: Figurative Nuance",
               "isLocked": false,
               "tasks": [
                 {
-                  "taskId": "english-8-level-8-lesson",
-                  "taskName": "Interactive Lesson 8",
+                  "taskId": "english-8-level-5-lesson",
+                  "taskName": "Interactive Lesson 5",
                   "type": "lesson",
-                  "content": "Welcome to English Level 8! Prepare to learn some amazing new things today. This lesson prepares you for the varied interactive questions ahead!",
+                  "content": "Welcome to English Level 5! Prepare to learn some amazing new things today. This lesson prepares you for the varied interactive questions ahead!",
                   "questions": []
                 },
                 {
-                  "taskId": "english-8-level-8-quiz",
+                  "taskId": "english-8-level-5-quiz",
                   "taskName": "Practice Module",
                   "type": "quiz",
                   "timeLimit": 180,
@@ -27116,7 +27133,7 @@
                   "questions": [
                     {
                       "questionId": "q-English-8-l5-1",
-                      "questionText": "Which of these relates to English Level 8?",
+                      "questionText": "Which of these relates to English Level 5?",
                       "options": [
                         "Alpha",
                         "Beta",
@@ -27135,7 +27152,7 @@
                   ]
                 },
                 {
-                  "taskId": "english-8-level-8-exam",
+                  "taskId": "english-8-level-5-exam",
                   "taskName": "Final Challenge (Whistles!)",
                   "type": "exam",
                   "timeLimit": 300,
@@ -27143,7 +27160,7 @@
                   "questions": [
                     {
                       "questionId": "q-English-8-l5-1",
-                      "questionText": "Which of these relates to English Level 8?",
+                      "questionText": "Which of these relates to English Level 5?",
                       "options": [
                         "Alpha",
                         "Beta",
@@ -27161,7 +27178,7 @@
                     },
                     {
                       "questionId": "q-English-8-l5-3",
-                      "questionText": "Is it true that Level 8 is fun?",
+                      "questionText": "Is it true that Level 5 is fun?",
                       "options": [
                         "True",
                         "False"
@@ -27181,7 +27198,7 @@
             },
             {
               "levelId": "english-8-level-6",
-              "levelName": "Level 6 Mastery",
+              "levelName": "Level 6: Cohesion & Flow",
               "isLocked": false,
               "tasks": [
                 {
@@ -27265,7 +27282,7 @@
             },
             {
               "levelId": "english-8-level-7",
-              "levelName": "Level 7 Mastery",
+              "levelName": "Level 7: Perspective & Bias",
               "isLocked": false,
               "tasks": [
                 {
@@ -27349,7 +27366,7 @@
             },
             {
               "levelId": "english-8-level-8",
-              "levelName": "Level 8 Mastery",
+              "levelName": "Level 8: Evaluating Arguments",
               "isLocked": false,
               "tasks": [
                 {
@@ -27433,7 +27450,7 @@
             },
             {
               "levelId": "english-8-level-9",
-              "levelName": "Level 9 Mastery",
+              "levelName": "Level 9: Formal Reports",
               "isLocked": false,
               "tasks": [
                 {
@@ -27517,7 +27534,7 @@
             },
             {
               "levelId": "english-8-level-10",
-              "levelName": "Level 10 Mastery",
+              "levelName": "Level 10: Archetypes & Themes",
               "isLocked": false,
               "tasks": [
                 {
