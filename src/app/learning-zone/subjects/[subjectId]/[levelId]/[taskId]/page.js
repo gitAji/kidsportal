@@ -24,7 +24,7 @@ export default function TaskContentPage() {
   const router = useRouter();
   const params = useParams();
   const { subjectId, levelId, taskId } = params;
-  const { language, toggleLanguage, languageLoaded } = useLanguage();
+  const { language, toggleLanguage, languageLoaded, t } = useLanguage();
   const isTamilSubject = subjectId?.toLowerCase().includes('tamil');
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -45,6 +45,9 @@ export default function TaskContentPage() {
   const [sessionHistory, setSessionHistory] = useState([]);
   const [isCheckingAnswer, setIsCheckingAnswer] = useState(false);
   const [clickedCountingItems, setClickedCountingItems] = useState([]);
+  const [translatedQuestion, setTranslatedQuestion] = useState(null);
+  const [isTranslating, setIsTranslating] = useState(false);
+  const [contentLanguage, setContentLanguage] = useState('en');
 
   const correctSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/correct.mp3') : null, []);
   const incorrectSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/incorrect.mp3') : null, []);
@@ -122,16 +125,16 @@ export default function TaskContentPage() {
   // Professor Greeting & Character Setup
   const professor = useMemo(() => {
     const char = childUser?.professorCharacter || 'owl';
-    if (char === 'panda') return { name: 'Smart Panda', img: '/images/smart-panda.png', defaultMsg: "Hi! I'm Smart Panda 🐼. Let's learn together!" };
-    return { name: 'Professor Owl', img: '/images/professor-owl.png', defaultMsg: "Hi! I'm Professor Owl 🦉. Read carefully and give it your best shot!" };
-  }, [childUser]);
+    if (char === 'panda') return { name: t('panda_name'), img: '/images/smart-panda.png', defaultMsg: t('panda_default_msg') };
+    return { name: t('owl_name'), img: '/images/professor-owl.png', defaultMsg: t('owl_default_msg') };
+  }, [childUser, t]);
 
   useEffect(() => {
     if (taskData && !loading && !feedbackMessage) {
       const timer = setTimeout(() => {
         setFeedbackMessage({
           type: 'info',
-          message: `Hi ${childUser?.name || 'Explorer'}! I'm ${professor.name}. ${professor.defaultMsg}`
+          message: `${t('hi')} ${childUser?.name || t('explorer')}! ${t('imCharacter')} ${professor.name}. ${professor.defaultMsg}`
         });
       }, 1500);
 
@@ -191,9 +194,9 @@ export default function TaskContentPage() {
         const next = p - 1;
         // Time alerts logic
         if (childUser?.timeAlertsEnabled) {
-          if (next === 60) setFeedbackMessage({ type: 'info', message: "One minute left! You can do it! ⏰" });
-          if (next === 30) setFeedbackMessage({ type: 'info', message: "30 seconds left! Almost there! 🚀" });
-          if (next === 10) setFeedbackMessage({ type: 'info', message: "Quick! Only 10 seconds remaining! 🏁" });
+          if (next === 60) setFeedbackMessage({ type: 'info', message: t('one_min_left') });
+          if (next === 30) setFeedbackMessage({ type: 'info', message: t('thirty_sec_left') });
+          if (next === 10) setFeedbackMessage({ type: 'info', message: t('ten_sec_left') });
         }
         return next;
       });
@@ -213,6 +216,39 @@ export default function TaskContentPage() {
 
   const currentQuestion = taskData?.questions?.[currentQuestionIndex];
 
+  useEffect(() => {
+    setTranslatedQuestion(null);
+    if (!currentQuestion) return;
+
+    if (isTamilSubject && contentLanguage === 'ta') {
+      const fetchTranslation = async () => {
+        setIsTranslating(true);
+        try {
+          const res = await fetch('/api/translate-question', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ question: currentQuestion, targetLanguage: 'ta' })
+          });
+          const data = await res.json();
+          if (data.translatedData) {
+            setTranslatedQuestion(data.translatedData);
+          }
+        } catch (e) {
+          console.error("Translation failed", e);
+        } finally {
+          setIsTranslating(false);
+        }
+      };
+
+      const handler = setTimeout(() => {
+        fetchTranslation();
+      }, 300);
+      return () => clearTimeout(handler);
+    }
+  }, [currentQuestionIndex, currentQuestion, isTamilSubject, contentLanguage]);
+
+  const displayQuestion = translatedQuestion || currentQuestion;
+
   const handleSubmitAnswer = async (overrideAnswer) => {
     if (!currentQuestion) return;
 
@@ -222,7 +258,7 @@ export default function TaskContentPage() {
 
     // Standard string matching logic for multiple choice or as fallback
     let isCorrect = String(answerToCheck).toLowerCase().trim() === String(currentQuestion.correctAnswer).toLowerCase().trim();
-    let message = isCorrect ? 'Awesome! 🌟 +10 pts' : 'Oops! Try again 💪';
+    let message = isCorrect ? t('feedbackGood') : t('feedbackBad');
 
     if (currentQuestion.type === 'writing') {
       isCorrect = true; // For tracing, completion is success
@@ -453,8 +489,8 @@ export default function TaskContentPage() {
           <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", bounce: 0.5 }}
             className="p-10 text-center bg-white/80 backdrop-blur-md rounded-[3rem] shadow-2xl max-w-lg w-full border-4 border-white">
             <FaStar size={100} className="text-yellow-400 mb-6 mx-auto drop-shadow-md" />
-            <h1 className="text-4xl font-extrabold mb-4 text-green-600">Lesson Complete!</h1>
-            <p className="text-xl text-gray-600 mb-8">+10 Points Added</p>
+            <h1 className="text-4xl font-extrabold mb-4 text-green-600">{t('lessonComplete')}</h1>
+            <p className="text-xl text-gray-600 mb-8">+{score} {t('pointsAdded')}</p>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <button onClick={() => router.push('/learning-zone/rewards')} className="flex-1 bg-cyan-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-cyan-600 hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2"><FaGift /> My Rewards</button>
@@ -494,11 +530,11 @@ export default function TaskContentPage() {
 
   if (quizCompleted) {
     const pct = (correctAnswersCount / totalQuestions) * 100;
-    let medal = 'Keep Practicing! 💪', medalColor = 'text-gray-500', bgGradient = 'from-red-50 to-teal-100';
+    let medal = t('keep_practicing'), medalColor = 'text-gray-500', bgGradient = 'from-red-50 to-teal-100';
     let icon = <FaStar size={80} className="text-gray-400 mb-4 mx-auto" />;
-    if (pct === 100) { medal = 'Perfect! Gold Medal 🏆'; medalColor = 'text-yellow-600'; bgGradient = 'from-yellow-100 to-amber-200'; icon = <FaTrophy size={100} className="text-yellow-500 mb-6 mx-auto drop-shadow-md" />; }
-    else if (pct >= 75) { medal = 'Great! Silver Medal 🥈'; medalColor = 'text-slate-600'; bgGradient = 'from-gray-100 to-slate-200'; icon = <FaMedal size={90} className="text-gray-400 mb-4 mx-auto drop-shadow-md" />; }
-    else if (pct >= 50) { medal = 'Good Effort! Bronze 🥉'; medalColor = 'text-orange-700'; bgGradient = 'from-orange-50 to-orange-100'; icon = <FaMedal size={90} className="text-orange-500 mb-4 mx-auto drop-shadow-md" />; }
+    if (pct === 100) { medal = t('perfect_medal'); medalColor = 'text-yellow-600'; bgGradient = 'from-yellow-100 to-amber-200'; icon = <FaTrophy size={100} className="text-yellow-500 mb-6 mx-auto drop-shadow-md" />; }
+    else if (pct >= 75) { medal = t('great_medal'); medalColor = 'text-slate-600'; bgGradient = 'from-gray-100 to-slate-200'; icon = <FaMedal size={90} className="text-gray-400 mb-4 mx-auto drop-shadow-md" />; }
+    else if (pct >= 50) { medal = t('good_medal'); medalColor = 'text-orange-700'; bgGradient = 'from-orange-50 to-orange-100'; icon = <FaMedal size={90} className="text-orange-500 mb-4 mx-auto drop-shadow-md" />; }
 
     return (
       <div className={`min-h-screen bg-gradient-to-br ${bgGradient} p-4 flex flex-col items-center justify-center gap-6`}>
@@ -507,7 +543,7 @@ export default function TaskContentPage() {
           {icon}
           <h1 className={`text-4xl font-extrabold mb-4 ${medalColor}`}>{medal}</h1>
           <div className="bg-white rounded-3xl p-6 shadow-inner mb-8">
-            <p className="text-3xl font-black text-gray-800 mb-1">Score: <span className="text-green-500">{score}</span></p>
+            <p className="text-3xl font-black text-gray-800 mb-1">{t('scoreLabel')}: <span className="text-green-500">{score}</span></p>
             <p className="text-xl text-gray-600 mb-1">✅ <span className="font-bold text-green-500">{correctAnswersCount}</span> / {totalQuestions}</p>
             <p className="text-xl text-gray-600 mb-3">❌ <span className="font-bold text-red-500">{wrongAnswersCount}</span></p>
             {taskData.type !== 'lesson' && <p className="text-lg text-gray-400 bg-gray-100 rounded-full py-1 px-4 inline-block">⏳ {formatTime(timeTaken)}</p>}
@@ -515,13 +551,13 @@ export default function TaskContentPage() {
 
           <div className="mt-8 text-left">
             <h3 className="text-xl font-black text-slate-800 mb-4 flex items-center gap-2">
-              <FaCheckCircle className="text-green-500" /> Full Detailed Recap
+              <FaCheckCircle className="text-green-500" /> {t('detailedRecap')}
             </h3>
             <div className="space-y-3 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
               {sessionHistory.slice().reverse().map((item, i) => (
                 <div key={i} className={`p-4 rounded-2xl border-2 ${item.isCorrect ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100'}`}>
                   <div className="flex justify-between items-start mb-2">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Question {item.index}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">{t('question')} {item.index}</span>
                     <span className={item.isCorrect ? 'text-green-600' : 'text-red-600'}>
                       {item.isCorrect ? <FaCheckCircle /> : <FaTimesCircle />}
                     </span>
@@ -529,12 +565,12 @@ export default function TaskContentPage() {
                   <p className="text-sm font-bold text-slate-800 mb-2">{item.question}</p>
                   <div className="flex gap-4 text-xs">
                     <div>
-                      <p className="text-slate-400 font-bold uppercase text-[9px]">Your Answer</p>
-                      <p className={`font-bold ${item.isCorrect ? 'text-green-600' : 'text-red-600'}`}>{item.userAnswer || 'Skipped'}</p>
+                      <p className="text-slate-400 font-bold uppercase text-[9px]">{t('yourAnswer')}</p>
+                      <p className={`font-bold ${item.isCorrect ? 'text-green-600' : 'text-red-600'}`}>{item.userAnswer || t('skipped')}</p>
                     </div>
                     {!item.isCorrect && (
                       <div>
-                        <p className="text-slate-400 font-bold uppercase text-[9px]">Correct Answer</p>
+                        <p className="text-slate-400 font-bold uppercase text-[9px]">{t('correctAnswer')}</p>
                         <p className="font-bold text-green-600">{item.correctAnswer}</p>
                       </div>
                     )}
@@ -545,8 +581,8 @@ export default function TaskContentPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 mt-8">
-            <button onClick={() => router.back()} className="flex-1 bg-blue-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-blue-600 hover:scale-105 transition-all shadow-lg">Back to Map 🗺️</button>
-            <button onClick={() => router.push('/learning-zone/rewards')} className="flex-1 bg-cyan-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-cyan-600 hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2"><FaGift /> My Rewards</button>
+            <button onClick={() => router.back()} className="flex-1 bg-blue-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-blue-600 hover:scale-105 transition-all shadow-lg">{t('backToMap')}</button>
+            <button onClick={() => router.push('/learning-zone/rewards')} className="flex-1 bg-cyan-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-cyan-600 hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2"><FaGift /> {t('myRewards')}</button>
           </div>
         </motion.div>
 
@@ -585,7 +621,7 @@ export default function TaskContentPage() {
                 <FaStar className="text-xl" />
               </div>
               <div>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Score</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">{t('scoreLabel')}</p>
                 <p className="font-black text-slate-800 text-xl leading-none">{score}</p>
               </div>
             </div>
@@ -595,7 +631,7 @@ export default function TaskContentPage() {
                 <FaCheckCircle className="text-xl" />
               </div>
               <div>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Correct</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">{t('correctText')}</p>
                 <p className="font-black text-slate-800 text-xl leading-none">{correctAnswersCount}</p>
               </div>
             </div>
@@ -605,7 +641,7 @@ export default function TaskContentPage() {
                 <FaTimesCircle className="text-xl" />
               </div>
               <div>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">Wrong</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">{t('wrongText')}</p>
                 <p className="font-black text-slate-800 text-xl leading-none">{wrongAnswersCount}</p>
               </div>
             </div>
@@ -619,7 +655,7 @@ export default function TaskContentPage() {
                 {taskData.type} Progress
               </p>
               <p className="text-sm font-black text-slate-600">
-                Question {currentQuestionIndex + 1} of {totalQuestions}
+                {t('question')} {currentQuestionIndex + 1} of {totalQuestions}
               </p>
             </div>
             <div className="h-4 w-full bg-slate-200/50 rounded-full p-1 overflow-hidden backdrop-blur-sm border border-white/50 shadow-inner">
@@ -635,7 +671,7 @@ export default function TaskContentPage() {
           {(taskData.type === 'quiz' || taskData.type === 'exam') && taskData.timeLimit && (
             <div className="flex-shrink-0">
               <div className={`px-6 py-3 rounded-2xl flex flex-col items-center justify-center border-b-4 transition-colors ${timeLeft <= 10 ? 'bg-red-500 text-white border-red-700 animate-pulse' : 'bg-white text-slate-600 border-slate-200 shadow-md'}`}>
-                <p className="text-[10px] font-black uppercase tracking-widest opacity-80 leading-none mb-1">Time Left</p>
+                <p className="text-[10px] font-black uppercase tracking-widest opacity-80 leading-none mb-1">{t('time_left')}</p>
                 <p className="text-2xl font-black font-mono leading-none tracking-tighter">{formatTime(timeLeft)}</p>
               </div>
             </div>
@@ -646,17 +682,17 @@ export default function TaskContentPage() {
           {feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong') && (
             <motion.div initial={{ scale: 0.5, opacity: 0, x: 20 }} animate={{ scale: 1, opacity: 1, x: 0 }}
               className={`absolute top-4 right-4 px-4 py-1.5 rounded-2xl font-black shadow-lg text-sm flex items-center gap-2 z-20 tracking-widest uppercase border-2 border-white ${feedbackMessage.type === 'correct' ? 'bg-green-500 text-white shadow-green-200' : 'bg-red-500 text-white shadow-red-200'}`}>
-              {feedbackMessage.type === 'correct' ? <><FaCheckCircle /> Correct!</> : <><FaTimesCircle /> Incorrect!</>}
+              {feedbackMessage.type === 'correct' ? <><FaCheckCircle /> {t('correctText')}</> : <><FaTimesCircle /> {t('incorrectText')}</>}
             </motion.div>
           )}
 
           {isTamilSubject && languageLoaded && !feedbackMessage && (
             <button
-              onClick={toggleLanguage}
+              onClick={() => setContentLanguage(prev => prev === 'en' ? 'ta' : 'en')}
               className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-black text-[10px] shadow drop-shadow-sm hover:scale-105 active:scale-95 transition-transform z-20"
             >
               <FaLanguage size={14} />
-              <span>{language === 'en' ? 'தமிழ்' : 'English'}</span>
+              <span>{contentLanguage === 'en' ? 'தமிழ்' : 'English'}</span>
             </button>
           )}
 
@@ -721,26 +757,28 @@ export default function TaskContentPage() {
               </div>
             )}
 
-            {currentQuestion.questionText}
+            {displayQuestion?.questionText}
             {currentQuestion.type === 'counting' && (
-              <p className="text-base text-gray-500 mt-2 font-medium">Try clicking on each one!</p>
+              <p className="text-base text-gray-500 mt-2 font-medium">{t('counting_instruction')}</p>
             )}
             <div className="mt-3 bg-blue-50 text-blue-500 rounded-full hover:bg-blue-100 transition-colors">
-              <AudioPlayer text={currentQuestion.questionText} />
+              <AudioPlayer text={displayQuestion?.questionText} lang={isTamilSubject && contentLanguage === 'ta' ? 'ta-IN' : 'en-US'} />
             </div>
+            {isTranslating && <p className="text-xs text-indigo-500 font-bold mt-2 animate-pulse">Translating...</p>}
           </div>
 
-          {currentQuestion.options && (
+          {displayQuestion?.options && (
             <div className={currentQuestion.type === 'counting' ? "flex flex-wrap justify-center gap-4 bg-gray-100/50 p-6 rounded-[2rem] max-w-2xl mx-auto" : "grid grid-cols-1 md:grid-cols-2 gap-4"}>
-              {currentQuestion.options.map((option, index) => {
-                const isSelected = userAnswer === option;
+              {displayQuestion.options.map((optionText, index) => {
+                const originalOption = currentQuestion.options ? currentQuestion.options[index] : optionText;
+                const isSelected = userAnswer === originalOption;
                 let style = "bg-white border-2 border-gray-200 text-gray-700 hover:border-blue-400 hover:bg-blue-50";
 
                 if (currentQuestion.type === 'counting') {
                   // Specific styling for counting round number buttons
                   style = "bg-blue-500 text-white border-4 border-blue-600 shadow-md hover:bg-blue-400 hover:scale-110";
                   if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
-                    if (option === currentQuestion.correctAnswer) style = "bg-green-500 text-white border-4 border-green-600 scale-110 shadow-lg";
+                    if (originalOption === currentQuestion.correctAnswer) style = "bg-green-500 text-white border-4 border-green-600 scale-110 shadow-lg";
                     else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-500 text-white border-4 border-red-600 opacity-80 scale-95";
                     else style = "bg-gray-300 text-gray-500 border-4 border-gray-400 opacity-50";
                   } else if (isSelected) {
@@ -749,7 +787,7 @@ export default function TaskContentPage() {
                 } else {
                   // Standard styling for quiz buttons
                   if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
-                    if (option === currentQuestion.correctAnswer) style = "bg-green-100 border-2 border-green-500 text-green-800 scale-105 shadow-md";
+                    if (originalOption === currentQuestion.correctAnswer) style = "bg-green-100 border-2 border-green-500 text-green-800 scale-105 shadow-md";
                     else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-100 border-2 border-red-500 text-red-800 line-through opacity-80";
                     else style = "bg-gray-100 border-2 border-gray-200 text-gray-400 opacity-40";
                   } else if (isSelected) style = "bg-blue-100 border-2 border-blue-500 text-blue-800 scale-[1.02] shadow-sm";
@@ -758,11 +796,11 @@ export default function TaskContentPage() {
                 return (
                   <button key={index} onClick={() => {
                     if (!feedbackMessage) {
-                      setUserAnswer(option);
-                      handleSubmitAnswer(option);
+                      setUserAnswer(originalOption);
+                      handleSubmitAnswer(originalOption);
                     }
-                  }} disabled={!!feedbackMessage}
-                    className={currentQuestion.type === 'counting' ? `w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full transition-all duration-300 font-black text-2xl sm:text-3xl md:text-4xl flex items-center justify-center ${style}` : `p-6 rounded-2xl transition-all duration-300 font-bold text-xl ${style}`}>{option}</button>
+                  }} disabled={!!feedbackMessage || isTranslating}
+                    className={currentQuestion.type === 'counting' ? `w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full transition-all duration-300 font-black text-2xl sm:text-3xl md:text-4xl flex items-center justify-center ${style}` : `p-6 rounded-2xl transition-all duration-300 font-bold text-xl ${style}`}>{optionText}</button>
                 );
               })}
             </div>
@@ -853,7 +891,7 @@ export default function TaskContentPage() {
                     }}
                   />
                 </div>
-                <p className="text-xs font-bold text-slate-400 mt-4 uppercase tracking-widest">Draw clearly and click "Done!" when finished</p>
+                <p className="text-xs font-bold text-slate-400 mt-4 uppercase tracking-widest">{t('writing_instruction')}</p>
               </motion.div>
             </div>
           )}
@@ -865,23 +903,23 @@ export default function TaskContentPage() {
                 <button onClick={() => handleSubmitAnswer()} disabled={!userAnswer || isCheckingAnswer}
                   className={`px-10 py-4 text-xl font-bold rounded-full transition-all flex items-center justify-center shadow-lg ${(userAnswer && !isCheckingAnswer) ? 'bg-green-500 text-white hover:bg-green-600 hover:scale-105' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>
                   {isCheckingAnswer ? (
-                    <>Thinking <span className="animate-spin ml-2 inline-block">⏳</span></>
+                    <>{t('thinking')} <span className="animate-spin ml-2 inline-block">⏳</span></>
                   ) : (
-                    <>Check Answer <FaCheckCircle className="ml-2" /></>
+                    <>{t('checkAnswer')} <FaCheckCircle className="ml-2" /></>
                   )}
                 </button>
               )
             ) : (
               <button id="next-btn" onClick={handleNextQuestion} className="bg-blue-500 text-white px-10 py-4 font-bold rounded-full text-xl hover:bg-blue-600 hover:scale-105 transition-all flex items-center justify-center shadow-lg">
-                {currentQuestionIndex < totalQuestions - 1 ? 'Next ➡️' : 'Finish! 🎉'}
+                {currentQuestionIndex < totalQuestions - 1 ? t('next') : t('finish')}
               </button>
             )}
             {!feedbackMessage && taskData.type === 'quiz' && (
-              <button onClick={handleSkip} className="bg-white border-2 border-gray-300 text-gray-500 font-bold px-8 py-4 rounded-full text-lg hover:bg-gray-50 transition-colors">Skip ⏭️</button>
+              <button onClick={handleSkip} className="bg-white border-2 border-gray-300 text-gray-500 font-bold px-8 py-4 rounded-full text-lg hover:bg-gray-50 transition-colors">{t('skip')}</button>
             )}
             {showReviewOption && taskData.type === 'quiz' && (
               <button onClick={handleReview} className="bg-yellow-400 text-yellow-900 font-bold px-8 py-4 rounded-full text-lg hover:bg-yellow-500 transition-colors flex items-center gap-2 shadow-md">
-                Try Again <FaRedo />
+                {t('tryAgain')} <FaRedo />
               </button>
             )}
           </div>
@@ -892,7 +930,7 @@ export default function TaskContentPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-3xl mx-auto mt-8">
             <div className="bg-white/60 backdrop-blur-md rounded-[2.5rem] p-8 border border-white/50 shadow-xl">
               <h3 className="text-xl font-black text-slate-800 mb-6 flex items-center gap-2">
-                <FaTrophy className="text-yellow-500" /> Recent Activity
+                <FaTrophy className="text-yellow-500" /> {t('recentActivity')}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {sessionHistory.slice(0, 4).map((item, i) => (
@@ -930,7 +968,7 @@ export default function TaskContentPage() {
                   <FaStar className="text-yellow-400 text-xs" />
                 </div>
                 <p className="font-bold text-slate-700 text-sm md:text-base leading-snug">
-                  {isCheckingAnswer ? "Hmm, let me look at that..." : feedbackMessage?.message}
+                  {isCheckingAnswer ? t('thinking_msg') : feedbackMessage?.message}
                 </p>
               </motion.div>
             )}

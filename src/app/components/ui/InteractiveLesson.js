@@ -13,16 +13,49 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const [isLoading, setIsLoading] = useState(false);
     const [currentPromptType, setCurrentPromptType] = useState(null);
     const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
-    const { language, toggleLanguage, languageLoaded } = useLanguage();
+    const [translatedContent, setTranslatedContent] = useState(null);
+    const [isTranslating, setIsTranslating] = useState(false);
+    const [contentLanguage, setContentLanguage] = useState('en');
+    const { languageLoaded } = useLanguage();
     const isTamilSubject = taskData?.subjectId?.toLowerCase().includes('tamil') ||
         taskData?.taskId?.toLowerCase().includes('tamil') ||
         typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('tamil');
 
+    React.useEffect(() => {
+        setTranslatedContent(null);
+        setCurrentSentenceIndex(0);
+        if (!taskData?.content) return;
+
+        if (isTamilSubject && contentLanguage === 'ta') {
+            const fetchTranslation = async () => {
+                setIsTranslating(true);
+                try {
+                    const res = await fetch('/api/translate', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ text: taskData.content, targetLanguage: 'ta' })
+                    });
+                    const data = await res.json();
+                    if (data.translatedText) {
+                        setTranslatedContent(data.translatedText);
+                    }
+                } catch (e) {
+                    console.error("Translation failed", e);
+                } finally {
+                    setIsTranslating(false);
+                }
+            };
+            fetchTranslation();
+        }
+    }, [taskData, isTamilSubject, contentLanguage]);
+
     // Safely split text into sentences, filter out empty strings, and remove Markdown characters like ** or #
-    const cleanContent = (taskData.content || "").replace(/[*#_]/g, "");
+    const displayContent = translatedContent || taskData?.content || "";
+    const cleanContent = displayContent.replace(/[*#_]/g, "");
     const sentences = (cleanContent.match(/[^.!?]+[.!?]+/g) || [cleanContent]).map(s => s.trim()).filter(s => s.length > 0);
-    const isLastSentence = currentSentenceIndex === sentences.length - 1;
-    const progress = ((currentSentenceIndex + 1) / sentences.length) * 100;
+    const validCurrentSentenceIndex = Math.min(currentSentenceIndex, Math.max(0, sentences.length - 1));
+    const isLastSentence = validCurrentSentenceIndex === sentences.length - 1;
+    const progress = sentences.length > 0 ? ((validCurrentSentenceIndex + 1) / sentences.length) * 100 : 0;
 
     const handleNext = () => {
         if (!isLastSentence) {
@@ -86,7 +119,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             />
                         </div>
                         <span className="text-xs font-black text-slate-400 whitespace-nowrap">
-                            {currentSentenceIndex + 1}/{sentences.length}
+                            {validCurrentSentenceIndex + 1}/{sentences.length}
                         </span>
                     </div>
                 </div>
@@ -126,7 +159,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                 </div>
                                 <div>
                                     <p className="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">Concept</p>
-                                    <p className="text-sm sm:text-base font-black text-slate-700 leading-tight">{currentSentenceIndex + 1} of {sentences.length}</p>
+                                    <p className="text-sm sm:text-base font-black text-slate-700 leading-tight">{validCurrentSentenceIndex + 1} of {sentences.length}</p>
                                 </div>
                             </div>
 
@@ -151,11 +184,11 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         {isTamilSubject && languageLoaded && (
                             <div className="absolute top-16 sm:top-20 right-5 sm:right-8 z-20">
                                 <button
-                                    onClick={toggleLanguage}
+                                    onClick={() => setContentLanguage(prev => prev === 'en' ? 'ta' : 'en')}
                                     className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-black text-[10px] shadow drop-shadow-sm hover:scale-105 active:scale-95 transition-transform"
                                 >
                                     <FaLanguage size={14} />
-                                    <span>{language === 'en' ? 'தமிழ்' : 'English'}</span>
+                                    <span>{contentLanguage === 'en' ? 'தமிழ்' : 'English'}</span>
                                 </button>
                             </div>
                         )}
@@ -164,7 +197,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         <div className="px-5 sm:px-8 py-8 sm:py-12 md:py-16 min-h-[200px] sm:min-h-[280px] flex flex-col items-center justify-center">
                             <AnimatePresence mode="wait">
                                 <motion.div
-                                    key={currentSentenceIndex}
+                                    key={validCurrentSentenceIndex}
                                     initial={{ opacity: 0, y: 30, scale: 0.97 }}
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: -30, scale: 0.97 }}
@@ -172,7 +205,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                     className="w-full text-center"
                                 >
                                     <p className="text-xl sm:text-3xl md:text-4xl text-slate-800 font-extrabold leading-snug sm:leading-tight max-w-2xl mx-auto">
-                                        {sentences[currentSentenceIndex]}
+                                        {isTranslating ? <span className="animate-pulse text-indigo-400">Translating...</span> : sentences[validCurrentSentenceIndex]}
                                     </p>
                                 </motion.div>
                             </AnimatePresence>
@@ -182,7 +215,8 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         <div className="bg-slate-50/60 border-t border-slate-100/60 px-5 sm:px-8 py-4 sm:py-5 flex items-center justify-between gap-3">
                             {/* Listen Button */}
                             <AudioPlayer
-                                text={sentences[currentSentenceIndex]}
+                                text={sentences[validCurrentSentenceIndex]}
+                                lang={isTamilSubject && contentLanguage === 'ta' ? 'ta-IN' : 'en-US'}
                                 label="Listen"
                                 icon={<FaVolumeUp />}
                                 customClassName="inline-flex items-center gap-2 bg-white px-4 sm:px-5 py-2.5 sm:py-3 text-blue-600 rounded-xl sm:rounded-2xl font-bold shadow-sm hover:shadow-md hover:bg-blue-50 transition-all cursor-pointer border border-blue-100 text-sm sm:text-base"
