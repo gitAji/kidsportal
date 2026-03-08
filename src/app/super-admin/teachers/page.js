@@ -9,8 +9,29 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     FaChalkboardTeacher, FaPlus, FaTrashAlt, FaSearch,
     FaEnvelope, FaCalendarAlt, FaShieldAlt, FaTimes,
-    FaCheckCircle, FaClock, FaBan, FaUsers
+    FaCheckCircle, FaClock, FaBan, FaUsers, FaTasks, FaGraduationCap, FaBookOpen,
+    FaUserShield
 } from 'react-icons/fa';
+
+const GRADES = [
+    { id: 'all', name: 'All Grades' },
+    { id: 'grade-1', name: 'Grade 1' },
+    { id: 'grade-2', name: 'Grade 2' },
+    { id: 'grade-3', name: 'Grade 3' },
+    { id: 'grade-4', name: 'Grade 4' },
+    { id: 'grade-5', name: 'Grade 5' },
+    { id: 'grade-6', name: 'Grade 6' },
+    { id: 'grade-7', name: 'Grade 7' },
+    { id: 'grade-8', name: 'Grade 8' }
+];
+
+const SUBJECTS = [
+    { id: 'all', name: 'All Subjects', icon: '🌟' },
+    { id: 'English', name: 'English', icon: '📝' },
+    { id: 'Math', name: 'Mathematics', icon: '🔢' },
+    { id: 'Science', name: 'Science', icon: '🔬' },
+    { id: 'Tamil', name: 'Tamil', icon: '📚' },
+];
 
 export default function TeachersManagement() {
     const [teachers, setTeachers] = useState([]);
@@ -18,9 +39,15 @@ export default function TeachersManagement() {
     const [searchTerm, setSearchTerm] = useState('');
     const [statusFilter, setStatusFilter] = useState('all'); // all, pending, active, suspended
     const [isAddOpen, setIsAddOpen] = useState(false);
+    const [isAssignmentsOpen, setIsAssignmentsOpen] = useState(false);
+    const [selectedTeacher, setSelectedTeacher] = useState(null);
     const [newEmail, setNewEmail] = useState('');
     const [newName, setNewName] = useState('');
     const [actionLoading, setActionLoading] = useState(false);
+
+    // Assignment Form State
+    const [assignGrade, setAssignGrade] = useState('all');
+    const [assignSubject, setAssignSubject] = useState('all');
 
     useEffect(() => {
         fetchTeachers();
@@ -50,6 +77,7 @@ export default function TeachersManagement() {
                 name: newName,
                 email: newEmail.toLowerCase().trim(),
                 role: 'teacher',
+                isCurriculumAdmin: false,
                 createdAt: serverTimestamp(),
                 status: 'active',
                 authorizedAt: serverTimestamp()
@@ -96,6 +124,29 @@ export default function TeachersManagement() {
         }
     };
 
+    const handleToggleAdmin = async (teacherId, currentStatus) => {
+        setActionLoading(true);
+        try {
+            const nextStatus = !currentStatus;
+            const updateData = {
+                isCurriculumAdmin: nextStatus,
+                updatedAt: serverTimestamp()
+            };
+
+            // If making them admin, auto-grant all assignments
+            if (nextStatus) {
+                updateData.assignments = [{ grade: 'all', subject: 'all' }];
+            }
+
+            await updateDoc(doc(db, 'teachers', teacherId), updateData);
+            fetchTeachers();
+        } catch (error) {
+            alert("Error updating admin status: " + error.message);
+        } finally {
+            setActionLoading(false);
+        }
+    };
+
     const handleDeleteTeacher = async (id) => {
         if (!confirm("Are you sure? This teacher will be permanently removed from the registry.")) return;
         try {
@@ -103,6 +154,53 @@ export default function TeachersManagement() {
             fetchTeachers();
         } catch (error) {
             alert("Error deleting teacher: " + error.message);
+        }
+    };
+
+    const handleUpdateAssignments = async () => {
+        if (!selectedTeacher) return;
+        setActionLoading(true);
+        try {
+            // Check if it's already in the list
+            const currentAssignments = selectedTeacher.assignments || [];
+            const isDuplicate = currentAssignments.some(a => a.grade === assignGrade && a.subject === assignSubject);
+
+            if (isDuplicate) {
+                alert("This assignment already exists.");
+                setActionLoading(false);
+                return;
+            }
+
+            const updatedAssignments = [...currentAssignments, { grade: assignGrade, subject: assignSubject }];
+            await updateDoc(doc(db, 'teachers', selectedTeacher.id), {
+                assignments: updatedAssignments,
+                updatedAt: serverTimestamp()
+            });
+
+            setSelectedTeacher({ ...selectedTeacher, assignments: updatedAssignments });
+            fetchTeachers();
+        } catch (error) {
+            alert("Error updating assignments: " + error.message);
+        } finally {
+            setActionLoading(false);
+        }
+    };
+
+    const handleRemoveAssignment = async (index) => {
+        if (!selectedTeacher) return;
+        setActionLoading(true);
+        try {
+            const updatedAssignments = selectedTeacher.assignments.filter((_, i) => i !== index);
+            await updateDoc(doc(db, 'teachers', selectedTeacher.id), {
+                assignments: updatedAssignments,
+                updatedAt: serverTimestamp()
+            });
+            setSelectedTeacher({ ...selectedTeacher, assignments: updatedAssignments });
+            fetchTeachers();
+        } catch (error) {
+            alert("Error removing assignment: " + error.message);
+        } finally {
+            setActionLoading(false);
         }
     };
 
@@ -278,24 +376,25 @@ export default function TeachersManagement() {
             </div>
 
             {/* ── Teachers Table ── */}
-            <div className="bg-slate-950 border border-slate-800 rounded-[3rem] overflow-hidden">
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+            <div className="bg-slate-950 border border-slate-800 rounded-[2.5rem] overflow-hidden">
+                <div className="overflow-x-auto pb-4 custom-scrollbar">
+                    <table className="w-full text-left min-w-[1000px] border-collapse">
                         <thead>
                             <tr className="border-b border-slate-800/50 bg-slate-900/30">
-                                <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Instructor</th>
-                                <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Contact</th>
-                                <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Registered</th>
-                                <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Status</th>
-                                <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[3px] text-slate-500 text-right">Actions</th>
+                                <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Instructor</th>
+                                <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Contact</th>
+                                <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Registered</th>
+                                <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[3px] text-slate-500">Status</th>
+                                <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[3px] text-slate-500 text-center">Admin Role</th>
+                                <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[3px] text-slate-500 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-800/30">
                             {filteredTeachers.map((teacher) => (
                                 <tr key={teacher.id} className="hover:bg-slate-900/50 transition-colors group">
-                                    <td className="px-10 py-6">
-                                        <div className="flex items-center gap-4">
-                                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black text-lg border ${teacher.status === 'active'
+                                    <td className="px-8 py-5">
+                                        <div className="flex items-center gap-3">
+                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm border ${teacher.status === 'active'
                                                 ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
                                                 : teacher.status === 'pending'
                                                     ? 'bg-amber-500/10 text-amber-500 border-amber-500/20'
@@ -304,27 +403,27 @@ export default function TeachersManagement() {
                                                 {teacher.name?.charAt(0) || teacher.email.charAt(0).toUpperCase()}
                                             </div>
                                             <div>
-                                                <p className="text-white font-black">{teacher.name || "Unnamed Teacher"}</p>
-                                                <p className="text-[10px] text-slate-600 font-bold uppercase tracking-widest mt-0.5">
+                                                <p className="text-white font-black text-sm leading-tight">{teacher.name || "Unnamed Teacher"}</p>
+                                                <p className="text-[9px] text-slate-600 font-bold uppercase tracking-widest mt-0.5">
                                                     {teacher.status === 'pending' ? 'Awaiting Approval' : teacher.status === 'suspended' ? 'Access Denied' : 'Authorized Educator'}
                                                 </p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="px-10 py-6">
-                                        <div className="flex items-center gap-2 text-slate-400 font-bold text-sm">
+                                    <td className="px-8 py-5">
+                                        <div className="flex items-center gap-2 text-slate-400 font-bold text-xs">
                                             <FaEnvelope className="text-slate-600" />
                                             {teacher.email}
                                         </div>
                                     </td>
-                                    <td className="px-10 py-6">
-                                        <div className="flex items-center gap-2 text-slate-500 font-bold text-xs uppercase tracking-tighter">
+                                    <td className="px-8 py-5">
+                                        <div className="flex items-center gap-2 text-slate-500 font-bold text-[10px] uppercase tracking-tighter">
                                             <FaCalendarAlt className="text-slate-700" />
                                             {teacher.createdAt?.toDate?.() ? teacher.createdAt.toDate().toLocaleDateString() : 'Recently'}
                                         </div>
                                     </td>
-                                    <td className="px-10 py-6">
-                                        <span className={`px-3 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase border ${teacher.status === 'active'
+                                    <td className="px-8 py-5">
+                                        <span className={`px-2.5 py-1 rounded-full text-[9px] font-black tracking-widest uppercase border ${teacher.status === 'active'
                                             ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
                                             : teacher.status === 'pending'
                                                 ? 'bg-amber-500/10 text-amber-500 border-amber-500/20 animate-pulse'
@@ -333,21 +432,36 @@ export default function TeachersManagement() {
                                             {teacher.status === 'active' ? 'Active' : teacher.status === 'pending' ? 'Pending' : 'Denied'}
                                         </span>
                                     </td>
-                                    <td className="px-10 py-6 text-right">
-                                        <div className="flex items-center justify-end gap-2">
+                                    <td className="px-8 py-5">
+                                        <div className="flex justify-center">
+                                            <button
+                                                onClick={() => handleToggleAdmin(teacher.id, teacher.isCurriculumAdmin)}
+                                                disabled={actionLoading}
+                                                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-[9px] font-black uppercase transition-all border ${teacher.isCurriculumAdmin
+                                                    ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-900/40'
+                                                    : 'bg-slate-900 border-slate-800 text-slate-500 hover:border-slate-700'
+                                                    }`}
+                                            >
+                                                {teacher.isCurriculumAdmin ? <FaUserShield className="text-[10px]" /> : <FaShieldAlt className="text-[10px]" />}
+                                                {teacher.isCurriculumAdmin ? 'Curriculum Admin' : 'Make Admin'}
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td className="px-8 py-5 text-right">
+                                        <div className="flex items-center justify-end gap-1.5">
                                             {teacher.status === 'pending' && (
                                                 <>
                                                     <button
                                                         onClick={() => handleAuthorizeTeacher(teacher.id)}
                                                         disabled={actionLoading}
-                                                        className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-emerald-900/20 disabled:opacity-50"
+                                                        className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-[9px] font-black uppercase tracking-widest rounded-lg transition-all shadow-lg shadow-emerald-900/20 disabled:opacity-50"
                                                     >
                                                         Approve
                                                     </button>
                                                     <button
                                                         onClick={() => handleSuspendTeacher(teacher.id)}
                                                         disabled={actionLoading}
-                                                        className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-rose-900/20 disabled:opacity-50"
+                                                        className="px-3 py-1.5 bg-rose-600 hover:bg-rose-500 text-white text-[9px] font-black uppercase tracking-widest rounded-lg transition-all shadow-lg shadow-rose-900/20 disabled:opacity-50"
                                                     >
                                                         Deny
                                                     </button>
@@ -355,51 +469,187 @@ export default function TeachersManagement() {
                                             )}
                                             {teacher.status === 'active' && (
                                                 <button
-                                                    onClick={() => handleSuspendTeacher(teacher.id)}
-                                                    disabled={actionLoading}
-                                                    className="px-4 py-2 bg-slate-800 hover:bg-rose-600 text-slate-400 hover:text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all disabled:opacity-50"
+                                                    onClick={() => {
+                                                        setSelectedTeacher(teacher);
+                                                        setIsAssignmentsOpen(true);
+                                                    }}
+                                                    className="px-3 py-1.5 bg-blue-600/10 hover:bg-blue-600 text-blue-400 hover:text-white text-[9px] font-black uppercase tracking-widest rounded-lg transition-all border border-blue-500/20"
                                                 >
-                                                    Suspend
-                                                </button>
-                                            )}
-                                            {teacher.status === 'suspended' && (
-                                                <button
-                                                    onClick={() => handleAuthorizeTeacher(teacher.id)}
-                                                    disabled={actionLoading}
-                                                    className="px-4 py-2 bg-slate-800 hover:bg-emerald-600 text-slate-400 hover:text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all disabled:opacity-50"
-                                                >
-                                                    Reactivate
+                                                    Scope
                                                 </button>
                                             )}
                                             <button
-                                                onClick={() => handleDeleteTeacher(teacher.id)}
-                                                className="p-3 text-slate-600 hover:text-rose-500 hover:bg-rose-500/10 rounded-xl transition-all"
+                                                onClick={() => handleSuspendTeacher(teacher.id)}
+                                                disabled={actionLoading}
+                                                className="p-2 text-slate-600 hover:text-rose-500 hover:bg-rose-500/10 rounded-lg transition-all"
+                                                title="Suspend Access"
                                             >
-                                                <FaTrashAlt />
+                                                <FaBan className="text-xs" />
+                                            </button>
+                                            <button
+                                                onClick={() => handleDeleteTeacher(teacher.id)}
+                                                className="p-2 text-slate-600 hover:text-rose-500 hover:bg-rose-500/10 rounded-lg transition-all"
+                                                title="Delete Permanently"
+                                            >
+                                                <FaTrashAlt className="text-xs" />
                                             </button>
                                         </div>
                                     </td>
                                 </tr>
                             ))}
-                            {filteredTeachers.length === 0 && (
-                                <tr>
-                                    <td colSpan="5" className="px-10 py-20 text-center">
-                                        <div className="flex flex-col items-center gap-4">
-                                            <FaChalkboardTeacher className="text-6xl text-slate-800" />
-                                            <p className="text-slate-500 font-bold text-lg">
-                                                {statusFilter !== 'all'
-                                                    ? `No ${statusFilter} teachers found.`
-                                                    : 'No teachers found in the registry.'
-                                                }
-                                            </p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            )}
                         </tbody>
                     </table>
                 </div>
             </div>
+
+            {/* ── Assignments Management Modal ── */}
+            <AnimatePresence>
+                {isAssignmentsOpen && selectedTeacher && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-6"
+                    >
+                        <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm" onClick={() => setIsAssignmentsOpen(false)} />
+                        <motion.div
+                            initial={{ scale: 0.9, y: 20 }}
+                            animate={{ scale: 1, y: 0 }}
+                            exit={{ scale: 0.9, y: 20 }}
+                            className="bg-slate-900 border border-slate-800 w-full max-w-2xl rounded-[2.5rem] p-10 relative z-10 shadow-3xl shadow-black/50"
+                        >
+                            <button onClick={() => setIsAssignmentsOpen(false)} className="absolute top-8 right-8 text-slate-500 hover:text-white transition-colors">
+                                <FaTimes className="text-xl" />
+                            </button>
+
+                            <div className="mb-8">
+                                <h2 className="text-2xl font-black text-white tracking-tight mb-2 flex items-center gap-3">
+                                    <FaTasks className="text-blue-500" />
+                                    Manage Assignments
+                                </h2>
+                                <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px] mb-1">Instructor: {selectedTeacher.name}</p>
+                                <p className="text-slate-600 text-xs font-medium italic">Configure which grades and subjects this teacher can access.</p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {/* Left Side: Add New Assignment */}
+                                <div className="space-y-6">
+                                    <h3 className="text-sm font-black text-white uppercase tracking-widest border-b border-slate-800 pb-3">New Assignment</h3>
+
+                                    <div className="space-y-4">
+                                        <div>
+                                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-2 block">Select Grade</label>
+                                            <div className="grid grid-cols-2 gap-2">
+                                                {GRADES.map(g => (
+                                                    <button
+                                                        key={g.id}
+                                                        onClick={() => setAssignGrade(g.id)}
+                                                        className={`px-3 py-2 rounded-xl text-[10px] font-black transition-all border ${assignGrade === g.id
+                                                            ? 'bg-blue-600 border-blue-500 text-white'
+                                                            : 'bg-slate-950 border-slate-800 text-slate-500 hover:border-slate-700'}`}
+                                                    >
+                                                        {g.name}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-2 block">Select Subject</label>
+                                            <div className="grid grid-cols-2 gap-2">
+                                                {SUBJECTS.map(s => (
+                                                    <button
+                                                        key={s.id}
+                                                        onClick={() => setAssignSubject(s.id)}
+                                                        className={`px-3 py-2 rounded-xl text-[10px] font-black transition-all border ${assignSubject === s.id
+                                                            ? 'bg-blue-600 border-blue-500 text-white'
+                                                            : 'bg-slate-950 border-slate-800 text-slate-500 hover:border-slate-700'}`}
+                                                    >
+                                                        {s.icon} {s.name}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <button
+                                            onClick={handleUpdateAssignments}
+                                            disabled={actionLoading}
+                                            className="w-full bg-blue-600 hover:bg-blue-500 text-white h-12 rounded-xl font-black shadow-lg shadow-blue-900/20 transition-all flex items-center justify-center gap-3 disabled:opacity-50 text-xs"
+                                        >
+                                            <FaPlus /> {actionLoading ? "Updating..." : "Add Assignment"}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Right Side: Current Assignments */}
+                                <div className="space-y-6">
+                                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                                        <h3 className="text-sm font-black text-white uppercase tracking-widest">Active Scope</h3>
+                                        {selectedTeacher.isCurriculumAdmin && (
+                                            <span className="text-[8px] font-black bg-blue-500 text-white px-2 py-0.5 rounded-full uppercase tracking-widest">Full Access</span>
+                                        )}
+                                    </div>
+
+                                    <div className="space-y-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                                        {selectedTeacher.isCurriculumAdmin ? (
+                                            <div className="p-4 bg-blue-600/10 border border-blue-500/20 rounded-2xl">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center text-blue-400">
+                                                        <FaUserShield />
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-blue-400 font-black text-xs uppercase tracking-widest">Curriculum Admin</p>
+                                                        <p className="text-slate-500 font-bold text-[9px] uppercase tracking-tighter">Authorized for All Grades & Subjects</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : null}
+
+                                        {(!selectedTeacher.assignments || selectedTeacher.assignments.length === 0) && !selectedTeacher.isCurriculumAdmin ? (
+                                            <div className="py-10 text-center bg-slate-950 rounded-2xl border border-dashed border-slate-800">
+                                                <p className="text-slate-600 text-[10px] font-black uppercase tracking-widest">No Assignments</p>
+                                                <p className="text-slate-400 text-[10px] mt-1 italic">Assign a grade to start</p>
+                                            </div>
+                                        ) : (
+                                            selectedTeacher.assignments.map((asgn, i) => (
+                                                <div key={i} className="flex items-center justify-between p-4 bg-slate-950 border border-slate-800 rounded-2xl group transition-all hover:border-blue-500/30">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-500 text-xs">
+                                                            {asgn.subject === 'all' ? <FaTasks /> : <FaBookOpen />}
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-white font-black text-xs">
+                                                                {GRADES.find(g => g.id === asgn.grade)?.name || asgn.grade}
+                                                            </p>
+                                                            <p className="text-slate-500 font-bold text-[9px] uppercase tracking-widest">
+                                                                {SUBJECTS.find(s => s.id === asgn.subject)?.name || asgn.subject}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <button
+                                                        onClick={() => handleRemoveAssignment(i)}
+                                                        className="w-8 h-8 rounded-lg bg-rose-500/10 text-rose-500 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center hover:bg-rose-500 hover:text-white"
+                                                    >
+                                                        <FaTrashAlt className="text-[10px]" />
+                                                    </button>
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
+
+                                    {selectedTeacher.assignments?.length > 0 && (
+                                        <div className="bg-emerald-500/5 border border-emerald-500/20 p-4 rounded-2xl">
+                                            <p className="text-[9px] text-emerald-400 font-bold italic leading-relaxed">
+                                                Updates are live. The teacher will only see content matching these assignments.
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

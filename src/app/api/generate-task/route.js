@@ -6,7 +6,7 @@ const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
 });
 
-const model = "gemini-2.5-flash-lite";
+const model = "gemini-1.5-flash";
 
 // Create a customized task based on child past performance using Vertex AI / Gemini
 export async function POST(request) {
@@ -60,29 +60,26 @@ For each question, provide:
 3. options: Array of exactly 4 strings if multiple-choice. Omit this if identification.
 4. correctAnswer: The correct answer string.
 
-Respond ONLY with valid JSON matching this schema exactly.`;
-
-        // We use JSON output format to ensure valid response
-        const result = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
-            contents: prompt,
-            config: {
+        // Corrected standard SDK call for @google/genai
+        const genModel = ai.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+            generationConfig: {
                 temperature: 0.7,
                 responseMimeType: "application/json",
                 responseSchema: {
                     type: "object",
                     properties: {
-                        taskName: { type: "string", description: "A fun title for this generated task" },
-                        description: { type: "string", description: "A short engaging instruction for the student" },
-                        type: { type: "string", description: "Always 'quiz'" },
-                        timeLimit: { type: "number", description: "Optional time limit in seconds, e.g., 60" },
+                        taskName: { type: "string" },
+                        description: { type: "string" },
+                        type: { type: "string" },
+                        timeLimit: { type: "number" },
                         questions: {
                             type: "array",
                             items: {
                                 type: "object",
                                 properties: {
                                     questionText: { type: "string" },
-                                    type: { type: "string", description: "multiple-choice or identification" },
+                                    type: { type: "string" },
                                     options: {
                                         type: "array",
                                         items: { type: "string" }
@@ -98,7 +95,8 @@ Respond ONLY with valid JSON matching this schema exactly.`;
             }
         });
 
-        const generatedTask = JSON.parse(result.text);
+        const result = await genModel.generateContent(prompt);
+        const generatedTask = JSON.parse(result.response.text());
 
         // Ensure we stamp it with the requested IDs
         generatedTask.taskId = taskId;

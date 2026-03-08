@@ -202,55 +202,65 @@ export default function LevelTasksPage() {
         variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
       >
         {levelData.tasks && levelData.tasks.length > 0 ? (
-          levelData.tasks.map(task => {
-            const Icon = taskIconMap[task.type?.toLowerCase()] || taskIconMap.default;
-            const taskColor = taskColorMap[task.type?.toLowerCase()] || taskColorMap.default;
-            const isDone = childStats?.completedTasks_list?.includes(task.taskId);
+          levelData.tasks
+            .filter(task => {
+              const name = task.taskName?.toLowerCase().trim() || '';
+              const isGeneric = /^\[(quizz|quiz|exam|lesson)\s*\d*\]$/i.test(name) ||
+                /^(quizz|quiz|exam|lesson)\s*\d+$/i.test(name) ||
+                /^(quizz|quiz)\d+$/i.test(name) ||
+                ['new quiz', 'new lesson', 'new exam', 'quizz 1', 'quiz 1', 'lesson 1', 'exam 1'].includes(name) ||
+                name.includes('placeholder');
+              return !isGeneric;
+            })
+            .map(task => {
+              const Icon = taskIconMap[task.type?.toLowerCase()] || taskIconMap.default;
+              const taskColor = taskColorMap[task.type?.toLowerCase()] || taskColorMap.default;
+              const isDone = childStats?.completedTasks_list?.includes(task.taskId);
 
-            return (
-              <motion.div
-                key={task.taskId}
-                onClick={() => router.push(`/learning-zone/subjects/${subjectId}/${levelId}/${task.taskId}`)}
-                className={`${taskColor} text-white rounded-[2rem] shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[220px] relative overflow-hidden group border-b-8`}
-                variants={cardVariants}
-                whileHover="hover"
-                whileTap="tap"
-              >
-                {/* Decorative overlay for cards */}
-                <div className="absolute -bottom-5 -right-5 text-white opacity-20 transform rotate-12 group-hover:-rotate-12 transition-transform duration-500 ease-in-out">
-                  <Icon size={100} />
-                </div>
-
-                {/* Small checkmark badge when task is done */}
-                {isDone && (
-                  <div className="absolute top-4 right-4 z-40">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center shadow-lg border-2 border-white"
-                    >
-                      <FaCheckCircle size={20} className="text-white" />
-                    </motion.div>
+              return (
+                <motion.div
+                  key={task.taskId}
+                  onClick={() => router.push(`/learning-zone/subjects/${subjectId}/${levelId}/${task.taskId}`)}
+                  className={`${taskColor} text-white rounded-[2rem] shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[220px] relative overflow-hidden group border-b-8`}
+                  variants={cardVariants}
+                  whileHover="hover"
+                  whileTap="tap"
+                >
+                  {/* Decorative overlay for cards */}
+                  <div className="absolute -bottom-5 -right-5 text-white opacity-20 transform rotate-12 group-hover:-rotate-12 transition-transform duration-500 ease-in-out">
+                    <Icon size={100} />
                   </div>
-                )}
 
-                <div className="bg-white/20 p-4 rounded-full mb-4 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                  <Icon size={36} className="text-white" />
-                </div>
-
-                <h2 className="text-2xl font-extrabold mb-2 drop-shadow-md z-10 leading-tight">
-                  {task.taskName}
-                </h2>
-
-                <div className="mt-auto bg-black/20 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide z-10 flex items-center gap-2">
-                  {task.type}
+                  {/* Small checkmark badge when task is done */}
                   {isDone && (
-                    <FaCheckCircle className="text-green-300" title="Completed!" />
+                    <div className="absolute top-4 right-4 z-40">
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center shadow-lg border-2 border-white"
+                      >
+                        <FaCheckCircle size={20} className="text-white" />
+                      </motion.div>
+                    </div>
                   )}
-                </div>
-              </motion.div>
-            );
-          })
+
+                  <div className="bg-white/20 p-4 rounded-full mb-4 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                    <Icon size={36} className="text-white" />
+                  </div>
+
+                  <h2 className="text-2xl font-extrabold mb-2 drop-shadow-md z-10 leading-tight">
+                    {task.taskName?.replace(/^\[.*?\]\s*/i, "").replace(/^(quizz|quiz|exam|lesson)\s*\d+[:\s-]*\s*/i, "").trim()}
+                  </h2>
+
+                  <div className="mt-auto bg-black/20 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide z-10 flex items-center gap-2">
+                    {task.type}
+                    {isDone && (
+                      <FaCheckCircle className="text-green-300" title="Completed!" />
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })
         ) : (
           <p className="text-center text-gray-600 col-span-full font-bold text-xl bg-white p-8 rounded-2xl shadow-sm">
             No tasks found for this level yet.

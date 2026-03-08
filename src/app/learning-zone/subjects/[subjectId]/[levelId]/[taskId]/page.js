@@ -251,7 +251,17 @@ export default function TaskContentPage() {
     }
   }, [currentQuestionIndex, currentQuestion, isTamilSubject, contentLanguage]);
 
-  const displayQuestion = translatedQuestion || currentQuestion;
+  const cleanString = (str) => {
+    if (str === null || str === undefined) return "";
+    const s = String(str);
+    return s
+      .replace(/^\[.*?\]\s*/i, "")
+      .replace(/^(quizz|quiz|exam|lesson)\s*\d+[:\s-]*\s*/i, "")
+      .replace(/^option\s*[a-z0-9]+[:\s-]*\s*/i, "")
+      .trim();
+  };
+
+  const displayQuestion = translatedQuestion ? { ...currentQuestion, ...translatedQuestion } : currentQuestion;
 
   const handleSubmitAnswer = async (overrideAnswer) => {
     if (!currentQuestion) return;
@@ -576,7 +586,7 @@ export default function TaskContentPage() {
                       {item.isCorrect ? <FaCheckCircle /> : <FaTimesCircle />}
                     </span>
                   </div>
-                  <p className="text-sm font-bold text-slate-800 mb-2">{item.question}</p>
+                  <p className="text-sm font-bold text-slate-800 mb-2">{cleanString(item.question)}</p>
                   <div className="flex gap-4 text-xs">
                     <div>
                       <p className="text-slate-400 font-bold uppercase text-[9px]">{t('yourAnswer')}</p>
@@ -797,13 +807,13 @@ export default function TaskContentPage() {
               </div>
             )}
 
-            {displayQuestion?.questionText}
+            {cleanString(displayQuestion?.questionText)}
             {currentQuestion.type === 'counting' && (
               <p className="text-base text-gray-500 mt-2 font-medium">{t('counting_instruction')}</p>
             )}
             <div className="mt-3 bg-blue-50 text-blue-500 rounded-full hover:bg-blue-100 transition-colors">
               <AudioPlayer
-                text={displayQuestion?.questionText}
+                text={cleanString(displayQuestion?.questionText)}
                 lang={contentLanguage === 'ta' ? 'ta-IN' : 'en-US'}
               />
             </div>
@@ -812,40 +822,44 @@ export default function TaskContentPage() {
 
           {displayQuestion?.options && (
             <div className={currentQuestion.type === 'counting' ? "flex flex-wrap justify-center gap-4 bg-gray-100/50 p-6 rounded-[2rem] max-w-2xl mx-auto" : "grid grid-cols-1 md:grid-cols-2 gap-4"}>
-              {displayQuestion.options.map((optionText, index) => {
-                const originalOption = currentQuestion.options ? currentQuestion.options[index] : optionText;
-                const isSelected = userAnswer === originalOption;
-                let style = "bg-white border-2 border-gray-200 text-gray-700 hover:border-blue-400 hover:bg-blue-50";
+              {(displayQuestion.options || []).map((opt, i) => ({ original: opt, index: i }))
+                .filter(item => item.original !== null && item.original !== undefined && String(item.original).trim() !== '')
+                .map((item, index) => {
+                  const cleaned = cleanString(item.original);
+                  const optionText = cleaned || (item.original ? String(item.index + 1) : "");
+                  // Map back to currentQuestion.options for consistent answer tracking
+                  const originalOption = currentQuestion.options ? currentQuestion.options[item.index] : item.original;
 
-                if (currentQuestion.type === 'counting') {
-                  // Specific styling for counting round number buttons
-                  style = "bg-blue-500 text-white border-4 border-blue-600 shadow-md hover:bg-blue-400 hover:scale-110";
-                  if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
-                    if (originalOption === currentQuestion.correctAnswer) style = "bg-green-500 text-white border-4 border-green-600 scale-110 shadow-lg";
-                    else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-500 text-white border-4 border-red-600 opacity-80 scale-95";
-                    else style = "bg-gray-300 text-gray-500 border-4 border-gray-400 opacity-50";
-                  } else if (isSelected) {
-                    style = "bg-blue-600 text-white border-4 border-white shadow-inner scale-95";
-                  }
-                } else {
-                  // Standard styling for quiz buttons
-                  if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
-                    if (originalOption === currentQuestion.correctAnswer) style = "bg-green-100 border-2 border-green-500 text-green-800 scale-105 shadow-md";
-                    else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-100 border-2 border-red-500 text-red-800 line-through opacity-80";
-                    else style = "bg-gray-100 border-2 border-gray-200 text-gray-400 opacity-40";
-                  } else if (isSelected) style = "bg-blue-100 border-2 border-blue-500 text-blue-800 scale-[1.02] shadow-sm";
-                }
+                  const isSelected = userAnswer === originalOption;
+                  let style = "bg-white border-2 border-gray-200 text-gray-700 hover:border-blue-400 hover:bg-blue-50";
 
-                return (
-                  <button key={index} onClick={() => {
-                    if (!feedbackMessage) {
-                      setUserAnswer(originalOption);
-                      handleSubmitAnswer(originalOption);
+                  if (currentQuestion.type === 'counting') {
+                    style = "bg-blue-500 text-white border-4 border-blue-600 shadow-md hover:bg-blue-400 hover:scale-110";
+                    if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
+                      if (originalOption === currentQuestion.correctAnswer) style = "bg-green-500 text-white border-4 border-green-600 scale-110 shadow-lg";
+                      else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-500 text-white border-4 border-red-600 opacity-80 scale-95";
+                      else style = "bg-gray-300 text-gray-500 border-4 border-gray-400 opacity-50";
+                    } else if (isSelected) {
+                      style = "bg-blue-600 text-white border-4 border-white shadow-inner scale-95";
                     }
-                  }} disabled={!!feedbackMessage || isTranslating}
-                    className={currentQuestion.type === 'counting' ? `w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full transition-all duration-300 font-black text-2xl sm:text-3xl md:text-4xl flex items-center justify-center ${style}` : `p-6 rounded-2xl transition-all duration-300 font-bold text-xl ${style}`}>{optionText}</button>
-                );
-              })}
+                  } else {
+                    if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
+                      if (originalOption === currentQuestion.correctAnswer) style = "bg-green-100 border-2 border-green-500 text-green-800 scale-105 shadow-md";
+                      else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-100 border-2 border-red-500 text-red-800 line-through opacity-80";
+                      else style = "bg-gray-100 border-2 border-gray-200 text-gray-400 opacity-40";
+                    } else if (isSelected) style = "bg-blue-100 border-2 border-blue-500 text-blue-800 scale-[1.02] shadow-sm";
+                  }
+
+                  return (
+                    <button key={index} onClick={() => {
+                      if (!feedbackMessage) {
+                        setUserAnswer(originalOption);
+                        handleSubmitAnswer(originalOption);
+                      }
+                    }} disabled={!!feedbackMessage || isTranslating}
+                      className={currentQuestion.type === 'counting' ? `w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full transition-all duration-300 font-black text-2xl sm:text-3xl md:text-4xl flex items-center justify-center ${style}` : `p-6 rounded-2xl transition-all duration-300 font-bold text-xl ${style}`}>{optionText}</button>
+                  );
+                })}
             </div>
           )}
 

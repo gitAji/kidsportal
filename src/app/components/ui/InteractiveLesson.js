@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome, FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage } from 'react-icons/fa';
 import { useLanguage } from '@/app/providers/LanguageProvider';
@@ -65,9 +65,20 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     }, [taskData, contentLanguage, isEnglishContent]);
 
     // Safely split text into sentences, filter out empty strings, and remove Markdown characters like ** or #
+    // Clean strings like "[EXAM 2] Question" or "Quizz 1: Question" or "Lesson 2 - Question"
+    const cleanStr = (str) => {
+        if (!str) return "";
+        return str
+            .replace(/^\[.*?\]\s*/i, "")
+            .replace(/^(quizz|quiz|exam|lesson)\s*\d+[:\s-]*/i, "")
+            .trim();
+    };
+
     const displayContent = translatedContent || taskData?.content || "";
     const cleanContent = displayContent.replace(/[*#_]/g, "");
-    const sentences = (cleanContent.match(/[^.!?]+[.!?]+/g) || [cleanContent]).map(s => s.trim()).filter(s => s.length > 0);
+    const sentences = (cleanContent.match(/[^.!?]+[.!?]+/g) || [cleanContent])
+        .map(s => cleanStr(s.trim()))
+        .filter(s => s.length > 0);
     const validCurrentSentenceIndex = Math.min(currentSentenceIndex, Math.max(0, sentences.length - 1));
     const isLastSentence = validCurrentSentenceIndex === sentences.length - 1;
     const progress = sentences.length > 0 ? ((validCurrentSentenceIndex + 1) / sentences.length) * 100 : 0;
@@ -155,7 +166,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest">Interactive Lesson</span>
                     </div>
                     <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-800 leading-tight">
-                        {taskData.taskName}
+                        {cleanStr(taskData.taskName)}
                     </h1>
                 </motion.div>
 

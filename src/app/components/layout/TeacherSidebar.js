@@ -14,9 +14,10 @@ import {
     FaGraduationCap,
     FaExternalLinkAlt
 } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "@/firebase/config";
 import { signOut } from "firebase/auth";
+import { useTeacher } from "@/context/TeacherContext";
 
 const menuItems = [
     { name: "Curriculum", icon: <FaBook />, path: "/teacher-admin" },
@@ -27,6 +28,7 @@ const menuItems = [
 export default function TeacherSidebar() {
     const pathname = usePathname();
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const { teacherProfile } = useTeacher();
 
     const handleLogout = async () => {
         try {
@@ -102,8 +104,25 @@ export default function TeacherSidebar() {
                 })}
             </nav>
 
-            {/* Footer / Logout - Fixed at bottom */}
-            <div className="p-4 border-t border-slate-50 mt-auto space-y-1">
+            {/* Footer / User Profile & Logout - Fixed at bottom */}
+            <div className="p-4 border-t border-slate-50 mt-auto space-y-2">
+                {/* User Profile Info */}
+                <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-4'} px-4 py-3 bg-slate-50/50 rounded-2xl mb-2`}>
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xs font-black shadow-sm flex-shrink-0">
+                        {teacherProfile?.image ? (
+                            <img src={teacherProfile.image} alt="" className="w-full h-full object-cover rounded-xl" />
+                        ) : (
+                            teacherProfile?.name?.charAt(0) || teacherProfile?.email?.charAt(0).toUpperCase() || 'T'
+                        )}
+                    </div>
+                    {!isCollapsed && (
+                        <div className="flex flex-col min-w-0">
+                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Teacher</span>
+                            <span className="text-xs font-bold text-slate-700 truncate">{teacherProfile?.name || teacherProfile?.email}</span>
+                        </div>
+                    )}
+                </div>
+
                 <button
                     onClick={handleLogout}
                     className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-slate-400 hover:bg-red-50 hover:text-red-500 transition-all group"

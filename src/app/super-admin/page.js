@@ -396,13 +396,13 @@ export default function SuperAdminDashboard() {
                     <Link href="/super-admin/parents" className="text-[10px] font-black uppercase tracking-widest text-blue-400 hover:text-blue-300 bg-blue-500/10 px-4 py-2 rounded-xl border border-blue-500/20 hover:bg-blue-500/20 transition-all">View All</Link>
                 </div>
 
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left">
+                <div className="overflow-x-auto pb-4 custom-scrollbar">
+                    <table className="w-full text-left min-w-[600px]">
                         <thead>
                             <tr className="border-b border-slate-800/50">
                                 <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500">Name</th>
                                 <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500">Email</th>
-                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500">Joined</th>
+                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500 text-right">Joined</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-800/30">
@@ -410,14 +410,14 @@ export default function SuperAdminDashboard() {
                                 <tr key={parent.id} className="hover:bg-slate-900/50 transition-colors">
                                     <td className="px-6 py-5">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-black text-emerald-400">
+                                            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-black text-emerald-400 text-xs">
                                                 {parent.displayName?.charAt(0) || parent.name?.charAt(0) || parent.email?.charAt(0).toUpperCase() || '?'}
                                             </div>
-                                            <span className="text-white font-bold">{parent.displayName || parent.name || 'Unknown'}</span>
+                                            <span className="text-white font-bold text-sm">{parent.displayName || parent.name || 'Unknown'}</span>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-5 text-slate-400 font-medium text-sm">{parent.email}</td>
-                                    <td className="px-6 py-5 text-slate-500 text-xs font-bold uppercase tracking-wider">
+                                    <td className="px-6 py-5 text-slate-400 font-medium text-xs">{parent.email}</td>
+                                    <td className="px-6 py-5 text-slate-500 text-[10px] font-bold uppercase tracking-wider text-right">
                                         {parent.createdAt?.toDate?.() ? parent.createdAt.toDate().toLocaleDateString() : 'Recently'}
                                     </td>
                                 </tr>
@@ -446,14 +446,14 @@ export default function SuperAdminDashboard() {
                     </div>
                 </div>
 
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left">
+                <div className="overflow-x-auto pb-4 custom-scrollbar">
+                    <table className="w-full text-left min-w-[800px]">
                         <thead>
                             <tr className="border-b border-slate-800/50">
                                 <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500">From</th>
                                 <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500">Subject</th>
                                 <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500">Message</th>
-                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500">Date</th>
+                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[2px] text-slate-500 text-right">Date</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-800/30">
@@ -461,17 +461,17 @@ export default function SuperAdminDashboard() {
                                 <tr key={ticket.id} className="hover:bg-slate-900/50 transition-colors">
                                     <td className="px-6 py-5">
                                         <div>
-                                            <p className="text-white font-bold">{ticket.name}</p>
+                                            <p className="text-white font-bold text-sm">{ticket.name}</p>
                                             <p className="text-[10px] text-slate-500">{ticket.email}</p>
                                         </div>
                                     </td>
                                     <td className="px-6 py-5">
-                                        <span className="text-blue-400 font-bold text-sm">{ticket.subject}</span>
+                                        <span className="text-blue-400 font-bold text-xs bg-blue-500/10 px-2 py-1 rounded-md border border-blue-500/20">{ticket.subject}</span>
                                     </td>
                                     <td className="px-6 py-5">
-                                        <p className="text-slate-400 text-sm line-clamp-2 max-w-md">{ticket.message}</p>
+                                        <p className="text-slate-400 text-sm line-clamp-1 max-w-xs">{ticket.message}</p>
                                     </td>
-                                    <td className="px-6 py-5 text-slate-500 text-xs font-bold uppercase tracking-wider">
+                                    <td className="px-6 py-5 text-slate-500 text-[10px] font-bold uppercase tracking-wider text-right">
                                         {ticket.createdAt?.toDate?.() ? ticket.createdAt.toDate().toLocaleDateString() : 'Recently'}
                                     </td>
                                 </tr>

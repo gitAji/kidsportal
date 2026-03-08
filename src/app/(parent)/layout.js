@@ -12,6 +12,8 @@ import DashboardFooter from "@/app/components/layout/footer/DashboardFooter";
 import { useUI } from "@/app/providers/UIProvider";
 
 
+import ParentGuard from "./ParentGuard";
+
 // Dynamic imports for optimized loading
 const Chat = dynamic(() => import("@/app/components/ui/Chat"), { ssr: false });
 const AuthModal = dynamic(() => import("@/app/components/ui/AuthModal"), { ssr: false });
@@ -49,12 +51,6 @@ export default function ParentLayout({ children }) {
   }, []);
 
   useEffect(() => {
-    if (!loadingAuth && !user && isWorkspace) {
-      router.push("/login?role=parent");
-    }
-  }, [loadingAuth, user, isWorkspace, router]);
-
-  useEffect(() => {
     const handleMouseLeave = (event) => {
       if (user || sessionStorage.getItem('exitIntentShown') || loadingAuth) {
         return;
@@ -80,72 +76,71 @@ export default function ParentLayout({ children }) {
   // Final decision: Should we show the Sidebar Workspace?
   const showSidebar = user && isWorkspace;
 
-  if (showSidebar) {
-    return (
-      <div className="flex bg-slate-50 h-screen overflow-hidden">
-        <ParentSidebar />
-        <div className="flex-grow flex flex-col h-full overflow-hidden min-w-0">
-          <main className="flex-grow overflow-y-auto bg-slate-50/50 flex flex-col">
-            <div className="flex-grow">
-              <Suspense fallback={<DashboardSkeleton />}>
-                {children}
-              </Suspense>
-            </div>
-            <DashboardFooter />
-          </main>
-
-        </div>
-        <Chat />
-        <AuthModal
-          isModalOpen={modalState.auth}
-          setIsModalOpen={closeModal}
-          isRegister={modalState.isRegister}
-          setIsRegister={openModal}
-        />
-      </div>
-    );
-  }
-
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header
-        setIsModalOpen={openModal}
-        setIsRegister={(isRegister) => openModal(isRegister)}
-        setIsHowItWorksOpen={() => openPanel('howItWorks')}
-        setIsAboutUsOpen={() => openPanel('about')}
-        setIsOurTeamOpen={() => openPanel('team')}
-      />
-      <main className="flex-grow">
-        <Suspense fallback={<PageLoader message="Initializing your workspace..." />}>
-          {children}
-        </Suspense>
-      </main>
-      <Chat />
-      <Footer />
-      <AuthModal
-        isModalOpen={modalState.auth}
-        setIsModalOpen={closeModal}
-        isRegister={modalState.isRegister}
-        setIsRegister={openModal}
-      />
-      <RightSidePanel panelName="How It Works" isOpen={panelState.howItWorks} onClose={() => closePanel('howItWorks')}>
-        <HowItWorksContent onClose={() => closePanel('howItWorks')} />
-      </RightSidePanel>
-      <RightSidePanel panelName="About Us" isOpen={panelState.about} onClose={() => closePanel('about')}>
-        <AboutUsContent onClose={() => closePanel('about')} />
-      </RightSidePanel>
-      <RightSidePanel panelName="Our Team" isOpen={panelState.team} onClose={() => closePanel('team')}>
-        <OurTeamContent onClose={() => closePanel('team')} />
-      </RightSidePanel>
-      {showExitIntentModal && (
-        <ExitIntentModal
-          isOpen={showExitIntentModal}
-          onClose={() => setShowExitIntentModal(false)}
-          setIsModalOpen={() => openModal(false)}
-          setIsRegister={() => openModal(true)}
-          isLoggedIn={!!user}
-        />
+    <ParentGuard>
+      {showSidebar ? (
+        <div className="flex bg-slate-50 h-screen overflow-hidden">
+          <ParentSidebar />
+          <div className="flex-grow flex flex-col h-full overflow-hidden min-w-0">
+            <main className="flex-grow overflow-y-auto bg-slate-50/50 flex flex-col">
+              <div className="flex-grow">
+                <Suspense fallback={<DashboardSkeleton />}>
+                  {children}
+                </Suspense>
+              </div>
+              <DashboardFooter />
+            </main>
+          </div>
+          <Chat />
+          <AuthModal
+            isModalOpen={modalState.auth}
+            setIsModalOpen={closeModal}
+            isRegister={modalState.isRegister}
+            setIsRegister={openModal}
+          />
+        </div>
+      ) : (
+        <div className="flex flex-col min-h-screen">
+          <Header
+            setIsModalOpen={openModal}
+            setIsRegister={(isRegister) => openModal(isRegister)}
+            setIsHowItWorksOpen={() => openPanel('howItWorks')}
+            setIsAboutUsOpen={() => openPanel('about')}
+            setIsOurTeamOpen={() => openPanel('team')}
+          />
+          <main className="flex-grow">
+            <Suspense fallback={<PageLoader message="Initializing your workspace..." />}>
+              {children}
+            </Suspense>
+          </main>
+          <Chat />
+          <Footer />
+          <AuthModal
+            isModalOpen={modalState.auth}
+            setIsModalOpen={closeModal}
+            isRegister={modalState.isRegister}
+            setIsRegister={openModal}
+          />
+          <RightSidePanel panelName="How It Works" isOpen={panelState.howItWorks} onClose={() => closePanel('howItWorks')}>
+            <HowItWorksContent onClose={() => closePanel('howItWorks')} />
+          </RightSidePanel>
+          <RightSidePanel panelName="About Us" isOpen={panelState.about} onClose={() => closePanel('about')}>
+            <AboutUsContent onClose={() => closePanel('about')} />
+          </RightSidePanel>
+          <RightSidePanel panelName="Our Team" isOpen={panelState.team} onClose={() => closePanel('team')}>
+            <OurTeamContent onClose={() => closePanel('team')} />
+          </RightSidePanel>
+          {showExitIntentModal && (
+            <ExitIntentModal
+              isOpen={showExitIntentModal}
+              onClose={() => setShowExitIntentModal(false)}
+              setIsModalOpen={() => openModal(false)}
+              setIsRegister={() => openModal(true)}
+              isLoggedIn={!!user}
+            />
+          )}
+        </div>
       )}
-    </div>
+    </ParentGuard>
   );
 }

@@ -53,46 +53,63 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
       }
 
       window.speechSynthesis.cancel();
-      // Strip Markdown asterisks or hash characters so the voice doesn't read them out loud
-      const cleanText = (text || "").replace(/[*#_]/g, "");
+
+      // 1. Clean up text: Strip Markdown (**, #, etc.) and emojis for cleaner speech
+      const cleanText = (text || "")
+        .replace(/[*#_]/g, "")
+        .replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, "");
+
       const utterance = new SpeechSynthesisUtterance(cleanText);
       utterance.lang = lang;
 
-      // Kid friendly settings
-      utterance.rate = 0.85; // A bit slower so kids can understand
-      utterance.pitch = 1.2; // Slightly higher pitch for a friendly tone
+      // 2. Kid-friendly expressive settings
+      // We use slightly higher pitch for a "friendly teacher" vibe
+      utterance.rate = 0.9;
+      utterance.pitch = 1.15;
+      utterance.volume = 1.0;
 
       utterance.onstart = () => setIsPlaying(true);
       utterance.onend = () => setIsPlaying(false);
-      utterance.onerror = () => setIsPlaying(false);
+      utterance.onerror = (err) => {
+        console.error("Speech error:", err);
+        setIsPlaying(false);
+      };
 
+      // 3. Advanced Voice Selection
       if (voices.length > 0) {
-        const langCode = lang.split('-')[0];
-        const langVoices = voices.filter(v => v.lang.startsWith(langCode));
+        const langCode = lang.split('-')[0].toLowerCase();
+        const langVoices = voices.filter(v => v.lang.toLowerCase().startsWith(langCode));
 
         let bestVoice;
 
         if (langCode === 'en') {
-          bestVoice =
-            langVoices.find(v => v.name.includes('Google UK English Female')) ||
-            langVoices.find(v => v.name.includes('Google US English')) ||
-            langVoices.find(v => v.name.includes('Samantha')) ||
-            langVoices.find(v => v.name.includes('Victoria')) ||
-            langVoices.find(v => v.name.includes('Tessa')) ||
-            langVoices.find(v => v.name.includes('Google')) ||
-            langVoices[0];
+          // Priority list for Premium/Natural sounding English voices
+          const priority = [
+            'Samantha', 'Google UK English Female', 'Google US English',
+            'Premium', 'Natural', 'Serena', 'Daniel', 'Victoria', 'Fiona'
+          ];
+
+          for (const namePart of priority) {
+            bestVoice = langVoices.find(v => v.name.includes(namePart));
+            if (bestVoice) break;
+          }
+
+          if (!bestVoice) bestVoice = langVoices[0];
         } else if (langCode === 'ta') {
-          bestVoice =
-            langVoices.find(v => v.name.includes('Valluvar')) ||
-            langVoices.find(v => v.name.includes('Tamil')) ||
-            langVoices.find(v => v.name.includes('Google')) ||
-            langVoices[0];
+          // Priority for Tamil voices
+          const priority = ['Valluvar', 'Tamil', 'Google', 'Kanya', 'Vani'];
+          for (const namePart of priority) {
+            bestVoice = langVoices.find(v => v.name.includes(namePart));
+            if (bestVoice) break;
+          }
+          if (!bestVoice) bestVoice = langVoices[0];
         } else {
           bestVoice = langVoices[0];
         }
 
         if (bestVoice) {
           utterance.voice = bestVoice;
+          console.log(`Using voice: ${bestVoice.name} (${bestVoice.lang})`);
         }
       }
 

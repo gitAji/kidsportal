@@ -16,12 +16,12 @@ const LevelPath = ({ tasks, activeTaskId, completedTaskIds, onTaskSelect }) => {
     <div className="relative p-4">
       {/* The visual path line */}
       <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-300 transform -translate-y-1/2"></div>
-      
+
       <div className="relative flex justify-between items-center">
         {tasks.map((task, index) => {
           const isCompleted = completedTaskIds.includes(task.taskId);
           const isActive = activeTaskId === task.taskId;
-          
+
           // Determine if the task is the next one to be done
           const lastCompletedIndex = tasks.findIndex(t => t.taskId === completedTaskIds[completedTaskIds.length - 1]);
           const isNextUp = (completedTaskIds.length === 0 && index === 0) || (lastCompletedIndex === index - 1);
@@ -40,7 +40,7 @@ const LevelPath = ({ tasks, activeTaskId, completedTaskIds, onTaskSelect }) => {
                 {isCompleted ? <FaCheckCircle /> : getTaskIcon(task.type)}
               </button>
               <p className="mt-2 text-sm font-semibold text-gray-700 text-center w-24 truncate">
-                {task.taskName}
+                {task.taskName?.replace(/^\[.*?\]\s*/i, "").replace(/^(quizz|quiz|exam|lesson)\s*\d+[:\s-]*\s*/i, "").trim()}
               </p>
             </div>
           );

@@ -1,236 +1,316 @@
+"use client";
+import React, { useState, useEffect, useCallback } from 'react';
 import { collection, getDocs, collectionGroup, query, orderBy, limit } from 'firebase/firestore';
-import { db } from '../../firebase/config';
-import { FaChartLine, FaUsers, FaBookOpen, FaAward, FaCalendarAlt, FaChevronRight, FaSync } from 'react-icons/fa';
+import { db } from '@/firebase/config';
+import { FaChartLine, FaBook, FaLayerGroup, FaGraduationCap, FaSync, FaChevronRight } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 import TeacherAdminGuard from '../TeacherAdminGuard';
 
+import { useTeacher } from '@/context/TeacherContext';
+
 export default function ReportsPage() {
-    const [loading, setLoading] = React.useState(true);
-    const [stats, setStats] = React.useState({
-        activeStudents: 0,
-        lessonsCompleted: 0,
-        avgScore: 0,
-        medalsEarned: 0,
-        recentActivity: [],
-        subjectPopularity: []
+    const { isCurriculumAdmin, assignments } = useTeacher();
+
+    const [loading, setLoading] = useState(true);
+    const [stats, setStats] = useState({
+        modules: [],
+        grades: [],
+        levels: [],
+        recentActivity: []
     });
 
-    const fetchData = React.useCallback(async () => {
+    const fetchData = useCallback(async () => {
         setLoading(true);
         try {
-            // 1. Fetch all children profiles
+            console.log("Fetching detailed analytics...");
+
+            // 1. Fetch data
             const childrenSnap = await getDocs(collectionGroup(db, 'children'));
-            const children = childrenSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            const childrenMap = {};
+            childrenSnap.docs.forEach(doc => { childrenMap[doc.id] = doc.data(); });
 
-            // 2. Fetch all achievements
-            const achievementsSnap = await getDocs(collection(db, 'achievements'));
-            const medalsTotal = achievementsSnap.size;
+            const historySnap = await getDocs(collectionGroup(db, 'taskHistory'));
+            let historyDocs = historySnap.docs;
 
-            // 3. Process Activity & Aggregates
-            let totalCompleted = 0;
-            let totalScore = 0;
-            let scoreCount = 0;
+            // For testing purposes in development, if no real data exists, provide mocks
+            if (historyDocs.length === 0 && process.env.NODE_ENV === 'development') {
+                console.log("Teacher Reports: No real taskHistory found, providing mock data for UI verification.");
+                const mockDocs = [
+                    { data: () => ({ taskId: 'English-1-level-1-quiz', score: 85, subjectId: 'English', completedAt: new Date().toISOString() }), ref: { parent: { parent: { id: 'child-1' } } } },
+                    { data: () => ({ taskId: 'Math-2-level-3-exam', score: 92, subjectId: 'Math', completedAt: new Date().toISOString() }), ref: { parent: { parent: { id: 'child-2' } } } },
+                    { data: () => ({ taskId: 'Science-grade3-l4', score: 78, subjectId: 'Science', completedAt: new Date().toISOString() }), ref: { parent: { parent: { id: 'child-3' } } } },
+                    { data: () => ({ taskId: 'Tamil-1-level-1', score: 95, subjectId: 'Tamil', completedAt: new Date().toISOString() }), ref: { parent: { parent: { id: 'child-1' } } } },
+                    { data: () => ({ taskId: 'other-task', score: 60, subjectId: 'unknown_subject', completedAt: new Date().toISOString() }), ref: { parent: { parent: { id: 'child-2' } } } }
+                ];
+                historyDocs = mockDocs;
+            }
+
+            const moduleData = {};
+            const gradeData = {};
+            const levelData = {};
             const activity = [];
-            const subjectCounts = {};
 
-            children.forEach(child => {
-                const completed = (child.assignedTasks || []).filter(t => t.status === 'completed');
-                totalCompleted += completed.length;
+            historyDocs.forEach(doc => {
+                const data = doc.data();
+                const childId = doc.ref.parent.parent.id;
+                const child = childrenMap[childId] || { name: 'Student' };
+                const taskId = data.taskId || '';
+                const rawSubject = data.subjectId;
+                const rawLevel = data.levelId;
 
-                completed.forEach(task => {
-                    const score = parseFloat(task.score);
-                    if (!isNaN(score)) {
-                        totalScore += score;
-                        scoreCount++;
-                    }
+                // 1. Extract Module (Subject)
+                let module = 'general';
+                if (rawSubject && rawSubject !== 'unknown_subject') {
+                    module = rawSubject.toLowerCase();
+                } else if (taskId.toLowerCase().startsWith('english')) module = 'english';
+                else if (taskId.toLowerCase().startsWith('math')) module = 'math';
+                else if (taskId.toLowerCase().startsWith('science')) module = 'science';
+                else if (taskId.toLowerCase().startsWith('tamil')) module = 'tamil';
 
-                    // Track subject popularity
-                    const subId = task.subjectId || task.taskId?.split('-')[0] || 'other';
-                    subjectCounts[subId] = (subjectCounts[subId] || 0) + 1;
+                // 2. Extract Grade
+                let grade = 'Other';
+                const gradeMatch = taskId.match(/grade-?(\d+)/i) || (rawLevel || '').match(/grade-?(\d+)/i);
+                if (gradeMatch) {
+                    grade = `grade-${gradeMatch[1]}`;
+                } else {
+                    const dashMatch = taskId.match(/^([a-z]+)-(\d+)/i);
+                    if (dashMatch) grade = `grade-${dashMatch[2]}`;
+                }
 
-                    // Add to recent activity list
-                    activity.push({
-                        studentName: child.name || 'Student',
-                        studentImage: child.profileImage || child.image,
-                        taskName: task.taskName || task.taskId,
-                        score: task.score,
-                        completedAt: task.completedAt || new Date().toISOString(),
-                        subjectId: subId
-                    });
+                if (grade === 'Other' && child.grade) {
+                    grade = `grade-${child.grade}`;
+                }
+
+                // 3. Extract Level
+                let levelLabel = 'Other';
+                const levelMatch = (rawLevel || '').match(/level-?(\d+)/i) || taskId.match(/level-?(\d+)/i);
+                if (levelMatch) {
+                    levelLabel = `Level ${levelMatch[1]}`;
+                }
+
+                // --- ROLE BASED FILTERING ---
+                if (!isCurriculumAdmin) {
+                    const hasAccess = assignments.some(a =>
+                        (a.grade === 'all' || a.grade === grade) &&
+                        (a.subject === 'all' || a.subject.toLowerCase() === module.toLowerCase())
+                    );
+                    if (!hasAccess) return; // Skip this entry if teacher is not assigned to this data
+                }
+
+                // Aggregate
+                moduleData[module] = (moduleData[module] || 0) + 1;
+                gradeData[grade] = (gradeData[grade] || 0) + 1;
+                levelData[levelLabel] = (levelData[levelLabel] || 0) + 1;
+
+                activity.push({
+                    studentName: child.name || 'Anonymous',
+                    studentImage: child.profileImage || child.image,
+                    taskName: data.taskName || taskId.split('-').pop()?.replace(/task/, 'Task ') || "Task",
+                    score: data.score,
+                    completedAt: data.timestamp?.toDate ? data.timestamp.toDate().toISOString() : (data.completedAt || new Date().toISOString()),
+                    module,
+                    grade: grade.replace('grade-', 'Grade '),
+                    level: levelLabel
                 });
             });
 
-            // Sort activity by time
-            const recent = activity
-                .sort((a, b) => new Date(b.completedAt) - new Date(a.completedAt))
-                .slice(0, 5);
+            // Process Data for UI
+            const totalCompletions = activity.length;
 
-            // Process subject popularity
-            const totalTasks = Object.values(subjectCounts).reduce((a, b) => a + b, 0);
-            const popularity = Object.entries(subjectCounts)
-                .map(([name, count]) => ({
-                    name: name.charAt(0).toUpperCase() + name.slice(1),
-                    pct: totalTasks > 0 ? Math.round((count / totalTasks) * 100) : 0,
-                    color: name === 'english' ? 'bg-blue-500' : name === 'math' ? 'bg-orange-500' : 'bg-green-500'
-                }))
-                .sort((a, b) => b.pct - a.pct)
-                .slice(0, 3);
+            const modules = Object.entries(moduleData).map(([name, count]) => ({
+                name: name.charAt(0).toUpperCase() + name.slice(1),
+                count,
+                pct: totalCompletions > 0 ? Math.round((count / totalCompletions) * 100) : 0,
+                color: name === 'english' ? 'bg-blue-500' : name === 'math' ? 'bg-orange-500' : name === 'science' ? 'bg-purple-500' : 'bg-emerald-500'
+            })).sort((a, b) => b.count - a.count);
+
+            const grades = Object.entries(gradeData).map(([name, count]) => ({
+                name: name.replace('grade-', 'Grade '),
+                count,
+                pct: totalCompletions > 0 ? Math.round((count / totalCompletions) * 100) : 0
+            })).sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+
+            const levels = Object.entries(levelData).map(([name, count]) => ({
+                name,
+                count,
+                pct: totalCompletions > 0 ? Math.round((count / totalCompletions) * 100) : 0
+            })).sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
 
             setStats({
-                activeStudents: children.length,
-                lessonsCompleted: totalCompleted,
-                avgScore: scoreCount > 0 ? Math.round(totalScore / scoreCount) : 0,
-                medalsEarned: medalsTotal,
-                recentActivity: recent,
-                subjectPopularity: popularity.length > 0 ? popularity : [
-                    { name: 'Mathematics', pct: 0, color: 'bg-blue-500' },
-                    { name: 'English', pct: 0, color: 'bg-green-500' },
-                    { name: 'Science', pct: 0, color: 'bg-purple-500' }
-                ]
+                modules,
+                grades: grades.slice(0, 4), // Top 4 grades for the UI grid
+                levels,
+                recentActivity: activity.sort((a, b) => new Date(b.completedAt) - new Date(a.completedAt)).slice(0, 8)
             });
+
         } catch (e) {
-            console.error("Reports fetch error:", e);
+            console.error("Data Fetch Error:", e);
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [isCurriculumAdmin, assignments]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetchData();
     }, [fetchData]);
 
-    const statConfig = [
-        { label: "Active Students", value: stats.activeStudents, icon: <FaUsers />, color: "bg-blue-500", text: "text-blue-500" },
-        { label: "Lessons Completed", value: stats.lessonsCompleted, icon: <FaBookOpen />, color: "bg-green-500", text: "text-green-500" },
-        { label: "Avg. Quiz Score", value: `${stats.avgScore}%`, icon: <FaChartLine />, color: "bg-purple-500", text: "text-purple-500" },
-        { label: "Medals Earned", value: stats.medalsEarned, icon: <FaAward />, color: "bg-yellow-500", text: "text-yellow-500" },
+    const topStats = [
+        { label: "Active Modules", value: stats.modules.length, icon: <FaBook />, color: "from-blue-600 to-blue-400" },
+        { label: "Grades Covered", value: stats.grades.length, icon: <FaGraduationCap />, color: "from-emerald-600 to-emerald-400" },
+        { label: "Total Levels", value: stats.levels.length, icon: <FaLayerGroup />, color: "from-purple-600 to-purple-400" },
     ];
 
     return (
-        <TeacherAdminGuard>
-            <div className="p-8 max-w-7xl mx-auto space-y-8">
-                {/* Header Section */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                        <h1 className="text-3xl font-black text-slate-800 tracking-tight">Learning Insights</h1>
-                        <p className="text-slate-500 font-medium">Monitor student progress and curriculum performance.</p>
-                    </div>
+        <div className="p-6 md:p-10 max-w-7xl mx-auto space-y-10">
+            {/* Header */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                <div className="space-y-1">
                     <div className="flex items-center gap-3">
-                        <button
-                            onClick={fetchData}
-                            disabled={loading}
-                            className="bg-white px-4 py-2 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-2 hover:bg-slate-50 transition-colors"
-                        >
-                            <FaSync className={`${loading ? 'animate-spin' : ''} text-blue-500`} />
-                            <span className="text-sm font-bold text-slate-600">Refresh Data</span>
-                        </button>
+                        <div className="w-12 h-12 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center text-blue-600">
+                            <FaChartLine size={24} />
+                        </div>
+                        <h1 className="text-4xl font-black text-slate-800 tracking-tight">System Reports</h1>
                     </div>
+                    <p className="text-slate-400 font-bold text-xs uppercase tracking-[0.2em] ml-16">Curriculum Analytics & Progress</p>
                 </div>
 
-                {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {statConfig.map((stat, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.1 }}
-                            className="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center gap-5 group hover:shadow-md transition-all cursor-pointer"
-                        >
-                            <div className={`${stat.color} w-14 h-14 rounded-2xl flex items-center justify-center text-white text-xl shadow-lg transition-transform group-hover:scale-110`}>
-                                {stat.icon}
-                            </div>
-                            <div>
-                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">{stat.label}</p>
-                                <p className="text-2xl font-black text-slate-800 leading-none">
-                                    {loading ? '...' : stat.value}
-                                </p>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
+                <button
+                    onClick={fetchData}
+                    disabled={loading}
+                    className="bg-white px-6 py-3 rounded-full shadow-sm border border-slate-100 font-black text-xs uppercase tracking-widest flex items-center gap-3 hover:shadow-md transition-all active:scale-95 text-slate-600"
+                >
+                    <FaSync className={loading ? 'animate-spin text-blue-500' : ''} />
+                    {loading ? 'Refreshing...' : 'Sync Data'}
+                </button>
+            </div>
 
-                {/* Main Content Sections */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Recent completions */}
-                    <div className="lg:col-span-2 bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100">
-                        <div className="flex items-center justify-between mb-8">
-                            <h3 className="text-xl font-bold text-slate-800">Recent Student Activity</h3>
-                            <button className="text-sm font-bold text-blue-500 hover:text-blue-600">View All</button>
+            {/* Simplified Pillar Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {topStats.map((s, i) => (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100 relative overflow-hidden group"
+                    >
+                        <div className={`absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform duration-500`}>
+                            {React.cloneElement(s.icon, { size: 100 })}
                         </div>
-                        <div className="space-y-4">
-                            {loading ? (
-                                Array.from({ length: 3 }).map((_, i) => (
-                                    <div key={i} className="animate-pulse flex items-center justify-between p-4 rounded-2xl bg-slate-50">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 rounded-full bg-slate-200" />
-                                            <div className="space-y-2">
-                                                <div className="h-4 w-24 bg-slate-200 rounded" />
-                                                <div className="h-3 w-32 bg-slate-200 rounded" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            ) : stats.recentActivity.length > 0 ? (
-                                stats.recentActivity.map((act, i) => (
-                                    <div key={i} className="flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-lg font-bold text-slate-400 overflow-hidden">
-                                                {act.studentImage ? <img src={act.studentImage} alt="" className="w-full h-full object-cover" /> : act.studentName?.charAt(0)}
-                                            </div>
-                                            <div>
-                                                <p className="font-bold text-slate-800">{act.studentName}</p>
-                                                <p className="text-xs text-slate-400 font-medium line-clamp-1">Completed: {act.taskName}</p>
-                                            </div>
-                                        </div>
-                                        <div className="text-right">
-                                            <p className={`text-sm font-bold ${parseFloat(act.score) >= 80 ? 'text-green-500' : 'text-amber-500'}`}>
-                                                {act.score !== undefined ? `${act.score}% Score` : 'Completed'}
-                                            </p>
-                                            <p className="text-[10px] text-slate-300 font-bold uppercase">
-                                                {new Date(act.completedAt).toLocaleDateString()}
-                                            </p>
-                                        </div>
-                                    </div>
-                                ))
-                            ) : (
-                                <div className="text-center py-10">
-                                    <p className="text-slate-400 font-bold">No recent activities found.</p>
-                                </div>
-                            )}
+                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center text-white text-2xl shadow-lg mb-6`}>
+                            {s.icon}
                         </div>
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{s.label}</p>
+                        <p className="text-3xl font-black text-slate-800">{loading ? '...' : s.value}</p>
+                    </motion.div>
+                ))}
+            </div>
+
+            {/* Core Breakdown Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+                {/* Module (Subject) Performance */}
+                <div className="bg-white rounded-[3rem] p-10 shadow-sm border border-slate-100 space-y-8">
+                    <div>
+                        <h2 className="text-2xl font-black text-slate-800">Module Engagement</h2>
+                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Student completions per module</p>
                     </div>
-
-                    {/* Quick Access */}
                     <div className="space-y-6">
-                        <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[2.5rem] p-8 text-white shadow-xl shadow-blue-200">
-                            <h3 className="text-xl font-bold mb-2">Weekly Summary</h3>
-                            <p className="text-blue-100 text-sm mb-6 leading-relaxed">
-                                {stats.activeStudents === 0 ? 'Start assigning tasks to see your student analytics!' : `Your ${stats.activeStudents} students have completed ${stats.lessonsCompleted} tasks so far.`}
-                            </p>
-                            <button className="w-full bg-white text-blue-600 font-bold py-4 rounded-2xl shadow-lg hover:bg-blue-50 transition-all flex items-center justify-center gap-2">
-                                Download PDF <FaChevronRight size={12} />
-                            </button>
-                        </div>
-
-                        <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100">
-                            <h3 className="text-lg font-bold text-slate-800 mb-6">Subject Popularity</h3>
-                            <div className="space-y-5">
-                                {stats.subjectPopularity.map((subject, i) => (
-                                    <div key={i} className="space-y-2">
-                                        <div className="flex justify-between text-xs font-bold">
-                                            <span className="text-slate-600">{subject.name}</span>
-                                            <span className="text-slate-400">{subject.pct}%</span>
-                                        </div>
-                                        <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                                            <div className={`h-full ${subject.color} transition-all duration-1000`} style={{ width: `${subject.pct}%` }} />
-                                        </div>
-                                    </div>
-                                ))}
+                        {stats.modules.map((m, i) => (
+                            <div key={i} className="group">
+                                <div className="flex justify-between items-end mb-2 px-1">
+                                    <span className="font-black text-slate-700 text-sm">{m.name}</span>
+                                    <span className="text-xs font-bold text-slate-400 group-hover:text-blue-500 transition-colors">{m.count} completions ({m.pct}%)</span>
+                                </div>
+                                <div className="h-4 w-full bg-slate-50 rounded-full overflow-hidden border border-slate-100 p-0.5">
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${m.pct}%` }}
+                                        className={`h-full rounded-full ${m.color} shadow-sm`}
+                                    />
+                                </div>
                             </div>
+                        ))}
+                        {stats.modules.length === 0 && !loading && <p className="text-center py-10 text-slate-300 font-bold italic">No module data recorded.</p>}
+                    </div>
+                </div>
+
+                {/* Grade & Level Columns */}
+                <div className="space-y-10">
+                    {/* Grades */}
+                    <div className="bg-white rounded-[3rem] p-10 shadow-sm border border-slate-100">
+                        <h3 className="text-xl font-black text-slate-800 mb-6 flex items-center gap-3">
+                            <FaGraduationCap className="text-emerald-500" /> Grade Reach
+                        </h3>
+                        <div className="grid grid-cols-2 gap-4">
+                            {stats.grades.map((g, i) => (
+                                <div key={i} className="bg-slate-50 p-5 rounded-[2rem] border border-slate-100 flex flex-col items-center justify-center hover:bg-white hover:shadow-md transition-all">
+                                    <span className="text-lg font-black text-slate-800">{g.name}</span>
+                                    <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mt-1">{g.count} Task Entries</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Levels */}
+                    <div className="bg-white rounded-[3rem] p-10 shadow-sm border border-slate-100">
+                        <h3 className="text-xl font-black text-slate-800 mb-6 flex items-center gap-3">
+                            <FaLayerGroup className="text-purple-500" /> Level Progression
+                        </h3>
+                        <div className="flex flex-wrap gap-3">
+                            {stats.levels.map((l, i) => (
+                                <div key={i} className="px-5 py-3 bg-indigo-50 rounded-2xl border border-indigo-100 flex flex-col items-center group hover:bg-indigo-600 transition-all">
+                                    <span className="text-xs font-black text-indigo-700 group-hover:text-white">{l.name}</span>
+                                    <span className="text-[10px] font-bold text-indigo-400 group-hover:text-indigo-200 uppercase">{l.count} Done</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
             </div>
-        </TeacherAdminGuard>
+
+            {/* Activity Feed */}
+            <div className="bg-white rounded-[3rem] p-10 shadow-sm border border-slate-100">
+                <div className="flex items-center justify-between mb-10">
+                    <div>
+                        <h2 className="text-2xl font-black text-slate-800">Global Activity Feed</h2>
+                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Real-time student submissions</p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <AnimatePresence>
+                        {stats.recentActivity.map((act, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: i * 0.05 }}
+                                className="p-6 rounded-[2rem] bg-slate-50 border border-slate-100 flex items-center gap-6 group hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all"
+                            >
+                                <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center overflow-hidden flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    {act.studentImage ? (
+                                        <img src={act.studentImage} alt="" className="w-full h-full object-cover" />
+                                    ) : (
+                                        <span className="text-lg font-black text-slate-300">{act.studentName.charAt(0)}</span>
+                                    )}
+                                </div>
+                                <div className="flex-grow min-w-0">
+                                    <p className="font-black text-slate-800 text-sm truncate">{act.studentName}</p>
+                                    <div className="flex items-center gap-2 mt-1">
+                                        <span className="text-[9px] font-black bg-blue-100 text-blue-600 px-2 py-0.5 rounded uppercase">{act.module}</span>
+                                        <span className="text-[9px] font-black bg-emerald-100 text-emerald-600 px-2 py-0.5 rounded uppercase">{act.grade}</span>
+                                    </div>
+                                </div>
+                                <div className="text-right flex-shrink-0">
+                                    <p className="text-xs font-black text-slate-800">{act.score !== undefined ? `${act.score}%` : 'Done'}</p>
+                                    <p className="text-[9px] font-bold text-slate-300 uppercase mt-1">{new Date(act.completedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
+                </div>
+            </div>
+        </div>
     );
 }

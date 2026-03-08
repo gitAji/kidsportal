@@ -44,9 +44,22 @@ function UnifiedLoginPage() {
 
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, async (user) => {
-            if (user && activeRole === 'parent') {
-                // If logged in, redirect to dashboard 
-                router.push("/dashboard");
+            const hasError = searchParams.get('error');
+            if (user && activeRole === 'parent' && !hasError) {
+                // Determine if they are actually a parent OR a teacher
+                try {
+                    const teacherDoc = await getDoc(doc(db, "teachers", user.email?.toLowerCase()));
+                    if (teacherDoc.exists()) {
+                        console.log("Teacher detected at login, redirecting to teacher portal...");
+                        router.push("/teacher-admin");
+                    } else {
+                        // If logged in and no error, redirect to dashboard 
+                        router.push("/dashboard");
+                    }
+                } catch (e) {
+                    console.error("Auth sync error:", e);
+                    setVerifying(false);
+                }
             } else {
                 setVerifying(false);
             }
