@@ -18,9 +18,11 @@ export const POST = async (req) => {
             return new Response(JSON.stringify({ error: `Child profile not found for ID: ${childId} under parent: ${parentUid}` }), { status: 404 });
         }
 
+        const { password: _password, ...childDataWithoutPassword } = childDoc.data();
+
         return new Response(JSON.stringify({
             parentData: parentDoc.data(),
-            childData: childDoc.data()
+            childData: childDataWithoutPassword
         }), { status: 200, headers: { 'Content-Type': 'application/json' } });
 
     } catch (error) {

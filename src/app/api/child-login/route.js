@@ -33,7 +33,8 @@ export const POST = async (req) => {
             return new Response(JSON.stringify({ error: "Your account is currently disabled. Please ask your parent to enable it." }), { status: 403 });
         }
 
-        const foundChild = { id: childDoc.id, ...childData, parentUid };
+        const { password: _password, ...childDataWithoutPassword } = childData;
+        const foundChild = { id: childDoc.id, ...childDataWithoutPassword, parentUid };
 
         return new Response(JSON.stringify({ child: foundChild }), { status: 200, headers: { 'Content-Type': 'application/json' } });
 
