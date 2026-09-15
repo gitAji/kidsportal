@@ -58,7 +58,7 @@ For each question, provide:
 1. questionText: A fun, engaging question.
 2. type: Either "multiple-choice" or "identification" (where they type the answer). Ensure a mix of both.
 3. options: Array of exactly 4 strings if multiple-choice. Omit this if identification.
-4. correctAnswer: The correct answer string.
+4. correctAnswer: The correct answer string.`;
 
         // Corrected standard SDK call for @google/genai
         const genModel = ai.getGenerativeModel({ 
