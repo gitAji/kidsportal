@@ -20233,7 +20233,7 @@
       "gradeName": "Grade 6",
       "subjects": [
         {
-          "subjectId": "english-5",
+          "subjectId": "english-6",
           "subjectName": "English",
           "levels": [
             {
@@ -21089,7 +21089,7 @@
           ]
         },
         {
-          "subjectId": "math-5",
+          "subjectId": "math-6",
           "subjectName": "Math",
           "levels": [
             {
@@ -21945,7 +21945,7 @@
           ]
         },
         {
-          "subjectId": "science-5",
+          "subjectId": "science-6",
           "subjectName": "Science",
           "levels": [
             {
@@ -22801,7 +22801,7 @@
           ]
         },
         {
-          "subjectId": "tamil-5",
+          "subjectId": "tamil-6",
           "subjectName": "Tamil",
           "levels": [
             {
@@ -23663,7 +23663,7 @@
       "gradeName": "Grade 7",
       "subjects": [
         {
-          "subjectId": "english-5",
+          "subjectId": "english-7",
           "subjectName": "English",
           "levels": [
             {
@@ -24519,7 +24519,7 @@
           ]
         },
         {
-          "subjectId": "math-5",
+          "subjectId": "math-7",
           "subjectName": "Math",
           "levels": [
             {
@@ -25375,7 +25375,7 @@
           ]
         },
         {
-          "subjectId": "science-5",
+          "subjectId": "science-7",
           "subjectName": "Science",
           "levels": [
             {
@@ -26231,7 +26231,7 @@
           ]
         },
         {
-          "subjectId": "tamil-5",
+          "subjectId": "tamil-7",
           "subjectName": "Tamil",
           "levels": [
             {
@@ -27093,7 +27093,7 @@
       "gradeName": "Grade 8",
       "subjects": [
         {
-          "subjectId": "english-5",
+          "subjectId": "english-8",
           "subjectName": "English",
           "levels": [
             {
@@ -27949,7 +27949,7 @@
           ]
         },
         {
-          "subjectId": "math-5",
+          "subjectId": "math-8",
           "subjectName": "Math",
           "levels": [
             {
@@ -28805,7 +28805,7 @@
           ]
         },
         {
-          "subjectId": "science-5",
+          "subjectId": "science-8",
           "subjectName": "Science",
           "levels": [
             {
@@ -29661,7 +29661,7 @@
           ]
         },
         {
-          "subjectId": "tamil-5",
+          "subjectId": "tamil-8",
           "subjectName": "Tamil",
           "levels": [
             {
