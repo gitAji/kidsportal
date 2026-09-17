@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
-import { FaUserTie, FaCode, FaPaintBrush, FaGraduationCap, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import Link from 'next/link';
+import { FaUserTie, FaCode, FaPaintBrush, FaGraduationCap, FaUsers } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const teamMembers = [
@@ -47,6 +48,10 @@ export default function OurTeamContent({ onClose }) {
           <h2 className="text-3xl font-black text-slate-800 tracking-tight">Meet the Team</h2>
           <p className="text-slate-500 font-medium text-sm md:text-base">The passionate minds behind the magic</p>
         </div>
+        <div className="hidden sm:flex items-center gap-2 bg-white border border-slate-100 rounded-xl px-4 py-2 text-slate-500">
+          <FaUsers className="text-blue-500" />
+          <span className="text-sm font-bold">{teamMembers.length} team members</span>
+        </div>
       </div>
 
       <div className="flex-grow overflow-y-auto px-8 py-10 custom-scrollbar">
@@ -61,19 +66,15 @@ export default function OurTeamContent({ onClose }) {
                 className="group relative bg-white rounded-[2.5rem] p-6 border border-slate-100 hover:border-blue-400 hover:shadow-xl transition-all"
               >
                 <div className="flex items-start gap-5">
-                  <div className={`w-16 h-16 rounded-3xl ${member.color} flex items-center justify-center text-white text-2xl shadow-lg shadow-gray-200 group-hover:scale-110 transition-transform`}>
+                  <div className={`w-16 h-16 rounded-3xl ${member.color} flex items-center justify-center text-white text-2xl shadow-lg shadow-gray-200 flex-shrink-0 group-hover:scale-110 transition-transform`}>
                     {member.icon}
                   </div>
-                  <div className="flex-grow">
+                  <div className="flex-grow min-w-0">
                     <h3 className="text-xl font-black text-slate-800">{member.name}</h3>
                     <p className="text-blue-600 font-bold text-sm mb-3 tracking-wide uppercase">{member.role}</p>
-                    <p className="text-slate-500 text-sm leading-relaxed mb-4 line-clamp-2">
+                    <p className="text-slate-500 text-sm leading-relaxed">
                       {member.bio}
                     </p>
-                    <div className="flex gap-3">
-                      <button className="text-slate-300 hover:text-blue-600 transition-colors"><FaLinkedin /></button>
-                      <button className="text-slate-300 hover:text-blue-400 transition-colors"><FaTwitter /></button>
-                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -84,7 +85,7 @@ export default function OurTeamContent({ onClose }) {
           <div className="mt-12 text-center py-10 bg-slate-50 rounded-[2.5rem] border border-dashed border-slate-300">
             <h4 className="text-lg font-black text-slate-800 mb-2">Want to join us?</h4>
             <p className="text-slate-500 text-sm mb-6">We&apos;re always looking for brilliant minds in education and tech.</p>
-            <button className="text-blue-600 font-bold hover:underline">View open positions →</button>
+            <Link href="/contact" onClick={onClose} className="text-blue-600 font-bold hover:underline">View open positions →</Link>
           </div>
         </div>
       </div>
