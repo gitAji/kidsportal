@@ -831,12 +831,18 @@ export default function TaskContentPage() {
                   const originalOption = currentQuestion.options ? currentQuestion.options[item.index] : item.original;
 
                   const isSelected = userAnswer === originalOption;
+                  // A wrong quiz answer offers a "Try Again" on this same question, so
+                  // don't reveal which option is correct yet — that would let the
+                  // student just re-click the highlighted answer instead of actually
+                  // knowing it. Only reveal it once there's no more retry coming
+                  // (answered correctly, or this task has no retry at all).
+                  const revealCorrectAnswer = feedbackMessage?.type === 'correct' || taskData.type !== 'quiz';
                   let style = "bg-white border-2 border-gray-200 text-gray-700 hover:border-blue-400 hover:bg-blue-50";
 
                   if (currentQuestion.type === 'counting') {
                     style = "bg-blue-500 text-white border-4 border-blue-600 shadow-md hover:bg-blue-400 hover:scale-110";
                     if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
-                      if (originalOption === currentQuestion.correctAnswer) style = "bg-green-500 text-white border-4 border-green-600 scale-110 shadow-lg";
+                      if (revealCorrectAnswer && originalOption === currentQuestion.correctAnswer) style = "bg-green-500 text-white border-4 border-green-600 scale-110 shadow-lg";
                       else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-500 text-white border-4 border-red-600 opacity-80 scale-95";
                       else style = "bg-gray-300 text-gray-500 border-4 border-gray-400 opacity-50";
                     } else if (isSelected) {
@@ -844,7 +850,7 @@ export default function TaskContentPage() {
                     }
                   } else {
                     if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
-                      if (originalOption === currentQuestion.correctAnswer) style = "bg-green-100 border-2 border-green-500 text-green-800 scale-105 shadow-md";
+                      if (revealCorrectAnswer && originalOption === currentQuestion.correctAnswer) style = "bg-green-100 border-2 border-green-500 text-green-800 scale-105 shadow-md";
                       else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-100 border-2 border-red-500 text-red-800 line-through opacity-80";
                       else style = "bg-gray-100 border-2 border-gray-200 text-gray-400 opacity-40";
                     } else if (isSelected) style = "bg-blue-100 border-2 border-blue-500 text-blue-800 scale-[1.02] shadow-sm";
