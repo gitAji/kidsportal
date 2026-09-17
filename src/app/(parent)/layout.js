@@ -15,7 +15,6 @@ import { useUI } from "@/app/providers/UIProvider";
 import ParentGuard from "./ParentGuard";
 
 // Dynamic imports for optimized loading
-const Chat = dynamic(() => import("@/app/components/ui/Chat"), { ssr: false });
 const AuthModal = dynamic(() => import("@/app/components/ui/AuthModal"), { ssr: false });
 const ExitIntentModal = dynamic(() => import("@/app/components/ui/ExitIntentModal"), { ssr: false });
 const RightSidePanel = dynamic(() => import("@/app/components/RightSidePanel"), { ssr: false });
@@ -91,7 +90,6 @@ export default function ParentLayout({ children }) {
               <DashboardFooter />
             </main>
           </div>
-          <Chat />
           <AuthModal
             isModalOpen={modalState.auth}
             setIsModalOpen={closeModal}
@@ -113,7 +111,6 @@ export default function ParentLayout({ children }) {
               {children}
             </Suspense>
           </main>
-          <Chat />
           <Footer />
           <AuthModal
             isModalOpen={modalState.auth}

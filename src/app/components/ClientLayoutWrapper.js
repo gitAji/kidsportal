@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/auth";
-import Chat from "./ui/Chat";
 import Header from "./layout/header/Header";
 import Footer from "./layout/footer/Footer";
 import AuthModal from "./ui/AuthModal";
@@ -52,7 +51,6 @@ export default function ClientLayoutWrapper({ children }) {
         setIsOurTeamOpen={() => openPanel('team')}
       />
       <main className="flex-grow">{children}</main>
-      <Chat />
       <Footer />
       <AuthModal
         isModalOpen={modalState.auth}
