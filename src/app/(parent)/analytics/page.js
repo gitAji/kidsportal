@@ -5,14 +5,15 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/config";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "@/firebase/config";
-import { getChildStats, getChildAchievements } from "@/app/utils/firestoreService";
+import { getChildStats, getChildAchievements, getChildTaskHistory } from "@/app/utils/firestoreService";
 import { loadStats, loadUnlockedAchievements, ACHIEVEMENTS } from "@/app/utils/achievements";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   FaArrowRight, FaStar, FaTrophy, FaClock,
   FaCheckCircle, FaFire, FaUsers, FaChartLine,
-  FaMedal, FaBookOpen, FaBrain, FaTimes, FaHome
+  FaMedal, FaBookOpen, FaBrain, FaTimes, FaHome,
+  FaHistory, FaRedo
 } from "react-icons/fa";
 import CustomAvatar from "@/app/components/ui/CustomAvatar";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
@@ -143,6 +144,18 @@ function ChildSummaryCard({ child, index, onShowDetail }) {
 
 // ── Child Detail Modal ────────────────────────────────────────────
 function ChildDetailModal({ child, stats, achievements, onClose }) {
+  const [taskHistory, setTaskHistory] = useState([]);
+  const [historyLoading, setHistoryLoading] = useState(true);
+
+  useEffect(() => {
+    if (!child) return;
+    setHistoryLoading(true);
+    getChildTaskHistory(child.id)
+      .then(setTaskHistory)
+      .catch(() => setTaskHistory([]))
+      .finally(() => setHistoryLoading(false));
+  }, [child]);
+
   if (!child) return null;
 
   const totalTasks = stats?.totalTasksCompleted || 0;
@@ -150,13 +163,21 @@ function ChildDetailModal({ child, stats, achievements, onClose }) {
   const xp = stats?.totalScore || 0;
   const lessons = stats?.lessonsCompleted || 0;
   const quizzes = stats?.quizzesCompleted || 0;
+  const totalRetakes = stats?.totalRetakes || 0;
 
   const detailStats = [
     { icon: <FaCheckCircle />, label: "Tasks Done", value: totalTasks, color: "text-blue-500", bg: "bg-blue-50", border: "border-blue-100" },
     { icon: <FaStar />, label: "Total XP", value: xp.toLocaleString(), color: "text-amber-500", bg: "bg-amber-50", border: "border-amber-100" },
     { icon: <FaBookOpen />, label: "Lessons", value: lessons, color: "text-emerald-500", bg: "bg-emerald-50", border: "border-emerald-100" },
     { icon: <FaBrain />, label: "Quizzes", value: quizzes, color: "text-violet-500", bg: "bg-violet-50", border: "border-violet-100" },
+    { icon: <FaRedo />, label: "Retakes", value: totalRetakes, color: "text-rose-500", bg: "bg-rose-50", border: "border-rose-100" },
   ];
+
+  const formatHistoryDate = (ts) => {
+    if (!ts) return "";
+    const date = ts.seconds ? new Date(ts.seconds * 1000) : new Date(ts);
+    return date.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+  };
 
   return (
     <motion.div
@@ -195,7 +216,7 @@ function ChildDetailModal({ child, stats, achievements, onClose }) {
         {/* Modal body */}
         <div className="flex-grow overflow-y-auto p-6 space-y-6">
           {/* Quick stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
             {detailStats.map((s, i) => (
               <div key={i} className={`${s.bg} border ${s.border} rounded-xl p-4 text-center`}>
                 <div className={`${s.color} text-lg mx-auto mb-2 flex justify-center`}>{s.icon}</div>
@@ -246,6 +267,46 @@ function ChildDetailModal({ child, stats, achievements, onClose }) {
                 )}
               </div>
             </div>
+          </div>
+
+          {/* Full activity log — every exam/quiz/lesson attempt, including retakes */}
+          <div className="bg-slate-50 rounded-xl p-5 border border-slate-100">
+            <h3 className="text-sm font-black text-slate-700 mb-4 flex items-center gap-2 uppercase tracking-wider">
+              <FaHistory className="text-blue-500" /> Full Activity Log
+            </h3>
+            {historyLoading ? (
+              <div className="space-y-2">
+                {[0, 1, 2].map((i) => <div key={i} className="h-14 bg-white rounded-xl border border-slate-100 animate-pulse" />)}
+              </div>
+            ) : taskHistory.length === 0 ? (
+              <div className="py-8 text-center bg-white rounded-xl border border-dashed border-slate-200">
+                <p className="text-sm font-bold text-slate-400">No activity recorded yet.</p>
+              </div>
+            ) : (
+              <div className="space-y-2 max-h-72 overflow-y-auto pr-1 custom-scrollbar">
+                {taskHistory.map((entry) => (
+                  <div key={entry.id} className="bg-white rounded-xl p-3.5 border border-slate-100 flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-sm font-black text-slate-800 truncate">
+                        {entry.taskId} <span className="text-slate-400 font-medium">· {entry.subjectId}</span>
+                      </p>
+                      <p className="text-xs text-slate-400 font-medium">{formatHistoryDate(entry.timestamp)}</p>
+                    </div>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      {entry.isRetake && (
+                        <span className="flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-rose-600 bg-rose-50 border border-rose-100 rounded-full px-2 py-1">
+                          <FaRedo className="text-[9px]" /> Retake
+                        </span>
+                      )}
+                      <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 bg-slate-100 rounded-full px-2 py-1">
+                        Attempt #{entry.attemptNumber || 1}
+                      </span>
+                      <span className="text-sm font-black text-blue-600">{entry.score ?? 0} pts</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </motion.div>

@@ -35,6 +35,7 @@ export default function TaskContentPage() {
   const [wrongAnswersCount, setWrongAnswersCount] = useState(0);
   const [showReviewOption, setShowReviewOption] = useState(false);
   const [attemptCount, setAttemptCount] = useState(0);
+  const [attemptNumber, setAttemptNumber] = useState(1);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
   const [timerActive, setTimerActive] = useState(false);
@@ -420,28 +421,32 @@ export default function TaskContentPage() {
           correct: finalCorrect, timeTaken, levelId, subjectId, retried: retriedThisTask,
           taskId: taskData.taskId
         });
+        setAttemptNumber(updatedStats._attemptNumber || 1);
 
-        // Only check achievements & sync on FIRST completion
+        // Only check achievements on FIRST completion — retakes don't earn new stickers
+        let unlocked = [];
         if (!updatedStats._isRepeat) {
-          const unlocked = checkAchievements(childId, updatedStats);
+          unlocked = checkAchievements(childId, updatedStats);
           if (unlocked.length > 0) {
             setNewAchievements(unlocked);
           }
-
-          // Sync stats + achievements to Firestore via API route (Admin SDK)
-          fetch('/api/child-stats', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              childId,
-              parentUid: childUser.parentUid,
-              stats: updatedStats,
-              newAchievements: unlocked,
-              sessionHistory,
-              taskId: taskData.taskId,
-            }),
-          }).catch(console.error);
         }
+
+        // Always sync this attempt (first play or retake) so parents see a full log
+        fetch('/api/child-stats', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            childId,
+            parentUid: childUser.parentUid,
+            stats: updatedStats,
+            newAchievements: unlocked,
+            sessionHistory,
+            taskId: taskData.taskId,
+            attemptNumber: updatedStats._attemptNumber || 1,
+            isRetake: !!updatedStats._isRepeat,
+          }),
+        }).catch(console.error);
       }
     }
   };
@@ -449,6 +454,29 @@ export default function TaskContentPage() {
   const handleSkip = () => { setWrongAnswersCount(c => c + 1); handleNextQuestion(); };
   const handleReview = () => { setUserAnswer(''); setFeedbackMessage(null); setShowReviewOption(false); setRetriedThisTask(true); setTimerActive(true); setClickedCountingItems([]); };
   const formatTime = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+
+  // Retake the exam / practice the quiz or lesson again — every attempt is logged for parents.
+  const handleRetake = () => {
+    setCurrentQuestionIndex(0);
+    setUserAnswer('');
+    setFeedbackMessage(null);
+    setScore(0);
+    setCorrectAnswersCount(0);
+    setWrongAnswersCount(0);
+    setShowReviewOption(false);
+    setAttemptCount(0);
+    setQuizCompleted(false);
+    setTimeTaken(0);
+    setRetriedThisTask(false);
+    setNewAchievements([]);
+    setSessionHistory([]);
+    setClickedCountingItems([]);
+    setTranslatedQuestion(null);
+    if (taskData?.timeLimit) {
+      setTimeLeft(taskData.timeLimit);
+      setTimerActive(true);
+    }
+  };
 
   const handleLessonComplete = async () => {
     completionSound?.play();
@@ -471,31 +499,35 @@ export default function TaskContentPage() {
       correct: 1, timeTaken: 0, levelId, subjectId, retried: false,
       taskId: taskData.taskId
     });
+    setAttemptNumber(updatedStats._attemptNumber || 1);
 
-    // Only check achievements & sync on FIRST completion
+    // Only check achievements on FIRST completion — retakes don't earn new stickers
+    let unlocked = [];
     if (!updatedStats._isRepeat) {
-      const unlocked = checkAchievements(childId, updatedStats);
+      unlocked = checkAchievements(childId, updatedStats);
+    }
 
-      // Sync stats + achievements to Firestore via API route (Admin SDK)
-      fetch('/api/child-stats', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          childId,
-          parentUid: childUser.parentUid,
-          stats: updatedStats,
-          newAchievements: unlocked,
-          sessionHistory,
-          taskId: taskData.taskId,
-        }),
-      }).catch(console.error);
+    // Always sync this attempt (first play or practice replay) so parents see a full log
+    fetch('/api/child-stats', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        childId,
+        parentUid: childUser.parentUid,
+        stats: updatedStats,
+        newAchievements: unlocked,
+        sessionHistory,
+        taskId: taskData.taskId,
+        attemptNumber: updatedStats._attemptNumber || 1,
+        isRetake: !!updatedStats._isRepeat,
+      }),
+    }).catch(console.error);
 
-      if (unlocked.length > 0) {
-        setNewAchievements(unlocked);
-        setScore(10);
-        setQuizCompleted(true); // Re-use the summary screen
-        return;
-      }
+    if (unlocked.length > 0) {
+      setNewAchievements(unlocked);
+      setScore(10);
+      setQuizCompleted(true); // Re-use the summary screen
+      return;
     }
 
     // Repeat play or no new achievements — go back
@@ -574,7 +606,12 @@ export default function TaskContentPage() {
         <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", bounce: 0.5 }}
           className="p-10 text-center bg-white/80 backdrop-blur-md rounded-[3rem] shadow-2xl max-w-lg w-full border-4 border-white">
           {icon}
-          <h1 className={`text-4xl font-extrabold mb-4 ${medalColor}`}>{medal}</h1>
+          <h1 className={`text-4xl font-extrabold mb-2 ${medalColor}`}>{medal}</h1>
+          {attemptNumber > 1 && (
+            <p className="text-xs font-black uppercase tracking-widest text-slate-400 bg-slate-100 rounded-full py-1 px-4 inline-block mb-4">
+              {t('attemptLabel')} #{attemptNumber}
+            </p>
+          )}
           <div className="bg-white rounded-3xl p-6 shadow-inner mb-8">
             <p className="text-3xl font-black text-gray-800 mb-1">{t('scoreLabel')}: <span className="text-green-500">{score}</span></p>
             <p className="text-xl text-gray-600 mb-1">✅ <span className="font-bold text-green-500">{correctAnswersCount}</span> / {totalQuestions}</p>
@@ -614,6 +651,9 @@ export default function TaskContentPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 mt-8">
+            <button onClick={handleRetake} className="flex-1 bg-emerald-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-emerald-600 hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2">
+              <FaRedo /> {taskData.type === 'exam' ? t('retakeExam') : t('practiceAgain')}
+            </button>
             <button onClick={() => router.back()} className="flex-1 bg-blue-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-blue-600 hover:scale-105 transition-all shadow-lg">{t('backToMap')}</button>
             <button onClick={() => router.push('/learning-zone/rewards')} className="flex-1 bg-cyan-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-cyan-600 hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2"><FaGift /> {t('myRewards')}</button>
           </div>

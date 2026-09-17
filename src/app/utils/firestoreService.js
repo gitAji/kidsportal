@@ -8,7 +8,7 @@
  */
 import {
     collection, doc, getDoc, getDocs, setDoc, addDoc,
-    updateDoc, deleteDoc, query, where, serverTimestamp
+    updateDoc, deleteDoc, query, where, orderBy, limit, serverTimestamp
 } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 
@@ -82,4 +82,18 @@ export async function getChildAchievements(childId) {
     const q = query(collection(db, 'achievements'), where('childId', '==', childId));
     const snap = await getDocs(q);
     return snap.docs.map(d => d.data());
+}
+
+/**
+ * Full attempt log for a child — every exam/quiz/lesson play, including retakes.
+ * Newest first. Used by the parent-facing "full log" view.
+ */
+export async function getChildTaskHistory(childId, maxEntries = 200) {
+    const q = query(
+        collection(db, 'childStats', childId, 'taskHistory'),
+        orderBy('timestamp', 'desc'),
+        limit(maxEntries)
+    );
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }

@@ -42,7 +42,7 @@ export async function GET(request) {
 // POST — Save stats and/or record new achievements
 export async function POST(request) {
     try {
-        const { childId, parentUid, stats, newAchievements, sessionHistory, taskId } = await request.json();
+        const { childId, parentUid, stats, newAchievements, sessionHistory, taskId, attemptNumber, isRetake } = await request.json();
 
         if (!childId || !parentUid) {
             return NextResponse.json({ error: 'Missing childId or parentUid' }, { status: 400 });
@@ -86,7 +86,9 @@ export async function POST(request) {
                     status: 'completed',
                     completedAt: new Date().toISOString(),
                     score: stats.score || 0,
-                    type: stats.type || 'task'
+                    type: stats.type || 'task',
+                    attemptNumber: attemptNumber || 1,
+                    isRetake: !!isRetake
                 };
 
                 // Use FieldValue.arrayUnion to add to assignedTasks
@@ -119,7 +121,10 @@ export async function POST(request) {
                 levelId: (stats && stats.levelId) || "unknown_level",
                 timestamp: FieldValue.serverTimestamp(),
                 history: sessionHistory,
-                score: (stats && stats.score) || 0
+                score: (stats && stats.score) || 0,
+                type: (stats && stats.type) || "task",
+                attemptNumber: attemptNumber || 1,
+                isRetake: !!isRetake
             });
         }
 

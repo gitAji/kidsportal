@@ -241,20 +241,29 @@ export function isTaskAlreadyCompleted(childId, taskId) {
  *
  * DESIGN RULE:
  *   - Stats & achievements are only recorded on the FIRST completion of a task.
- *   - If the student replays a task they already finished, this function returns
- *     the existing stats unchanged and sets stats._isRepeat = true so callers
- *     know NOT to check achievements or sync to the server.
+ *   - If the student replays (retakes) a task they already finished, the running
+ *     totals, medals and achievements are left untouched — but the retake is still
+ *     counted in stats.attemptCounts[taskId] and stats._isRepeat is set to true so
+ *     callers know to sync this attempt to the parent-visible log without treating
+ *     it as a new achievement-worthy completion.
  *   - The student can still play for practice — they see scores and confetti —
- *     but nothing is persisted.
+ *     every attempt is logged, they just don't earn XP/medals twice for the same task.
  */
 export function recordTaskCompletion(childId, taskResult) {
     const stats = loadStats(childId);
+
+    // Every play of a task — first try or retake — counts toward its attempt total.
+    if (!stats.attemptCounts) stats.attemptCounts = {};
+    stats.attemptCounts[taskResult.taskId] = (stats.attemptCounts[taskResult.taskId] || 0) + 1;
+    stats._attemptNumber = stats.attemptCounts[taskResult.taskId];
 
     // ── Guard: repeat completion ────────────────────────────────────────────
     const alreadyDone = (stats.completedTasks_list || []).includes(taskResult.taskId);
     if (alreadyDone) {
         stats._isRepeat = true;
-        return stats;              // nothing changes, no save
+        stats.totalRetakes = (stats.totalRetakes || 0) + 1;
+        saveStats(childId, stats); // persist the incremented attempt/retake count
+        return stats;
     }
     stats._isRepeat = false;
     // ────────────────────────────────────────────────────────────────────────
