@@ -66,6 +66,7 @@ export default function ReportsPage() {
                 else if (taskId.toLowerCase().startsWith('math')) module = 'math';
                 else if (taskId.toLowerCase().startsWith('science')) module = 'science';
                 else if (taskId.toLowerCase().startsWith('tamil')) module = 'tamil';
+                else if (taskId.toLowerCase().startsWith('computerscience')) module = 'computer science';
 
                 // 2. Extract Grade
                 let grade = 'Other';
