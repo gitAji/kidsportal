@@ -35,7 +35,7 @@ export default function ParentLayout({ children }) {
     '/dashboard', '/analytics', '/child-dashboard', '/profile',
     '/billing', '/pricing', '/child-profile', '/child-settings',
     '/subscription-management', '/avatar-customizer', '/avatar-shop',
-    '/sticker-book', '/payment', '/grades'
+    '/sticker-book', '/payment', '/grades', '/support'
   ];
   const isWorkspace = workspacePaths.some(path => pathname?.startsWith(path));
 

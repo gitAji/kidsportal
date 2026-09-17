@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaSearch,
@@ -291,9 +292,9 @@ export default function HelpPage() {
                 >
                   <FaEnvelope className="text-blue-500" /> Ask a Teacher
                 </a>
-                <button className="w-full sm:w-auto bg-white/10 backdrop-blur-md text-white border border-white/20 px-12 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-all">
+                <Link href="/support" className="w-full sm:w-auto bg-white/10 backdrop-blur-md text-white border border-white/20 px-12 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-all">
                   Open Support Portal
-                </button>
+                </Link>
               </div>
             </div>
           </div>

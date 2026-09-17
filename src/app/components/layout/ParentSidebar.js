@@ -16,6 +16,7 @@ import {
     FaChessPawn,
     FaExternalLinkAlt,
     FaChalkboardTeacher,
+    FaTicketAlt,
     FaBars,
     FaTimes
 } from "react-icons/fa";
@@ -27,6 +28,7 @@ const menuItems = [
     { name: "Dashboard", icon: <FaHome />, path: "/dashboard" },
     { name: "Analytics", icon: <FaChartBar />, path: "/analytics" },
     { name: "Billing", icon: <FaCreditCard />, path: "/billing" },
+    { name: "Support", icon: <FaTicketAlt />, path: "/support" },
     { name: "Settings", icon: <FaUserCog />, path: "/profile" },
 ];
 
