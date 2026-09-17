@@ -10,16 +10,33 @@ import { loadStats } from '../../../utils/achievements';
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
+// A small, deliberate set of clearly distinct, cheerful colors.
+// Red is intentionally left out here — it's reserved for "wrong answer"
+// feedback elsewhere in the app, so it shouldn't also mean "just a level".
 const colorPalette = [
   "bg-gradient-to-br from-blue-400 to-blue-600 border-blue-500",
-  "bg-gradient-to-br from-teal-400 to-teal-600 border-teal-500",
-  "bg-gradient-to-br from-green-400 to-green-600 border-green-500",
-  "bg-gradient-to-br from-cyan-400 to-cyan-600 border-cyan-500",
-  "bg-gradient-to-br from-yellow-400 to-orange-500 border-yellow-500",
-  "bg-gradient-to-br from-teal-400 to-teal-600 border-teal-500",
-  "bg-gradient-to-br from-red-400 to-red-600 border-red-500",
-  "bg-gradient-to-br from-indigo-400 to-indigo-600 border-indigo-500",
+  "bg-gradient-to-br from-violet-400 to-purple-600 border-purple-500",
+  "bg-gradient-to-br from-emerald-400 to-green-600 border-green-500",
+  "bg-gradient-to-br from-amber-400 to-orange-500 border-amber-500",
+  "bg-gradient-to-br from-pink-400 to-rose-500 border-pink-500",
+  "bg-gradient-to-br from-cyan-400 to-teal-600 border-cyan-500",
 ];
+
+// Friendly display names for subjectId prefixes (e.g. "math-3" -> "Math"),
+// so kids never see a raw internal ID like "MATH-3" in the UI.
+const subjectDisplayNames = {
+  english: 'English',
+  math: 'Math',
+  science: 'Science',
+  ariviyal: 'Science',
+  tamil: 'Tamil',
+  computerscience: 'Computer Science',
+};
+
+function getSubjectDisplayName(subjectId) {
+  const prefix = (subjectId || '').replace(/-\d+$/, '').toLowerCase();
+  return subjectDisplayNames[prefix] || prefix.charAt(0).toUpperCase() + prefix.slice(1);
+}
 
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
 import { db } from '@/firebase/config';
@@ -243,7 +260,7 @@ export default function SubjectLevelsPage() {
                 <FaLock size={28} />
               </div>
               <div className="flex flex-col">
-                <span className="text-red-600 font-black text-[10px] uppercase tracking-[0.2em] mb-1">Locked Level</span>
+                <span className="text-red-600 font-black text-xs uppercase tracking-[0.2em] mb-1">Locked Level</span>
                 <p className="font-extrabold text-slate-800 text-lg leading-tight">
                   {alertMessage}
                 </p>
@@ -258,8 +275,8 @@ export default function SubjectLevelsPage() {
         animate={{ opacity: 1, y: 0 }}
         className="text-center z-10 relative mb-12"
       >
-        <span className="inline-block bg-white px-6 py-1 rounded-full text-sm font-bold text-cyan-600 mb-4 shadow-sm uppercase tracking-wider">
-          {childUser?.grade} • {subjectId.toUpperCase()}
+        <span className="inline-block bg-white px-6 py-2 rounded-full text-sm font-bold text-cyan-600 mb-4 shadow-sm uppercase tracking-wider">
+          {childUser?.grade} • {getSubjectDisplayName(subjectId)}
         </span>
         <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 drop-shadow-sm">
           {t('select_level')}
@@ -291,7 +308,7 @@ export default function SubjectLevelsPage() {
           <div key={moduleTitle} className="space-y-6">
             <div className="flex items-center gap-4">
               <div className="h-0.5 flex-grow bg-gradient-to-r from-transparent via-blue-200 to-transparent"></div>
-              <h2 className="text-2xl font-black text-slate-400 uppercase tracking-[0.3em] bg-white/50 px-6 py-2 rounded-full backdrop-blur-sm shadow-sm">{moduleTitle}</h2>
+              <h2 className="text-xl md:text-2xl font-black text-slate-500 uppercase tracking-wider bg-white/50 px-6 py-2 rounded-full backdrop-blur-sm shadow-sm">{moduleTitle}</h2>
               <div className="h-0.5 flex-grow bg-gradient-to-r from-transparent via-cyan-200 to-transparent"></div>
             </div>
 
@@ -347,18 +364,10 @@ export default function SubjectLevelsPage() {
                         transition={{ type: "spring", bounce: 0.5, delay: 0.3 }}
                         className="absolute -top-1 -right-1 z-30"
                       >
-                        <div className="bg-green-500 text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-bl-2xl rounded-tr-[2.5rem] shadow-lg flex items-center gap-1.5 animate-pulse">
+                        <div className="bg-green-500 text-white text-xs font-black uppercase tracking-widest px-4 py-2 rounded-bl-2xl rounded-tr-[2.5rem] shadow-lg flex items-center gap-1.5 animate-pulse">
                           <FaUnlockAlt size={12} /> Unlocked!
                         </div>
                       </motion.div>
-                    )}
-
-                    {/* XP Reward Badge */}
-                    {level.xpReward > 0 && !level.isCompleted && (
-                      <div className="absolute top-4 left-4 z-30 flex items-center gap-1.5 bg-white/30 backdrop-blur-md px-3 py-1.5 rounded-full shadow-md border border-white/40 text-[10px] font-black tracking-widest text-white shadow-[0_4px_10px_rgba(0,0,0,0.1)]">
-                        <FaStar className="text-yellow-300" size={12} />
-                        +{level.xpReward} XP
-                      </div>
                     )}
 
                     <div className={`w-20 h-20 rounded-3xl mb-6 shadow-inner flex items-center justify-center text-4xl ${isLocked ? 'bg-slate-400 text-slate-200' : 'bg-white/20 text-white group-hover:rotate-12 transition-transform duration-300'}`}>
@@ -372,7 +381,7 @@ export default function SubjectLevelsPage() {
                       <h3 className="text-2xl font-black mb-2 drop-shadow-md tracking-tight z-10 line-clamp-2">
                         {level.levelName?.includes(':') ? level.levelName.split(':')[1].trim() : level.levelName || 'Untitled Topic'}
                       </h3>
-                      <p className="text-xs font-medium opacity-80 z-10 mt-auto">
+                      <p className="text-sm font-medium opacity-80 z-10 mt-auto">
                         {level.description || 'Embark on a new learning adventure!'}
                       </p>
                     </div>
@@ -383,10 +392,10 @@ export default function SubjectLevelsPage() {
                       return (
                         <div className="mt-6 w-full z-10">
                           <div className="flex justify-between items-end mb-2 px-1">
-                            <span className="text-[11px] font-black uppercase tracking-wider opacity-90">
+                            <span className="text-sm font-black uppercase tracking-wider opacity-90">
                               {completedCount}/{totalTasks} tasks
                             </span>
-                            <span className="text-[11px] font-black opacity-90">
+                            <span className="text-sm font-black opacity-90">
                               {pct}%
                             </span>
                           </div>
@@ -399,7 +408,7 @@ export default function SubjectLevelsPage() {
                             />
                           </div>
                           <div className="flex items-center justify-center gap-2 mt-3">
-                            <span className="bg-yellow-400/20 text-yellow-100 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">
+                            <span className="bg-yellow-400/20 text-yellow-100 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest backdrop-blur-sm">
                               {level.xpReward || 50} XP
                             </span>
                           </div>
@@ -410,10 +419,10 @@ export default function SubjectLevelsPage() {
                     {/* Minimal info for completed levels (behind the overlay) */}
                     {!isLocked && level.isCompleted && (
                       <div className="mt-6 flex items-center gap-2">
-                        <span className="bg-black/10 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">
+                        <span className="bg-black/10 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest backdrop-blur-sm">
                           {totalTasks} Tasks
                         </span>
-                        <span className="bg-yellow-400/20 text-yellow-100 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">
+                        <span className="bg-yellow-400/20 text-yellow-100 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest backdrop-blur-sm">
                           {level.xpReward || 50} XP
                         </span>
                       </div>
@@ -423,11 +432,11 @@ export default function SubjectLevelsPage() {
                     {isLocked && (
                       <div className="mt-6 w-full z-10">
                         <div className="flex items-center gap-2 justify-center mb-2">
-                          <span className="bg-black/10 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">
+                          <span className="bg-black/10 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest backdrop-blur-sm">
                             {totalTasks} Tasks
                           </span>
                         </div>
-                        <div className="bg-slate-800/40 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-md border border-white/10 text-center">
+                        <div className="bg-slate-800/40 px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest backdrop-blur-md border border-white/10 text-center">
                           {level.overrideIsLocked ? 'LOCKED' : t('locked')}
                         </div>
                       </div>
@@ -470,7 +479,7 @@ export default function SubjectLevelsPage() {
         </AnimatePresence>
 
         <div className="relative pointer-events-auto group">
-          <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-10 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-10 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
             Professor Owl
           </div>
           <motion.div
