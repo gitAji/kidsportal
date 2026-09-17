@@ -22,7 +22,9 @@ const GRADES = [
     { id: 'grade-5', name: 'Grade 5' },
     { id: 'grade-6', name: 'Grade 6' },
     { id: 'grade-7', name: 'Grade 7' },
-    { id: 'grade-8', name: 'Grade 8' }
+    { id: 'grade-8', name: 'Grade 8' },
+    { id: 'grade-9', name: 'Grade 9' },
+    { id: 'grade-10', name: 'Grade 10' }
 ];
 
 const SUBJECTS = [
