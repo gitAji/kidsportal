@@ -265,7 +265,7 @@ export default function LearningZonePage() {
         </AnimatePresence>
 
         <div className="relative pointer-events-auto group mt-2">
-          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-40 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-40 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
             {professor.name}
           </div>
           <motion.div

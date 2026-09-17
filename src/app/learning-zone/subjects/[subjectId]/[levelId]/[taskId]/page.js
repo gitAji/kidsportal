@@ -590,20 +590,20 @@ export default function TaskContentPage() {
               {sessionHistory.slice().reverse().map((item, i) => (
                 <div key={i} className={`p-4 rounded-2xl border-2 ${item.isCorrect ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100'}`}>
                   <div className="flex justify-between items-start mb-2">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">{t('question')} {item.index}</span>
+                    <span className="text-xs font-black uppercase tracking-widest text-slate-400">{t('question')} {item.index}</span>
                     <span className={item.isCorrect ? 'text-green-600' : 'text-red-600'}>
                       {item.isCorrect ? <FaCheckCircle /> : <FaTimesCircle />}
                     </span>
                   </div>
                   <p className="text-sm font-bold text-slate-800 mb-2">{cleanString(item.question)}</p>
-                  <div className="flex gap-4 text-xs">
+                  <div className="flex gap-4 text-sm">
                     <div>
-                      <p className="text-slate-400 font-bold uppercase text-[9px]">{t('yourAnswer')}</p>
+                      <p className="text-slate-400 font-bold uppercase text-xs">{t('yourAnswer')}</p>
                       <p className={`font-bold ${item.isCorrect ? 'text-green-600' : 'text-red-600'}`}>{item.userAnswer || t('skipped')}</p>
                     </div>
                     {!item.isCorrect && (
                       <div>
-                        <p className="text-slate-400 font-bold uppercase text-[9px]">{t('correctAnswer')}</p>
+                        <p className="text-slate-400 font-bold uppercase text-xs">{t('correctAnswer')}</p>
                         <p className="font-bold text-green-600">{item.correctAnswer}</p>
                       </div>
                     )}
@@ -654,7 +654,7 @@ export default function TaskContentPage() {
                 <FaStar className="text-xl" />
               </div>
               <div>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">{t('scoreLabel')}</p>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">{t('scoreLabel')}</p>
                 <p className="font-black text-slate-800 text-xl leading-none">{score}</p>
               </div>
             </div>
@@ -664,7 +664,7 @@ export default function TaskContentPage() {
                 <FaCheckCircle className="text-xl" />
               </div>
               <div>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">{t('correctText')}</p>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">{t('correctText')}</p>
                 <p className="font-black text-slate-800 text-xl leading-none">{correctAnswersCount}</p>
               </div>
             </div>
@@ -674,7 +674,7 @@ export default function TaskContentPage() {
                 <FaTimesCircle className="text-xl" />
               </div>
               <div>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">{t('wrongText')}</p>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">{t('wrongText')}</p>
                 <p className="font-black text-slate-800 text-xl leading-none">{wrongAnswersCount}</p>
               </div>
             </div>
@@ -710,7 +710,7 @@ export default function TaskContentPage() {
         <div className="w-full max-w-4xl flex items-center gap-6 mb-8">
           <div className="flex-grow flex flex-col gap-2">
             <div className="flex justify-between items-end px-1">
-              <p className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">
+              <p className="text-sm font-black text-slate-400 uppercase tracking-wider">
                 {taskData.type} Progress
               </p>
               <p className="text-sm font-black text-slate-600">
@@ -730,7 +730,7 @@ export default function TaskContentPage() {
           {(taskData.type === 'quiz' || taskData.type === 'exam') && taskData.timeLimit && (
             <div className="flex-shrink-0">
               <div className={`px-6 py-3 rounded-2xl flex flex-col items-center justify-center border-b-4 transition-colors ${timeLeft <= 10 ? 'bg-red-500 text-white border-red-700 animate-pulse' : 'bg-white text-slate-600 border-slate-200 shadow-md'}`}>
-                <p className="text-[10px] font-black uppercase tracking-widest opacity-80 leading-none mb-1">{t('time_left')}</p>
+                <p className="text-xs font-black uppercase tracking-wider opacity-80 leading-none mb-1">{t('time_left')}</p>
                 <p className="text-2xl font-black font-mono leading-none tracking-tighter">{formatTime(timeLeft)}</p>
               </div>
             </div>
@@ -748,7 +748,7 @@ export default function TaskContentPage() {
           {languageLoaded && !feedbackMessage && (
             <button
               onClick={() => setContentLanguage(prev => prev === 'en' ? 'ta' : 'en')}
-              className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-black text-[10px] shadow drop-shadow-sm hover:scale-105 active:scale-95 transition-transform z-20"
+              className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-black text-xs shadow drop-shadow-sm hover:scale-105 active:scale-95 transition-transform z-20"
             >
               <FaLanguage size={14} />
               <span>{contentLanguage === 'en' ? 'தமிழ்' : 'English'}</span>
@@ -1005,11 +1005,11 @@ export default function TaskContentPage() {
                       {item.isCorrect ? <FaCheckCircle /> : <FaTimesCircle />}
                     </div>
                     <div className="flex-grow min-w-0">
-                      <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest leading-none mb-1">Q{item.index}</p>
+                      <p className="text-xs font-black uppercase text-slate-400 tracking-widest leading-none mb-1">Q{item.index}</p>
                       <p className="text-sm font-bold text-slate-800 truncate">{item.question}</p>
                     </div>
                     {item.attempts > 1 && (
-                      <span className="flex-shrink-0 text-[10px] font-black uppercase text-slate-400 bg-slate-100 rounded-full px-2.5 py-1">
+                      <span className="flex-shrink-0 text-xs font-black uppercase text-slate-400 bg-slate-100 rounded-full px-2.5 py-1">
                         {item.attempts} tries
                       </span>
                     )}
@@ -1050,7 +1050,7 @@ export default function TaskContentPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-30 whitespace-nowrap"
+              className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-30 whitespace-nowrap"
             >
               {professor.name}
             </motion.div>

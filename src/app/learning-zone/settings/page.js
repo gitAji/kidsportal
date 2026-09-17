@@ -125,7 +125,7 @@ export default function SettingsPage() {
                   : 'bg-slate-100 text-gray-500 hover:bg-slate-200'
                   }`}>
                 {av.icon}
-                <span className="text-[10px] font-bold">{av.label}</span>
+                <span className="text-xs font-bold">{av.label}</span>
               </button>
             ))}
           </div>
