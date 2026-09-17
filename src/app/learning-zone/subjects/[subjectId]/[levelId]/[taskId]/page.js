@@ -34,6 +34,7 @@ export default function TaskContentPage() {
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [wrongAnswersCount, setWrongAnswersCount] = useState(0);
   const [showReviewOption, setShowReviewOption] = useState(false);
+  const [attemptCount, setAttemptCount] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
   const [timerActive, setTimerActive] = useState(false);
@@ -329,6 +330,12 @@ export default function TaskContentPage() {
       setIsCheckingAnswer(false);
     }
 
+    // Track how many times this question has been attempted (first try = 1),
+    // and only offer one retry: a wrong second attempt moves on for good.
+    const attemptNumber = attemptCount + 1;
+    setAttemptCount(attemptNumber);
+    const canRetry = taskData.type === 'quiz' && attemptNumber < 2;
+
     if (isCorrect) {
       setFeedbackMessage({ type: 'correct', message });
       const pointsToAdd = currentQuestion.points || 10;
@@ -340,7 +347,7 @@ export default function TaskContentPage() {
     } else {
       setFeedbackMessage({ type: 'wrong', message });
       setWrongAnswersCount(c => c + 1);
-      if (taskData.type === 'quiz') setShowReviewOption(true);
+      setShowReviewOption(canRetry);
       incorrectSound?.play();
     }
     const historyItem = {
@@ -350,6 +357,7 @@ export default function TaskContentPage() {
       isCorrect,
       index: currentQuestionIndex + 1,
       type: currentQuestion.type,
+      attempts: attemptNumber,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
     setSessionHistory(prev => [historyItem, ...prev]);
@@ -381,6 +389,7 @@ export default function TaskContentPage() {
     setUserAnswer('');
     setFeedbackMessage(null);
     setShowReviewOption(false);
+    setAttemptCount(0);
     setClickedCountingItems([]);
     if (currentQuestionIndex < taskData.questions.length - 1) {
       setCurrentQuestionIndex(i => i + 1);
@@ -438,7 +447,7 @@ export default function TaskContentPage() {
   };
 
   const handleSkip = () => { setWrongAnswersCount(c => c + 1); handleNextQuestion(); };
-  const handleReview = () => { setFeedbackMessage(null); setShowReviewOption(false); setRetriedThisTask(true); setTimerActive(true); setClickedCountingItems([]); };
+  const handleReview = () => { setUserAnswer(''); setFeedbackMessage(null); setShowReviewOption(false); setRetriedThisTask(true); setTimerActive(true); setClickedCountingItems([]); };
   const formatTime = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 
   const handleLessonComplete = async () => {
@@ -831,12 +840,18 @@ export default function TaskContentPage() {
                   const originalOption = currentQuestion.options ? currentQuestion.options[item.index] : item.original;
 
                   const isSelected = userAnswer === originalOption;
+                  // A wrong quiz answer offers a "Try Again" on this same question, so
+                  // don't reveal which option is correct yet — that would let the
+                  // student just re-click the highlighted answer instead of actually
+                  // knowing it. Only reveal it once there's no more retry coming
+                  // (answered correctly, or the one allowed retry is used up).
+                  const revealCorrectAnswer = feedbackMessage?.type === 'correct' || !showReviewOption;
                   let style = "bg-white border-2 border-gray-200 text-gray-700 hover:border-blue-400 hover:bg-blue-50";
 
                   if (currentQuestion.type === 'counting') {
                     style = "bg-blue-500 text-white border-4 border-blue-600 shadow-md hover:bg-blue-400 hover:scale-110";
                     if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
-                      if (originalOption === currentQuestion.correctAnswer) style = "bg-green-500 text-white border-4 border-green-600 scale-110 shadow-lg";
+                      if (revealCorrectAnswer && originalOption === currentQuestion.correctAnswer) style = "bg-green-500 text-white border-4 border-green-600 scale-110 shadow-lg";
                       else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-500 text-white border-4 border-red-600 opacity-80 scale-95";
                       else style = "bg-gray-300 text-gray-500 border-4 border-gray-400 opacity-50";
                     } else if (isSelected) {
@@ -844,7 +859,7 @@ export default function TaskContentPage() {
                     }
                   } else {
                     if (feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong')) {
-                      if (originalOption === currentQuestion.correctAnswer) style = "bg-green-100 border-2 border-green-500 text-green-800 scale-105 shadow-md";
+                      if (revealCorrectAnswer && originalOption === currentQuestion.correctAnswer) style = "bg-green-100 border-2 border-green-500 text-green-800 scale-105 shadow-md";
                       else if (isSelected && feedbackMessage.type === 'wrong') style = "bg-red-100 border-2 border-red-500 text-red-800 line-through opacity-80";
                       else style = "bg-gray-100 border-2 border-gray-200 text-gray-400 opacity-40";
                     } else if (isSelected) style = "bg-blue-100 border-2 border-blue-500 text-blue-800 scale-[1.02] shadow-sm";
@@ -993,6 +1008,11 @@ export default function TaskContentPage() {
                       <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest leading-none mb-1">Q{item.index}</p>
                       <p className="text-sm font-bold text-slate-800 truncate">{item.question}</p>
                     </div>
+                    {item.attempts > 1 && (
+                      <span className="flex-shrink-0 text-[10px] font-black uppercase text-slate-400 bg-slate-100 rounded-full px-2.5 py-1">
+                        {item.attempts} tries
+                      </span>
+                    )}
                   </motion.div>
                 ))}
               </div>
