@@ -334,7 +334,7 @@ export default function TaskContentPage() {
     // and only offer one retry: a wrong second attempt moves on for good.
     const attemptNumber = attemptCount + 1;
     setAttemptCount(attemptNumber);
-    const canRetry = taskData.type === 'quiz' && attemptNumber < 2;
+    const canRetry = (taskData.type === 'quiz' || taskData.type === 'exam') && attemptNumber < 2;
 
     if (isCorrect) {
       setFeedbackMessage({ type: 'correct', message });
@@ -982,7 +982,7 @@ export default function TaskContentPage() {
             {!feedbackMessage && taskData.type === 'quiz' && (
               <button onClick={handleSkip} className="bg-white border-2 border-gray-300 text-gray-500 font-bold px-8 py-4 rounded-full text-lg hover:bg-gray-50 transition-colors">{t('skip')}</button>
             )}
-            {showReviewOption && taskData.type === 'quiz' && (
+            {showReviewOption && (taskData.type === 'quiz' || taskData.type === 'exam') && (
               <button onClick={handleReview} className="bg-yellow-400 text-yellow-900 font-bold px-8 py-4 rounded-full text-lg hover:bg-yellow-500 transition-colors flex items-center gap-2 shadow-md">
                 {t('tryAgain')} <FaRedo />
               </button>
