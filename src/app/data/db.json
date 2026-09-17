@@ -15394,14 +15394,14 @@
             },
             {
               "levelId": "tamil-3-level-9",
-              "levelName": "Reading Short Stories",
+              "levelName": "Aathichudi: Auvaiyar's Wisdom",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "tamil-3-level-9-lesson",
-                  "taskName": "Lesson: Reading Short Stories",
+                  "taskName": "Lesson: Aathichudi: Auvaiyar's Wisdom",
                   "type": "lesson",
-                  "content": "Reading short Tamil stories builds vocabulary and comprehension skills. A simple story might begin 'ஒரு காட்டில் ஒரு சிங்கம் இருந்தது' (Once there was a lion in a forest). As you read, look for the main character (கதாபாத்திரம்), the setting (இடம்), and what happens (நிகழ்வு). After reading, practice answering 'கதையில் என்ன நடந்தது?' (What happened in the story?) in a full sentence.",
+                  "content": "ஆத்திசூடி (Aathichudi) is one of the most famous books ever written for Tamil children. It was written long ago by the poet ஔவையார் (Auvaiyar), and it is a list of short, one-line sayings that each teach a good habit or a good value. The clever part is that the sayings are arranged in the order of the Tamil alphabet — the first saying starts with அ, the second with ஆ, the third with இ, and so on! This helped children learn their letters and good manners at the same time. Here are some famous lines: \"அறம் செய விரும்பு\" means \"Wish to do good deeds.\" \"ஆறுவது சினம்\" means \"Let your anger cool down\" — it reminds us not to stay angry. \"ஈவது விலக்கேல்\" means \"Do not stop someone from giving to others.\" \"ஊக்கமது கைவிடேல்\" means \"Never give up your effort.\" Even though Auvaiyar wrote these lines a very long time ago, they still teach us how to be kind, patient, and hardworking today.",
                   "questions": []
                 },
                 {
@@ -15413,44 +15413,38 @@
                   "questions": [
                     {
                       "questionId": "tamil-3-level-9-quiz-q1",
-                      "questionText": "What Tamil word means 'story'?",
-                      "correctAnswer": "கதை",
+                      "questionText": "Who wrote the Aathichudi?",
+                      "correctAnswer": "Auvaiyar",
                       "type": "multiple-choice",
                       "options": [
-                        "கதை",
-                        "பாடல்",
-                        "புத்தகம்",
-                        "எழுத்து"
+                        "Auvaiyar",
+                        "Bharathiyar",
+                        "Kambar",
+                        "Ilango Adigal"
                       ]
                     },
                     {
                       "questionId": "tamil-3-level-9-quiz-q2",
-                      "questionText": "What Tamil word means 'main character'?",
-                      "correctAnswer": "கதாபாத்திரம்",
+                      "questionText": "What is special about the order of the sayings in Aathichudi?",
+                      "correctAnswer": "Each saying starts with the next letter of the Tamil alphabet",
                       "type": "multiple-choice",
                       "options": [
-                        "கதாபாத்திரம்",
-                        "இடம்",
-                        "நிகழ்வு",
-                        "முடிவு"
+                        "They are numbered 1 to 100",
+                        "Each saying starts with the next letter of the Tamil alphabet",
+                        "They are arranged from shortest to longest",
+                        "They are written as questions and answers"
                       ]
                     },
                     {
                       "questionId": "tamil-3-level-9-quiz-q3",
-                      "questionText": "In the story opening 'ஒரு காட்டில் ஒரு சிங்கம் இருந்தது', what animal is mentioned?",
-                      "correctAnswer": "சிங்கம் (lion)",
-                      "type": "multiple-choice",
-                      "options": [
-                        "சிங்கம் (lion)",
-                        "யானை (elephant)",
-                        "நாய் (dog)",
-                        "பூனை (cat)"
-                      ]
+                      "questionText": "What does the line \"ஆறுவது சினம்\" teach us to do?",
+                      "correctAnswer": "Let your anger cool down / control your anger",
+                      "type": "identification"
                     },
                     {
                       "questionId": "tamil-3-level-9-quiz-q4",
-                      "questionText": "Write the Tamil phrase asking 'What happened in the story?'",
-                      "correctAnswer": "கதையில் என்ன நடந்தது?",
+                      "questionText": "Write the Tamil name of the famous book of one-line sayings written by Auvaiyar.",
+                      "correctAnswer": "ஆத்திசூடி",
                       "type": "identification"
                     }
                   ]
@@ -15464,50 +15458,44 @@
                   "questions": [
                     {
                       "questionId": "tamil-3-level-9-exam-q1",
-                      "questionText": "What Tamil word describes where a story takes place (the setting)?",
-                      "correctAnswer": "இடம்",
-                      "type": "multiple-choice",
-                      "options": [
-                        "இடம்",
-                        "கதாபாத்திரம்",
-                        "கதை",
-                        "முடிவு"
-                      ]
+                      "questionText": "Why did Auvaiyar arrange the Aathichudi in alphabetical order?",
+                      "correctAnswer": "So that children could learn the Tamil letters and good values at the same time",
+                      "type": "identification"
                     },
                     {
                       "questionId": "tamil-3-level-9-exam-q2",
-                      "questionText": "In 'ஒரு காட்டில் ஒரு சிங்கம் இருந்தது', what Tamil word means 'forest'?",
-                      "correctAnswer": "காடு",
+                      "questionText": "Which line from Aathichudi means \"Wish to do good deeds\"?",
+                      "correctAnswer": "அறம் செய விரும்பு",
                       "type": "multiple-choice",
                       "options": [
-                        "காடு",
-                        "சிங்கம்",
-                        "இருந்தது",
-                        "ஒரு"
+                        "அறம் செய விரும்பு",
+                        "ஆறுவது சினம்",
+                        "ஈவது விலக்கேல்",
+                        "ஊக்கமது கைவிடேல்"
                       ]
                     },
                     {
                       "questionId": "tamil-3-level-9-exam-q3",
-                      "questionText": "Which of these words names a short piece of narrative writing, like a fable or tale?",
-                      "correctAnswer": "கதை",
+                      "questionText": "The line \"ஊக்கமது கைவிடேல்\" teaches children to never give up their...",
+                      "correctAnswer": "Effort / diligence",
                       "type": "multiple-choice",
                       "options": [
-                        "கதை",
-                        "எழுத்து",
-                        "பாடம்",
-                        "மொழி"
+                        "Toys",
+                        "Effort / diligence",
+                        "Money",
+                        "Friends"
                       ]
                     },
                     {
                       "questionId": "tamil-3-level-9-exam-q4",
-                      "questionText": "Write the Tamil word meaning 'event/what happens' in a story.",
-                      "correctAnswer": "நிகழ்வு",
+                      "questionText": "What kind of book is Aathichudi — a story, a poem, or a list of one-line sayings?",
+                      "correctAnswer": "A list of one-line sayings (moral maxims)",
                       "type": "identification"
                     },
                     {
                       "questionId": "tamil-3-level-9-exam-q5",
-                      "questionText": "Write the Tamil word for 'main character'.",
-                      "correctAnswer": "கதாபாத்திரம்",
+                      "questionText": "Why is Aathichudi still taught to Tamil children today, even though it was written so long ago?",
+                      "correctAnswer": "Because its lessons about kindness, patience, and hard work are still true and useful today",
                       "type": "identification"
                     }
                   ]
@@ -27883,14 +27871,14 @@
             },
             {
               "levelId": "tamil-5-level-4",
-              "levelName": "Proverbs II",
+              "levelName": "Tamil Kings: The Chola, Pandya & Chera Dynasties",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "tamil-5-level-4-lesson",
-                  "taskName": "Lesson: Proverbs II",
+                  "taskName": "Lesson: Tamil Kings: The Chola, Pandya & Chera Dynasties",
                   "type": "lesson",
-                  "content": "Tamil pazhamozhi (பழமொழி, proverbs) pack a whole lesson into a short, memorable line, and understanding them means looking past the literal words to the intended meaning. The famous saying attributed to the poet Auvaiyar, \"கற்றது கை மண்ணளவு, கல்லாதது உலகளவு\" (kattradhu kai mannalavu, kallaadhadhu ulagalavu), literally means \"what we've learned is a handful of sand, what we haven't is the size of the world\" — a reminder to stay humble about how much we still don't know. Another common proverb, \"கிணற்றுத் தவளைக்குக் கடல் தெரியுமா?\" (kinatru thavalaikku kadal theriyumaa?), asks \"does a frog in a well know the ocean?\", used to describe someone whose narrow experience limits their understanding of the wider world. A third, \"அளவுக்கு மிஞ்சினால் அமுதமும் நஞ்சு\" (alavukku minjinaal amudhamum nanju), warns that even nectar becomes poison in excess — moderation matters in all things.",
+                  "content": "Long ago, ancient Tamil land (Tamilakam) was ruled by three great royal families, often called மூவேந்தர் (the \"Three Crowned Kings\"): the சோழர் (Chola), பாண்டியர் (Pandya), and சேரர் (Chera). Each dynasty ruled a different region and had its own symbol (emblem). The Cholas ruled the fertile Kaveri river valley in the east, and their emblem was the tiger. Their early capital was Uraiyur. The Pandyas ruled the south, with their capital at மதுரை (Madurai), and their emblem was the fish (carp). Madurai was also a great center of learning, home to the Tamil Sangams — academies of poets who composed and preserved classical Tamil literature. The Cheras ruled the west, in what is now Kerala, with their capital near Vanji, and their emblem was the bow. These three kingdoms sometimes fought each other for power, but they also supported poets, temples, and trade, and their courts are where much of the earliest Tamil literature, called Sangam literature, was composed and collected.",
                   "questions": []
                 },
                 {
@@ -27902,39 +27890,45 @@
                   "questions": [
                     {
                       "questionId": "tamil-5-level-4-quiz-q1",
-                      "questionText": "What is the literal meaning of \"கற்றது கை மண்ணளவு, கல்லாதது உலகளவு\"?",
-                      "correctAnswer": "What we've learned is a handful of sand, what we haven't is the size of the world",
-                      "type": "multiple-choice",
-                      "options": [
-                        "What we've learned is a handful of sand, what we haven't is the size of the world",
-                        "A rolling stone gathers no moss",
-                        "Slow and steady wins the race",
-                        "Actions speak louder than words"
-                      ]
+                      "questionText": "What were the three ancient Tamil royal dynasties together called?",
+                      "correctAnswer": "மூவேந்தர் (the Three Crowned Kings)",
+                      "type": "identification"
                     },
                     {
                       "questionId": "tamil-5-level-4-quiz-q2",
-                      "questionText": "The proverb \"கிணற்றுத் தவளைக்குக் கடல் தெரியுமா?\" is used to describe someone who is...",
-                      "correctAnswer": "Narrow-minded or inexperienced of the wider world",
+                      "questionText": "Which dynasty had the tiger as its emblem and ruled the Kaveri river valley?",
+                      "correctAnswer": "Chola",
                       "type": "multiple-choice",
                       "options": [
-                        "Very wealthy",
-                        "Narrow-minded or inexperienced of the wider world",
-                        "Extremely brave",
-                        "Highly skilled at swimming"
+                        "Chola",
+                        "Pandya",
+                        "Chera",
+                        "Pallava"
                       ]
                     },
                     {
                       "questionId": "tamil-5-level-4-quiz-q3",
-                      "questionText": "Which classical Tamil poet is traditionally credited with the saying \"கற்றது கை மண்ணளவு, கல்லாதது உலகளவு\"?",
-                      "correctAnswer": "Auvaiyar (ஔவையார்)",
-                      "type": "identification"
+                      "questionText": "Which city was the capital of the Pandya kingdom and a great center of Tamil learning?",
+                      "correctAnswer": "Madurai",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Uraiyur",
+                        "Madurai",
+                        "Thanjavur",
+                        "Vanji"
+                      ]
                     },
                     {
                       "questionId": "tamil-5-level-4-quiz-q4",
-                      "questionText": "Complete the proverb about moderation: \"அளவுக்கு மிஞ்சினால் அமுதமும் ___\"",
-                      "correctAnswer": "நஞ்சு (poison)",
-                      "type": "identification"
+                      "questionText": "What was the emblem of the Chera dynasty, which ruled the west (modern Kerala)?",
+                      "correctAnswer": "The bow",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The bow",
+                        "The fish",
+                        "The tiger",
+                        "The elephant"
+                      ]
                     }
                   ]
                 },
@@ -27947,45 +27941,45 @@
                   "questions": [
                     {
                       "questionId": "tamil-5-level-4-exam-q1",
-                      "questionText": "What lesson does the proverb \"கிணற்றுத் தவளைக்குக் கடல் தெரியுமா?\" (does a frog in a well know the ocean?) teach?",
-                      "correctAnswer": "That limited experience keeps someone from understanding the wider world",
+                      "questionText": "Name the three ancient Tamil dynasties known as the \"Three Crowned Kings.\"",
+                      "correctAnswer": "Chola, Pandya, and Chera",
                       "type": "identification"
                     },
                     {
                       "questionId": "tamil-5-level-4-exam-q2",
-                      "questionText": "Which English idiom carries the closest meaning to \"கிணற்றுத் தவளைக்குக் கடல் தெரியுமா?\"?",
-                      "correctAnswer": "A frog in a well",
-                      "type": "multiple-choice",
-                      "options": [
-                        "A frog in a well",
-                        "Kill two birds with one stone",
-                        "Actions speak louder than words",
-                        "Better late than never"
-                      ]
+                      "questionText": "What were the Tamil Sangams, and which city hosted them?",
+                      "correctAnswer": "Academies of poets who composed and preserved classical Tamil literature, hosted in Madurai",
+                      "type": "identification"
                     },
                     {
                       "questionId": "tamil-5-level-4-exam-q3",
-                      "questionText": "\"அளவுக்கு மிஞ்சினால் அமுதமும் நஞ்சு\" teaches a lesson about...",
-                      "correctAnswer": "The value of moderation, even with good things",
+                      "questionText": "Which emblem belonged to the Pandya dynasty?",
+                      "correctAnswer": "The fish (carp)",
                       "type": "multiple-choice",
                       "options": [
-                        "Bravery in battle",
-                        "The value of moderation, even with good things",
-                        "The importance of honesty",
-                        "Respecting elders"
+                        "The fish (carp)",
+                        "The bow",
+                        "The tiger",
+                        "The lion"
                       ]
                     },
                     {
                       "questionId": "tamil-5-level-4-exam-q4",
-                      "questionText": "Why does Auvaiyar's proverb compare learned knowledge to \"a handful of sand\" rather than something larger?",
-                      "correctAnswer": "To show how small our knowledge is compared to everything in the world, encouraging humility",
+                      "questionText": "Besides ruling their kingdoms, what else did these three royal courts support that helped Tamil culture grow?",
+                      "correctAnswer": "They supported poets, temples, trade, and the composition/preservation of literature",
                       "type": "identification"
                     },
                     {
                       "questionId": "tamil-5-level-4-exam-q5",
-                      "questionText": "What is the Tamil word for a proverb, used as the title of this unit?",
-                      "correctAnswer": "பழமொழி (pazhamozhi)",
-                      "type": "identification"
+                      "questionText": "Which region did the Chola dynasty rule?",
+                      "correctAnswer": "The fertile Kaveri river valley in the east",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The fertile Kaveri river valley in the east",
+                        "The mountains of the north",
+                        "The western coast (modern Kerala)",
+                        "The island of Sri Lanka"
+                      ]
                     }
                   ]
                 }
@@ -32551,14 +32545,14 @@
             },
             {
               "levelId": "tamil-6-level-4",
-              "levelName": "Idioms & Figures of Speech I",
+              "levelName": "The Chola Empire: Rajaraja & Rajendra Chola",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "tamil-6-level-4-lesson",
-                  "taskName": "Lesson: Idioms & Figures of Speech I",
+                  "taskName": "Lesson: The Chola Empire: Rajaraja & Rajendra Chola",
                   "type": "lesson",
-                  "content": "Tamil is rich in மரபுத்தொடர் (marabuthodar, idioms) — fixed expressions whose meaning cannot be guessed from the individual words alone. \"தலை தெறிக்க ஓடுதல்\" (thalai therikka odudhal) literally means \"to run so hard the head flies off,\" and is used to describe running away in a great hurry or panic. \"வாயில் நீர் ஊறுதல்\" (vaayil neer oorudhal), literally \"water forming in the mouth,\" describes the feeling of one's mouth watering at the sight or smell of delicious food. \"மூக்கின் மேல் கோபம்\" (mookkin mel kobam), literally \"anger on the tip of the nose,\" describes someone who has a very short temper and gets angry quickly. Learning idioms like these helps you understand natural, everyday spoken Tamil far better than a word-for-word translation ever could.",
+                  "content": "By the 10th and 11th centuries CE, the Chola kingdom had grown into one of the most powerful empires in Tamil history, thanks to two remarkable rulers: ராஜராஜ சோழன் (Rajaraja Chola I, who ruled 985–1014 CE) and his son ராஜேந்திர சோழன் (Rajendra Chola I, who ruled 1014–1044 CE). Rajaraja Chola I built the magnificent பிரகதீஸ்வரர் கோயில் (Brihadeeswarar Temple) in Thanjavur, a towering stone temple dedicated to Lord Shiva that is now a UNESCO World Heritage Site and still stands today, over a thousand years later. He also built a powerful navy and expanded Chola rule to northern Sri Lanka and the Maldive Islands. His son Rajendra Chola I pushed the empire even further: he led a famous military campaign all the way north to the Ganges river, and to celebrate this achievement he built a new capital city called கங்கைகொண்ட சோழபுரம் (Gangaikonda Cholapuram, \"the city of the Chola who took the Ganges\"). Rajendra Chola also sent a naval expedition across the sea to Southeast Asia, reaching the Srivijaya empire in what is now Indonesia and Malaysia — one of the few times in history that an Indian kingdom launched a major overseas naval campaign. Together, father and son made the Chola Empire one of the largest and most advanced empires of its time, famous for its temples, its navy, and its support of Tamil art and literature.",
                   "questions": []
                 },
                 {
@@ -32570,38 +32564,38 @@
                   "questions": [
                     {
                       "questionId": "tamil-6-level-4-quiz-q1",
-                      "questionText": "What does the idiom \"தலை தெறிக்க ஓடுதல்\" mean?",
-                      "correctAnswer": "To run away in a great hurry or panic",
-                      "type": "multiple-choice",
-                      "options": [
-                        "To eat very slowly",
-                        "To run away in a great hurry or panic",
-                        "To fall asleep quickly",
-                        "To speak very politely"
-                      ]
+                      "questionText": "What famous temple did Rajaraja Chola I build in Thanjavur?",
+                      "correctAnswer": "The Brihadeeswarar Temple (பிரகதீஸ்வரர் கோயில்)",
+                      "type": "identification"
                     },
                     {
                       "questionId": "tamil-6-level-4-quiz-q2",
-                      "questionText": "The idiom \"வாயில் நீர் ஊறுதல்\" describes what feeling?",
-                      "correctAnswer": "One's mouth watering at delicious food",
+                      "questionText": "Which Chola king led a military campaign all the way to the Ganges river and built Gangaikonda Cholapuram to mark it?",
+                      "correctAnswer": "Rajendra Chola I",
                       "type": "multiple-choice",
                       "options": [
-                        "Feeling thirsty for water",
-                        "One's mouth watering at delicious food",
-                        "Feeling sick to one's stomach",
-                        "Being unable to speak"
+                        "Rajaraja Chola I",
+                        "Rajendra Chola I",
+                        "Rajaraja Chola II",
+                        "Kulothunga Chola"
                       ]
                     },
                     {
                       "questionId": "tamil-6-level-4-quiz-q3",
-                      "questionText": "Write the Tamil idiom that literally means \"anger on the tip of the nose,\" describing a short-tempered person.",
-                      "correctAnswer": "மூக்கின் மேல் கோபம்",
-                      "type": "identification"
+                      "questionText": "Rajendra Chola I sent a naval expedition overseas to which Southeast Asian empire?",
+                      "correctAnswer": "The Srivijaya empire",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The Srivijaya empire",
+                        "The Khmer empire",
+                        "The Ming empire",
+                        "The Roman empire"
+                      ]
                     },
                     {
                       "questionId": "tamil-6-level-4-quiz-q4",
-                      "questionText": "Write the Tamil term for a fixed idiomatic expression, as studied in this unit.",
-                      "correctAnswer": "மரபுத்தொடர்",
+                      "questionText": "What is special about the Brihadeeswarar Temple today, over a thousand years after it was built?",
+                      "correctAnswer": "It is a UNESCO World Heritage Site and still stands",
                       "type": "identification"
                     }
                   ]
@@ -32615,50 +32609,44 @@
                   "questions": [
                     {
                       "questionId": "tamil-6-level-4-exam-q1",
-                      "questionText": "Why can't the meaning of an idiom like \"மூக்கின் மேல் கோபம்\" be understood by translating each word separately?",
-                      "correctAnswer": "Because idioms carry a figurative meaning that is different from the literal meaning of their individual words",
+                      "questionText": "Explain what Rajaraja Chola I achieved during his reign (985–1014 CE).",
+                      "correctAnswer": "He built the Brihadeeswarar Temple in Thanjavur and built a powerful navy that expanded Chola rule to northern Sri Lanka and the Maldives",
                       "type": "identification"
                     },
                     {
                       "questionId": "tamil-6-level-4-exam-q2",
-                      "questionText": "Which idiom would best describe someone sprinting away in fear after seeing a dog?",
-                      "correctAnswer": "தலை தெறிக்க ஓடுதல்",
-                      "type": "multiple-choice",
-                      "options": [
-                        "வாயில் நீர் ஊறுதல்",
-                        "தலை தெறிக்க ஓடுதல்",
-                        "மூக்கின் மேல் கோபம்",
-                        "கை நீட்டுதல்"
-                      ]
+                      "questionText": "Why did Rajendra Chola I build the city of Gangaikonda Cholapuram?",
+                      "correctAnswer": "To commemorate his military campaign that reached the Ganges river",
+                      "type": "identification"
                     },
                     {
                       "questionId": "tamil-6-level-4-exam-q3",
-                      "questionText": "If someone is described as having \"மூக்கின் மேல் கோபம்,\" what personality trait are they being described as having?",
-                      "correctAnswer": "Quick to anger, short-tempered",
+                      "questionText": "Who was the father of Rajendra Chola I?",
+                      "correctAnswer": "Rajaraja Chola I",
                       "type": "multiple-choice",
                       "options": [
-                        "Very calm and patient",
-                        "Quick to anger, short-tempered",
-                        "Extremely generous",
-                        "Very shy"
+                        "Rajaraja Chola I",
+                        "Ilango Adigal",
+                        "Kambar",
+                        "Karikala Chola"
                       ]
                     },
                     {
                       "questionId": "tamil-6-level-4-exam-q4",
-                      "questionText": "Describe a situation where you might correctly use the idiom \"வாயில் நீர் ஊறுதல்\".",
-                      "correctAnswer": "When smelling or seeing delicious food and feeling your mouth water in anticipation",
+                      "questionText": "What made Rajendra Chola I's naval expedition to Srivijaya unusual for an Indian kingdom of that time?",
+                      "correctAnswer": "It was one of the few times an Indian kingdom launched a major overseas naval campaign",
                       "type": "identification"
                     },
                     {
                       "questionId": "tamil-6-level-4-exam-q5",
-                      "questionText": "What English expression carries a similar figurative meaning to \"தலை தெறிக்க ஓடுதல்\"?",
-                      "correctAnswer": "To run for one's life / run at breakneck speed",
+                      "questionText": "What god was the Brihadeeswarar Temple in Thanjavur built to honor?",
+                      "correctAnswer": "Lord Shiva",
                       "type": "multiple-choice",
                       "options": [
-                        "To run for one's life / run at breakneck speed",
-                        "To sleep like a log",
-                        "To bite the bullet",
-                        "To let the cat out of the bag"
+                        "Lord Shiva",
+                        "Lord Vishnu",
+                        "Lord Murugan",
+                        "Goddess Meenakshi"
                       ]
                     }
                   ]
@@ -37084,14 +37072,14 @@
             },
             {
               "levelId": "tamil-7-level-3",
-              "levelName": "Idioms & Figures of Speech II",
+              "levelName": "The Jaffna Kingdom: Tamil History in Sri Lanka",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "tamil-7-level-3-lesson",
-                  "taskName": "Lesson: Idioms & Figures of Speech II",
+                  "taskName": "Lesson: The Jaffna Kingdom: Tamil History in Sri Lanka",
                   "type": "lesson",
-                  "content": "Continuing beyond the idioms of Grade 6, this unit introduces more marabuthodar (மரபுத்தொடர், idioms) alongside அணி (ani, figures of speech) used to make Tamil expressive. \"கை கழுவிவிடுதல்\" (kai kazhuvividudhal), literally \"to wash one's hands of it,\" means to completely disown responsibility for something. \"நாக்கைக் கடித்துக் கொள்ளுதல்\" (naakkai kadithuk kolludhal), literally \"to bite one's own tongue,\" describes the moment of regret right after realising you said something you shouldn't have. Alongside idioms, Tamil poetry uses அணி such as உவமை அணி (uvamai ani, simile), as in \"நிலா போன்ற முகம்\" (a face like the moon), which directly compares two things using \"போன்ற\" (like/similar to).",
+                  "content": "Tamil history is not only about mainland India — it also includes a long and proud history in இலங்கை (Sri Lanka). Around the 13th century CE, a Tamil kingdom known as the யாழ்ப்பாண இராச்சியம் (Jaffna Kingdom) was established in the northern part of Sri Lanka, ruled by the Aryacakravarti dynasty. Its capital was நல்லூர் (Nallur), which became an important center of Tamil Hindu (Saiva) culture, religion, and literature in the island. The kingdom built magnificent temples, most famously the நல்லூர் கந்தசுவாமி கோயில் (Nallur Kandaswamy Temple) dedicated to Lord Murugan, which remains one of the most important Hindu temples in Sri Lanka today. The Jaffna Kingdom traded with South India and other parts of the region, and its rulers supported Tamil scholars and poets, helping Tamil language and culture flourish in the north of the island for several centuries. The kingdom remained independent until 1619, when it was conquered by Portuguese colonizers — bringing an end to centuries of Tamil royal rule in Sri Lanka, though Tamil language, culture, and Hindu traditions continued to thrive among the Tamil community there.",
                   "questions": []
                 },
                 {
@@ -37103,38 +37091,38 @@
                   "questions": [
                     {
                       "questionId": "tamil-7-level-3-quiz-q1",
-                      "questionText": "What does the idiom \"கை கழுவிவிடுதல்\" mean?",
-                      "correctAnswer": "To completely disown responsibility for something",
-                      "type": "multiple-choice",
-                      "options": [
-                        "To wash one's hands (literal cleaning only)",
-                        "To completely disown responsibility for something",
-                        "To celebrate a victory",
-                        "To fall ill suddenly"
-                      ]
+                      "questionText": "What was the name of the Tamil kingdom established in northern Sri Lanka around the 13th century?",
+                      "correctAnswer": "The Jaffna Kingdom (யாழ்ப்பாண இராச்சியம்)",
+                      "type": "identification"
                     },
                     {
                       "questionId": "tamil-7-level-3-quiz-q2",
-                      "questionText": "The idiom \"நாக்கைக் கடித்துக் கொள்ளுதல்\" describes what moment?",
-                      "correctAnswer": "Regret right after saying something one shouldn't have",
+                      "questionText": "What was the capital city of the Jaffna Kingdom?",
+                      "correctAnswer": "Nallur",
                       "type": "multiple-choice",
                       "options": [
-                        "Enjoying a tasty meal",
-                        "Regret right after saying something one shouldn't have",
-                        "Winning an argument",
-                        "Falling asleep"
+                        "Nallur",
+                        "Kandy",
+                        "Colombo",
+                        "Trincomalee"
                       ]
                     },
                     {
                       "questionId": "tamil-7-level-3-quiz-q3",
-                      "questionText": "Write the Tamil term for a figure of speech, the broader category that includes simile and metaphor.",
-                      "correctAnswer": "அணி (ani)",
-                      "type": "identification"
+                      "questionText": "Which famous temple in Jaffna is dedicated to Lord Murugan?",
+                      "correctAnswer": "Nallur Kandaswamy Temple",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Nallur Kandaswamy Temple",
+                        "Brihadeeswarar Temple",
+                        "Meenakshi Temple",
+                        "Ramanathaswamy Temple"
+                      ]
                     },
                     {
                       "questionId": "tamil-7-level-3-quiz-q4",
-                      "questionText": "Which word in \"நிலா போன்ற முகம்\" (a face like the moon) signals that this is a simile (உவமை அணி)?",
-                      "correctAnswer": "போன்ற (like/similar to)",
+                      "questionText": "In what year was the Jaffna Kingdom conquered, ending centuries of Tamil royal rule in Sri Lanka?",
+                      "correctAnswer": "1619",
                       "type": "identification"
                     }
                   ]
@@ -37148,50 +37136,50 @@
                   "questions": [
                     {
                       "questionId": "tamil-7-level-3-exam-q1",
-                      "questionText": "Which idiom would you use to describe someone completely refusing to take further responsibility for a failed project?",
-                      "correctAnswer": "கை கழுவிவிடுதல்",
-                      "type": "multiple-choice",
-                      "options": [
-                        "கை கழுவிவிடுதல்",
-                        "வாயில் நீர் ஊறுதல்",
-                        "தலை தெறிக்க ஓடுதல்",
-                        "மூக்கின் மேல் கோபம்"
-                      ]
-                    },
-                    {
-                      "questionId": "tamil-7-level-3-exam-q2",
-                      "questionText": "What Tamil term names the figure of speech that compares two things using a word like \"போன்ற\" (like/as)?",
-                      "correctAnswer": "உவமை அணி (simile)",
+                      "questionText": "Which dynasty ruled the Jaffna Kingdom?",
+                      "correctAnswer": "The Aryacakravarti dynasty",
                       "type": "identification"
                     },
                     {
+                      "questionId": "tamil-7-level-3-exam-q2",
+                      "questionText": "Who conquered the Jaffna Kingdom in 1619?",
+                      "correctAnswer": "The Portuguese",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The Portuguese",
+                        "The British",
+                        "The Dutch",
+                        "The Cholas"
+                      ]
+                    },
+                    {
                       "questionId": "tamil-7-level-3-exam-q3",
-                      "questionText": "In \"நிலா போன்ற முகம்\" (a face like the moon), what two things are being compared?",
-                      "correctAnswer": "A face (முகம்) and the moon (நிலா)",
+                      "questionText": "Why was Nallur important to the Jaffna Kingdom beyond being its capital?",
+                      "correctAnswer": "It became an important center of Tamil Hindu (Saiva) culture, religion, and literature",
                       "type": "identification"
                     },
                     {
                       "questionId": "tamil-7-level-3-exam-q4",
-                      "questionText": "Describe a situation in which someone might use the idiom \"நாக்கைக் கடித்துக் கொள்ளுதல்\".",
-                      "correctAnswer": "Right after blurting out something they immediately regret saying, realising their mistake",
+                      "questionText": "What did the rulers of the Jaffna Kingdom do to help Tamil language and culture flourish?",
+                      "correctAnswer": "They supported Tamil scholars and poets and built temples",
                       "type": "identification"
                     },
                     {
                       "questionId": "tamil-7-level-3-exam-q5",
-                      "questionText": "What is the key difference between an idiom (மரபுத்தொடர்) and a figure of speech like simile (அணி)?",
-                      "correctAnswer": "An idiom is a fixed expression with an established figurative meaning, while a simile explicitly compares two things using a comparison word",
+                      "questionText": "What continued to thrive among the Tamil community in Sri Lanka even after the kingdom fell?",
+                      "correctAnswer": "Tamil language, culture, and Hindu traditions",
                       "type": "multiple-choice",
                       "options": [
-                        "An idiom is a fixed expression with an established figurative meaning, while a simile explicitly compares two things using a comparison word",
-                        "There is no difference between them",
-                        "Idioms are only used in writing, never in speech",
-                        "Similes never appear in Tamil poetry"
+                        "Tamil language, culture, and Hindu traditions",
+                        "The Aryacakravarti royal government",
+                        "The original Jaffna army",
+                        "Trade with the Chola empire"
                       ]
                     }
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 1: Getting Started"
             },
             {
               "levelId": "tamil-7-level-4",
@@ -42418,14 +42406,14 @@
             },
             {
               "levelId": "tamil-8-level-9",
-              "levelName": "Research & Presentation Skills",
+              "levelName": "Subramania Bharati: Poet of Freedom",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "tamil-8-level-9-lesson",
-                  "taskName": "Lesson: Research & Presentation Skills",
+                  "taskName": "Lesson: Subramania Bharati: Poet of Freedom",
                   "type": "lesson",
-                  "content": "ஆய்வுத் திறன்கள் (aaivuth thiranghal, research skills) begin with gathering reliable ஆதாரங்கள் (aadhaarangal, sources) on a topic and taking clear notes rather than copying text directly. When you use another person's words or ideas, proper practice requires a மேற்கோள் (merkol, citation) acknowledging where the information came from, both to give credit fairly and to let others check your sources. Once research is gathered, organising it into a clear விளக்கக்காட்சி (vilakkakkaatchi, presentation) means structuring your findings logically — an introduction to the topic, a few clearly organised main points, and a conclusion — and supporting your spoken explanation with well-chosen காட்சிப் பொருள்கள் (kaatchip porulgal, visual aids) such as images, charts or key words on a slide, rather than dense blocks of text the audience must read instead of listening to you.",
+                  "content": "சுப்பிரமணிய பாரதி (Subramania Bharati), affectionately called பாரதியார் (Bharathiyar) and honored as \"Mahakavi\" (great poet), was born in 1882 in Ettayapuram, Tamil Nadu, and became one of the most important Tamil poets of the modern era. He lived during a time when India was under British colonial rule, and his poetry became a powerful voice for India's freedom movement — he wrote fiery, passionate verses calling for national independence, unity, and courage, and his songs were sung at protests and gatherings across Tamil Nadu. But Bharathiyar wrote about more than just politics: he was also a bold social reformer who used his poetry to speak out against the caste system and to call for the equality and education of women, ideas that were considered very progressive for his time. He wrote beautiful, playful poems for and about children too, such as \"சின்னஞ்சிறு கிளியே\" (Chinnanchiru Kiliye, \"Little Parrot\"), which is still taught and loved today. He also composed devotional and patriotic songs about \"பாரத மாதா\" (Bharat Matha, \"Mother India\"), blending love of language, faith, and country into his verse. Bharathiyar died young, in 1921, but his poetry continues to inspire Tamil readers, and he is remembered as one of the greatest poets in the history of the Tamil language.",
                   "questions": []
                 },
                 {
@@ -42437,38 +42425,32 @@
                   "questions": [
                     {
                       "questionId": "tamil-8-level-9-quiz-q1",
-                      "questionText": "What is the Tamil term for a citation, acknowledging where information came from?",
-                      "correctAnswer": "மேற்கோள் (citation)",
-                      "type": "multiple-choice",
-                      "options": [
-                        "மேற்கோள் (citation)",
-                        "வேற்றுமை (case marker)",
-                        "தளை (metrical rule)",
-                        "பழமொழி (proverb)"
-                      ]
+                      "questionText": "What is Subramania Bharati commonly known as, out of respect for his poetry?",
+                      "correctAnswer": "Bharathiyar / Mahakavi (great poet)",
+                      "type": "identification"
                     },
                     {
                       "questionId": "tamil-8-level-9-quiz-q2",
-                      "questionText": "What should a researcher do instead of copying text directly when taking notes on a source?",
-                      "correctAnswer": "Take clear notes in their own words",
+                      "questionText": "What major historical movement did Bharathiyar's poetry support?",
+                      "correctAnswer": "India's freedom / independence movement",
                       "type": "multiple-choice",
                       "options": [
-                        "Take clear notes in their own words",
-                        "Copy every sentence word for word without changes",
-                        "Avoid reading the source at all",
-                        "Only memorise the title"
+                        "India's freedom / independence movement",
+                        "The building of the Brihadeeswarar Temple",
+                        "The founding of the Tamil Sangams",
+                        "The Jaffna Kingdom's trade expansion"
                       ]
                     },
                     {
                       "questionId": "tamil-8-level-9-quiz-q3",
-                      "questionText": "Write the Tamil term for a presentation, where research findings are organised and shared.",
-                      "correctAnswer": "விளக்கக்காட்சி",
+                      "questionText": "Besides politics, what social causes did Bharathiyar speak out for in his poetry?",
+                      "correctAnswer": "Ending the caste system and supporting equality and education for women",
                       "type": "identification"
                     },
                     {
                       "questionId": "tamil-8-level-9-quiz-q4",
-                      "questionText": "Write the Tamil term for visual aids, such as images or charts, used to support a presentation.",
-                      "correctAnswer": "காட்சிப் பொருள்கள்",
+                      "questionText": "What is the name of Bharathiyar's famous poem for children, meaning \"Little Parrot\"?",
+                      "correctAnswer": "சின்னஞ்சிறு கிளியே (Chinnanchiru Kiliye)",
                       "type": "identification"
                     }
                   ]
@@ -42482,50 +42464,50 @@
                   "questions": [
                     {
                       "questionId": "tamil-8-level-9-exam-q1",
-                      "questionText": "Why is it important to cite (மேற்கோள்) a source when using someone else's words or ideas in research?",
-                      "correctAnswer": "To give credit fairly to the original source and to let others verify where the information came from",
+                      "questionText": "In which town was Subramania Bharati born, and in what year?",
+                      "correctAnswer": "Ettayapuram, in 1882",
                       "type": "identification"
                     },
                     {
                       "questionId": "tamil-8-level-9-exam-q2",
-                      "questionText": "What three parts should a well-organised presentation include, according to this unit?",
-                      "correctAnswer": "An introduction to the topic, a few clearly organised main points, and a conclusion",
+                      "questionText": "What did Bharathiyar mean by \"பாரத மாதா\" (Bharat Matha) in his patriotic songs?",
+                      "correctAnswer": "Mother India",
                       "type": "multiple-choice",
                       "options": [
-                        "An introduction to the topic, a few clearly organised main points, and a conclusion",
-                        "Only a long list of unrelated facts",
-                        "Only visual aids with no spoken explanation",
-                        "A conclusion first, then an introduction"
+                        "Mother India",
+                        "The Chola Empire",
+                        "The Tamil Sangam",
+                        "The city of Madurai"
                       ]
                     },
                     {
                       "questionId": "tamil-8-level-9-exam-q3",
-                      "questionText": "Why should visual aids (காட்சிப் பொருள்கள்) avoid dense blocks of text?",
-                      "correctAnswer": "Because dense text makes the audience read instead of listening to the speaker, reducing the effectiveness of the presentation",
+                      "questionText": "Why were Bharathiyar's views on women's education considered progressive for his time?",
+                      "correctAnswer": "Because he called for equality and education for women when such ideas were not widely accepted yet",
                       "type": "identification"
                     },
                     {
                       "questionId": "tamil-8-level-9-exam-q4",
-                      "questionText": "Write the Tamil term for reliable sources gathered during research.",
-                      "correctAnswer": "ஆதாரங்கள்",
+                      "questionText": "How were Bharathiyar's patriotic songs used during the independence movement?",
+                      "correctAnswer": "They were sung at protests and public gatherings to inspire unity and courage",
                       "type": "identification"
                     },
                     {
                       "questionId": "tamil-8-level-9-exam-q5",
-                      "questionText": "Which of these is good research practice when gathering information from multiple sources?",
-                      "correctAnswer": "Taking clear notes in your own words and citing where each idea came from",
+                      "questionText": "In what year did Subramania Bharati die?",
+                      "correctAnswer": "1921",
                       "type": "multiple-choice",
                       "options": [
-                        "Taking clear notes in your own words and citing where each idea came from",
-                        "Copying entire paragraphs without any citation",
-                        "Using only one uncredited source for everything",
-                        "Avoiding notes and relying purely on memory"
+                        "1901",
+                        "1921",
+                        "1947",
+                        "1965"
                       ]
                     }
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 3: Skill Building"
             },
             {
               "levelId": "tamil-8-level-10",
