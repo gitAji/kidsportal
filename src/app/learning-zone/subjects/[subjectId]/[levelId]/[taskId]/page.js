@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import SkeletonLoader from '../../../../../components/ui/SkeletonLoader';
-import { FaArrowLeft, FaCheckCircle, FaTimesCircle, FaRedo, FaForward, FaPaintBrush, FaKeyboard, FaHome, FaStar, FaTrophy, FaMedal, FaGift } from 'react-icons/fa';
+import { FaArrowLeft, FaCheckCircle, FaTimesCircle, FaRedo, FaForward, FaPaintBrush, FaKeyboard, FaHome, FaStar, FaTrophy, FaMedal, FaGift, FaEraser } from 'react-icons/fa';
 import { useChild } from '../../../../../providers/ChildProvider';
 import AudioPlayer from '../../../../../components/ui/AudioPlayer';
 import DrawingCanvas from '../../../../../components/ui/DrawingCanvas';
