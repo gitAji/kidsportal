@@ -33,6 +33,7 @@ const SUBJECTS = [
     { id: 'Math', name: 'Mathematics', icon: '🔢' },
     { id: 'Science', name: 'Science', icon: '🔬' },
     { id: 'Tamil', name: 'Tamil', icon: '📚' },
+    { id: 'Computer Science', name: 'Computer Science', icon: '💻' },
 ];
 
 export default function TeachersManagement() {

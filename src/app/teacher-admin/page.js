@@ -24,6 +24,7 @@ const ALL_SUBJECTS = [
     { id: 'Math', name: 'Mathematics', icon: '🔢', color: 'orange' },
     { id: 'Science', name: 'Science', icon: '🔬', color: 'purple' },
     { id: 'Tamil', name: 'Tamil', icon: '📚', color: 'emerald' },
+    { id: 'Computer Science', name: 'Computer Science', icon: '💻', color: 'cyan' },
 ];
 
 
@@ -506,8 +507,9 @@ function TeacherAdminPageContent() {
 
     const getFullSubjectId = useCallback(() => {
         if (!selectedGrade || !selectedSubject) return '';
-        // Use lowercase for consistency with db.json and standard IDs
-        return `${selectedSubject.toLowerCase()}-${selectedGrade.replace('grade-', '')}`;
+        // Use lowercase, no spaces, for consistency with db.json subjectIds
+        // (e.g. "Computer Science" -> "computerscience", matching computerscience-1 etc.)
+        return `${selectedSubject.toLowerCase().replace(/\s+/g, '')}-${selectedGrade.replace('grade-', '')}`;
     }, [selectedGrade, selectedSubject]);
 
     const refreshLevels = useCallback(async () => {
@@ -612,7 +614,7 @@ function TeacherAdminPageContent() {
                 const gradeMatch = taskId.match(/grade-?(\d+)/i) || (data.levelId || '').match(/grade-?(\d+)/i);
                 const grade = gradeMatch ? `grade-${gradeMatch[1]}` : '';
 
-                if (module === selectedSubject.toLowerCase() && grade === selectedGrade) {
+                if (module === selectedSubject.toLowerCase().replace(/\s+/g, '') && grade === selectedGrade) {
                     count++;
                     totalS += parseFloat(data.score) || 0;
                     breakdown[taskId] = (breakdown[taskId] || 0) + 1;
