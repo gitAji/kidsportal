@@ -34,6 +34,7 @@ export default function TaskContentPage() {
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [wrongAnswersCount, setWrongAnswersCount] = useState(0);
   const [showReviewOption, setShowReviewOption] = useState(false);
+  const [attemptCount, setAttemptCount] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
   const [timerActive, setTimerActive] = useState(false);
@@ -329,6 +330,12 @@ export default function TaskContentPage() {
       setIsCheckingAnswer(false);
     }
 
+    // Track how many times this question has been attempted (first try = 1),
+    // and only offer one retry: a wrong second attempt moves on for good.
+    const attemptNumber = attemptCount + 1;
+    setAttemptCount(attemptNumber);
+    const canRetry = taskData.type === 'quiz' && attemptNumber < 2;
+
     if (isCorrect) {
       setFeedbackMessage({ type: 'correct', message });
       const pointsToAdd = currentQuestion.points || 10;
@@ -340,7 +347,7 @@ export default function TaskContentPage() {
     } else {
       setFeedbackMessage({ type: 'wrong', message });
       setWrongAnswersCount(c => c + 1);
-      if (taskData.type === 'quiz') setShowReviewOption(true);
+      setShowReviewOption(canRetry);
       incorrectSound?.play();
     }
     const historyItem = {
@@ -350,6 +357,7 @@ export default function TaskContentPage() {
       isCorrect,
       index: currentQuestionIndex + 1,
       type: currentQuestion.type,
+      attempts: attemptNumber,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
     setSessionHistory(prev => [historyItem, ...prev]);
@@ -381,6 +389,7 @@ export default function TaskContentPage() {
     setUserAnswer('');
     setFeedbackMessage(null);
     setShowReviewOption(false);
+    setAttemptCount(0);
     setClickedCountingItems([]);
     if (currentQuestionIndex < taskData.questions.length - 1) {
       setCurrentQuestionIndex(i => i + 1);
@@ -438,7 +447,7 @@ export default function TaskContentPage() {
   };
 
   const handleSkip = () => { setWrongAnswersCount(c => c + 1); handleNextQuestion(); };
-  const handleReview = () => { setFeedbackMessage(null); setShowReviewOption(false); setRetriedThisTask(true); setTimerActive(true); setClickedCountingItems([]); };
+  const handleReview = () => { setUserAnswer(''); setFeedbackMessage(null); setShowReviewOption(false); setRetriedThisTask(true); setTimerActive(true); setClickedCountingItems([]); };
   const formatTime = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 
   const handleLessonComplete = async () => {
@@ -835,8 +844,8 @@ export default function TaskContentPage() {
                   // don't reveal which option is correct yet — that would let the
                   // student just re-click the highlighted answer instead of actually
                   // knowing it. Only reveal it once there's no more retry coming
-                  // (answered correctly, or this task has no retry at all).
-                  const revealCorrectAnswer = feedbackMessage?.type === 'correct' || taskData.type !== 'quiz';
+                  // (answered correctly, or the one allowed retry is used up).
+                  const revealCorrectAnswer = feedbackMessage?.type === 'correct' || !showReviewOption;
                   let style = "bg-white border-2 border-gray-200 text-gray-700 hover:border-blue-400 hover:bg-blue-50";
 
                   if (currentQuestion.type === 'counting') {
@@ -999,6 +1008,11 @@ export default function TaskContentPage() {
                       <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest leading-none mb-1">Q{item.index}</p>
                       <p className="text-sm font-bold text-slate-800 truncate">{item.question}</p>
                     </div>
+                    {item.attempts > 1 && (
+                      <span className="flex-shrink-0 text-[10px] font-black uppercase text-slate-400 bg-slate-100 rounded-full px-2.5 py-1">
+                        {item.attempts} tries
+                      </span>
+                    )}
                   </motion.div>
                 ))}
               </div>
