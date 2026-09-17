@@ -152,18 +152,20 @@ export default function SubjectLevelsPage() {
       const completedCount = levelTasks.filter(t => completedTaskIds.includes(t.taskId)).length;
       const isCompleted = totalTasks > 0 && completedCount === totalTasks;
 
-      // Decide if level should be locked based on progression setting
-      let dynamicIsLocked = false;
+      // The real progression gate: has the previous level actually been finished?
       const isSequential = childUser?.sequentialProgression !== false; // Default to true if not set
+      const sequentialLocked = isSequential && !previousCompleted;
 
-      if (isSequential) {
-        dynamicIsLocked = !previousCompleted;
-      }
+      // Visual lock (greyed-out card + lock icon)
+      let dynamicIsLocked = sequentialLocked;
 
       // Mark the first unlocked, non-completed level as "next up"
       let isNextUp = previousCompleted && !isCompleted && !dynamicIsLocked;
 
-      // Unlock everything for premium Tamil users
+      // Premium Tamil users can browse every level (no grey-out), but still
+      // have to finish the previous level before they can actually enter one
+      // out of sequence — that's enforced separately, at click time, via
+      // requiresPreviousLevel below, regardless of this visual bypass.
       if (isPremiumAndTamil) {
         dynamicIsLocked = false;
         // Adjust isNextUp so that only the first non-completed one looks "next up"
@@ -181,14 +183,15 @@ export default function SubjectLevelsPage() {
         ...level,
         overrideIsLocked: dynamicIsLocked,
         isLocked: dynamicIsLocked,
-        lockMessage: dynamicIsLocked ? "Finish the previous level to unlock this one! 🚀" : level.lockMessage,
+        requiresPreviousLevel: sequentialLocked,
+        lockMessage: (dynamicIsLocked || sequentialLocked) ? "Finish the previous level to unlock this one! 🚀" : level.lockMessage,
         completedCount,
         totalTasks,
         isCompleted,
         isNextUp
       };
     });
-  }, [levels, childStats, subjectId, childUser?.isSubscriptionActive]);
+  }, [levels, childStats, subjectId, childUser?.isSubscriptionActive, childUser?.sequentialProgression]);
 
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center p-8">
@@ -197,7 +200,7 @@ export default function SubjectLevelsPage() {
   );
 
   const handleLevelClick = (level) => {
-    if (level.overrideIsLocked || level.isLocked) {
+    if (level.overrideIsLocked || level.isLocked || level.requiresPreviousLevel) {
       const msg = level.lockMessage || t('locked');
       setAlertMessage(msg);
 
