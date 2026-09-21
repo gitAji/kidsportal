@@ -3,19 +3,24 @@ import { doc, onSnapshot, collection, query, getDocs } from "firebase/firestore"
 import { db } from '../../../firebase/config';
 import { auth } from '../../../firebase/auth';
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Subscription from "./Subscription";
 import ChildrenList from "./ChildrenList";
 import AddChildForm from "./AddChildForm";
 import Notifications from "./Notifications";
 import { DashboardSkeleton } from "../ui/SkeletonLoader";
 import Modal from "../ui/Modal";
-import { FaPlus, FaBell, FaUserFriends, FaUserCircle, FaCrown } from 'react-icons/fa';
+import { getChildStats, getChildAchievements } from "@/app/utils/firestoreService";
+import { loadStats, loadUnlockedAchievements } from "@/app/utils/achievements";
+import { FaPlus, FaBell, FaUserFriends, FaUserCircle, FaCrown, FaCheckCircle, FaStar, FaTrophy, FaClock, FaChartLine } from 'react-icons/fa';
 import { motion } from "framer-motion";
 
 const ParentDashboard = () => {
   const [showAddChildModal, setShowAddChildModal] = useState(false);
   const [parentData, setParentData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [overview, setOverview] = useState(null);
+  const [overviewLoading, setOverviewLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -31,8 +36,31 @@ const ParentDashboard = () => {
             ...childDoc.data()
           }));
           setParentData({ ...data, children: childrenData });
+
+          // Family-wide learning overview (mirrors the totals shown on /analytics)
+          let tasks = 0, score = 0, achievements = 0, minutes = 0;
+          for (const kid of childrenData) {
+            try {
+              const fs = await getChildStats(kid.id);
+              const fa = await getChildAchievements(kid.id);
+              const s = Object.keys(fs).length ? fs : loadStats(kid.id);
+              tasks += s.totalTasksCompleted || 0;
+              score += s.totalScore || 0;
+              achievements += fa.length || loadUnlockedAchievements(kid.id).length;
+              minutes += Math.round((s.totalTimeTaken || 0) / 60);
+            } catch {
+              const s = loadStats(kid.id);
+              tasks += s.totalTasksCompleted || 0;
+              score += s.totalScore || 0;
+              achievements += loadUnlockedAchievements(kid.id).length;
+              minutes += Math.round((s.totalTimeTaken || 0) / 60);
+            }
+          }
+          setOverview({ tasks, score, achievements, minutes, childCount: childrenData.length });
+          setOverviewLoading(false);
         } else {
           setParentData(null);
+          setOverviewLoading(false);
         }
         setLoading(false);
       });
@@ -65,6 +93,12 @@ const ParentDashboard = () => {
           </div>
 
           <div className="flex items-center gap-3">
+            <Link
+              href="/analytics"
+              className="flex items-center gap-2 px-5 py-3 rounded-full border border-slate-200 text-slate-600 font-bold text-sm hover:border-blue-400 hover:text-blue-600 transition-all bg-white"
+            >
+              <FaChartLine className="text-xs" /> Full Analytics
+            </Link>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -78,7 +112,24 @@ const ParentDashboard = () => {
       </div>
 
       {/* ── Content ── */}
-      <div className="max-w-7xl mx-auto px-8 py-8">
+      <div className="max-w-7xl mx-auto px-8 py-8 space-y-6">
+
+        {/* Family learning overview */}
+        {overviewLoading ? (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[0, 1, 2, 3].map((i) => (
+              <div key={i} className="h-24 bg-white rounded-2xl border border-slate-100 animate-pulse" />
+            ))}
+          </div>
+        ) : overview && overview.childCount > 0 ? (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <OverviewCard icon={<FaCheckCircle />} label="Tasks Completed" value={overview.tasks} color="emerald" />
+            <OverviewCard icon={<FaStar />} label="Family XP" value={overview.score.toLocaleString()} color="amber" />
+            <OverviewCard icon={<FaTrophy />} label="Badges Earned" value={overview.achievements} color="violet" />
+            <OverviewCard icon={<FaClock />} label="Learning Minutes" value={`${overview.minutes}m`} color="blue" />
+          </div>
+        ) : null}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
           {/* Left: Children List */}
@@ -131,6 +182,34 @@ const ParentDashboard = () => {
     </div>
   );
 };
+
+// ── Family Overview Stat Card ──────────────────────────────────────
+function OverviewCard({ icon, label, value, color = "blue" }) {
+  const palette = {
+    blue: { bg: "bg-blue-50", border: "border-blue-100", text: "text-blue-600", icon: "bg-blue-100" },
+    amber: { bg: "bg-amber-50", border: "border-amber-100", text: "text-amber-600", icon: "bg-amber-100" },
+    violet: { bg: "bg-violet-50", border: "border-violet-100", text: "text-violet-600", icon: "bg-violet-100" },
+    emerald: { bg: "bg-emerald-50", border: "border-emerald-100", text: "text-emerald-600", icon: "bg-emerald-100" },
+  };
+  const p = palette[color];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", stiffness: 120 }}
+      className={`${p.bg} rounded-2xl p-5 border ${p.border} flex items-center gap-4`}
+    >
+      <div className={`w-11 h-11 ${p.icon} rounded-xl flex items-center justify-center ${p.text} text-lg flex-shrink-0`}>
+        {icon}
+      </div>
+      <div className="min-w-0">
+        <p className={`text-xl font-black ${p.text} leading-tight truncate`}>{value}</p>
+        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">{label}</p>
+      </div>
+    </motion.div>
+  );
+}
 
 // ── Shared Section Card ────────────────────────────────────────────
 function SectionCard({ icon, title, children, flex = false }) {
