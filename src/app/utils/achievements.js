@@ -283,9 +283,10 @@ export function recordTaskCompletion(childId, taskResult) {
         else if (pct >= 0.5) stats.bronzeMedals = (stats.bronzeMedals || 0) + 1;
     }
 
-    // Lesson / quiz counters
+    // Lesson / quiz / exam counters
     if (taskResult.type === "lesson") stats.lessonsCompleted = (stats.lessonsCompleted || 0) + 1;
     if (taskResult.type === "quiz") stats.quizzesCompleted = (stats.quizzesCompleted || 0) + 1;
+    if (taskResult.type === "exam") stats.examsCompleted = (stats.examsCompleted || 0) + 1;
 
     // Fastest quiz time
     if (taskResult.type === "quiz" && taskResult.timeTaken > 0) {
