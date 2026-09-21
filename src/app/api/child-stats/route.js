@@ -42,7 +42,7 @@ export async function GET(request) {
 // POST — Save stats and/or record new achievements
 export async function POST(request) {
     try {
-        const { childId, parentUid, stats, newAchievements, sessionHistory, taskId, attemptNumber, isRetake } = await request.json();
+        const { childId, parentUid, stats, newAchievements, sessionHistory, taskId, attemptNumber, isRetake, subjectId, levelId, score, type, taskName } = await request.json();
 
         if (!childId || !parentUid) {
             return NextResponse.json({ error: 'Missing childId or parentUid' }, { status: 400 });
@@ -80,13 +80,13 @@ export async function POST(request) {
             if (taskId || stats.taskId) {
                 const taskEntry = {
                     taskId: taskId || stats.taskId,
-                    taskName: stats.taskName || stats.taskId, // fallback
-                    subjectId: stats.subjectId,
-                    levelId: stats.levelId,
+                    taskName: taskName || stats.taskName || taskId || stats.taskId, // fallback
+                    subjectId: subjectId || stats.subjectId || 'unknown_subject',
+                    levelId: levelId || stats.levelId || 'unknown_level',
                     status: 'completed',
                     completedAt: new Date().toISOString(),
-                    score: stats.score || 0,
-                    type: stats.type || 'task',
+                    score: score ?? stats.score ?? 0,
+                    type: type || stats.type || 'task',
                     attemptNumber: attemptNumber || 1,
                     isRetake: !!isRetake
                 };
@@ -117,12 +117,13 @@ export async function POST(request) {
             const historyRef = adminDb.collection(`childStats/${childId}/taskHistory`).doc();
             batch.set(historyRef, {
                 taskId: taskId || (stats && stats.taskId) || "unknown_task",
-                subjectId: (stats && stats.subjectId) || "unknown_subject",
-                levelId: (stats && stats.levelId) || "unknown_level",
+                subjectId: subjectId || (stats && stats.subjectId) || "unknown_subject",
+                levelId: levelId || (stats && stats.levelId) || "unknown_level",
+                taskName: taskName || (stats && stats.taskName) || null,
                 timestamp: FieldValue.serverTimestamp(),
                 history: sessionHistory,
-                score: (stats && stats.score) || 0,
-                type: (stats && stats.type) || "task",
+                score: score ?? (stats && stats.score) ?? 0,
+                type: type || (stats && stats.type) || "task",
                 attemptNumber: attemptNumber || 1,
                 isRetake: !!isRetake
             });

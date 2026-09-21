@@ -5,15 +5,14 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/config";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "@/firebase/config";
-import { getChildStats, getChildAchievements, getChildTaskHistory } from "@/app/utils/firestoreService";
-import { loadStats, loadUnlockedAchievements, ACHIEVEMENTS } from "@/app/utils/achievements";
-import { motion, AnimatePresence } from "framer-motion";
+import { getChildStats, getChildAchievements } from "@/app/utils/firestoreService";
+import { loadStats, loadUnlockedAchievements } from "@/app/utils/achievements";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   FaArrowRight, FaStar, FaTrophy, FaClock,
   FaCheckCircle, FaFire, FaUsers, FaChartLine,
-  FaMedal, FaBookOpen, FaBrain, FaTimes, FaHome,
-  FaHistory, FaRedo
+  FaHome,
 } from "react-icons/fa";
 import CustomAvatar from "@/app/components/ui/CustomAvatar";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
@@ -55,7 +54,7 @@ function StatCard({ icon, label, value, color = "blue", delay = 0 }) {
 }
 
 // ── Child Summary Card ────────────────────────────────────────────
-function ChildSummaryCard({ child, index, onShowDetail }) {
+function ChildSummaryCard({ child, index }) {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const c = CHILD_COLORS[index % CHILD_COLORS.length];
@@ -131,185 +130,13 @@ function ChildSummaryCard({ child, index, onShowDetail }) {
         </div>
 
         {/* CTA */}
-        <button
-          onClick={() => onShowDetail(stats)}
+        <Link
+          href={`/analytics/${child.id}`}
           className={`w-full py-3 rounded-xl border ${c.border} ${c.bg} ${c.text} font-black text-sm hover:opacity-80 transition-all flex items-center justify-center gap-2`}
         >
           View Full Report <FaArrowRight className="text-xs" />
-        </button>
+        </Link>
       </div>
-    </motion.div>
-  );
-}
-
-// ── Child Detail Modal ────────────────────────────────────────────
-function ChildDetailModal({ child, stats, achievements, onClose }) {
-  const [taskHistory, setTaskHistory] = useState([]);
-  const [historyLoading, setHistoryLoading] = useState(true);
-
-  useEffect(() => {
-    if (!child) return;
-    setHistoryLoading(true);
-    getChildTaskHistory(child.id)
-      .then(setTaskHistory)
-      .catch(() => setTaskHistory([]))
-      .finally(() => setHistoryLoading(false));
-  }, [child]);
-
-  if (!child) return null;
-
-  const totalTasks = stats?.totalTasksCompleted || 0;
-  const timeTaken = Math.round((stats?.totalTimeTaken || 0) / 60);
-  const xp = stats?.totalScore || 0;
-  const lessons = stats?.lessonsCompleted || 0;
-  const quizzes = stats?.quizzesCompleted || 0;
-  const totalRetakes = stats?.totalRetakes || 0;
-
-  const detailStats = [
-    { icon: <FaCheckCircle />, label: "Tasks Done", value: totalTasks, color: "text-blue-500", bg: "bg-blue-50", border: "border-blue-100" },
-    { icon: <FaStar />, label: "Total XP", value: xp.toLocaleString(), color: "text-amber-500", bg: "bg-amber-50", border: "border-amber-100" },
-    { icon: <FaBookOpen />, label: "Lessons", value: lessons, color: "text-emerald-500", bg: "bg-emerald-50", border: "border-emerald-100" },
-    { icon: <FaBrain />, label: "Quizzes", value: quizzes, color: "text-violet-500", bg: "bg-violet-50", border: "border-violet-100" },
-    { icon: <FaRedo />, label: "Retakes", value: totalRetakes, color: "text-rose-500", bg: "bg-rose-50", border: "border-rose-100" },
-  ];
-
-  const formatHistoryDate = (ts) => {
-    if (!ts) return "";
-    const date = ts.seconds ? new Date(ts.seconds * 1000) : new Date(ts);
-    return date.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-6"
-    >
-      <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={onClose} />
-
-      <motion.div
-        initial={{ scale: 0.95, y: 40 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.95, y: 40 }}
-        className="relative w-full sm:max-w-3xl bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden"
-      >
-        {/* Modal header */}
-        <div className="bg-white px-6 py-5 border-b border-slate-100 flex items-center justify-between sticky top-0 z-10">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center overflow-hidden">
-              <CustomAvatar child={child} size="text-xl" />
-            </div>
-            <div>
-              <h2 className="text-base font-black text-slate-800">{child.name}&apos;s Report</h2>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{child.grade || "Elementary"}</p>
-            </div>
-          </div>
-          <button
-            onClick={onClose}
-            className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-100 text-slate-400 hover:text-slate-700 hover:border-slate-200 flex items-center justify-center transition-all"
-          >
-            <FaTimes className="text-sm" />
-          </button>
-        </div>
-
-        {/* Modal body */}
-        <div className="flex-grow overflow-y-auto p-6 space-y-6">
-          {/* Quick stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-            {detailStats.map((s, i) => (
-              <div key={i} className={`${s.bg} border ${s.border} rounded-xl p-4 text-center`}>
-                <div className={`${s.color} text-lg mx-auto mb-2 flex justify-center`}>{s.icon}</div>
-                <p className={`text-xl font-black ${s.color}`}>{s.value}</p>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">{s.label}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* Medals */}
-            <div className="bg-slate-50 rounded-xl p-5 border border-slate-100">
-              <h3 className="text-sm font-black text-slate-700 mb-4 flex items-center gap-2 uppercase tracking-wider">
-                <FaMedal className="text-amber-500" /> Medals
-              </h3>
-              <div className="grid grid-cols-3 gap-3">
-                {[
-                  { emoji: "🥇", label: "Gold", count: stats?.goldMedals || 0 },
-                  { emoji: "🥈", label: "Silver", count: stats?.silverMedals || 0 },
-                  { emoji: "🥉", label: "Bronze", count: stats?.bronzeMedals || 0 },
-                ].map((m) => (
-                  <div key={m.label} className="bg-white rounded-xl p-3 text-center border border-slate-100">
-                    <div className="text-2xl mb-1">{m.emoji}</div>
-                    <p className="text-lg font-black text-slate-800">{m.count}</p>
-                    <p className="text-[9px] font-bold text-slate-400 uppercase">{m.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Recent achievements */}
-            <div className="bg-slate-900 rounded-xl p-5 text-white">
-              <h3 className="text-sm font-black mb-4 flex items-center gap-2 uppercase tracking-wider">
-                <FaTrophy className="text-amber-400" /> Recent Stickers
-              </h3>
-              <div className="grid grid-cols-2 gap-2.5">
-                {achievements.length > 0 ? (
-                  achievements.slice(0, 4).map((ach, idx) => (
-                    <div key={idx} className="bg-white/10 rounded-xl p-3 flex items-center gap-2">
-                      <span className="text-xl">{ach.emoji}</span>
-                      <p className="text-xs font-black leading-tight line-clamp-2">{ach.name}</p>
-                    </div>
-                  ))
-                ) : (
-                  <div className="col-span-2 py-6 text-center bg-white/5 rounded-xl border border-dashed border-white/10">
-                    <p className="text-white/40 font-bold text-xs">No stickers yet.</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Full activity log — every exam/quiz/lesson attempt, including retakes */}
-          <div className="bg-slate-50 rounded-xl p-5 border border-slate-100">
-            <h3 className="text-sm font-black text-slate-700 mb-4 flex items-center gap-2 uppercase tracking-wider">
-              <FaHistory className="text-blue-500" /> Full Activity Log
-            </h3>
-            {historyLoading ? (
-              <div className="space-y-2">
-                {[0, 1, 2].map((i) => <div key={i} className="h-14 bg-white rounded-xl border border-slate-100 animate-pulse" />)}
-              </div>
-            ) : taskHistory.length === 0 ? (
-              <div className="py-8 text-center bg-white rounded-xl border border-dashed border-slate-200">
-                <p className="text-sm font-bold text-slate-400">No activity recorded yet.</p>
-              </div>
-            ) : (
-              <div className="space-y-2 max-h-72 overflow-y-auto pr-1 custom-scrollbar">
-                {taskHistory.map((entry) => (
-                  <div key={entry.id} className="bg-white rounded-xl p-3.5 border border-slate-100 flex items-center justify-between gap-3">
-                    <div className="min-w-0">
-                      <p className="text-sm font-black text-slate-800 truncate">
-                        {entry.taskId} <span className="text-slate-400 font-medium">· {entry.subjectId}</span>
-                      </p>
-                      <p className="text-xs text-slate-400 font-medium">{formatHistoryDate(entry.timestamp)}</p>
-                    </div>
-                    <div className="flex items-center gap-2 flex-shrink-0">
-                      {entry.isRetake && (
-                        <span className="flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-rose-600 bg-rose-50 border border-rose-100 rounded-full px-2 py-1">
-                          <FaRedo className="text-[9px]" /> Retake
-                        </span>
-                      )}
-                      <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 bg-slate-100 rounded-full px-2 py-1">
-                        Attempt #{entry.attemptNumber || 1}
-                      </span>
-                      <span className="text-sm font-black text-blue-600">{entry.score ?? 0} pts</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </motion.div>
     </motion.div>
   );
 }
@@ -332,9 +159,6 @@ export default function AnalyticsPage() {
   const [children, setChildren] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totals, setTotals] = useState({ tasks: 0, score: 0, achievements: 0, minutes: 0 });
-  const [selectedChild, setSelectedChild] = useState(null);
-  const [selectedStats, setSelectedStats] = useState(null);
-  const [selectedAchievements, setSelectedAchievements] = useState([]);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (u) => {
@@ -362,31 +186,6 @@ export default function AnalyticsPage() {
     });
     return () => unsub();
   }, []);
-
-  const handleShowDetail = async (child, stats) => {
-    try {
-      const ach = await getChildAchievements(child.id);
-      setSelectedAchievements(
-        ach.length
-          ? ach
-          : loadUnlockedAchievements(child.id)
-            .map(id => ACHIEVEMENTS.find(a => a.id === id))
-            .filter(Boolean)
-      );
-      setSelectedChild(child);
-      setSelectedStats(stats);
-    } catch (e) {
-      console.error("Error fetching child data details:", e);
-      // Fallback safely to show modal even if DB fetch permissions fail
-      setSelectedAchievements(
-        loadUnlockedAchievements(child.id)
-          .map(id => ACHIEVEMENTS.find(a => a.id === id))
-          .filter(Boolean)
-      );
-      setSelectedChild(child);
-      setSelectedStats(stats);
-    }
-  };
 
   if (loading) return <DashboardSkeleton />;
 
@@ -463,7 +262,6 @@ export default function AnalyticsPage() {
                   key={child.id}
                   child={child}
                   index={i}
-                  onShowDetail={(stats) => handleShowDetail(child, stats)}
                 />
               ))}
             </div>
@@ -498,18 +296,6 @@ export default function AnalyticsPage() {
           </div>
         </div>
       </div>
-
-      {/* Detail Modal */}
-      <AnimatePresence>
-        {selectedChild && (
-          <ChildDetailModal
-            child={selectedChild}
-            stats={selectedStats}
-            achievements={selectedAchievements}
-            onClose={() => setSelectedChild(null)}
-          />
-        )}
-      </AnimatePresence>
     </div>
   );
 }
