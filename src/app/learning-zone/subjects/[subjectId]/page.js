@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../data/db.json';
 import SkeletonLoader from '../../../components/ui/SkeletonLoader';
-import { FaArrowLeft, FaHome, FaLock, FaStar, FaTrophy, FaCheckCircle, FaUnlockAlt, FaLanguage } from 'react-icons/fa';
+import { FaArrowLeft, FaHome, FaLock, FaStar, FaTrophy, FaCheckCircle, FaUnlockAlt, FaLanguage, FaRandom } from 'react-icons/fa';
 import { useChild } from '../../../providers/ChildProvider';
 import { useLanguage } from '../../../providers/LanguageProvider';
 import { loadStats } from '../../../utils/achievements';
@@ -36,6 +36,17 @@ const subjectDisplayNames = {
 function getSubjectDisplayName(subjectId) {
   const prefix = (subjectId || '').replace(/-\d+$/, '').toLowerCase();
   return subjectDisplayNames[prefix] || prefix.charAt(0).toUpperCase() + prefix.slice(1);
+}
+
+// Fisher-Yates — used only to reorder the Replay Round view, never the
+// underlying data, so completion/XP/lock state can't be affected by it.
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
@@ -210,6 +221,30 @@ export default function SubjectLevelsPage() {
     });
   }, [levels, childStats, subjectId, childUser?.isSubscriptionActive, childUser?.sequentialProgression]);
 
+  // Once every level in the subject is finished, offer a shuffled "Replay
+  // Round" for review practice. This only reorders what's displayed —
+  // completion, XP and lock state are untouched, and turning it off goes
+  // straight back to the normal Level 1 -> 10 order.
+  const isSubjectFullyCompleted = processedLevels.length > 0 && processedLevels.every(l => l.isCompleted);
+  const [replayMode, setReplayMode] = useState(false);
+  const [replaySeed, setReplaySeed] = useState(0);
+
+  const groupedModules = useMemo(() => {
+    const grouped = processedLevels.reduce((acc, level) => {
+      const module = level.moduleName || 'Standard Lessons';
+      if (!acc[module]) acc[module] = [];
+      acc[module].push(level);
+      return acc;
+    }, {});
+
+    let entries = Object.entries(grouped);
+    if (replayMode && isSubjectFullyCompleted) {
+      entries = shuffleArray(entries).map(([title, lvls]) => [title, shuffleArray(lvls)]);
+    }
+    return entries;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [processedLevels, replayMode, replaySeed, isSubjectFullyCompleted]);
+
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center p-8">
       <SkeletonLoader variant="page" message="Getting your levels ready..." />
@@ -296,15 +331,47 @@ export default function SubjectLevelsPage() {
         )}
       </motion.div>
 
+      {isSubjectFullyCompleted && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-3xl mx-auto z-10 relative mb-10 px-4"
+        >
+          <div className="bg-white rounded-[2rem] shadow-lg border-2 border-amber-200 px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3 text-center sm:text-left">
+              <div className="text-4xl">🏆</div>
+              <div>
+                <p className="font-black text-slate-800 text-lg leading-tight">You finished every level!</p>
+                <p className="text-sm font-medium text-slate-500">
+                  {replayMode ? 'Replay Round: levels are shuffled for fun practice.' : 'Play a Replay Round to practice them again in a new order.'}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              {replayMode && (
+                <button
+                  onClick={() => setReplaySeed(s => s + 1)}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-100 text-slate-600 font-bold text-sm hover:bg-slate-200 transition-colors"
+                >
+                  <FaRandom /> Shuffle Again
+                </button>
+              )}
+              <button
+                onClick={() => setReplayMode(prev => !prev)}
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl font-black text-sm shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] ${replayMode
+                  ? 'bg-slate-800 text-white'
+                  : 'bg-gradient-to-r from-amber-400 to-orange-500 text-white'
+                  }`}
+              >
+                <FaRandom /> {replayMode ? 'Back to Normal Order' : 'Start Replay Round'}
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
       <div className="w-full max-w-6xl mx-auto z-10 relative pb-20 space-y-12">
-        {Object.entries(
-          processedLevels.reduce((acc, level) => {
-            const module = level.moduleName || 'Standard Lessons';
-            if (!acc[module]) acc[module] = [];
-            acc[module].push(level);
-            return acc;
-          }, {})
-        ).map(([moduleTitle, moduleLevels]) => (
+        {groupedModules.map(([moduleTitle, moduleLevels]) => (
           <div key={moduleTitle} className="space-y-6">
             <div className="flex items-center gap-4">
               <div className="h-0.5 flex-grow bg-gradient-to-r from-transparent via-blue-200 to-transparent"></div>

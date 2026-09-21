@@ -141,7 +141,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Phonics Foundations"
             },
             {
               "levelId": "english-1-level-2",
@@ -270,7 +270,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Phonics Foundations"
             },
             {
               "levelId": "english-1-level-3",
@@ -393,7 +393,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar & Sentence Building"
             },
             {
               "levelId": "english-1-level-4",
@@ -516,7 +516,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar & Sentence Building"
             },
             {
               "levelId": "english-1-level-5",
@@ -639,7 +639,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar & Sentence Building"
             },
             {
               "levelId": "english-1-level-6",
@@ -762,7 +762,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing in Different Forms"
             },
             {
               "levelId": "english-1-level-7",
@@ -885,7 +885,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing in Different Forms"
             },
             {
               "levelId": "english-1-level-8",
@@ -1008,7 +1008,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing in Different Forms"
             },
             {
               "levelId": "english-1-level-9",
@@ -1131,7 +1131,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry & Review"
             },
             {
               "levelId": "english-1-level-10",
@@ -1260,7 +1260,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry & Review"
             }
           ]
         },
@@ -1383,7 +1383,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Place Value"
             },
             {
               "levelId": "math-1-level-2",
@@ -1494,7 +1494,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Place Value"
             },
             {
               "levelId": "math-1-level-3",
@@ -1611,7 +1611,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Money & Measurement"
             },
             {
               "levelId": "math-1-level-4",
@@ -1728,7 +1728,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Money & Measurement"
             },
             {
               "levelId": "math-1-level-5",
@@ -1845,7 +1845,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Money & Measurement"
             },
             {
               "levelId": "math-1-level-6",
@@ -1956,7 +1956,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Shape, Time & Position"
             },
             {
               "levelId": "math-1-level-7",
@@ -2073,7 +2073,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Shape, Time & Position"
             },
             {
               "levelId": "math-1-level-8",
@@ -2190,7 +2190,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Shape, Time & Position"
             },
             {
               "levelId": "math-1-level-9",
@@ -2307,7 +2307,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Data & Problem Solving"
             },
             {
               "levelId": "math-1-level-10",
@@ -2424,7 +2424,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Data & Problem Solving"
             }
           ]
         },
@@ -2553,7 +2553,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Tamil Alphabet & Greetings"
             },
             {
               "levelId": "tamil-1-level-2",
@@ -2676,7 +2676,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Tamil Alphabet & Greetings"
             },
             {
               "levelId": "tamil-1-level-3",
@@ -2799,7 +2799,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Everyday Words & Family"
             },
             {
               "levelId": "tamil-1-level-4",
@@ -2922,7 +2922,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Everyday Words & Family"
             },
             {
               "levelId": "tamil-1-level-5",
@@ -3045,7 +3045,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Everyday Words & Family"
             },
             {
               "levelId": "tamil-1-level-6",
@@ -3168,7 +3168,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Nature, Food & Rhymes"
             },
             {
               "levelId": "tamil-1-level-7",
@@ -3291,7 +3291,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Nature, Food & Rhymes"
             },
             {
               "levelId": "tamil-1-level-8",
@@ -3414,7 +3414,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Nature, Food & Rhymes"
             },
             {
               "levelId": "tamil-1-level-9",
@@ -3537,7 +3537,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Foundations Review"
             },
             {
               "levelId": "tamil-1-level-10",
@@ -3660,7 +3660,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Foundations Review"
             }
           ]
         },
@@ -3789,7 +3789,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "ariviyal-1-level-2",
@@ -3906,7 +3906,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "ariviyal-1-level-3",
@@ -4023,7 +4023,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "ariviyal-1-level-4",
@@ -4140,7 +4140,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "ariviyal-1-level-5",
@@ -4257,7 +4257,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "ariviyal-1-level-6",
@@ -4374,7 +4374,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "ariviyal-1-level-7",
@@ -4491,7 +4491,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "ariviyal-1-level-8",
@@ -4608,7 +4608,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "ariviyal-1-level-9",
@@ -4725,7 +4725,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             },
             {
               "levelId": "ariviyal-1-level-10",
@@ -4842,7 +4842,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             }
           ]
         },
@@ -4971,7 +4971,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "science-1-level-2",
@@ -5088,7 +5088,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "science-1-level-3",
@@ -5205,7 +5205,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "science-1-level-4",
@@ -5322,7 +5322,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "science-1-level-5",
@@ -5439,7 +5439,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "science-1-level-6",
@@ -5556,7 +5556,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "science-1-level-7",
@@ -5673,7 +5673,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "science-1-level-8",
@@ -5790,7 +5790,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "science-1-level-9",
@@ -5907,7 +5907,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             },
             {
               "levelId": "science-1-level-10",
@@ -6024,7 +6024,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             }
           ]
         },
@@ -6147,7 +6147,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Computer Basics & Online Safety"
             },
             {
               "levelId": "computerscience-1-level-2",
@@ -6264,7 +6264,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Computer Basics & Online Safety"
             },
             {
               "levelId": "computerscience-1-level-3",
@@ -6381,7 +6381,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Algorithms & Coding Concepts"
             },
             {
               "levelId": "computerscience-1-level-4",
@@ -6498,7 +6498,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Algorithms & Coding Concepts"
             },
             {
               "levelId": "computerscience-1-level-5",
@@ -6615,7 +6615,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Algorithms & Coding Concepts"
             },
             {
               "levelId": "computerscience-1-level-6",
@@ -6732,7 +6732,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Software & the Internet"
             },
             {
               "levelId": "computerscience-1-level-7",
@@ -6849,7 +6849,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Software & the Internet"
             },
             {
               "levelId": "computerscience-1-level-8",
@@ -6966,7 +6966,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Software & the Internet"
             },
             {
               "levelId": "computerscience-1-level-9",
@@ -7083,7 +7083,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Creative Projects & Review"
             },
             {
               "levelId": "computerscience-1-level-10",
@@ -7200,7 +7200,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Creative Projects & Review"
             }
           ]
         }
@@ -7335,7 +7335,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Phonics Foundations"
             },
             {
               "levelId": "english-2-level-2",
@@ -7458,7 +7458,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Phonics Foundations"
             },
             {
               "levelId": "english-2-level-3",
@@ -7581,7 +7581,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar & Sentence Building"
             },
             {
               "levelId": "english-2-level-4",
@@ -7704,7 +7704,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar & Sentence Building"
             },
             {
               "levelId": "english-2-level-5",
@@ -7827,7 +7827,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar & Sentence Building"
             },
             {
               "levelId": "english-2-level-6",
@@ -7950,7 +7950,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing in Different Forms"
             },
             {
               "levelId": "english-2-level-7",
@@ -8073,7 +8073,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing in Different Forms"
             },
             {
               "levelId": "english-2-level-8",
@@ -8196,7 +8196,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing in Different Forms"
             },
             {
               "levelId": "english-2-level-9",
@@ -8319,7 +8319,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry & Review"
             },
             {
               "levelId": "english-2-level-10",
@@ -8442,7 +8442,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry & Review"
             }
           ]
         },
@@ -8565,7 +8565,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Place Value"
             },
             {
               "levelId": "math-2-level-2",
@@ -8676,7 +8676,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Place Value"
             },
             {
               "levelId": "math-2-level-3",
@@ -8793,7 +8793,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Money & Measurement"
             },
             {
               "levelId": "math-2-level-4",
@@ -8910,7 +8910,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Money & Measurement"
             },
             {
               "levelId": "math-2-level-5",
@@ -9021,7 +9021,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Money & Measurement"
             },
             {
               "levelId": "math-2-level-6",
@@ -9132,7 +9132,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Shape, Time & Position"
             },
             {
               "levelId": "math-2-level-7",
@@ -9249,7 +9249,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Shape, Time & Position"
             },
             {
               "levelId": "math-2-level-8",
@@ -9366,7 +9366,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Shape, Time & Position"
             },
             {
               "levelId": "math-2-level-9",
@@ -9483,7 +9483,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Data & Problem Solving"
             },
             {
               "levelId": "math-2-level-10",
@@ -9594,7 +9594,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Data & Problem Solving"
             }
           ]
         },
@@ -9723,7 +9723,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Tamil Alphabet & Greetings"
             },
             {
               "levelId": "tamil-2-level-2",
@@ -9846,7 +9846,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Tamil Alphabet & Greetings"
             },
             {
               "levelId": "tamil-2-level-3",
@@ -9969,7 +9969,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Everyday Words & Family"
             },
             {
               "levelId": "tamil-2-level-4",
@@ -10092,7 +10092,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Everyday Words & Family"
             },
             {
               "levelId": "tamil-2-level-5",
@@ -10215,7 +10215,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Everyday Words & Family"
             },
             {
               "levelId": "tamil-2-level-6",
@@ -10338,7 +10338,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Nature, Food & Rhymes"
             },
             {
               "levelId": "tamil-2-level-7",
@@ -10461,7 +10461,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Nature, Food & Rhymes"
             },
             {
               "levelId": "tamil-2-level-8",
@@ -10584,7 +10584,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Nature, Food & Rhymes"
             },
             {
               "levelId": "tamil-2-level-9",
@@ -10707,7 +10707,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Foundations Review"
             },
             {
               "levelId": "tamil-2-level-10",
@@ -10830,7 +10830,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Foundations Review"
             }
           ]
         },
@@ -10953,7 +10953,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "ariviyal-2-level-2",
@@ -11070,7 +11070,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "ariviyal-2-level-3",
@@ -11187,7 +11187,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "ariviyal-2-level-4",
@@ -11304,7 +11304,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "ariviyal-2-level-5",
@@ -11421,7 +11421,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "ariviyal-2-level-6",
@@ -11538,7 +11538,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "ariviyal-2-level-7",
@@ -11655,7 +11655,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "ariviyal-2-level-8",
@@ -11772,7 +11772,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "ariviyal-2-level-9",
@@ -11889,7 +11889,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             },
             {
               "levelId": "ariviyal-2-level-10",
@@ -12006,7 +12006,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             }
           ]
         },
@@ -12129,7 +12129,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "science-2-level-2",
@@ -12246,7 +12246,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "science-2-level-3",
@@ -12363,7 +12363,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "science-2-level-4",
@@ -12480,7 +12480,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "science-2-level-5",
@@ -12597,7 +12597,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "science-2-level-6",
@@ -12714,7 +12714,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "science-2-level-7",
@@ -12831,7 +12831,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "science-2-level-8",
@@ -12948,7 +12948,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "science-2-level-9",
@@ -13065,7 +13065,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             },
             {
               "levelId": "science-2-level-10",
@@ -13182,7 +13182,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             }
           ]
         },
@@ -13305,7 +13305,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Computer Basics & Online Safety"
             },
             {
               "levelId": "computerscience-2-level-2",
@@ -13422,7 +13422,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Computer Basics & Online Safety"
             },
             {
               "levelId": "computerscience-2-level-3",
@@ -13539,7 +13539,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Algorithms & Coding Concepts"
             },
             {
               "levelId": "computerscience-2-level-4",
@@ -13656,7 +13656,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Algorithms & Coding Concepts"
             },
             {
               "levelId": "computerscience-2-level-5",
@@ -13773,7 +13773,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Algorithms & Coding Concepts"
             },
             {
               "levelId": "computerscience-2-level-6",
@@ -13890,7 +13890,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Software & the Internet"
             },
             {
               "levelId": "computerscience-2-level-7",
@@ -14007,7 +14007,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Software & the Internet"
             },
             {
               "levelId": "computerscience-2-level-8",
@@ -14124,7 +14124,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Software & the Internet"
             },
             {
               "levelId": "computerscience-2-level-9",
@@ -14241,7 +14241,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Creative Projects & Review"
             },
             {
               "levelId": "computerscience-2-level-10",
@@ -14358,7 +14358,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Creative Projects & Review"
             }
           ]
         }
@@ -14493,7 +14493,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Phonics Foundations"
             },
             {
               "levelId": "english-3-level-2",
@@ -14616,7 +14616,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Phonics Foundations"
             },
             {
               "levelId": "english-3-level-3",
@@ -14739,7 +14739,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar & Sentence Building"
             },
             {
               "levelId": "english-3-level-4",
@@ -14862,7 +14862,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar & Sentence Building"
             },
             {
               "levelId": "english-3-level-5",
@@ -14985,7 +14985,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar & Sentence Building"
             },
             {
               "levelId": "english-3-level-6",
@@ -15108,7 +15108,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing in Different Forms"
             },
             {
               "levelId": "english-3-level-7",
@@ -15231,7 +15231,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing in Different Forms"
             },
             {
               "levelId": "english-3-level-8",
@@ -15354,7 +15354,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing in Different Forms"
             },
             {
               "levelId": "english-3-level-9",
@@ -15477,7 +15477,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry & Review"
             },
             {
               "levelId": "english-3-level-10",
@@ -15600,7 +15600,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry & Review"
             }
           ]
         },
@@ -15723,7 +15723,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Place Value"
             },
             {
               "levelId": "math-3-level-2",
@@ -15840,7 +15840,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Place Value"
             },
             {
               "levelId": "math-3-level-3",
@@ -15957,7 +15957,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Money & Measurement"
             },
             {
               "levelId": "math-3-level-4",
@@ -16074,7 +16074,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Money & Measurement"
             },
             {
               "levelId": "math-3-level-5",
@@ -16185,7 +16185,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Money & Measurement"
             },
             {
               "levelId": "math-3-level-6",
@@ -16296,7 +16296,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Shape, Time & Position"
             },
             {
               "levelId": "math-3-level-7",
@@ -16407,7 +16407,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Shape, Time & Position"
             },
             {
               "levelId": "math-3-level-8",
@@ -16524,7 +16524,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Shape, Time & Position"
             },
             {
               "levelId": "math-3-level-9",
@@ -16641,7 +16641,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Data & Problem Solving"
             },
             {
               "levelId": "math-3-level-10",
@@ -16752,7 +16752,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Data & Problem Solving"
             }
           ]
         },
@@ -16881,7 +16881,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Tamil Alphabet & Greetings"
             },
             {
               "levelId": "tamil-3-level-2",
@@ -17004,7 +17004,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Tamil Alphabet & Greetings"
             },
             {
               "levelId": "tamil-3-level-3",
@@ -17127,7 +17127,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Everyday Words & Family"
             },
             {
               "levelId": "tamil-3-level-4",
@@ -17250,7 +17250,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Everyday Words & Family"
             },
             {
               "levelId": "tamil-3-level-5",
@@ -17373,7 +17373,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Everyday Words & Family"
             },
             {
               "levelId": "tamil-3-level-6",
@@ -17496,7 +17496,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Nature, Food & Rhymes"
             },
             {
               "levelId": "tamil-3-level-7",
@@ -17619,7 +17619,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Nature, Food & Rhymes"
             },
             {
               "levelId": "tamil-3-level-8",
@@ -17742,7 +17742,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Nature, Food & Rhymes"
             },
             {
               "levelId": "tamil-3-level-9",
@@ -17853,7 +17853,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Foundations Review"
             },
             {
               "levelId": "tamil-3-level-10",
@@ -17976,7 +17976,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Foundations Review"
             }
           ]
         },
@@ -18099,7 +18099,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "ariviyal-3-level-2",
@@ -18216,7 +18216,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "ariviyal-3-level-3",
@@ -18333,7 +18333,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "ariviyal-3-level-4",
@@ -18450,7 +18450,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "ariviyal-3-level-5",
@@ -18567,7 +18567,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "ariviyal-3-level-6",
@@ -18684,7 +18684,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "ariviyal-3-level-7",
@@ -18801,7 +18801,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "ariviyal-3-level-8",
@@ -18918,7 +18918,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "ariviyal-3-level-9",
@@ -19035,7 +19035,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             },
             {
               "levelId": "ariviyal-3-level-10",
@@ -19152,7 +19152,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             }
           ]
         },
@@ -19275,7 +19275,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "science-3-level-2",
@@ -19392,7 +19392,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "science-3-level-3",
@@ -19509,7 +19509,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "science-3-level-4",
@@ -19626,7 +19626,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "science-3-level-5",
@@ -19743,7 +19743,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "science-3-level-6",
@@ -19860,7 +19860,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "science-3-level-7",
@@ -19977,7 +19977,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "science-3-level-8",
@@ -20094,7 +20094,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "science-3-level-9",
@@ -20211,7 +20211,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             },
             {
               "levelId": "science-3-level-10",
@@ -20328,7 +20328,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             }
           ]
         },
@@ -20451,7 +20451,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Computer Basics & Online Safety"
             },
             {
               "levelId": "computerscience-3-level-2",
@@ -20568,7 +20568,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Computer Basics & Online Safety"
             },
             {
               "levelId": "computerscience-3-level-3",
@@ -20685,7 +20685,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Algorithms & Coding Concepts"
             },
             {
               "levelId": "computerscience-3-level-4",
@@ -20802,7 +20802,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Algorithms & Coding Concepts"
             },
             {
               "levelId": "computerscience-3-level-5",
@@ -20919,7 +20919,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Algorithms & Coding Concepts"
             },
             {
               "levelId": "computerscience-3-level-6",
@@ -21036,7 +21036,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Software & the Internet"
             },
             {
               "levelId": "computerscience-3-level-7",
@@ -21153,7 +21153,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Software & the Internet"
             },
             {
               "levelId": "computerscience-3-level-8",
@@ -21270,7 +21270,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Software & the Internet"
             },
             {
               "levelId": "computerscience-3-level-9",
@@ -21387,7 +21387,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Creative Projects & Review"
             },
             {
               "levelId": "computerscience-3-level-10",
@@ -21504,7 +21504,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Creative Projects & Review"
             }
           ]
         }
@@ -21639,7 +21639,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Phonics Foundations"
             },
             {
               "levelId": "english-4-level-2",
@@ -21762,7 +21762,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Phonics Foundations"
             },
             {
               "levelId": "english-4-level-3",
@@ -21885,7 +21885,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar & Sentence Building"
             },
             {
               "levelId": "english-4-level-4",
@@ -22008,7 +22008,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar & Sentence Building"
             },
             {
               "levelId": "english-4-level-5",
@@ -22131,7 +22131,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar & Sentence Building"
             },
             {
               "levelId": "english-4-level-6",
@@ -22254,7 +22254,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing in Different Forms"
             },
             {
               "levelId": "english-4-level-7",
@@ -22377,7 +22377,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing in Different Forms"
             },
             {
               "levelId": "english-4-level-8",
@@ -22500,7 +22500,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing in Different Forms"
             },
             {
               "levelId": "english-4-level-9",
@@ -22623,7 +22623,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry & Review"
             },
             {
               "levelId": "english-4-level-10",
@@ -22746,7 +22746,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry & Review"
             }
           ]
         },
@@ -22869,7 +22869,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Place Value"
             },
             {
               "levelId": "math-4-level-2",
@@ -22986,7 +22986,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Place Value"
             },
             {
               "levelId": "math-4-level-3",
@@ -23097,7 +23097,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Money & Measurement"
             },
             {
               "levelId": "math-4-level-4",
@@ -23214,7 +23214,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Money & Measurement"
             },
             {
               "levelId": "math-4-level-5",
@@ -23331,7 +23331,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Money & Measurement"
             },
             {
               "levelId": "math-4-level-6",
@@ -23442,7 +23442,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Shape, Time & Position"
             },
             {
               "levelId": "math-4-level-7",
@@ -23559,7 +23559,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Shape, Time & Position"
             },
             {
               "levelId": "math-4-level-8",
@@ -23676,7 +23676,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Shape, Time & Position"
             },
             {
               "levelId": "math-4-level-9",
@@ -23793,7 +23793,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Data & Problem Solving"
             },
             {
               "levelId": "math-4-level-10",
@@ -23904,7 +23904,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Data & Problem Solving"
             }
           ]
         },
@@ -24033,7 +24033,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Tamil Alphabet & Greetings"
             },
             {
               "levelId": "tamil-4-level-2",
@@ -24156,7 +24156,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Tamil Alphabet & Greetings"
             },
             {
               "levelId": "tamil-4-level-3",
@@ -24279,7 +24279,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Everyday Words & Family"
             },
             {
               "levelId": "tamil-4-level-4",
@@ -24402,7 +24402,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Everyday Words & Family"
             },
             {
               "levelId": "tamil-4-level-5",
@@ -24525,7 +24525,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Everyday Words & Family"
             },
             {
               "levelId": "tamil-4-level-6",
@@ -24648,7 +24648,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Nature, Food & Rhymes"
             },
             {
               "levelId": "tamil-4-level-7",
@@ -24771,7 +24771,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Nature, Food & Rhymes"
             },
             {
               "levelId": "tamil-4-level-8",
@@ -24894,7 +24894,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Nature, Food & Rhymes"
             },
             {
               "levelId": "tamil-4-level-9",
@@ -25017,7 +25017,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Foundations Review"
             },
             {
               "levelId": "tamil-4-level-10",
@@ -25140,7 +25140,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Foundations Review"
             }
           ]
         },
@@ -25263,7 +25263,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "ariviyal-4-level-2",
@@ -25380,7 +25380,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "ariviyal-4-level-3",
@@ -25497,7 +25497,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "ariviyal-4-level-4",
@@ -25614,7 +25614,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "ariviyal-4-level-5",
@@ -25731,7 +25731,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "ariviyal-4-level-6",
@@ -25848,7 +25848,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "ariviyal-4-level-7",
@@ -25965,7 +25965,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "ariviyal-4-level-8",
@@ -26082,7 +26082,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "ariviyal-4-level-9",
@@ -26199,7 +26199,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             },
             {
               "levelId": "ariviyal-4-level-10",
@@ -26316,7 +26316,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             }
           ]
         },
@@ -26439,7 +26439,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "science-4-level-2",
@@ -26556,7 +26556,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Living Things & Habitats"
             },
             {
               "levelId": "science-4-level-3",
@@ -26673,7 +26673,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "science-4-level-4",
@@ -26790,7 +26790,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "science-4-level-5",
@@ -26907,7 +26907,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Materials & Scientific Enquiry"
             },
             {
               "levelId": "science-4-level-6",
@@ -27024,7 +27024,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "science-4-level-7",
@@ -27141,7 +27141,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "science-4-level-8",
@@ -27258,7 +27258,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Seasons, Habitats & Change"
             },
             {
               "levelId": "science-4-level-9",
@@ -27375,7 +27375,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             },
             {
               "levelId": "science-4-level-10",
@@ -27492,7 +27492,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Enquiry Project & Review"
             }
           ]
         },
@@ -27615,7 +27615,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Computer Basics & Online Safety"
             },
             {
               "levelId": "computerscience-4-level-2",
@@ -27732,7 +27732,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Computer Basics & Online Safety"
             },
             {
               "levelId": "computerscience-4-level-3",
@@ -27849,7 +27849,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Algorithms & Coding Concepts"
             },
             {
               "levelId": "computerscience-4-level-4",
@@ -27966,7 +27966,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Algorithms & Coding Concepts"
             },
             {
               "levelId": "computerscience-4-level-5",
@@ -28083,7 +28083,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Algorithms & Coding Concepts"
             },
             {
               "levelId": "computerscience-4-level-6",
@@ -28200,7 +28200,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Software & the Internet"
             },
             {
               "levelId": "computerscience-4-level-7",
@@ -28317,7 +28317,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Software & the Internet"
             },
             {
               "levelId": "computerscience-4-level-8",
@@ -28434,7 +28434,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Software & the Internet"
             },
             {
               "levelId": "computerscience-4-level-9",
@@ -28551,7 +28551,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Creative Projects & Review"
             },
             {
               "levelId": "computerscience-4-level-10",
@@ -28668,7 +28668,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Creative Projects & Review"
             }
           ]
         }
@@ -28797,7 +28797,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Critical Analysis"
             },
             {
               "levelId": "english-5-level-2",
@@ -28914,7 +28914,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Critical Analysis"
             },
             {
               "levelId": "english-5-level-3",
@@ -29031,7 +29031,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar, Style & Sentence Craft"
             },
             {
               "levelId": "english-5-level-4",
@@ -29148,7 +29148,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar, Style & Sentence Craft"
             },
             {
               "levelId": "english-5-level-5",
@@ -29265,7 +29265,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar, Style & Sentence Craft"
             },
             {
               "levelId": "english-5-level-6",
@@ -29382,7 +29382,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Creative & Persuasive Writing"
             },
             {
               "levelId": "english-5-level-7",
@@ -29499,7 +29499,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Creative & Persuasive Writing"
             },
             {
               "levelId": "english-5-level-8",
@@ -29616,7 +29616,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Creative & Persuasive Writing"
             },
             {
               "levelId": "english-5-level-9",
@@ -29733,7 +29733,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry, Spoken Language & Exam Skills"
             },
             {
               "levelId": "english-5-level-10",
@@ -29850,7 +29850,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry, Spoken Language & Exam Skills"
             }
           ]
         },
@@ -29973,7 +29973,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Algebra Foundations"
             },
             {
               "levelId": "math-5-level-2",
@@ -30090,7 +30090,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Algebra Foundations"
             },
             {
               "levelId": "math-5-level-3",
@@ -30207,7 +30207,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Ratio & Proportion"
             },
             {
               "levelId": "math-5-level-4",
@@ -30324,7 +30324,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Ratio & Proportion"
             },
             {
               "levelId": "math-5-level-5",
@@ -30441,7 +30441,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Ratio & Proportion"
             },
             {
               "levelId": "math-5-level-6",
@@ -30558,7 +30558,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Geometry, Data & Probability"
             },
             {
               "levelId": "math-5-level-7",
@@ -30675,7 +30675,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Geometry, Data & Probability"
             },
             {
               "levelId": "math-5-level-8",
@@ -30792,7 +30792,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Geometry, Data & Probability"
             },
             {
               "levelId": "math-5-level-9",
@@ -30909,7 +30909,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Equations, Graphs & GCSE Foundations"
             },
             {
               "levelId": "math-5-level-10",
@@ -31032,7 +31032,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Equations, Graphs & GCSE Foundations"
             }
           ]
         },
@@ -31155,7 +31155,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Biology Foundations"
             },
             {
               "levelId": "science-5-level-2",
@@ -31272,7 +31272,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Biology Foundations"
             },
             {
               "levelId": "science-5-level-3",
@@ -31389,7 +31389,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Matter & Reactions"
             },
             {
               "levelId": "science-5-level-4",
@@ -31506,7 +31506,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Matter & Reactions"
             },
             {
               "levelId": "science-5-level-5",
@@ -31623,7 +31623,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Matter & Reactions"
             },
             {
               "levelId": "science-5-level-6",
@@ -31740,7 +31740,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Forces & Energy"
             },
             {
               "levelId": "science-5-level-7",
@@ -31857,7 +31857,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Forces & Energy"
             },
             {
               "levelId": "science-5-level-8",
@@ -31974,7 +31974,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Forces & Energy"
             },
             {
               "levelId": "science-5-level-9",
@@ -32091,7 +32091,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Working Scientifically & GCSE Foundations"
             },
             {
               "levelId": "science-5-level-10",
@@ -32208,7 +32208,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Working Scientifically & GCSE Foundations"
             }
           ]
         },
@@ -32337,7 +32337,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Grammar & Language Skills"
             },
             {
               "levelId": "tamil-5-level-2",
@@ -32454,7 +32454,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Grammar & Language Skills"
             },
             {
               "levelId": "tamil-5-level-3",
@@ -32571,7 +32571,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Classical Literature & History"
             },
             {
               "levelId": "tamil-5-level-4",
@@ -32688,7 +32688,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Classical Literature & History"
             },
             {
               "levelId": "tamil-5-level-5",
@@ -32799,7 +32799,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Classical Literature & History"
             },
             {
               "levelId": "tamil-5-level-6",
@@ -32916,7 +32916,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Essay Writing & Debate"
             },
             {
               "levelId": "tamil-5-level-7",
@@ -33033,7 +33033,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Essay Writing & Debate"
             },
             {
               "levelId": "tamil-5-level-8",
@@ -33150,7 +33150,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Essay Writing & Debate"
             },
             {
               "levelId": "tamil-5-level-9",
@@ -33267,7 +33267,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Literary Criticism & Capstone"
             },
             {
               "levelId": "tamil-5-level-10",
@@ -33378,7 +33378,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Literary Criticism & Capstone"
             }
           ]
         },
@@ -33501,7 +33501,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Program Design & Networks"
             },
             {
               "levelId": "computerscience-5-level-2",
@@ -33618,7 +33618,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Program Design & Networks"
             },
             {
               "levelId": "computerscience-5-level-3",
@@ -33735,7 +33735,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Python Programming"
             },
             {
               "levelId": "computerscience-5-level-4",
@@ -33852,7 +33852,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Python Programming"
             },
             {
               "levelId": "computerscience-5-level-5",
@@ -33969,7 +33969,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Python Programming"
             },
             {
               "levelId": "computerscience-5-level-6",
@@ -34086,7 +34086,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Hardware & Systems"
             },
             {
               "levelId": "computerscience-5-level-7",
@@ -34203,7 +34203,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Hardware & Systems"
             },
             {
               "levelId": "computerscience-5-level-8",
@@ -34320,7 +34320,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Hardware & Systems"
             },
             {
               "levelId": "computerscience-5-level-9",
@@ -34437,7 +34437,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Cyber Security & GCSE Readiness"
             },
             {
               "levelId": "computerscience-5-level-10",
@@ -34554,7 +34554,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Cyber Security & GCSE Readiness"
             }
           ]
         }
@@ -34683,7 +34683,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Critical Analysis"
             },
             {
               "levelId": "english-6-level-2",
@@ -34800,7 +34800,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Critical Analysis"
             },
             {
               "levelId": "english-6-level-3",
@@ -34917,7 +34917,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar, Style & Sentence Craft"
             },
             {
               "levelId": "english-6-level-4",
@@ -35034,7 +35034,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar, Style & Sentence Craft"
             },
             {
               "levelId": "english-6-level-5",
@@ -35151,7 +35151,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar, Style & Sentence Craft"
             },
             {
               "levelId": "english-6-level-6",
@@ -35268,7 +35268,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Creative & Persuasive Writing"
             },
             {
               "levelId": "english-6-level-7",
@@ -35385,7 +35385,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Creative & Persuasive Writing"
             },
             {
               "levelId": "english-6-level-8",
@@ -35502,7 +35502,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Creative & Persuasive Writing"
             },
             {
               "levelId": "english-6-level-9",
@@ -35619,7 +35619,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry, Spoken Language & Exam Skills"
             },
             {
               "levelId": "english-6-level-10",
@@ -35736,7 +35736,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry, Spoken Language & Exam Skills"
             }
           ]
         },
@@ -35865,7 +35865,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Algebra Foundations"
             },
             {
               "levelId": "math-6-level-2",
@@ -35982,7 +35982,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Algebra Foundations"
             },
             {
               "levelId": "math-6-level-3",
@@ -36099,7 +36099,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Ratio & Proportion"
             },
             {
               "levelId": "math-6-level-4",
@@ -36210,7 +36210,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Ratio & Proportion"
             },
             {
               "levelId": "math-6-level-5",
@@ -36333,7 +36333,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Ratio & Proportion"
             },
             {
               "levelId": "math-6-level-6",
@@ -36444,7 +36444,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Geometry, Data & Probability"
             },
             {
               "levelId": "math-6-level-7",
@@ -36561,7 +36561,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Geometry, Data & Probability"
             },
             {
               "levelId": "math-6-level-8",
@@ -36672,7 +36672,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Geometry, Data & Probability"
             },
             {
               "levelId": "math-6-level-9",
@@ -36783,7 +36783,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Equations, Graphs & GCSE Foundations"
             },
             {
               "levelId": "math-6-level-10",
@@ -36894,7 +36894,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Equations, Graphs & GCSE Foundations"
             }
           ]
         },
@@ -37017,7 +37017,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Biology Foundations"
             },
             {
               "levelId": "science-6-level-2",
@@ -37134,7 +37134,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Biology Foundations"
             },
             {
               "levelId": "science-6-level-3",
@@ -37251,7 +37251,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Matter & Reactions"
             },
             {
               "levelId": "science-6-level-4",
@@ -37368,7 +37368,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Matter & Reactions"
             },
             {
               "levelId": "science-6-level-5",
@@ -37485,7 +37485,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Matter & Reactions"
             },
             {
               "levelId": "science-6-level-6",
@@ -37602,7 +37602,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Forces & Energy"
             },
             {
               "levelId": "science-6-level-7",
@@ -37719,7 +37719,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Forces & Energy"
             },
             {
               "levelId": "science-6-level-8",
@@ -37836,7 +37836,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Forces & Energy"
             },
             {
               "levelId": "science-6-level-9",
@@ -37953,7 +37953,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Working Scientifically & GCSE Foundations"
             },
             {
               "levelId": "science-6-level-10",
@@ -38070,7 +38070,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Working Scientifically & GCSE Foundations"
             }
           ]
         },
@@ -38187,7 +38187,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Grammar & Language Skills"
             },
             {
               "levelId": "tamil-6-level-2",
@@ -38298,7 +38298,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Grammar & Language Skills"
             },
             {
               "levelId": "tamil-6-level-3",
@@ -38421,7 +38421,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Classical Literature & History"
             },
             {
               "levelId": "tamil-6-level-4",
@@ -38532,7 +38532,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Classical Literature & History"
             },
             {
               "levelId": "tamil-6-level-5",
@@ -38655,7 +38655,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Classical Literature & History"
             },
             {
               "levelId": "tamil-6-level-6",
@@ -38772,7 +38772,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Essay Writing & Debate"
             },
             {
               "levelId": "tamil-6-level-7",
@@ -38889,7 +38889,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Essay Writing & Debate"
             },
             {
               "levelId": "tamil-6-level-8",
@@ -39006,7 +39006,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Essay Writing & Debate"
             },
             {
               "levelId": "tamil-6-level-9",
@@ -39117,7 +39117,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Literary Criticism & Capstone"
             },
             {
               "levelId": "tamil-6-level-10",
@@ -39228,7 +39228,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Literary Criticism & Capstone"
             }
           ]
         },
@@ -39351,7 +39351,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Program Design & Networks"
             },
             {
               "levelId": "computerscience-6-level-2",
@@ -39468,7 +39468,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Program Design & Networks"
             },
             {
               "levelId": "computerscience-6-level-3",
@@ -39585,7 +39585,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Python Programming"
             },
             {
               "levelId": "computerscience-6-level-4",
@@ -39702,7 +39702,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Python Programming"
             },
             {
               "levelId": "computerscience-6-level-5",
@@ -39819,7 +39819,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Python Programming"
             },
             {
               "levelId": "computerscience-6-level-6",
@@ -39936,7 +39936,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Hardware & Systems"
             },
             {
               "levelId": "computerscience-6-level-7",
@@ -40053,7 +40053,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Hardware & Systems"
             },
             {
               "levelId": "computerscience-6-level-8",
@@ -40170,7 +40170,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Hardware & Systems"
             },
             {
               "levelId": "computerscience-6-level-9",
@@ -40287,7 +40287,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Cyber Security & GCSE Readiness"
             },
             {
               "levelId": "computerscience-6-level-10",
@@ -40398,7 +40398,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Cyber Security & GCSE Readiness"
             }
           ]
         }
@@ -40527,7 +40527,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Critical Analysis"
             },
             {
               "levelId": "english-7-level-2",
@@ -40644,7 +40644,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Critical Analysis"
             },
             {
               "levelId": "english-7-level-3",
@@ -40761,7 +40761,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar, Style & Sentence Craft"
             },
             {
               "levelId": "english-7-level-4",
@@ -40878,7 +40878,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar, Style & Sentence Craft"
             },
             {
               "levelId": "english-7-level-5",
@@ -40995,7 +40995,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar, Style & Sentence Craft"
             },
             {
               "levelId": "english-7-level-6",
@@ -41112,7 +41112,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Creative & Persuasive Writing"
             },
             {
               "levelId": "english-7-level-7",
@@ -41229,7 +41229,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Creative & Persuasive Writing"
             },
             {
               "levelId": "english-7-level-8",
@@ -41346,7 +41346,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Creative & Persuasive Writing"
             },
             {
               "levelId": "english-7-level-9",
@@ -41463,7 +41463,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry, Spoken Language & Exam Skills"
             },
             {
               "levelId": "english-7-level-10",
@@ -41580,7 +41580,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry, Spoken Language & Exam Skills"
             }
           ]
         },
@@ -41709,7 +41709,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Algebra Foundations"
             },
             {
               "levelId": "math-7-level-2",
@@ -41820,7 +41820,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Algebra Foundations"
             },
             {
               "levelId": "math-7-level-3",
@@ -41931,7 +41931,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Ratio & Proportion"
             },
             {
               "levelId": "math-7-level-4",
@@ -42042,7 +42042,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Ratio & Proportion"
             },
             {
               "levelId": "math-7-level-5",
@@ -42159,7 +42159,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Ratio & Proportion"
             },
             {
               "levelId": "math-7-level-6",
@@ -42270,7 +42270,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Geometry, Data & Probability"
             },
             {
               "levelId": "math-7-level-7",
@@ -42381,7 +42381,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Geometry, Data & Probability"
             },
             {
               "levelId": "math-7-level-8",
@@ -42492,7 +42492,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Geometry, Data & Probability"
             },
             {
               "levelId": "math-7-level-9",
@@ -42603,7 +42603,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Equations, Graphs & GCSE Foundations"
             },
             {
               "levelId": "math-7-level-10",
@@ -42714,7 +42714,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Equations, Graphs & GCSE Foundations"
             }
           ]
         },
@@ -42837,7 +42837,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Biology Foundations"
             },
             {
               "levelId": "science-7-level-2",
@@ -42954,7 +42954,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Biology Foundations"
             },
             {
               "levelId": "science-7-level-3",
@@ -43071,7 +43071,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Matter & Reactions"
             },
             {
               "levelId": "science-7-level-4",
@@ -43188,7 +43188,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Matter & Reactions"
             },
             {
               "levelId": "science-7-level-5",
@@ -43305,7 +43305,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Matter & Reactions"
             },
             {
               "levelId": "science-7-level-6",
@@ -43422,7 +43422,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Forces & Energy"
             },
             {
               "levelId": "science-7-level-7",
@@ -43539,7 +43539,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Forces & Energy"
             },
             {
               "levelId": "science-7-level-8",
@@ -43656,7 +43656,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Forces & Energy"
             },
             {
               "levelId": "science-7-level-9",
@@ -43773,7 +43773,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Working Scientifically & GCSE Foundations"
             },
             {
               "levelId": "science-7-level-10",
@@ -43890,7 +43890,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Working Scientifically & GCSE Foundations"
             }
           ]
         },
@@ -44007,7 +44007,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Grammar & Language Skills"
             },
             {
               "levelId": "tamil-7-level-2",
@@ -44118,7 +44118,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Grammar & Language Skills"
             },
             {
               "levelId": "tamil-7-level-3",
@@ -44229,7 +44229,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 2: Classical Literature & History"
             },
             {
               "levelId": "tamil-7-level-4",
@@ -44352,7 +44352,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Classical Literature & History"
             },
             {
               "levelId": "tamil-7-level-5",
@@ -44463,7 +44463,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Classical Literature & History"
             },
             {
               "levelId": "tamil-7-level-6",
@@ -44580,7 +44580,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Essay Writing & Debate"
             },
             {
               "levelId": "tamil-7-level-7",
@@ -44697,7 +44697,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Essay Writing & Debate"
             },
             {
               "levelId": "tamil-7-level-8",
@@ -44808,7 +44808,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Essay Writing & Debate"
             },
             {
               "levelId": "tamil-7-level-9",
@@ -44925,7 +44925,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Literary Criticism & Capstone"
             },
             {
               "levelId": "tamil-7-level-10",
@@ -45042,7 +45042,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Literary Criticism & Capstone"
             }
           ]
         },
@@ -45165,7 +45165,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Program Design & Networks"
             },
             {
               "levelId": "computerscience-7-level-2",
@@ -45282,7 +45282,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Program Design & Networks"
             },
             {
               "levelId": "computerscience-7-level-3",
@@ -45399,7 +45399,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Python Programming"
             },
             {
               "levelId": "computerscience-7-level-4",
@@ -45516,7 +45516,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Python Programming"
             },
             {
               "levelId": "computerscience-7-level-5",
@@ -45633,7 +45633,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Python Programming"
             },
             {
               "levelId": "computerscience-7-level-6",
@@ -45750,7 +45750,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Hardware & Systems"
             },
             {
               "levelId": "computerscience-7-level-7",
@@ -45867,7 +45867,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Hardware & Systems"
             },
             {
               "levelId": "computerscience-7-level-8",
@@ -45984,7 +45984,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Hardware & Systems"
             },
             {
               "levelId": "computerscience-7-level-9",
@@ -46101,7 +46101,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Cyber Security & GCSE Readiness"
             },
             {
               "levelId": "computerscience-7-level-10",
@@ -46218,7 +46218,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Cyber Security & GCSE Readiness"
             }
           ]
         }
@@ -46347,7 +46347,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Critical Analysis"
             },
             {
               "levelId": "english-8-level-2",
@@ -46464,7 +46464,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Reading & Critical Analysis"
             },
             {
               "levelId": "english-8-level-3",
@@ -46581,7 +46581,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar, Style & Sentence Craft"
             },
             {
               "levelId": "english-8-level-4",
@@ -46698,7 +46698,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar, Style & Sentence Craft"
             },
             {
               "levelId": "english-8-level-5",
@@ -46815,7 +46815,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Grammar, Style & Sentence Craft"
             },
             {
               "levelId": "english-8-level-6",
@@ -46932,7 +46932,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Creative & Persuasive Writing"
             },
             {
               "levelId": "english-8-level-7",
@@ -47049,7 +47049,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Creative & Persuasive Writing"
             },
             {
               "levelId": "english-8-level-8",
@@ -47166,7 +47166,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Creative & Persuasive Writing"
             },
             {
               "levelId": "english-8-level-9",
@@ -47283,7 +47283,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry, Spoken Language & Exam Skills"
             },
             {
               "levelId": "english-8-level-10",
@@ -47400,7 +47400,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry, Spoken Language & Exam Skills"
             }
           ]
         },
@@ -47517,7 +47517,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Algebra Foundations"
             },
             {
               "levelId": "math-8-level-2",
@@ -47628,7 +47628,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Algebra Foundations"
             },
             {
               "levelId": "math-8-level-3",
@@ -47739,7 +47739,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Ratio & Proportion"
             },
             {
               "levelId": "math-8-level-4",
@@ -47850,7 +47850,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Ratio & Proportion"
             },
             {
               "levelId": "math-8-level-5",
@@ -47967,7 +47967,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Fractions, Ratio & Proportion"
             },
             {
               "levelId": "math-8-level-6",
@@ -48078,7 +48078,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Geometry, Data & Probability"
             },
             {
               "levelId": "math-8-level-7",
@@ -48189,7 +48189,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Geometry, Data & Probability"
             },
             {
               "levelId": "math-8-level-8",
@@ -48300,7 +48300,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Geometry, Data & Probability"
             },
             {
               "levelId": "math-8-level-9",
@@ -48411,7 +48411,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Equations, Graphs & GCSE Foundations"
             },
             {
               "levelId": "math-8-level-10",
@@ -48534,7 +48534,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Equations, Graphs & GCSE Foundations"
             }
           ]
         },
@@ -48657,7 +48657,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Biology Foundations"
             },
             {
               "levelId": "science-8-level-2",
@@ -48774,7 +48774,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Biology Foundations"
             },
             {
               "levelId": "science-8-level-3",
@@ -48891,7 +48891,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Matter & Reactions"
             },
             {
               "levelId": "science-8-level-4",
@@ -49008,7 +49008,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Matter & Reactions"
             },
             {
               "levelId": "science-8-level-5",
@@ -49125,7 +49125,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Matter & Reactions"
             },
             {
               "levelId": "science-8-level-6",
@@ -49242,7 +49242,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Forces & Energy"
             },
             {
               "levelId": "science-8-level-7",
@@ -49359,7 +49359,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Forces & Energy"
             },
             {
               "levelId": "science-8-level-8",
@@ -49476,7 +49476,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Forces & Energy"
             },
             {
               "levelId": "science-8-level-9",
@@ -49593,7 +49593,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Working Scientifically & GCSE Foundations"
             },
             {
               "levelId": "science-8-level-10",
@@ -49710,7 +49710,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Working Scientifically & GCSE Foundations"
             }
           ]
         },
@@ -49827,7 +49827,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Grammar & Language Skills"
             },
             {
               "levelId": "tamil-8-level-2",
@@ -49944,7 +49944,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Grammar & Language Skills"
             },
             {
               "levelId": "tamil-8-level-3",
@@ -50055,7 +50055,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Classical Literature & History"
             },
             {
               "levelId": "tamil-8-level-4",
@@ -50172,7 +50172,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Classical Literature & History"
             },
             {
               "levelId": "tamil-8-level-5",
@@ -50283,7 +50283,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Classical Literature & History"
             },
             {
               "levelId": "tamil-8-level-6",
@@ -50400,7 +50400,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Essay Writing & Debate"
             },
             {
               "levelId": "tamil-8-level-7",
@@ -50517,7 +50517,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Essay Writing & Debate"
             },
             {
               "levelId": "tamil-8-level-8",
@@ -50628,7 +50628,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Essay Writing & Debate"
             },
             {
               "levelId": "tamil-8-level-9",
@@ -50733,7 +50733,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 4: Literary Criticism & Capstone"
             },
             {
               "levelId": "tamil-8-level-10",
@@ -50844,7 +50844,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Literary Criticism & Capstone"
             }
           ]
         },
@@ -50967,7 +50967,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Program Design & Networks"
             },
             {
               "levelId": "computerscience-8-level-2",
@@ -51084,7 +51084,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Program Design & Networks"
             },
             {
               "levelId": "computerscience-8-level-3",
@@ -51201,7 +51201,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Python Programming"
             },
             {
               "levelId": "computerscience-8-level-4",
@@ -51318,7 +51318,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Python Programming"
             },
             {
               "levelId": "computerscience-8-level-5",
@@ -51435,7 +51435,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Python Programming"
             },
             {
               "levelId": "computerscience-8-level-6",
@@ -51552,7 +51552,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Hardware & Systems"
             },
             {
               "levelId": "computerscience-8-level-7",
@@ -51669,7 +51669,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Hardware & Systems"
             },
             {
               "levelId": "computerscience-8-level-8",
@@ -51786,7 +51786,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Data, Hardware & Systems"
             },
             {
               "levelId": "computerscience-8-level-9",
@@ -51903,7 +51903,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Cyber Security & GCSE Readiness"
             },
             {
               "levelId": "computerscience-8-level-10",
@@ -52020,7 +52020,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Cyber Security & GCSE Readiness"
             }
           ]
         }
@@ -52143,7 +52143,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: GCSE Reading: Non-Fiction & Fiction"
             },
             {
               "levelId": "english-9-level-2",
@@ -52254,7 +52254,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: GCSE Reading: Non-Fiction & Fiction"
             },
             {
               "levelId": "english-9-level-3",
@@ -52365,7 +52365,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: GCSE Writing Skills"
             },
             {
               "levelId": "english-9-level-4",
@@ -52476,7 +52476,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: GCSE Writing Skills"
             },
             {
               "levelId": "english-9-level-5",
@@ -52587,7 +52587,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: GCSE Writing Skills"
             },
             {
               "levelId": "english-9-level-6",
@@ -52698,7 +52698,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Literature: Prose & Shakespeare"
             },
             {
               "levelId": "english-9-level-7",
@@ -52809,7 +52809,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Literature: Prose & Shakespeare"
             },
             {
               "levelId": "english-9-level-8",
@@ -52920,7 +52920,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Literature: Prose & Shakespeare"
             },
             {
               "levelId": "english-9-level-9",
@@ -53031,7 +53031,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry & Exam Technique"
             },
             {
               "levelId": "english-9-level-10",
@@ -53142,7 +53142,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry & Exam Technique"
             }
           ]
         },
@@ -53259,7 +53259,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Algebra"
             },
             {
               "levelId": "math-9-level-2",
@@ -53376,7 +53376,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Algebra"
             },
             {
               "levelId": "math-9-level-3",
@@ -53487,7 +53487,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Geometry & Trigonometry"
             },
             {
               "levelId": "math-9-level-4",
@@ -53598,7 +53598,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Geometry & Trigonometry"
             },
             {
               "levelId": "math-9-level-5",
@@ -53709,7 +53709,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Geometry & Trigonometry"
             },
             {
               "levelId": "math-9-level-6",
@@ -53826,7 +53826,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Statistics & Probability"
             },
             {
               "levelId": "math-9-level-7",
@@ -53937,7 +53937,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Statistics & Probability"
             },
             {
               "levelId": "math-9-level-8",
@@ -54048,7 +54048,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Statistics & Probability"
             },
             {
               "levelId": "math-9-level-9",
@@ -54159,7 +54159,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Functions, Vectors & Exam Practice"
             },
             {
               "levelId": "math-9-level-10",
@@ -54270,7 +54270,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Functions, Vectors & Exam Practice"
             }
           ]
         },
@@ -54393,7 +54393,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Biology: Cells & Systems"
             },
             {
               "levelId": "science-9-level-2",
@@ -54510,7 +54510,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Biology: Cells & Systems"
             },
             {
               "levelId": "science-9-level-3",
@@ -54627,7 +54627,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Structure & Reactions"
             },
             {
               "levelId": "science-9-level-4",
@@ -54744,7 +54744,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Structure & Reactions"
             },
             {
               "levelId": "science-9-level-5",
@@ -54861,7 +54861,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Structure & Reactions"
             },
             {
               "levelId": "science-9-level-6",
@@ -54978,7 +54978,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Energy & Forces"
             },
             {
               "levelId": "science-9-level-7",
@@ -55095,7 +55095,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Energy & Forces"
             },
             {
               "levelId": "science-9-level-8",
@@ -55212,7 +55212,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Energy & Forces"
             },
             {
               "levelId": "science-9-level-9",
@@ -55329,7 +55329,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Practical Skills & Exam Revision"
             },
             {
               "levelId": "science-9-level-10",
@@ -55446,7 +55446,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Practical Skills & Exam Revision"
             }
           ]
         },
@@ -55569,7 +55569,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Advanced Grammar & Classical Roots"
             },
             {
               "levelId": "tamil-9-level-2",
@@ -55686,7 +55686,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Advanced Grammar & Classical Roots"
             },
             {
               "levelId": "tamil-9-level-3",
@@ -55803,7 +55803,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Modern Tamil Literature & History"
             },
             {
               "levelId": "tamil-9-level-4",
@@ -55920,7 +55920,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Modern Tamil Literature & History"
             },
             {
               "levelId": "tamil-9-level-5",
@@ -56037,7 +56037,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Modern Tamil Literature & History"
             },
             {
               "levelId": "tamil-9-level-6",
@@ -56154,7 +56154,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing, Translation & Oratory"
             },
             {
               "levelId": "tamil-9-level-7",
@@ -56271,7 +56271,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing, Translation & Oratory"
             },
             {
               "levelId": "tamil-9-level-8",
@@ -56388,7 +56388,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing, Translation & Oratory"
             },
             {
               "levelId": "tamil-9-level-9",
@@ -56505,7 +56505,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Capstone Project & Exam Preparation"
             },
             {
               "levelId": "tamil-9-level-10",
@@ -56622,7 +56622,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Capstone Project & Exam Preparation"
             }
           ]
         },
@@ -56745,7 +56745,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Algorithms & Programming"
             },
             {
               "levelId": "computerscience-9-level-2",
@@ -56862,7 +56862,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Algorithms & Programming"
             },
             {
               "levelId": "computerscience-9-level-3",
@@ -56979,7 +56979,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Data Representation & Systems"
             },
             {
               "levelId": "computerscience-9-level-4",
@@ -57096,7 +57096,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Data Representation & Systems"
             },
             {
               "levelId": "computerscience-9-level-5",
@@ -57213,7 +57213,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Data Representation & Systems"
             },
             {
               "levelId": "computerscience-9-level-6",
@@ -57330,7 +57330,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Networks & Cyber Security"
             },
             {
               "levelId": "computerscience-9-level-7",
@@ -57447,7 +57447,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Networks & Cyber Security"
             },
             {
               "levelId": "computerscience-9-level-8",
@@ -57564,7 +57564,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Networks & Cyber Security"
             },
             {
               "levelId": "computerscience-9-level-9",
@@ -57675,7 +57675,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Databases & Exam Revision"
             },
             {
               "levelId": "computerscience-9-level-10",
@@ -57792,7 +57792,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Databases & Exam Revision"
             }
           ]
         }
@@ -57915,7 +57915,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: GCSE Reading: Non-Fiction & Fiction"
             },
             {
               "levelId": "english-10-level-2",
@@ -58026,7 +58026,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: GCSE Reading: Non-Fiction & Fiction"
             },
             {
               "levelId": "english-10-level-3",
@@ -58137,7 +58137,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: GCSE Writing Skills"
             },
             {
               "levelId": "english-10-level-4",
@@ -58248,7 +58248,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: GCSE Writing Skills"
             },
             {
               "levelId": "english-10-level-5",
@@ -58359,7 +58359,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: GCSE Writing Skills"
             },
             {
               "levelId": "english-10-level-6",
@@ -58470,7 +58470,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Literature: Prose & Shakespeare"
             },
             {
               "levelId": "english-10-level-7",
@@ -58581,7 +58581,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Literature: Prose & Shakespeare"
             },
             {
               "levelId": "english-10-level-8",
@@ -58692,7 +58692,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Literature: Prose & Shakespeare"
             },
             {
               "levelId": "english-10-level-9",
@@ -58803,7 +58803,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry & Exam Technique"
             },
             {
               "levelId": "english-10-level-10",
@@ -58914,7 +58914,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Poetry & Exam Technique"
             }
           ]
         },
@@ -59031,7 +59031,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Algebra"
             },
             {
               "levelId": "math-10-level-2",
@@ -59142,7 +59142,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Number & Algebra"
             },
             {
               "levelId": "math-10-level-3",
@@ -59247,7 +59247,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Geometry & Trigonometry"
             },
             {
               "levelId": "math-10-level-4",
@@ -59358,7 +59358,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Geometry & Trigonometry"
             },
             {
               "levelId": "math-10-level-5",
@@ -59469,7 +59469,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Geometry & Trigonometry"
             },
             {
               "levelId": "math-10-level-6",
@@ -59580,7 +59580,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Statistics & Probability"
             },
             {
               "levelId": "math-10-level-7",
@@ -59691,7 +59691,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Statistics & Probability"
             },
             {
               "levelId": "math-10-level-8",
@@ -59796,7 +59796,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Statistics & Probability"
             },
             {
               "levelId": "math-10-level-9",
@@ -59907,7 +59907,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Functions, Vectors & Exam Practice"
             },
             {
               "levelId": "math-10-level-10",
@@ -60012,7 +60012,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Functions, Vectors & Exam Practice"
             }
           ]
         },
@@ -60135,7 +60135,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Biology: Cells & Systems"
             },
             {
               "levelId": "science-10-level-2",
@@ -60252,7 +60252,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Biology: Cells & Systems"
             },
             {
               "levelId": "science-10-level-3",
@@ -60369,7 +60369,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Structure & Reactions"
             },
             {
               "levelId": "science-10-level-4",
@@ -60486,7 +60486,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Structure & Reactions"
             },
             {
               "levelId": "science-10-level-5",
@@ -60603,7 +60603,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Chemistry: Structure & Reactions"
             },
             {
               "levelId": "science-10-level-6",
@@ -60720,7 +60720,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Energy & Forces"
             },
             {
               "levelId": "science-10-level-7",
@@ -60837,7 +60837,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Energy & Forces"
             },
             {
               "levelId": "science-10-level-8",
@@ -60954,7 +60954,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Physics: Energy & Forces"
             },
             {
               "levelId": "science-10-level-9",
@@ -61071,7 +61071,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Practical Skills & Exam Revision"
             },
             {
               "levelId": "science-10-level-10",
@@ -61188,7 +61188,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Practical Skills & Exam Revision"
             }
           ]
         },
@@ -61311,7 +61311,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Advanced Grammar & Classical Roots"
             },
             {
               "levelId": "tamil-10-level-2",
@@ -61428,7 +61428,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Advanced Grammar & Classical Roots"
             },
             {
               "levelId": "tamil-10-level-3",
@@ -61545,7 +61545,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Modern Tamil Literature & History"
             },
             {
               "levelId": "tamil-10-level-4",
@@ -61662,7 +61662,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Modern Tamil Literature & History"
             },
             {
               "levelId": "tamil-10-level-5",
@@ -61779,7 +61779,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Modern Tamil Literature & History"
             },
             {
               "levelId": "tamil-10-level-6",
@@ -61896,7 +61896,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing, Translation & Oratory"
             },
             {
               "levelId": "tamil-10-level-7",
@@ -62013,7 +62013,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing, Translation & Oratory"
             },
             {
               "levelId": "tamil-10-level-8",
@@ -62130,7 +62130,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Writing, Translation & Oratory"
             },
             {
               "levelId": "tamil-10-level-9",
@@ -62247,7 +62247,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Capstone Project & Exam Preparation"
             },
             {
               "levelId": "tamil-10-level-10",
@@ -62364,7 +62364,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Capstone Project & Exam Preparation"
             }
           ]
         },
@@ -62487,7 +62487,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Algorithms & Programming"
             },
             {
               "levelId": "computerscience-10-level-2",
@@ -62604,7 +62604,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 1: Getting Started"
+              "moduleName": "Module 1: Algorithms & Programming"
             },
             {
               "levelId": "computerscience-10-level-3",
@@ -62721,7 +62721,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Data Representation & Systems"
             },
             {
               "levelId": "computerscience-10-level-4",
@@ -62838,7 +62838,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Data Representation & Systems"
             },
             {
               "levelId": "computerscience-10-level-5",
@@ -62955,7 +62955,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 2: Core Concepts"
+              "moduleName": "Module 2: Data Representation & Systems"
             },
             {
               "levelId": "computerscience-10-level-6",
@@ -63066,7 +63066,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Networks & Cyber Security"
             },
             {
               "levelId": "computerscience-10-level-7",
@@ -63171,7 +63171,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Networks & Cyber Security"
             },
             {
               "levelId": "computerscience-10-level-8",
@@ -63282,7 +63282,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 3: Skill Building"
+              "moduleName": "Module 3: Networks & Cyber Security"
             },
             {
               "levelId": "computerscience-10-level-9",
@@ -63387,7 +63387,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Databases & Exam Revision"
             },
             {
               "levelId": "computerscience-10-level-10",
@@ -63498,7 +63498,7 @@
                   ]
                 }
               ],
-              "moduleName": "Module 4: Mastery Challenge"
+              "moduleName": "Module 4: Databases & Exam Revision"
             }
           ]
         }
