@@ -8,6 +8,8 @@ import AudioPlayer from '../../../../../components/ui/AudioPlayer';
 import DrawingCanvas from '../../../../../components/ui/DrawingCanvas';
 import VirtualKeyboard from '../../../../../components/ui/VirtualKeyboard';
 import InteractiveLesson from '../../../../../components/ui/InteractiveLesson';
+import SuccessBadge from '../../../../../components/ui/SuccessBadge';
+import CountUpNumber from '../../../../../components/ui/CountUpNumber';
 import { motion, AnimatePresence } from "framer-motion";
 import { FaLanguage } from 'react-icons/fa';
 import { useLanguage } from '@/app/providers/LanguageProvider';
@@ -563,13 +565,18 @@ export default function TaskContentPage() {
         <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-100 p-4 flex flex-col items-center justify-center gap-6">
           <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", bounce: 0.5 }}
             className="p-10 text-center bg-white/80 backdrop-blur-md rounded-[3rem] shadow-2xl max-w-lg w-full border-4 border-white">
-            <FaStar size={100} className="text-yellow-400 mb-6 mx-auto drop-shadow-md" />
+            <SuccessBadge icon={<FaStar size={100} className="text-yellow-400" />} ringColor="rgba(250, 204, 21, 0.5)" />
             <h1 className="text-4xl font-extrabold mb-4 text-green-600">{t('lessonComplete')}</h1>
-            <p className="text-xl text-gray-600 mb-8">+{score} {t('pointsAdded')}</p>
+            <p className="text-xl text-gray-600 mb-8">+<CountUpNumber value={score} /> {t('pointsAdded')}</p>
 
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button onClick={() => router.push('/learning-zone/rewards')} className="flex-1 bg-cyan-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-cyan-600 hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2"><FaGift /> My Rewards</button>
-            </div>
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-col gap-3">
+              <button onClick={() => router.back()} className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black px-6 py-4 rounded-full text-xl hover:scale-[1.02] transition-all shadow-lg shadow-blue-200/50 flex items-center justify-center gap-2">
+                <FaHome /> {t('backToMap')}
+              </button>
+              <button onClick={() => router.push('/learning-zone/rewards')} className="w-full bg-white text-cyan-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-cyan-200 hover:bg-cyan-50 hover:border-cyan-300 transition-all flex items-center justify-center gap-2">
+                <FaGift /> My Rewards
+              </button>
+            </motion.div>
           </motion.div>
 
           {newAchievements.length > 0 && (
@@ -606,16 +613,17 @@ export default function TaskContentPage() {
   if (quizCompleted) {
     const pct = (correctAnswersCount / totalQuestions) * 100;
     let medal = t('keep_practicing'), medalColor = 'text-gray-500', bgGradient = 'from-red-50 to-teal-100';
-    let icon = <FaStar size={80} className="text-gray-400 mb-4 mx-auto" />;
-    if (pct === 100) { medal = t('perfect_medal'); medalColor = 'text-yellow-600'; bgGradient = 'from-yellow-100 to-amber-200'; icon = <FaTrophy size={100} className="text-yellow-500 mb-6 mx-auto drop-shadow-md" />; }
-    else if (pct >= 75) { medal = t('great_medal'); medalColor = 'text-slate-600'; bgGradient = 'from-gray-100 to-slate-200'; icon = <FaMedal size={90} className="text-gray-400 mb-4 mx-auto drop-shadow-md" />; }
-    else if (pct >= 50) { medal = t('good_medal'); medalColor = 'text-orange-700'; bgGradient = 'from-orange-50 to-orange-100'; icon = <FaMedal size={90} className="text-orange-500 mb-4 mx-auto drop-shadow-md" />; }
+    let icon = <FaStar size={80} className="text-gray-400" />;
+    let ringColor = 'rgba(148, 163, 184, 0.4)';
+    if (pct === 100) { medal = t('perfect_medal'); medalColor = 'text-yellow-600'; bgGradient = 'from-yellow-100 to-amber-200'; icon = <FaTrophy size={100} className="text-yellow-500" />; ringColor = 'rgba(250, 204, 21, 0.5)'; }
+    else if (pct >= 75) { medal = t('great_medal'); medalColor = 'text-slate-600'; bgGradient = 'from-gray-100 to-slate-200'; icon = <FaMedal size={90} className="text-gray-400" />; ringColor = 'rgba(148, 163, 184, 0.5)'; }
+    else if (pct >= 50) { medal = t('good_medal'); medalColor = 'text-orange-700'; bgGradient = 'from-orange-50 to-orange-100'; icon = <FaMedal size={90} className="text-orange-500" />; ringColor = 'rgba(249, 115, 22, 0.5)'; }
 
     return (
       <div className={`min-h-screen bg-gradient-to-br ${bgGradient} p-4 flex flex-col items-center justify-center gap-6`}>
         <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", bounce: 0.5 }}
           className="p-10 text-center bg-white/80 backdrop-blur-md rounded-[3rem] shadow-2xl max-w-lg w-full border-4 border-white">
-          {icon}
+          <SuccessBadge icon={icon} ringColor={ringColor} />
           <h1 className={`text-4xl font-extrabold mb-2 ${medalColor}`}>{medal}</h1>
           {attemptNumber > 1 && (
             <p className="text-xs font-black uppercase tracking-widest text-slate-400 bg-slate-100 rounded-full py-1 px-4 inline-block mb-4">
@@ -623,7 +631,7 @@ export default function TaskContentPage() {
             </p>
           )}
           <div className="bg-white rounded-3xl p-6 shadow-inner mb-8">
-            <p className="text-3xl font-black text-gray-800 mb-1">{t('scoreLabel')}: <span className="text-green-500">{score}</span></p>
+            <p className="text-3xl font-black text-gray-800 mb-1">{t('scoreLabel')}: <span className="text-green-500"><CountUpNumber value={score} /></span></p>
             <p className="text-xl text-gray-600 mb-1">✅ <span className="font-bold text-green-500">{correctAnswersCount}</span> / {totalQuestions}</p>
             <p className="text-xl text-gray-600 mb-3">❌ <span className="font-bold text-red-500">{wrongAnswersCount}</span></p>
             {taskData.type !== 'lesson' && <p className="text-lg text-gray-400 bg-gray-100 rounded-full py-1 px-4 inline-block">⏳ {formatTime(timeTaken)}</p>}
@@ -660,13 +668,19 @@ export default function TaskContentPage() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 mt-8">
-            <button onClick={handleRetake} className="flex-1 bg-emerald-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-emerald-600 hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2">
-              <FaRedo /> {taskData.type === 'exam' ? t('retakeExam') : t('practiceAgain')}
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-col gap-3 mt-8">
+            <button onClick={() => router.back()} className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black px-6 py-4 rounded-full text-xl hover:scale-[1.02] transition-all shadow-lg shadow-blue-200/50 flex items-center justify-center gap-2">
+              <FaHome /> {t('backToMap')}
             </button>
-            <button onClick={() => router.back()} className="flex-1 bg-blue-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-blue-600 hover:scale-105 transition-all shadow-lg">{t('backToMap')}</button>
-            <button onClick={() => router.push('/learning-zone/rewards')} className="flex-1 bg-cyan-500 text-white font-bold px-6 py-4 rounded-full text-xl hover:bg-cyan-600 hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2"><FaGift /> {t('myRewards')}</button>
-          </div>
+            <div className="grid grid-cols-2 gap-3">
+              <button onClick={handleRetake} className="w-full bg-white text-emerald-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300 transition-all flex items-center justify-center gap-2">
+                <FaRedo /> {taskData.type === 'exam' ? t('retakeExam') : t('practiceAgain')}
+              </button>
+              <button onClick={() => router.push('/learning-zone/rewards')} className="w-full bg-white text-cyan-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-cyan-200 hover:bg-cyan-50 hover:border-cyan-300 transition-all flex items-center justify-center gap-2">
+                <FaGift /> {t('myRewards')}
+              </button>
+            </div>
+          </motion.div>
         </motion.div>
 
         {newAchievements.length > 0 && (
