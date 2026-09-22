@@ -168,7 +168,7 @@ export default function SettingsPage() {
                                                     {profile.profileImage ? (
                                                         <img src={profile.profileImage} className="w-full h-full object-cover rounded-[2rem]" alt="Avatar" />
                                                     ) : (
-                                                        profile.fullName?.charAt(0) || user.email.charAt(0).toUpperCase()
+                                                        profile.fullName?.charAt(0) || user?.email?.charAt(0)?.toUpperCase() || 'T'
                                                     )}
                                                 </div>
                                                 <button className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-2xl shadow-lg border border-slate-100 flex items-center justify-center text-slate-400 hover:text-blue-600 transition-all opacity-0 group-hover:opacity-100">
@@ -195,7 +195,11 @@ export default function SettingsPage() {
                                             </div>
                                             <div className="space-y-2">
                                                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2 flex items-center gap-2">
-                                                    <FaEnvelope size={10} /> Email (Verified)
+                                                    <FaEnvelope size={10} /> Email {user?.emailVerified ? (
+                                                        <span className="text-emerald-500 normal-case">(Verified)</span>
+                                                    ) : (
+                                                        <span className="text-amber-500 normal-case">(Not verified)</span>
+                                                    )}
                                                 </label>
                                                 <input
                                                     value={profile.email}

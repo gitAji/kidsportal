@@ -9,6 +9,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Header from "@/app/components/layout/header/Header";
 import Footer from "@/app/components/layout/footer/Footer";
 import DashboardFooter from "@/app/components/layout/footer/DashboardFooter";
+import EmailVerificationBanner from "@/app/components/ui/EmailVerificationBanner";
 import { useUI } from "@/app/providers/UIProvider";
 
 
@@ -82,6 +83,7 @@ export default function ParentLayout({ children }) {
           <ParentSidebar />
           <div className="flex-grow flex flex-col h-full overflow-hidden min-w-0">
             <main className="flex-grow overflow-y-auto bg-slate-50/50 flex flex-col">
+              <EmailVerificationBanner user={user} />
               <div className="flex-grow">
                 <Suspense fallback={<DashboardSkeleton />}>
                   {children}
