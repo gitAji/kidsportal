@@ -68,7 +68,7 @@ function findLevelTasks(gradeId, subjectId, levelId) {
  */
 export async function GET(request, { params }) {
   try {
-    const { gradeId, subjectId, levelId } = params;
+    const { gradeId, subjectId, levelId } = await params;
     const tasks = findLevelTasks(gradeId, subjectId, levelId);
 
     if (tasks) {

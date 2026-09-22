@@ -168,7 +168,7 @@ export default function SettingsPage() {
                                                     {profile.profileImage ? (
                                                         <img src={profile.profileImage} className="w-full h-full object-cover rounded-[2rem]" alt="Avatar" />
                                                     ) : (
-                                                        profile.fullName?.charAt(0) || user.email.charAt(0).toUpperCase()
+                                                        profile.fullName?.charAt(0) || user?.email?.charAt(0)?.toUpperCase() || 'T'
                                                     )}
                                                 </div>
                                                 <button className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-2xl shadow-lg border border-slate-100 flex items-center justify-center text-slate-400 hover:text-blue-600 transition-all opacity-0 group-hover:opacity-100">
