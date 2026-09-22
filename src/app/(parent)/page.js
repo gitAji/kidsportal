@@ -1,14 +1,109 @@
 import { lazy, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  FaRobot, FaClock, FaCertificate, FaChartLine,
+  FaShieldAlt, FaBookOpen, FaSmile,
+} from "react-icons/fa";
 
 import BackToTop from "../components/ui/BackToTop";
 import SkeletonLoader from "../components/ui/SkeletonLoader";
 import HomePageClient from "../components/HomePageClient";
-const GradeCard = lazy(() => import("../components/ui/GradeCard"));
+const CurriculumShowcase = lazy(() => import("../components/ui/CurriculumShowcase"));
 import db from '../data/db.json'; // Import from src/app/data/db.json
 
 import HeroSection from "../components/ui/HeroSection";
+
+// Real, verified capabilities only — nothing here that isn't actually
+// shipped in the product.
+const FEATURES = [
+  {
+    icon: FaRobot,
+    title: "AI Learning Assistant",
+    description: "A built-in AI tutor guides every lesson, quiz, and exam — explaining concepts and answering questions in real time, whenever your child gets stuck.",
+    color: "indigo",
+    size: "hero",
+  },
+  {
+    icon: FaClock,
+    title: "Parental Time Controls",
+    description: "Set daily and weekly time limits per child. Once time's up, they can ask for more — and you decide.",
+    color: "blue",
+    size: "tall",
+  },
+  {
+    icon: FaCertificate,
+    title: "Certificates of Achievement",
+    description: "Downloadable Gold, Silver & Bronze certificates once real progress is made.",
+    color: "amber",
+    size: "tall",
+  },
+  {
+    icon: FaChartLine,
+    title: "Real Progress Analytics",
+    description: "See exactly what's been completed, when, and how well — tasks, levels, XP, and weekly trends, all from real activity.",
+    color: "violet",
+    size: "wide",
+  },
+  {
+    icon: FaShieldAlt,
+    title: "Zero Ads, Zero Distractions",
+    description: "No ads. No third-party links. Nothing on screen except learning.",
+    color: "emerald",
+    size: "wide",
+  },
+  {
+    icon: FaBookOpen,
+    title: "Ever-Growing Curriculum",
+    description: "10 grades and multiple subjects — from English and Math to Coding — regularly expanded by our curriculum team.",
+    color: "cyan",
+    size: "wide",
+  },
+  {
+    icon: FaSmile,
+    title: "Built for Kids",
+    description: "Playful, gamified, and safe by design — stickers, XP, avatars, and a friendly professor guide.",
+    color: "rose",
+    size: "wide",
+  },
+];
+
+const FEATURE_COLORS = {
+  indigo: { bg: "bg-indigo-50", iconBg: "bg-indigo-100", text: "text-indigo-600", groupHoverText: "group-hover:text-indigo-600", border: "hover:border-indigo-100 hover:border-b-indigo-500" },
+  blue: { bg: "bg-blue-50", iconBg: "bg-blue-100", text: "text-blue-600", groupHoverText: "group-hover:text-blue-600", border: "hover:border-blue-100 hover:border-b-blue-500" },
+  amber: { bg: "bg-amber-50", iconBg: "bg-amber-100", text: "text-amber-600", groupHoverText: "group-hover:text-amber-600", border: "hover:border-amber-100 hover:border-b-amber-500" },
+  violet: { bg: "bg-violet-50", iconBg: "bg-violet-100", text: "text-violet-600", groupHoverText: "group-hover:text-violet-600", border: "hover:border-violet-100 hover:border-b-violet-500" },
+  emerald: { bg: "bg-emerald-50", iconBg: "bg-emerald-100", text: "text-emerald-600", groupHoverText: "group-hover:text-emerald-600", border: "hover:border-emerald-100 hover:border-b-emerald-500" },
+  cyan: { bg: "bg-cyan-50", iconBg: "bg-cyan-100", text: "text-cyan-600", groupHoverText: "group-hover:text-cyan-600", border: "hover:border-cyan-100 hover:border-b-cyan-500" },
+  rose: { bg: "bg-rose-50", iconBg: "bg-rose-100", text: "text-rose-600", groupHoverText: "group-hover:text-rose-600", border: "hover:border-rose-100 hover:border-b-rose-500" },
+};
+
+// Bento sizing on a 6-col grid: the AI hero tile spans 4 cols x 2 rows,
+// the two "tall" tiles fill the remaining 2 cols (1 row each), and the
+// four "wide" tiles pair up into two more rows of 3+3.
+const FEATURE_SIZE_CLASSES = {
+  hero: "md:col-span-4 md:row-span-2",
+  tall: "md:col-span-2",
+  wide: "md:col-span-3",
+};
+
+function FeatureTile({ feature }) {
+  const c = FEATURE_COLORS[feature.color];
+  const Icon = feature.icon;
+  const isHero = feature.size === "hero";
+  return (
+    <div
+      className={`group bg-white p-8 ${isHero ? "md:p-10" : ""} rounded-[2rem] border-2 border-slate-100 border-b-[6px] ${c.border} hover:-translate-y-1 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden flex flex-col justify-center ${FEATURE_SIZE_CLASSES[feature.size]}`}
+    >
+      <div className={`absolute top-0 right-0 w-32 h-32 ${c.bg} rounded-full blur-3xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700 opacity-50`} />
+      <div className={`${isHero ? "w-20 h-20 text-4xl" : "w-14 h-14 text-2xl"} ${c.iconBg} rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-6 group-hover:scale-110 transition-all duration-300 relative z-10`}>
+        <Icon className={c.text} />
+      </div>
+      <h3 className={`${isHero ? "text-3xl" : "text-xl"} font-black text-slate-800 mb-3 ${c.groupHoverText} transition-colors relative z-10`}>{feature.title}</h3>
+      <p className={`text-slate-500 ${isHero ? "text-lg" : "text-sm"} leading-relaxed relative z-10 font-medium`}>{feature.description}</p>
+    </div>
+  );
+}
 
 export default async function HomePage() {
   const grades = db.grades;
@@ -71,33 +166,10 @@ export default async function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-2 md:px-0">
-            <div className="group bg-white p-10 rounded-[2.5rem] border-2 border-slate-100 border-b-[6px] hover:border-blue-100 hover:border-b-blue-500 hover:-translate-y-2 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700 opacity-50" />
-              <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-8 group-hover:rotate-12 group-hover:scale-110 group-hover:bg-blue-100 transition-all duration-300 relative z-10">
-                <span className="text-3xl">✨</span>
-              </div>
-              <h3 className="text-2xl font-black text-slate-800 mb-4 group-hover:text-blue-600 transition-colors relative z-10">Interactive Journey</h3>
-              <p className="text-slate-500 text-lg leading-relaxed relative z-10 font-medium">Gamified lessons that turn complex concepts into fun adventures. Kids don't just learn; they play and grow.</p>
-            </div>
-
-            <div className="group bg-white p-10 rounded-[2.5rem] border-2 border-slate-100 border-b-[6px] hover:border-green-100 hover:border-b-green-500 hover:-translate-y-2 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-green-50 rounded-full blur-3xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700 opacity-50" />
-              <div className="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-8 group-hover:rotate-12 group-hover:scale-110 group-hover:bg-green-100 transition-all duration-300 relative z-10">
-                <span className="text-3xl">👩‍🏫</span>
-              </div>
-              <h3 className="text-2xl font-black text-slate-800 mb-4 group-hover:text-green-600 transition-colors relative z-10">Expert Curriculum</h3>
-              <p className="text-slate-500 text-lg leading-relaxed relative z-10 font-medium">Aligned with national standards for grades 1-8, developed by top-tier educators with decades of experience.</p>
-            </div>
-
-            <div className="group bg-white p-10 rounded-[2.5rem] border-2 border-slate-100 border-b-[6px] hover:border-purple-100 hover:border-b-purple-500 hover:-translate-y-2 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-full blur-3xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700 opacity-50" />
-              <div className="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center mb-8 group-hover:-rotate-12 group-hover:scale-110 group-hover:bg-purple-100 transition-all duration-300 relative z-10">
-                <span className="text-3xl">📈</span>
-              </div>
-              <h3 className="text-2xl font-black text-slate-800 mb-4 group-hover:text-purple-600 transition-colors relative z-10">Real-time Insights</h3>
-              <p className="text-slate-500 text-lg leading-relaxed relative z-10 font-medium">Track every milestone with a detailed parent dashboard. See exactly where your child excels and where they need a boost.</p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-6 md:auto-rows-[minmax(220px,auto)] gap-6 px-2 md:px-0">
+            {FEATURES.map((feature) => (
+              <FeatureTile key={feature.title} feature={feature} />
+            ))}
           </div>
 
           {/* Testimonial Snippet */}
@@ -140,19 +212,10 @@ export default async function HomePage() {
             Explore Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Curriculum</span>
           </h2>
           <p className="text-slate-600 text-lg md:text-xl font-medium max-w-2xl mx-auto mb-16">
-            Click on a grade below to dive into our interactive subjects and preview the fun challenges waiting for your child!
+            Pick a grade to explore its subjects and preview the levels waiting for your child!
           </p>
           <Suspense fallback={<SkeletonLoader variant="grid" />}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {grades.map((grade, gradeIndex) => (
-                <GradeCard
-                  key={grade.gradeId}
-                  grade={grade}
-                  gradeIndex={gradeIndex}
-                  themeColor={gradeColors[gradeIndex % gradeColors.length]}
-                />
-              ))}
-            </div>
+            <CurriculumShowcase grades={grades} themeColors={gradeColors} />
           </Suspense>
         </div>
       </section>
