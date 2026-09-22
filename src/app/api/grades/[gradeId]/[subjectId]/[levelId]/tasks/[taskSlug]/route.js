@@ -18,7 +18,7 @@ function findTaskBySlug(gradeId, subjectId, levelId, taskSlug) {
 
 export async function GET(request, { params }) {
   try {
-    const { gradeId, subjectId, levelId, taskSlug } = params;
+    const { gradeId, subjectId, levelId, taskSlug } = await params;
     const task = findTaskBySlug(gradeId, subjectId, levelId, taskSlug);
 
     if (task) {

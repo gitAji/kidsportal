@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import dbData from '../../../../data/db.json';
 
 export async function GET(request, { params }) {
-  const { gradeId, subjectId } = params;
+  const { gradeId, subjectId } = await params;
 
   try {
     const grade = dbData.grades.find(g => g.id === gradeId);

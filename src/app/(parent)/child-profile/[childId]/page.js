@@ -2,16 +2,14 @@
 import { useEffect, useState, Suspense } from "react";
 import { doc, getDoc, setDoc, deleteDoc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "@/firebase/config";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import SkeletonLoader from "@/app/components/ui/SkeletonLoader";
 import AddChildForm from "@/app/components/dashboard/AddChildForm"; // Re-use for editing
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 export default function ChildProfilePage() {
-  // Added a comment to trigger re-evaluation
-
-  const { childId } = params;
+  const { childId } = useParams();
   const router = useRouter();
   const [childData, setChildData] = useState(null);
   const [loading, setLoading] = useState(true);
