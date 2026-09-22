@@ -195,7 +195,11 @@ export default function SettingsPage() {
                                             </div>
                                             <div className="space-y-2">
                                                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2 flex items-center gap-2">
-                                                    <FaEnvelope size={10} /> Email (Verified)
+                                                    <FaEnvelope size={10} /> Email {user?.emailVerified ? (
+                                                        <span className="text-emerald-500 normal-case">(Verified)</span>
+                                                    ) : (
+                                                        <span className="text-amber-500 normal-case">(Not verified)</span>
+                                                    )}
                                                 </label>
                                                 <input
                                                     value={profile.email}
