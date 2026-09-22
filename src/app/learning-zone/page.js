@@ -9,7 +9,7 @@ import { getSubjectsByGrade } from '../utils/learningData';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
-import { FaBookOpen, FaCalculator, FaMicroscope, FaLanguage, FaStar, FaPlay } from 'react-icons/fa';
+import { FaBookOpen, FaCalculator, FaMicroscope, FaLanguage, FaStar, FaPlay, FaCode, FaLaptopCode } from 'react-icons/fa';
 import { getChildStats } from '@/app/utils/firestoreService';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import TimeLimitBlockedScreen from '../components/child/TimeLimitBlockedScreen';
@@ -46,6 +46,18 @@ const subjectStyleMap = {
     iconColor: "text-orange-100",
     bgPattern: "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-amber-300/20 via-transparent to-transparent"
   },
+  "Coding": {
+    gradient: "from-violet-500 to-purple-700",
+    shadow: "shadow-purple-500/50",
+    iconColor: "text-purple-100",
+    bgPattern: "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-violet-300/20 via-transparent to-transparent"
+  },
+  "Computer Science": {
+    gradient: "from-cyan-500 to-sky-700",
+    shadow: "shadow-sky-500/50",
+    iconColor: "text-sky-100",
+    bgPattern: "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-cyan-300/20 via-transparent to-transparent"
+  },
   "default": {
     gradient: "from-gray-400 to-slate-600",
     shadow: "shadow-slate-500/50",
@@ -60,6 +72,8 @@ const subjectIconMap = {
   "Tamil": FaLanguage,
   "Science": FaMicroscope,
   "Ariviyal": FaMicroscope,
+  "Coding": FaCode,
+  "Computer Science": FaLaptopCode,
   "default": FaStar,
 };
 
