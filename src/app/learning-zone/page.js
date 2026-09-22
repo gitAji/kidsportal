@@ -10,6 +10,9 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
 import { FaBookOpen, FaCalculator, FaMicroscope, FaLanguage, FaStar, FaPlay } from 'react-icons/fa';
+import { getChildStats } from '@/app/utils/firestoreService';
+import { getTimeStatus } from '@/app/utils/timeLimits';
+import TimeLimitBlockedScreen from '../components/child/TimeLimitBlockedScreen';
 
 // A map for sleek subject styling
 const subjectStyleMap = {
@@ -78,6 +81,7 @@ export default function LearningZonePage() {
   const [subjects, setSubjects] = useState([]);
   const [subjectsLoading, setSubjectsLoading] = useState(true);
   const [greeting, setGreeting] = useState(null);
+  const [timeStatus, setTimeStatus] = useState(null);
 
   const professor = React.useMemo(() => {
     const char = childUser?.professorCharacter || 'owl';
@@ -121,8 +125,32 @@ export default function LearningZonePage() {
     loadSubjects();
   }, [childUser]);
 
+  // Screen-time limits: re-check whenever this page is (re)visited so a
+  // limit hit while browsing subjects blocks starting a new one.
+  useEffect(() => {
+    const checkTimeStatus = async () => {
+      if (!childUser?.id) return;
+      try {
+        const stats = await getChildStats(childUser.id);
+        setTimeStatus(getTimeStatus({
+          timeLimits: childUser.timeLimits,
+          timeUsage: stats.timeUsage,
+          timeBonus: stats.timeBonus,
+        }));
+      } catch (err) {
+        console.error('Failed to check time status', err);
+        setTimeStatus(getTimeStatus({ timeLimits: childUser.timeLimits }));
+      }
+    };
+    checkTimeStatus();
+  }, [childUser?.id, childUser?.timeLimits]);
+
   if (!childUser) {
     return null;
+  }
+
+  if (timeStatus?.isBlocked) {
+    return <TimeLimitBlockedScreen status={timeStatus} />;
   }
 
   // Animation variants for cards

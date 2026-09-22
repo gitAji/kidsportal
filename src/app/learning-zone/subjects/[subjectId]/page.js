@@ -52,6 +52,9 @@ function shuffleArray(arr) {
 
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
 import { db } from '@/firebase/config';
+import { getChildStats } from '@/app/utils/firestoreService';
+import { getTimeStatus } from '@/app/utils/timeLimits';
+import TimeLimitBlockedScreen from '../../../components/child/TimeLimitBlockedScreen';
 
 export default function SubjectLevelsPage() {
   const { childUser } = useChild();
@@ -64,6 +67,28 @@ export default function SubjectLevelsPage() {
   const params = useParams();
   const { subjectId } = params;
   const [greeting, setGreeting] = useState(null);
+  const [timeStatus, setTimeStatus] = useState(null);
+
+  // Screen-time limits: checked here (before a new level can be started),
+  // never inside the task page itself, so a limit hit mid-lesson doesn't
+  // interrupt work already in progress.
+  useEffect(() => {
+    const checkTimeStatus = async () => {
+      if (!childUser?.id) return;
+      try {
+        const stats = await getChildStats(childUser.id);
+        setTimeStatus(getTimeStatus({
+          timeLimits: childUser.timeLimits,
+          timeUsage: stats.timeUsage,
+          timeBonus: stats.timeBonus,
+        }));
+      } catch (err) {
+        console.error('Failed to check time status', err);
+        setTimeStatus(getTimeStatus({ timeLimits: childUser.timeLimits }));
+      }
+    };
+    checkTimeStatus();
+  }, [childUser?.id, childUser?.timeLimits]);
 
   useEffect(() => {
     if (childUser && levels.length > 0 && !loading) {
@@ -252,6 +277,10 @@ export default function SubjectLevelsPage() {
       <SkeletonLoader variant="page" message="Getting your levels ready..." />
     </div>
   );
+
+  if (timeStatus?.isBlocked) {
+    return <TimeLimitBlockedScreen status={timeStatus} />;
+  }
 
   const handleLevelClick = (level) => {
     if (level.overrideIsLocked || level.isLocked || level.requiresPreviousLevel) {
