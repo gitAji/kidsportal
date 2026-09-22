@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../data/db.json';
 import SkeletonLoader from '../../../components/ui/SkeletonLoader';
-import { FaArrowLeft, FaHome, FaLock, FaStar, FaTrophy, FaCheckCircle, FaUnlockAlt, FaLanguage, FaRandom } from 'react-icons/fa';
+import { FaArrowLeft, FaHome, FaLock, FaStar, FaTrophy, FaCheckCircle, FaUnlockAlt, FaLanguage, FaRandom, FaCode, FaArrowRight } from 'react-icons/fa';
 import { useChild } from '../../../providers/ChildProvider';
 import { useLanguage } from '../../../providers/LanguageProvider';
 import { loadStats } from '../../../utils/achievements';
@@ -361,6 +361,32 @@ export default function SubjectLevelsPage() {
           </div>
         )}
       </motion.div>
+
+      {subjectId?.toLowerCase().startsWith('coding') && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-3xl mx-auto z-10 relative mb-10 px-4"
+        >
+          <div
+            onClick={() => router.push('/learning-zone/coding-lab')}
+            className="bg-gradient-to-r from-violet-600 to-purple-700 rounded-[2rem] shadow-xl shadow-purple-200/50 px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 cursor-pointer hover:scale-[1.01] transition-transform"
+          >
+            <div className="flex items-center gap-3 text-center sm:text-left text-white">
+              <div className="bg-white/20 backdrop-blur-sm w-14 h-14 rounded-2xl flex items-center justify-center shrink-0">
+                <FaCode size={26} />
+              </div>
+              <div>
+                <p className="font-black text-lg leading-tight">Try the Build Lab!</p>
+                <p className="text-sm font-medium text-white/80">Snap blocks together to guide a robot, match patterns, or draw with code.</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 shrink-0 bg-white/20 text-white font-black text-sm px-5 py-2.5 rounded-2xl">
+              Play Now <FaArrowRight />
+            </div>
+          </div>
+        </motion.div>
+      )}
 
       {isSubjectFullyCompleted && (
         <motion.div
