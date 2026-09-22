@@ -7,6 +7,7 @@ import TeacherSidebar from "@/app/components/layout/TeacherSidebar";
 import TeacherAdminGuard from "./TeacherAdminGuard";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
 import EmailVerificationBanner from "@/app/components/ui/EmailVerificationBanner";
+import { UnsavedChangesProvider } from "@/context/UnsavedChangesContext";
 
 export default function TeacherAdminLayout({ children }) {
     const pathname = usePathname();
@@ -24,15 +25,17 @@ export default function TeacherAdminLayout({ children }) {
 
     return (
         <TeacherAdminGuard>
-            <div className="flex bg-slate-50 h-screen overflow-hidden">
-                <TeacherSidebar />
-                <div className="flex-grow flex flex-col h-full overflow-hidden">
-                    <main className="flex-grow overflow-y-auto bg-slate-50/50">
-                        <EmailVerificationBanner user={user} />
-                        <Suspense fallback={<DashboardSkeleton />}>
-                            {children}
-                        </Suspense>
-                    </main>
+            <UnsavedChangesProvider>
+                <div className="flex bg-slate-50 h-screen overflow-hidden">
+                    <TeacherSidebar />
+                    <div className="flex-grow flex flex-col h-full overflow-hidden">
+                        <main className="flex-grow overflow-y-auto bg-slate-50/50">
+                            <EmailVerificationBanner user={user} />
+                            <Suspense fallback={<DashboardSkeleton />}>
+                                {children}
+                            </Suspense>
+                        </main>
+                    </div>
                 </div>
             </UnsavedChangesProvider>
         </TeacherAdminGuard>
