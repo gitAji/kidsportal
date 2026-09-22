@@ -53,6 +53,7 @@ const ChildDashboard = ({ child, onClose }) => {
   const [timeLimitsEnabled, setTimeLimitsEnabled] = useState(child?.timeLimits?.enabled ?? false);
   const [dailyMinutes, setDailyMinutes] = useState(child?.timeLimits?.dailyMinutes ?? 60);
   const [weeklyMinutes, setWeeklyMinutes] = useState(child?.timeLimits?.weeklyMinutes ?? 300);
+  const [sequentialProgression, setSequentialProgression] = useState(child?.sequentialProgression !== false);
   const [showLoginHelper, setShowLoginHelper] = useState(false);
 
   const router = useRouter();
@@ -182,6 +183,7 @@ const ChildDashboard = ({ child, onClose }) => {
       const childDocRef = doc(db, "users", childData.parentUid, "children", childData.id);
       const updates = {
         username, loginEnabled, professorCharacter, timeAlertsEnabled,
+        sequentialProgression,
         timeLimits: {
           enabled: timeLimitsEnabled,
           dailyMinutes: Number(dailyMinutes) || 0,
@@ -525,6 +527,42 @@ const ChildDashboard = ({ child, onClose }) => {
                         />
                         <p className="text-[10px] text-slate-400 font-medium mt-1.5">0 = no weekly cap</p>
                       </div>
+                    </div>
+                  </div>
+
+                  {/* Learning Path */}
+                  <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                        <FaTasks className="text-violet-500" /> Learning Path
+                      </h3>
+                    </div>
+                    <p className="text-xs text-slate-400 font-medium mb-5">
+                      Choose how {childData.name} moves through levels in each subject.
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setSequentialProgression(true)}
+                        className={`text-left p-4 rounded-xl border-2 transition-all ${sequentialProgression
+                          ? 'border-violet-500 bg-violet-50/50'
+                          : 'border-slate-100 bg-white hover:border-violet-200'
+                          }`}
+                      >
+                        <p className={`text-sm font-black mb-1 ${sequentialProgression ? 'text-violet-600' : 'text-slate-700'}`}>Finish to Unlock</p>
+                        <p className="text-xs text-slate-400 font-medium">Must complete a level before the next one opens</p>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSequentialProgression(false)}
+                        className={`text-left p-4 rounded-xl border-2 transition-all ${!sequentialProgression
+                          ? 'border-violet-500 bg-violet-50/50'
+                          : 'border-slate-100 bg-white hover:border-violet-200'
+                          }`}
+                      >
+                        <p className={`text-sm font-black mb-1 ${!sequentialProgression ? 'text-violet-600' : 'text-slate-700'}`}>Free Access</p>
+                        <p className="text-xs text-slate-400 font-medium">Any level can be played, in any order</p>
+                      </button>
                     </div>
                   </div>
 
