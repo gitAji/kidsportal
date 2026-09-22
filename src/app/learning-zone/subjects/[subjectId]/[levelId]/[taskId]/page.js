@@ -51,6 +51,16 @@ export default function TaskContentPage() {
   const [isTranslating, setIsTranslating] = useState(false);
   const [contentLanguage, setContentLanguage] = useState(isTamilSubject ? 'ta' : 'en');
 
+  // Once the parent's global learning-language preference has loaded, default
+  // non-Tamil-subject content to it too — so a family that picked Tamil in
+  // Settings gets Tamil content everywhere, not just the Tamil subject, and
+  // doesn't have to manually re-toggle on every single lesson.
+  useEffect(() => {
+    if (!isTamilSubject && languageLoaded && language === 'ta') {
+      setContentLanguage('ta');
+    }
+  }, [isTamilSubject, languageLoaded, language]);
+
   const correctSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/correct.mp3') : null, []);
   const incorrectSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/incorrect.mp3') : null, []);
   const completionSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/completed.mp3') : null, []);

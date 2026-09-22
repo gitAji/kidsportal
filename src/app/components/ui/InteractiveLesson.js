@@ -20,7 +20,17 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
         (typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('tamil'));
 
     const [contentLanguage, setContentLanguage] = useState(isTamilSubject ? 'ta' : 'en');
-    const { languageLoaded } = useLanguage();
+    const { language, languageLoaded } = useLanguage();
+
+    // Once the parent's global learning-language preference has loaded,
+    // default non-Tamil-subject content to it too — so a family that picked
+    // Tamil in Settings gets Tamil content everywhere, not just the Tamil
+    // subject, and doesn't have to manually re-toggle on every lesson.
+    useEffect(() => {
+        if (!isTamilSubject && languageLoaded && language === 'ta') {
+            setContentLanguage('ta');
+        }
+    }, [isTamilSubject, languageLoaded, language]);
 
     // Check if the current content appears to be English
     const isEnglishContent = useCallback((text) => {
