@@ -5,9 +5,10 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/config";
 import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
 import { db } from "@/firebase/config";
-import { getChildStats, getChildAchievements } from "@/app/utils/firestoreService";
+import { getChildStats, getChildAchievements, getChildTaskHistory } from "@/app/utils/firestoreService";
 import { loadStats, loadUnlockedAchievements } from "@/app/utils/achievements";
 import { computeLevelProgress } from "@/app/utils/childProgress";
+import { getDateKey, getWeekDateKeys } from "@/app/utils/timeLimits";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
@@ -158,6 +159,19 @@ function SectionCard({ icon, title, children }) {
   );
 }
 
+// Counts real, timestamped task-history entries that fall within the
+// current Monday-Sunday week — the actual source of "this week" progress,
+// as opposed to a lifetime running total.
+function countThisWeek(historyEntries) {
+  const weekKeys = new Set(getWeekDateKeys());
+  return historyEntries.filter((entry) => {
+    const ts = entry.timestamp;
+    if (!ts) return false;
+    const date = ts.seconds ? new Date(ts.seconds * 1000) : new Date(ts);
+    return weekKeys.has(getDateKey(date));
+  }).length;
+}
+
 // ── Main Page ─────────────────────────────────────────────────────
 const DEFAULT_LEARNING_SUBJECTS = ["English", "Math", "Science", "Tamil"];
 
@@ -165,7 +179,7 @@ export default function AnalyticsPage() {
   const [children, setChildren] = useState([]);
   const [learningSubjects, setLearningSubjects] = useState(DEFAULT_LEARNING_SUBJECTS);
   const [loading, setLoading] = useState(true);
-  const [totals, setTotals] = useState({ tasks: 0, score: 0, achievements: 0, minutes: 0 });
+  const [totals, setTotals] = useState({ tasks: 0, score: 0, achievements: 0, minutes: 0, weeklyTasks: 0 });
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (u) => {
@@ -181,7 +195,7 @@ export default function AnalyticsPage() {
           setLearningSubjects(parentSnap.data().learningSubjects);
         }
 
-        let tasks = 0, score = 0, achievements = 0, minutes = 0;
+        let tasks = 0, score = 0, achievements = 0, minutes = 0, weeklyTasks = 0;
         for (const kid of kids) {
           const fs = await getChildStats(kid.id);
           const fa = await getChildAchievements(kid.id);
@@ -190,8 +204,14 @@ export default function AnalyticsPage() {
           score += s.totalScore || 0;
           achievements += fa.length || loadUnlockedAchievements(kid.id).length;
           minutes += Math.round((s.totalTimeTaken || 0) / 60);
+          try {
+            const history = await getChildTaskHistory(kid.id);
+            weeklyTasks += countThisWeek(history);
+          } catch (err) {
+            console.error(`Failed to load task history for ${kid.id}`, err);
+          }
         }
-        setTotals({ tasks, score, achievements, minutes });
+        setTotals({ tasks, score, achievements, minutes, weeklyTasks });
       } catch (e) {
         console.error(e);
       }
@@ -203,7 +223,7 @@ export default function AnalyticsPage() {
   if (loading) return <DashboardSkeleton />;
 
   const weeklyGoal = 20;
-  const weeklyPct = Math.min(Math.round((totals.tasks / weeklyGoal) * 100), 100);
+  const weeklyPct = Math.min(Math.round((totals.weeklyTasks / weeklyGoal) * 100), 100);
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -292,7 +312,7 @@ export default function AnalyticsPage() {
           <div className="p-6">
             <div className="flex items-center justify-between mb-3">
               <p className="text-sm text-slate-500 font-medium">
-                Your family completed <span className="font-black text-slate-800">{totals.tasks}</span> out of <span className="font-black text-slate-800">{weeklyGoal}</span> target tasks this week.
+                Your family completed <span className="font-black text-slate-800">{totals.weeklyTasks}</span> out of <span className="font-black text-slate-800">{weeklyGoal}</span> target tasks this week.
               </p>
             </div>
             <div className="h-3 bg-slate-100 rounded-full overflow-hidden">

@@ -30,20 +30,7 @@ export default function ReportsPage() {
             childrenSnap.docs.forEach(doc => { childrenMap[doc.id] = doc.data(); });
 
             const historySnap = await getDocs(collectionGroup(db, 'taskHistory'));
-            let historyDocs = historySnap.docs;
-
-            // For testing purposes in development, if no real data exists, provide mocks
-            if (historyDocs.length === 0 && process.env.NODE_ENV === 'development') {
-                console.log("Teacher Reports: No real taskHistory found, providing mock data for UI verification.");
-                const mockDocs = [
-                    { data: () => ({ taskId: 'English-1-level-1-quiz', score: 85, subjectId: 'English', completedAt: new Date().toISOString() }), ref: { parent: { parent: { id: 'child-1' } } } },
-                    { data: () => ({ taskId: 'Math-2-level-3-exam', score: 92, subjectId: 'Math', completedAt: new Date().toISOString() }), ref: { parent: { parent: { id: 'child-2' } } } },
-                    { data: () => ({ taskId: 'Science-grade3-l4', score: 78, subjectId: 'Science', completedAt: new Date().toISOString() }), ref: { parent: { parent: { id: 'child-3' } } } },
-                    { data: () => ({ taskId: 'Tamil-1-level-1', score: 95, subjectId: 'Tamil', completedAt: new Date().toISOString() }), ref: { parent: { parent: { id: 'child-1' } } } },
-                    { data: () => ({ taskId: 'other-task', score: 60, subjectId: 'unknown_subject', completedAt: new Date().toISOString() }), ref: { parent: { parent: { id: 'child-2' } } } }
-                ];
-                historyDocs = mockDocs;
-            }
+            const historyDocs = historySnap.docs;
 
             const moduleData = {};
             const gradeData = {};

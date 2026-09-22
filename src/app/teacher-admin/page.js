@@ -618,15 +618,7 @@ function TeacherAdminPageContent() {
             let totalS = 0;
             const breakdown = {};
 
-            let historyDocs = historySnap.docs;
-            if (historyDocs.length === 0 && process.env.NODE_ENV === 'development') {
-                const gNum = selectedGrade.split('-').pop();
-                historyDocs = [
-                    { data: () => ({ taskId: `${selectedSubject.toLowerCase()}-${gNum}-level-1-quiz`, score: 95, subjectId: 'unknown_subject' }) },
-                    { data: () => ({ taskId: `${selectedSubject.toLowerCase()}-${gNum}-level-1-lesson`, score: 100, subjectId: 'unknown_subject' }) },
-                    { data: () => ({ taskId: `${selectedSubject.toLowerCase()}-${gNum}-level-2-quiz`, score: 85, subjectId: 'unknown_subject' }) }
-                ];
-            }
+            const historyDocs = historySnap.docs;
 
             historyDocs.forEach(doc => {
                 const data = doc.data();
