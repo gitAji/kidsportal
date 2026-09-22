@@ -5,6 +5,7 @@ import {
   updateProfile,
   updateEmail,
   updatePassword,
+  sendEmailVerification,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "@/firebase/config";
@@ -187,7 +188,15 @@ export default function SettingsPage() {
     setSaving(true);
     try {
       await updateProfile(user, { displayName });
-      if (!isGoogleSignIn && email !== user.email) await updateEmail(user, email);
+      if (!isGoogleSignIn && email !== user.email) {
+        await updateEmail(user, email);
+        // The new address hasn't been verified yet — ask Firebase to email a link.
+        try {
+          await sendEmailVerification(user);
+        } catch (verificationError) {
+          console.error("Failed to send verification email", verificationError);
+        }
+      }
       if (!isGoogleSignIn && password) await updatePassword(user, password);
       await setDoc(doc(db, "users", user.uid), {
         firstName, lastName, phoneNumber,
@@ -411,7 +420,16 @@ export default function SettingsPage() {
                 {/* Account */}
                 <Card title="Account">
                   <div className="space-y-4">
-                    <Field label="Email Address">
+                    <Field label={
+                      <span className="flex items-center gap-2">
+                        Email Address
+                        {isGoogleSignIn ? null : user?.emailVerified ? (
+                          <span className="text-emerald-500 normal-case font-bold text-[10px]">✓ Verified</span>
+                        ) : (
+                          <span className="text-amber-500 normal-case font-bold text-[10px]">Not verified</span>
+                        )}
+                      </span>
+                    }>
                       <input
                         className={`${inputCls} ${isGoogleSignIn ? "opacity-50 cursor-not-allowed" : ""}`}
                         type="email" value={email}

@@ -13,7 +13,7 @@ async function getLevel(gradeId, subjectId, levelId) {
 }
 
 const LevelDetailPage = async ({ params }) => {
-  const { gradeId, subjectId, levelId } = params;
+  const { gradeId, subjectId, levelId } = await params;
   const level = await getLevel(gradeId, subjectId, levelId);
   const backgroundImage = getBackgroundImage();
 

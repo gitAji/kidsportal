@@ -15,6 +15,7 @@ import {
 import TeacherAdminGuard from './TeacherAdminGuard';
 import InteractiveLesson from '../components/ui/InteractiveLesson';
 import { useTeacher } from '@/context/TeacherContext';
+import { useUnsavedChanges } from '@/context/UnsavedChangesContext';
 
 // ── Static metadata ──────────────────────────────────────────────
 const ALL_GRADES = Array.from({ length: 10 }, (_, i) => ({ id: `grade-${i + 1}`, name: `Grade ${i + 1}` }));
@@ -468,6 +469,32 @@ function TeacherAdminPageContent() {
         taskBreakdown: {}
     });
 
+    // ── Unsaved-changes protection ────────────────────────────────────────
+    // Snapshot of `levels` as last loaded/saved, so we can detect edits and
+    // warn a teacher before they're silently discarded by switching
+    // grade/subject, closing the tab, or navigating to another page.
+    const [savedSnapshot, setSavedSnapshot] = useState(null);
+    const isDirty = savedSnapshot !== null && JSON.stringify(levels) !== savedSnapshot;
+    const { setIsDirty } = useUnsavedChanges();
+
+    useEffect(() => { setIsDirty(isDirty); }, [isDirty, setIsDirty]);
+    useEffect(() => () => setIsDirty(false), [setIsDirty]); // clear on unmount
+
+    useEffect(() => {
+        const handler = (e) => {
+            if (!isDirty) return;
+            e.preventDefault();
+            e.returnValue = '';
+        };
+        window.addEventListener('beforeunload', handler);
+        return () => window.removeEventListener('beforeunload', handler);
+    }, [isDirty]);
+
+    const confirmDiscardIfDirty = useCallback(() => {
+        if (!isDirty) return true;
+        return window.confirm("You have unsaved changes to this curriculum that will be lost. Leave anyway?");
+    }, [isDirty]);
+
     const isAssigned = useCallback((gradeId, subjectId) => {
         if (!gradeId || !subjectId) return false;
         const g = gradeId.toLowerCase();
@@ -529,22 +556,26 @@ function TeacherAdminPageContent() {
                 if (sub?.levels) data = sub.levels;
             }
 
-            setLevels(data.sort((a, b) => {
+            const sorted = data.sort((a, b) => {
                 const numA = parseInt(a.levelId?.split('-').pop()) || 0;
                 const numB = parseInt(b.levelId?.split('-').pop()) || 0;
                 return numA - numB;
-            }));
+            });
+            setLevels(sorted);
+            setSavedSnapshot(JSON.stringify(sorted));
         } catch (e) {
             console.error("Firestore sync failed, falling back to local:", e);
             // Fallback to local data on permission error or network failure
             const gData = dbData.grades.find(g => g.gradeId === selectedGrade);
             const sub = gData?.subjects?.find(s => s.subjectId === fullSubjectId);
             if (sub?.levels) {
-                setLevels(sub.levels.sort((a, b) => {
+                const sorted = sub.levels.sort((a, b) => {
                     const numA = parseInt(a.levelId?.split('-').pop()) || 0;
                     const numB = parseInt(b.levelId?.split('-').pop()) || 0;
                     return numA - numB;
-                }));
+                });
+                setLevels(sorted);
+                setSavedSnapshot(JSON.stringify(sorted));
             }
         } finally {
             setLoading(false);
@@ -636,6 +667,7 @@ function TeacherAdminPageContent() {
         if (selectedGrade && selectedSubject) {
             setCopilotData(null);
             setLevels([]);
+            setSavedSnapshot(null);
             setActiveTab('curriculum');
             refreshLevels();
             fetchCompletionStats();
@@ -687,6 +719,7 @@ function TeacherAdminPageContent() {
             await batch.commit();
             console.log("[Save] Batch commit successful.");
             setSaveStatus('success');
+            setSavedSnapshot(JSON.stringify(levels));
             setTimeout(() => setSaveStatus(null), 3000);
             refreshLevels();
         } catch (e) {
@@ -726,15 +759,15 @@ function TeacherAdminPageContent() {
     };
 
     const seedFromLocal = () => {
-        if (!confirm("This will overwrite current edits with data from local db.json. Proceed?")) return;
+        if (!confirm("This loads ready-made starter content for this subject and grade, replacing whatever is currently in the editor below. You can still edit it before saving. Continue?")) return;
         const fullSubjectId = getFullSubjectId();
         const gData = dbData.grades.find(g => g.gradeId === selectedGrade);
         const sub = gData?.subjects?.find(s => s.subjectId === fullSubjectId);
         if (sub?.levels) {
             setLevels(sub.levels);
-            alert("Local data loaded! Click 'Save All Changes' to sync to Firebase.");
+            alert("Starter content loaded! Click 'Save All Changes' below to publish it.");
         } else {
-            alert("No data found in local db.json for this subject/grade.");
+            alert("No starter content is available for this subject and grade yet.");
         }
     };
 
@@ -751,8 +784,8 @@ function TeacherAdminPageContent() {
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col">
             {/* Header Dashboard Navigation */}
-            <div className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-50 shadow-sm backdrop-blur-md bg-white/80">
-                <div className="flex items-center gap-4">
+            <div className="bg-white border-b border-slate-200 pl-20 pr-6 py-4 md:px-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sticky top-0 z-50 shadow-sm backdrop-blur-md bg-white/80">
+                <div className="flex items-center gap-4 min-w-0">
                     <div className="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200"><FaGraduationCap size={20} /></div>
                     <div>
                         <div className="flex items-center gap-3 mb-1">
@@ -764,11 +797,11 @@ function TeacherAdminPageContent() {
                             )}
                         </div>
                         <nav className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-400">
-                            <button onClick={() => { setSelectedGrade(null); setSelectedSubject(null); }} className="hover:text-blue-600 transition-colors">Select Grade</button>
+                            <button onClick={() => { if (!confirmDiscardIfDirty()) return; setSelectedGrade(null); setSelectedSubject(null); }} className="hover:text-blue-600 transition-colors">Select Grade</button>
                             {selectedGrade && (
                                 <>
                                     <span>/</span>
-                                    <button onClick={() => setSelectedSubject(null)} className="hover:text-blue-600 transition-colors">{GRADES.find(g => g.id === selectedGrade)?.name}</button>
+                                    <button onClick={() => { if (!confirmDiscardIfDirty()) return; setSelectedSubject(null); }} className="hover:text-blue-600 transition-colors">{GRADES.find(g => g.id === selectedGrade)?.name}</button>
                                 </>
                             )}
                             {selectedSubject && (
@@ -781,7 +814,7 @@ function TeacherAdminPageContent() {
                     </div>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 flex-wrap">
                     {isCurriculumAdmin && (
                         <button
                             onClick={() => setShowAllContents(!showAllContents)}
@@ -793,14 +826,21 @@ function TeacherAdminPageContent() {
                     )}
 
                     {selectedGrade && selectedSubject && (
-                        <button
-                            onClick={saveAll}
-                            disabled={!canEdit || saveStatus === 'saving'}
-                            className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-black text-xs text-white uppercase shadow-lg transition-all ${!canEdit ? 'bg-slate-300 cursor-not-allowed grayscale' : saveStatus === 'success' ? 'bg-green-500' : saveStatus === 'error' ? 'bg-red-500' : 'bg-blue-600 hover:bg-blue-700'}`}
-                        >
-                            {saveStatus === 'saving' ? <FaSync className="animate-spin" /> : <FaSave />}
-                            {!canEdit ? 'Read Only' : saveStatus === 'saving' ? 'Saving...' : saveStatus === 'success' ? 'Synced!' : 'Save All Changes'}
-                        </button>
+                        <div className="flex items-center gap-2">
+                            {canEdit && isDirty && saveStatus === null && (
+                                <span className="flex items-center gap-1.5 text-[10px] font-black uppercase text-amber-600">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" /> Unsaved changes
+                                </span>
+                            )}
+                            <button
+                                onClick={saveAll}
+                                disabled={!canEdit || saveStatus === 'saving'}
+                                className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-black text-xs text-white uppercase shadow-lg transition-all ${!canEdit ? 'bg-slate-300 cursor-not-allowed grayscale' : saveStatus === 'success' ? 'bg-green-500' : saveStatus === 'error' ? 'bg-red-500' : isDirty ? 'bg-blue-600 hover:bg-blue-700 ring-4 ring-blue-100' : 'bg-blue-600 hover:bg-blue-700'}`}
+                            >
+                                {saveStatus === 'saving' ? <FaSync className="animate-spin" /> : <FaSave />}
+                                {!canEdit ? 'Read Only' : saveStatus === 'saving' ? 'Saving...' : saveStatus === 'success' ? 'Synced!' : 'Save All Changes'}
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>
@@ -876,9 +916,10 @@ function TeacherAdminPageContent() {
                                     <button
                                         onClick={seedFromLocal}
                                         disabled={!canEdit}
+                                        title="Loads ready-made starter content for this subject and grade — you can still edit it before saving."
                                         className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-black text-[10px] uppercase transition-all border ${!canEdit ? 'bg-slate-100 text-slate-300 border-slate-200 cursor-not-allowed' : 'bg-slate-50 text-slate-400 border-slate-100 hover:bg-slate-100'}`}
                                     >
-                                        <FaDatabase /> Local Seed
+                                        <FaDatabase /> Load Starter Content
                                     </button>
                                     <button onClick={addLevel} disabled={!canEdit} className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-black text-[10px] uppercase shadow-lg transition-all ${!canEdit ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-green-500 text-white shadow-green-100 hover:bg-green-600'}`}>
                                         <FaPlus /> Custom Level

@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  sendEmailVerification,
 } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
@@ -100,11 +101,30 @@ export const signUpWithEmail = async (email, password, name, onSuccess) => {
         trialStartedAt: new Date(),
       }
     });
+
+    // Ask Firebase to email the new account a verification link. A failure
+    // here (e.g. no network) shouldn't block account creation — the banner
+    // in the dashboard lets them resend it later.
+    try {
+      await sendEmailVerification(result.user);
+    } catch (verificationError) {
+      console.error("Failed to send verification email", verificationError);
+    }
+
     if (onSuccess) onSuccess();
   } catch (error) {
     console.error("Error signing up with email and password", error);
     throw error;
   }
+};
+
+// Resends the verification email to whichever account is currently signed
+// in. Used by the "Resend email" action in EmailVerificationBanner.
+export const resendVerificationEmail = async () => {
+  if (!auth.currentUser) {
+    throw new Error("No signed-in user to verify.");
+  }
+  await sendEmailVerification(auth.currentUser);
 };
 
 export const signInWithEmail = async (email, password, isTeacherFlow = false) => {

@@ -72,7 +72,7 @@ function TeacherLoginPage() {
             if (activeTab === "register") {
                 // For teachers, we use a slightly modified flow or just custom doc creation
                 // We'll create the auth account first
-                const { createUserWithEmailAndPassword } = await import("firebase/auth");
+                const { createUserWithEmailAndPassword, sendEmailVerification } = await import("firebase/auth");
                 const result = await createUserWithEmailAndPassword(auth, email, password);
                 user = result.user;
 
@@ -84,6 +84,13 @@ function TeacherLoginPage() {
                     createdAt: serverTimestamp(),
                     status: 'pending'
                 });
+
+                try {
+                    await sendEmailVerification(user);
+                } catch (verificationError) {
+                    console.error("Failed to send verification email", verificationError);
+                }
+
                 setError("APPLICATION_RECEIVED");
             } else {
                 const result = await signInWithEmail(email, password, true);
