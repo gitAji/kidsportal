@@ -5,7 +5,7 @@ import path from 'path';
 const dbPath = path.resolve(process.cwd(), 'src/app/data/db.json');
 
 export async function GET(request, { params }) {
-  const { gradeId } = params;
+  const { gradeId } = await params;
 
   try {
     const dbData = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));

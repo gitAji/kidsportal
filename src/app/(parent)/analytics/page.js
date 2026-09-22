@@ -3,16 +3,17 @@
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/config";
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { getChildStats, getChildAchievements } from "@/app/utils/firestoreService";
 import { loadStats, loadUnlockedAchievements } from "@/app/utils/achievements";
+import { computeLevelProgress } from "@/app/utils/childProgress";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   FaArrowRight, FaStar, FaTrophy, FaClock,
   FaCheckCircle, FaFire, FaUsers, FaChartLine,
-  FaHome,
+  FaHome, FaGraduationCap,
 } from "react-icons/fa";
 import CustomAvatar from "@/app/components/ui/CustomAvatar";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
@@ -54,7 +55,7 @@ function StatCard({ icon, label, value, color = "blue", delay = 0 }) {
 }
 
 // ── Child Summary Card ────────────────────────────────────────────
-function ChildSummaryCard({ child, index }) {
+function ChildSummaryCard({ child, index, learningSubjects }) {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const c = CHILD_COLORS[index % CHILD_COLORS.length];
@@ -91,6 +92,8 @@ function ChildSummaryCard({ child, index }) {
   const totalTasks = stats?.totalTasksCompleted || 0;
   const timeTaken = Math.round((stats?.totalTimeTaken || 0) / 60);
   const xp = stats?.totalScore || 0;
+  const completedTaskIds = new Set(stats?.completedTasks_list || []);
+  const { totalLevels, completedLevels } = computeLevelProgress(child, learningSubjects, completedTaskIds);
 
   return (
     <motion.div
@@ -116,9 +119,10 @@ function ChildSummaryCard({ child, index }) {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-3 mb-5">
+        <div className="grid grid-cols-2 gap-3 mb-5">
           {[
             { label: "Tasks", value: totalTasks },
+            { label: "Levels", value: totalLevels > 0 ? `${completedLevels}/${totalLevels}` : "—" },
             { label: "XP", value: xp.toLocaleString() },
             { label: "Mins", value: `${timeTaken}` },
           ].map((s) => (
@@ -155,8 +159,11 @@ function SectionCard({ icon, title, children }) {
 }
 
 // ── Main Page ─────────────────────────────────────────────────────
+const DEFAULT_LEARNING_SUBJECTS = ["English", "Math", "Science", "Tamil"];
+
 export default function AnalyticsPage() {
   const [children, setChildren] = useState([]);
+  const [learningSubjects, setLearningSubjects] = useState(DEFAULT_LEARNING_SUBJECTS);
   const [loading, setLoading] = useState(true);
   const [totals, setTotals] = useState({ tasks: 0, score: 0, achievements: 0, minutes: 0 });
 
@@ -164,9 +171,15 @@ export default function AnalyticsPage() {
     const unsub = onAuthStateChanged(auth, async (u) => {
       if (!u) { setLoading(false); return; }
       try {
-        const snap = await getDocs(query(collection(db, 'users', u.uid, 'children')));
+        const [snap, parentSnap] = await Promise.all([
+          getDocs(query(collection(db, 'users', u.uid, 'children'))),
+          getDoc(doc(db, 'users', u.uid)).catch(() => null),
+        ]);
         const kids = snap.docs.map(d => ({ id: d.id, ...d.data() }));
         setChildren(kids);
+        if (parentSnap?.exists() && Array.isArray(parentSnap.data().learningSubjects) && parentSnap.data().learningSubjects.length > 0) {
+          setLearningSubjects(parentSnap.data().learningSubjects);
+        }
 
         let tasks = 0, score = 0, achievements = 0, minutes = 0;
         for (const kid of kids) {
@@ -262,6 +275,7 @@ export default function AnalyticsPage() {
                   key={child.id}
                   child={child}
                   index={i}
+                  learningSubjects={learningSubjects}
                 />
               ))}
             </div>

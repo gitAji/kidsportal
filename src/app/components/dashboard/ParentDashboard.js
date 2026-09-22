@@ -12,7 +12,8 @@ import { DashboardSkeleton } from "../ui/SkeletonLoader";
 import Modal from "../ui/Modal";
 import { getChildStats, getChildAchievements } from "@/app/utils/firestoreService";
 import { loadStats, loadUnlockedAchievements } from "@/app/utils/achievements";
-import { FaPlus, FaBell, FaUserFriends, FaUserCircle, FaCrown, FaCheckCircle, FaStar, FaTrophy, FaClock, FaChartLine } from 'react-icons/fa';
+import { computeLevelProgress } from "@/app/utils/childProgress";
+import { FaPlus, FaBell, FaUserFriends, FaUserCircle, FaCrown, FaCheckCircle, FaStar, FaTrophy, FaClock, FaChartLine, FaGraduationCap } from 'react-icons/fa';
 import { motion } from "framer-motion";
 
 const ParentDashboard = () => {
@@ -38,25 +39,30 @@ const ParentDashboard = () => {
           setParentData({ ...data, children: childrenData });
 
           // Family-wide learning overview (mirrors the totals shown on /analytics)
-          let tasks = 0, score = 0, achievements = 0, minutes = 0;
+          const learningSubjects = Array.isArray(data.learningSubjects) && data.learningSubjects.length > 0
+            ? data.learningSubjects
+            : ["English", "Math", "Science", "Tamil"];
+          let tasks = 0, score = 0, achievements = 0, minutes = 0, levelsDone = 0, levelsTotal = 0;
           for (const kid of childrenData) {
+            let s;
             try {
               const fs = await getChildStats(kid.id);
               const fa = await getChildAchievements(kid.id);
-              const s = Object.keys(fs).length ? fs : loadStats(kid.id);
-              tasks += s.totalTasksCompleted || 0;
-              score += s.totalScore || 0;
+              s = Object.keys(fs).length ? fs : loadStats(kid.id);
               achievements += fa.length || loadUnlockedAchievements(kid.id).length;
-              minutes += Math.round((s.totalTimeTaken || 0) / 60);
             } catch {
-              const s = loadStats(kid.id);
-              tasks += s.totalTasksCompleted || 0;
-              score += s.totalScore || 0;
+              s = loadStats(kid.id);
               achievements += loadUnlockedAchievements(kid.id).length;
-              minutes += Math.round((s.totalTimeTaken || 0) / 60);
             }
+            tasks += s.totalTasksCompleted || 0;
+            score += s.totalScore || 0;
+            minutes += Math.round((s.totalTimeTaken || 0) / 60);
+            const completedTaskIds = new Set(s.completedTasks_list || []);
+            const progress = computeLevelProgress(kid, learningSubjects, completedTaskIds);
+            levelsDone += progress.completedLevels;
+            levelsTotal += progress.totalLevels;
           }
-          setOverview({ tasks, score, achievements, minutes, childCount: childrenData.length });
+          setOverview({ tasks, score, achievements, minutes, levelsDone, levelsTotal, childCount: childrenData.length });
           setOverviewLoading(false);
         } else {
           setParentData(null);
@@ -116,14 +122,20 @@ const ParentDashboard = () => {
 
         {/* Family learning overview */}
         {overviewLoading ? (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {[0, 1, 2, 3].map((i) => (
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            {[0, 1, 2, 3, 4].map((i) => (
               <div key={i} className="h-24 bg-white rounded-2xl border border-slate-100 animate-pulse" />
             ))}
           </div>
         ) : overview && overview.childCount > 0 ? (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
             <OverviewCard icon={<FaCheckCircle />} label="Tasks Completed" value={overview.tasks} color="emerald" />
+            <OverviewCard
+              icon={<FaGraduationCap />}
+              label="Levels Completed"
+              value={overview.levelsTotal > 0 ? `${overview.levelsDone}/${overview.levelsTotal}` : "—"}
+              color="blue"
+            />
             <OverviewCard icon={<FaStar />} label="Family XP" value={overview.score.toLocaleString()} color="amber" />
             <OverviewCard icon={<FaTrophy />} label="Badges Earned" value={overview.achievements} color="violet" />
             <OverviewCard icon={<FaClock />} label="Learning Minutes" value={`${overview.minutes}m`} color="blue" />

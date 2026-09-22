@@ -34,7 +34,7 @@ export default function TeacherAdminLayout({ children }) {
                         </Suspense>
                     </main>
                 </div>
-            </div>
+            </UnsavedChangesProvider>
         </TeacherAdminGuard>
     );
 }

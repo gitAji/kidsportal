@@ -1,16 +1,17 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { collection, query, getDocs } from 'firebase/firestore';
+import { collection, doc, getDoc, query, getDocs } from 'firebase/firestore';
 import { db } from '../../../firebase/config';
 import { auth } from '../../../firebase/auth';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import CustomAvatar from '../ui/CustomAvatar';
 import { motion } from 'framer-motion';
-import { FaArrowRight, FaChartBar, FaStar, FaCheckCircle } from 'react-icons/fa';
+import { FaArrowRight, FaChartBar, FaStar, FaCheckCircle, FaGraduationCap } from 'react-icons/fa';
 import { getChildStats } from '@/app/utils/firestoreService';
 import { loadStats } from '@/app/utils/achievements';
+import { computeLevelProgress } from '@/app/utils/childProgress';
 
 function formatLastActive(ts) {
   if (!ts) return null;
@@ -26,25 +27,26 @@ function formatLastActive(ts) {
   return `Active ${d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}`;
 }
 
-function ChildQuickStats({ childId }) {
+function ChildQuickStats({ child, learningSubjects }) {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
-        const fs = await getChildStats(childId);
-        if (!cancelled) setStats(Object.keys(fs).length ? fs : loadStats(childId));
+        const fs = await getChildStats(child.id);
+        if (!cancelled) setStats(Object.keys(fs).length ? fs : loadStats(child.id));
       } catch {
-        if (!cancelled) setStats(loadStats(childId));
+        if (!cancelled) setStats(loadStats(child.id));
       }
     })();
     return () => { cancelled = true; };
-  }, [childId]);
+  }, [child.id]);
 
   if (!stats) {
     return (
       <div className="flex gap-2">
+        <div className="h-6 w-16 bg-slate-100 rounded-full animate-pulse" />
         <div className="h-6 w-16 bg-slate-100 rounded-full animate-pulse" />
         <div className="h-6 w-16 bg-slate-100 rounded-full animate-pulse" />
       </div>
@@ -53,12 +55,19 @@ function ChildQuickStats({ childId }) {
 
   const tasks = stats.totalTasksCompleted || 0;
   const xp = stats.totalScore || 0;
+  const completedTaskIds = new Set(stats.completedTasks_list || []);
+  const { totalLevels, completedLevels } = computeLevelProgress(child, learningSubjects, completedTaskIds);
 
   return (
     <div className="flex flex-wrap gap-2">
       <span className="inline-flex items-center gap-1.5 text-[11px] font-black text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full px-2.5 py-1">
         <FaCheckCircle className="text-[10px]" /> {tasks} tasks
       </span>
+      {totalLevels > 0 && (
+        <span className="inline-flex items-center gap-1.5 text-[11px] font-black text-blue-600 bg-blue-50 border border-blue-100 rounded-full px-2.5 py-1">
+          <FaGraduationCap className="text-[10px]" /> {completedLevels}/{totalLevels} levels
+        </span>
+      )}
       <span className="inline-flex items-center gap-1.5 text-[11px] font-black text-amber-600 bg-amber-50 border border-amber-100 rounded-full px-2.5 py-1">
         <FaStar className="text-[10px]" /> {xp.toLocaleString()} XP
       </span>
@@ -66,8 +75,11 @@ function ChildQuickStats({ childId }) {
   );
 }
 
+const DEFAULT_LEARNING_SUBJECTS = ["English", "Math", "Science", "Tamil"];
+
 const ChildrenList = () => {
   const [children, setChildren] = useState([]);
+  const [learningSubjects, setLearningSubjects] = useState(DEFAULT_LEARNING_SUBJECTS);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const router = useRouter();
@@ -85,15 +97,21 @@ const ChildrenList = () => {
         const childrenCollectionRef = collection(db, 'users', parentUid, 'children');
         const q = query(childrenCollectionRef);
 
-        const querySnapshot = await getDocs(q);
+        const [querySnapshot, parentSnap] = await Promise.all([
+          getDocs(q),
+          getDoc(doc(db, 'users', parentUid)).catch(() => null),
+        ]);
 
-        const childrenData = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data(),
+        const childrenData = querySnapshot.docs.map(childDoc => ({
+          id: childDoc.id,
+          ...childDoc.data(),
           parentUid: parentUid,
         }));
 
         setChildren(childrenData);
+        if (parentSnap?.exists() && Array.isArray(parentSnap.data().learningSubjects) && parentSnap.data().learningSubjects.length > 0) {
+          setLearningSubjects(parentSnap.data().learningSubjects);
+        }
       } catch (err) {
         console.error("Error fetching children:", err);
         setError("Failed to load children data.");
@@ -176,7 +194,7 @@ const ChildrenList = () => {
               </div>
 
               <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
-                <ChildQuickStats childId={child.id} />
+                <ChildQuickStats child={child} learningSubjects={learningSubjects} />
                 <Link
                   href={`/analytics/${child.id}`}
                   onClick={(e) => e.stopPropagation()}
