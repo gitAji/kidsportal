@@ -24,7 +24,7 @@ import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
 // parent sees the same subject names their child sees.
 const SUBJECT_DISPLAY_NAMES = {
   english: "English", math: "Math", science: "Science", ariviyal: "Science",
-  tamil: "Tamil", computerscience: "Computer Science",
+  tamil: "Tamil", computerscience: "Computer Science", coding: "Coding",
 };
 function subjectDisplayName(subjectId) {
   const prefix = (subjectId || "").replace(/-\d+$/, "").toLowerCase();

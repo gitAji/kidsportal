@@ -31,6 +31,7 @@ const subjectDisplayNames = {
   ariviyal: 'Science',
   tamil: 'Tamil',
   computerscience: 'Computer Science',
+  coding: 'Coding',
 };
 
 function getSubjectDisplayName(subjectId) {

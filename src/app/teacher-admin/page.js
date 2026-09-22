@@ -26,6 +26,7 @@ const ALL_SUBJECTS = [
     { id: 'Science', name: 'Science', icon: '🔬', color: 'purple' },
     { id: 'Tamil', name: 'Tamil', icon: '📚', color: 'emerald' },
     { id: 'Computer Science', name: 'Computer Science', icon: '💻', color: 'cyan' },
+    { id: 'Coding', name: 'Coding', icon: '⌨️', color: 'violet' },
 ];
 
 
