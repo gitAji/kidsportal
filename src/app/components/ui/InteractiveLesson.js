@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome, FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage } from 'react-icons/fa';
+import { FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome, FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage, FaCrown } from 'react-icons/fa';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -11,6 +11,7 @@ const SWIPE_THRESHOLD = 80;
 
 export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const router = useRouter();
+    const isPremium = !!childUser?.isSubscriptionActive;
     const [activeTab, setActiveTab] = useState('lesson');
     const [aiResponse, setAiResponse] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -381,13 +382,40 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-white text-2xl sm:text-3xl shadow-lg border-2 border-white/30">
                             <FaRobot />
                         </div>
-                        <div>
-                            <h3 className="text-lg sm:text-xl font-black text-white">AI Tutor Assistant</h3>
+                        <div className="flex-1">
+                            <div className="flex items-center gap-2">
+                                <h3 className="text-lg sm:text-xl font-black text-white">AI Tutor Assistant</h3>
+                                {!isPremium && (
+                                    <span className="flex items-center gap-1 bg-amber-400 text-amber-900 text-[9px] sm:text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full">
+                                        <FaCrown className="text-[9px]" /> Premium
+                                    </span>
+                                )}
+                            </div>
                             <p className="text-indigo-200 font-bold text-xs sm:text-sm">Ask me anything about this lesson!</p>
                         </div>
                     </div>
 
-                    {/* Tutor Action Buttons */}
+                    {!isPremium ? (
+                        /* Upsell — AI Tutor is a Premium-only feature */
+                        <div className="p-6 sm:p-8 flex flex-col items-center text-center gap-4">
+                            <div className="w-16 h-16 bg-gradient-to-br from-amber-300 to-orange-400 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
+                                <FaCrown />
+                            </div>
+                            <div>
+                                <p className="font-black text-slate-800 text-lg leading-tight">Unlock the AI Tutor with Premium</p>
+                                <p className="text-slate-500 font-medium text-sm mt-1 max-w-sm">
+                                    Get simpler explanations, fun examples, and challenge questions from your AI tutor on every lesson.
+                                </p>
+                            </div>
+                            <Link
+                                href="/pricing"
+                                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white font-black text-sm shadow-lg hover:scale-105 transition-all"
+                            >
+                                <FaCrown /> Upgrade to Premium
+                            </Link>
+                        </div>
+                    ) : (
+                    /* Tutor Action Buttons */
                     <div className="p-4 sm:p-6">
                         <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">
                             <button
@@ -463,6 +491,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             ) : null}
                         </AnimatePresence>
                     </div>
+                    )}
                 </motion.div>
             </div>
 
