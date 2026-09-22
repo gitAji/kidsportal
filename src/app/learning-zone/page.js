@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -79,7 +78,6 @@ export default function LearningZonePage() {
   const [subjects, setSubjects] = useState([]);
   const [subjectsLoading, setSubjectsLoading] = useState(true);
   const [greeting, setGreeting] = useState(null);
-  const router = useRouter();
 
   const professor = React.useMemo(() => {
     const char = childUser?.professorCharacter || 'owl';
@@ -133,32 +131,6 @@ export default function LearningZonePage() {
     visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 100, damping: 15 } },
   };
 
-  if (!childUser.isSubscriptionActive) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-slate-50 text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-white p-12 rounded-[3rem] shadow-xl border border-slate-200 max-w-xl w-full"
-        >
-          <div className="text-7xl mb-6">🏜️</div>
-          <h1 className="text-4xl font-black text-slate-800 mb-4">{t('adventure_on_hold')}</h1>
-          <p className="text-lg text-slate-600 mb-8 font-medium">
-            {t('trial_ended')}
-          </p>
-          <div className="flex flex-col gap-4">
-            <button
-              onClick={() => router.push('/child-login')}
-              className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-black shadow-lg hover:bg-blue-700 transition-all font-mono tracking-widest text-sm"
-            >
-              {t('log_out')}
-            </button>
-          </div>
-        </motion.div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-8 md:p-12 relative overflow-hidden">
 
@@ -186,6 +158,12 @@ export default function LearningZonePage() {
         <p className="text-xl md:text-2xl text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
           {t('ready_adventure')}
         </p>
+        {!childUser.isSubscriptionActive && (
+          <div className="mt-6 inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-700 px-5 py-2.5 rounded-full font-bold text-sm">
+            <FaStar className="text-amber-400" />
+            Free Preview — Level 1 of every subject is open to try! Subscribe to unlock everything.
+          </div>
+        )}
       </motion.div>
 
       {subjectsLoading ? (

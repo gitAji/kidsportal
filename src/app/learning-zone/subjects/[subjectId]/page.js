@@ -161,8 +161,7 @@ export default function SubjectLevelsPage() {
 
   const processedLevels = useMemo(() => {
     let previousCompleted = true; // Level 1 is always unlocked
-    const isTamilSubject = subjectId?.toLowerCase().includes('tamil');
-    const isPremiumAndTamil = isTamilSubject && childUser?.isSubscriptionActive;
+    const isSubscribed = !!childUser?.isSubscriptionActive;
 
     return levels.map((level, index) => {
       // Filter out placeholders so they don't count towards progression/display
@@ -184,25 +183,26 @@ export default function SubjectLevelsPage() {
       const isSequential = childUser?.sequentialProgression !== false; // Default to true if not set
       const sequentialLocked = isSequential && !previousCompleted;
 
-      // Visual lock (greyed-out card + lock icon)
-      let dynamicIsLocked = sequentialLocked;
+      // Free accounts can always try level 1 of every subject, but every
+      // level after that requires an active subscription — subscribing
+      // removes this cap entirely (every level opens immediately) as well
+      // as the sequential-progression requirement below.
+      const requiresSubscription = !isSubscribed && index !== 0;
+
+      let dynamicIsLocked;
+      let lockMessage = level.lockMessage;
+      if (isSubscribed) {
+        dynamicIsLocked = false;
+      } else if (requiresSubscription) {
+        dynamicIsLocked = true;
+        lockMessage = "Subscribe to unlock this level! 🔓";
+      } else {
+        dynamicIsLocked = sequentialLocked;
+        lockMessage = sequentialLocked ? "Finish the previous level to unlock this one! 🚀" : level.lockMessage;
+      }
 
       // Mark the first unlocked, non-completed level as "next up"
-      let isNextUp = previousCompleted && !isCompleted && !dynamicIsLocked;
-
-      // Premium Tamil users can browse every level (no grey-out), but still
-      // have to finish the previous level before they can actually enter one
-      // out of sequence — that's enforced separately, at click time, via
-      // requiresPreviousLevel below, regardless of this visual bypass.
-      if (isPremiumAndTamil) {
-        dynamicIsLocked = false;
-        // Adjust isNextUp so that only the first non-completed one looks "next up"
-        if (!isCompleted && previousCompleted) {
-          isNextUp = true;
-        } else {
-          isNextUp = false;
-        }
-      }
+      const isNextUp = previousCompleted && !isCompleted && !dynamicIsLocked;
 
       // Update for the next level in the array
       previousCompleted = isCompleted;
@@ -211,8 +211,9 @@ export default function SubjectLevelsPage() {
         ...level,
         overrideIsLocked: dynamicIsLocked,
         isLocked: dynamicIsLocked,
-        requiresPreviousLevel: sequentialLocked,
-        lockMessage: (dynamicIsLocked || sequentialLocked) ? "Finish the previous level to unlock this one! 🚀" : level.lockMessage,
+        requiresPreviousLevel: !requiresSubscription && sequentialLocked,
+        requiresSubscription,
+        lockMessage,
         completedCount,
         totalTasks,
         isCompleted,
@@ -504,7 +505,7 @@ export default function SubjectLevelsPage() {
                           </span>
                         </div>
                         <div className="bg-slate-800/40 px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest backdrop-blur-md border border-white/10 text-center">
-                          {level.overrideIsLocked ? 'LOCKED' : t('locked')}
+                          {level.requiresSubscription ? 'Subscribe to Unlock 🔓' : (level.overrideIsLocked ? 'LOCKED' : t('locked'))}
                         </div>
                       </div>
                     )}

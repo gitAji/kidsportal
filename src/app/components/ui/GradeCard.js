@@ -89,22 +89,27 @@ export default function GradeCard({ grade, gradeIndex, themeColor }) {
                   </div>
 
                   <div className="max-h-[300px] overflow-y-auto space-y-2 pr-1 custom-scrollbar">
-                    {selectedSubject.levels?.map((level) => (
-                      <div
-                        key={level.levelId}
-                        className="bg-white p-3 rounded-xl border border-slate-100 flex items-center justify-between"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm ${level.isLocked ? 'bg-slate-100 text-slate-400' : 'bg-yellow-50 text-yellow-500'}`}>
-                            {level.isLocked ? <FaLock size={12} /> : <FaStar />}
-                          </div>
-                          <div>
-                            <p className="font-bold text-slate-700 text-sm">{level.levelName}</p>
-                            <p className="text-[10px] text-slate-400 uppercase font-bold tracking-tight">{level.tasks?.length || 0} Tasks</p>
+                    {selectedSubject.levels?.map((level, levelIndex) => {
+                      // Level 1 is always free to preview; everything after
+                      // that requires a subscription.
+                      const isLocked = levelIndex !== 0;
+                      return (
+                        <div
+                          key={level.levelId}
+                          className="bg-white p-3 rounded-xl border border-slate-100 flex items-center justify-between"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm ${isLocked ? 'bg-slate-100 text-slate-400' : 'bg-yellow-50 text-yellow-500'}`}>
+                              {isLocked ? <FaLock size={12} /> : <FaStar />}
+                            </div>
+                            <div>
+                              <p className="font-bold text-slate-700 text-sm">{level.levelName}</p>
+                              <p className="text-[10px] text-slate-400 uppercase font-bold tracking-tight">{level.tasks?.length || 0} Tasks{!isLocked ? ' · Free Preview' : ''}</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
 
                   <div className="pt-2">
