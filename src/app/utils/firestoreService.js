@@ -8,7 +8,7 @@
  */
 import {
     collection, doc, getDoc, getDocs, setDoc, addDoc,
-    updateDoc, deleteDoc, query, where, orderBy, limit, serverTimestamp
+    updateDoc, deleteDoc, query, where, orderBy, limit, serverTimestamp, increment
 } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 
@@ -96,4 +96,23 @@ export async function getChildTaskHistory(childId, maxEntries = 200) {
     );
     const snap = await getDocs(q);
     return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+// ── SCREEN TIME LIMITS ──────────────────────────────────────────────────────
+
+/** Add elapsed minutes to a child's usage total for a given date (YYYY-MM-DD). */
+export async function addTimeUsage(childId, dateKey, minutesDelta) {
+    if (!minutesDelta) return;
+    await setDoc(doc(db, 'childStats', childId), {
+        timeUsage: { [dateKey]: increment(minutesDelta) },
+        updatedAt: serverTimestamp(),
+    }, { merge: true });
+}
+
+/** Grant bonus minutes for a specific date (a parent approving a time request). */
+export async function grantBonusTime(childId, dateKey, minutes) {
+    await setDoc(doc(db, 'childStats', childId), {
+        timeBonus: { [dateKey]: increment(minutes) },
+        updatedAt: serverTimestamp(),
+    }, { merge: true });
 }

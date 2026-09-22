@@ -1,17 +1,18 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { collection, doc, getDoc, query, getDocs } from 'firebase/firestore';
+import { collection, doc, getDoc, query, getDocs, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../../../firebase/config';
 import { auth } from '../../../firebase/auth';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import CustomAvatar from '../ui/CustomAvatar';
-import { motion } from 'framer-motion';
-import { FaArrowRight, FaChartBar, FaStar, FaCheckCircle, FaGraduationCap } from 'react-icons/fa';
-import { getChildStats } from '@/app/utils/firestoreService';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaArrowRight, FaChartBar, FaStar, FaCheckCircle, FaGraduationCap, FaClock, FaTimes } from 'react-icons/fa';
+import { getChildStats, grantBonusTime } from '@/app/utils/firestoreService';
 import { loadStats } from '@/app/utils/achievements';
 import { computeLevelProgress } from '@/app/utils/childProgress';
+import { getDateKey } from '@/app/utils/timeLimits';
 
 function formatLastActive(ts) {
   if (!ts) return null;
@@ -75,6 +76,59 @@ function ChildQuickStats({ child, learningSubjects }) {
   );
 }
 
+// Shown on a child's card when they've hit their screen-time limit and
+// asked for more. A quick preset grant (or dismiss) is one click away —
+// no need to dig into that child's settings.
+function TimeRequestBanner({ child, onGrant, onDismiss }) {
+  const [busy, setBusy] = useState(false);
+
+  const handleGrant = async (minutes) => {
+    if (busy) return;
+    setBusy(true);
+    try {
+      await onGrant(child, minutes);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      className="mt-3 bg-amber-50 border border-amber-200 rounded-xl p-3"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="flex items-center gap-2 mb-2">
+        <FaClock className="text-amber-500 text-xs flex-shrink-0" />
+        <p className="text-xs font-bold text-amber-700">{child.name} is asking for more time!</p>
+      </div>
+      <div className="flex flex-wrap items-center gap-2">
+        {[15, 30, 60].map((minutes) => (
+          <button
+            key={minutes}
+            type="button"
+            disabled={busy}
+            onClick={() => handleGrant(minutes)}
+            className="text-[11px] font-black uppercase tracking-wide bg-amber-500 text-white px-3 py-1.5 rounded-full hover:bg-amber-600 transition-colors disabled:opacity-50"
+          >
+            +{minutes} min
+          </button>
+        ))}
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() => onDismiss(child)}
+          className="text-[11px] font-bold uppercase tracking-wide text-amber-600 px-2 py-1.5 hover:text-amber-800 transition-colors flex items-center gap-1 disabled:opacity-50"
+        >
+          <FaTimes className="text-[10px]" /> Not now
+        </button>
+      </div>
+    </motion.div>
+  );
+}
+
 const DEFAULT_LEARNING_SUBJECTS = ["English", "Math", "Science", "Tamil"];
 
 const ChildrenList = () => {
@@ -123,9 +177,47 @@ const ChildrenList = () => {
     fetchChildren();
   }, []);
 
+  // Live-watch each child's own doc so a "please give me more time" request
+  // (or its removal, after a grant/dismiss) shows up without a refresh.
+  useEffect(() => {
+    if (!auth.currentUser || children.length === 0) return;
+    const parentUid = auth.currentUser.uid;
+    const unsubscribes = children.map((child) =>
+      onSnapshot(doc(db, 'users', parentUid, 'children', child.id), (snap) => {
+        if (!snap.exists()) return;
+        setChildren((prev) => prev.map((c) => (
+          c.id === child.id ? { id: child.id, ...snap.data(), parentUid } : c
+        )));
+      })
+    );
+    return () => unsubscribes.forEach((unsub) => unsub());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [children.length]);
+
   const handleManageChild = (child) => {
     sessionStorage.setItem('childUser', JSON.stringify(child));
     router.push('/child-dashboard');
+  };
+
+  const handleGrantTime = async (child, minutes) => {
+    try {
+      await grantBonusTime(child.id, getDateKey(), minutes);
+      await updateDoc(doc(db, 'users', child.parentUid, 'children', child.id), {
+        timeExtensionRequest: null,
+      });
+    } catch (err) {
+      console.error('Failed to grant bonus time', err);
+    }
+  };
+
+  const handleDismissTimeRequest = async (child) => {
+    try {
+      await updateDoc(doc(db, 'users', child.parentUid, 'children', child.id), {
+        timeExtensionRequest: null,
+      });
+    } catch (err) {
+      console.error('Failed to dismiss time request', err);
+    }
   };
 
   if (loading) {
@@ -203,6 +295,16 @@ const ChildrenList = () => {
                   <FaChartBar className="text-[10px]" /> Report
                 </Link>
               </div>
+
+              <AnimatePresence>
+                {child.timeExtensionRequest?.status === 'pending' && (
+                  <TimeRequestBanner
+                    child={child}
+                    onGrant={handleGrantTime}
+                    onDismiss={handleDismissTimeRequest}
+                  />
+                )}
+              </AnimatePresence>
             </motion.div>
           );
         })}

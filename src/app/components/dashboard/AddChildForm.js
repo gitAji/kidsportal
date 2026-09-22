@@ -113,7 +113,11 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
           password, loginEnabled: true, photoURL: '', assignedTasks: [], points: 0,
           stickers: [], progress: { overall: 0, subjects: {} }, parentUid,
           professorCharacter: 'owl', timeAlertsEnabled: true,
-          sequentialProgression
+          sequentialProgression,
+          // Screen time limits default to off — a parent opts in and sets
+          // minutes from the child's Settings tab.
+          timeLimits: { enabled: false, dailyMinutes: 60, weeklyMinutes: 300 },
+          timeExtensionRequest: null,
         };
 
         await runTransaction(db, async (t) => {

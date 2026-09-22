@@ -50,6 +50,9 @@ const ChildDashboard = ({ child, onClose }) => {
   const [loginEnabled, setLoginEnabled] = useState(child?.loginEnabled ?? true);
   const [professorCharacter, setProfessorCharacter] = useState(child?.professorCharacter || 'owl');
   const [timeAlertsEnabled, setTimeAlertsEnabled] = useState(child?.timeAlertsEnabled ?? true);
+  const [timeLimitsEnabled, setTimeLimitsEnabled] = useState(child?.timeLimits?.enabled ?? false);
+  const [dailyMinutes, setDailyMinutes] = useState(child?.timeLimits?.dailyMinutes ?? 60);
+  const [weeklyMinutes, setWeeklyMinutes] = useState(child?.timeLimits?.weeklyMinutes ?? 300);
   const [showLoginHelper, setShowLoginHelper] = useState(false);
 
   const router = useRouter();
@@ -77,6 +80,9 @@ const ChildDashboard = ({ child, onClose }) => {
     setLoginEnabled(child?.loginEnabled ?? true);
     setProfessorCharacter(child?.professorCharacter || 'owl');
     setTimeAlertsEnabled(child?.timeAlertsEnabled ?? true);
+    setTimeLimitsEnabled(child?.timeLimits?.enabled ?? false);
+    setDailyMinutes(child?.timeLimits?.dailyMinutes ?? 60);
+    setWeeklyMinutes(child?.timeLimits?.weeklyMinutes ?? 300);
     setCurrentView('details');
     setActiveTab('about');
   }, [child]);
@@ -174,7 +180,14 @@ const ChildDashboard = ({ child, onClose }) => {
     setSaveStatus(null);
     try {
       const childDocRef = doc(db, "users", childData.parentUid, "children", childData.id);
-      const updates = { username, loginEnabled, professorCharacter, timeAlertsEnabled };
+      const updates = {
+        username, loginEnabled, professorCharacter, timeAlertsEnabled,
+        timeLimits: {
+          enabled: timeLimitsEnabled,
+          dailyMinutes: Number(dailyMinutes) || 0,
+          weeklyMinutes: Number(weeklyMinutes) || 0,
+        },
+      };
       if (newPassword) updates.password = newPassword;
       if (username !== childData.username) {
         const oldUsernameDocRef = doc(db, 'child_usernames', childData.username);
@@ -466,6 +479,51 @@ const ChildDashboard = ({ child, onClose }) => {
                           />
                           <div className="w-12 h-7 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-200 after:border after:rounded-full after:h-6 after:w-6 after:transition-all after:shadow-sm peer-checked:bg-amber-500"></div>
                         </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Screen Time Limits */}
+                  <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100">
+                    <div className="flex items-center justify-between mb-5">
+                      <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                        <FaClock className="text-blue-500" /> Screen Time Limits
+                      </h3>
+                      <label className="relative inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          className="sr-only peer"
+                          checked={timeLimitsEnabled}
+                          onChange={(e) => setTimeLimitsEnabled(e.target.checked)}
+                        />
+                        <div className="w-12 h-7 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-200 after:border after:rounded-full after:h-6 after:w-6 after:transition-all after:shadow-sm peer-checked:bg-blue-600"></div>
+                      </label>
+                    </div>
+                    <p className="text-xs text-slate-400 font-medium mb-5">
+                      Once a limit is reached, {childData.name} is blocked from starting anything new in the Student Zone until you grant more time (they can ask for it right from the block screen).
+                    </p>
+                    <div className={`grid grid-cols-1 sm:grid-cols-2 gap-5 transition-opacity ${timeLimitsEnabled ? '' : 'opacity-40 pointer-events-none'}`}>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-500 mb-2">Daily limit (minutes)</label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={dailyMinutes}
+                          onChange={(e) => setDailyMinutes(e.target.value)}
+                          className={inputCls}
+                        />
+                        <p className="text-[10px] text-slate-400 font-medium mt-1.5">0 = no daily cap</p>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-500 mb-2">Weekly limit (minutes)</label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={weeklyMinutes}
+                          onChange={(e) => setWeeklyMinutes(e.target.value)}
+                          className={inputCls}
+                        />
+                        <p className="text-[10px] text-slate-400 font-medium mt-1.5">0 = no weekly cap</p>
                       </div>
                     </div>
                   </div>
