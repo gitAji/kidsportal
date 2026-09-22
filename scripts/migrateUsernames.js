@@ -1,15 +1,5 @@
 // scripts/migrateUsernames.js
-const admin = require('firebase-admin');
-
-// IMPORTANT: Make sure the path to your service account key is correct.
-const serviceAccount = require('../serviceAccountKey.json');
-
-// Initialize the Firebase Admin SDK
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-
-const db = admin.firestore();
+const { admin, db } = require('./_adminInit');
 
 async function migrateUsernames() {
   console.log("Starting migration with admin privileges...");
@@ -50,10 +40,14 @@ async function migrateUsernames() {
           continue;
         }
 
-        console.log(`  -> Found child: ${childData.name} (Username: ${username})`);
+        // /api/child-login always lowercases the username before looking it
+        // up, so the registry key must be lowercase too, or login will fail
+        // with "Invalid username or password" even with correct credentials.
+        const usernameKey = username.toLowerCase();
+        console.log(`  -> Found child: ${childData.name} (Username: ${usernameKey})`);
 
-        const usernameDocRef = db.collection('child_usernames').doc(username);
-        
+        const usernameDocRef = db.collection('child_usernames').doc(usernameKey);
+
         // Create the entry in the global username directory
         await usernameDocRef.set({ parentUid, childId });
         
@@ -68,7 +62,7 @@ async function migrateUsernames() {
 
   } catch (error) {
     console.error("\nAn error occurred during migration:", error.message);
-    console.error("Please ensure your `serviceAccountKey.json` file is correct and has the necessary permissions.");
+    console.error("Please ensure FIREBASE_ADMIN_PROJECT_ID/CLIENT_EMAIL/PRIVATE_KEY are set in .env.local and have the necessary permissions.");
   }
 }
 
