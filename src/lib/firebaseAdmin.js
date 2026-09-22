@@ -3,6 +3,7 @@
 // Uses service account credentials stored in environment variables
 import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
+import { getAuth } from 'firebase-admin/auth';
 
 function initAdmin() {
     if (getApps().length > 0) return getApps()[0];
@@ -38,3 +39,4 @@ function initAdmin() {
 
 const app = initAdmin();
 export const adminDb = app ? getFirestore() : null;
+export const adminAuth = app ? getAuth(app) : null;

@@ -3,11 +3,18 @@ import { NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
+import { getVerifiedUid } from '@/lib/verifyAuth';
 
 export async function POST(request) {
     try {
         const { uid } = await request.json();
         if (!uid) return NextResponse.json({ error: 'Missing uid' }, { status: 400 });
+
+        // Prevents pulling (and overwriting Firestore with) another user's Stripe data.
+        const verifiedUid = await getVerifiedUid(request);
+        if (!verifiedUid || verifiedUid !== uid) {
+            return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
+        }
 
         const stripe = getStripe();
         const userRef = adminDb.doc(`users/${uid}`);

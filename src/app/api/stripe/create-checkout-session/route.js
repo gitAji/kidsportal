@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
 import { adminDb } from '@/lib/firebaseAdmin';
+import { getVerifiedUid } from '@/lib/verifyAuth';
 
 // Native Stripe Price IDs per currency
 const PRICE_IDS = {
@@ -37,6 +38,13 @@ export async function POST(request) {
 
         if (!uid) {
             return NextResponse.json({ error: 'Missing uid.' }, { status: 400 });
+        }
+
+        // Never trust a client-supplied uid — verify it matches the signed-in caller,
+        // otherwise anyone could create a Stripe customer linked to someone else's account.
+        const verifiedUid = await getVerifiedUid(request);
+        if (!verifiedUid || verifiedUid !== uid) {
+            return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
         }
 
         // Pick native price ID; fall back to USD if currency not supported

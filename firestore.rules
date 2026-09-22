@@ -16,8 +16,8 @@ service cloud.firestore {
 
     // Helper function for active teacher check
     function isActiveTeacher() {
-      const email = request.auth != null && request.auth.token.email != null 
-                    ? request.auth.token.email.lower() 
+      let email = request.auth != null && request.auth.token.email != null
+                    ? request.auth.token.email.lower()
                     : null;
       return email != null &&
         exists(/databases/$(database)/documents/teachers/$(email)) &&
@@ -26,11 +26,47 @@ service cloud.firestore {
 
     // 1. User records and their subcollections
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read: if request.auth != null && request.auth.uid == userId;
       allow list: if isAdmin();
-      
-      match /{allSubcollections=**} {
+
+      // Account creation (signup) may only set the initial free-trial state —
+      // never a paid plan or any billing fields, which are written exclusively
+      // by the Stripe webhook / API routes via the Admin SDK (which bypasses
+      // these rules entirely, so this never blocks a real payment).
+      allow create: if request.auth != null && request.auth.uid == userId
+        && (!('planType' in request.resource.data) || request.resource.data.planType == 'free_trial')
+        && !('subscriptionStatus' in request.resource.data)
+        && !('subscriptionPlan' in request.resource.data)
+        && !('subscriptionExpiresAt' in request.resource.data)
+        && !('lastPayment' in request.resource.data);
+
+      // Profile edits may not touch billing/subscription fields — those are
+      // server-authoritative (Stripe webhook via Admin SDK). Without this, any
+      // signed-in user could grant themselves Premium for free by writing
+      // straight to their own document.
+      allow update: if request.auth != null && request.auth.uid == userId
+        && !request.resource.data.diff(resource.data).affectedKeys()
+             .hasAny(['subscriptionStatus', 'subscriptionPlan', 'subscriptionExpiresAt', 'lastPayment'])
+        && (
+             !request.resource.data.diff(resource.data).affectedKeys().hasAny(['planType', 'subscription'])
+             || (request.resource.data.planType == 'free_trial'
+                 && request.resource.data.subscription.plan == 'trial'
+                 && request.resource.data.subscription.status == 'active')
+           );
+
+      allow delete: if false;
+
+      // Children profiles — fully owned by the parent.
+      match /children/{childId} {
         allow read, write: if request.auth != null && request.auth.uid == userId;
+        allow read, list: if isAdmin();
+      }
+
+      // Invoice/payment history — server-written only (Stripe webhook via
+      // Admin SDK); the parent may read their own but never write or delete it.
+      match /payments/{paymentId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if false;
         allow read, list: if isAdmin();
       }
     }

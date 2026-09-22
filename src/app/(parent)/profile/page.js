@@ -209,9 +209,10 @@ export default function SettingsPage() {
     setCheckoutError("");
     setCheckoutLoading(true);
     try {
+      const idToken = await user.getIdToken();
       const res = await fetch("/api/stripe/create-checkout-session", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${idToken}` },
         body: JSON.stringify({ uid: user.uid, email: user.email, billingCycle, currency: checkoutCurrency(country) }),
       });
       const data = await res.json();
@@ -228,9 +229,10 @@ export default function SettingsPage() {
   const openPortal = async () => {
     setPortalLoading(true);
     try {
+      const idToken = await user.getIdToken();
       const res = await fetch("/api/stripe/create-portal-session", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${idToken}` },
         body: JSON.stringify({ uid: user.uid }),
       });
       const data = await res.json();

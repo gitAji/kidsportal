@@ -1,11 +1,19 @@
 // scripts/create-stripe-prices.js
-// Run once: node scripts/create-stripe-prices.js
+// Run once: STRIPE_SECRET_KEY=sk_... node scripts/create-stripe-prices.js
 // Creates KidsPortal Premium product + native prices in USD, EUR, GBP, NOK, SEK, DKK
 // Then prints all price IDs to add to .env.local
+//
+// Uses whichever key you pass in — a sk_test_... key creates test-mode prices,
+// a sk_live_... key creates real live-mode prices. Run it once per mode.
 
 const Stripe = require('stripe');
 
-const stripe = Stripe('sk_test_51T67RtDi0VFDCkG8AdEBl9iSzs4IhC50m36SHc3pIIo1kcy8VMdDQh8DgS3x6uBdgKRSsIRwl2ukLXHPICBLIn3I00ZktvyzTy');
+if (!process.env.STRIPE_SECRET_KEY) {
+    console.error('Missing STRIPE_SECRET_KEY. Run as: STRIPE_SECRET_KEY=sk_... node scripts/create-stripe-prices.js');
+    process.exit(1);
+}
+
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Native prices per currency
 // Monthly / Yearly (in smallest currency unit — cents, øre, etc.)

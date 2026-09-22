@@ -3,6 +3,7 @@
 import { NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
 import { adminDb } from '@/lib/firebaseAdmin';
+import { getVerifiedUid } from '@/lib/verifyAuth';
 
 export async function POST(request) {
     try {
@@ -10,6 +11,13 @@ export async function POST(request) {
 
         if (!uid) {
             return NextResponse.json({ error: 'Missing uid.' }, { status: 400 });
+        }
+
+        // Without this check, anyone could pass another user's uid and be handed a
+        // portal link that lets them cancel or change that person's subscription.
+        const verifiedUid = await getVerifiedUid(request);
+        if (!verifiedUid || verifiedUid !== uid) {
+            return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
         }
 
         const userRef = adminDb.doc(`users/${uid}`);

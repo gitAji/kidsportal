@@ -71,9 +71,10 @@ export default function BillingPage() {
     const syncWithStripe = async () => {
         setSyncing(true);
         try {
+            const idToken = await auth.currentUser?.getIdToken();
             const res = await fetch("/api/stripe/sync", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", Authorization: `Bearer ${idToken}` },
                 body: JSON.stringify({ uid: auth.currentUser?.uid }),
             });
             const data = await res.json();
@@ -147,9 +148,10 @@ export default function BillingPage() {
         setPortalLoading(true);
         setPortalError("");
         try {
+            const idToken = await auth.currentUser?.getIdToken();
             const res = await fetch("/api/stripe/create-portal-session", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", Authorization: `Bearer ${idToken}` },
                 body: JSON.stringify({ uid: auth.currentUser?.uid }),
             });
             const data = await res.json();
