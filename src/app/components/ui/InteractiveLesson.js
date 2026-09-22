@@ -4,8 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome, FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage, FaCrown } from 'react-icons/fa';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import Image from 'next/image';
 import AudioPlayer from './AudioPlayer';
+
+const SWIPE_THRESHOLD = 80;
 
 export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const router = useRouter();
@@ -17,6 +19,9 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
     const [translatedContent, setTranslatedContent] = useState(null);
     const [isTranslating, setIsTranslating] = useState(false);
+    const [starsEarned, setStarsEarned] = useState(0);
+    const [starPop, setStarPop] = useState(false);
+    const [mascotMessage, setMascotMessage] = useState(null);
     const isTamilSubject = taskData?.subjectId?.toLowerCase().includes('tamil') ||
         taskData?.taskId?.toLowerCase().includes('tamil') ||
         (typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('tamil'));
@@ -98,6 +103,9 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const handleNext = () => {
         if (!isLastSentence) {
             setCurrentSentenceIndex(prev => prev + 1);
+            setStarsEarned(prev => prev + 1);
+            setStarPop(true);
+            setTimeout(() => setStarPop(false), 500);
         }
     };
 
@@ -106,6 +114,45 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
             setCurrentSentenceIndex(prev => prev - 1);
         }
     };
+
+    const handleSwipe = (offsetX) => {
+        if (offsetX <= -SWIPE_THRESHOLD) handleNext();
+        else if (offsetX >= SWIPE_THRESHOLD) handlePrev();
+    };
+
+    const handleFinish = () => {
+        import('canvas-confetti').then(({ default: confetti }) => {
+            confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+        });
+        onComplete();
+    };
+
+    // A friendly professor companion, reusing the same character/name the
+    // child picked in Settings — lessons previously showed no mascot at all,
+    // unlike quizzes.
+    const professor = childUser?.professorCharacter === 'panda'
+        ? { name: 'Smart Panda', img: '/images/smart-panda.png' }
+        : { name: 'Professor Owl', img: '/images/professor-owl.png' };
+
+    // Cheer the student on at a few key moments rather than on every single
+    // sentence, so the mascot feels encouraging instead of chatty.
+    useEffect(() => {
+        if (sentences.length === 0) return;
+        let message = null;
+        if (validCurrentSentenceIndex === 0) {
+            message = `Hi! I'm ${professor.name}. Let's learn together!`;
+        } else if (isLastSentence) {
+            message = "Last one — you've got this!";
+        } else if (validCurrentSentenceIndex === Math.floor(sentences.length / 2)) {
+            message = "Halfway there, great job!";
+        }
+        if (message) {
+            setMascotMessage(message);
+            const clear = setTimeout(() => setMascotMessage(null), 5000);
+            return () => clearTimeout(clear);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- only fire on milestone changes, not every render
+    }, [validCurrentSentenceIndex, sentences.length, isLastSentence]);
 
     const fetchTutorHelp = async (actionType) => {
         setIsLoading(true);
@@ -146,7 +193,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
 
             {/* Sticky Top Navigation */}
             <div className="w-full sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/50 shadow-sm">
-                <div className="max-w-5xl mx-auto flex items-center justify-center px-4 sm:px-6 py-3">
+                <div className="max-w-5xl mx-auto flex items-center justify-center gap-3 px-4 sm:px-6 py-3">
                     {/* Center: Compact Progress */}
                     <div className="flex items-center gap-3 w-full max-w-sm">
                         <div className="flex-1 h-2 bg-slate-200/60 rounded-full overflow-hidden">
@@ -161,6 +208,15 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             {validCurrentSentenceIndex + 1}/{sentences.length}
                         </span>
                     </div>
+
+                    {/* Stars collected this lesson */}
+                    <motion.div
+                        animate={starPop ? { scale: [1, 1.3, 1] } : {}}
+                        transition={{ duration: 0.4 }}
+                        className="flex items-center gap-1 bg-amber-50 text-amber-600 px-2.5 py-1 rounded-full font-black text-xs whitespace-nowrap"
+                    >
+                        <FaStar className="text-amber-400" /> {starsEarned}
+                    </motion.div>
                 </div>
             </div>
 
@@ -245,8 +301,8 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             </div>
                         )}
 
-                        {/* Content Area with Animation */}
-                        <div className="px-5 sm:px-8 py-8 sm:py-12 md:py-16 min-h-[200px] sm:min-h-[280px] flex flex-col items-center justify-center">
+                        {/* Content Area with Animation — swipeable on touch devices */}
+                        <div className="px-5 sm:px-8 py-8 sm:py-12 md:py-16 min-h-[200px] sm:min-h-[280px] flex flex-col items-center justify-center touch-pan-y">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={validCurrentSentenceIndex}
@@ -254,7 +310,11 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: -30, scale: 0.97 }}
                                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                                    className="w-full text-center"
+                                    drag="x"
+                                    dragConstraints={{ left: 0, right: 0 }}
+                                    dragElastic={0.7}
+                                    onDragEnd={(_, info) => handleSwipe(info.offset.x)}
+                                    className="w-full text-center cursor-grab active:cursor-grabbing"
                                 >
                                     <p className="text-xl sm:text-3xl md:text-4xl text-slate-800 font-extrabold leading-snug sm:leading-tight max-w-2xl mx-auto">
                                         {isTranslating ? <span className="animate-pulse text-indigo-400">Translating...</span> : sentences[validCurrentSentenceIndex]}
@@ -297,7 +357,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                     </button>
                                 ) : (
                                     <motion.button
-                                        onClick={onComplete}
+                                        onClick={handleFinish}
                                         animate={{ scale: [1, 1.03, 1] }}
                                         transition={{ repeat: Infinity, duration: 2 }}
                                         className="flex items-center gap-1.5 px-5 sm:px-7 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-black shadow-lg shadow-green-500/30 hover:shadow-xl hover:shadow-green-500/40 hover:-translate-y-0.5 transition-all text-sm sm:text-base"
@@ -432,6 +492,30 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         </AnimatePresence>
                     </div>
                     )}
+                </motion.div>
+            </div>
+
+            {/* Persistent Professor Companion */}
+            <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none">
+                <AnimatePresence>
+                    {mascotMessage && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+                            className="mb-3 max-w-[220px] bg-white rounded-2xl rounded-br-sm shadow-xl border border-slate-100 px-4 py-3"
+                        >
+                            <p className="text-sm font-bold text-slate-700 leading-snug">{mascotMessage}</p>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+                <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", bounce: 0.5, delay: 0.3 }}
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white shadow-xl border-4 border-white overflow-hidden relative pointer-events-auto"
+                >
+                    <Image src={professor.img} alt={professor.name} fill className="object-contain p-1.5" />
                 </motion.div>
             </div>
         </div>
