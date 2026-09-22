@@ -162,7 +162,7 @@ export default function ReportsPage() {
     ];
 
     return (
-        <div className="p-6 md:p-10 max-w-7xl mx-auto space-y-10">
+        <div className="pl-16 pr-6 py-6 md:p-10 max-w-7xl mx-auto space-y-10">
             {/* Header */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div className="space-y-1">

@@ -112,7 +112,7 @@ export default function SettingsPage() {
 
     return (
         <TeacherAdminGuard>
-            <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-10">
+            <div className="pl-16 pr-6 py-6 md:p-10 max-w-6xl mx-auto space-y-10">
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div className="space-y-1">
