@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import { doc, onSnapshot, collection, query, getDocs } from "firebase/firestore";
 import { db } from '../../../firebase/config';
 import { auth } from '../../../firebase/auth';
@@ -22,48 +22,57 @@ const ParentDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [overview, setOverview] = useState(null);
   const [overviewLoading, setOverviewLoading] = useState(true);
+  const [childrenRefreshKey, setChildrenRefreshKey] = useState(0);
   const router = useRouter();
+
+  // Children live in a Firestore subcollection, so writes to it (adding or
+  // editing a learner) never trigger the onSnapshot listener on the parent
+  // doc below. Pulled out so it can also be called directly right after a
+  // save, instead of waiting for a parent-doc change that will never come.
+  const refreshChildrenAndOverview = useCallback(async (data) => {
+    if (!auth.currentUser) return;
+    const childrenCollectionRef = collection(db, 'users', auth.currentUser.uid, 'children');
+    const childrenSnapshot = await getDocs(query(childrenCollectionRef));
+    const childrenData = childrenSnapshot.docs.map(childDoc => ({
+      id: childDoc.id,
+      ...childDoc.data()
+    }));
+    setParentData({ ...data, children: childrenData });
+
+    // Family-wide learning overview (mirrors the totals shown on /analytics)
+    const learningSubjects = Array.isArray(data.learningSubjects) && data.learningSubjects.length > 0
+      ? data.learningSubjects
+      : ["English", "Math", "Science", "Tamil"];
+    let tasks = 0, score = 0, achievements = 0, minutes = 0, levelsDone = 0, levelsTotal = 0;
+    for (const kid of childrenData) {
+      let s;
+      try {
+        const fs = await getChildStats(kid.id);
+        const fa = await getChildAchievements(kid.id);
+        s = Object.keys(fs).length ? fs : loadStats(kid.id);
+        achievements += fa.length || loadUnlockedAchievements(kid.id).length;
+      } catch {
+        s = loadStats(kid.id);
+        achievements += loadUnlockedAchievements(kid.id).length;
+      }
+      tasks += s.totalTasksCompleted || 0;
+      score += s.totalScore || 0;
+      minutes += Math.round((s.totalTimeTaken || 0) / 60);
+      const completedTaskIds = new Set(s.completedTasks_list || []);
+      const progress = computeLevelProgress(kid, learningSubjects, completedTaskIds);
+      levelsDone += progress.completedLevels;
+      levelsTotal += progress.totalLevels;
+    }
+    setOverview({ tasks, score, achievements, minutes, levelsDone, levelsTotal, childCount: childrenData.length });
+    setOverviewLoading(false);
+  }, []);
 
   useEffect(() => {
     if (auth.currentUser) {
       const parentDocRef = doc(db, 'users', auth.currentUser.uid);
       const unsubscribe = onSnapshot(parentDocRef, async (docSnap) => {
         if (docSnap.exists()) {
-          const data = docSnap.data();
-          const childrenCollectionRef = collection(db, 'users', auth.currentUser.uid, 'children');
-          const childrenSnapshot = await getDocs(query(childrenCollectionRef));
-          const childrenData = childrenSnapshot.docs.map(childDoc => ({
-            id: childDoc.id,
-            ...childDoc.data()
-          }));
-          setParentData({ ...data, children: childrenData });
-
-          // Family-wide learning overview (mirrors the totals shown on /analytics)
-          const learningSubjects = Array.isArray(data.learningSubjects) && data.learningSubjects.length > 0
-            ? data.learningSubjects
-            : ["English", "Math", "Science", "Tamil"];
-          let tasks = 0, score = 0, achievements = 0, minutes = 0, levelsDone = 0, levelsTotal = 0;
-          for (const kid of childrenData) {
-            let s;
-            try {
-              const fs = await getChildStats(kid.id);
-              const fa = await getChildAchievements(kid.id);
-              s = Object.keys(fs).length ? fs : loadStats(kid.id);
-              achievements += fa.length || loadUnlockedAchievements(kid.id).length;
-            } catch {
-              s = loadStats(kid.id);
-              achievements += loadUnlockedAchievements(kid.id).length;
-            }
-            tasks += s.totalTasksCompleted || 0;
-            score += s.totalScore || 0;
-            minutes += Math.round((s.totalTimeTaken || 0) / 60);
-            const completedTaskIds = new Set(s.completedTasks_list || []);
-            const progress = computeLevelProgress(kid, learningSubjects, completedTaskIds);
-            levelsDone += progress.completedLevels;
-            levelsTotal += progress.totalLevels;
-          }
-          setOverview({ tasks, score, achievements, minutes, levelsDone, levelsTotal, childCount: childrenData.length });
-          setOverviewLoading(false);
+          await refreshChildrenAndOverview(docSnap.data());
         } else {
           setParentData(null);
           setOverviewLoading(false);
@@ -72,7 +81,16 @@ const ParentDashboard = () => {
       });
       return () => unsubscribe();
     }
-  }, []);
+  }, [refreshChildrenAndOverview]);
+
+  // A learner was just added or edited — re-pull the children subcollection
+  // and bump ChildrenList's refresh key so both update immediately, with no
+  // page reload.
+  const handleChildSaved = () => {
+    setShowAddChildModal(false);
+    if (parentData) refreshChildrenAndOverview(parentData);
+    setChildrenRefreshKey((k) => k + 1);
+  };
 
   if (loading) return <DashboardSkeleton />;
 
@@ -151,7 +169,7 @@ const ParentDashboard = () => {
               title="Your Learners"
             >
               <Suspense fallback={<DashboardSkeleton />}>
-                <ChildrenList />
+                <ChildrenList refreshKey={childrenRefreshKey} />
               </Suspense>
             </SectionCard>
           </div>
@@ -186,7 +204,7 @@ const ParentDashboard = () => {
           <Modal onClose={() => setShowAddChildModal(false)} unstyled>
             <AddChildForm
               onClose={() => setShowAddChildModal(false)}
-              onSaveSuccess={() => setShowAddChildModal(false)}
+              onSaveSuccess={handleChildSaved}
             />
           </Modal>
         </Suspense>

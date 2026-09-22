@@ -77,7 +77,7 @@ function ChildQuickStats({ child, learningSubjects }) {
 
 const DEFAULT_LEARNING_SUBJECTS = ["English", "Math", "Science", "Tamil"];
 
-const ChildrenList = () => {
+const ChildrenList = ({ refreshKey } = {}) => {
   const [children, setChildren] = useState([]);
   const [learningSubjects, setLearningSubjects] = useState(DEFAULT_LEARNING_SUBJECTS);
   const [loading, setLoading] = useState(true);
@@ -121,7 +121,9 @@ const ChildrenList = () => {
     };
 
     fetchChildren();
-  }, []);
+    // refreshKey is bumped by the parent right after a learner is added or
+    // edited, so this list updates immediately without a page reload.
+  }, [refreshKey]);
 
   const handleManageChild = (child) => {
     sessionStorage.setItem('childUser', JSON.stringify(child));
