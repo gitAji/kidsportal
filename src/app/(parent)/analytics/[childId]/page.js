@@ -102,12 +102,12 @@ function SectionCard({ icon, title, right, children }) {
   );
 }
 
-function ModuleBadge({ status }) {
+function ModuleBadge({ status, pct }) {
   if (status === "finished") {
     return <span className="flex items-center gap-1 text-[11px] font-black uppercase tracking-wider text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full px-2.5 py-1"><FaCheckCircle className="text-[10px]" /> Finished</span>;
   }
   if (status === "in-progress") {
-    return <span className="text-[11px] font-black uppercase tracking-wider text-amber-600 bg-amber-50 border border-amber-100 rounded-full px-2.5 py-1">In Progress</span>;
+    return <span className="text-[11px] font-black uppercase tracking-wider text-amber-600 bg-amber-50 border border-amber-100 rounded-full px-2.5 py-1">{pct}% In Progress</span>;
   }
   return <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 bg-slate-100 border border-slate-200 rounded-full px-2.5 py-1">Not Started</span>;
 }
@@ -197,16 +197,21 @@ export default function ChildReportPage() {
       const modules = Object.entries(moduleMap).map(([name, lvls]) => {
         const done = lvls.filter((l) => l.isCompleted).length;
         const status = done === lvls.length ? "finished" : done > 0 ? "in-progress" : "not-started";
-        return { name, total: lvls.length, done, status };
+        const totalTasksInModule = lvls.reduce((n, l) => n + l.totalTasks, 0);
+        const completedTasksInModule = lvls.reduce((n, l) => n + l.completedCount, 0);
+        const modulePct = totalTasksInModule > 0 ? Math.round((completedTasksInModule / totalTasksInModule) * 100) : 0;
+        return { name, total: lvls.length, done, status, pct: modulePct };
       });
 
-      const subjectEntries = history.filter((h) => h.subjectId === subject.subjectId && (h.type === "quiz" || h.type === "exam"));
-      const accuracy = accuracyFor(subjectEntries);
+      const allSubjectEntries = history.filter((h) => h.subjectId === subject.subjectId);
+      const gradedSubjectEntries = allSubjectEntries.filter((h) => h.type === "quiz" || h.type === "exam");
+      const accuracy = accuracyFor(gradedSubjectEntries);
+      const subjectXP = allSubjectEntries.reduce((n, h) => n + (h.score || 0), 0);
 
       return {
         subjectId: subject.subjectId,
         subjectName: subject.subjectName || subjectDisplayName(subject.subjectId),
-        totalLevels, completedLevels, pct, levels, modules, accuracy,
+        totalLevels, completedLevels, pct, levels, modules, accuracy, subjectXP,
       };
     });
   }, [subjects, completedTaskIds, history]);
@@ -229,6 +234,27 @@ export default function ChildReportPage() {
     () => history.filter((h) => h.type === "exam").map((e) => ({ ...e, pct: accuracyFor([e]) })),
     [history]
   );
+
+  // Group every exam attempt by the level it belongs to, so a parent can see
+  // exactly how many times an exam was attempted and the result of each try
+  // — not just the latest one.
+  const examsByLevel = useMemo(() => {
+    const map = {};
+    examEntries.forEach((e) => {
+      const key = e.levelId || "unknown";
+      if (!map[key]) map[key] = [];
+      map[key].push(e);
+    });
+    return Object.values(map)
+      .map((attempts) => {
+        const sorted = [...attempts].sort((a, b) => (a.timestamp?.seconds || 0) - (b.timestamp?.seconds || 0));
+        const numbered = sorted.map((a, i) => ({ ...a, seq: i + 1 }));
+        const bestPct = Math.max(...sorted.map((a) => a.pct ?? 0));
+        const latest = sorted[sorted.length - 1];
+        return { levelId: latest.levelId, subjectId: latest.subjectId, attempts: numbered, attemptCount: sorted.length, bestPct, latest };
+      })
+      .sort((a, b) => (b.latest.timestamp?.seconds || 0) - (a.latest.timestamp?.seconds || 0));
+  }, [examEntries]);
 
   const totalLevelsAll = subjectReports.reduce((n, s) => n + s.totalLevels, 0);
   const completedLevelsAll = subjectReports.reduce((n, s) => n + s.completedLevels, 0);
@@ -337,6 +363,7 @@ export default function ChildReportPage() {
                       <p className="text-xs font-bold text-slate-400 mt-0.5">
                         {s.completedLevels} of {s.totalLevels} levels complete
                         {s.accuracy !== null && <> • {s.accuracy}% accuracy on quizzes &amp; exams</>}
+                        {" "}• {s.subjectXP.toLocaleString()} XP earned
                       </p>
                     </div>
                     <div className="flex items-center gap-3">
@@ -353,7 +380,7 @@ export default function ChildReportPage() {
                           <p className="text-sm font-bold text-slate-700 truncate">{m.name.replace(/^Module \d+:\s*/, "")}</p>
                           <p className="text-[11px] font-medium text-slate-400">{m.done} of {m.total} levels</p>
                         </div>
-                        <ModuleBadge status={m.status} />
+                        <ModuleBadge status={m.status} pct={m.pct} />
                       </div>
                     ))}
                   </div>
@@ -364,30 +391,58 @@ export default function ChildReportPage() {
         </SectionCard>
 
         {/* ── Exam Results ── */}
-        <SectionCard icon={<FaMedal className="text-amber-500" />} title="Exam Results" right={<span className="text-xs font-bold text-slate-400">{examEntries.length} exam{examEntries.length === 1 ? "" : "s"} taken</span>}>
-          {examEntries.length === 0 ? (
+        <SectionCard
+          icon={<FaMedal className="text-amber-500" />}
+          title="Exam Results"
+          right={<span className="text-xs font-bold text-slate-400">{examEntries.length} attempt{examEntries.length === 1 ? "" : "s"} across {examsByLevel.length} exam{examsByLevel.length === 1 ? "" : "s"}</span>}
+        >
+          {examsByLevel.length === 0 ? (
             <p className="text-sm font-bold text-slate-400 text-center py-8">No exams taken yet.</p>
           ) : (
-            <div className="space-y-2">
-              {examEntries.map((e) => {
-                const lookup = levelLookup[e.levelId] || {};
-                const tier = tierForPct(e.pct);
+            <div className="space-y-4">
+              {examsByLevel.map((group) => {
+                const lookup = levelLookup[group.levelId] || {};
+                const bestTier = tierForPct(group.bestPct);
                 return (
-                  <div key={e.id} className="flex flex-wrap items-center justify-between gap-3 bg-slate-50 border border-slate-100 rounded-xl px-4 py-3">
-                    <div className="min-w-0">
-                      <p className="text-sm font-black text-slate-800 truncate">
-                        {lookup.levelName || e.levelId} <span className="text-slate-400 font-medium">· {lookup.subjectName || subjectDisplayName(e.subjectId)}</span>
-                      </p>
-                      <p className="text-xs text-slate-400 font-medium">{formatDate(e.timestamp)}{e.isRetake && ` • Attempt #${e.attemptNumber || 1}`}</p>
-                    </div>
-                    <div className="flex items-center gap-2 flex-shrink-0">
-                      {tier && (
-                        <span className={`flex items-center gap-1 text-[11px] font-black uppercase tracking-wider rounded-full px-2.5 py-1 border ${tier.color}`}>
-                          {tier.emoji} {tier.label}
+                  <div key={group.levelId} className="border border-slate-100 rounded-2xl overflow-hidden">
+                    <div className="bg-slate-50 px-5 py-3.5 flex flex-wrap items-center justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-sm font-black text-slate-800 truncate">
+                          {lookup.levelName || group.levelId} <span className="text-slate-400 font-medium">· {lookup.subjectName || subjectDisplayName(group.subjectId)}</span>
+                        </p>
+                        <p className="text-xs font-bold text-slate-400 mt-0.5">
+                          {group.attemptCount} attempt{group.attemptCount === 1 ? "" : "s"} • Best score: {group.bestPct}%
+                        </p>
+                      </div>
+                      {bestTier && (
+                        <span className={`flex items-center gap-1 text-[11px] font-black uppercase tracking-wider rounded-full px-2.5 py-1 border flex-shrink-0 ${bestTier.color}`}>
+                          {bestTier.emoji} Best: {bestTier.label}
                         </span>
                       )}
-                      <span className="text-sm font-black text-slate-700">{e.pct !== null ? `${e.pct}%` : "—"}</span>
-                      <span className="text-xs font-bold text-slate-400">({e.score ?? 0} pts)</span>
+                    </div>
+                    <div className="p-4 space-y-2">
+                      {group.attempts.map((a) => {
+                        const tier = tierForPct(a.pct);
+                        return (
+                          <div key={a.id} className="flex flex-wrap items-center justify-between gap-3 bg-white border border-slate-100 rounded-xl px-4 py-2.5">
+                            <div className="flex items-center gap-3 min-w-0">
+                              <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 bg-slate-100 rounded-full px-2 py-1 flex-shrink-0">
+                                Attempt {a.seq}
+                              </span>
+                              <p className="text-xs text-slate-400 font-medium truncate">{formatDate(a.timestamp)}</p>
+                            </div>
+                            <div className="flex items-center gap-2 flex-shrink-0">
+                              {tier && (
+                                <span className={`flex items-center gap-1 text-[11px] font-black uppercase tracking-wider rounded-full px-2.5 py-1 border ${tier.color}`}>
+                                  {tier.emoji} {tier.label}
+                                </span>
+                              )}
+                              <span className="text-sm font-black text-slate-700">{a.pct !== null ? `${a.pct}%` : "—"}</span>
+                              <span className="text-xs font-bold text-slate-400">({a.score ?? 0} pts)</span>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 );
