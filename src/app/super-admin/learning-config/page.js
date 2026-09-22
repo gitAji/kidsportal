@@ -45,6 +45,7 @@ const ALL_SUBJECTS = [
     { id: "History", emoji: "📜", category: "General" },
     { id: "Geography", emoji: "🌍", category: "General" },
     { id: "Computer Science", emoji: "💻", category: "General" },
+    { id: "Coding", emoji: "⌨️", category: "General" },
     { id: "Physical Education", emoji: "⚽", category: "General" },
 ];
 
