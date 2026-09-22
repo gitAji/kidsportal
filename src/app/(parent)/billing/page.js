@@ -340,7 +340,7 @@ export default function BillingPage() {
                             {portalLoading ? <FaSpinner className="animate-spin" /> : <FaCreditCard />} Manage Subscription
                         </button>
                     ) : (
-                        <a href="/pricing" className="w-full py-4 bg-blue-600 text-white text-sm font-black rounded-2xl hover:bg-blue-700 shadow-md shadow-blue-100 block text-center">
+                        <a href="/pricing" className="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-sm font-black rounded-2xl hover:scale-[1.01] shadow-lg shadow-blue-200 block text-center transition-all">
                             {isExpired ? "Renew Subscription" : "Upgrade Plan"}
                         </a>
                     )}

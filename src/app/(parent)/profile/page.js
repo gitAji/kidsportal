@@ -611,7 +611,7 @@ export default function SettingsPage() {
                         <button
                           onClick={handleStripeCheckout}
                           disabled={checkoutLoading}
-                          className="w-full py-3.5 bg-blue-600 text-white text-sm font-black rounded-xl hover:bg-blue-700 transition-all flex items-center justify-center gap-2 disabled:opacity-60 shadow-md shadow-blue-100"
+                          className="w-full py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-sm font-black rounded-xl hover:scale-[1.01] transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:hover:scale-100 shadow-lg shadow-blue-200"
                         >
                           {checkoutLoading
                             ? <><FaSpinner className="animate-spin" /> Redirecting to Stripe…</>

@@ -165,9 +165,13 @@ const Subscription = () => {
       {/* CTA → Billing page */}
       <Link
         href="/billing"
-        className="w-full py-2.5 flex items-center justify-center gap-2 text-xs font-black rounded-xl border border-slate-100 bg-slate-50 text-slate-600 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-all"
+        className={
+          isPaid
+            ? "w-full py-2.5 flex items-center justify-center gap-2 text-xs font-black rounded-xl border border-slate-100 bg-slate-50 text-slate-600 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-all"
+            : "w-full py-3 flex items-center justify-center gap-2 text-sm font-black rounded-xl text-white bg-gradient-to-r from-blue-600 to-cyan-500 shadow-lg shadow-blue-200 hover:scale-[1.02] hover:shadow-cyan-300 active:scale-[0.98] transition-all"
+        }
       >
-        {isExpired ? 'Renew Plan' : isPaid ? 'Manage Billing' : 'View Plans'}
+        {isExpired ? 'Renew Now' : isPaid ? 'Manage Billing' : 'Upgrade to Premium'}
         <FaArrowRight className="text-[10px]" />
       </Link>
     </div>
