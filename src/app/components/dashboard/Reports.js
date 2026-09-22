@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { jsPDF } from 'jspdf';
-import { FaFilePdf, FaChartBar, FaClipboardList, FaAward, FaCertificate } from 'react-icons/fa';
+import { FaFilePdf, FaChartBar, FaClipboardList, FaAward, FaCertificate, FaLock } from 'react-icons/fa';
 
 const Reports = ({ childData }) => {
   const [certSubject, setCertSubject] = useState('overall');
+  const completedTaskCount = (childData.assignedTasks || []).filter(t => t.status === 'completed').length;
+  const hasEarnedCertificate = completedTaskCount > 0;
   const generateProgressReport = () => {
     const doc = new jsPDF();
     doc.setFontSize(18);
@@ -191,28 +193,41 @@ const Reports = ({ childData }) => {
             <FaAward className="text-amber-500" /> Certificates of Excellence
           </h4>
           <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-2xl p-6 shadow-sm">
-            <p className="text-slate-600 mb-5 font-medium">Generate a beautifully designed PDF certificate for your child based on their star and task completions! Features automatic Gold, Silver, and Bronze tiering.</p>
+            {hasEarnedCertificate ? (
+              <>
+                <p className="text-slate-600 mb-5 font-medium">Generate a beautifully designed PDF certificate for your child based on their star and task completions! Features automatic Gold, Silver, and Bronze tiering.</p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <div className="w-full sm:w-auto flex-1">
-                <select
-                  className="w-full bg-white border-2 border-amber-200 text-slate-800 text-sm font-bold rounded-xl px-4 py-4 outline-none focus:ring-2 focus:ring-amber-500/30 transition-all cursor-pointer"
-                  value={certSubject}
-                  onChange={(e) => setCertSubject(e.target.value)}
-                >
-                  <option value="overall">Overall Achievement</option>
-                  <option value="english">English Module</option>
-                  <option value="math">Mathematics Module</option>
-                  <option value="science">Science Module</option>
-                </select>
+                <div className="flex flex-col sm:flex-row items-center gap-4">
+                  <div className="w-full sm:w-auto flex-1">
+                    <select
+                      className="w-full bg-white border-2 border-amber-200 text-slate-800 text-sm font-bold rounded-xl px-4 py-4 outline-none focus:ring-2 focus:ring-amber-500/30 transition-all cursor-pointer"
+                      value={certSubject}
+                      onChange={(e) => setCertSubject(e.target.value)}
+                    >
+                      <option value="overall">Overall Achievement</option>
+                      <option value="english">English Module</option>
+                      <option value="math">Mathematics Module</option>
+                      <option value="science">Science Module</option>
+                    </select>
+                  </div>
+                  <button
+                    onClick={generateCertificate}
+                    className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black uppercase tracking-widest rounded-xl shadow-lg hover:shadow-amber-500/40 transition-all flex items-center justify-center gap-3 drop-shadow-sm"
+                  >
+                    <FaCertificate className="text-xl" /> Generate Certificate
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="flex items-center gap-4 text-slate-500">
+                <div className="w-12 h-12 rounded-full bg-white border-2 border-amber-200 flex items-center justify-center flex-shrink-0">
+                  <FaLock className="text-amber-400" />
+                </div>
+                <p className="font-medium text-sm">
+                  {childData.name} hasn&apos;t completed any lessons yet. Once they finish their first task, a certificate will be ready to generate here!
+                </p>
               </div>
-              <button
-                onClick={generateCertificate}
-                className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black uppercase tracking-widest rounded-xl shadow-lg hover:shadow-amber-500/40 transition-all flex items-center justify-center gap-3 drop-shadow-sm"
-              >
-                <FaCertificate className="text-xl" /> Generate Certificate
-              </button>
-            </div>
+            )}
           </div>
         </div>
       </div>
