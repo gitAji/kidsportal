@@ -1322,6 +1322,36 @@
                       "questionText": "What is 8 tens and 0 ones written as a number?",
                       "correctAnswer": "80",
                       "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-1-quiz-q5",
+                      "questionText": "What is the value of the digit 4 in 84?",
+                      "correctAnswer": "40",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4",
+                        "40",
+                        "84",
+                        "48"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-1-quiz-q6",
+                      "questionText": "Write the number that has 3 tens and 8 ones.",
+                      "correctAnswer": "38",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-1-quiz-q7",
+                      "questionText": "Which of these is the same as 60 + 2?",
+                      "correctAnswer": "62",
+                      "type": "multiple-choice",
+                      "options": [
+                        "26",
+                        "62",
+                        "620",
+                        "602"
+                      ]
                     }
                   ]
                 },
@@ -1378,6 +1408,36 @@
                         "64",
                         "75",
                         "54"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-1-exam-q6",
+                      "questionText": "Partition 45 into tens and ones. Write your answer as tens + ones, e.g. 50 + 6.",
+                      "correctAnswer": "40 + 5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-1-exam-q7",
+                      "questionText": "What is the value of the digit 7 in 47?",
+                      "correctAnswer": "7",
+                      "type": "multiple-choice",
+                      "options": [
+                        "7",
+                        "70",
+                        "47",
+                        "74"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-1-exam-q8",
+                      "questionText": "Which number is 10 more than 38?",
+                      "correctAnswer": "48",
+                      "type": "multiple-choice",
+                      "options": [
+                        "28",
+                        "39",
+                        "48",
+                        "58"
                       ]
                     }
                   ]
@@ -1439,6 +1499,36 @@
                       "questionText": "What is 53 - 26?",
                       "correctAnswer": "27",
                       "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-2-quiz-q5",
+                      "questionText": "What is 34 + 29?",
+                      "correctAnswer": "63",
+                      "type": "multiple-choice",
+                      "options": [
+                        "63",
+                        "53",
+                        "73",
+                        "54"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-2-quiz-q6",
+                      "questionText": "What is 71 - 38?",
+                      "correctAnswer": "33",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-2-quiz-q7",
+                      "questionText": "What is 18 + 47?",
+                      "correctAnswer": "65",
+                      "type": "multiple-choice",
+                      "options": [
+                        "65",
+                        "55",
+                        "75",
+                        "64"
+                      ]
                     }
                   ]
                 },
@@ -1489,6 +1579,30 @@
                       "questionId": "math-1-level-2-exam-q5",
                       "questionText": "What is 19 + 56?",
                       "correctAnswer": "75",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-2-exam-q6",
+                      "questionText": "What is 26 + 39?",
+                      "correctAnswer": "65",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-2-exam-q7",
+                      "questionText": "What is 92 - 58?",
+                      "correctAnswer": "34",
+                      "type": "multiple-choice",
+                      "options": [
+                        "34",
+                        "44",
+                        "36",
+                        "24"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-2-exam-q8",
+                      "questionText": "What is 57 + 28?",
+                      "correctAnswer": "85",
                       "type": "identification"
                     }
                   ]
@@ -1550,6 +1664,36 @@
                       "questionText": "What is 20 / 5?",
                       "correctAnswer": "4",
                       "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-3-quiz-q5",
+                      "questionText": "What is 2 x 8?",
+                      "correctAnswer": "16",
+                      "type": "multiple-choice",
+                      "options": [
+                        "16",
+                        "10",
+                        "18",
+                        "14"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-3-quiz-q6",
+                      "questionText": "What is 5 x 9?",
+                      "correctAnswer": "45",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-3-quiz-q7",
+                      "questionText": "What is 16 / 2?",
+                      "correctAnswer": "8",
+                      "type": "multiple-choice",
+                      "options": [
+                        "8",
+                        "6",
+                        "9",
+                        "7"
+                      ]
                     }
                   ]
                 },
@@ -1607,6 +1751,30 @@
                         "12",
                         "8"
                       ]
+                    },
+                    {
+                      "questionId": "math-1-level-3-exam-q6",
+                      "questionText": "What is 10 x 4?",
+                      "correctAnswer": "40",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-3-exam-q7",
+                      "questionText": "What is 5 x 7?",
+                      "correctAnswer": "35",
+                      "type": "multiple-choice",
+                      "options": [
+                        "35",
+                        "30",
+                        "25",
+                        "40"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-3-exam-q8",
+                      "questionText": "What is 30 / 5?",
+                      "correctAnswer": "6",
+                      "type": "identification"
                     }
                   ]
                 }
@@ -1667,6 +1835,36 @@
                       "questionText": "What is a third of 9?",
                       "correctAnswer": "3",
                       "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-4-quiz-q5",
+                      "questionText": "What is half of 8?",
+                      "correctAnswer": "4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4",
+                        "2",
+                        "16",
+                        "3"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-4-quiz-q6",
+                      "questionText": "What is a third of 15?",
+                      "correctAnswer": "5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-4-quiz-q7",
+                      "questionText": "What fraction is shown if 1 out of 4 equal parts is coloured?",
+                      "correctAnswer": "1/4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1/4",
+                        "1/2",
+                        "4/1",
+                        "3/4"
+                      ]
                     }
                   ]
                 },
@@ -1723,6 +1921,36 @@
                         "10",
                         "20",
                         "25"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-4-exam-q6",
+                      "questionText": "What is a quarter of 24?",
+                      "correctAnswer": "6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-4-exam-q7",
+                      "questionText": "What is half of 22?",
+                      "correctAnswer": "11",
+                      "type": "multiple-choice",
+                      "options": [
+                        "11",
+                        "10",
+                        "12",
+                        "9"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-4-exam-q8",
+                      "questionText": "Which fraction means 'one of three equal parts'?",
+                      "correctAnswer": "1/3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1/3",
+                        "1/2",
+                        "1/4",
+                        "3/3"
                       ]
                     }
                   ]
@@ -1784,6 +2012,36 @@
                       "questionText": "How many millilitres are in 1 litre?",
                       "correctAnswer": "1000",
                       "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-5-quiz-q5",
+                      "questionText": "Which is heavier: 3kg or 2500g?",
+                      "correctAnswer": "3kg",
+                      "type": "multiple-choice",
+                      "options": [
+                        "3kg",
+                        "2500g",
+                        "They are equal",
+                        "Cannot tell"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-5-quiz-q6",
+                      "questionText": "How many centimetres are in 2 metres?",
+                      "correctAnswer": "200",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-5-quiz-q7",
+                      "questionText": "Which holds more: 1 litre or 900ml?",
+                      "correctAnswer": "1 litre",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1 litre",
+                        "900ml",
+                        "They are equal",
+                        "Cannot tell"
+                      ]
                     }
                   ]
                 },
@@ -1841,6 +2099,30 @@
                         "Litres",
                         "Metres"
                       ]
+                    },
+                    {
+                      "questionId": "math-1-level-5-exam-q6",
+                      "questionText": "How many millilitres are in 2 litres?",
+                      "correctAnswer": "2000",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-5-exam-q7",
+                      "questionText": "Which is longer: 180cm or 2m?",
+                      "correctAnswer": "2m",
+                      "type": "multiple-choice",
+                      "options": [
+                        "180cm",
+                        "2m",
+                        "They are equal",
+                        "Cannot tell"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-5-exam-q8",
+                      "questionText": "How many grams are in 3 kilograms?",
+                      "correctAnswer": "3000",
+                      "type": "identification"
                     }
                   ]
                 }
@@ -1901,6 +2183,36 @@
                       "questionText": "What is £1 + 45p?",
                       "correctAnswer": "£1.45",
                       "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-6-quiz-q5",
+                      "questionText": "How many pence make \u00a33?",
+                      "correctAnswer": "300",
+                      "type": "multiple-choice",
+                      "options": [
+                        "300",
+                        "30",
+                        "3000",
+                        "3"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-6-quiz-q6",
+                      "questionText": "What is 40p + 35p?",
+                      "correctAnswer": "75p",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-6-quiz-q7",
+                      "questionText": "Which amount equals \u00a35?",
+                      "correctAnswer": "500p",
+                      "type": "multiple-choice",
+                      "options": [
+                        "500p",
+                        "50p",
+                        "5000p",
+                        "5p"
+                      ]
                     }
                   ]
                 },
@@ -1951,6 +2263,30 @@
                       "questionId": "math-1-level-6-exam-q5",
                       "questionText": "What is £10 - £4.20?",
                       "correctAnswer": "£5.80",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-6-exam-q6",
+                      "questionText": "What is 80p + 45p?",
+                      "correctAnswer": "\u00a31.25",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-6-exam-q7",
+                      "questionText": "You have \u00a310 and spend \u00a33.60. How much is left?",
+                      "correctAnswer": "\u00a36.40",
+                      "type": "multiple-choice",
+                      "options": [
+                        "\u00a36.40",
+                        "\u00a33.60",
+                        "\u00a37.40",
+                        "\u00a36.60"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-6-exam-q8",
+                      "questionText": "What is \u00a32.75 written in pence?",
+                      "correctAnswer": "275p",
                       "type": "identification"
                     }
                   ]
@@ -2012,6 +2348,36 @@
                       "questionText": "How many minutes are there between 4:00 and 4:25?",
                       "correctAnswer": "25",
                       "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-7-quiz-q5",
+                      "questionText": "The minute hand points to the 8. How many minutes past the hour is it?",
+                      "correctAnswer": "40",
+                      "type": "multiple-choice",
+                      "options": [
+                        "40",
+                        "8",
+                        "20",
+                        "45"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-7-quiz-q6",
+                      "questionText": "If the minute hand points to the 5, how many minutes past the hour is it?",
+                      "correctAnswer": "25",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-7-quiz-q7",
+                      "questionText": "What time is shown when the hour hand is just past 6 and the minute hand points to the 3?",
+                      "correctAnswer": "6:15",
+                      "type": "multiple-choice",
+                      "options": [
+                        "6:15",
+                        "6:45",
+                        "3:15",
+                        "3:45"
+                      ]
                     }
                   ]
                 },
@@ -2069,6 +2435,30 @@
                         "6:30",
                         "6:35"
                       ]
+                    },
+                    {
+                      "questionId": "math-1-level-7-exam-q6",
+                      "questionText": "What time is 15 minutes before 9:00?",
+                      "correctAnswer": "8:45",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-7-exam-q7",
+                      "questionText": "How many minutes are in a quarter of an hour?",
+                      "correctAnswer": "15",
+                      "type": "multiple-choice",
+                      "options": [
+                        "15",
+                        "30",
+                        "45",
+                        "60"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-7-exam-q8",
+                      "questionText": "It is 4:50. How many minutes until 5:00?",
+                      "correctAnswer": "10",
+                      "type": "identification"
                     }
                   ]
                 }
@@ -2129,6 +2519,36 @@
                       "questionText": "How many edges does a cube have?",
                       "correctAnswer": "12",
                       "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-8-quiz-q5",
+                      "questionText": "How many sides does an octagon have?",
+                      "correctAnswer": "8",
+                      "type": "multiple-choice",
+                      "options": [
+                        "8",
+                        "6",
+                        "7",
+                        "9"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-8-quiz-q6",
+                      "questionText": "How many vertices (corners) does a square have?",
+                      "correctAnswer": "4",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-8-quiz-q7",
+                      "questionText": "How many edges does a triangular-based pyramid (tetrahedron) have?",
+                      "correctAnswer": "6",
+                      "type": "multiple-choice",
+                      "options": [
+                        "6",
+                        "4",
+                        "8",
+                        "3"
+                      ]
                     }
                   ]
                 },
@@ -2186,6 +2606,30 @@
                         "8",
                         "5"
                       ]
+                    },
+                    {
+                      "questionId": "math-1-level-8-exam-q6",
+                      "questionText": "How many sides does a heptagon have?",
+                      "correctAnswer": "7",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-8-exam-q7",
+                      "questionText": "Which shape has exactly 4 equal sides and 4 right angles?",
+                      "correctAnswer": "Square",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Square",
+                        "Triangle",
+                        "Circle",
+                        "Pentagon"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-8-exam-q8",
+                      "questionText": "How many faces does a cube have?",
+                      "correctAnswer": "6",
+                      "type": "identification"
                     }
                   ]
                 }
@@ -2246,6 +2690,36 @@
                       "questionText": "If you face East and make a half turn, which direction do you face?",
                       "correctAnswer": "West",
                       "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-9-quiz-q5",
+                      "questionText": "If you face South and make a quarter turn clockwise, which direction do you face?",
+                      "correctAnswer": "West",
+                      "type": "multiple-choice",
+                      "options": [
+                        "West",
+                        "East",
+                        "North",
+                        "South"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-9-quiz-q6",
+                      "questionText": "If you face West and make a quarter turn anticlockwise, which direction do you face?",
+                      "correctAnswer": "South",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-9-quiz-q7",
+                      "questionText": "Three quarter turns clockwise is the same as how many quarter turns anticlockwise?",
+                      "correctAnswer": "1",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
                     }
                   ]
                 },
@@ -2303,6 +2777,30 @@
                         "Half turn",
                         "Quarter turn"
                       ]
+                    },
+                    {
+                      "questionId": "math-1-level-9-exam-q6",
+                      "questionText": "If you face East and make a half turn, which direction do you face?",
+                      "correctAnswer": "West",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-9-exam-q7",
+                      "questionText": "If you face North and make a quarter turn anticlockwise, which direction do you face?",
+                      "correctAnswer": "West",
+                      "type": "multiple-choice",
+                      "options": [
+                        "West",
+                        "East",
+                        "South",
+                        "North"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-9-exam-q8",
+                      "questionText": "How many quarter turns make a full turn?",
+                      "correctAnswer": "4",
+                      "type": "identification"
                     }
                   ]
                 }
@@ -2363,6 +2861,36 @@
                       "questionText": "A table shows Monday: 6 sunny hours, Tuesday: 4 sunny hours. How many more sunny hours were there on Monday?",
                       "correctAnswer": "2",
                       "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-10-quiz-q5",
+                      "questionText": "In a pictogram, each symbol = 3 pets. If there are 5 symbols in the 'cats' row, how many cats are there?",
+                      "correctAnswer": "15",
+                      "type": "multiple-choice",
+                      "options": [
+                        "15",
+                        "8",
+                        "10",
+                        "20"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-10-quiz-q6",
+                      "questionText": "A table shows 4 red cars, 6 blue cars and 3 green cars. How many cars in total?",
+                      "correctAnswer": "13",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-10-quiz-q7",
+                      "questionText": "In a pictogram, each symbol = 10 books. If there are 2 symbols, how many books?",
+                      "correctAnswer": "20",
+                      "type": "multiple-choice",
+                      "options": [
+                        "20",
+                        "10",
+                        "12",
+                        "30"
+                      ]
                     }
                   ]
                 },
@@ -2420,6 +2948,30 @@
                         "4",
                         "8"
                       ]
+                    },
+                    {
+                      "questionId": "math-1-level-10-exam-q6",
+                      "questionText": "A table shows 9 cats, 4 dogs and 2 rabbits. How many pets altogether?",
+                      "correctAnswer": "15",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-10-exam-q7",
+                      "questionText": "In a pictogram, each symbol = 5 sweets. If there are 4 symbols, how many sweets?",
+                      "correctAnswer": "20",
+                      "type": "multiple-choice",
+                      "options": [
+                        "20",
+                        "9",
+                        "16",
+                        "24"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-10-exam-q8",
+                      "questionText": "In a table, class A has 14 pupils and class B has 11 pupils. How many pupils in both classes?",
+                      "correctAnswer": "25",
+                      "type": "identification"
                     }
                   ]
                 }
