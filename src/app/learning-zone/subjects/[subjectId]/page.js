@@ -28,7 +28,6 @@ const subjectDisplayNames = {
   english: 'English',
   math: 'Math',
   science: 'Science',
-  ariviyal: 'Science',
   tamil: 'Tamil',
   computerscience: 'Computer Science',
   coding: 'Coding',
