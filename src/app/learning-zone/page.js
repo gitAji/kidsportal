@@ -9,7 +9,7 @@ import { getSubjectsByGrade } from '../utils/learningData';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
-import { FaBookOpen, FaCalculator, FaMicroscope, FaLanguage, FaStar, FaPlay, FaCode, FaLaptopCode } from 'react-icons/fa';
+import { FaBookOpen, FaCalculator, FaMicroscope, FaLanguage, FaStar, FaPlay, FaCode, FaLaptopCode, FaGamepad } from 'react-icons/fa';
 import { getChildStats } from '@/app/utils/firestoreService';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import TimeLimitBlockedScreen from '../components/child/TimeLimitBlockedScreen';
@@ -206,6 +206,34 @@ export default function LearningZonePage() {
             Free Preview — Level 1 of every subject is open to try! Subscribe to unlock everything.
           </div>
         )}
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15 }}
+        className="w-full max-w-4xl mx-auto mb-12 z-10 px-4"
+      >
+        <Link href="/learning-zone/games">
+          <motion.div
+            whileHover={{ scale: 1.015, y: -3 }}
+            whileTap={{ scale: 0.98 }}
+            className="relative overflow-hidden rounded-[2rem] p-6 sm:p-8 flex items-center justify-between gap-4 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 shadow-xl border-b-[6px] border-black/10 cursor-pointer"
+          >
+            <div className="flex items-center gap-4 sm:gap-6 relative z-10">
+              <div className="bg-white/20 backdrop-blur-sm w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shadow-inner shrink-0">
+                <FaGamepad size={28} className="text-white drop-shadow-sm" />
+              </div>
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white drop-shadow-md tracking-tight leading-tight">Games</h2>
+                <p className="text-white/90 font-medium text-sm sm:text-base">Play games that match what you're learning!</p>
+              </div>
+            </div>
+            <div className="hidden sm:flex items-center gap-2 text-white font-bold bg-black/20 px-5 py-2.5 rounded-full backdrop-blur-md relative z-10 shrink-0">
+              <FaPlay className="text-xs" /> Play Now
+            </div>
+          </motion.div>
+        </Link>
       </motion.div>
 
       {subjectsLoading ? (
