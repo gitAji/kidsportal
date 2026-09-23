@@ -178,21 +178,15 @@ export default function LearningZonePage() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-        className="text-center z-10 w-full max-w-4xl mx-auto mb-16 mt-8"
+        className="text-center z-10 w-full max-w-4xl mx-auto mb-8 mt-4"
       >
-        <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-6 py-2 rounded-full shadow-sm border border-slate-100 mb-6">
+        <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-6 py-2 rounded-full shadow-sm border border-slate-100">
           <FaStar className="text-yellow-400" />
           <p className="text-sm sm:text-base font-bold text-slate-700 uppercase tracking-widest">
             {childUser.grade} {t('explorer')}
           </p>
           <FaStar className="text-yellow-400" />
         </div>
-        <h1 className="text-5xl md:text-7xl font-black text-slate-800 mb-6 tracking-tight">
-          {t('welcome')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">{childUser.name}!</span>
-        </h1>
-        <p className="text-xl md:text-2xl text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
-          {t('ready_adventure')}
-        </p>
         {!childUser.isSubscriptionActive && (
           <div className="mt-6 inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-700 px-5 py-2.5 rounded-full font-bold text-sm">
             <FaStar className="text-amber-400" />
