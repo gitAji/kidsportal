@@ -3,9 +3,10 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../data/db.json';
 import SkeletonLoader from '../../../components/ui/SkeletonLoader';
-import { FaArrowLeft, FaHome, FaLock, FaStar, FaTrophy, FaCheckCircle, FaUnlockAlt, FaLanguage, FaRandom, FaCode, FaArrowRight } from 'react-icons/fa';
+import { FaLock, FaStar, FaTrophy, FaCheckCircle, FaUnlockAlt, FaLanguage, FaRandom, FaCode, FaArrowRight } from 'react-icons/fa';
 import { useChild } from '../../../providers/ChildProvider';
 import { useLanguage } from '../../../providers/LanguageProvider';
+import MinimalBackButton from '../../../components/child/MinimalBackButton';
 import { loadStats } from '../../../utils/achievements';
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -310,7 +311,7 @@ export default function SubjectLevelsPage() {
       <div className="absolute top-20 right-20 text-blue-200 opacity-30 text-9xl transform rotate-12"><FaTrophy /></div>
       <div className="absolute bottom-10 left-10 text-teal-200 opacity-40 text-8xl transform -rotate-12"><FaStar /></div>
 
-      {/* Navigation handled by Global Header */}
+      <MinimalBackButton />
 
       <AnimatePresence>
         {alertMessage && (
