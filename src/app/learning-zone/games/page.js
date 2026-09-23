@@ -9,6 +9,7 @@ import dbData from '../../data/db.json';
 import { loadStats } from '../../utils/achievements';
 import { loadGameStats, hasCompletedLessonInSubject } from '../../utils/gameStats';
 import { getGamesForGrade, CODING_GAME_LINK } from '../../components/games/gamesContent';
+import MinimalBackButton from '../../components/child/MinimalBackButton';
 
 export default function GamesHubPage() {
   const { childUser } = useChild();
@@ -23,6 +24,7 @@ export default function GamesHubPage() {
 
   return (
     <div className="min-h-screen p-4 sm:p-6 md:p-8">
+      <MinimalBackButton />
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}

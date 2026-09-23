@@ -10,6 +10,7 @@ import { getGameById } from '../../../components/games/gamesContent';
 import TapMatchGame from '../../../components/games/TapMatchGame';
 import MemoryPairsGame from '../../../components/games/MemoryPairsGame';
 import TimedReflexGame from '../../../components/games/TimedReflexGame';
+import MinimalBackButton from '../../../components/child/MinimalBackButton';
 
 const ENGINES = {
   'tap-match': TapMatchGame,
@@ -63,5 +64,10 @@ export default function GamePlayerPage() {
     return <div className="text-center p-10 font-bold text-2xl text-gray-600">This game type isn't supported yet.</div>;
   }
 
-  return <Engine game={game} onFinish={handleFinish} />;
+  return (
+    <>
+      <MinimalBackButton />
+      <Engine game={game} onFinish={handleFinish} />
+    </>
+  );
 }
