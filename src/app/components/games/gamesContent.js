@@ -1,9 +1,11 @@
 // Grade-1 pilot content for the Games section. Each game is tied to a real
 // subject/level from db.json (grade-1) so it reinforces what that lesson
 // actually teaches, not just a generic "letters/numbers" placeholder:
-//   - math-1-level-1   "Place Value to 100"      -> tap-match on tens & ones
-//   - english-1-level-1 "Phonics & Spelling"      -> memory pairs on suffixes
-//   - tamil-1-level-1  "Tamil Alphabet: Vowels"   -> timed reflex on uyir ezhuthukkal
+//   - math-1-level-1            "Place Value to 100"          -> tap-match on tens & ones
+//   - english-1-level-1         "Phonics & Spelling"          -> memory pairs on suffixes
+//   - tamil-1-level-1           "Tamil Alphabet: Vowels"      -> timed reflex on uyir ezhuthukkal
+//   - science-1-level-1         "Living Things & Habitats"    -> timed reflex on living vs not
+//   - computerscience-1-level-1 "What is a Computer?"         -> tap-match on parts & uses
 // Coding already has its own dedicated Build Lab (maze/pattern/free-build);
 // the Games hub links out to it rather than duplicating it.
 
@@ -71,6 +73,48 @@ export const GAMES_BY_GRADE = {
           { value: 'ந', isTarget: false }, { value: 'ஐ', isTarget: true }, { value: 'ப', isTarget: false },
           { value: 'ஒ', isTarget: true }, { value: 'ம', isTarget: false }, { value: 'ஓ', isTarget: true },
           { value: 'ய', isTarget: false }, { value: 'ஔ', isTarget: true }, { value: 'ர', isTarget: false },
+        ],
+      },
+    },
+    {
+      id: 'living-things-tap',
+      subjectId: 'science-1',
+      subjectLabel: 'Science',
+      title: 'Living or Not?',
+      description: 'Tap every living thing before time runs out!',
+      engine: 'timed-reflex',
+      icon: '🌱',
+      color: 'from-lime-400 to-green-500',
+      data: {
+        instruction: 'Tap only the LIVING things — they grow, move, and need food and water!',
+        timeLimit: 25,
+        items: [
+          { value: '🐶', isTarget: true }, { value: '🪨', isTarget: false }, { value: '🌼', isTarget: true },
+          { value: '🚗', isTarget: false }, { value: '🐟', isTarget: true }, { value: '🪑', isTarget: false },
+          { value: '🌳', isTarget: true }, { value: '🍂', isTarget: false }, { value: '🦋', isTarget: true },
+          { value: '📱', isTarget: false }, { value: '🐱', isTarget: true }, { value: '🥄', isTarget: false },
+          { value: '🌱', isTarget: true }, { value: '🧸', isTarget: false }, { value: '🐦', isTarget: true },
+          { value: '⚽', isTarget: false },
+        ],
+      },
+    },
+    {
+      id: 'computer-parts-match',
+      subjectId: 'computerscience-1',
+      subjectLabel: 'Computer Science',
+      title: 'Parts & Uses',
+      description: 'Match each computer part to what it does!',
+      engine: 'tap-match',
+      icon: '💻',
+      color: 'from-sky-400 to-blue-600',
+      data: {
+        instruction: 'Tap what each part of a computer is for!',
+        rounds: [
+          { prompt: 'Screen (Monitor)', options: ['Shows us pictures and words', 'Lets us type letters and numbers', 'Follows instructions very quickly'], correctIndex: 0 },
+          { prompt: 'Keyboard', options: ['Lets us point, click and move things', 'Lets us type letters and numbers', 'Shows us pictures and words'], correctIndex: 1 },
+          { prompt: 'Mouse / Touchpad', options: ['Follows instructions very quickly', 'Lets us type letters and numbers', 'Lets us point, click and move things'], correctIndex: 2 },
+          { prompt: "The part that does the 'thinking'", options: ['Follows our instructions very quickly', 'Shows us pictures and words', 'Lets us point and click'], correctIndex: 0 },
+          { prompt: 'A computer', options: ['A toy that only plays games', 'A machine that stores info and follows instructions', 'A machine that never turns on'], correctIndex: 1 },
         ],
       },
     },
