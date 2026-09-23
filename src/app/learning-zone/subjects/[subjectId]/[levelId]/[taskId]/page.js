@@ -15,9 +15,29 @@ import { FaLanguage } from 'react-icons/fa';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import confetti from 'canvas-confetti';
 import { recordTaskCompletion, checkAchievements } from '../../../../../utils/achievements';
+import { shuffleQuestions, applySavedQuestionOrder } from '../../../../../utils/shuffle';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import Image from 'next/image';
+
+// Quiz/exam questions (and multiple-choice options) get shuffled so
+// retaking the same lesson doesn't show an identical, memorizable order.
+// A page refresh mid-attempt reuses whatever order was already saved,
+// so the student's in-progress currentQuestionIndex still lines up.
+function prepareTaskData(task, childId) {
+  if (!task || (task.type !== 'quiz' && task.type !== 'exam') || !task.questions?.length) {
+    return task;
+  }
+  try {
+    const progressKey = `kidsportal_progress_${childId}_${task.taskId}`;
+    const saved = JSON.parse(localStorage.getItem(progressKey) || 'null');
+    if (saved?.questionOrder) {
+      const reordered = applySavedQuestionOrder(task, saved.questionOrder);
+      if (reordered !== task) return reordered;
+    }
+  } catch (e) { /* fall through to a fresh shuffle */ }
+  return { ...task, questions: shuffleQuestions(task.questions) };
+}
 
 export default function TaskContentPage() {
   const { childUser } = useChild();
@@ -79,7 +99,8 @@ export default function TaskContentPage() {
           const levelData = snap.data();
           const found = levelData.tasks?.find(t => t.taskId === taskId);
           if (found) {
-            setTaskData(found);
+            const prepared = prepareTaskData(found, childUser.uid || childUser.id);
+            setTaskData(prepared);
             if ((found.type === 'quiz' || found.type === 'exam') && found.timeLimit) {
               setTimeLeft(found.timeLimit);
               setTimerActive(true);
@@ -126,7 +147,7 @@ export default function TaskContentPage() {
         }
       }
 
-      setTaskData(task || null);
+      setTaskData(task ? prepareTaskData(task, childUser.uid || childUser.id) : null);
       if (task && (task.type === 'quiz' || task.type === 'exam') && task.timeLimit) {
         setTimeLeft(task.timeLimit);
         setTimerActive(true);
@@ -196,7 +217,8 @@ export default function TaskContentPage() {
         wrongAnswersCount,
         timeTaken,
         sessionHistory,
-        timeLeft
+        timeLeft,
+        questionOrder: taskData.questions?.map(q => q.questionId)
       }));
     }
   }, [currentQuestionIndex, score, correctAnswersCount, wrongAnswersCount, timeTaken, sessionHistory, timeLeft, taskData, childUser, quizCompleted]);
@@ -474,6 +496,9 @@ export default function TaskContentPage() {
 
   // Retake the exam / practice the quiz or lesson again — every attempt is logged for parents.
   const handleRetake = () => {
+    // Fresh shuffle each retake, so practising the same lesson again doesn't
+    // show the identical question (and option) order every time.
+    setTaskData(prev => (prev?.questions?.length ? { ...prev, questions: shuffleQuestions(prev.questions) } : prev));
     setCurrentQuestionIndex(0);
     setUserAnswer('');
     setFeedbackMessage(null);
