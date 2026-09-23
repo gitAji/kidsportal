@@ -99,9 +99,9 @@ export default function LearningZonePage() {
 
   const professor = React.useMemo(() => {
     const char = childUser?.professorCharacter || 'owl';
-    if (char === 'panda') return { name: 'Smart Panda', img: '/images/smart-panda.png', emoji: '🐼' };
-    return { name: 'Professor Owl', img: '/images/professor-owl.png', emoji: '🦉' };
-  }, [childUser]);
+    if (char === 'panda') return { name: t('panda_name'), img: '/images/smart-panda.png', emoji: '🐼' };
+    return { name: t('owl_name'), img: '/images/professor-owl.png', emoji: '🦉' };
+  }, [childUser, t]);
 
   useEffect(() => {
     if (childUser && !subjectsLoading) {

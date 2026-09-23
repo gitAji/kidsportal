@@ -27,7 +27,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
         (typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('tamil'));
 
     const [contentLanguage, setContentLanguage] = useState(isTamilSubject ? 'ta' : 'en');
-    const { language, languageLoaded } = useLanguage();
+    const { language, languageLoaded, t } = useLanguage();
 
     // Once the parent's global learning-language preference has loaded,
     // default non-Tamil-subject content to it too — so a family that picked
@@ -131,8 +131,8 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     // child picked in Settings — lessons previously showed no mascot at all,
     // unlike quizzes.
     const professor = childUser?.professorCharacter === 'panda'
-        ? { name: 'Smart Panda', img: '/images/smart-panda.png' }
-        : { name: 'Professor Owl', img: '/images/professor-owl.png' };
+        ? { name: t('panda_name'), img: '/images/smart-panda.png' }
+        : { name: t('owl_name'), img: '/images/professor-owl.png' };
 
     // Cheer the student on at a few key moments rather than on every single
     // sentence, so the mascot feels encouraging instead of chatty.
