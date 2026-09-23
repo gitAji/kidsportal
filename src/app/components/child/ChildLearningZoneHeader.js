@@ -2,19 +2,18 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useChild } from '@/app/providers/ChildProvider';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaStar, FaTrophy, FaSignOutAlt, FaCog, FaMedal, FaArrowLeft, FaHome, FaBolt } from 'react-icons/fa';
+import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaStar, FaTrophy, FaSignOutAlt, FaCog, FaMedal, FaHome } from 'react-icons/fa';
 import { loadStats } from '@/app/utils/achievements';
 
 export default function ChildLearningZoneHeader() {
   const { childUser } = useChild();
   const { t } = useLanguage();
   const router = useRouter();
-  const pathname = usePathname();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const dropdownRef = useRef(null);
@@ -141,144 +140,102 @@ export default function ChildLearningZoneHeader() {
         )}
       </AnimatePresence>
 
-      <header className="sticky top-0 z-[400] w-full px-4 py-3">
-        {/* Main Header Bar (Row 1) */}
-        <div className="max-w-7xl mx-auto bg-white/80 backdrop-blur-2xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-full px-6 py-2 flex items-center justify-between mb-3 ring-8 ring-white/10">
+      {/* Minimal floating profile icon — the only persistent chrome, so the
+          module content itself stays the main focus of the screen. */}
+      <div className="fixed top-4 right-4 z-[400]" ref={dropdownRef}>
+        <button
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+          aria-label="Profile menu"
+          className="flex items-center p-0.5 rounded-2xl bg-white/85 backdrop-blur-md shadow-lg border border-white/60 transition-all hover:scale-105 active:scale-95"
+        >
+          {renderAvatar()}
+        </button>
 
-          {/* Left: Logo */}
-          <div className="flex items-center gap-4">
-            <Link href="/learning-zone" className="group flex items-center gap-3 transition-transform hover:scale-[1.02] active:scale-[0.98]">
-              <div className="relative flex items-center h-14 md:h-16">
-                <Image src="/logo.png" alt="KidsPortal" width={180} height={50} className="w-auto h-10 md:h-12 drop-shadow-sm object-contain" />
-              </div>
-            </Link>
-          </div>
-
-          {/* Center: Dynamic Stats (Visible on desktop) */}
-          <div className="hidden md:flex items-center gap-6">
-            <div className="flex items-center gap-3 bg-amber-50/50 border border-amber-100 rounded-2xl px-4 py-1.5 shadow-sm transition-transform hover:scale-105">
-              <div className="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 shadow-inner">
-                <FaStar className="animate-pulse" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] font-black uppercase tracking-widest text-amber-700/60 leading-none mb-0.5">{t('stars_earned')}</span>
-                <span className="text-sm font-black text-amber-900 leading-none">{stats.stars}</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 bg-blue-50/50 border border-blue-100 rounded-2xl px-4 py-1.5 shadow-sm transition-transform hover:scale-105">
-              <div className="w-8 h-8 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 shadow-inner">
-                <FaTrophy />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] font-black uppercase tracking-widest text-blue-700/60 leading-none mb-0.5">{t('current_level')}</span>
-                <span className="text-sm font-black text-blue-900 leading-none">{stats.level}</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 bg-purple-50/50 border border-purple-100 rounded-2xl px-4 py-1.5 shadow-sm transition-transform hover:scale-105">
-              <div className="w-8 h-8 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 shadow-inner">
-                <FaBolt />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] font-black uppercase tracking-widest text-purple-700/60 leading-none mb-0.5">XP Points</span>
-                <span className="text-sm font-black text-purple-900 leading-none">{stats.points}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Profile & Dropdown */}
-          <div className="flex items-center gap-3">
-            {/* Mobile Stars Indicator */}
-            <div className="md:hidden flex items-center gap-1.5 bg-amber-100/50 px-3 py-1.5 rounded-full border border-amber-200">
-              <FaStar className="text-amber-500 text-xs" />
-              <span className="text-xs font-black text-amber-700">{stats.stars}</span>
-            </div>
-
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center gap-2 p-1 rounded-2xl transition-all hover:bg-slate-50 active:scale-95 group"
-              >
-                {renderAvatar()}
-                <div className="hidden sm:flex flex-col items-start px-1 mr-2">
-                  <span className="text-xs font-black text-slate-800 uppercase tracking-wider leading-none mb-1">
-                    {childUser?.name || 'Explorer'}
-                  </span>
-                  <span className="text-[10px] font-bold text-slate-400 leading-none">
-                    {childUser?.grade || 'Lvl ' + stats.level}
-                  </span>
+        <AnimatePresence>
+          {dropdownOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10, x: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10, x: 20 }}
+              className="absolute right-0 top-full mt-4 w-72 max-w-[85vw] bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden z-[500]"
+            >
+              {/* Dropdown Header */}
+              <div className="bg-gradient-to-br from-slate-50 to-white px-6 py-6 border-b border-slate-50">
+                <div className="flex items-center gap-4">
+                  {renderAvatar(true)}
+                  <div>
+                    <h3 className="text-lg font-black text-slate-900 leading-tight">{childUser?.name}</h3>
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">{t('explorer_rank')}</p>
+                  </div>
                 </div>
-              </button>
+                <div className="flex items-center gap-4 mt-4 pt-4 border-t border-slate-100">
+                  <div className="flex items-center gap-1.5 text-amber-600">
+                    <FaStar className="text-xs" />
+                    <span className="text-xs font-black">{stats.stars}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-blue-600">
+                    <FaTrophy className="text-xs" />
+                    <span className="text-xs font-black">{t('current_level')} {stats.level}</span>
+                  </div>
+                </div>
+              </div>
 
-              <AnimatePresence>
-                {dropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95, y: 10, x: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
-                    exit={{ opacity: 0, scale: 0.95, y: 10, x: 20 }}
-                    className="absolute right-0 top-full mt-4 w-72 bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden z-[500]"
-                  >
-                    {/* Dropdown Header */}
-                    <div className="bg-gradient-to-br from-slate-50 to-white px-6 py-6 border-b border-slate-50">
-                      <div className="flex items-center gap-4">
-                        {renderAvatar(true)}
-                        <div>
-                          <h3 className="text-lg font-black text-slate-900 leading-tight">{childUser?.name}</h3>
-                          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">{t('explorer_rank')}</p>
-                        </div>
-                      </div>
-                    </div>
+              {/* Dropdown Content */}
+              <div className="p-3">
+                <Link
+                  href="/learning-zone"
+                  onClick={() => setDropdownOpen(false)}
+                  className="flex items-center gap-4 px-5 py-4 rounded-3xl text-sm font-black text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all group"
+                >
+                  <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-500 flex items-center justify-center text-lg group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
+                    <FaHome />
+                  </div>
+                  <span>Home</span>
+                </Link>
 
-                    {/* Dropdown Content */}
-                    <div className="p-3">
-                      <Link
-                        href="/learning-zone/rewards"
-                        onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-4 px-5 py-4 rounded-3xl text-sm font-black text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-all group"
-                      >
-                        <div className="w-10 h-10 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center text-lg group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
-                          <FaMedal />
-                        </div>
-                        <span>{t('achievements')}</span>
-                      </Link>
+                <Link
+                  href="/learning-zone/rewards"
+                  onClick={() => setDropdownOpen(false)}
+                  className="flex items-center gap-4 px-5 py-4 rounded-3xl text-sm font-black text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-all group"
+                >
+                  <div className="w-10 h-10 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center text-lg group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                    <FaMedal />
+                  </div>
+                  <span>{t('achievements')}</span>
+                </Link>
 
-                      <Link
-                        href="/learning-zone/settings"
-                        onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-4 px-5 py-4 rounded-3xl text-sm font-black text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all group"
-                      >
-                        <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-500 flex items-center justify-center text-lg group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm">
-                          <FaCog />
-                        </div>
-                        <span>{t('settings')}</span>
-                      </Link>
+                <Link
+                  href="/learning-zone/settings"
+                  onClick={() => setDropdownOpen(false)}
+                  className="flex items-center gap-4 px-5 py-4 rounded-3xl text-sm font-black text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all group"
+                >
+                  <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-500 flex items-center justify-center text-lg group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm">
+                    <FaCog />
+                  </div>
+                  <span>{t('settings')}</span>
+                </Link>
 
-                      <div className="my-2 border-t border-slate-50" />
+                <div className="my-2 border-t border-slate-50" />
 
-                      <button
-                        onClick={handleSignOut}
-                        className="flex items-center gap-4 w-full px-5 py-4 rounded-3xl text-sm font-black text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-all group"
-                      >
-                        <div className="w-10 h-10 rounded-2xl bg-rose-50 text-rose-400 flex items-center justify-center text-lg group-hover:bg-rose-600 group-hover:text-white transition-all shadow-sm">
-                          <FaSignOutAlt />
-                        </div>
-                        <span>{t('logout')}</span>
-                      </button>
-                    </div>
+                <button
+                  onClick={handleSignOut}
+                  className="flex items-center gap-4 w-full px-5 py-4 rounded-3xl text-sm font-black text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-all group"
+                >
+                  <div className="w-10 h-10 rounded-2xl bg-rose-50 text-rose-400 flex items-center justify-center text-lg group-hover:bg-rose-600 group-hover:text-white transition-all shadow-sm">
+                    <FaSignOutAlt />
+                  </div>
+                  <span>{t('logout')}</span>
+                </button>
+              </div>
 
-                    {/* Dropdown Footer */}
-                    <div className="bg-slate-50/50 px-6 py-3 text-center">
-                      <p className="text-[10px] font-black text-slate-300 uppercase tracking-[3px]">{t('next_level')}: {stats.level + 1}</p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-
-      </header>
+              {/* Dropdown Footer */}
+              <div className="bg-slate-50/50 px-6 py-3 text-center">
+                <p className="text-[10px] font-black text-slate-300 uppercase tracking-[3px]">{t('next_level')}: {stats.level + 1}</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </>
   );
 }

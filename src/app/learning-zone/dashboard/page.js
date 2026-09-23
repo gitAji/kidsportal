@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import SkeletonLoader from "../../components/ui/SkeletonLoader";
 import LearningZone from "../../components/learning/LearningZone";
 import dbData from '../../data/db.json';
+import MinimalBackButton from '../../components/child/MinimalBackButton';
 
 export default function LearningZoneDashboardPage() {
   const [childUser, setChildUser] = useState(null);
@@ -43,6 +44,7 @@ export default function LearningZoneDashboardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-cyan-200">
+      <MinimalBackButton />
       <main className="container mx-auto p-4 sm:p-6">
         <Suspense fallback={<SkeletonLoader />}>
           <LearningZone child={childUser} subjects={learningContent} />

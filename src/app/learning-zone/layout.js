@@ -2,10 +2,8 @@
 
 import { ChildProvider, useChild } from "../providers/ChildProvider";
 import ChildLearningZoneHeader from "../components/child/ChildLearningZoneHeader";
-import ChildLearningZoneFooter from "../components/child/ChildLearningZoneFooter";
 import { ChildThemeProvider } from "../providers/ChildThemeProvider";
 import { LanguageProvider } from "../providers/LanguageProvider";
-import LearningZonePageNavigation from "../components/child/LearningZonePageNavigation";
 import TimeTracker from "../components/child/TimeTracker";
 
 function LearningZoneCore({ children }) {
@@ -20,11 +18,9 @@ function LearningZoneCore({ children }) {
             <div className="flex flex-col min-h-screen bg-[var(--child-background)]">
                 <TimeTracker />
                 <ChildLearningZoneHeader />
-                <main className="flex-grow p-4 sm:p-6 md:p-8">
-                    <LearningZonePageNavigation />
+                <main className="flex-grow p-2 sm:p-4 md:p-6">
                     {children}
                 </main>
-                <ChildLearningZoneFooter />
             </div>
         </ChildThemeProvider>
     );
