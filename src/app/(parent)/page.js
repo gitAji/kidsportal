@@ -68,6 +68,32 @@ const FEATURES = [
   },
 ];
 
+// Short, compact reviews — shown as small avatar-icon + name/role cards
+// rather than one large pull-quote, so several can be scanned at once.
+const REVIEWS = [
+  {
+    quote: "My son used to struggle with math, but since joining KidsPortal, he asks to 'play math' every single day. The progress is night and day!",
+    name: "Sarah Jenkins",
+    role: "Parent of a 3rd Grader",
+    initial: "S",
+    color: "from-blue-500 to-indigo-500",
+  },
+  {
+    quote: "The time controls are a lifesaver — I set the limit once and never have to argue about screen time again. My daughter still begs to finish 'one more level'.",
+    name: "Marcus Odei",
+    role: "Parent of a 1st Grader",
+    initial: "M",
+    color: "from-emerald-500 to-teal-500",
+  },
+  {
+    quote: "No ads, no random links to click — I can finally hand over the tablet without watching over her shoulder. The certificates keep her motivated too.",
+    name: "Priya Raman",
+    role: "Parent of a 5th Grader",
+    initial: "P",
+    color: "from-rose-500 to-orange-500",
+  },
+];
+
 const FEATURE_COLORS = {
   indigo: { bg: "bg-indigo-50", iconBg: "bg-indigo-100", text: "text-indigo-600", groupHoverText: "group-hover:text-indigo-600", border: "hover:border-indigo-100 hover:border-b-indigo-500" },
   blue: { bg: "bg-blue-50", iconBg: "bg-blue-100", text: "text-blue-600", groupHoverText: "group-hover:text-blue-600", border: "hover:border-blue-100 hover:border-b-blue-500" },
@@ -186,29 +212,45 @@ export default async function HomePage() {
               <FeatureTile key={feature.title} feature={feature} />
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Testimonial Snippet */}
-          <div className="mt-20 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[3rem] p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 p-8 opacity-10">
-              <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017V14C19.017 11.2386 16.7784 9 14.017 9V6C18.4353 6 22.017 9.58172 22.017 14V21H14.017ZM2.017 21L2.017 18C2.017 16.8954 2.91243 16 4.017 16H7.017V14C7.017 11.2386 4.77843 9 2.017 9V6C6.43528 6 10.017 9.58172 10.017 14V21H2.017Z" /></svg>
+      {/* Parent Reviews Section — its own full-width section, not nested
+          inside Features, so it isn't squeezed into a narrower container */}
+      <section className="py-24 bg-white border-t border-slate-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-amber-50 text-amber-600 rounded-full text-sm font-bold uppercase tracking-wider">
+              <span>⭐</span> Loved by Families
             </div>
-            <div className="relative z-10 max-w-2xl">
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-xl">★</span>
-                ))}
-              </div>
-              <p className="text-xl md:text-2xl font-medium mb-8 leading-relaxed italic">
-                "My son used to struggle with math, but since joining KidsPortal, he asks to 'play math' every single day. The progress is night and day!"
-              </p>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center font-bold text-lg mr-4">S</div>
-                <div>
-                  <div className="font-bold">Sarah Jenkins</div>
-                  <div className="text-blue-300 text-sm">Parent of 3rd Grader</div>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-800 mb-6 tracking-tight">
+              What Parents Are Saying
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {REVIEWS.map((review) => (
+              <div
+                key={review.name}
+                className="bg-slate-50 rounded-3xl p-6 border-2 border-slate-100 hover:border-blue-100 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 flex flex-col"
+              >
+                <div className="flex mb-3">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-yellow-400 text-sm">★</span>
+                  ))}
+                </div>
+                <p className="text-slate-600 text-sm font-medium leading-relaxed mb-5 flex-grow">"{review.quote}"</p>
+                <div className="flex items-center gap-3">
+                  <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${review.color} text-white flex items-center justify-center font-bold text-sm shrink-0`}>
+                    {review.initial}
+                  </div>
+                  <div>
+                    <div className="font-bold text-sm text-slate-800">{review.name}</div>
+                    <div className="text-slate-400 text-xs font-medium">{review.role}</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
