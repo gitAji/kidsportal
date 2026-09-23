@@ -40,12 +40,6 @@ const subjectStyleMap = {
     iconColor: "text-orange-100",
     bgPattern: "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-amber-300/20 via-transparent to-transparent"
   },
-  "Ariviyal": {
-    gradient: "from-amber-400 to-orange-600",
-    shadow: "shadow-orange-500/50",
-    iconColor: "text-orange-100",
-    bgPattern: "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-amber-300/20 via-transparent to-transparent"
-  },
   "Coding": {
     gradient: "from-violet-500 to-purple-700",
     shadow: "shadow-purple-500/50",
@@ -71,7 +65,6 @@ const subjectIconMap = {
   "Math": FaCalculator,
   "Tamil": FaLanguage,
   "Science": FaMicroscope,
-  "Ariviyal": FaMicroscope,
   "Coding": FaCode,
   "Computer Science": FaLaptopCode,
   "default": FaStar,
