@@ -67,10 +67,7 @@ export const translations = {
             "English": "English",
             "Math": "Math",
             "Tamil": "Tamil",
-            "Science": "Science",
-            "Ariviyal": "Science",
-            "Coding": "Coding",
-            "Computer Science": "Computer Science"
+            "Science": "Science"
         },
 
         // Footer
@@ -172,10 +169,7 @@ export const translations = {
             "English": "ஆங்கிலம்",
             "Math": "கணிதம்",
             "Tamil": "தமிழ்",
-            "Science": "அறிவியல்",
-            "Ariviyal": "அறிவியல்",
-            "Coding": "நிரலாக்கம்",
-            "Computer Science": "கணினி அறிவியல்"
+            "Science": "அறிவியல்"
         },
 
         // Footer
@@ -277,10 +271,7 @@ export const translations = {
             "English": "Engelsk",
             "Math": "Matematikk",
             "Tamil": "Tamil",
-            "Science": "Naturfag",
-            "Ariviyal": "Naturfag",
-            "Coding": "Koding",
-            "Computer Science": "Informatikk"
+            "Science": "Naturfag"
         },
 
         // Footer
@@ -317,7 +308,7 @@ export const translations = {
         back_to_dashboard: "Retour au tableau de bord",
         your_subjects: "Vos matières",
         no_subjects: "Aucune matière trouvée pour votre classe.",
-        subjects: { "English": "Anglais", "Math": "Mathématiques", "Tamil": "Tamoul", "Science": "Sciences", "Ariviyal": "Sciences", "Coding": "Programmation", "Computer Science": "Informatique" },
+        subjects: { "English": "Anglais", "Math": "Mathématiques", "Tamil": "Tamoul", "Science": "Sciences" },
         crafted: "Conçu pour l'excellence",
         inspiring: "Inspirer la prochaine génération",
         safety: "Sécurité et confidentialité garanties",
@@ -349,7 +340,7 @@ export const translations = {
         back_to_dashboard: "Volver al panel",
         your_subjects: "Tus materias",
         no_subjects: "No se encontraron materias para tu grado.",
-        subjects: { "English": "Inglés", "Math": "Matemáticas", "Tamil": "Tamil", "Science": "Ciencias", "Ariviyal": "Ciencias", "Coding": "Programación", "Computer Science": "Informática" },
+        subjects: { "English": "Inglés", "Math": "Matemáticas", "Tamil": "Tamil", "Science": "Ciencias" },
         crafted: "Hecho con excelencia",
         inspiring: "Inspirando a la próxima generación",
         safety: "Seguridad y privacidad garantizadas",
@@ -381,7 +372,7 @@ export const translations = {
         back_to_dashboard: "Zurück zum Dashboard",
         your_subjects: "Deine Fächer",
         no_subjects: "Keine Fächer für deine Klasse gefunden.",
-        subjects: { "English": "Englisch", "Math": "Mathematik", "Tamil": "Tamil", "Science": "Naturwissenschaften", "Ariviyal": "Naturwissenschaften", "Coding": "Programmieren", "Computer Science": "Informatik" },
+        subjects: { "English": "Englisch", "Math": "Mathematik", "Tamil": "Tamil", "Science": "Naturwissenschaften" },
         crafted: "Für Spitzenleistung gemacht",
         inspiring: "Die nächste Generation inspirieren",
         safety: "Sicherheit und Datenschutz garantiert",

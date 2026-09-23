@@ -108,6 +108,21 @@ function FeatureTile({ feature }) {
 export default async function HomePage() {
   const grades = db.grades;
 
+  // Derive headline stats from the real curriculum data instead of hand-maintained
+  // numbers, so they can't silently go stale as grades/subjects are added.
+  const gradeRange = grades.length
+    ? `${Math.min(...grades.map((g) => parseInt(g.gradeId.replace("grade-", ""), 10)))}-${Math.max(...grades.map((g) => parseInt(g.gradeId.replace("grade-", ""), 10)))}`
+    : "1-10";
+  const totalLevels = grades.reduce((sum, g) => {
+    const seenNames = new Set();
+    return sum + (g.subjects || []).reduce((s, subject) => {
+      if (seenNames.has(subject.subjectName)) return s;
+      seenNames.add(subject.subjectName);
+      return s + (subject.levels?.length || 0);
+    }, 0);
+  }, 0);
+  const levelsDisplay = `${Math.floor(totalLevels / 50) * 50}+`;
+
   const gradeColors = [
     "#FF5722", // Deep Orange
     "#4CAF50", // Green
@@ -131,11 +146,11 @@ export default async function HomePage() {
         <div className="container mx-auto px-4 z-10 relative">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             <div className="text-center group p-6 rounded-3xl bg-white border-2 border-slate-50 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-blue-100 hover:-translate-y-1 transition-all duration-300">
-              <div className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-indigo-500 mb-2 group-hover:scale-105 transition-transform">1-8</div>
+              <div className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-indigo-500 mb-2 group-hover:scale-105 transition-transform">{gradeRange}</div>
               <div className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-[0.2em]">Active Grades</div>
             </div>
             <div className="text-center group p-6 rounded-3xl bg-white border-2 border-slate-50 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-cyan-100 hover:-translate-y-1 transition-all duration-300">
-              <div className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-cyan-500 to-teal-400 mb-2 group-hover:scale-105 transition-transform">360+</div>
+              <div className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-cyan-500 to-teal-400 mb-2 group-hover:scale-105 transition-transform">{levelsDisplay}</div>
               <div className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-[0.2em]">Learning Levels</div>
             </div>
             <div className="text-center group p-6 rounded-3xl bg-white border-2 border-slate-50 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-purple-100 hover:-translate-y-1 transition-all duration-300">
