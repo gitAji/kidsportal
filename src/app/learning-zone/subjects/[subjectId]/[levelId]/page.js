@@ -3,9 +3,10 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../../data/db.json';
 import SkeletonLoader from '../../../../components/ui/SkeletonLoader';
-import { FaArrowLeft, FaHome, FaBookOpen, FaQuestionCircle, FaAward, FaStar, FaCheckCircle, FaTrophy } from 'react-icons/fa';
+import { FaBookOpen, FaQuestionCircle, FaAward, FaStar, FaCheckCircle, FaTrophy } from 'react-icons/fa';
 import { useChild } from '../../../../providers/ChildProvider';
 import { loadStats } from '../../../../utils/achievements';
+import MinimalBackButton from '../../../../components/child/MinimalBackButton';
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -148,7 +149,7 @@ export default function LevelTasksPage() {
       <div className="absolute top-40 right-10 text-blue-200 opacity-30 text-8xl transform rotate-12"><FaQuestionCircle /></div>
       <div className="absolute top-20 left-10 text-green-200 opacity-40 text-9xl transform -rotate-12"><FaBookOpen /></div>
 
-      {/* Navigation handled by Global Header */}
+      <MinimalBackButton />
 
       <motion.div
         initial={{ opacity: 0, y: -20 }}

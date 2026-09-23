@@ -18,6 +18,7 @@ import { recordTaskCompletion, checkAchievements } from '../../../../../utils/ac
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import Image from 'next/image';
+import MinimalBackButton from '../../../../../components/child/MinimalBackButton';
 
 export default function TaskContentPage() {
   const { childUser } = useChild();
@@ -610,11 +611,14 @@ export default function TaskContentPage() {
     }
 
     return (
-      <InteractiveLesson
-        taskData={taskData}
-        childUser={childUser}
-        onComplete={handleLessonComplete}
-      />
+      <>
+        <MinimalBackButton />
+        <InteractiveLesson
+          taskData={taskData}
+          childUser={childUser}
+          onComplete={handleLessonComplete}
+        />
+      </>
     );
   }
 
@@ -715,6 +719,7 @@ export default function TaskContentPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 relative overflow-hidden flex flex-col items-center">
+      <MinimalBackButton />
       <AnimatePresence>
         {feedbackMessage?.type === 'correct' && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-green-100 -z-10" />}
         {feedbackMessage?.type === 'wrong' && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-red-50 -z-10" />}
