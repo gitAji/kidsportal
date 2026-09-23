@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Kids Learning Portal",
-  description: "A platform for kids to learn and explore",
+  title: "KidsPortal — Fun, Safe Learning for Grades 1-10",
+  description: "KidsPortal is an interactive learning platform for grades 1-10, with an AI tutor, gamified lessons, real progress analytics, and a distraction-free, ad-free experience built for kids.",
 };
 
 import { UIProvider } from "./providers/UIProvider";
