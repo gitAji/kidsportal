@@ -3,25 +3,14 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../data/db.json';
 import SkeletonLoader from '../../../components/ui/SkeletonLoader';
-import { FaLock, FaStar, FaTrophy, FaCheckCircle, FaUnlockAlt, FaLanguage, FaRandom, FaCode, FaArrowRight, FaCalculator, FaLeaf, FaBook } from 'react-icons/fa';
+import { FaLock, FaStar, FaCheckCircle, FaUnlockAlt, FaLanguage, FaRandom, FaCode, FaArrowRight, FaCalculator, FaLeaf, FaBook } from 'react-icons/fa';
 import { useChild } from '../../../providers/ChildProvider';
 import { useLanguage } from '../../../providers/LanguageProvider';
 import MinimalBackButton from '../../../components/child/MinimalBackButton';
 import { loadStats } from '../../../utils/achievements';
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-
-// A small, deliberate set of clearly distinct, cheerful colors.
-// Red is intentionally left out here — it's reserved for "wrong answer"
-// feedback elsewhere in the app, so it shouldn't also mean "just a level".
-const colorPalette = [
-  "bg-[#FF9B9B] border-[#FF7272]",
-  "bg-[#72C6FF] border-[#40A5E5]",
-  "bg-[#72E5A8] border-[#4CC287]",
-  "bg-[#FFC972] border-[#E5A840]",
-  "bg-[#C48CFF] border-[#A05CFF]",
-  "bg-[#8CEFFF] border-[#5CCEE5]",
-];
+import { SUBJECT_STYLE_MAP, SUBJECT_ICON_MAP } from '../../../utils/subjectStyles';
 
 // Friendly display names for subjectId prefixes (e.g. "math-3" -> "Math"),
 // so kids never see a raw internal ID like "MATH-3" in the UI.
@@ -119,6 +108,13 @@ export default function SubjectLevelsPage() {
   const { subjectId } = params;
   const [greeting, setGreeting] = useState(null);
   const [timeStatus, setTimeStatus] = useState(null);
+
+  // Same color/icon identity this subject has on the Learning Zone hub,
+  // so its levels here don't cycle through every subject's color at
+  // random — every level card in this subject stays that one color.
+  const subjectDisplayName = getSubjectDisplayName(subjectId);
+  const subjectStyle = SUBJECT_STYLE_MAP[subjectDisplayName] || SUBJECT_STYLE_MAP.default;
+  const SubjectIcon = SUBJECT_ICON_MAP[subjectDisplayName] || SUBJECT_ICON_MAP.default;
 
   // Screen-time limits: checked here (before a new level can be started),
   // never inside the task page itself, so a limit hit mid-lesson doesn't
@@ -360,10 +356,6 @@ export default function SubjectLevelsPage() {
 
   return (
     <div className="flex flex-col p-2 sm:p-4 relative font-sans">
-      {/* Background Decor */}
-      <div className="absolute top-20 right-20 text-yellow-400 opacity-20 text-9xl transform rotate-12 pointer-events-none"><FaTrophy /></div>
-      <div className="absolute bottom-10 left-10 text-pink-400 opacity-20 text-8xl transform -rotate-12 pointer-events-none"><FaStar /></div>
-
       <MinimalBackButton />
 
       <AnimatePresence>
@@ -504,8 +496,10 @@ export default function SubjectLevelsPage() {
               {moduleLevels.map((level, index) => {
                 // If it's locked by previous progression OR hard-locked in DB
                 const isLocked = level.overrideIsLocked || level.isLocked;
-                const colorClass = colorPalette[index % colorPalette.length];
-                const cardBg = isLocked ? "bg-slate-300 border-slate-400" : colorClass;
+                // Every level in this subject shares the subject's own
+                // color (matching its tile on the Learning Zone hub)
+                // instead of cycling through every subject's color.
+                const cardBg = isLocked ? "bg-slate-300 border-slate-400" : `${subjectStyle.bg} ${subjectStyle.border}`;
 
                 const totalTasks = level.totalTasks;
                 const completedCount = level.completedCount;
@@ -519,6 +513,14 @@ export default function SubjectLevelsPage() {
                     whileHover={!isLocked ? "hover" : { scale: 1.02 }}
                     whileTap="tap"
                   >
+                    {/* Same corner blur-ball decoration as this subject's tile on the hub */}
+                    {!isLocked && (
+                      <>
+                        <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl pointer-events-none" />
+                        <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/5 rounded-full blur-xl pointer-events-none" />
+                      </>
+                    )}
+
                     {!isLocked && !level.isCompleted && (
                       <div className="absolute -top-10 -right-10 text-white opacity-20 transform rotate-45 group-hover:rotate-90 transition-transform duration-700 ease-in-out">
                         <FaStar size={120} />
@@ -552,8 +554,9 @@ export default function SubjectLevelsPage() {
                       </motion.div>
                     )}
 
-                    <div className={`w-20 h-20 rounded-3xl mb-6 shadow-inner flex items-center justify-center text-4xl ${isLocked ? 'bg-slate-400 text-slate-200' : 'bg-white/20 text-white group-hover:rotate-12 transition-transform duration-300'}`}>
-                      {isLocked ? <FaLock /> : (level.badgeEmoji || <FaStar />)}
+                    {/* White circle + subject-colored icon, matching the icon badge on this subject's hub tile */}
+                    <div className={`w-20 h-20 rounded-full mb-6 shadow-inner flex items-center justify-center text-4xl relative z-10 ${isLocked ? 'bg-slate-400 text-slate-200' : `bg-white ${subjectStyle.icon} group-hover:rotate-12 transition-transform duration-300`}`}>
+                      {isLocked ? <FaLock /> : (level.badgeEmoji || <SubjectIcon />)}
                     </div>
 
                     <div>

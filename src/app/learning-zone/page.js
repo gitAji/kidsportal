@@ -9,30 +9,11 @@ import { getSubjectsByGrade, DEFAULT_LEARNING_SUBJECTS } from '../utils/learning
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
-import { FaBookOpen, FaCalculator, FaMicroscope, FaLanguage, FaStar, FaPlay, FaCode, FaLaptopCode, FaGamepad } from 'react-icons/fa';
+import { FaStar, FaPlay, FaGamepad } from 'react-icons/fa';
 import { getChildStats } from '@/app/utils/firestoreService';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import TimeLimitBlockedScreen from '../components/child/TimeLimitBlockedScreen';
-
-const subjectStyleMap = {
-  "English": { bg: "bg-[#FF9B9B]", border: "border-[#FF7272]", shadow: "shadow-[#FF7272]", icon: "text-[#FF7272]" },
-  "Math": { bg: "bg-[#72C6FF]", border: "border-[#40A5E5]", shadow: "shadow-[#40A5E5]", icon: "text-[#40A5E5]" },
-  "Tamil": { bg: "bg-[#72E5A8]", border: "border-[#4CC287]", shadow: "shadow-[#4CC287]", icon: "text-[#4CC287]" },
-  "Science": { bg: "bg-[#FFC972]", border: "border-[#E5A840]", shadow: "shadow-[#E5A840]", icon: "text-[#E5A840]" },
-  "Coding": { bg: "bg-[#C48CFF]", border: "border-[#A05CFF]", shadow: "shadow-[#A05CFF]", icon: "text-[#A05CFF]" },
-  "Computer Science": { bg: "bg-[#8CEFFF]", border: "border-[#5CCEE5]", shadow: "shadow-[#5CCEE5]", icon: "text-[#5CCEE5]" },
-  "default": { bg: "bg-[#D1D5DB]", border: "border-[#9CA3AF]", shadow: "shadow-[#9CA3AF]", icon: "text-[#9CA3AF]" },
-};
-
-const subjectIconMap = {
-  "English": FaBookOpen,
-  "Math": FaCalculator,
-  "Tamil": FaLanguage,
-  "Science": FaMicroscope,
-  "Coding": FaCode,
-  "Computer Science": FaLaptopCode,
-  "default": FaStar,
-};
+import { SUBJECT_STYLE_MAP as subjectStyleMap, SUBJECT_ICON_MAP as subjectIconMap } from '../utils/subjectStyles';
 
 export default function LearningZonePage() {
   const { childUser } = useChild();
