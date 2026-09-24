@@ -330,6 +330,30 @@ export default function PricingPage() {
           {!NATIVE_CURRENCIES.has(currencyCode) && <span className="block mt-1 font-medium italic opacity-70">Indicative prices — card charged in USD.</span>}
         </motion.p>
 
+        {/* ── Membership disclosure + guarantee ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9 }}
+          className="mt-8 max-w-xl w-full flex flex-col items-center gap-4"
+        >
+          <p className="text-slate-500 text-xs sm:text-sm text-center font-medium leading-relaxed">
+            Your membership will be renewed automatically. You can cancel online anytime. Sales tax may apply.
+          </p>
+
+          <div className="w-full bg-emerald-50 border border-emerald-100 rounded-2xl px-6 py-5 flex items-start gap-4 text-left">
+            <div className="w-10 h-10 flex-shrink-0 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+              <FaShieldAlt />
+            </div>
+            <div>
+              <p className="font-black text-emerald-800 text-sm mb-1">Our guarantee</p>
+              <p className="text-emerald-700/80 text-sm font-medium leading-relaxed">
+                If you're not satisfied within 30 days, we'll gladly provide a full refund.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
       </main>
     </div>
   );
