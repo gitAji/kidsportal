@@ -280,14 +280,17 @@ export default function LearningZonePage() {
       )}
 
       {/* Persistent Professor Guide */}
-      <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[100] flex flex-col items-end pointer-events-none">
+        {/* Greeting bubble hidden on small screens — a fixed-position bubble
+            plus this widget's large avatar has little room on a phone and
+            would otherwise sit on top of subject cards. */}
         <AnimatePresence>
           {greeting && (
             <motion.div
               initial={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
               animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
-              className="bg-white/95 backdrop-blur-md rounded-3xl rounded-br-sm shadow-2xl p-5 mb-4 max-w-xs border-4 border-indigo-200 pointer-events-auto relative z-40"
+              className="hidden sm:block bg-white/95 backdrop-blur-md rounded-3xl rounded-br-sm shadow-2xl p-5 mb-4 max-w-xs border-4 border-indigo-200 pointer-events-auto relative z-40"
             >
               <div className="absolute top-0 right-0 p-1 opacity-10">
                 <FaStar className="text-yellow-400 text-xs" />
@@ -306,7 +309,7 @@ export default function LearningZonePage() {
           <motion.div
             animate={{ y: [0, -6, 0] }}
             transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="w-28 h-28 md:w-36 md:h-36 flex items-center justify-center relative z-20 group"
+            className="w-16 h-16 sm:w-28 sm:h-28 md:w-36 md:h-36 flex items-center justify-center relative z-20 group"
           >
             <div className="relative w-full h-full bg-white rounded-full border-[5px] border-indigo-200 shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:border-indigo-400 group-hover:shadow-[0_15px_35px_rgba(99,102,241,0.3)]">
               <div className="relative w-[85%] h-[85%] mt-3">

@@ -560,12 +560,12 @@ export default function SubjectLevelsPage() {
                       <p className="text-sm font-bold opacity-90 z-10 leading-relaxed mb-1">
                         {level.levelName?.includes(':') ? level.levelName.split(':')[0] : `Level ${index + 1}`}
                       </p>
-                      <h3 className="text-2xl font-black mb-2 drop-shadow-md tracking-tight z-10 line-clamp-2">
+                      <h3 className="text-2xl font-black drop-shadow-md tracking-tight z-10 line-clamp-2">
                         {level.levelName?.includes(':') ? level.levelName.split(':')[1].trim() : level.levelName || 'Untitled Topic'}
                       </h3>
-                      <p className="text-sm font-medium opacity-80 z-10 mt-auto">
-                        {level.description || 'Embark on a new learning adventure!'}
-                      </p>
+                      {level.description && (
+                        <p className="text-sm font-medium opacity-80 z-10 mt-1">{level.description}</p>
+                      )}
                     </div>
 
                     {/* Progress bar + stats — shown on unlocked, non-completed levels */}
@@ -641,14 +641,17 @@ export default function SubjectLevelsPage() {
       </div>
 
       {/* Persistent Professor Owl Guide */}
-      <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[100] flex flex-col items-end pointer-events-none">
+        {/* Greeting bubble is decorative flavor text — hidden on small screens
+            where the fixed-position owl already has little room and would
+            otherwise sit on top of the first level card. */}
         <AnimatePresence>
           {greeting && (
             <motion.div
               initial={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
               animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
-              className="bg-white/95 backdrop-blur-md rounded-3xl rounded-br-sm shadow-2xl p-5 mb-4 max-w-xs border-4 border-teal-200 pointer-events-auto relative"
+              className="hidden sm:block bg-white/95 backdrop-blur-md rounded-3xl rounded-br-sm shadow-2xl p-5 mb-4 max-w-xs border-4 border-teal-200 pointer-events-auto relative"
             >
               <div className="absolute top-0 right-0 p-1 opacity-10">
                 <FaStar className="text-yellow-400 text-xs" />
@@ -667,7 +670,7 @@ export default function SubjectLevelsPage() {
           <motion.div
             animate={{ y: [0, -5, 0], rotate: [0, 2, -2, 0] }}
             transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center shadow-2xl border-4 border-white overflow-hidden bg-gradient-to-tr from-teal-400 to-blue-600"
+            className="w-14 h-14 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center shadow-2xl border-4 border-white overflow-hidden bg-gradient-to-tr from-teal-400 to-blue-600"
           >
             <div className="relative w-full h-full p-2">
               <Image
