@@ -57,7 +57,13 @@ export function checkoutCurrency(country = "") {
  */
 export const PLAN_META = {
     free_trial: { label: "Free Trial", children: 2, color: "amber" },
-    premium_monthly: { label: "Premium Monthly", children: 5, color: "blue" },
-    premium_yearly: { label: "Premium Yearly", children: 5, color: "indigo" },
+    premium_monthly: { label: "Premium Monthly", children: 4, color: "blue" },
+    premium_yearly: { label: "Premium Yearly", children: 4, color: "indigo" },
     free: { label: "Free", children: 2, color: "slate" },
 };
+
+/** How many child profiles a plan allows. Falls back to the free-trial cap
+ * for any plan not in PLAN_META (e.g. no subscription yet). */
+export function childLimitForPlan(plan) {
+    return PLAN_META[plan]?.children ?? PLAN_META.free_trial.children;
+}

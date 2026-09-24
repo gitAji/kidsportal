@@ -29,9 +29,9 @@ function daysLeft(ts) {
 function getPlanInfo(plan) {
     switch (plan) {
         case "premium_monthly":
-            return { label: "Premium Monthly", cycle: "Monthly", children: 5, color: "blue" };
+            return { label: "Premium Monthly", cycle: "Monthly", children: 4, color: "blue" };
         case "premium_yearly":
-            return { label: "Premium Yearly", cycle: "Yearly", children: 5, color: "indigo" };
+            return { label: "Premium Yearly", cycle: "Yearly", children: 4, color: "indigo" };
         case "trial":
             return { label: "Free Trial", cycle: "Trial", children: 2, color: "amber" };
         default:
