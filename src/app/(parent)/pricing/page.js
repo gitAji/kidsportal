@@ -98,7 +98,7 @@ export default function PricingPage() {
         "Full access to all grades & subjects",
         "Unlimited practice sessions",
         "Detailed progress & analytics",
-        "Up to 5 children accounts",
+        "Up to 4 children accounts",
         "Priority support",
         "Exclusive premium content",
       ],

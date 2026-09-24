@@ -576,7 +576,7 @@ export default function SettingsPage() {
                     <div className="grid grid-cols-2 gap-2 mb-5">
                       {[
                         "Full access all grades",
-                        "Up to 5 children accounts",
+                        "Up to 4 children accounts",
                         "Detailed analytics",
                         "Priority support",
                       ].map(f => (

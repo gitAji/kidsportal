@@ -13,11 +13,14 @@ import Modal from "../ui/Modal";
 import { getChildStats, getChildAchievements } from "@/app/utils/firestoreService";
 import { loadStats, loadUnlockedAchievements } from "@/app/utils/achievements";
 import { computeLevelProgress } from "@/app/utils/childProgress";
-import { FaPlus, FaBell, FaUserFriends, FaUserCircle, FaCrown, FaCheckCircle, FaStar, FaTrophy, FaClock, FaChartLine, FaGraduationCap } from 'react-icons/fa';
+import { resolveSubscription } from "@/lib/subscriptionStatus";
+import { childLimitForPlan } from "@/lib/pricingConfig";
+import { FaPlus, FaBell, FaUserFriends, FaUserCircle, FaCrown, FaCheckCircle, FaStar, FaTrophy, FaClock, FaChartLine, FaGraduationCap, FaLock } from 'react-icons/fa';
 import { motion } from "framer-motion";
 
 const ParentDashboard = () => {
   const [showAddChildModal, setShowAddChildModal] = useState(false);
+  const [showLimitModal, setShowLimitModal] = useState(false);
   const [parentData, setParentData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [overview, setOverview] = useState(null);
@@ -95,6 +98,9 @@ const ParentDashboard = () => {
   if (loading) return <DashboardSkeleton />;
 
   const displayName = auth.currentUser?.displayName || auth.currentUser?.email?.split('@')[0] || 'Parent';
+  const childLimit = childLimitForPlan(resolveSubscription(parentData)?.plan);
+  const childCount = overview?.childCount ?? 0;
+  const atChildLimit = childCount >= childLimit;
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -123,14 +129,24 @@ const ParentDashboard = () => {
             >
               <FaChartLine className="text-xs" /> Full Analytics
             </Link>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setShowAddChildModal(true)}
-              className="group flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black rounded-full shadow-lg hover:shadow-cyan-400/40 transition-all text-sm uppercase tracking-widest border-2 border-transparent hover:border-white/20"
-            >
-              <FaPlus className="text-xs group-hover:rotate-90 transition-transform duration-300" /> Add Learner
-            </motion.button>
+            <div className="flex flex-col items-end gap-1.5">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => atChildLimit ? setShowLimitModal(true) : setShowAddChildModal(true)}
+                className={`group flex items-center justify-center gap-2 px-6 py-3 font-black rounded-full shadow-lg transition-all text-sm uppercase tracking-widest border-2 border-transparent ${atChildLimit
+                  ? 'bg-slate-100 text-slate-400 hover:border-slate-200'
+                  : 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:shadow-cyan-400/40 hover:border-white/20'
+                  }`}
+              >
+                {atChildLimit
+                  ? <><FaLock className="text-xs" /> Add Learner</>
+                  : <><FaPlus className="text-xs group-hover:rotate-90 transition-transform duration-300" /> Add Learner</>}
+              </motion.button>
+              <p className="text-[10px] font-bold text-slate-300 uppercase tracking-wider pr-1">
+                {childCount} / {childLimit} learners used
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -208,6 +224,28 @@ const ParentDashboard = () => {
             />
           </Modal>
         </Suspense>
+      )}
+
+      {/* Child limit reached */}
+      {showLimitModal && (
+        <Modal onClose={() => setShowLimitModal(false)}>
+          <div className="text-center pt-2">
+            <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center text-2xl">
+              <FaLock />
+            </div>
+            <h3 className="text-lg font-black text-slate-800 mb-2">Learner limit reached</h3>
+            <p className="text-sm text-slate-500 font-medium mb-6 leading-relaxed">
+              Your current plan allows up to {childLimit} child profile{childLimit !== 1 ? 's' : ''}, and you&apos;ve used all {childCount}.
+              Upgrade to add more learners to your family.
+            </p>
+            <Link
+              href="/pricing"
+              className="block w-full py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-sm font-black rounded-2xl hover:scale-[1.01] shadow-lg shadow-blue-200 transition-all"
+            >
+              Upgrade Plan
+            </Link>
+          </div>
+        </Modal>
       )}
     </div>
   );
