@@ -266,11 +266,13 @@ export default function SubjectLevelsPage() {
       // as the sequential-progression requirement below.
       const requiresSubscription = !isSubscribed && index !== 0;
 
+      // Subscription (which levels a family can reach at all) and sequential
+      // progression (whether a reachable level still needs the previous one
+      // finished first) are independent gates — being subscribed removes the
+      // paywall, not the parent's "Finish to Unlock" setting.
       let dynamicIsLocked;
       let lockMessage = level.lockMessage;
-      if (isSubscribed) {
-        dynamicIsLocked = false;
-      } else if (requiresSubscription) {
+      if (requiresSubscription) {
         dynamicIsLocked = true;
         lockMessage = "Subscribe to unlock this level! 🔓";
       } else {
