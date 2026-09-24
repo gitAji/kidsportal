@@ -18,6 +18,7 @@ import {
 } from "react-icons/fa";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
 import { CURRENCY_PRICES, NATIVE_CURRENCIES, countryToCurrency, checkoutCurrency } from "@/lib/pricingConfig";
+import { resolveSubscription } from "@/lib/subscriptionStatus";
 
 // ── Shared input style ─────────────────────────────────────────────
 const inputCls = "w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-blue-400 block px-4 py-3 transition-all outline-none placeholder:text-slate-300";
@@ -156,19 +157,7 @@ export default function SettingsPage() {
       // Live subscription listener
       const ref = doc(db, "users", u.uid);
       const unsubSnap = onSnapshot(ref, (snap) => {
-        const data = snap.data() || {};
-        const createdAt = data.createdAt?.toDate
-          ? data.createdAt.toDate()
-          : data.createdAt ? new Date(data.createdAt) : null;
-
-        if (!data.subscription) {
-          const base = createdAt || new Date();
-          const trialEnd = new Date(base);
-          trialEnd.setMonth(trialEnd.getMonth() + 1);
-          setSub({ plan: "trial", status: trialEnd > new Date() ? "active" : "expired", currentPeriodEnd: trialEnd });
-        } else {
-          setSub(data.subscription);
-        }
+        setSub(resolveSubscription(snap.data()));
       });
 
       setLoading(false);

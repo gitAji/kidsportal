@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { collection, query, orderBy, limit } from "firebase/firestore";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
+import { resolveSubscription } from "@/lib/subscriptionStatus";
 
 // ── Helpers ────────────────────────────────────────────────────────
 function formatDate(ts) {
@@ -93,34 +94,7 @@ export default function BillingPage() {
 
             const ref = doc(db, "users", user.uid);
             const unsubSnap = onSnapshot(ref, (snap) => {
-                const data = snap.data() || {};
-
-                if (data.planType === 'paid') {
-                    setSub({
-                        ...(data.subscription || {}),
-                        status: data.subscriptionStatus || data.subscription?.status || 'inactive',
-                        plan: data.subscriptionPlan || data.subscription?.plan,
-                        currentPeriodEnd: data.subscriptionExpiresAt || data.subscription?.currentPeriodEnd,
-                        card: data.subscription?.card || null
-                    });
-                } else if (data.planType === 'free_trial' || (!data.subscription && data.createdAt)) {
-                    const trialEnd = data.trialEndDate?.toDate ? data.trialEndDate.toDate() : (data.trialEndDate ? new Date(data.trialEndDate) : null);
-                    let finalTrialEnd = trialEnd;
-                    if (!finalTrialEnd) {
-                        const base = data.createdAt?.toDate ? data.createdAt.toDate() : (data.createdAt ? new Date(data.createdAt) : new Date());
-                        finalTrialEnd = new Date(base);
-                        finalTrialEnd.setMonth(finalTrialEnd.getMonth() + 1);
-                    }
-                    setSub({
-                        plan: "trial",
-                        status: finalTrialEnd > new Date() ? "active" : "expired",
-                        currentPeriodEnd: finalTrialEnd,
-                        ...(data.subscription || {}),
-                        card: data.subscription?.card || null,
-                    });
-                } else if (data.subscription) {
-                    setSub(data.subscription);
-                }
+                setSub(resolveSubscription(snap.data()));
                 setLoading(false);
             });
 
