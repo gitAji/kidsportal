@@ -1,13 +1,38 @@
 "use client";
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome, FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage, FaCrown } from 'react-icons/fa';
+import {
+    FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome,
+    FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage, FaCrown,
+    FaCalculator, FaFlask, FaLaptopCode, FaGlobeAmericas, FaCode, FaFeatherAlt,
+} from 'react-icons/fa';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Image from 'next/image';
 import AudioPlayer from './AudioPlayer';
 
 const SWIPE_THRESHOLD = 80;
+
+// A visual identity per subject — icon + gradient — used to theme the
+// companion panel and give each lesson a distinct feel instead of every
+// subject looking like the same blue card. Matched loosely against
+// subjectId/taskId since those aren't perfectly standardized across the
+// curriculum data.
+const SUBJECT_THEMES = [
+    { match: /math/i, icon: FaCalculator, gradient: 'from-blue-500 to-indigo-500', glow: 'bg-blue-300/30' },
+    { match: /science/i, icon: FaFlask, gradient: 'from-emerald-500 to-teal-500', glow: 'bg-emerald-300/30' },
+    { match: /computerscience|computer.?science/i, icon: FaLaptopCode, gradient: 'from-sky-500 to-blue-600', glow: 'bg-sky-300/30' },
+    { match: /coding/i, icon: FaCode, gradient: 'from-violet-500 to-purple-500', glow: 'bg-violet-300/30' },
+    { match: /tamil/i, icon: FaFeatherAlt, gradient: 'from-orange-500 to-rose-500', glow: 'bg-orange-300/30' },
+    { match: /english/i, icon: FaBookOpen, gradient: 'from-cyan-500 to-blue-500', glow: 'bg-cyan-300/30' },
+];
+const DEFAULT_THEME = { icon: FaGlobeAmericas, gradient: 'from-blue-500 to-cyan-500', glow: 'bg-blue-300/30' };
+
+function getSubjectTheme(taskData) {
+    const key = `${taskData?.subjectId || ''} ${taskData?.taskId || ''}`;
+    return SUBJECT_THEMES.find(t => t.match.test(key)) || DEFAULT_THEME;
+}
 
 export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const router = useRouter();
@@ -22,6 +47,8 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const [starsEarned, setStarsEarned] = useState(0);
     const [starPop, setStarPop] = useState(false);
     const [mascotMessage, setMascotMessage] = useState(null);
+    const theme = getSubjectTheme(taskData);
+    const ThemeIcon = theme.icon;
     const isTamilSubject = taskData?.subjectId?.toLowerCase().includes('tamil') ||
         taskData?.taskId?.toLowerCase().includes('tamil') ||
         (typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('tamil'));
@@ -193,7 +220,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
 
             {/* Sticky Top Navigation */}
             <div className="w-full sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/50 shadow-sm">
-                <div className="max-w-5xl mx-auto flex items-center justify-center gap-3 px-4 sm:px-6 py-3">
+                <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 px-4 sm:px-6 py-3">
                     {/* Center: Compact Progress */}
                     <div className="flex items-center gap-3 w-full max-w-sm">
                         <div className="flex-1 h-2 bg-slate-200/60 rounded-full overflow-hidden">
@@ -220,8 +247,11 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                 </div>
             </div>
 
-            {/* Main Content */}
-            <div className="w-full max-w-4xl px-4 sm:px-6 py-6 sm:py-10 flex-grow flex flex-col z-10">
+            {/* Main Content — full-width on large screens, with a companion
+                panel alongside the lesson instead of everything living in a
+                single narrow centered column. */}
+            <div className="w-full max-w-7xl px-4 sm:px-6 py-6 sm:py-10 flex-grow z-10 xl:grid xl:grid-cols-[1fr_360px] xl:gap-10 xl:items-start">
+              <div className="flex flex-col min-w-0">
 
                 {/* Lesson Title Card */}
                 <motion.div
@@ -229,9 +259,9 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-6 sm:mb-10"
                 >
-                    <div className="inline-flex items-center gap-2 bg-blue-100/60 text-blue-600 rounded-full px-4 py-1.5 mb-3">
-                        <FaBookOpen className="text-xs" />
-                        <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest">Interactive Lesson</span>
+                    <div className={`inline-flex items-center gap-2 bg-gradient-to-r ${theme.gradient} text-white rounded-full px-4 py-1.5 mb-3 shadow-md`}>
+                        <ThemeIcon className="text-xs" />
+                        <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest">{taskData.subjectId || 'Interactive Lesson'}</span>
                     </div>
                     <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-800 leading-tight">
                         {cleanStr(taskData.taskName)}
@@ -301,8 +331,27 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             </div>
                         )}
 
-                        {/* Content Area with Animation — swipeable on touch devices */}
-                        <div className="px-5 sm:px-8 py-8 sm:py-12 md:py-16 min-h-[200px] sm:min-h-[280px] flex flex-col items-center justify-center touch-pan-y">
+                        {/* Content Area with Animation — swipeable on touch devices.
+                            A giant watermark icon + a couple of slowly floating
+                            accent shapes give the concept some visual presence
+                            instead of it being a plain wall of text. */}
+                        <div className="relative px-5 sm:px-8 py-8 sm:py-12 md:py-16 min-h-[220px] sm:min-h-[300px] flex flex-col items-center justify-center touch-pan-y overflow-hidden">
+                            <ThemeIcon className={`absolute -z-0 text-[9rem] sm:text-[13rem] text-transparent bg-clip-text bg-gradient-to-br ${theme.gradient} opacity-[0.06] pointer-events-none select-none`} />
+                            <motion.div
+                                animate={{ y: [0, -14, 0], rotate: [0, 6, 0] }}
+                                transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+                                className={`hidden sm:flex absolute top-6 left-6 w-12 h-12 rounded-2xl bg-gradient-to-br ${theme.gradient} items-center justify-center text-white shadow-lg opacity-90`}
+                            >
+                                <ThemeIcon className="text-lg" />
+                            </motion.div>
+                            <motion.div
+                                animate={{ y: [0, 12, 0] }}
+                                transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut', delay: 0.5 }}
+                                className="hidden sm:flex absolute bottom-8 right-8 w-8 h-8 rounded-full bg-amber-300/80 items-center justify-center text-white shadow-md"
+                            >
+                                <FaStar className="text-xs" />
+                            </motion.div>
+
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={validCurrentSentenceIndex}
@@ -314,7 +363,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                     dragConstraints={{ left: 0, right: 0 }}
                                     dragElastic={0.7}
                                     onDragEnd={(_, info) => handleSwipe(info.offset.x)}
-                                    className="w-full text-center cursor-grab active:cursor-grabbing"
+                                    className="relative w-full text-center cursor-grab active:cursor-grabbing"
                                 >
                                     <p className="text-xl sm:text-3xl md:text-4xl text-slate-800 font-extrabold leading-snug sm:leading-tight max-w-2xl mx-auto">
                                         {isTranslating ? <span className="animate-pulse text-indigo-400">Translating...</span> : sentences[validCurrentSentenceIndex]}
@@ -493,10 +542,78 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                     </div>
                     )}
                 </motion.div>
+              </div>
+
+              {/* Companion Panel — desktop/large-screen only. Puts the
+                  mascot front and center in a real illustrated panel next
+                  to the lesson instead of tucked into a tiny corner bubble,
+                  and uses the extra width full-width layouts are supposed
+                  to give back to the page rather than just stretching the
+                  same narrow card. */}
+              <div className="hidden xl:flex flex-col gap-5 sticky top-24">
+                <div className={`relative overflow-hidden rounded-[2rem] bg-gradient-to-br ${theme.gradient} p-6 shadow-xl text-white`}>
+                    <div className={`absolute -top-10 -right-10 w-40 h-40 rounded-full ${theme.glow} blur-2xl`} />
+                    <div className={`absolute -bottom-14 -left-10 w-40 h-40 rounded-full ${theme.glow} blur-2xl`} />
+
+                    <motion.div
+                        animate={{ y: [0, -10, 0] }}
+                        transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut' }}
+                        className="relative w-32 h-32 mx-auto"
+                    >
+                        <div className="w-full h-full rounded-full bg-white shadow-lg border-4 border-white/70 overflow-hidden relative">
+                            <Image src={professor.img} alt={professor.name} fill className="object-contain p-3" />
+                        </div>
+                        <motion.div
+                            animate={{ scale: [1, 1.15, 1] }}
+                            transition={{ repeat: Infinity, duration: 2 }}
+                            className="absolute -top-1 -right-1 w-9 h-9 bg-amber-400 rounded-full flex items-center justify-center shadow-md border-2 border-white"
+                        >
+                            <FaStar className="text-white text-xs" />
+                        </motion.div>
+                    </motion.div>
+
+                    <p className="relative text-center font-black text-lg mt-4">{professor.name}</p>
+
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={mascotMessage || 'idle'}
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -8 }}
+                            className="relative mt-4 bg-white/15 backdrop-blur-sm rounded-2xl px-4 py-3 text-center"
+                        >
+                            <p className="text-sm font-bold leading-snug">
+                                {mascotMessage || "You're doing great — keep going!"}
+                            </p>
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+
+                {/* Quick stats — reuses numbers already on screen so the
+                    panel earns its width instead of being empty space. */}
+                <div className="bg-white rounded-[1.75rem] shadow-md border border-slate-100 p-5">
+                    <div className="flex items-center justify-between mb-4">
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">This Lesson</span>
+                        <ThemeIcon className="text-slate-300" />
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                        <div className="bg-slate-50 rounded-2xl p-3 text-center">
+                            <p className="text-2xl font-black text-slate-800">{starsEarned}</p>
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Stars</p>
+                        </div>
+                        <div className="bg-slate-50 rounded-2xl p-3 text-center">
+                            <p className="text-2xl font-black text-slate-800">{Math.round(progress)}%</p>
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Complete</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
             </div>
 
-            {/* Persistent Professor Companion */}
-            <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none">
+            {/* Persistent Professor Companion — mobile/tablet only; the
+                desktop companion panel above replaces this once there's
+                room for it. */}
+            <div className="xl:hidden fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none">
                 <AnimatePresence>
                     {mascotMessage && (
                         <motion.div
