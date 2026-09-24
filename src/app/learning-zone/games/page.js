@@ -23,7 +23,7 @@ export default function GamesHubPage() {
   if (!childUser) return null;
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 md:p-8">
+    <div className="flex flex-col p-2 sm:p-4 relative font-sans">
       <MinimalBackButton />
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -33,7 +33,7 @@ export default function GamesHubPage() {
         <div className="inline-flex items-center gap-2 bg-white px-6 py-1.5 rounded-full text-sm font-bold text-violet-600 mb-4 shadow-sm uppercase tracking-wider">
           <FaGamepad /> {childUser.grade} Games
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600 drop-shadow-sm">
+        <h1 className="text-4xl md:text-6xl font-black text-slate-800 drop-shadow-sm tracking-tight">
           Learn by Playing!
         </h1>
         <p className="text-slate-500 font-medium mt-3 max-w-xl mx-auto">
@@ -56,7 +56,7 @@ export default function GamesHubPage() {
             <motion.div
               whileHover={unlocked ? { scale: 1.03, y: -6 } : {}}
               whileTap={unlocked ? { scale: 0.97 } : {}}
-              className={`relative h-[220px] rounded-[2rem] p-6 flex flex-col justify-between overflow-hidden border-b-[6px] border-black/10 bg-gradient-to-br ${game.color} ${unlocked ? 'cursor-pointer' : 'opacity-60 grayscale cursor-not-allowed'}`}
+              className={`relative h-[220px] rounded-[2rem] p-6 flex flex-col justify-between overflow-hidden shadow-lg hover:shadow-xl border-b-[8px] border-x-[4px] border-t-4 border-white/50 bg-gradient-to-br ${game.color} ${unlocked ? 'cursor-pointer' : 'opacity-60 grayscale cursor-not-allowed'}`}
             >
               <div className="absolute -bottom-6 -right-6 text-7xl opacity-20">{game.icon}</div>
               <div className="relative z-10">
@@ -97,7 +97,7 @@ export default function GamesHubPage() {
           <motion.div
             whileHover={{ scale: 1.03, y: -6 }}
             whileTap={{ scale: 0.97 }}
-            className={`relative h-[220px] rounded-[2rem] p-6 flex flex-col justify-between overflow-hidden border-b-[6px] border-black/10 bg-gradient-to-br ${CODING_GAME_LINK.color} cursor-pointer`}
+            className={`relative h-[220px] rounded-[2rem] p-6 flex flex-col justify-between overflow-hidden shadow-lg hover:shadow-xl border-b-[8px] border-x-[4px] border-t-4 border-white/50 bg-gradient-to-br ${CODING_GAME_LINK.color} cursor-pointer`}
           >
             <div className="absolute -bottom-6 -right-6 text-7xl opacity-20">{CODING_GAME_LINK.icon}</div>
             <div className="relative z-10">

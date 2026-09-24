@@ -598,7 +598,7 @@ export default function TaskContentPage() {
     if (quizCompleted) {
       // Re-using the success screen for lesson completions with achievements
       return (
-        <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-100 p-4 flex flex-col items-center justify-center gap-6">
+        <div className="flex flex-col items-center justify-center gap-6 p-2 sm:p-4 relative font-sans">
           <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", bounce: 0.5 }}
             className="p-10 text-center bg-white/80 backdrop-blur-md rounded-[3rem] shadow-2xl max-w-lg w-full border-4 border-white">
             <SuccessBadge icon={<FaStar size={100} className="text-yellow-400" />} ringColor="rgba(250, 204, 21, 0.5)" />

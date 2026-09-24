@@ -45,7 +45,7 @@ export default function MathLabPage() {
   if (timeStatus?.isBlocked) return <TimeLimitBlockedScreen status={timeStatus} />;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+    <div className="flex flex-col p-2 sm:p-4 relative font-sans">
       <MinimalBackButton />
       <div className="px-4 py-8">
         <motion.div

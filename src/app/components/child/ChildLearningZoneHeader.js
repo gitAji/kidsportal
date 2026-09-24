@@ -157,37 +157,38 @@ export default function ChildLearningZoneHeader() {
               initial={{ opacity: 0, scale: 0.95, y: 10, x: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10, x: 20 }}
-              className="absolute right-0 top-full mt-4 w-72 max-w-[85vw] bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden z-[500]"
+              className="absolute right-0 top-full mt-4 w-72 max-w-[85vw] bg-white rounded-[2.5rem] shadow-2xl border-4 border-white overflow-hidden z-[500] ring-4 ring-slate-100/50"
             >
               {/* Dropdown Header */}
-              <div className="bg-gradient-to-br from-slate-50 to-white px-6 py-6 border-b border-slate-50">
-                <div className="flex items-center gap-4">
+              <div className="bg-gradient-to-br from-blue-500 to-cyan-500 px-6 py-6 text-white relative overflow-hidden">
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
+                <div className="flex items-center gap-4 relative z-10">
                   {renderAvatar(true)}
                   <div>
-                    <h3 className="text-lg font-black text-slate-900 leading-tight">{childUser?.name}</h3>
-                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">{t('explorer_rank')}</p>
+                    <h3 className="text-xl font-black drop-shadow-md leading-tight">{childUser?.name}</h3>
+                    <p className="text-xs font-bold text-cyan-100 uppercase tracking-widest mt-1">{t('explorer_rank')}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 mt-4 pt-4 border-t border-slate-100">
-                  <div className="flex items-center gap-1.5 text-amber-600">
+                <div className="flex items-center gap-4 mt-5 pt-4 border-t border-white/20 relative z-10">
+                  <div className="flex items-center gap-1.5 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full shadow-sm">
                     <FaStar className="text-xs" />
                     <span className="text-xs font-black">{stats.stars}</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-blue-600">
+                  <div className="flex items-center gap-1.5 bg-cyan-400 text-cyan-900 px-3 py-1 rounded-full shadow-sm">
                     <FaTrophy className="text-xs" />
-                    <span className="text-xs font-black">{t('current_level')} {stats.level}</span>
+                    <span className="text-xs font-black">Lvl {stats.level}</span>
                   </div>
                 </div>
               </div>
 
               {/* Dropdown Content */}
-              <div className="p-3">
+              <div className="p-4 space-y-2">
                 <Link
                   href="/learning-zone"
                   onClick={() => setDropdownOpen(false)}
-                  className="flex items-center gap-4 px-5 py-4 rounded-3xl text-sm font-black text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all group"
+                  className="flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-black text-slate-600 hover:bg-[#72E5A8] hover:text-white transition-all shadow-[0_4px_0_transparent] hover:shadow-[0_4px_0_#4CC287] hover:-translate-y-1 group"
                 >
-                  <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-500 flex items-center justify-center text-lg group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-emerald-500 flex items-center justify-center text-lg group-hover:bg-white/20 group-hover:text-white transition-all">
                     <FaHome />
                   </div>
                   <span>Home</span>
@@ -196,9 +197,9 @@ export default function ChildLearningZoneHeader() {
                 <Link
                   href="/learning-zone/rewards"
                   onClick={() => setDropdownOpen(false)}
-                  className="flex items-center gap-4 px-5 py-4 rounded-3xl text-sm font-black text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-all group"
+                  className="flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-black text-slate-600 hover:bg-[#FFC972] hover:text-white transition-all shadow-[0_4px_0_transparent] hover:shadow-[0_4px_0_#E5A840] hover:-translate-y-1 group"
                 >
-                  <div className="w-10 h-10 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center text-lg group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-amber-500 flex items-center justify-center text-lg group-hover:bg-white/20 group-hover:text-white transition-all">
                     <FaMedal />
                   </div>
                   <span>{t('achievements')}</span>
@@ -207,21 +208,21 @@ export default function ChildLearningZoneHeader() {
                 <Link
                   href="/learning-zone/settings"
                   onClick={() => setDropdownOpen(false)}
-                  className="flex items-center gap-4 px-5 py-4 rounded-3xl text-sm font-black text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all group"
+                  className="flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-black text-slate-600 hover:bg-[#8CEFFF] hover:text-white transition-all shadow-[0_4px_0_transparent] hover:shadow-[0_4px_0_#5CCEE5] hover:-translate-y-1 group"
                 >
-                  <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-500 flex items-center justify-center text-lg group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm">
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-cyan-500 flex items-center justify-center text-lg group-hover:bg-white/20 group-hover:text-white transition-all">
                     <FaCog />
                   </div>
                   <span>{t('settings')}</span>
                 </Link>
 
-                <div className="my-2 border-t border-slate-50" />
+                <div className="my-2 border-t border-slate-100" />
 
                 <button
                   onClick={handleSignOut}
-                  className="flex items-center gap-4 w-full px-5 py-4 rounded-3xl text-sm font-black text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-all group"
+                  className="flex items-center gap-4 w-full px-4 py-3 rounded-2xl text-sm font-black text-slate-500 hover:bg-[#FF9B9B] hover:text-white transition-all shadow-[0_4px_0_transparent] hover:shadow-[0_4px_0_#FF7272] hover:-translate-y-1 group"
                 >
-                  <div className="w-10 h-10 rounded-2xl bg-rose-50 text-rose-400 flex items-center justify-center text-lg group-hover:bg-rose-600 group-hover:text-white transition-all shadow-sm">
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-red-400 flex items-center justify-center text-lg group-hover:bg-white/20 group-hover:text-white transition-all">
                     <FaSignOutAlt />
                   </div>
                   <span>{t('logout')}</span>
@@ -229,8 +230,11 @@ export default function ChildLearningZoneHeader() {
               </div>
 
               {/* Dropdown Footer */}
-              <div className="bg-slate-50/50 px-6 py-3 text-center">
-                <p className="text-[10px] font-black text-slate-300 uppercase tracking-[3px]">{t('next_level')}: {stats.level + 1}</p>
+              <div className="bg-slate-50 px-6 py-4 text-center border-t-4 border-white shadow-inner">
+                <div className="w-full bg-slate-200 rounded-full h-2 mb-2 overflow-hidden">
+                  <div className="bg-gradient-to-r from-blue-400 to-cyan-400 h-full rounded-full w-1/3" />
+                </div>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('next_level')}: {stats.level + 1}</p>
               </div>
             </motion.div>
           )}

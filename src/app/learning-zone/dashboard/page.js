@@ -43,7 +43,7 @@ export default function LearningZoneDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-cyan-200">
+    <div className="flex flex-col relative font-sans">
       <MinimalBackButton />
       <main className="container mx-auto p-4 sm:p-6">
         <Suspense fallback={<SkeletonLoader />}>

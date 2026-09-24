@@ -87,7 +87,7 @@ export default function SettingsPage() {
   const currentTheme = themes.find(t => t.id === selectedTheme) || themes[0];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="flex flex-col relative font-sans">
       <MinimalBackButton />
 
       <div className="max-w-2xl mx-auto px-4 py-8 space-y-6">

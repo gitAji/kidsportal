@@ -4,165 +4,226 @@ import Link from "next/link";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/auth";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaRocket, FaPlusCircle, FaBookOpen, FaHeart, FaShieldAlt } from "react-icons/fa";
+import { FaRocket, FaPlusCircle, FaPlay, FaShieldAlt, FaStar } from "react-icons/fa";
 
-const HIGHLIGHTS = [
-    {
-        icon: FaBookOpen,
-        title: "Complete K-10 Curriculum",
-        items: "Math  •  Science  •  English  •  Tamil  •  Coding",
-        accent: "text-blue-600",
-    },
-    {
-        icon: FaHeart,
-        title: "Loved by Parents & Kids",
-        items: "10,000+ families  •  4.9/5 rating",
-        accent: "text-rose-500",
-    },
-    {
-        icon: FaShieldAlt,
-        title: "Safe, Fun & Interactive",
-        items: "AI Tutor  •  Games & Rewards  •  Zero Ads",
-        accent: "text-emerald-600",
-    },
+const FLOATERS = [
+  { emoji: "🚀", top: "10%", left: "5%",  delay: 0,   dur: 5.5 },
+  { emoji: "⭐", top: "18%", right: "6%", delay: 0.6, dur: 4.8 },
+  { emoji: "🎨", top: "60%", left: "3%",  delay: 1.1, dur: 6.2 },
+  { emoji: "🧪", top: "72%", right: "4%", delay: 1.6, dur: 5.8 },
+  { emoji: "📚", top: "35%", right: "8%", delay: 0.3, dur: 5   },
+  { emoji: "🎮", top: "82%", left: "7%",  delay: 0.9, dur: 6   },
 ];
 
-// A rounded card with a few overlapping circles peeking above its top edge —
-// same color as the card, so they read as one soft "cloud" silhouette.
-function CloudCard({ icon: Icon, title, items, accent }) {
-    return (
-        <div className="relative pt-3 h-full">
-            <div className="absolute -top-1 left-5 w-9 h-9 bg-white rounded-full hidden sm:block" />
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-12 bg-white rounded-full hidden sm:block" />
-            <div className="absolute -top-1 right-5 w-9 h-9 bg-white rounded-full hidden sm:block" />
+const SUBJECTS = ["🧮 Math", "🔬 Science", "📖 English", "💻 Coding", "🌿 Tamil"];
 
-            <div className="relative z-10 bg-white rounded-[1.75rem] shadow-lg shadow-blue-100 border border-blue-50 px-5 py-6 sm:px-6 text-center h-full">
-                <Icon className={`text-2xl sm:text-3xl mx-auto mb-3 ${accent}`} />
-                <h3 className="font-black text-slate-800 text-base sm:text-lg mb-1">{title}</h3>
-                <p className="text-slate-500 font-semibold text-xs sm:text-sm leading-relaxed">{items}</p>
-            </div>
-        </div>
-    );
-}
+const TRUST_ITEMS = [
+  { icon: <FaShieldAlt />, text: "Safe & Ad-Free", color: "text-teal-600 bg-teal-50 border-teal-100" },
+  { icon: <FaStar />,      text: "4.9 / 5 Stars",  color: "text-amber-500 bg-amber-50 border-amber-100" },
+  { icon: "🏅",            text: "10K+ Families",   color: "text-indigo-600 bg-indigo-50 border-indigo-100" },
+];
+
+const STATS = [
+  { value: "10K+", label: "Happy Families",  grad: "from-sky-500 to-indigo-500" },
+  { value: "4.9★", label: "App Rating",       grad: "from-amber-400 to-orange-400" },
+  { value: "150+", label: "Learning Levels",  grad: "from-teal-400 to-emerald-500" },
+];
 
 export default function HeroSection() {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const [user, setUser]       = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            setLoading(false);
-        });
-        return () => unsubscribe();
-    }, []);
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (u) => { setUser(u); setLoading(false); });
+    return () => unsub();
+  }, []);
 
-    return (
-        <section className="relative bg-gradient-to-b from-blue-50 via-blue-50 to-white py-14 sm:py-20 md:py-24 overflow-hidden">
-            {/* Background Decor */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div className="absolute -top-24 -right-24 w-72 h-72 sm:w-96 sm:h-96 bg-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30" />
-                <div className="absolute top-1/3 -left-24 w-72 h-72 sm:w-96 sm:h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30" />
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#eef6ff] via-[#f0f4ff] to-[#f5f0ff] min-h-[88vh] flex items-center">
 
-                <motion.div
-                    animate={{ y: ["-15px", "15px"], rotate: [-2, 2] }}
-                    transition={{ duration: 6, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-                    className="absolute top-10 left-[6%] text-6xl drop-shadow-xl hidden sm:block"
+      {/* Soft blob decorations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-sky-200/40 rounded-full blur-[130px]" />
+        <div className="absolute top-1/2 -right-40 w-[500px] h-[500px] bg-violet-200/40 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-teal-200/30 rounded-full blur-[100px]" />
+        {/* subtle grid */}
+        <div className="absolute inset-0 opacity-[0.025]"
+          style={{ backgroundImage: "radial-gradient(circle, #64748b 1px, transparent 1px)", backgroundSize: "32px 32px" }}
+        />
+      </div>
+
+      {/* Floating emoji (desktop) */}
+      <div className="absolute inset-0 pointer-events-none hidden lg:block">
+        {FLOATERS.map(({ emoji, top, left, right, delay, dur }) => (
+          <motion.span
+            key={emoji}
+            className="absolute text-4xl select-none drop-shadow-lg"
+            style={{ top, left, right }}
+            animate={{ y: ["-12px", "12px"], rotate: [-3, 3] }}
+            transition={{ duration: dur, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay }}
+          >
+            {emoji}
+          </motion.span>
+        ))}
+      </div>
+
+      <div className="relative z-10 w-full container mx-auto px-4 sm:px-6 py-16 sm:py-24">
+        <AnimatePresence mode="wait">
+          {loading ? (
+            <div key="loading" className="h-48" />
+
+          ) : user ? (
+            /* ── Logged-in ── */
+            <motion.div key="in" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+              className="max-w-2xl mx-auto text-center"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white border border-sky-100 shadow-sm text-sky-600 text-xs font-bold uppercase tracking-widest">
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse inline-block" /> Welcome Back
+              </div>
+              <h1 className="text-4xl sm:text-5xl font-black text-slate-800 mb-5 leading-tight">
+                Hey{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-500">
+                  {user.displayName || "Explorer"}
+                </span>
+                , ready to learn? 🎉
+              </h1>
+              <p className="text-slate-500 text-base sm:text-lg mb-8 font-medium max-w-lg mx-auto leading-relaxed">
+                Your children are making great progress! Jump into the dashboard to see achievements and manage their profiles.
+              </p>
+              <Link href="/dashboard"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-sky-500 to-indigo-500 text-white px-10 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-sky-200/60 hover:-translate-y-0.5 hover:shadow-sky-300/70 transition-all"
+              >
+                <FaRocket /> Go to Dashboard
+              </Link>
+            </motion.div>
+
+          ) : (
+            /* ── Public ── */
+            <motion.div key="out" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+              className="max-w-5xl mx-auto"
+            >
+              {/* Trust pills row */}
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
+                className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8"
+              >
+                {TRUST_ITEMS.map(({ icon, text, color }) => (
+                  <span key={text} className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold ${color}`}>
+                    <span className="text-sm">{icon}</span> {text}
+                  </span>
+                ))}
+              </motion.div>
+
+              {/* Badge */}
+              <div className="flex justify-center mb-6">
+                <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1 }}
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white shadow-sm border border-sky-100"
                 >
-                    🎈
+                  <span className="text-indigo-500 text-xs">✦</span>
+                  <span className="text-slate-600 text-xs sm:text-sm font-bold uppercase tracking-widest">The Ultimate Kids Learning Portal</span>
+                  <span className="text-sky-400 text-xs">✦</span>
                 </motion.div>
+              </div>
 
-                <motion.div
-                    animate={{ y: ["10px", "-10px"], x: ["-5px", "5px"], rotate: [-5, 5] }}
-                    transition={{ duration: 7, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 1 }}
-                    className="absolute bottom-12 left-[4%] text-6xl drop-shadow-xl hidden sm:block"
+              {/* Headline */}
+              <div className="text-center mb-5">
+                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
+                  className="text-4xl sm:text-6xl md:text-7xl font-black text-slate-800 leading-[1.06] tracking-tight"
                 >
-                    🛴
-                </motion.div>
+                  Where Kids
+                  <br className="hidden sm:block" />
+                  <span className="relative inline-block ml-2 sm:ml-0">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500">
+                      Fall in Love with Learning
+                    </span>
+                    <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 400 10" fill="none">
+                      <path d="M2 7 Q 100 1, 200 7 Q 300 13, 398 7" stroke="url(#ug)" strokeWidth="3" strokeLinecap="round" fill="none"/>
+                      <defs>
+                        <linearGradient id="ug" x1="0" y1="0" x2="1" y2="0">
+                          <stop offset="0%" stopColor="#0ea5e9"/>
+                          <stop offset="50%" stopColor="#6366f1"/>
+                          <stop offset="100%" stopColor="#8b5cf6"/>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </span>
+                </motion.h1>
+              </div>
 
-                <motion.div
-                    animate={{ y: ["-12px", "12px"], rotate: [3, -3] }}
-                    transition={{ duration: 6.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.5 }}
-                    className="absolute top-14 right-[6%] text-6xl drop-shadow-xl hidden sm:block"
+              {/* Subtitle */}
+              <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 }}
+                className="text-center text-slate-500 text-base sm:text-lg md:text-xl font-medium max-w-2xl mx-auto mb-8 leading-relaxed"
+              >
+                Expert curriculum · AI tutor · Fun games &amp; rewards — all in one safe, ad-free platform your
+                child will <span className="text-slate-700 font-bold">love</span> every day.
+              </motion.p>
+
+              {/* Subject pills */}
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+                className="flex flex-wrap items-center justify-center gap-2 mb-10"
+              >
+                {SUBJECTS.map((s) => (
+                  <span key={s} className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-slate-200 text-slate-600 text-sm font-semibold shadow-sm hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700 transition-all cursor-default">
+                    {s}
+                  </span>
+                ))}
+              </motion.div>
+
+              {/* CTAs */}
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38 }}
+                className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+              >
+                <Link href="/register"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-9 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg text-white bg-gradient-to-r from-sky-500 to-indigo-500 shadow-xl shadow-sky-200/60 hover:shadow-sky-300/70 hover:-translate-y-1 transition-all duration-300"
                 >
-                    ✈️
-                </motion.div>
+                  <FaPlusCircle className="group-hover:rotate-90 transition-transform duration-300" />
+                  Start Free — No Credit Card
+                </Link>
 
-                <motion.div
-                    animate={{ y: ["8px", "-8px"] }}
-                    transition={{ duration: 5.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 1.5 }}
-                    className="absolute bottom-10 right-[5%] text-5xl drop-shadow-xl hidden sm:block"
+                <Link href="#gradesCard" scroll={true}
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-9 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg text-slate-700 bg-white border-2 border-slate-200 shadow-sm hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 hover:-translate-y-1 transition-all duration-300"
                 >
-                    ⭐
-                </motion.div>
-            </div>
+                  <FaPlay className="text-xs text-slate-400 group-hover:translate-x-1 transition-transform" />
+                  Explore Curriculum
+                </Link>
+              </motion.div>
 
-            <div className="container mx-auto relative z-10 px-4">
-                <AnimatePresence mode="wait">
-                    {loading ? (
-                        <div key="loading" className="h-40" />
-                    ) : user ? (
-                        <motion.div
-                            key="logged-in"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="max-w-2xl mx-auto text-center"
-                        >
-                            <div className="inline-block px-4 py-1.5 bg-blue-100 text-blue-600 rounded-full font-black text-xs uppercase tracking-widest mb-5 border border-blue-200">
-                                Welcome Back
-                            </div>
-                            <h1 className="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight leading-[1.1]">
-                                Hey <span className="text-blue-600">{user.displayName || "Explorer"}</span>, ready to continue?
-                            </h1>
-                            <p className="text-base sm:text-lg text-slate-600 mb-8 font-medium">
-                                Your children are making great progress! Jump back into your dashboard to see recent achievements or manage profiles.
-                            </p>
-                            <Link href="/dashboard" className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-blue-600 text-white px-10 py-4 sm:px-12 sm:py-5 rounded-3xl font-black text-lg sm:text-xl shadow-xl shadow-blue-200 hover:bg-blue-700 hover:scale-105 transition-all">
-                                <FaRocket /> Enter Dashboard
-                            </Link>
-                        </motion.div>
-                    ) : (
-                        <motion.div
-                            key="public"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="max-w-4xl mx-auto text-center"
-                        >
-                            <div className="inline-block px-4 py-1.5 bg-blue-100 text-blue-600 rounded-full font-black text-xs uppercase tracking-widest mb-5 border border-blue-200">
-                                The Ultimate Learning Portal
-                            </div>
-                            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 mb-4 tracking-tight leading-[1.1]">
-                                KidsPortal <span className="font-normal text-slate-400">is</span> <span className="text-blue-600">fun learning</span>
-                            </h1>
-                            <p className="text-base sm:text-lg text-slate-600 mb-9 sm:mb-10 font-medium max-w-2xl mx-auto">
-                                Explore exciting games, interactive tasks, and expert curriculum that make learning an adventure your child will love.
-                            </p>
+              {/* Stats */}
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.46 }}
+                className="grid grid-cols-3 gap-3 sm:gap-5 max-w-md sm:max-w-xl mx-auto"
+              >
+                {STATS.map(({ value, label, grad }) => (
+                  <div key={label} className="flex flex-col items-center gap-1 bg-white border border-slate-100 rounded-2xl px-3 py-4 shadow-sm hover:shadow-md transition-shadow">
+                    <span className={`text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-br ${grad}`}>{value}</span>
+                    <span className="text-slate-400 text-[10px] sm:text-xs font-semibold text-center">{label}</span>
+                  </div>
+                ))}
+              </motion.div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-5 mb-9 sm:mb-10 max-w-3xl mx-auto">
-                                {HIGHLIGHTS.map((h) => (
-                                    <CloudCard key={h.title} {...h} />
-                                ))}
-                            </div>
+              {/* Social proof */}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.56 }}
+                className="flex items-center justify-center gap-3 mt-8 text-slate-400 text-xs sm:text-sm font-medium"
+              >
+                <div className="flex -space-x-2">
+                  {["🧒", "👦", "👧", "🧑"].map((e, i) => (
+                    <span key={i} className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-sky-400 to-indigo-400 flex items-center justify-center text-xs border-2 border-white shadow-sm">
+                      {e}
+                    </span>
+                  ))}
+                </div>
+                <span>Loved by 10,000+ families worldwide</span>
+                <span className="text-yellow-400 tracking-tight">★★★★★</span>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
-                            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-                                <Link href="/register" className="w-full sm:w-auto bg-yellow-400 text-slate-900 px-10 py-5 rounded-3xl font-black text-lg shadow-xl shadow-yellow-100 hover:bg-yellow-500 hover:scale-105 transition-all flex items-center justify-center gap-2">
-                                    <FaPlusCircle /> Get Started Free
-                                </Link>
-                                <Link href="#gradesCard" scroll={true} className="w-full sm:w-auto bg-white text-blue-600 border border-blue-100 px-10 py-5 rounded-3xl font-black text-lg shadow-lg hover:bg-blue-50 hover:scale-105 transition-all flex items-center justify-center gap-2">
-                                    Explore Now
-                                </Link>
-                            </div>
-
-                            <div className="flex items-center justify-center gap-2 text-slate-500 font-bold text-sm">
-                                <span className="text-yellow-400 text-lg">★★★★★</span>
-                                <span>Loved by 10,000+ families</span>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        </section>
-    );
+      {/* Wave divider */}
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+        <svg viewBox="0 0 1440 70" fill="none" className="w-full">
+          <path d="M0 35 Q 180 0, 360 35 Q 540 70, 720 35 Q 900 0, 1080 35 Q 1260 70, 1440 35 L1440 70 L0 70 Z" fill="white"/>
+        </svg>
+      </div>
+    </section>
+  );
 }

@@ -46,7 +46,7 @@ export default function CodingLabPage() {
   if (timeStatus?.isBlocked) return <TimeLimitBlockedScreen status={timeStatus} />;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-cyan-50 px-4 py-8">
+    <div className="flex flex-col p-2 sm:p-4 relative font-sans">
       <MinimalBackButton />
 
       <motion.div

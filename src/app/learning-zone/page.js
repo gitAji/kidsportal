@@ -14,50 +14,14 @@ import { getChildStats } from '@/app/utils/firestoreService';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import TimeLimitBlockedScreen from '../components/child/TimeLimitBlockedScreen';
 
-// A map for sleek subject styling
 const subjectStyleMap = {
-  "English": {
-    gradient: "from-blue-400 to-indigo-600",
-    shadow: "shadow-blue-500/50",
-    iconColor: "text-blue-100",
-    bgPattern: "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-300/20 via-transparent to-transparent"
-  },
-  "Math": {
-    gradient: "from-rose-400 to-red-600",
-    shadow: "shadow-red-500/50",
-    iconColor: "text-red-100",
-    bgPattern: "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-rose-300/20 via-transparent to-transparent"
-  },
-  "Tamil": {
-    gradient: "from-emerald-400 to-green-600",
-    shadow: "shadow-green-500/50",
-    iconColor: "text-green-100",
-    bgPattern: "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-emerald-300/20 via-transparent to-transparent"
-  },
-  "Science": {
-    gradient: "from-amber-400 to-orange-600",
-    shadow: "shadow-orange-500/50",
-    iconColor: "text-orange-100",
-    bgPattern: "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-amber-300/20 via-transparent to-transparent"
-  },
-  "Coding": {
-    gradient: "from-violet-500 to-purple-700",
-    shadow: "shadow-purple-500/50",
-    iconColor: "text-purple-100",
-    bgPattern: "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-violet-300/20 via-transparent to-transparent"
-  },
-  "Computer Science": {
-    gradient: "from-cyan-500 to-sky-700",
-    shadow: "shadow-sky-500/50",
-    iconColor: "text-sky-100",
-    bgPattern: "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-cyan-300/20 via-transparent to-transparent"
-  },
-  "default": {
-    gradient: "from-gray-400 to-slate-600",
-    shadow: "shadow-slate-500/50",
-    iconColor: "text-slate-100",
-    bgPattern: "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-gray-300/20 via-transparent to-transparent"
-  }
+  "English": { bg: "bg-[#FF9B9B]", border: "border-[#FF7272]", shadow: "shadow-[#FF7272]", icon: "text-[#FF7272]" },
+  "Math": { bg: "bg-[#72C6FF]", border: "border-[#40A5E5]", shadow: "shadow-[#40A5E5]", icon: "text-[#40A5E5]" },
+  "Tamil": { bg: "bg-[#72E5A8]", border: "border-[#4CC287]", shadow: "shadow-[#4CC287]", icon: "text-[#4CC287]" },
+  "Science": { bg: "bg-[#FFC972]", border: "border-[#E5A840]", shadow: "shadow-[#E5A840]", icon: "text-[#E5A840]" },
+  "Coding": { bg: "bg-[#C48CFF]", border: "border-[#A05CFF]", shadow: "shadow-[#A05CFF]", icon: "text-[#A05CFF]" },
+  "Computer Science": { bg: "bg-[#8CEFFF]", border: "border-[#5CCEE5]", shadow: "shadow-[#5CCEE5]", icon: "text-[#5CCEE5]" },
+  "default": { bg: "bg-[#D1D5DB]", border: "border-[#9CA3AF]", shadow: "shadow-[#9CA3AF]", icon: "text-[#9CA3AF]" },
 };
 
 const subjectIconMap = {
@@ -70,24 +34,11 @@ const subjectIconMap = {
   "default": FaStar,
 };
 
-// Floating animation for background elements
-const floatingAnimation = {
-  y: ["-10px", "10px"],
-  x: ["-5px", "5px"],
-  transition: {
-    duration: 4,
-    repeat: Infinity,
-    repeatType: "reverse",
-    ease: "easeInOut"
-  }
-};
-
 export default function LearningZonePage() {
   const { childUser } = useChild();
   const { t } = useLanguage();
   const [subjects, setSubjects] = useState([]);
   const [subjectsLoading, setSubjectsLoading] = useState(true);
-  const [greeting, setGreeting] = useState(null);
   const [timeStatus, setTimeStatus] = useState(null);
 
   const professor = React.useMemo(() => {
@@ -97,43 +48,26 @@ export default function LearningZonePage() {
   }, [childUser, t]);
 
   useEffect(() => {
-    if (childUser && !subjectsLoading) {
-      const timer = setTimeout(() => {
-        setGreeting(`Hey ${childUser.name}! Which adventure should we start today? ${professor.emoji}`);
-      }, 2000);
-      const clearTimer = setTimeout(() => setGreeting(null), 10000);
-      return () => { clearTimeout(timer); clearTimeout(clearTimer); };
-    }
-  }, [childUser, subjectsLoading]);
-
-  useEffect(() => {
     const loadSubjects = async () => {
       if (!childUser) return;
       setSubjectsLoading(true);
-
-      // Fetch the parent's selected learning subjects
       let learningSubjects = childUser.learningSubjects || DEFAULT_LEARNING_SUBJECTS;
       try {
         if (childUser.parentUid) {
           const parentSnap = await getDoc(doc(db, 'users', childUser.parentUid));
           if (parentSnap.exists()) {
-            learningSubjects = parentSnap.data().learningSubjects || learningSubjects; // Use parent's preference, or fallback to childUser's/default
+            learningSubjects = parentSnap.data().learningSubjects || learningSubjects;
           }
         }
-      } catch (err) {
-        console.error('Error fetching parent subject preferences:', err);
-      }
-
+      } catch (err) {}
+      
       const fetchedSubjects = getSubjectsByGrade(childUser.gradeId, learningSubjects);
       setSubjects(fetchedSubjects);
-      setTimeout(() => setSubjectsLoading(false), 800);
+      setTimeout(() => setSubjectsLoading(false), 500);
     };
-
     loadSubjects();
   }, [childUser]);
 
-  // Screen-time limits: re-check whenever this page is (re)visited so a
-  // limit hit while browsing subjects blocks starting a new one.
   useEffect(() => {
     const checkTimeStatus = async () => {
       if (!childUser?.id) return;
@@ -145,186 +79,109 @@ export default function LearningZonePage() {
           timeBonus: stats.timeBonus,
         }));
       } catch (err) {
-        console.error('Failed to check time status', err);
         setTimeStatus(getTimeStatus({ timeLimits: childUser.timeLimits }));
       }
     };
     checkTimeStatus();
   }, [childUser?.id, childUser?.timeLimits]);
 
-  if (!childUser) {
-    return null;
-  }
-
-  if (timeStatus?.isBlocked) {
-    return <TimeLimitBlockedScreen status={timeStatus} />;
-  }
-
-  // Animation variants for cards
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50, scale: 0.9 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 100, damping: 15 } },
-  };
+  if (!childUser) return null;
+  if (timeStatus?.isBlocked) return <TimeLimitBlockedScreen status={timeStatus} />;
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-4 sm:p-8 md:p-12 relative overflow-hidden">
+    <div className="flex flex-col items-center sm:p-4 relative font-sans">
 
-      {/* Animated Gradient Background Orbs */}
-      <motion.div animate={floatingAnimation} className="absolute -top-40 -left-40 w-96 h-96 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></motion.div>
-      <motion.div animate={{ ...floatingAnimation, transition: { duration: 5, repeat: Infinity, repeatType: "reverse" } }} className="absolute top-20 -right-20 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></motion.div>
-      <motion.div animate={{ ...floatingAnimation, transition: { duration: 6, repeat: Infinity, repeatType: "reverse" } }} className="absolute -bottom-40 left-1/3 w-80 h-80 bg-teal-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-        className="text-center z-10 w-full max-w-4xl mx-auto mb-8 mt-4"
+      {/* Welcome Banner */}
+      <motion.div 
+        initial={{ opacity: 0, y: -20, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
+        className="relative z-10 w-full max-w-5xl mx-auto mt-6 mb-12"
       >
-        <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-6 py-2 rounded-full shadow-sm border border-slate-100">
-          <FaStar className="text-yellow-400" />
-          <p className="text-sm sm:text-base font-bold text-slate-700 uppercase tracking-widest">
-            {childUser.grade} {t('explorer')}
-          </p>
-          <FaStar className="text-yellow-400" />
-        </div>
-        {!childUser.isSubscriptionActive && (
-          <div className="mt-6 inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-700 px-5 py-2.5 rounded-full font-bold text-sm">
-            <FaStar className="text-amber-400" />
-            Free Preview — Level 1 of every subject is open to try! Subscribe to unlock everything.
+        <div className="bg-white/80 backdrop-blur-xl border-4 border-white shadow-xl rounded-[2.5rem] p-6 sm:p-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+          <div className="relative w-28 h-28 sm:w-36 sm:h-36 shrink-0 bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-full border-4 border-white shadow-lg overflow-hidden flex items-center justify-center">
+             <Image src={professor.img} alt={professor.name} fill className="object-contain scale-[0.85] translate-y-2" priority />
           </div>
-        )}
+          <div className="text-center sm:text-left flex-grow">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-yellow-100 text-yellow-700 rounded-full font-black text-sm uppercase tracking-widest mb-3 border border-yellow-200 shadow-sm">
+               <FaStar /> Grade {childUser.gradeId} Explorer
+            </div>
+            <h1 className="text-3xl sm:text-5xl font-black text-slate-800 tracking-tight leading-tight mb-2">
+              Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500">{childUser.name}</span>!
+            </h1>
+            <p className="text-lg sm:text-xl font-bold text-slate-500">
+              What adventure are we going on today? 🚀
+            </p>
+          </div>
+        </div>
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15 }}
-        className="w-full max-w-4xl mx-auto mb-12 z-10 px-4"
-      >
+      {/* Main Content Area */}
+      <div className="w-full max-w-5xl mx-auto z-10 relative">
+        
+        {/* Games Promo Card */}
         <Link href="/learning-zone/games">
-          <motion.div
-            whileHover={{ scale: 1.015, y: -3 }}
+          <motion.div 
+            whileHover={{ scale: 1.02, y: -4 }}
             whileTap={{ scale: 0.98 }}
-            className="relative overflow-hidden rounded-[2rem] p-6 sm:p-8 flex items-center justify-between gap-4 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 shadow-xl border-b-[6px] border-black/10 cursor-pointer"
+            className="w-full bg-[#FF79B3] rounded-[2.5rem] p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 shadow-[0_12px_0_#DF5593] hover:shadow-[0_8px_0_#DF5593] hover:translate-y-1 transition-all border-[6px] border-white cursor-pointer"
           >
-            <div className="flex items-center gap-4 sm:gap-6 relative z-10">
-              <div className="bg-white/20 backdrop-blur-sm w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shadow-inner shrink-0">
-                <FaGamepad size={28} className="text-white drop-shadow-sm" />
+            <div className="flex items-center gap-6">
+              <div className="w-20 h-20 bg-white/20 rounded-[1.5rem] flex items-center justify-center shadow-inner border-4 border-white/30">
+                <FaGamepad className="text-5xl text-white drop-shadow-sm" />
               </div>
               <div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-white drop-shadow-md tracking-tight leading-tight">Games</h2>
-                <p className="text-white/90 font-medium text-sm sm:text-base">Play games that match what you're learning!</p>
+                <h2 className="text-3xl sm:text-4xl font-black text-white drop-shadow-md mb-1">Play Games!</h2>
+                <p className="text-white/90 font-bold text-lg">Earn stars and learn while having fun.</p>
               </div>
             </div>
-            <div className="hidden sm:flex items-center gap-2 text-white font-bold bg-black/20 px-5 py-2.5 rounded-full backdrop-blur-md relative z-10 shrink-0">
-              <FaPlay className="text-xs" /> Play Now
+            <div className="bg-white text-[#DF5593] px-8 py-4 rounded-full font-black text-lg shadow-lg flex items-center gap-3 active:scale-95 transition-transform">
+              <FaPlay /> GO!
             </div>
           </motion.div>
         </Link>
-      </motion.div>
 
-      {subjectsLoading ? (
-        <div className="w-full max-w-7xl z-10 px-4">
+        {/* Subjects Grid */}
+        <div className="flex items-center gap-3 mb-6 px-2">
+           <div className="w-2 h-8 bg-blue-500 rounded-full" />
+           <h2 className="text-3xl font-black text-slate-700">Your Subjects</h2>
+        </div>
+
+        {subjectsLoading ? (
           <SkeletonLoader variant="subjects" count={6} />
-        </div>
-      ) : (
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full max-w-7xl z-10 pb-20 px-4"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            visible: { transition: { staggerChildren: 0.1 } },
-          }}
-        >
-          {subjects.map((subject) => {
-            const Icon = subjectIconMap[subject.subjectName] || subjectIconMap.default;
-            const style = subjectStyleMap[subject.subjectName] || subjectStyleMap.default;
-            // Show translated subject name
-            const displayName = t(`subjects.${subject.subjectName}`) || subject.subjectName;
-
-            return (
-              <Link key={subject.subjectId} href={`/learning-zone/subjects/${subject.subjectId}`}>
-                <motion.div
-                  className={`relative h-[240px] sm:h-[260px] rounded-[2rem] p-6 flex flex-col justify-between cursor-pointer overflow-hidden group border-b-[6px] border-black/10 bg-gradient-to-br ${style.gradient} ${style.shadow} hover:shadow-2xl transition-shadow duration-300`}
-                  variants={cardVariants}
-                  whileHover={{ scale: 1.03, y: -8 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  {/* Texture Pattern Overlay */}
-                  <div className={`absolute inset-0 ${style.bgPattern}`}></div>
-
-                  {/* Big decorative background icon */}
-                  <div className="absolute -bottom-6 -right-6 text-white opacity-20 transform -rotate-12 group-hover:rotate-0 group-hover:scale-110 transition-all duration-500 ease-out">
-                    <Icon size={140} />
-                  </div>
-
-                  <div className="relative z-10">
-                    <div className="bg-white/20 backdrop-blur-sm w-16 h-16 rounded-2xl flex items-center justify-center mb-4 shadow-inner group-hover:bg-white/30 transition-colors duration-300">
-                      <Icon size={32} className="text-white drop-shadow-sm" />
-                    </div>
-                    <h2 className="text-3xl font-extrabold text-white drop-shadow-md tracking-tight leading-tight">
-                      {displayName}
-                    </h2>
-                  </div>
-
-                  <div className="relative z-10">
-                    <div className="flex items-center gap-2 text-white font-bold bg-black/20 w-fit px-4 py-2 rounded-full backdrop-blur-md group-hover:bg-black/30 transition-colors text-sm">
-                      <FaPlay className="text-xs" /> {t('play_now')}
-                    </div>
-                  </div>
-                </motion.div>
-              </Link>
-            );
-          })}
-        </motion.div>
-      )}
-
-      {/* Persistent Professor Guide */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[100] flex flex-col items-end pointer-events-none">
-        {/* Greeting bubble hidden on small screens — a fixed-position bubble
-            plus this widget's large avatar has little room on a phone and
-            would otherwise sit on top of subject cards. */}
-        <AnimatePresence>
-          {greeting && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
-              animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
-              className="hidden sm:block bg-white/95 backdrop-blur-md rounded-3xl rounded-br-sm shadow-2xl p-5 mb-4 max-w-xs border-4 border-indigo-200 pointer-events-auto relative z-40"
-            >
-              <div className="absolute top-0 right-0 p-1 opacity-10">
-                <FaStar className="text-yellow-400 text-xs" />
-              </div>
-              <p className="font-bold text-slate-700 leading-snug">
-                {greeting}
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <div className="relative pointer-events-auto group mt-2">
-          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-40 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-            {professor.name}
-          </div>
-          <motion.div
-            animate={{ y: [0, -6, 0] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="w-16 h-16 sm:w-28 sm:h-28 md:w-36 md:h-36 flex items-center justify-center relative z-20 group"
+        ) : (
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pb-20"
+            initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
           >
-            <div className="relative w-full h-full bg-white rounded-full border-[5px] border-indigo-200 shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:border-indigo-400 group-hover:shadow-[0_15px_35px_rgba(99,102,241,0.3)]">
-              <div className="relative w-[85%] h-[85%] mt-3">
-                <Image
-                  src={professor.img}
-                  alt={professor.name}
-                  fill
-                  className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  priority
-                />
-              </div>
-            </div>
+            {subjects.map((subject) => {
+              const Icon = subjectIconMap[subject.subjectName] || subjectIconMap.default;
+              const style = subjectStyleMap[subject.subjectName] || subjectStyleMap.default;
+              const displayName = t(`subjects.${subject.subjectName}`) || subject.subjectName;
+
+              return (
+                <Link key={subject.subjectId} href={`/learning-zone/subjects/${subject.subjectId}`}>
+                  <motion.div 
+                    variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1, transition: { type: "spring", bounce: 0.5 } } }}
+                    whileHover={{ scale: 1.05, y: -4 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`${style.bg} ${style.border} border-b-[8px] border-r-[4px] border-l-4 border-t-4 rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center cursor-pointer shadow-lg hover:shadow-xl transition-all h-[240px] relative overflow-hidden`}
+                  >
+                    <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
+                    <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/5 rounded-full blur-xl" />
+                    
+                    <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-inner mb-4 relative z-10">
+                      <Icon className={`text-5xl ${style.icon}`} />
+                    </div>
+                    <h3 className="text-2xl font-black text-white drop-shadow-sm relative z-10">{displayName}</h3>
+                  </motion.div>
+                </Link>
+              );
+            })}
           </motion.div>
-        </div>
+        )}
       </div>
+
     </div>
   );
 }

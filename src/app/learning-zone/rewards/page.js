@@ -59,7 +59,7 @@ export default function RewardsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-indigo-100">
+    <div className="flex flex-col p-2 sm:p-4 relative font-sans">
       <MinimalBackButton />
 
       <div className="max-w-3xl mx-auto px-4 py-8">
@@ -141,9 +141,9 @@ export default function RewardsPage() {
                   <motion.div key={ach.id} layout
                     initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
                     transition={{ delay: i * 0.03 }}
-                    className={`relative rounded-3xl p-5 text-center border-2 shadow-md transition-all duration-300 overflow-hidden ${isUnlocked
-                      ? `bg-gradient-to-br ${ach.color} ${ach.border} shadow-lg`
-                      : 'bg-white border-gray-200 opacity-60'
+                    className={`relative rounded-3xl p-5 text-center transition-all duration-300 overflow-hidden shadow-lg hover:shadow-xl border-b-[6px] border-x-[3px] border-t-2 ${isUnlocked
+                      ? `bg-gradient-to-br ${ach.color} border-white/50`
+                      : 'bg-white border-slate-200 opacity-60'
                       }`}>
                     {!isUnlocked && (
                       <div className="absolute inset-0 flex items-center justify-center bg-gray-100/80 backdrop-blur-[2px] rounded-3xl">

@@ -106,7 +106,7 @@ export default function LevelPage() {
     if (!levelData) return <div className="text-center p-10">Level not found.</div>;
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-cyan-100 to-teal-100 p-4 sm:p-8">
+        <div className="flex flex-col p-2 sm:p-4 relative font-sans">
             <MinimalBackButton />
             <div className="max-w-7xl mx-auto">
                 <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-6 mb-8">

@@ -144,7 +144,7 @@ export default function LevelTasksPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 p-4 sm:p-6 md:p-8 relative overflow-hidden">
+    <div className="flex flex-col p-2 sm:p-4 relative font-sans">
       {/* Background Decor */}
       <div className="absolute top-40 right-10 text-blue-200 opacity-30 text-8xl transform rotate-12"><FaQuestionCircle /></div>
       <div className="absolute top-20 left-10 text-green-200 opacity-40 text-9xl transform -rotate-12"><FaBookOpen /></div>

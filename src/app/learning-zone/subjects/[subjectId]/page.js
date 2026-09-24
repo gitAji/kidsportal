@@ -15,12 +15,12 @@ import Image from "next/image";
 // Red is intentionally left out here — it's reserved for "wrong answer"
 // feedback elsewhere in the app, so it shouldn't also mean "just a level".
 const colorPalette = [
-  "bg-gradient-to-br from-blue-400 to-blue-600 border-blue-500",
-  "bg-gradient-to-br from-violet-400 to-purple-600 border-purple-500",
-  "bg-gradient-to-br from-emerald-400 to-green-600 border-green-500",
-  "bg-gradient-to-br from-amber-400 to-orange-500 border-amber-500",
-  "bg-gradient-to-br from-pink-400 to-rose-500 border-pink-500",
-  "bg-gradient-to-br from-cyan-400 to-teal-600 border-cyan-500",
+  "bg-[#FF9B9B] border-[#FF7272]",
+  "bg-[#72C6FF] border-[#40A5E5]",
+  "bg-[#72E5A8] border-[#4CC287]",
+  "bg-[#FFC972] border-[#E5A840]",
+  "bg-[#C48CFF] border-[#A05CFF]",
+  "bg-[#8CEFFF] border-[#5CCEE5]",
 ];
 
 // Friendly display names for subjectId prefixes (e.g. "math-3" -> "Math"),
@@ -359,10 +359,10 @@ export default function SubjectLevelsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 p-4 sm:p-6 md:p-8 relative overflow-hidden">
+    <div className="flex flex-col p-2 sm:p-4 relative font-sans">
       {/* Background Decor */}
-      <div className="absolute top-20 right-20 text-blue-200 opacity-30 text-9xl transform rotate-12"><FaTrophy /></div>
-      <div className="absolute bottom-10 left-10 text-teal-200 opacity-40 text-8xl transform -rotate-12"><FaStar /></div>
+      <div className="absolute top-20 right-20 text-yellow-400 opacity-20 text-9xl transform rotate-12 pointer-events-none"><FaTrophy /></div>
+      <div className="absolute bottom-10 left-10 text-pink-400 opacity-20 text-8xl transform -rotate-12 pointer-events-none"><FaStar /></div>
 
       <MinimalBackButton />
 
@@ -397,7 +397,7 @@ export default function SubjectLevelsPage() {
         <span className="inline-block bg-white px-6 py-2 rounded-full text-sm font-bold text-cyan-600 mb-4 shadow-sm uppercase tracking-wider">
           {childUser?.grade} • {getSubjectDisplayName(subjectId)}
         </span>
-        <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 drop-shadow-sm">
+        <h1 className="text-4xl md:text-6xl font-black text-slate-800 drop-shadow-sm tracking-tight">
           {t('select_level')}
         </h1>
 
@@ -514,7 +514,7 @@ export default function SubjectLevelsPage() {
                   <motion.div
                     key={level.levelId}
                     onClick={() => handleLevelClick(level)}
-                    className={`${cardBg} text-white rounded-[2.5rem] shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[260px] relative overflow-hidden group border-b-8 ${isLocked ? 'opacity-80 grayscale-[0.5]' : ''} ${level.isNextUp ? 'ring-4 ring-green-400 ring-offset-4 ring-offset-transparent' : ''}`}
+                    className={`${cardBg} text-white rounded-[2.5rem] shadow-lg hover:shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[260px] relative overflow-hidden group border-b-[8px] border-x-[4px] border-t-4 ${isLocked ? 'opacity-80 grayscale-[0.5]' : ''} ${level.isNextUp ? 'ring-4 ring-green-400 ring-offset-4 ring-offset-transparent' : ''}`}
                     variants={cardVariants}
                     whileHover={!isLocked ? "hover" : { scale: 1.02 }}
                     whileTap="tap"
@@ -640,50 +640,6 @@ export default function SubjectLevelsPage() {
         )}
       </div>
 
-      {/* Persistent Professor Owl Guide */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[100] flex flex-col items-end pointer-events-none">
-        {/* Greeting bubble is decorative flavor text — hidden on small screens
-            where the fixed-position owl already has little room and would
-            otherwise sit on top of the first level card. */}
-        <AnimatePresence>
-          {greeting && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
-              animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
-              className="hidden sm:block bg-white/95 backdrop-blur-md rounded-3xl rounded-br-sm shadow-2xl p-5 mb-4 max-w-xs border-4 border-teal-200 pointer-events-auto relative"
-            >
-              <div className="absolute top-0 right-0 p-1 opacity-10">
-                <FaStar className="text-yellow-400 text-xs" />
-              </div>
-              <p className="font-bold text-slate-700 leading-snug">
-                {greeting}
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <div className="relative pointer-events-auto group">
-          <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-10 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-            Professor Owl
-          </div>
-          <motion.div
-            animate={{ y: [0, -5, 0], rotate: [0, 2, -2, 0] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="w-14 h-14 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center shadow-2xl border-4 border-white overflow-hidden bg-gradient-to-tr from-teal-400 to-blue-600"
-          >
-            <div className="relative w-full h-full p-2">
-              <Image
-                src="/images/professor-owl.png"
-                alt="Professor Owl"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </motion.div>
-        </div>
-      </div>
     </div>
   );
 }
