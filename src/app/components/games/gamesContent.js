@@ -17,6 +17,16 @@
 // gets a second game per grade (this session), sourced the same way from
 // each grade's Level 2 Tamil quiz/exam bank, so kids get more than one
 // quiz's worth of Tamil practice instead of a single game per grade.
+//
+// A handful of grades also get a hand-crafted `label-diagram` game (drag
+// each label onto the matching part of a diagram), each one grounded in
+// that grade's real Science lesson content rather than an invented topic:
+//   - grade-1 "Parts of a Flower"                 (Plants)
+//   - grade-3 "The Water Cycle"                   (The Water Cycle)
+//   - grade-4 "Simple Machines"                   (Mechanisms: levers/pulleys/gears)
+//   - grade-5 "The Circulatory System"            (The Circulatory System)
+//   - grade-6 "Parts of a Plant Cell"              (Cells & Organisation)
+//   - grade-7 "Parts of an Ecosystem"              (Ecosystems & Interdependence)
 import { GENERATED_GAMES_BY_GRADE } from './gamesContentGenerated';
 
 const HAND_CRAFTED_GAMES_BY_GRADE = {
@@ -170,7 +180,7 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
           { kind: 'svg', tag: 'circle', props: { cx: 50, cy: 30, r: 9, fill: '#fbbf24' } },
           { kind: 'svg', tag: 'rect', props: { x: 47, y: 38, width: 6, height: 48, rx: 2, fill: '#16a34a' } },
           { kind: 'svg', tag: 'ellipse', props: { cx: 30, cy: 64, rx: 14, ry: 7, fill: '#22c55e', transform: 'rotate(-25 30 64)' } },
-          { kind: 'svg', tag: 'path', props: { d: 'M50,86 L38,98 M50,86 L50,99 M50,86 L62,98', stroke: '#92400e', 'stroke-width': 3, fill: 'none', 'stroke-linecap': 'round' } },
+          { kind: 'svg', tag: 'path', props: { d: 'M50,86 L38,98 M50,86 L50,99 M50,86 L62,98', stroke: '#92400e', strokeWidth: 3, fill: 'none', strokeLinecap: 'round' } },
         ],
         zones: [
           { id: 'petal', x: 50, y: 18, label: 'Petal' },
@@ -207,6 +217,130 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
           { id: 'herbivore', x: 55, y: 68, label: 'Consumer (Herbivore)' },
           { id: 'predator', x: 78, y: 55, label: 'Consumer (Predator)' },
           { id: 'decomposer', x: 45, y: 88, label: 'Decomposer' },
+        ],
+      },
+    },
+  ],
+  'grade-3': [
+    {
+      id: 'water-cycle-label',
+      subjectId: 'science-3',
+      subjectLabel: 'Science',
+      title: 'The Water Cycle',
+      description: 'Drag each label onto the matching stage of the water cycle!',
+      engine: 'label-diagram',
+      icon: '💧',
+      color: 'from-sky-400 to-blue-500',
+      data: {
+        instruction: 'Drag each label onto the matching stage of the water cycle!',
+        background: 'linear-gradient(180deg, #dbeafe 0%, #dbeafe 55%, #0ea5e9 55%, #0ea5e9 100%)',
+        shapes: [
+          { kind: 'emoji', x: 18, y: 12, size: 40, value: '☀️' },
+          { kind: 'emoji', x: 55, y: 15, size: 48, value: '☁️' },
+          { kind: 'emoji', x: 78, y: 38, size: 40, value: '🌧️' },
+          { kind: 'emoji', x: 50, y: 85, size: 52, value: '🌊' },
+          { kind: 'svg', tag: 'path', props: { d: 'M30,80 C28,65 35,50 30,32', stroke: '#38bdf8', strokeWidth: 2.5, fill: 'none', strokeDasharray: '4 3', strokeLinecap: 'round' } },
+        ],
+        zones: [
+          { id: 'evaporation', x: 30, y: 55, label: 'Evaporation' },
+          { id: 'condensation', x: 55, y: 15, label: 'Condensation' },
+          { id: 'precipitation', x: 78, y: 38, label: 'Precipitation' },
+          { id: 'collection', x: 50, y: 85, label: 'Collection' },
+        ],
+      },
+    },
+  ],
+  'grade-4': [
+    {
+      id: 'simple-machines-label',
+      subjectId: 'science-4',
+      subjectLabel: 'Science',
+      title: 'Simple Machines: Levers, Pulleys & Gears',
+      description: 'Drag each label onto the matching part of these mechanisms!',
+      engine: 'label-diagram',
+      icon: '⚙️',
+      color: 'from-amber-400 to-orange-500',
+      data: {
+        instruction: 'Drag each label onto the matching part of these mechanisms!',
+        background: 'linear-gradient(180deg, #f1f5f9 0%, #f1f5f9 100%)',
+        shapes: [
+          { kind: 'svg', tag: 'polygon', props: { points: '15,72 22,58 29,72', fill: '#78716c' } },
+          { kind: 'svg', tag: 'rect', props: { x: 2, y: 54, width: 40, height: 5, fill: '#a16207', transform: 'rotate(-15 22 58)' } },
+          { kind: 'svg', tag: 'rect', props: { x: 2, y: 42, width: 10, height: 10, fill: '#3b82f6' } },
+          { kind: 'svg', tag: 'rect', props: { x: 48, y: 20, width: 3, height: 42, fill: '#57534e' } },
+          { kind: 'svg', tag: 'circle', props: { cx: 52, cy: 20, r: 5, fill: 'none', stroke: '#78716c', strokeWidth: 2.5 } },
+          { kind: 'svg', tag: 'path', props: { d: 'M49,22 L44,58 M55,22 L60,58', stroke: '#78350f', strokeWidth: 1.5, fill: 'none' } },
+          { kind: 'svg', tag: 'rect', props: { x: 40, y: 55, width: 10, height: 7, fill: '#dc2626' } },
+          { kind: 'emoji', x: 78, y: 45, size: 44, value: '⚙️' },
+          { kind: 'emoji', x: 91, y: 45, size: 28, value: '⚙️' },
+        ],
+        zones: [
+          { id: 'fulcrum', x: 22, y: 66, label: 'Fulcrum' },
+          { id: 'load-lever', x: 7, y: 47, label: 'Load (Lever)' },
+          { id: 'pulley-wheel', x: 52, y: 20, label: 'Pulley Wheel' },
+          { id: 'load-pulley', x: 44, y: 58, label: 'Load (Pulley)' },
+          { id: 'gear', x: 78, y: 45, label: 'Gear' },
+        ],
+      },
+    },
+  ],
+  'grade-5': [
+    {
+      id: 'circulatory-system-label',
+      subjectId: 'science-5',
+      subjectLabel: 'Science',
+      title: 'The Circulatory System',
+      description: 'Drag each label onto the matching part of the circulatory system!',
+      engine: 'label-diagram',
+      icon: '❤️',
+      color: 'from-rose-400 to-red-500',
+      data: {
+        instruction: 'Drag each label onto the matching part of the circulatory system!',
+        background: 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)',
+        shapes: [
+          { kind: 'emoji', x: 35, y: 40, size: 56, value: '❤️' },
+          { kind: 'svg', tag: 'path', props: { d: 'M55,35 C75,25 85,20 92,15', stroke: '#dc2626', strokeWidth: 3, fill: 'none', strokeLinecap: 'round' } },
+          { kind: 'svg', tag: 'path', props: { d: 'M92,30 C80,45 65,50 55,45', stroke: '#1d4ed8', strokeWidth: 3, fill: 'none', strokeLinecap: 'round' } },
+          { kind: 'svg', tag: 'circle', props: { cx: 94, cy: 22, r: 7, fill: '#fca5a5', opacity: 0.6 } },
+          { kind: 'svg', tag: 'path', props: { d: 'M90,18 L97,15 M90,18 L97,20 M90,26 L97,24 M90,26 L97,29', stroke: '#f87171', strokeWidth: 1.2, fill: 'none', strokeLinecap: 'round' } },
+        ],
+        zones: [
+          { id: 'heart', x: 35, y: 40, label: 'Heart' },
+          { id: 'artery', x: 75, y: 24, label: 'Artery' },
+          { id: 'vein', x: 75, y: 42, label: 'Vein' },
+          { id: 'capillary', x: 94, y: 22, label: 'Capillary' },
+        ],
+      },
+    },
+  ],
+  'grade-6': [
+    {
+      id: 'plant-cell-label',
+      subjectId: 'science-6',
+      subjectLabel: 'Science',
+      title: 'Parts of a Plant Cell',
+      description: 'Drag each label onto the matching part of the plant cell!',
+      engine: 'label-diagram',
+      icon: '🔬',
+      color: 'from-green-400 to-emerald-500',
+      data: {
+        instruction: 'Drag each label onto the matching part of the plant cell!',
+        background: 'linear-gradient(180deg, #f0fdf4 0%, #f0fdf4 100%)',
+        shapes: [
+          { kind: 'svg', tag: 'rect', props: { x: 8, y: 15, width: 84, height: 70, rx: 14, fill: '#bbf7d0', stroke: '#166534', strokeWidth: 3 } },
+          { kind: 'svg', tag: 'rect', props: { x: 13, y: 19, width: 74, height: 62, rx: 11, fill: 'none', stroke: '#4ade80', strokeWidth: 2, strokeDasharray: '4 2' } },
+          { kind: 'svg', tag: 'circle', props: { cx: 68, cy: 55, r: 18, fill: '#e0f2fe', stroke: '#0284c7', strokeWidth: 2, opacity: 0.85 } },
+          { kind: 'svg', tag: 'circle', props: { cx: 38, cy: 48, r: 14, fill: '#93c5fd', stroke: '#1d4ed8', strokeWidth: 2 } },
+          { kind: 'svg', tag: 'ellipse', props: { cx: 25, cy: 70, rx: 6, ry: 3.5, fill: '#16a34a', transform: 'rotate(20 25 70)' } },
+          { kind: 'svg', tag: 'ellipse', props: { cx: 55, cy: 25, rx: 6, ry: 3.5, fill: '#16a34a', transform: 'rotate(-15 55 25)' } },
+          { kind: 'svg', tag: 'ellipse', props: { cx: 80, cy: 30, rx: 6, ry: 3.5, fill: '#16a34a', transform: 'rotate(30 80 30)' } },
+        ],
+        zones: [
+          { id: 'cell-wall', x: 50, y: 17, label: 'Cell Wall' },
+          { id: 'cell-membrane', x: 13, y: 50, label: 'Cell Membrane' },
+          { id: 'nucleus', x: 38, y: 48, label: 'Nucleus' },
+          { id: 'vacuole', x: 68, y: 55, label: 'Vacuole' },
+          { id: 'chloroplast', x: 55, y: 25, label: 'Chloroplast' },
         ],
       },
     },
