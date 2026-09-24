@@ -7,6 +7,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { FaUser, FaEnvelope, FaLock, FaArrowRight, FaHome, FaCheckCircle, FaChalkboardTeacher } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { getFriendlyAuthError } from "@/app/utils/authErrors";
 
 export default function RegisterPage() {
     const [name, setName] = useState("");
@@ -47,7 +48,7 @@ export default function RegisterPage() {
             await signUpWithEmail(email, password, name);
             router.push("/dashboard");
         } catch (err) {
-            setError(err.message);
+            setError(err.message === "TEACHER_PROHIBITED" ? err.message : getFriendlyAuthError(err));
         } finally {
             setLoading(false);
         }
@@ -60,7 +61,7 @@ export default function RegisterPage() {
             await signInWithGoogle();
             router.push("/dashboard");
         } catch (err) {
-            setError(err.message);
+            setError(err.message === "TEACHER_PROHIBITED" ? err.message : getFriendlyAuthError(err));
         } finally {
             setLoading(false);
         }

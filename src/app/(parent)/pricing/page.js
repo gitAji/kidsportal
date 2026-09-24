@@ -66,6 +66,7 @@ export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState("monthly");
   const [currencyCode, setCurrencyCode] = useState("USD");
   const [loadingPlan, setLoadingPlan] = useState(null);
+  const [checkoutError, setCheckoutError] = useState(null);
   const router = useRouter();
 
   const currency = CURRENCY_PRICES[currencyCode];
@@ -108,10 +109,11 @@ export default function PricingPage() {
 
   const handleChoosePlan = async () => {
     if (!auth.currentUser) {
-      router.push("/login");
+      router.push("/login?role=parent&redirect=" + encodeURIComponent("/pricing"));
       return;
     }
 
+    setCheckoutError(null);
     setLoadingPlan("Premium");
     try {
       const idToken = await auth.currentUser.getIdToken();
@@ -131,9 +133,11 @@ export default function PricingPage() {
         window.location.href = data.url;
       } else {
         console.error("Stripe error:", data.error);
+        setCheckoutError("We couldn't start checkout. Please try again in a moment.");
       }
     } catch (err) {
       console.error("Checkout error:", err);
+      setCheckoutError("We couldn't start checkout. Please check your connection and try again.");
     } finally {
       setLoadingPlan(null);
     }
@@ -278,6 +282,9 @@ export default function PricingPage() {
                     <>Get Premium · {plan.price}{plan.period}</>
                   )}
                 </button>
+              )}
+              {!plan.isFree && checkoutError && (
+                <p className="text-rose-600 text-xs font-semibold text-center mt-3">{checkoutError}</p>
               )}
             </motion.div>
           ))}

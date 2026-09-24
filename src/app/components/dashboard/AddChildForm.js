@@ -17,6 +17,12 @@ const avatars = [
   { id: 'default', icon: <FaUserCircle />, color: 'from-indigo-400 to-cyan-500' },
 ];
 
+// Must match db.json's grade names exactly ("Grade 1".."Grade 10") — some
+// downstream lookups (e.g. dbData.grades.find(g => g.gradeName === grade))
+// require an exact match, so this used to be a free-text field a typo could
+// silently break (a child assigned "2nd" or "Grade2" saw an empty subject list).
+const GRADE_OPTIONS = Array.from({ length: 10 }, (_, i) => `Grade ${i + 1}`);
+
 const generatePassword = () => {
   const adjectives = ['Happy', 'Sunny', 'Brave', 'Clever', 'Fast'];
   const nouns = ['Fox', 'Lion', 'Bear', 'Tiger', 'Panda'];
@@ -224,7 +230,12 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
               </div>
               <div className="flex-1">
                 <label htmlFor="childGrade" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">Grade</label>
-                <input type="text" id="childGrade" className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800" placeholder="2nd" value={grade} onChange={(e) => setGrade(e.target.value)} required />
+                <select id="childGrade" className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800" value={grade} onChange={(e) => setGrade(e.target.value)} required>
+                  <option value="" disabled>Select grade</option>
+                  {GRADE_OPTIONS.map((g) => (
+                    <option key={g} value={g}>{g}</option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>

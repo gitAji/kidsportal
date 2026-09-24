@@ -16,6 +16,7 @@ import SkeletonLoader from "@/app/components/ui/SkeletonLoader";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import CustomAvatar from "@/app/components/ui/CustomAvatar";
+import { getFriendlyAuthError } from "@/app/utils/authErrors";
 
 export default function LoginPage() {
     return (
@@ -91,7 +92,7 @@ function UnifiedLoginPage() {
                 router.push("/dashboard");
             }
         } catch (err) {
-            setError(err.message);
+            setError(err.message === "TEACHER_PROHIBITED" ? err.message : getFriendlyAuthError(err));
         } finally {
             setLoading(false);
         }
@@ -103,7 +104,7 @@ function UnifiedLoginPage() {
             await signInWithGoogle();
             router.push("/dashboard");
         } catch (err) {
-            setError(err.message);
+            setError(err.message === "TEACHER_PROHIBITED" ? err.message : getFriendlyAuthError(err));
         } finally {
             setLoading(false);
         }

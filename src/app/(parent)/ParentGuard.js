@@ -18,10 +18,16 @@ export default function ParentGuard({ children }) {
 
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, async (user) => {
-            // Check if we are on a path that requires a parent role
+            // Check if we are on a path that requires a parent role.
+            // /pricing is intentionally excluded: it's linked from the public
+            // marketing site (CurriculumShowcase, InteractiveLesson) for
+            // visitors who haven't signed up yet, and its own "Subscribe"
+            // button already redirects to /login if no one is signed in —
+            // gating the whole page here just blocked prospects from ever
+            // seeing prices before creating an account.
             const workspacePaths = [
                 '/dashboard', '/analytics', '/child-dashboard', '/profile',
-                '/billing', '/pricing', '/child-profile', '/child-settings',
+                '/billing', '/child-profile', '/child-settings',
                 '/subscription-management', '/avatar-customizer', '/avatar-shop',
                 '/sticker-book', '/payment', '/grades'
             ];
