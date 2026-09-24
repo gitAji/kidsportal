@@ -4,6 +4,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { auth, db } from '../../../firebase/config';
 import Link from 'next/link';
 import { FaCrown, FaCalendarAlt, FaArrowRight, FaExclamationTriangle } from 'react-icons/fa';
+import { resolveSubscription } from '@/lib/subscriptionStatus';
 
 function formatDate(ts) {
   if (!ts) return "—";
@@ -35,39 +36,7 @@ const Subscription = () => {
       if (!user) { setSub(null); setLoading(false); return; }
       const ref = doc(db, 'users', user.uid);
       const unsubSnap = onSnapshot(ref, (snap) => {
-        const data = snap.data() || {};
-        const createdAt = data.createdAt?.toDate
-          ? data.createdAt.toDate()
-          : data.createdAt ? new Date(data.createdAt) : null;
-
-        if (data.planType === 'paid') {
-          // Paid plan from Stripe
-          setSub({
-            ...(data.subscription || {}),
-            status: data.subscriptionStatus || data.subscription?.status || 'inactive',
-            plan: data.subscriptionPlan || data.subscription?.plan,
-            currentPeriodEnd: data.subscriptionExpiresAt || data.subscription?.currentPeriodEnd
-          });
-        } else if (data.planType === 'free_trial' || (!data.subscription && data.createdAt)) {
-          // Application-level free trial
-          const trialEnd = data.trialEndDate?.toDate ? data.trialEndDate.toDate() : (data.trialEndDate ? new Date(data.trialEndDate) : null);
-
-          let finalTrialEnd = trialEnd;
-          if (!finalTrialEnd) {
-            const base = createdAt || new Date();
-            finalTrialEnd = new Date(base);
-            finalTrialEnd.setMonth(finalTrialEnd.getMonth() + 1);
-          }
-
-          setSub({
-            plan: 'trial',
-            status: finalTrialEnd > new Date() ? 'active' : 'expired',
-            currentPeriodEnd: finalTrialEnd,
-            ...(data.subscription || {}) // Keep customerId if it exists
-          });
-        } else if (data.subscription) {
-          setSub(data.subscription);
-        }
+        setSub(resolveSubscription(snap.data()));
         setLoading(false);
       });
       return () => unsubSnap();
