@@ -1,6 +1,6 @@
-// Grade-1 pilot content for the Games section. Each game is tied to a real
-// subject/level from db.json (grade-1) so it reinforces what that lesson
-// actually teaches, not just a generic "letters/numbers" placeholder:
+// Grade-1 pilot content for the Games section, hand-crafted to reinforce
+// exactly what that lesson teaches, not a generic "letters/numbers"
+// placeholder:
 //   - math-1-level-1            "Place Value to 100"          -> tap-match on tens & ones
 //   - english-1-level-1         "Phonics & Spelling"          -> memory pairs on suffixes
 //   - tamil-1-level-1           "Tamil Alphabet: Vowels"      -> timed reflex on uyir ezhuthukkal
@@ -8,8 +8,14 @@
 //   - computerscience-1-level-1 "What is a Computer?"         -> tap-match on parts & uses
 // Coding already has its own dedicated Build Lab (maze/pattern/free-build);
 // the Games hub links out to it rather than duplicating it.
+//
+// Grades 2-10 are generated from each subject's real Level 1 quiz/exam
+// question bank (see gamesContentGenerated.js) rather than hand-authored,
+// so every grade gets accurate, curriculum-tested coverage without
+// bespoke content for 45 more subject/grade combinations.
+import { GENERATED_GAMES_BY_GRADE } from './gamesContentGenerated';
 
-export const GAMES_BY_GRADE = {
+const HAND_CRAFTED_GAMES_BY_GRADE = {
   'grade-1': [
     {
       id: 'number-breakdown-match',
@@ -119,6 +125,11 @@ export const GAMES_BY_GRADE = {
       },
     },
   ],
+};
+
+export const GAMES_BY_GRADE = {
+  ...GENERATED_GAMES_BY_GRADE,
+  ...HAND_CRAFTED_GAMES_BY_GRADE, // grade-1 wins: richer, hand-crafted content
 };
 
 // A link-out entry shown alongside the grade's games: reuses the existing
