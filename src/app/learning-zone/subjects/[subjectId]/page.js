@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../data/db.json';
 import SkeletonLoader from '../../../components/ui/SkeletonLoader';
-import { FaLock, FaStar, FaTrophy, FaCheckCircle, FaUnlockAlt, FaLanguage, FaRandom, FaCode, FaArrowRight } from 'react-icons/fa';
+import { FaLock, FaStar, FaTrophy, FaCheckCircle, FaUnlockAlt, FaLanguage, FaRandom, FaCode, FaArrowRight, FaCalculator, FaLeaf, FaBook } from 'react-icons/fa';
 import { useChild } from '../../../providers/ChildProvider';
 import { useLanguage } from '../../../providers/LanguageProvider';
 import MinimalBackButton from '../../../components/child/MinimalBackButton';
@@ -37,6 +37,57 @@ const subjectDisplayNames = {
 function getSubjectDisplayName(subjectId) {
   const prefix = (subjectId || '').replace(/-\d+$/, '').toLowerCase();
   return subjectDisplayNames[prefix] || prefix.charAt(0).toUpperCase() + prefix.slice(1);
+}
+
+// Build Lab banners: one per subject, gated by subjectId prefix (some
+// subjects share a lab across grades, e.g. "math-3" and "math-7" both get
+// the Math lab banner).
+const buildLabConfig = [
+  {
+    match: (id) => id.startsWith('coding'),
+    path: '/learning-zone/coding-lab',
+    icon: FaCode,
+    gradient: 'from-violet-600 to-purple-700',
+    title: 'Try the Build Lab!',
+    desc: 'Snap blocks together to guide a robot, match patterns, or draw with code.',
+  },
+  {
+    match: (id) => id.startsWith('math'),
+    path: '/learning-zone/math-lab',
+    icon: FaCalculator,
+    gradient: 'from-blue-600 to-cyan-600',
+    title: 'Try the Build Lab!',
+    desc: 'Tap tiles to build equations that hit the target number.',
+  },
+  {
+    match: (id) => id.startsWith('science'),
+    path: '/learning-zone/science-lab',
+    icon: FaLeaf,
+    gradient: 'from-emerald-600 to-teal-600',
+    title: 'Try the Build Lab!',
+    desc: 'Sort creatures into the habitats where they really live.',
+  },
+  {
+    match: (id) => id.startsWith('english'),
+    path: '/learning-zone/english-lab',
+    icon: FaBook,
+    gradient: 'from-amber-600 to-orange-600',
+    title: 'Try the Build Lab!',
+    desc: 'Tap words in the right order to build sentences from a clue.',
+  },
+  {
+    match: (id) => id.startsWith('tamil'),
+    path: '/learning-zone/tamil-lab',
+    icon: FaLanguage,
+    gradient: 'from-fuchsia-600 to-pink-600',
+    title: 'Try the Build Lab!',
+    desc: 'Tap Tamil words in the right order to build sentences from an English clue.',
+  },
+];
+
+function getBuildLabConfig(subjectId) {
+  const id = (subjectId || '').toLowerCase();
+  return buildLabConfig.find((cfg) => cfg.match(id)) || null;
 }
 
 // Fisher-Yates — used only to reorder the Replay Round view, never the
@@ -362,31 +413,36 @@ export default function SubjectLevelsPage() {
         )}
       </motion.div>
 
-      {subjectId?.toLowerCase().startsWith('coding') && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-3xl mx-auto z-10 relative mb-10 px-4"
-        >
-          <div
-            onClick={() => router.push('/learning-zone/coding-lab')}
-            className="bg-gradient-to-r from-violet-600 to-purple-700 rounded-[2rem] shadow-xl shadow-purple-200/50 px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 cursor-pointer hover:scale-[1.01] transition-transform"
+      {(() => {
+        const labCfg = getBuildLabConfig(subjectId);
+        if (!labCfg) return null;
+        const LabIcon = labCfg.icon;
+        return (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="w-full max-w-3xl mx-auto z-10 relative mb-10 px-4"
           >
-            <div className="flex items-center gap-3 text-center sm:text-left text-white">
-              <div className="bg-white/20 backdrop-blur-sm w-14 h-14 rounded-2xl flex items-center justify-center shrink-0">
-                <FaCode size={26} />
+            <div
+              onClick={() => router.push(labCfg.path)}
+              className={`bg-gradient-to-r ${labCfg.gradient} rounded-[2rem] shadow-xl shadow-purple-200/50 px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 cursor-pointer hover:scale-[1.01] transition-transform`}
+            >
+              <div className="flex items-center gap-3 text-center sm:text-left text-white">
+                <div className="bg-white/20 backdrop-blur-sm w-14 h-14 rounded-2xl flex items-center justify-center shrink-0">
+                  <LabIcon size={26} />
+                </div>
+                <div>
+                  <p className="font-black text-lg leading-tight">{labCfg.title}</p>
+                  <p className="text-sm font-medium text-white/80">{labCfg.desc}</p>
+                </div>
               </div>
-              <div>
-                <p className="font-black text-lg leading-tight">Try the Build Lab!</p>
-                <p className="text-sm font-medium text-white/80">Snap blocks together to guide a robot, match patterns, or draw with code.</p>
+              <div className="flex items-center gap-2 shrink-0 bg-white/20 text-white font-black text-sm px-5 py-2.5 rounded-2xl">
+                Play Now <FaArrowRight />
               </div>
             </div>
-            <div className="flex items-center gap-2 shrink-0 bg-white/20 text-white font-black text-sm px-5 py-2.5 rounded-2xl">
-              Play Now <FaArrowRight />
-            </div>
-          </div>
-        </motion.div>
-      )}
+          </motion.div>
+        );
+      })()}
 
       {isSubjectFullyCompleted && (
         <motion.div
