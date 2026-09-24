@@ -53,10 +53,18 @@ export default function LabelDropGame({ game, onFinish }) {
   // useMemo) calls Math.random() on both the server and the client, which
   // produces two different orders and triggers a hydration mismatch.
   const [tray, setTray] = useState(() => zones.map((z) => ({ zoneId: z.id, label: z.label })));
+  // Keyed on game.id (not just []) so the tray — and any progress — resets
+  // if this same component instance is ever reused for a different game
+  // (e.g. a future "next game" navigation that doesn't unmount), instead of
+  // silently showing the previous game's labels.
   useEffect(() => {
-    setTray((prev) => shuffle(prev));
+    setTray(shuffle(zones.map((z) => ({ zoneId: z.id, label: z.label }))));
+    setPlaced({});
+    setWrongAttempts(0);
+    setShakeZoneId(null);
+    setDone(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [game.id]);
   const remaining = tray.filter((t) => !placed[t.zoneId]);
 
   const starsFor = () => {
