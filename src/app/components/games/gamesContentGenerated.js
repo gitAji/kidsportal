@@ -204,6 +204,71 @@ export const GENERATED_GAMES_BY_GRADE = {
       }
     },
     {
+      "id": "tamil-2-level2-quickcheck",
+      "subjectId": "tamil-2",
+      "subjectLabel": "Tamil",
+      "title": "Days of the Week & Months",
+      "description": "Quick-fire questions from this level's Tamil lesson!",
+      "engine": "tap-match",
+      "icon": "✍️",
+      "color": "from-amber-400 to-yellow-500",
+      "data": {
+        "instruction": "Tap the correct answer for each question!",
+        "rounds": [
+          {
+            "prompt": "Which Tamil word means 'Monday'?",
+            "options": [
+              "திங்கள்",
+              "செவ்வாய்",
+              "சனி",
+              "புதன்"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "Which Tamil word means 'Sunday'?",
+            "options": [
+              "ஞாயிறு",
+              "வியாழன்",
+              "வெள்ளி",
+              "செவ்வாய்"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "Which Tamil word means 'Friday'?",
+            "options": [
+              "வெள்ளி",
+              "திங்கள்",
+              "சனி",
+              "புதன்"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "Which Tamil word means 'Wednesday'?",
+            "options": [
+              "புதன்",
+              "வியாழன்",
+              "செவ்வாய்",
+              "ஞாயிறு"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "Which Tamil word means 'Tuesday'?",
+            "options": [
+              "செவ்வாய்",
+              "வெள்ளி",
+              "சனி",
+              "திங்கள்"
+            ],
+            "correctIndex": 0
+          }
+        ]
+      }
+    },
+    {
       "id": "science-2-quickcheck",
       "subjectId": "science-2",
       "subjectLabel": "Science",
@@ -526,6 +591,71 @@ export const GENERATED_GAMES_BY_GRADE = {
               "Action"
             ],
             "correctIndex": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "tamil-3-level2-quickcheck",
+      "subjectId": "tamil-3",
+      "subjectLabel": "Tamil",
+      "title": "Verbs (Vinaichol)",
+      "description": "Quick-fire questions from this level's Tamil lesson!",
+      "engine": "tap-match",
+      "icon": "🗣️",
+      "color": "from-teal-400 to-cyan-500",
+      "data": {
+        "instruction": "Tap the correct answer for each question!",
+        "rounds": [
+          {
+            "prompt": "What is the Tamil term for an action word (verb)?",
+            "options": [
+              "இடைச்சொல்",
+              "பெயர்ச்சொல்",
+              "உரிச்சொல்",
+              "வினைச்சொல்"
+            ],
+            "correctIndex": 3
+          },
+          {
+            "prompt": "Which of these is a verb meaning 'eat' (I eat)?",
+            "options": [
+              "அம்மா",
+              "புத்தகம்",
+              "பெரிய",
+              "சாப்பிடுகிறேன்"
+            ],
+            "correctIndex": 3
+          },
+          {
+            "prompt": "In 'அவள் படிக்கிறாள்' (she reads), which part shows the verb ending for 'she'?",
+            "options": [
+              "-கிறான்",
+              "-கிறாள்",
+              "-கிறேன்",
+              "-கிறோம்"
+            ],
+            "correctIndex": 1
+          },
+          {
+            "prompt": "Which ending is used for 'he' in a present-tense Tamil verb, as in 'ஓடுகிறான்'?",
+            "options": [
+              "-கிறாள்",
+              "-கிறேன்",
+              "-கிறீர்கள்",
+              "-கிறான்"
+            ],
+            "correctIndex": 3
+          },
+          {
+            "prompt": "Which of these words is a vinaichol (verb)?",
+            "options": [
+              "மேசை",
+              "ஓடுகிறேன்",
+              "அழகான",
+              "பள்ளி"
+            ],
+            "correctIndex": 1
           }
         ]
       }
@@ -858,6 +988,71 @@ export const GENERATED_GAMES_BY_GRADE = {
       }
     },
     {
+      "id": "tamil-4-level2-quickcheck",
+      "subjectId": "tamil-4",
+      "subjectLabel": "Tamil",
+      "title": "Synonyms & Antonyms",
+      "description": "Quick-fire questions from this level's Tamil lesson!",
+      "engine": "tap-match",
+      "icon": "📝",
+      "color": "from-indigo-400 to-violet-500",
+      "data": {
+        "instruction": "Tap the correct answer for each question!",
+        "rounds": [
+          {
+            "prompt": "What is the Tamil term for 'synonym'?",
+            "options": [
+              "பெயர்ச்சொல்",
+              "எதிர்ச்சொல்",
+              "வினைச்சொல்",
+              "ஒத்த சொல்"
+            ],
+            "correctIndex": 3
+          },
+          {
+            "prompt": "Which word is a synonym of 'மகிழ்ச்சி' (happiness)?",
+            "options": [
+              "சந்தோஷம்",
+              "பயம்",
+              "துக்கம்",
+              "கோபம்"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "Which word is the antonym of 'நல்லது' (good)?",
+            "options": [
+              "சிறியது",
+              "கெட்டது",
+              "பெரியது",
+              "அழகானது"
+            ],
+            "correctIndex": 1
+          },
+          {
+            "prompt": "Which of these pairs are synonyms (similar meaning)?",
+            "options": [
+              "வலது - இடது",
+              "மகிழ்ச்சி - சந்தோஷம்",
+              "நல்லது - கெட்டது",
+              "பெரியது - சிறியது"
+            ],
+            "correctIndex": 1
+          },
+          {
+            "prompt": "Which of these pairs are antonyms (opposite meaning)?",
+            "options": [
+              "பெரியது - சிறியது",
+              "மகிழ்ச்சி - சந்தோஷம்",
+              "நல்லது - நலம்",
+              "வேகம் - வேகமாக"
+            ],
+            "correctIndex": 0
+          }
+        ]
+      }
+    },
+    {
       "id": "science-4-quickcheck",
       "subjectId": "science-4",
       "subjectLabel": "Science",
@@ -1185,6 +1380,71 @@ export const GENERATED_GAMES_BY_GRADE = {
       }
     },
     {
+      "id": "tamil-5-level2-quickcheck",
+      "subjectId": "tamil-5",
+      "subjectLabel": "Tamil",
+      "title": "Participles & Verbal Forms",
+      "description": "Quick-fire questions from this level's Tamil lesson!",
+      "engine": "tap-match",
+      "icon": "🧵",
+      "color": "from-fuchsia-400 to-purple-500",
+      "data": {
+        "instruction": "Tap the correct answer for each question!",
+        "rounds": [
+          {
+            "prompt": "In \"சாப்பிட்டு படுத்தான்\" (having eaten, he lay down), what is \"சாப்பிட்டு\" called?",
+            "options": [
+              "வேற்றுமை (case marker)",
+              "பெயரெச்சம் (adjectival participle)",
+              "வினையெச்சம் (adverbial participle)",
+              "எழுவாய் (subject)"
+            ],
+            "correctIndex": 2
+          },
+          {
+            "prompt": "Which phrase correctly uses a peyarechcham to mean \"the student who studied\"?",
+            "options": [
+              "படிக்கிறான் மாணவன்",
+              "மாணவனுக்கு படித்தேன்",
+              "படித்த மாணவன்",
+              "மாணவன் படித்தான்"
+            ],
+            "correctIndex": 2
+          },
+          {
+            "prompt": "Which of the following is a correctly formed vinaiyechcham (adverbial participle) phrase meaning \"having gone, he returned\"?",
+            "options": [
+              "சென்று திரும்பினான்",
+              "செல்லும் திரும்பினான்",
+              "சென்றான் திரும்புதல்",
+              "செல்கிறான் திரும்பினான்"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "Which sentence element does a peyarechcham always come directly before?",
+            "options": [
+              "A conjunction",
+              "A verb",
+              "The noun it describes",
+              "A case marker"
+            ],
+            "correctIndex": 2
+          },
+          {
+            "prompt": "Which is the correct vinaiyechcham form of the verb படி (study), meaning \"having studied\"?",
+            "options": [
+              "படிக்கும்",
+              "படித்து",
+              "படிக்கிறேன்",
+              "படித்த"
+            ],
+            "correctIndex": 1
+          }
+        ]
+      }
+    },
+    {
       "id": "science-5-quickcheck",
       "subjectId": "science-5",
       "subjectLabel": "Science",
@@ -1497,6 +1757,61 @@ export const GENERATED_GAMES_BY_GRADE = {
               "கு"
             ],
             "correctIndex": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "tamil-6-level2-quickcheck",
+      "subjectId": "tamil-6",
+      "subjectLabel": "Tamil",
+      "title": "Compound Verbs",
+      "description": "Quick-fire questions from this level's Tamil lesson!",
+      "engine": "tap-match",
+      "icon": "🏛️",
+      "color": "from-rose-400 to-pink-500",
+      "data": {
+        "instruction": "Tap the correct answer for each question!",
+        "rounds": [
+          {
+            "prompt": "What is the Tamil term for a \"helping\" or auxiliary verb added to a main verb to change its meaning?",
+            "options": [
+              "பெயரெச்சம் (adjectival participle)",
+              "வேற்றுமை (case marker)",
+              "எழுவாய் (subject)",
+              "துணை வினை (auxiliary verb)"
+            ],
+            "correctIndex": 3
+          },
+          {
+            "prompt": "\"படித்துக் கொண்டிருக்கிறேன்\" (I am reading) uses the auxiliary \"கொண்டிரு\" to show which meaning?",
+            "options": [
+              "A polite request",
+              "Ongoing/progressive action",
+              "Completed action",
+              "A future wish"
+            ],
+            "correctIndex": 1
+          },
+          {
+            "prompt": "Which sentence correctly uses a compound verb to show completed action?",
+            "options": [
+              "நான் எழுதுகிறேன்",
+              "நான் எழுதி விட்டேன்",
+              "நான் எழுதுவேன்",
+              "நான் எழுதிக் கொண்டிருக்கிறேன்"
+            ],
+            "correctIndex": 1
+          },
+          {
+            "prompt": "Which auxiliary verb, when attached after a vinaiyechcham, typically conveys the sense of ongoing/progressive action?",
+            "options": [
+              "விடு",
+              "போடு",
+              "தா",
+              "கொண்டிரு"
+            ],
+            "correctIndex": 3
           }
         ]
       }
@@ -1819,6 +2134,61 @@ export const GENERATED_GAMES_BY_GRADE = {
       }
     },
     {
+      "id": "tamil-7-level2-quickcheck",
+      "subjectId": "tamil-7",
+      "subjectLabel": "Tamil",
+      "title": "Thirukkural: Inbam Pal",
+      "description": "Quick-fire questions from this level's Tamil lesson!",
+      "engine": "tap-match",
+      "icon": "🎭",
+      "color": "from-amber-400 to-yellow-500",
+      "data": {
+        "instruction": "Tap the correct answer for each question!",
+        "rounds": [
+          {
+            "prompt": "What is the main theme of Inbam Pal, the third section of the Thirukkural?",
+            "options": [
+              "Love",
+              "Wealth and statecraft",
+              "Grammar",
+              "Virtue and ethics"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "How many couplets does Inbam Pal contain?",
+            "options": [
+              "250",
+              "380",
+              "130",
+              "700"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "Which earlier Tamil poetic tradition does Inbam Pal's style most resemble, with its dialogue between lovers?",
+            "options": [
+              "Formal debate speeches",
+              "Modern puthukavithai",
+              "Sangam puram poetry",
+              "Sangam akam poetry"
+            ],
+            "correctIndex": 3
+          },
+          {
+            "prompt": "Which emotional experiences does Inbam Pal commonly explore?",
+            "options": [
+              "The structure of a formal debate",
+              "The duties of a minister to a king",
+              "Courtship, longing, separation and reunion between lovers",
+              "The rules of Tamil sandhi"
+            ],
+            "correctIndex": 2
+          }
+        ]
+      }
+    },
+    {
       "id": "science-7-quickcheck",
       "subjectId": "science-7",
       "subjectLabel": "Science",
@@ -2121,6 +2491,71 @@ export const GENERATED_GAMES_BY_GRADE = {
               "The last centuries BCE"
             ],
             "correctIndex": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "tamil-8-level2-quickcheck",
+      "subjectId": "tamil-8",
+      "subjectLabel": "Tamil",
+      "title": "Classical vs Modern Tamil",
+      "description": "Quick-fire questions from this level's Tamil lesson!",
+      "engine": "tap-match",
+      "icon": "📚",
+      "color": "from-teal-400 to-cyan-500",
+      "data": {
+        "instruction": "Tap the correct answer for each question!",
+        "rounds": [
+          {
+            "prompt": "What does செந்தமிழ் (sendhamizh) refer to?",
+            "options": [
+              "Classical/literary Tamil",
+              "A foreign language",
+              "Only spoken slang",
+              "A type of folk song"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "Which is the more casual, colloquial spoken form of \"செல்கின்றேன்\" (I am going)?",
+            "options": [
+              "செல்லுதல்",
+              "செல்வேன்",
+              "போறேன்",
+              "சென்றேன்"
+            ],
+            "correctIndex": 2
+          },
+          {
+            "prompt": "How does classical Tamil spelling typically compare to everyday spoken Tamil?",
+            "options": [
+              "Spoken Tamil is always longer than classical Tamil",
+              "Classical Tamil has no fixed grammar rules",
+              "They are always identical",
+              "Classical Tamil is closer to traditional grammatical rules and full spellings, while spoken Tamil often contracts words"
+            ],
+            "correctIndex": 3
+          },
+          {
+            "prompt": "Why is it useful for a Tamil speaker to be able to move between classical and colloquial registers?",
+            "options": [
+              "It is never useful, one register is always correct",
+              "Different situations call for different registers — formal for essays and exams, colloquial for everyday conversation",
+              "Colloquial Tamil should always be used, even in exams",
+              "Classical Tamil should always be used, even in casual chats"
+            ],
+            "correctIndex": 1
+          },
+          {
+            "prompt": "Which of these best describes the relationship between செந்தமிழ் and கொடுந்தமிழ்?",
+            "options": [
+              "Two entirely separate writing systems",
+              "Two unrelated languages",
+              "Two related registers of the same language used in different contexts",
+              "Old and new names for the same identical form of speech"
+            ],
+            "correctIndex": 2
           }
         ]
       }
@@ -2433,6 +2868,71 @@ export const GENERATED_GAMES_BY_GRADE = {
       }
     },
     {
+      "id": "tamil-9-level2-quickcheck",
+      "subjectId": "tamil-9",
+      "subjectLabel": "Tamil",
+      "title": "Tamil Grammar Tradition: Introduction to Tholkappiyam",
+      "description": "Quick-fire questions from this level's Tamil lesson!",
+      "engine": "tap-match",
+      "icon": "🖋️",
+      "color": "from-indigo-400 to-violet-500",
+      "data": {
+        "instruction": "Tap the correct answer for each question!",
+        "rounds": [
+          {
+            "prompt": "How many major \"அதிகாரங்கள்\" (divisions) does the Tholkappiyam have?",
+            "options": [
+              "Two",
+              "Five",
+              "Three",
+              "Four"
+            ],
+            "correctIndex": 2
+          },
+          {
+            "prompt": "Which division of Tholkappiyam covers phonology and sandhi rules?",
+            "options": [
+              "சொல்லதிகாரம்",
+              "இலக்கணவிதிகாரம்",
+              "பொருளதிகாரம்",
+              "எழுத்ததிகாரம்"
+            ],
+            "correctIndex": 3
+          },
+          {
+            "prompt": "Tholkappiyam is significant to Tamil literary history primarily because:",
+            "options": [
+              "It is the oldest surviving Tamil grammar and also theorizes Sangam poetic conventions",
+              "It only contains a list of vocabulary words",
+              "It was written after the Sangam anthologies to summarize them",
+              "It is a modern grammar textbook written in the 20th century"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "The five poetic landscapes used to set emotional tone in Sangam poetry, as theorized in பொருளதிகாரம், are called:",
+            "options": [
+              "யாப்பு",
+              "தொகை",
+              "பால்",
+              "திணை"
+            ],
+            "correctIndex": 3
+          },
+          {
+            "prompt": "Modern students are advised to study Tholkappiyam by:",
+            "options": [
+              "Memorizing every verse without context",
+              "Treating it only as a religious text",
+              "Understanding its historical and structural significance rather than memorizing it word for word",
+              "Ignoring it since it is outdated"
+            ],
+            "correctIndex": 2
+          }
+        ]
+      }
+    },
+    {
       "id": "science-9-quickcheck",
       "subjectId": "science-9",
       "subjectLabel": "Science",
@@ -2733,6 +3233,71 @@ export const GENERATED_GAMES_BY_GRADE = {
               "Select and apply the theoretical framework best suited to a given text and question, supported by textual evidence",
               "Avoid all theoretical frameworks entirely",
               "Judge texts only by length"
+            ],
+            "correctIndex": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "tamil-10-level2-quickcheck",
+      "subjectId": "tamil-10",
+      "subjectLabel": "Tamil",
+      "title": "Classical Epic: Manimekalai",
+      "description": "Quick-fire questions from this level's Tamil lesson!",
+      "engine": "tap-match",
+      "icon": "🌾",
+      "color": "from-fuchsia-400 to-purple-500",
+      "data": {
+        "instruction": "Tap the correct answer for each question!",
+        "rounds": [
+          {
+            "prompt": "Manimekalai is a direct sequel to which other classical Tamil epic?",
+            "options": [
+              "சிலப்பதிகாரம்",
+              "புறநானூறு",
+              "கம்பராமாயணம்",
+              "திருக்குறள்"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "Manimekalai is the daughter of which two characters from Silappathikaram?",
+            "options": [
+              "கோவலன் and மாதவி",
+              "மணிமேகலை and கோவலன்",
+              "கண்ணகி and கோவலன்",
+              "சாத்தனார் and மாதவி"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "Manimekalai is considered especially important historically because:",
+            "options": [
+              "It preserves a sustained, detailed exposition of Buddhist philosophy in early Tamil literature",
+              "It is the only Tamil epic ever written",
+              "It focuses exclusively on royal warfare",
+              "It was written centuries after all other Tamil literature"
+            ],
+            "correctIndex": 0
+          },
+          {
+            "prompt": "Compared to Silappathikaram, which is centered on tragedy and injustice, Manimekalai is centered on:",
+            "options": [
+              "Military conquest",
+              "Agricultural life",
+              "Romantic courtship alone",
+              "Renunciation, compassion, and Buddhist philosophical teaching"
+            ],
+            "correctIndex": 3
+          },
+          {
+            "prompt": "The epic's encounters between Manimekalai and teachers of rival philosophical schools reflect:",
+            "options": [
+              "A society with only one accepted religion",
+              "The religious pluralism of Sangam-era and post-Sangam Tamil society",
+              "A purely fictional world with no historical basis",
+              "A rejection of all philosophical debate"
             ],
             "correctIndex": 1
           }

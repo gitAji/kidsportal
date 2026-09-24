@@ -6,13 +6,17 @@
 //   - tamil-1-level-1           "Tamil Alphabet: Vowels"      -> timed reflex on uyir ezhuthukkal
 //   - science-1-level-1         "Living Things & Habitats"    -> timed reflex on living vs not
 //   - computerscience-1-level-1 "What is a Computer?"         -> tap-match on parts & uses
+//   - tamil-1-level-2           "Tamil Alphabet: Consonants"  -> tap-match, real quiz/exam bank
 // Coding already has its own dedicated Build Lab (maze/pattern/free-build);
 // the Games hub links out to it rather than duplicating it.
 //
 // Grades 2-10 are generated from each subject's real Level 1 quiz/exam
 // question bank (see gamesContentGenerated.js) rather than hand-authored,
 // so every grade gets accurate, curriculum-tested coverage without
-// bespoke content for 45 more subject/grade combinations.
+// bespoke content for 45 more subject/grade combinations. Tamil additionally
+// gets a second game per grade (this session), sourced the same way from
+// each grade's Level 2 Tamil quiz/exam bank, so kids get more than one
+// quiz's worth of Tamil practice instead of a single game per grade.
 import { GENERATED_GAMES_BY_GRADE } from './gamesContentGenerated';
 
 const HAND_CRAFTED_GAMES_BY_GRADE = {
@@ -79,6 +83,26 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
           { value: 'ந', isTarget: false }, { value: 'ஐ', isTarget: true }, { value: 'ப', isTarget: false },
           { value: 'ஒ', isTarget: true }, { value: 'ம', isTarget: false }, { value: 'ஓ', isTarget: true },
           { value: 'ய', isTarget: false }, { value: 'ஔ', isTarget: true }, { value: 'ர', isTarget: false },
+        ],
+      },
+    },
+    {
+      id: 'tamil-1-level2-quickcheck',
+      subjectId: 'tamil-1',
+      subjectLabel: 'Tamil',
+      title: 'Tamil Alphabet: Consonants',
+      description: "Quick-fire questions from this level's Tamil lesson!",
+      engine: 'tap-match',
+      icon: '📖',
+      color: 'from-rose-400 to-pink-500',
+      data: {
+        instruction: 'Tap the correct answer for each question!',
+        rounds: [
+          { prompt: 'What is the Tamil term for consonant letters?', options: ['எண்ணெழுத்து', 'உயிர்மெய் எழுத்து', 'மெய் எழுத்து', 'உயிர் எழுத்து'], correctIndex: 2 },
+          { prompt: "Which letter makes the 'm' sound?", options: ['ம', 'ன', 'ல', 'ந'], correctIndex: 0 },
+          { prompt: 'How many basic consonants are there in the Tamil alphabet?', options: ['24', '18', '12', '16'], correctIndex: 1 },
+          { prompt: 'The small dot placed above a consonant (like க்) is called a:', options: ['kural', 'vetrumai', 'pulli', 'kural mei'], correctIndex: 2 },
+          { prompt: "Which letter makes the 'ch' sound?", options: ['ஞ', 'ச', 'த', 'ட'], correctIndex: 1 },
         ],
       },
     },
