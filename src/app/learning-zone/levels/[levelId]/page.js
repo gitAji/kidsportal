@@ -7,6 +7,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import InteractiveQuiz from '@/app/components/learning/InteractiveQuiz';
 import CompletionModal from '@/app/components/learning/CompletionModal';
 import LevelPath from '@/app/components/learning/LevelPath';
+import MinimalBackButton from '@/app/components/child/MinimalBackButton';
 
 const LessonViewer = ({ task, subjectId }) => {
   const router = useRouter();
@@ -106,14 +107,8 @@ export default function LevelPage() {
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-cyan-100 to-teal-100 p-4 sm:p-8">
+            <MinimalBackButton />
             <div className="max-w-7xl mx-auto">
-                <button
-        onClick={() => router.push(`/learning-zone/subjects/${levelData.subjectId}`)}
-        className="flex items-center text-lg font-semibold text-gray-700 hover:text-blue-600 mb-6"
-      >
-        <FaArrowLeft className="mr-2" /> Back to Levels
-      </button>
-
                 <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-6 mb-8">
                     <h2 className="text-3xl font-bold mb-4 text-gray-800 text-center">{levelData.levelName}</h2>
                     <LevelPath 

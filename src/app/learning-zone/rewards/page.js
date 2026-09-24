@@ -4,9 +4,10 @@ import { useRouter } from 'next/navigation';
 import { useChild } from '../../providers/ChildProvider';
 import { ACHIEVEMENTS, loadUnlockedAchievements, loadStats } from '../../utils/achievements';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTrophy, FaLock, FaHome } from 'react-icons/fa';
+import { FaTrophy, FaLock } from 'react-icons/fa';
 import Link from 'next/link';
 import SkeletonLoader from '../../components/ui/SkeletonLoader';
+import MinimalBackButton from '../../components/child/MinimalBackButton';
 
 export default function RewardsPage() {
   const { childUser } = useChild();
@@ -59,13 +60,15 @@ export default function RewardsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-indigo-100">
-      <div className="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-cyan-100 shadow-sm px-4 py-3 flex items-center justify-between">
-        <button onClick={() => router.back()} className="px-4 py-2 rounded-full hover:bg-cyan-50 transition-colors text-cyan-600 font-semibold text-sm">← Back</button>
-        <h1 className="text-xl font-extrabold text-cyan-700 flex items-center gap-2"><FaTrophy /> My Rewards</h1>
-        <Link href="/learning-zone" className="p-2 rounded-full hover:bg-cyan-50 transition-colors text-cyan-600"><FaHome /></Link>
-      </div>
+      <MinimalBackButton />
 
       <div className="max-w-3xl mx-auto px-4 py-8">
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-cyan-700 flex items-center justify-center gap-3">
+            <FaTrophy /> My Rewards
+          </h1>
+        </motion.div>
+
         {/* Stats Banner */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
           className="bg-gradient-to-r from-cyan-600 to-indigo-600 rounded-3xl p-6 text-white mb-8 shadow-xl shadow-cyan-200 flex flex-col sm:flex-row items-center justify-between gap-6">

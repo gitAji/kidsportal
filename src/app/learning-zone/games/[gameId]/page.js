@@ -10,6 +10,7 @@ import { getGameById } from '../../../components/games/gamesContent';
 import TapMatchGame from '../../../components/games/TapMatchGame';
 import MemoryPairsGame from '../../../components/games/MemoryPairsGame';
 import TimedReflexGame from '../../../components/games/TimedReflexGame';
+import MinimalBackButton from '../../../components/child/MinimalBackButton';
 
 const ENGINES = {
   'tap-match': TapMatchGame,
@@ -39,29 +40,47 @@ export default function GamePlayerPage() {
   if (!childUser) return null;
 
   if (!game) {
-    return <div className="text-center p-10 font-bold text-2xl text-gray-600">Game not found.</div>;
+    return (
+      <>
+        <MinimalBackButton />
+        <div className="text-center p-10 font-bold text-2xl text-gray-600">Game not found.</div>
+      </>
+    );
   }
 
   if (!unlocked) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-8 text-center gap-4">
-        <p className="text-6xl">🔒</p>
-        <h1 className="text-2xl font-black text-slate-700">Finish a {game.subjectLabel} lesson first!</h1>
-        <p className="text-slate-500 font-medium max-w-sm">This game unlocks once you've completed a lesson in {game.subjectLabel}.</p>
-        <button
-          onClick={() => router.push('/learning-zone/games')}
-          className="mt-2 bg-blue-600 text-white font-bold px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
-        >
-          Back to Games
-        </button>
-      </div>
+      <>
+        <MinimalBackButton />
+        <div className="min-h-screen flex flex-col items-center justify-center p-8 text-center gap-4">
+          <p className="text-6xl">🔒</p>
+          <h1 className="text-2xl font-black text-slate-700">Finish a {game.subjectLabel} lesson first!</h1>
+          <p className="text-slate-500 font-medium max-w-sm">This game unlocks once you've completed a lesson in {game.subjectLabel}.</p>
+          <button
+            onClick={() => router.push('/learning-zone/games')}
+            className="mt-2 bg-blue-600 text-white font-bold px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+          >
+            Back to Games
+          </button>
+        </div>
+      </>
     );
   }
 
   const Engine = ENGINES[game.engine];
   if (!Engine) {
-    return <div className="text-center p-10 font-bold text-2xl text-gray-600">This game type isn't supported yet.</div>;
+    return (
+      <>
+        <MinimalBackButton />
+        <div className="text-center p-10 font-bold text-2xl text-gray-600">This game type isn't supported yet.</div>
+      </>
+    );
   }
 
-  return <Engine game={game} onFinish={handleFinish} />;
+  return (
+    <>
+      <MinimalBackButton />
+      <Engine game={game} onFinish={handleFinish} />
+    </>
+  );
 }

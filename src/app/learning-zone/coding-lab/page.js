@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { FaArrowLeft, FaCode } from 'react-icons/fa';
+import { FaCode } from 'react-icons/fa';
 import { useChild } from '../../providers/ChildProvider';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import { getChildStats } from '@/app/utils/firestoreService';
 import TimeLimitBlockedScreen from '../../components/child/TimeLimitBlockedScreen';
 import SkeletonLoader from '../../components/ui/SkeletonLoader';
+import MinimalBackButton from '../../components/child/MinimalBackButton';
 import CodingLab from '../../components/codingLab/CodingLab';
 
 export default function CodingLabPage() {
@@ -46,12 +47,7 @@ export default function CodingLabPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-cyan-50 px-4 py-8">
-      <button
-        onClick={() => router.back()}
-        className="flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors font-bold text-sm mb-6"
-      >
-        <FaArrowLeft /> Back
-      </button>
+      <MinimalBackButton />
 
       <motion.div
         initial={{ opacity: 0, y: -12 }}

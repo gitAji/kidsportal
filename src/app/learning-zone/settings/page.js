@@ -1,21 +1,21 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { doc, updateDoc } from 'firebase/firestore';
 import { app } from '../../../firebase/config';
 import { getFirestore } from 'firebase/firestore';
 import SkeletonLoader from '../../components/ui/SkeletonLoader';
 import {
-  FaArrowLeft, FaPalette, FaUserCircle, FaSave,
+  FaPalette, FaUserCircle, FaSave,
   FaPaw, FaRocket, FaCar, FaTree, FaSmile,
   FaStar, FaDragon, FaFish, FaHorse, FaCat,
-  FaCheckCircle, FaHome, FaVolumeUp, FaVolumeMute,
+  FaCheckCircle, FaVolumeUp, FaVolumeMute,
   FaTrophy
 } from 'react-icons/fa';
 import CustomAvatar from '../../components/ui/CustomAvatar';
 import { useChild } from '../../providers/ChildProvider';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import MinimalBackButton from '../../components/child/MinimalBackButton';
 
 const themes = [
   { id: 'default', name: 'Sky Blue', primary: '#3B82F6', bg: '#DBEAFE', gradient: 'from-blue-400 to-blue-600' },
@@ -48,7 +48,6 @@ export default function SettingsPage() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [saveStatus, setSaveStatus] = useState(null); // null | 'saving' | 'success' | 'error'
   const [errorMsg, setErrorMsg] = useState('');
-  const router = useRouter();
 
   useEffect(() => {
     if (childUser) {
@@ -89,18 +88,15 @@ export default function SettingsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      {/* Header */}
-      <div className="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100 shadow-sm px-4 py-3 flex items-center justify-between">
-        <button onClick={() => router.back()} className="px-4 py-2 rounded-full hover:bg-slate-50 transition-colors text-gray-600 font-semibold text-sm flex items-center gap-2">
-          <FaArrowLeft /> Back
-        </button>
-        <h1 className="text-xl font-extrabold text-gray-800">My Settings ⚙️</h1>
-        <Link href="/learning-zone/rewards" className="p-2 rounded-full hover:bg-yellow-50 text-yellow-500 transition-colors">
-          <FaTrophy />
-        </Link>
-      </div>
+      <MinimalBackButton />
 
       <div className="max-w-2xl mx-auto px-4 py-8 space-y-6">
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-center flex items-center justify-center gap-3">
+          <h1 className="text-2xl font-extrabold text-gray-800">My Settings ⚙️</h1>
+          <Link href="/learning-zone/rewards" className="p-2 rounded-full hover:bg-yellow-50 text-yellow-500 transition-colors" aria-label="My Rewards">
+            <FaTrophy />
+          </Link>
+        </motion.div>
         {/* Profile Preview */}
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
           className={`bg-gradient-to-br ${currentTheme.gradient} rounded-3xl p-6 text-white text-center shadow-xl`}>
