@@ -10,12 +10,14 @@ import { getGameById } from '../../../components/games/gamesContent';
 import TapMatchGame from '../../../components/games/TapMatchGame';
 import MemoryPairsGame from '../../../components/games/MemoryPairsGame';
 import TimedReflexGame from '../../../components/games/TimedReflexGame';
+import LabelDropGame from '../../../components/games/LabelDropGame';
 import MinimalBackButton from '../../../components/child/MinimalBackButton';
 
 const ENGINES = {
   'tap-match': TapMatchGame,
   'memory-pairs': MemoryPairsGame,
   'timed-reflex': TimedReflexGame,
+  'label-diagram': LabelDropGame,
 };
 
 export default function GamePlayerPage() {
