@@ -76,35 +76,48 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
       };
 
       // 3. Advanced Voice Selection
+      const ENGLISH_PRIORITY = [
+        'Samantha', 'Google UK English Female', 'Google US English',
+        'Premium', 'Natural', 'Serena', 'Daniel', 'Victoria', 'Fiona'
+      ];
+      // A network-backed voice (Google/Microsoft's online voices) is almost
+      // always far clearer than an always-available local/offline one —
+      // `localService` is a real signal the Web Speech API exposes, not a
+      // guess, so prefer it whenever no named voice above matches.
+      const pickBestVoice = (candidates, priority = []) => {
+        for (const namePart of priority) {
+          const match = candidates.find(v => v.name.includes(namePart));
+          if (match) return match;
+        }
+        return candidates.find(v => !v.localService) || candidates[0];
+      };
+
       if (voices.length > 0) {
         const langCode = lang.split('-')[0].toLowerCase();
         const langVoices = voices.filter(v => v.lang.toLowerCase().startsWith(langCode));
+        const englishVoices = voices.filter(v => v.lang.toLowerCase().startsWith('en'));
 
         let bestVoice;
 
         if (langCode === 'en') {
-          // Priority list for Premium/Natural sounding English voices
-          const priority = [
-            'Samantha', 'Google UK English Female', 'Google US English',
-            'Premium', 'Natural', 'Serena', 'Daniel', 'Victoria', 'Fiona'
-          ];
-
-          for (const namePart of priority) {
-            bestVoice = langVoices.find(v => v.name.includes(namePart));
-            if (bestVoice) break;
-          }
-
-          if (!bestVoice) bestVoice = langVoices[0];
+          bestVoice = pickBestVoice(langVoices, ENGLISH_PRIORITY);
         } else if (langCode === 'ta') {
-          // Priority for Tamil voices
-          const priority = ['Valluvar', 'Tamil', 'Google', 'Kanya', 'Vani'];
-          for (const namePart of priority) {
-            bestVoice = langVoices.find(v => v.name.includes(namePart));
-            if (bestVoice) break;
+          bestVoice = langVoices.length > 0
+            ? pickBestVoice(langVoices, ['Valluvar', 'Tamil', 'Google', 'Kanya', 'Vani'])
+            : null;
+
+          if (!bestVoice && englishVoices.length > 0) {
+            // No Tamil voice is installed on this device at all. Forcing
+            // ta-IN with nothing to match makes most browsers fall back to
+            // their default voice (usually English) while still trying to
+            // read Tamil script — that mismatch is what actually produces
+            // garbled, low-quality audio, not a bad-sounding Tamil voice.
+            // Read it with a good English voice on purpose instead.
+            utterance.lang = 'en-US';
+            bestVoice = pickBestVoice(englishVoices, ENGLISH_PRIORITY);
           }
-          if (!bestVoice) bestVoice = langVoices[0];
         } else {
-          bestVoice = langVoices[0];
+          bestVoice = pickBestVoice(langVoices);
         }
 
         if (bestVoice) {
