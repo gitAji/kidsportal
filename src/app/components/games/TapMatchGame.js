@@ -68,7 +68,9 @@ export default function TapMatchGame({ game, onFinish }) {
         <p className="text-center text-slate-500 font-bold mb-8">{instruction}</p>
 
         <div className="bg-white rounded-[2rem] shadow-xl p-8 sm:p-10 text-center mb-6">
-          <p className="text-5xl sm:text-6xl font-black text-slate-800">{round.prompt}</p>
+          <p className={`font-black text-slate-800 whitespace-pre-line ${round.prompt.length > 60 ? 'text-xl sm:text-2xl' : round.prompt.length > 24 ? 'text-2xl sm:text-4xl' : 'text-5xl sm:text-6xl'}`}>
+            {round.prompt}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 gap-4">
