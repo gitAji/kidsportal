@@ -328,7 +328,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             {/* Listen Button */}
                             <AudioPlayer
                                 text={sentences[validCurrentSentenceIndex]}
-                                lang={contentLanguage === 'ta' ? 'ta-IN' : 'en-US'}
+                                lang="en-US"
                                 label="Listen"
                                 icon={<FaVolumeUp />}
                                 customClassName="inline-flex items-center gap-2 bg-white px-4 sm:px-5 py-2.5 sm:py-3 text-blue-600 rounded-xl sm:rounded-2xl font-bold shadow-sm hover:shadow-md hover:bg-blue-50 transition-all cursor-pointer border border-blue-100 text-sm sm:text-base"

@@ -95,30 +95,9 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
       if (voices.length > 0) {
         const langCode = lang.split('-')[0].toLowerCase();
         const langVoices = voices.filter(v => v.lang.toLowerCase().startsWith(langCode));
-        const englishVoices = voices.filter(v => v.lang.toLowerCase().startsWith('en'));
-
-        let bestVoice;
-
-        if (langCode === 'en') {
-          bestVoice = pickBestVoice(langVoices, ENGLISH_PRIORITY);
-        } else if (langCode === 'ta') {
-          bestVoice = langVoices.length > 0
-            ? pickBestVoice(langVoices, ['Valluvar', 'Tamil', 'Google', 'Kanya', 'Vani'])
-            : null;
-
-          if (!bestVoice && englishVoices.length > 0) {
-            // No Tamil voice is installed on this device at all. Forcing
-            // ta-IN with nothing to match makes most browsers fall back to
-            // their default voice (usually English) while still trying to
-            // read Tamil script — that mismatch is what actually produces
-            // garbled, low-quality audio, not a bad-sounding Tamil voice.
-            // Read it with a good English voice on purpose instead.
-            utterance.lang = 'en-US';
-            bestVoice = pickBestVoice(englishVoices, ENGLISH_PRIORITY);
-          }
-        } else {
-          bestVoice = pickBestVoice(langVoices);
-        }
+        const bestVoice = langCode === 'en'
+          ? pickBestVoice(langVoices, ENGLISH_PRIORITY)
+          : pickBestVoice(langVoices);
 
         if (bestVoice) {
           utterance.voice = bestVoice;

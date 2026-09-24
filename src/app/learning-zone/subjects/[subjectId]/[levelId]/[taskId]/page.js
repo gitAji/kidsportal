@@ -927,7 +927,7 @@ export default function TaskContentPage() {
             <div className="mt-3 bg-blue-50 text-blue-500 rounded-full hover:bg-blue-100 transition-colors">
               <AudioPlayer
                 text={cleanString(displayQuestion?.questionText)}
-                lang={contentLanguage === 'ta' ? 'ta-IN' : 'en-US'}
+                lang="en-US"
               />
             </div>
             {isTranslating && <p className="text-xs text-indigo-500 font-bold mt-2 animate-pulse">Translating...</p>}
