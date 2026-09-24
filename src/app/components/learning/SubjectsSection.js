@@ -1,39 +1,54 @@
 "use client";
 import React from 'react';
 import { motion } from "framer-motion";
-import { FaBook, FaCalculator, FaGlobe, FaFlask, FaArrowRight } from "react-icons/fa";
+import { FaBook, FaCalculator, FaLanguage, FaFlask, FaLaptopCode, FaCode, FaArrowRight } from "react-icons/fa";
 
+// The real 6 subjects taught on the platform, each spanning all 10 grades —
+// kept in sync with what's actually in the curriculum (src/app/data/db.json),
+// not a generic marketing placeholder list.
 const subjects = [
   {
     name: 'English',
     icon: <FaBook size={32} />,
     color: 'from-blue-500 to-blue-700',
-    description: 'Master reading, writing, and storytelling through fun games.'
+    description: 'Phonics, spelling, grammar, and reading comprehension — building from early word patterns to fluent, confident writing.'
   },
   {
-    name: 'Mathematics',
+    name: 'Math',
     icon: <FaCalculator size={32} />,
     color: 'from-cyan-500 to-cyan-700',
-    description: 'Crack numbers and solve logic puzzles that bring math to life.'
+    description: 'Number sense, place value, arithmetic, and problem solving — practiced through interactive lessons, quizzes, and games.'
   },
   {
-    name: 'Social Studies',
-    icon: <FaGlobe size={32} />,
-    color: 'from-indigo-500 to-indigo-700',
-    description: 'Explore history and cultures with interactive 3D adventures.'
+    name: 'Tamil',
+    icon: <FaLanguage size={32} />,
+    color: 'from-orange-500 to-rose-600',
+    description: 'From the uyir ezhuthukkal (vowels) and consonants up through reading and writing fluency in Tamil.'
   },
   {
     name: 'Science',
     icon: <FaFlask size={32} />,
     color: 'from-teal-500 to-teal-700',
-    description: 'Conduct virtual experiments and discover the world.'
+    description: 'Living things, habitats, matter, and the natural world — explored through real lessons and hands-on quizzes.'
+  },
+  {
+    name: 'Computer Science',
+    icon: <FaLaptopCode size={32} />,
+    color: 'from-sky-500 to-blue-600',
+    description: 'What a computer actually is, its parts, and how we use it — the foundation before kids start writing code.'
+  },
+  {
+    name: 'Coding',
+    icon: <FaCode size={32} />,
+    color: 'from-violet-500 to-purple-700',
+    description: 'Real block-based coding in our Build Lab — solve mazes and match patterns by snapping code blocks together.'
   },
 ];
 
 const SubjectsSection = () => {
   return (
     <section className="relative py-12">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {subjects.map((subject, index) => (
           <motion.div
             key={index}
@@ -59,10 +74,13 @@ const SubjectsSection = () => {
                 {subject.description}
               </p>
 
-              <div className="mt-auto flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest group/btn cursor-pointer">
-                <span>Learn More</span>
+              <a
+                href="#curriculum-browser"
+                className="mt-auto flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest group/btn"
+              >
+                <span>See the Curriculum</span>
                 <FaArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-              </div>
+              </a>
             </div>
           </motion.div>
         ))}
