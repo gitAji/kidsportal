@@ -64,13 +64,16 @@ export async function POST(request) {
             return NextResponse.json({ error: 'Stripe Secret Key is not configured.' }, { status: 500 });
         }
         let customerId;
+        let existingTrialEndDate = null;
 
         // Look up existing Stripe customer from Firestore
         if (adminDb) {
             const userRef = adminDb.doc(`users/${uid}`);
             const userSnap = await userRef.get();
-            const sub = userSnap.data()?.subscription || {};
+            const userData = userSnap.data() || {};
+            const sub = userData.subscription || {};
             customerId = sub.stripeCustomerId;
+            existingTrialEndDate = userData.trialEndDate || null;
 
             if (!customerId) {
                 const customer = await stripe.customers.create({
@@ -91,6 +94,24 @@ export async function POST(request) {
 
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
+        // Align the first Stripe charge with the trial the user already started
+        // at signup instead of always granting a fresh 30-day trial from the
+        // moment they add a card. Without this, adding a card late in (or
+        // after) the app-level trial pushes the first charge well past the
+        // intended "day 31 from signup" — and directly contradicts the
+        // checkout copy promising "won't charge you until your trial ends."
+        let trialParams = { trial_period_days: 30 };
+        if (existingTrialEndDate) {
+            const trialEndDate = existingTrialEndDate.toDate
+                ? existingTrialEndDate.toDate()
+                : new Date(existingTrialEndDate);
+            const trialEndUnix = Math.floor(trialEndDate.getTime() / 1000);
+            const oneHourFromNow = Math.floor(Date.now() / 1000) + 3600;
+            // Trial already lapsed (or ends too soon for Stripe to accept) —
+            // charge immediately rather than inventing a new free period.
+            trialParams = trialEndUnix > oneHourFromNow ? { trial_end: trialEndUnix } : {};
+        }
+
         const session = await stripe.checkout.sessions.create({
             customer: customerId,
             mode: 'subscription',
@@ -106,7 +127,7 @@ export async function POST(request) {
                     firebaseUid: uid,
                     plan: billingCycle === 'yearly' ? 'premium_yearly' : 'premium_monthly'
                 },
-                trial_period_days: 30, // 1-month free trial before first charge
+                ...trialParams,
             },
             allow_promotion_codes: true,
         });
