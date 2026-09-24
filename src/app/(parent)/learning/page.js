@@ -4,6 +4,7 @@ import SubjectsSection from '../../components/learning/SubjectsSection';
 import HowWeMakeLearningFunSection from '../../components/learning/HowWeMakeLearningFunSection';
 import CurriculumShowcase from '../../components/ui/CurriculumShowcase';
 import { motion } from "framer-motion";
+import { FaFilePdf, FaDownload } from "react-icons/fa";
 import db from '../../data/db.json';
 
 // Same theme-color cycle used on the homepage's curriculum browser, so a
@@ -95,6 +96,46 @@ export default function LearningPage() {
           </div>
           <CurriculumShowcase grades={grades} themeColors={gradeColors} />
         </motion.div>
+
+        {/* Downloadable syllabus guides — real topic lists per grade, with
+            notes on how they align to real-world Tamil-language curricula
+            (Tamil Nadu, Sri Lanka, Malaysia), so parents can see exactly
+            what's covered without browsing the interactive view above. */}
+        {db.syllabusDocuments?.length > 0 && (
+          <div className="mt-24 max-w-3xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-3 tracking-tight">
+                Download the <span className="text-blue-600">Syllabus</span>
+              </h2>
+              <p className="text-slate-500 font-medium">
+                Prefer a document you can save or print? Every topic, grade by grade.
+              </p>
+            </div>
+            <div className="space-y-4">
+              {db.syllabusDocuments.map((doc) => (
+                <a
+                  key={doc.id}
+                  href={doc.fileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-5 bg-white border border-slate-100 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-red-50 text-red-500 flex items-center justify-center text-2xl flex-shrink-0">
+                    <FaFilePdf />
+                  </div>
+                  <div className="flex-grow min-w-0">
+                    <h3 className="font-black text-slate-800 tracking-tight">{doc.title}</h3>
+                    <p className="text-sm text-slate-500 font-medium mt-1 leading-relaxed">{doc.description}</p>
+                    <span className="text-[11px] font-black text-blue-500 uppercase tracking-widest mt-2 inline-block">{doc.gradeRange}</span>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-slate-50 group-hover:bg-blue-600 text-slate-400 group-hover:text-white flex items-center justify-center flex-shrink-0 transition-all">
+                    <FaDownload className="text-sm" />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="my-32">
           <HowWeMakeLearningFunSection />

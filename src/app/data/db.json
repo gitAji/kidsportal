@@ -72310,5 +72310,16 @@
   "membership": {
     "freeLevelsOpen": 2,
     "premiumLevelsStart": 3
-  }
+  },
+  "syllabusDocuments": [
+    {
+      "id": "tamil-syllabus",
+      "subjectName": "Tamil",
+      "title": "Tamil Language Curriculum & Syllabus Guide",
+      "description": "Every topic covered in KidsPortal's Tamil subject, Grade 1 through 10, with notes on how each grade aligns with Tamil Nadu's Samacheer Kalvi curriculum, Sri Lanka's Tamil-medium school syllabus (NIE), and Malaysia's Tamil-medium primary curriculum (SJK(T) / KSSR-DSKP).",
+      "fileUrl": "/documents/tamil-curriculum-syllabus.pdf",
+      "gradeRange": "Grade 1 - Grade 10",
+      "updatedAt": "2026-09-24"
+    }
+  ]
 }
