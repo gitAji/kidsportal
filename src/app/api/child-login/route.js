@@ -1,4 +1,4 @@
-import { adminDb } from '@/lib/firebaseAdmin';
+import { adminDb, adminAuth } from '@/lib/firebaseAdmin';
 
 export const POST = async (req) => {
     try {
@@ -42,6 +42,27 @@ export const POST = async (req) => {
 
         if (childData.loginEnabled === false) {
             return new Response(JSON.stringify({ error: "Your account is currently disabled. Please ask your parent to enable it." }), { status: 403 });
+        }
+
+        // The learning zone stays locked until the parent's own account email
+        // is verified — Google sign-ins already come back verified, so this
+        // only ever blocks email/password parent accounts that haven't
+        // clicked the link yet.
+        if (adminAuth) {
+            try {
+                const parentRecord = await adminAuth.getUser(parentUid);
+                if (!parentRecord.emailVerified) {
+                    return new Response(JSON.stringify({
+                        error: "Ask your parent to verify their email before you can start learning! Check the inbox for the account they signed up with.",
+                        code: "PARENT_EMAIL_NOT_VERIFIED",
+                    }), { status: 403 });
+                }
+            } catch (err) {
+                console.error(`Child login: failed to check email verification for parent ${parentUid}`, err);
+                // Fail open on a transient Admin Auth error — don't lock a
+                // real family out of an already-working session over an
+                // infra hiccup unrelated to the actual verification policy.
+            }
         }
 
         const { password: _password, ...childDataWithoutPassword } = childData;

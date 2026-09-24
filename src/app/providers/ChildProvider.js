@@ -92,7 +92,14 @@ export function ChildProvider({ children }) {
           } else {
             localStorage.removeItem("childUser");
             sessionStorage.removeItem("childUser");
-            router.push("/child-login");
+            let reason = null;
+            try {
+              const body = await response.json();
+              if (body.code === "PARENT_EMAIL_NOT_VERIFIED") reason = "email_not_verified";
+            } catch {
+              // no JSON body — fall through to a plain redirect
+            }
+            router.push(reason ? `/child-login?reason=${reason}` : "/child-login");
           }
         } catch (error) {
           console.error("Error fetching child/parent data for provider:", error);

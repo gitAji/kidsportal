@@ -76,6 +76,10 @@ function UnifiedLoginPage() {
         if (role && roles.map(r => r.id).includes(role)) {
             setActiveRole(role);
         }
+
+        if (searchParams.get('reason') === 'email_not_verified') {
+            setError("Ask your parent to verify their email before you can start learning! Check the inbox for the account they signed up with.");
+        }
         return () => unsub();
     }, [searchParams, activeRole, router]);
 
