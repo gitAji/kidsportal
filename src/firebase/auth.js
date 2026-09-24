@@ -7,7 +7,7 @@ import {
   signOut,
   sendEmailVerification,
 } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -59,6 +59,10 @@ export const signInWithGoogle = async (onSuccess, isTeacherFlow = false) => {
           currentPeriodEnd: trialEnd,
           trialStartedAt: new Date(),
         };
+        // Every other admin-listed collection (teachers, tickets, admins)
+        // sets this at creation and orders by it — the parents list needs
+        // it too, or Firestore's orderBy silently drops any doc missing it.
+        userData.createdAt = serverTimestamp();
       }
 
       await setDoc(userRef, userData, { merge: true });
@@ -99,7 +103,8 @@ export const signUpWithEmail = async (email, password, name, onSuccess) => {
         status: 'active',
         currentPeriodEnd: trialEnd,
         trialStartedAt: new Date(),
-      }
+      },
+      createdAt: serverTimestamp(),
     });
 
     // Ask Firebase to email the new account a verification link. A failure
