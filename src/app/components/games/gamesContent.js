@@ -148,13 +148,88 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
         ],
       },
     },
+    {
+      id: 'flower-parts-label',
+      subjectId: 'science-1',
+      subjectLabel: 'Science',
+      title: 'Parts of a Flower',
+      description: 'Drag each label onto the correct part of the flower!',
+      engine: 'label-diagram',
+      icon: '🌸',
+      color: 'from-pink-400 to-rose-500',
+      data: {
+        instruction: 'Drag each label onto the matching part of the flower!',
+        viewBox: '0 0 100 100',
+        background: 'linear-gradient(180deg, #e0f2fe 0%, #e0f2fe 55%, #d6b58a 55%, #d6b58a 100%)',
+        shapes: [
+          { kind: 'svg', tag: 'ellipse', props: { cx: 50, cy: 16, rx: 8, ry: 14, fill: '#f472b6', transform: 'rotate(0 50 16)' } },
+          { kind: 'svg', tag: 'ellipse', props: { cx: 63, cy: 24, rx: 8, ry: 14, fill: '#f472b6', transform: 'rotate(72 63 24)' } },
+          { kind: 'svg', tag: 'ellipse', props: { cx: 59, cy: 40, rx: 8, ry: 14, fill: '#f472b6', transform: 'rotate(144 59 40)' } },
+          { kind: 'svg', tag: 'ellipse', props: { cx: 41, cy: 40, rx: 8, ry: 14, fill: '#f472b6', transform: 'rotate(216 41 40)' } },
+          { kind: 'svg', tag: 'ellipse', props: { cx: 37, cy: 24, rx: 8, ry: 14, fill: '#f472b6', transform: 'rotate(288 37 24)' } },
+          { kind: 'svg', tag: 'circle', props: { cx: 50, cy: 30, r: 9, fill: '#fbbf24' } },
+          { kind: 'svg', tag: 'rect', props: { x: 47, y: 38, width: 6, height: 48, rx: 2, fill: '#16a34a' } },
+          { kind: 'svg', tag: 'ellipse', props: { cx: 30, cy: 64, rx: 14, ry: 7, fill: '#22c55e', transform: 'rotate(-25 30 64)' } },
+          { kind: 'svg', tag: 'path', props: { d: 'M50,86 L38,98 M50,86 L50,99 M50,86 L62,98', stroke: '#92400e', 'stroke-width': 3, fill: 'none', 'stroke-linecap': 'round' } },
+        ],
+        zones: [
+          { id: 'petal', x: 50, y: 18, label: 'Petal' },
+          { id: 'leaf', x: 30, y: 64, label: 'Leaf' },
+          { id: 'stem', x: 50, y: 62, label: 'Stem' },
+          { id: 'root', x: 50, y: 95, label: 'Root' },
+        ],
+      },
+    },
+  ],
+  'grade-7': [
+    {
+      id: 'ecosystem-parts-label',
+      subjectId: 'science-7',
+      subjectLabel: 'Science',
+      title: 'Parts of an Ecosystem',
+      description: 'Drag each label onto the matching part of the food chain!',
+      engine: 'label-diagram',
+      icon: '🌳',
+      color: 'from-emerald-400 to-green-600',
+      data: {
+        instruction: 'Drag each label onto the matching part of this ecosystem!',
+        background: 'linear-gradient(180deg, #bae6fd 0%, #bae6fd 30%, #bbf7d0 30%, #bbf7d0 82%, #92702f 82%, #92702f 100%)',
+        shapes: [
+          { kind: 'emoji', x: 15, y: 12, size: 46, value: '☀️' },
+          { kind: 'emoji', x: 30, y: 45, size: 54, value: '🌳' },
+          { kind: 'emoji', x: 55, y: 68, size: 40, value: '🐇' },
+          { kind: 'emoji', x: 78, y: 55, size: 42, value: '🦊' },
+          { kind: 'emoji', x: 45, y: 88, size: 34, value: '🍄' },
+        ],
+        zones: [
+          { id: 'energy', x: 15, y: 12, label: 'Sunlight (Energy Source)' },
+          { id: 'producer', x: 30, y: 45, label: 'Producer' },
+          { id: 'herbivore', x: 55, y: 68, label: 'Consumer (Herbivore)' },
+          { id: 'predator', x: 78, y: 55, label: 'Consumer (Predator)' },
+          { id: 'decomposer', x: 45, y: 88, label: 'Decomposer' },
+        ],
+      },
+    },
   ],
 };
 
-export const GAMES_BY_GRADE = {
-  ...GENERATED_GAMES_BY_GRADE,
-  ...HAND_CRAFTED_GAMES_BY_GRADE, // grade-1 wins: richer, hand-crafted content
-};
+// Grade 1 has no generated games at all, so its hand-crafted array is used
+// as-is. Every other grade already has 5 generated tap-match games (see
+// gamesContentGenerated.js) — a hand-crafted entry for one of those grades
+// (like grade-7's label-diagram game below) is appended to that grade's
+// list rather than replacing it, so new bespoke games and the generated
+// ones coexist instead of one silently clobbering the other.
+function mergeGamesByGrade(...sources) {
+  const merged = {};
+  for (const source of sources) {
+    for (const [gradeId, games] of Object.entries(source)) {
+      merged[gradeId] = [...(merged[gradeId] || []), ...games];
+    }
+  }
+  return merged;
+}
+
+export const GAMES_BY_GRADE = mergeGamesByGrade(GENERATED_GAMES_BY_GRADE, HAND_CRAFTED_GAMES_BY_GRADE);
 
 // A link-out entry shown alongside the grade's games: reuses the existing
 // Coding Build Lab (Blockly maze/pattern/free-build) instead of duplicating
