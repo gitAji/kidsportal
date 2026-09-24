@@ -47,9 +47,10 @@ export default function AuthModal({
           setIsLoading(false);
           return;
         }
-        await signUpWithEmail(email, password, firstName, lastName, () => setIsModalOpen(false));
+        await signUpWithEmail(email, password, `${firstName} ${lastName}`.trim(), () => setIsModalOpen(false));
       } else {
-        await signInWithEmail(email, password, () => setIsModalOpen(false));
+        await signInWithEmail(email, password);
+        setIsModalOpen(false);
       }
       router.push("/");
     } catch (err) {
