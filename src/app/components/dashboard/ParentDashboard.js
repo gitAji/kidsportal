@@ -15,6 +15,7 @@ import { loadStats, loadUnlockedAchievements } from "@/app/utils/achievements";
 import { computeLevelProgress } from "@/app/utils/childProgress";
 import { resolveSubscription } from "@/lib/subscriptionStatus";
 import { childLimitForPlan } from "@/lib/pricingConfig";
+import { DEFAULT_LEARNING_SUBJECTS } from "@/app/utils/learningData";
 import { FaPlus, FaBell, FaUserFriends, FaUserCircle, FaCrown, FaCheckCircle, FaStar, FaTrophy, FaClock, FaChartLine, FaGraduationCap, FaLock } from 'react-icons/fa';
 import { motion } from "framer-motion";
 
@@ -45,7 +46,7 @@ const ParentDashboard = () => {
     // Family-wide learning overview (mirrors the totals shown on /analytics)
     const learningSubjects = Array.isArray(data.learningSubjects) && data.learningSubjects.length > 0
       ? data.learningSubjects
-      : ["English", "Math", "Science", "Tamil"];
+      : DEFAULT_LEARNING_SUBJECTS;
     let tasks = 0, score = 0, achievements = 0, minutes = 0, levelsDone = 0, levelsTotal = 0;
     for (const kid of childrenData) {
       let s;

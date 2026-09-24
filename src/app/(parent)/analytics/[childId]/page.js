@@ -9,7 +9,7 @@ import {
   getChildStats, getChildAchievements, getChildTaskHistory,
 } from "@/app/utils/firestoreService";
 import { loadStats, loadUnlockedAchievements, ACHIEVEMENTS } from "@/app/utils/achievements";
-import { getSubjectsByGrade } from "@/app/utils/learningData";
+import { getSubjectsByGrade, DEFAULT_LEARNING_SUBJECTS } from "@/app/utils/learningData";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
@@ -140,7 +140,7 @@ export default function ChildReportPage() {
 
         // Parent's chosen subjects for this family (falls back to the same
         // default set used across the Learning Zone).
-        let learningSubjects = ["English", "Math", "Science", "Tamil"];
+        let learningSubjects = DEFAULT_LEARNING_SUBJECTS;
         try {
           const parentSnap = await getDoc(doc(db, "users", u.uid));
           if (parentSnap.exists() && parentSnap.data().learningSubjects) {

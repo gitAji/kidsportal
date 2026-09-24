@@ -18,6 +18,7 @@ import {
 } from "react-icons/fa";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
 import { CURRENCY_PRICES, NATIVE_CURRENCIES, countryToCurrency, checkoutCurrency } from "@/lib/pricingConfig";
+import { DEFAULT_LEARNING_SUBJECTS } from "@/app/utils/learningData";
 import { resolveSubscription } from "@/lib/subscriptionStatus";
 
 // ── Shared input style ─────────────────────────────────────────────
@@ -86,7 +87,7 @@ export default function SettingsPage() {
   const [postalCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
   const [learningLanguage, setLearningLanguage] = useState("English");
-  const [learningSubjects, setLearningSubjects] = useState(["English", "Math", "Science"]);
+  const [learningSubjects, setLearningSubjects] = useState(DEFAULT_LEARNING_SUBJECTS);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isGoogleSignIn, setIsGoogleSignIn] = useState(false);
@@ -136,7 +137,7 @@ export default function SettingsPage() {
           setPostalCode(d.postalCode || "");
           setCountry(d.country || "");
           setLearningLanguage(d.learningLanguage || "English");
-          setLearningSubjects(d.learningSubjects || ["English", "Math", "Science"]);
+          setLearningSubjects(d.learningSubjects || DEFAULT_LEARNING_SUBJECTS);
         }
       } catch (err) {
         console.error(err);

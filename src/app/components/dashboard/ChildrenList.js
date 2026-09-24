@@ -13,6 +13,7 @@ import { getChildStats, grantBonusTime } from '@/app/utils/firestoreService';
 import { loadStats } from '@/app/utils/achievements';
 import { computeLevelProgress } from '@/app/utils/childProgress';
 import { getDateKey } from '@/app/utils/timeLimits';
+import { DEFAULT_LEARNING_SUBJECTS } from '@/app/utils/learningData';
 
 function formatLastActive(ts) {
   if (!ts) return null;
@@ -128,8 +129,6 @@ function TimeRequestBanner({ child, onGrant, onDismiss }) {
     </motion.div>
   );
 }
-
-const DEFAULT_LEARNING_SUBJECTS = ["English", "Math", "Science", "Tamil"];
 
 const ChildrenList = ({ refreshKey } = {}) => {
   const [children, setChildren] = useState([]);

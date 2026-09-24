@@ -9,6 +9,7 @@ import { getChildStats, getChildAchievements, getChildTaskHistory } from "@/app/
 import { loadStats, loadUnlockedAchievements } from "@/app/utils/achievements";
 import { computeLevelProgress } from "@/app/utils/childProgress";
 import { getDateKey, getWeekDateKeys } from "@/app/utils/timeLimits";
+import { DEFAULT_LEARNING_SUBJECTS } from "@/app/utils/learningData";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
@@ -173,8 +174,6 @@ function countThisWeek(historyEntries) {
 }
 
 // ── Main Page ─────────────────────────────────────────────────────
-const DEFAULT_LEARNING_SUBJECTS = ["English", "Math", "Science", "Tamil"];
-
 export default function AnalyticsPage() {
   const [children, setChildren] = useState([]);
   const [learningSubjects, setLearningSubjects] = useState(DEFAULT_LEARNING_SUBJECTS);

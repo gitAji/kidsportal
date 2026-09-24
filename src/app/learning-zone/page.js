@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useChild } from '../providers/ChildProvider';
 import { useLanguage } from '../providers/LanguageProvider';
-import { getSubjectsByGrade } from '../utils/learningData';
+import { getSubjectsByGrade, DEFAULT_LEARNING_SUBJECTS } from '../utils/learningData';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
@@ -112,7 +112,7 @@ export default function LearningZonePage() {
       setSubjectsLoading(true);
 
       // Fetch the parent's selected learning subjects
-      let learningSubjects = childUser.learningSubjects || ['English', 'Math', 'Science', 'Tamil'];
+      let learningSubjects = childUser.learningSubjects || DEFAULT_LEARNING_SUBJECTS;
       try {
         if (childUser.parentUid) {
           const parentSnap = await getDoc(doc(db, 'users', childUser.parentUid));
