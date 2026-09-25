@@ -241,16 +241,8 @@ export default function SubjectLevelsPage() {
     const isSubscribed = !!childUser?.isSubscriptionActive;
 
     return levels.map((level, index) => {
-      // Filter out placeholders so they don't count towards progression/display
-      const levelTasks = (level.tasks || []).filter(task => {
-        const name = task.taskName?.toLowerCase().trim() || '';
-        const isGeneric = /^\[(quizz|quiz|exam|lesson)\s*\d*\]$/i.test(name) ||
-          /^(quizz|quiz|exam|lesson)\s*\d+$/i.test(name) ||
-          /^(quizz|quiz|exam|lesson)\d+$/i.test(name) ||
-          ['new quiz', 'new lesson', 'new exam', 'quizz 1', 'quiz 1', 'lesson 1', 'exam 1'].includes(name) ||
-          name.includes('placeholder');
-        return !isGeneric;
-      });
+      // Keep all tasks as requested by the user
+      const levelTasks = level.tasks || [];
       const totalTasks = levelTasks.length;
       const completedTaskIds = childStats?.completedTasks_list || [];
       const completedCount = levelTasks.filter(t => completedTaskIds.includes(t.taskId)).length;
