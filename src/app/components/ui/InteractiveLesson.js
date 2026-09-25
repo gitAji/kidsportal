@@ -247,11 +247,8 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                 </div>
             </div>
 
-            {/* Main Content — full-width on large screens, with a companion
-                panel alongside the lesson instead of everything living in a
-                single narrow centered column. */}
-            <div className="w-full max-w-7xl px-4 sm:px-6 py-6 sm:py-10 flex-grow z-10 xl:grid xl:grid-cols-[1fr_360px] xl:gap-10 xl:items-start">
-              <div className="flex flex-col min-w-0">
+            {/* Main Content */}
+            <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10 flex-grow z-10 flex flex-col min-w-0">
 
                 {/* Lesson Title Card */}
                 <motion.div
@@ -544,96 +541,57 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                 </motion.div>
               </div>
 
-              {/* Companion Panel — desktop/large-screen only. Puts the
-                  mascot front and center in a real illustrated panel next
-                  to the lesson instead of tucked into a tiny corner bubble,
-                  and uses the extra width full-width layouts are supposed
-                  to give back to the page rather than just stretching the
-                  same narrow card. */}
-              <div className="hidden xl:flex flex-col gap-5 sticky top-24">
-                <div className={`relative overflow-hidden rounded-[2rem] bg-gradient-to-br ${theme.gradient} p-6 shadow-xl text-white`}>
-                    <div className={`absolute -top-10 -right-10 w-40 h-40 rounded-full ${theme.glow} blur-2xl`} />
-                    <div className={`absolute -bottom-14 -left-10 w-40 h-40 rounded-full ${theme.glow} blur-2xl`} />
-
-                    <motion.div
-                        animate={{ y: [0, -10, 0] }}
-                        transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut' }}
-                        className="relative w-32 h-32 mx-auto"
-                    >
-                        <div className="w-full h-full rounded-full bg-white shadow-lg border-4 border-white/70 overflow-hidden relative">
-                            <Image src={professor.img} alt={professor.name} fill className="object-contain p-3" />
-                        </div>
-                        <motion.div
-                            animate={{ scale: [1, 1.15, 1] }}
-                            transition={{ repeat: Infinity, duration: 2 }}
-                            className="absolute -top-1 -right-1 w-9 h-9 bg-amber-400 rounded-full flex items-center justify-center shadow-md border-2 border-white"
-                        >
-                            <FaStar className="text-white text-xs" />
-                        </motion.div>
-                    </motion.div>
-
-                    <p className="relative text-center font-black text-lg mt-4">{professor.name}</p>
-
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={mascotMessage || 'idle'}
-                            initial={{ opacity: 0, y: 8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -8 }}
-                            className="relative mt-4 bg-white/15 backdrop-blur-sm rounded-2xl px-4 py-3 text-center"
-                        >
-                            <p className="text-sm font-bold leading-snug">
-                                {mascotMessage || "You're doing great — keep going!"}
-                            </p>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
-
-                {/* Quick stats — reuses numbers already on screen so the
-                    panel earns its width instead of being empty space. */}
-                <div className="bg-white rounded-[1.75rem] shadow-md border border-slate-100 p-5">
-                    <div className="flex items-center justify-between mb-4">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">This Lesson</span>
-                        <ThemeIcon className="text-slate-300" />
+            {/* AI Tutor Avatar (Matches Quiz/Exam design) */}
+            <div className="fixed bottom-4 md:bottom-8 right-4 md:right-8 z-[100] flex flex-col justify-end items-end pointer-events-none">
+              {/* Mascot Speech Bubble */}
+              <AnimatePresence mode="wait">
+                {mascotMessage && (
+                  <motion.div
+                    key="speech-bubble"
+                    initial={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
+                    className="bg-white/95 backdrop-blur-md rounded-3xl rounded-br-sm shadow-2xl p-4 md:p-5 mb-3 max-w-[260px] md:max-w-sm border-4 border-indigo-300 overflow-hidden pointer-events-auto relative"
+                  >
+                    <div className="absolute top-0 right-0 p-1 opacity-20">
+                      <FaStar className="text-yellow-400 text-xs" />
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-slate-50 rounded-2xl p-3 text-center">
-                            <p className="text-2xl font-black text-slate-800">{starsEarned}</p>
-                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Stars</p>
-                        </div>
-                        <div className="bg-slate-50 rounded-2xl p-3 text-center">
-                            <p className="text-2xl font-black text-slate-800">{Math.round(progress)}%</p>
-                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Complete</p>
-                        </div>
-                    </div>
-                </div>
-              </div>
-            </div>
+                    <p className="font-bold text-slate-700 text-sm md:text-base leading-snug">
+                      {mascotMessage}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-            {/* Persistent Professor Companion — mobile/tablet only; the
-                desktop companion panel above replaces this once there's
-                room for it. */}
-            <div className="xl:hidden fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none">
-                <AnimatePresence>
-                    {mascotMessage && (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.8, y: 10 }}
-                            className="mb-3 max-w-[220px] bg-white rounded-2xl rounded-br-sm shadow-xl border border-slate-100 px-4 py-3"
-                        >
-                            <p className="text-sm font-bold text-slate-700 leading-snug">{mascotMessage}</p>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+              {/* Professor Character */}
+              <div className="relative pointer-events-auto mt-2">
+                {/* Name Tag */}
                 <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", bounce: 0.5, delay: 0.3 }}
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white shadow-xl border-4 border-white overflow-hidden relative pointer-events-auto"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-30 whitespace-nowrap"
                 >
-                    <Image src={professor.img} alt={professor.name} fill className="object-contain p-1.5" />
+                  {professor.name}
                 </motion.div>
+
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
+                  className="w-16 h-16 sm:w-28 sm:h-28 md:w-44 md:h-44 flex items-center justify-center mr-2 relative z-20 group"
+                >
+                  <div className="relative w-full h-full bg-white rounded-full border-[5px] shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex items-center justify-center transition-all duration-300 border-indigo-200 group-hover:border-indigo-400 group-hover:shadow-[0_15px_35px_rgba(99,102,241,0.3)]">
+                    <div className="relative w-[85%] h-[85%] mt-3">
+                      <Image
+                        src={professor.img}
+                        alt={professor.name}
+                        fill
+                        className="object-contain transition-transform duration-300 group-hover:scale-110"
+                        priority
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             </div>
         </div>
     );
