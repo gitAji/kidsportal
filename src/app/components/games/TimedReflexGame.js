@@ -78,7 +78,7 @@ export default function TimedReflexGame({ game, onFinish }) {
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-8 pt-20">
       <div className="w-full max-w-2xl">
         <div className="flex items-center justify-between mb-2">
-          <p className="text-sm font-black text-slate-400 uppercase tracking-widest">{game.title}</p>
+          <p className="text-sm font-black text-slate-400 uppercase">{game.title}</p>
           <div className={`px-4 py-1.5 rounded-full font-black text-sm ${timeLeft <= 10 ? 'bg-red-500 text-white animate-pulse' : 'bg-white text-slate-600 shadow-md'}`}>
             ⏳ {timeLeft}s
           </div>
