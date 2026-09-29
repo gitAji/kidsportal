@@ -114,6 +114,8 @@ export default function SubjectLevelsPage() {
   const [loading, setLoading] = useState(true);
   const [alertMessage, setAlertMessage] = useState(null);
   const [childStats, setChildStats] = useState({});
+  const [generatingMore, setGeneratingMore] = useState(false);
+  const [generateError, setGenerateError] = useState(null);
   const router = useRouter();
   const params = useParams();
   const { subjectId } = params;
@@ -327,6 +329,34 @@ export default function SubjectLevelsPage() {
     return <TimeLimitBlockedScreen status={timeStatus} />;
   }
 
+  // Once every existing level is done, generate a brand-new one on demand
+  // (via Gemini, persisted to Firestore) so there's always real new
+  // curriculum to reach for instead of just a shuffle of old content.
+  const handleGenerateMore = async () => {
+    if (generatingMore || !childUser?.gradeId) return;
+    setGeneratingMore(true);
+    setGenerateError(null);
+    try {
+      const res = await fetch('/api/generate-level', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ gradeId: childUser.gradeId, subjectId }),
+      });
+      if (!res.ok) throw new Error('Generation failed');
+      const newLevel = await res.json();
+      setLevels(prev => [...prev, newLevel]);
+      setReplayMode(false);
+      setGreeting(`Hoot hoot! 🦉 A brand new level just landed: "${newLevel.levelName}"!`);
+      setTimeout(() => setGreeting(null), 8500);
+    } catch (err) {
+      console.error('Failed to generate more curriculum', err);
+      setGenerateError("Couldn't create a new level right now — try again in a bit!");
+      setTimeout(() => setGenerateError(null), 4000);
+    } finally {
+      setGeneratingMore(false);
+    }
+  };
+
   const handleLevelClick = (level) => {
     if (level.overrideIsLocked || level.isLocked || level.requiresPreviousLevel) {
       const msg = level.lockMessage || t('locked');
@@ -450,11 +480,24 @@ export default function SubjectLevelsPage() {
               <div>
                 <p className="font-black text-slate-800 text-lg leading-tight">You finished every level!</p>
                 <p className="text-sm font-medium text-slate-500">
-                  {replayMode ? 'Replay Round: levels are shuffled for fun practice.' : 'Play a Replay Round to practice them again in a new order.'}
+                  {replayMode ? 'Replay Round: levels are shuffled for fun practice.' : 'Get a brand new level, or play a Replay Round to practice these again.'}
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-2 shrink-0 flex-wrap justify-center">
+              <button
+                onClick={handleGenerateMore}
+                disabled={generatingMore}
+                className="flex items-center gap-2 px-5 py-2.5 rounded-2xl font-black text-sm shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] bg-gradient-to-r from-emerald-400 to-teal-500 text-white disabled:opacity-60 disabled:hover:scale-100"
+              >
+                {generatingMore ? (
+                  <>
+                    <FaStar className="animate-spin" /> Creating your next level...
+                  </>
+                ) : (
+                  <>✨ Get More Levels!</>
+                )}
+              </button>
               {replayMode && (
                 <button
                   onClick={() => setReplaySeed(s => s + 1)}
@@ -467,12 +510,15 @@ export default function SubjectLevelsPage() {
                 onClick={() => setReplayMode(prev => !prev)}
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl font-black text-sm shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] ${replayMode
                   ? 'bg-slate-800 text-white'
-                  : 'bg-gradient-to-r from-amber-400 to-orange-500 text-white'
+                  : 'bg-white border-2 border-amber-300 text-amber-600'
                   }`}
               >
                 <FaRandom /> {replayMode ? 'Back to Normal Order' : 'Start Replay Round'}
               </button>
             </div>
+            {generateError && (
+              <p className="w-full text-center text-sm font-bold text-red-500 mt-2">{generateError}</p>
+            )}
           </div>
         </motion.div>
       )}
