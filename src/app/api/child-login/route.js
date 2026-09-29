@@ -29,7 +29,7 @@ export const POST = async (req) => {
 
         if (!childDoc.exists) {
             console.error(`Child login: child_usernames/${usernameKey} points at a missing child doc (parent ${parentUid}, child ${childId}).`);
-            return new Response(JSON.stringify({ error: `Child profile document missing (ID: ${childId})` }), { status: 404 });
+            return new Response(JSON.stringify({ error: "Invalid username or password." }), { status: 401 });
         }
 
         const childData = childDoc.data();

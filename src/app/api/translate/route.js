@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenAI, Type } from "@google/genai";
+import { safeErrorResponse } from '@/lib/apiError';
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -35,7 +36,6 @@ ${text}`;
         return NextResponse.json({ translatedText });
 
     } catch (error) {
-        console.error('Translation Error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('Translation Error:', error, 'Failed to translate text.');
     }
 }

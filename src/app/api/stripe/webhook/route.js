@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
+import { safeErrorResponse } from '@/lib/apiError';
 
 // Helper to find Firebase UID from various possible sources in the Stripe event
 async function getFirebaseUid(stripe, event) {
@@ -242,8 +243,7 @@ export async function POST(request) {
 
         return NextResponse.json({ received: true });
     } catch (error) {
-        console.error('Webhook handler error:', error);
-        return NextResponse.json({ error: 'Webhook processing failed.' }, { status: 500 });
+        return safeErrorResponse('Webhook handler error:', error, 'Webhook processing failed.');
     }
 }
 

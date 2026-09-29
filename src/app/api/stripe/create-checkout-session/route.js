@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { getVerifiedUid } from '@/lib/verifyAuth';
+import { safeErrorResponse } from '@/lib/apiError';
 
 // Native Stripe Price IDs per currency
 const PRICE_IDS = {
@@ -134,7 +135,6 @@ export async function POST(request) {
 
         return NextResponse.json({ url: session.url });
     } catch (error) {
-        console.error('Stripe checkout session error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('Stripe checkout session error:', error, 'Failed to start checkout.');
     }
 }

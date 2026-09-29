@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenAI, Type } from "@google/genai";
+import { safeErrorResponse } from '@/lib/apiError';
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -91,15 +92,6 @@ export async function POST(request) {
         return NextResponse.json(syncResult);
 
     } catch (error) {
-        console.error('CRITICAL: Sync Research Error:', error);
-        console.error('Error Details:', {
-            message: error.message,
-            stack: error.stack,
-            cause: error.cause
-        });
-        return NextResponse.json({
-            error: error.message,
-            details: "Please check server logs for CRITICAL: Sync Research Error"
-        }, { status: 500 });
+        return safeErrorResponse('CRITICAL: Sync Research Error:', error, 'Failed to sync research.');
     }
 }

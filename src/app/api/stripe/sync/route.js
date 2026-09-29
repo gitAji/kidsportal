@@ -4,6 +4,7 @@ import { getStripe } from '@/lib/stripe';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
 import { getVerifiedUid } from '@/lib/verifyAuth';
+import { safeErrorResponse } from '@/lib/apiError';
 
 export async function POST(request) {
     try {
@@ -91,7 +92,6 @@ export async function POST(request) {
 
         return NextResponse.json({ success: true, subData });
     } catch (error) {
-        console.error("Sync error:", error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('Sync error:', error, 'Failed to sync subscription.');
     }
 }
