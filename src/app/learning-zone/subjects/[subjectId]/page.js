@@ -3,25 +3,14 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../data/db.json';
 import SkeletonLoader from '../../../components/ui/SkeletonLoader';
-import { FaLock, FaStar, FaTrophy, FaCheckCircle, FaUnlockAlt, FaLanguage, FaRandom, FaCode, FaArrowRight, FaCalculator, FaLeaf, FaBook } from 'react-icons/fa';
+import { FaLock, FaStar, FaCheckCircle, FaUnlockAlt, FaLanguage, FaRandom, FaCode, FaArrowRight, FaCalculator, FaLeaf, FaBook } from 'react-icons/fa';
 import { useChild } from '../../../providers/ChildProvider';
 import { useLanguage } from '../../../providers/LanguageProvider';
 import MinimalBackButton from '../../../components/child/MinimalBackButton';
 import { loadStats } from '../../../utils/achievements';
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-
-// A small, deliberate set of clearly distinct, cheerful colors.
-// Red is intentionally left out here — it's reserved for "wrong answer"
-// feedback elsewhere in the app, so it shouldn't also mean "just a level".
-const colorPalette = [
-  "bg-[#FF9B9B] border-[#FF7272]",
-  "bg-[#72C6FF] border-[#40A5E5]",
-  "bg-[#72E5A8] border-[#4CC287]",
-  "bg-[#FFC972] border-[#E5A840]",
-  "bg-[#C48CFF] border-[#A05CFF]",
-  "bg-[#8CEFFF] border-[#5CCEE5]",
-];
+import { SUBJECT_STYLE_MAP, SUBJECT_ICON_MAP } from '../../../utils/subjectStyles';
 
 // Friendly display names for subjectId prefixes (e.g. "math-3" -> "Math"),
 // so kids never see a raw internal ID like "MATH-3" in the UI.
@@ -114,11 +103,20 @@ export default function SubjectLevelsPage() {
   const [loading, setLoading] = useState(true);
   const [alertMessage, setAlertMessage] = useState(null);
   const [childStats, setChildStats] = useState({});
+  const [generatingMore, setGeneratingMore] = useState(false);
+  const [generateError, setGenerateError] = useState(null);
   const router = useRouter();
   const params = useParams();
   const { subjectId } = params;
   const [greeting, setGreeting] = useState(null);
   const [timeStatus, setTimeStatus] = useState(null);
+
+  // Same color/icon identity this subject has on the Learning Zone hub,
+  // so its levels here don't cycle through every subject's color at
+  // random — every level card in this subject stays that one color.
+  const subjectDisplayName = getSubjectDisplayName(subjectId);
+  const subjectStyle = SUBJECT_STYLE_MAP[subjectDisplayName] || SUBJECT_STYLE_MAP.default;
+  const SubjectIcon = SUBJECT_ICON_MAP[subjectDisplayName] || SUBJECT_ICON_MAP.default;
 
   // Screen-time limits: checked here (before a new level can be started),
   // never inside the task page itself, so a limit hit mid-lesson doesn't
@@ -327,6 +325,34 @@ export default function SubjectLevelsPage() {
     return <TimeLimitBlockedScreen status={timeStatus} />;
   }
 
+  // Once every existing level is done, generate a brand-new one on demand
+  // (via Gemini, persisted to Firestore) so there's always real new
+  // curriculum to reach for instead of just a shuffle of old content.
+  const handleGenerateMore = async () => {
+    if (generatingMore || !childUser?.gradeId) return;
+    setGeneratingMore(true);
+    setGenerateError(null);
+    try {
+      const res = await fetch('/api/generate-level', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ gradeId: childUser.gradeId, subjectId }),
+      });
+      if (!res.ok) throw new Error('Generation failed');
+      const newLevel = await res.json();
+      setLevels(prev => [...prev, newLevel]);
+      setReplayMode(false);
+      setGreeting(`Hoot hoot! 🦉 A brand new level just landed: "${newLevel.levelName}"!`);
+      setTimeout(() => setGreeting(null), 8500);
+    } catch (err) {
+      console.error('Failed to generate more curriculum', err);
+      setGenerateError("Couldn't create a new level right now — try again in a bit!");
+      setTimeout(() => setGenerateError(null), 4000);
+    } finally {
+      setGeneratingMore(false);
+    }
+  };
+
   const handleLevelClick = (level) => {
     if (level.overrideIsLocked || level.isLocked || level.requiresPreviousLevel) {
       const msg = level.lockMessage || t('locked');
@@ -352,10 +378,6 @@ export default function SubjectLevelsPage() {
 
   return (
     <div className="flex flex-col p-2 sm:p-4 relative font-sans">
-      {/* Background Decor */}
-      <div className="absolute top-20 right-20 text-yellow-400 opacity-20 text-9xl transform rotate-12 pointer-events-none"><FaTrophy /></div>
-      <div className="absolute bottom-10 left-10 text-pink-400 opacity-20 text-8xl transform -rotate-12 pointer-events-none"><FaStar /></div>
-
       <MinimalBackButton />
 
       <AnimatePresence>
@@ -450,11 +472,24 @@ export default function SubjectLevelsPage() {
               <div>
                 <p className="font-black text-slate-800 text-lg leading-tight">You finished every level!</p>
                 <p className="text-sm font-medium text-slate-500">
-                  {replayMode ? 'Replay Round: levels are shuffled for fun practice.' : 'Play a Replay Round to practice them again in a new order.'}
+                  {replayMode ? 'Replay Round: levels are shuffled for fun practice.' : 'Get a brand new level, or play a Replay Round to practice these again.'}
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-2 shrink-0 flex-wrap justify-center">
+              <button
+                onClick={handleGenerateMore}
+                disabled={generatingMore}
+                className="flex items-center gap-2 px-5 py-2.5 rounded-2xl font-black text-sm shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] bg-gradient-to-r from-emerald-400 to-teal-500 text-white disabled:opacity-60 disabled:hover:scale-100"
+              >
+                {generatingMore ? (
+                  <>
+                    <FaStar className="animate-spin" /> Creating your next level...
+                  </>
+                ) : (
+                  <>✨ Get More Levels!</>
+                )}
+              </button>
               {replayMode && (
                 <button
                   onClick={() => setReplaySeed(s => s + 1)}
@@ -467,12 +502,15 @@ export default function SubjectLevelsPage() {
                 onClick={() => setReplayMode(prev => !prev)}
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl font-black text-sm shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] ${replayMode
                   ? 'bg-slate-800 text-white'
-                  : 'bg-gradient-to-r from-amber-400 to-orange-500 text-white'
+                  : 'bg-white border-2 border-amber-300 text-amber-600'
                   }`}
               >
                 <FaRandom /> {replayMode ? 'Back to Normal Order' : 'Start Replay Round'}
               </button>
             </div>
+            {generateError && (
+              <p className="w-full text-center text-sm font-bold text-red-500 mt-2">{generateError}</p>
+            )}
           </div>
         </motion.div>
       )}
@@ -496,8 +534,10 @@ export default function SubjectLevelsPage() {
               {moduleLevels.map((level, index) => {
                 // If it's locked by previous progression OR hard-locked in DB
                 const isLocked = level.overrideIsLocked || level.isLocked;
-                const colorClass = colorPalette[index % colorPalette.length];
-                const cardBg = isLocked ? "bg-slate-300 border-slate-400" : colorClass;
+                // Every level in this subject shares the subject's own
+                // color (matching its tile on the Learning Zone hub)
+                // instead of cycling through every subject's color.
+                const cardBg = isLocked ? "bg-slate-300 border-slate-400" : `${subjectStyle.bg} ${subjectStyle.border}`;
 
                 const totalTasks = level.totalTasks;
                 const completedCount = level.completedCount;
@@ -511,6 +551,14 @@ export default function SubjectLevelsPage() {
                     whileHover={!isLocked ? "hover" : { scale: 1.02 }}
                     whileTap="tap"
                   >
+                    {/* Same corner blur-ball decoration as this subject's tile on the hub */}
+                    {!isLocked && (
+                      <>
+                        <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl pointer-events-none" />
+                        <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/5 rounded-full blur-xl pointer-events-none" />
+                      </>
+                    )}
+
                     {!isLocked && !level.isCompleted && (
                       <div className="absolute -top-10 -right-10 text-white opacity-20 transform rotate-45 group-hover:rotate-90 transition-transform duration-700 ease-in-out">
                         <FaStar size={120} />
@@ -544,8 +592,9 @@ export default function SubjectLevelsPage() {
                       </motion.div>
                     )}
 
-                    <div className={`w-20 h-20 rounded-3xl mb-6 shadow-inner flex items-center justify-center text-4xl ${isLocked ? 'bg-slate-400 text-slate-200' : 'bg-white/20 text-white group-hover:rotate-12 transition-transform duration-300'}`}>
-                      {isLocked ? <FaLock /> : (level.badgeEmoji || <FaStar />)}
+                    {/* White circle + subject-colored icon, matching the icon badge on this subject's hub tile */}
+                    <div className={`w-20 h-20 rounded-full mb-6 shadow-inner flex items-center justify-center text-4xl relative z-10 ${isLocked ? 'bg-slate-400 text-slate-200' : `bg-white ${subjectStyle.icon} group-hover:rotate-12 transition-transform duration-300`}`}>
+                      {isLocked ? <FaLock /> : (level.badgeEmoji || <SubjectIcon />)}
                     </div>
 
                     <div>
