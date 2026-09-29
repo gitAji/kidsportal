@@ -62,7 +62,7 @@ export default function TapMatchGame({ game, onFinish }) {
   return (
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-8 pt-20">
       <div className="w-full max-w-2xl">
-        <p className="text-center text-sm font-black text-slate-400 uppercase tracking-widest mb-2">
+        <p className="text-center text-sm font-black text-slate-400 uppercase mb-2">
           {game.title} — {roundIndex + 1} / {rounds.length}
         </p>
         <p className="text-center text-slate-500 font-bold mb-8">{instruction}</p>

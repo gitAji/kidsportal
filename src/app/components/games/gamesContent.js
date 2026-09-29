@@ -27,6 +27,15 @@
 //   - grade-5 "The Circulatory System"            (The Circulatory System)
 //   - grade-6 "Parts of a Plant Cell"              (Cells & Organisation)
 //   - grade-7 "Parts of an Ecosystem"              (Ecosystems & Interdependence)
+//
+// A further round of hand-crafted Tamil games, each grounded in that
+// grade's real Tamil lesson content rather than a repeat of the
+// generated quiz-bank games above:
+//   - grade-1 "எண்கள் (Tamil Numbers)"        memory-pairs  (Numbers 1–10 in Tamil)
+//   - grade-2 "உயிர்மெய் எழுத்து"              memory-pairs  (Compound Letters)
+//   - grade-3 "திசைகள் (Directions)"          tap-match     (Directions & Locations)
+//   - grade-4 "பழமொழி (Proverbs)"             tap-match     (Proverbs (Pazhamozhi))
+//   - grade-5 "திருக்குறள் (Thirukkural)"      tap-match     (Thirukkural: Aram Pal)
 import { GENERATED_GAMES_BY_GRADE } from './gamesContentGenerated';
 
 const HAND_CRAFTED_GAMES_BY_GRADE = {
@@ -190,6 +199,50 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
         ],
       },
     },
+    {
+      id: 'tamil-numbers-pairs',
+      subjectId: 'tamil-1',
+      subjectLabel: 'Tamil',
+      title: 'எண்கள் (Tamil Numbers)',
+      description: 'Match each Tamil number word to its digit!',
+      engine: 'memory-pairs',
+      icon: '🔢',
+      color: 'from-fuchsia-400 to-pink-500',
+      data: {
+        instruction: 'Flip two cards to find a Tamil number word and its matching digit!',
+        pairs: [
+          { id: 'onru', front: 'ஒன்று', match: '1' },
+          { id: 'irandu', front: 'இரண்டு', match: '2' },
+          { id: 'moondru', front: 'மூன்று', match: '3' },
+          { id: 'naangu', front: 'நான்கு', match: '4' },
+          { id: 'ainthu', front: 'ஐந்து', match: '5' },
+          { id: 'aaru', front: 'ஆறு', match: '6' },
+        ],
+      },
+    },
+  ],
+  'grade-2': [
+    {
+      id: 'compound-letters-pairs',
+      subjectId: 'tamil-2',
+      subjectLabel: 'Tamil',
+      title: 'உயிர்மெய் எழுத்து (Compound Letters)',
+      description: 'Match கா, கி, கு... to the vowel sign that builds them!',
+      engine: 'memory-pairs',
+      icon: '✒️',
+      color: 'from-violet-400 to-purple-500',
+      data: {
+        instruction: 'Flip two cards to match a compound letter with how it\'s built!',
+        pairs: [
+          { id: 'kaa', front: 'க + ா', match: 'கா' },
+          { id: 'ki', front: 'க + ி', match: 'கி' },
+          { id: 'ku', front: 'க + ு', match: 'கு' },
+          { id: 'ke', front: 'க + ே', match: 'கே' },
+          { id: 'kai', front: 'க + ை', match: 'கை' },
+          { id: 'ko', front: 'க + ொ', match: 'கொ' },
+        ],
+      },
+    },
   ],
   'grade-7': [
     {
@@ -249,6 +302,26 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
         ],
       },
     },
+    {
+      id: 'tamil-directions-match',
+      subjectId: 'tamil-3',
+      subjectLabel: 'Tamil',
+      title: 'திசைகள் (Directions)',
+      description: "Quick-fire questions on Tamil direction words!",
+      engine: 'tap-match',
+      icon: '🧭',
+      color: 'from-cyan-400 to-sky-500',
+      data: {
+        instruction: 'Tap the correct meaning for each Tamil direction word!',
+        rounds: [
+          { prompt: '"வடக்கு" means:', options: ['North', 'South', 'West'], correctIndex: 0 },
+          { prompt: '"தெற்கு" means:', options: ['East', 'South', 'West'], correctIndex: 1 },
+          { prompt: '"கிழக்கு" (where the sun rises) means:', options: ['East', 'West', 'North'], correctIndex: 0 },
+          { prompt: '"மேற்கு" means:', options: ['West', 'East', 'South'], correctIndex: 0 },
+          { prompt: 'Which word means "above / up"?', options: ['கீழே', 'மேலே', 'பக்கத்தில்'], correctIndex: 1 },
+        ],
+      },
+    },
   ],
   'grade-4': [
     {
@@ -283,6 +356,46 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
         ],
       },
     },
+    {
+      id: 'tamil-proverbs-match',
+      subjectId: 'tamil-4',
+      subjectLabel: 'Tamil',
+      title: 'பழமொழி (Proverbs)',
+      description: 'Match each Tamil proverb to what it really means!',
+      engine: 'tap-match',
+      icon: '📜',
+      color: 'from-amber-400 to-yellow-500',
+      data: {
+        instruction: 'Tap the correct meaning for each Tamil proverb!',
+        rounds: [
+          {
+            prompt: '"அளவுக்கு மிஞ்சினால் அமிர்தமும் நஞ்சு" means:',
+            options: ['Even nectar becomes poison in excess', 'Sweet things are always good for you', 'Never drink anything sweet'],
+            correctIndex: 0,
+          },
+          {
+            prompt: '"கற்றது கைமண் அளவு, கல்லாதது உலகளவு" means:',
+            options: ['Sand is more valuable than gold', 'What you\'ve learned is tiny compared to all there is to learn', 'The whole world is made of sand'],
+            correctIndex: 1,
+          },
+          {
+            prompt: '"ஆடிப் பாடிக் கற்றால் மறவாது" means:',
+            options: ['Only silent study helps you learn', 'Singing matters more than reading', 'What you learn joyfully, through play and song, is never forgotten'],
+            correctIndex: 2,
+          },
+          {
+            prompt: '"ஒற்றுமையே பலம்" means:',
+            options: ['Strength beats unity', 'Working alone is best', 'Unity is strength'],
+            correctIndex: 2,
+          },
+          {
+            prompt: '"எட்டிப் பாய்ந்தாலும் புலி பாயும் அளவே பாயும்" means:',
+            options: ['Even stretching to leap, everyone can jump as far as a tiger', 'Tigers cannot jump at all', 'However far it stretches, a tiger only leaps as far as a tiger truly can'],
+            correctIndex: 2,
+          },
+        ],
+      },
+    },
   ],
   'grade-5': [
     {
@@ -309,6 +422,26 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
           { id: 'artery', x: 75, y: 24, label: 'Artery' },
           { id: 'vein', x: 75, y: 42, label: 'Vein' },
           { id: 'capillary', x: 94, y: 22, label: 'Capillary' },
+        ],
+      },
+    },
+    {
+      id: 'tamil-thirukkural-facts',
+      subjectId: 'tamil-5',
+      subjectLabel: 'Tamil',
+      title: 'திருக்குறள் (Thirukkural)',
+      description: 'Quick-fire facts about the Thirukkural and Aram Pal!',
+      engine: 'tap-match',
+      icon: '📖',
+      color: 'from-teal-400 to-cyan-600',
+      data: {
+        instruction: 'Tap the correct answer for each question!',
+        rounds: [
+          { prompt: 'Who composed the Thirukkural?', options: ['Thiruvalluvar', 'Kambar', 'Bharathiyar'], correctIndex: 0 },
+          { prompt: 'How many couplets (kurals) does the Thirukkural contain?', options: ['100', '1,330', '500'], correctIndex: 1 },
+          { prompt: 'In the Thirukkural\'s three Pals, what does "Aram" (அறம்) deal with?', options: ['Wealth & governance', 'Love', 'Virtue / ethics'], correctIndex: 2 },
+          { prompt: 'Which Pal deals with wealth and governance?', options: ['Porul (பொருள்)', 'Aram (அறம்)', 'Inbam (இன்பம்)'], correctIndex: 0 },
+          { prompt: 'Roughly how long ago was the Thirukkural composed?', options: ['About 2,000 years ago', 'Last year', 'About 200 years ago'], correctIndex: 0 },
         ],
       },
     },
