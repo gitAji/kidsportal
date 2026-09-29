@@ -85,7 +85,7 @@ export default function LearningZonePage() {
           </div>
           <div className="text-center sm:text-left flex-grow">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-yellow-100 text-yellow-700 rounded-full font-black text-sm uppercase tracking-widest mb-3 border border-yellow-200 shadow-sm">
-               <FaStar /> Grade {childUser.gradeId} Explorer
+               <FaStar /> {childUser.grade} Explorer
             </div>
             <h1 className="text-3xl sm:text-5xl font-black text-slate-800 tracking-tight leading-tight mb-2">
               Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500">{childUser.name}</span>!
