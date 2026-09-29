@@ -2977,6 +2977,405 @@
                 }
               ],
               "moduleName": "Module 4: Data & Problem Solving"
+            },
+            {
+              "levelId": "math-1-level-11",
+              "levelName": "Counting & Number Bonds to 20",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-1-level-11-lesson",
+                  "taskName": "Lesson: Counting & Number Bonds to 20",
+                  "type": "lesson",
+                  "content": "Number bonds are pairs of numbers that add together to make another number. For example, the number bonds to 10 include 6 + 4, 7 + 3, and 8 + 2. Knowing your number bonds to 20 by heart makes addition and subtraction much faster, because you can spot them inside bigger calculations, like knowing 6 + 4 = 10 helps you work out 16 + 4 = 20. Practise counting on and back to 20, and learn the pairs that make 10 and 20.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-1-level-11-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-1-level-11-quiz-q1",
+                      "questionText": "Which pair of numbers makes a bond to 10?",
+                      "correctAnswer": "6 + 4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "6 + 4",
+                        "6 + 5",
+                        "6 + 3",
+                        "6 + 2"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-11-quiz-q2",
+                      "questionText": "What number bonds with 8 to make 10?",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-11-quiz-q3",
+                      "questionText": "What is the missing number? 13 + ___ = 20",
+                      "correctAnswer": "7",
+                      "type": "multiple-choice",
+                      "options": [
+                        "6",
+                        "7",
+                        "8",
+                        "9"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-11-quiz-q4",
+                      "questionText": "What number bonds with 12 to make 20?",
+                      "correctAnswer": "8",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-11-quiz-q5",
+                      "questionText": "Which pair makes a bond to 20?",
+                      "correctAnswer": "15 + 5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "15 + 4",
+                        "15 + 5",
+                        "15 + 6",
+                        "15 + 7"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-1-level-11-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-1-level-11-exam-q1",
+                      "questionText": "What number bonds with 9 to make 10?",
+                      "correctAnswer": "1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-11-exam-q2",
+                      "questionText": "What is the missing number? 14 + ___ = 20",
+                      "correctAnswer": "6",
+                      "type": "multiple-choice",
+                      "options": [
+                        "5",
+                        "6",
+                        "7",
+                        "8"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-11-exam-q3",
+                      "questionText": "What number bonds with 17 to make 20?",
+                      "correctAnswer": "3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-11-exam-q4",
+                      "questionText": "Which pair of numbers makes a bond to 10?",
+                      "correctAnswer": "7 + 3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "7 + 2",
+                        "7 + 3",
+                        "7 + 4",
+                        "7 + 5"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-11-exam-q5",
+                      "questionText": "What number bonds with 6 to make 20?",
+                      "correctAnswer": "14",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-11-exam-q6",
+                      "questionText": "What is the missing number? 5 + ___ = 10",
+                      "correctAnswer": "5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4",
+                        "5",
+                        "6",
+                        "3"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Building Number Sense"
+            },
+            {
+              "levelId": "math-1-level-12",
+              "levelName": "Doubling, Halving & Sharing",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-1-level-12-lesson",
+                  "taskName": "Lesson: Doubling, Halving & Sharing",
+                  "type": "lesson",
+                  "content": "To double a number, you add it to itself - double 4 is 4 + 4 = 8. To halve a number, you split it into two equal groups - half of 8 is 4, because 4 + 4 = 8. Sharing is closely linked to halving: if you share 8 sweets between 2 friends equally, each friend gets 4. Doubling and halving are opposites of each other, and they are the first step towards learning multiplication and division.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-1-level-12-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-1-level-12-quiz-q1",
+                      "questionText": "What is double 5?",
+                      "correctAnswer": "10",
+                      "type": "multiple-choice",
+                      "options": [
+                        "10",
+                        "8",
+                        "15",
+                        "9"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-12-quiz-q2",
+                      "questionText": "What is half of 12?",
+                      "correctAnswer": "6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-12-quiz-q3",
+                      "questionText": "What is double 7?",
+                      "correctAnswer": "14",
+                      "type": "multiple-choice",
+                      "options": [
+                        "12",
+                        "14",
+                        "16",
+                        "10"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-12-quiz-q4",
+                      "questionText": "Share 10 apples equally between 2 baskets. How many in each?",
+                      "correctAnswer": "5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-12-quiz-q5",
+                      "questionText": "What is half of 16?",
+                      "correctAnswer": "8",
+                      "type": "multiple-choice",
+                      "options": [
+                        "6",
+                        "7",
+                        "8",
+                        "9"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-1-level-12-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-1-level-12-exam-q1",
+                      "questionText": "What is double 9?",
+                      "correctAnswer": "18",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-12-exam-q2",
+                      "questionText": "What is half of 20?",
+                      "correctAnswer": "10",
+                      "type": "multiple-choice",
+                      "options": [
+                        "8",
+                        "9",
+                        "10",
+                        "12"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-12-exam-q3",
+                      "questionText": "Share 12 pencils equally between 3 pots. How many in each?",
+                      "correctAnswer": "4",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-12-exam-q4",
+                      "questionText": "What is double 6?",
+                      "correctAnswer": "12",
+                      "type": "multiple-choice",
+                      "options": [
+                        "10",
+                        "11",
+                        "12",
+                        "13"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-12-exam-q5",
+                      "questionText": "What is half of 14?",
+                      "correctAnswer": "7",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-12-exam-q6",
+                      "questionText": "Share 18 stickers equally between 2 friends. How many each?",
+                      "correctAnswer": "9",
+                      "type": "multiple-choice",
+                      "options": [
+                        "8",
+                        "9",
+                        "10",
+                        "6"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Building Number Sense"
+            },
+            {
+              "levelId": "math-1-level-13",
+              "levelName": "Comparing & Ordering Numbers",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-1-level-13-lesson",
+                  "taskName": "Lesson: Comparing & Ordering Numbers",
+                  "type": "lesson",
+                  "content": "We use the symbols < (less than), > (greater than) and = (equal to) to compare numbers. For example, 34 > 29 because 34 is bigger than 29, and 15 < 18 because 15 is smaller than 18. To order a list of numbers, we look at the tens digit first, then the ones digit, to work out which is smallest and which is biggest. Ordering numbers from smallest to biggest is called ascending order, and biggest to smallest is called descending order.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-1-level-13-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-1-level-13-quiz-q1",
+                      "questionText": "Which symbol makes this true? 42 ___ 39",
+                      "correctAnswer": ">",
+                      "type": "multiple-choice",
+                      "options": [
+                        ">",
+                        "<",
+                        "="
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-13-quiz-q2",
+                      "questionText": "Which is bigger, 56 or 65?",
+                      "correctAnswer": "65",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-13-quiz-q3",
+                      "questionText": "Which symbol makes this true? 23 ___ 23",
+                      "correctAnswer": "=",
+                      "type": "multiple-choice",
+                      "options": [
+                        ">",
+                        "<",
+                        "="
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-13-quiz-q4",
+                      "questionText": "Put these in order, smallest first: 18, 5, 12. What is the smallest?",
+                      "correctAnswer": "5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-13-quiz-q5",
+                      "questionText": "Which symbol makes this true? 17 ___ 71",
+                      "correctAnswer": "<",
+                      "type": "multiple-choice",
+                      "options": [
+                        ">",
+                        "<",
+                        "="
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-1-level-13-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-1-level-13-exam-q1",
+                      "questionText": "Which is smaller, 48 or 84?",
+                      "correctAnswer": "48",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-13-exam-q2",
+                      "questionText": "Which symbol makes this true? 60 ___ 59",
+                      "correctAnswer": ">",
+                      "type": "multiple-choice",
+                      "options": [
+                        ">",
+                        "<",
+                        "="
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-13-exam-q3",
+                      "questionText": "Put these in order, biggest first: 30, 45, 22. What is the biggest?",
+                      "correctAnswer": "45",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-13-exam-q4",
+                      "questionText": "Which symbol makes this true? 9 ___ 90",
+                      "correctAnswer": "<",
+                      "type": "multiple-choice",
+                      "options": [
+                        ">",
+                        "<",
+                        "="
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-13-exam-q5",
+                      "questionText": "Which is bigger, 77 or 68?",
+                      "correctAnswer": "77",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-13-exam-q6",
+                      "questionText": "Which symbol makes this true? 100 ___ 99",
+                      "correctAnswer": ">",
+                      "type": "multiple-choice",
+                      "options": [
+                        ">",
+                        "<",
+                        "="
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Building Number Sense"
             }
           ]
         },
@@ -10261,6 +10660,406 @@
                 }
               ],
               "moduleName": "Module 4: Data & Problem Solving"
+            },
+            {
+              "levelId": "math-2-level-11",
+              "levelName": "Multiplication & Division Facts: 2, 5 & 10",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-2-level-11-lesson",
+                  "taskName": "Lesson: Multiplication & Division Facts: 2, 5 & 10",
+                  "type": "lesson",
+                  "content": "Knowing the 2, 5 and 10 times tables really well helps with almost every other maths topic. Multiples of 2 are always even numbers (2, 4, 6, 8...), multiples of 5 always end in 0 or 5, and multiples of 10 always end in 0. Division is the opposite of multiplication, so if 5 x 4 = 20, then 20 / 5 = 4 and 20 / 4 = 5. Practise these facts until you can recall them instantly.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-2-level-11-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-2-level-11-quiz-q1",
+                      "questionText": "What is 5 x 6?",
+                      "correctAnswer": "30",
+                      "type": "multiple-choice",
+                      "options": [
+                        "25",
+                        "30",
+                        "35",
+                        "20"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-11-quiz-q2",
+                      "questionText": "What is 10 x 7?",
+                      "correctAnswer": "70",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-11-quiz-q3",
+                      "questionText": "What is 20 / 2?",
+                      "correctAnswer": "10",
+                      "type": "multiple-choice",
+                      "options": [
+                        "8",
+                        "9",
+                        "10",
+                        "12"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-11-quiz-q4",
+                      "questionText": "What is 8 x 2?",
+                      "correctAnswer": "16",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-11-quiz-q5",
+                      "questionText": "What is 50 / 5?",
+                      "correctAnswer": "10",
+                      "type": "multiple-choice",
+                      "options": [
+                        "5",
+                        "10",
+                        "15",
+                        "20"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-2-level-11-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-2-level-11-exam-q1",
+                      "questionText": "What is 5 x 9?",
+                      "correctAnswer": "45",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-11-exam-q2",
+                      "questionText": "What is 100 / 10?",
+                      "correctAnswer": "10",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1",
+                        "10",
+                        "100",
+                        "20"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-11-exam-q3",
+                      "questionText": "What is 2 x 12?",
+                      "correctAnswer": "24",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-11-exam-q4",
+                      "questionText": "What is 40 / 5?",
+                      "correctAnswer": "8",
+                      "type": "multiple-choice",
+                      "options": [
+                        "6",
+                        "7",
+                        "8",
+                        "9"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-11-exam-q5",
+                      "questionText": "What is 10 x 9?",
+                      "correctAnswer": "90",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-11-exam-q6",
+                      "questionText": "What is 18 / 2?",
+                      "correctAnswer": "9",
+                      "type": "multiple-choice",
+                      "options": [
+                        "7",
+                        "8",
+                        "9",
+                        "10"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: More Number & Fractions"
+            },
+            {
+              "levelId": "math-2-level-12",
+              "levelName": "Fractions of Shapes & Amounts",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-2-level-12-lesson",
+                  "taskName": "Lesson: Fractions of Shapes & Amounts",
+                  "type": "lesson",
+                  "content": "A fraction shows equal parts of a whole. If a shape is split into 4 equal parts and 1 part is shaded, that's 1/4 shaded. To find a fraction of an amount, divide by the bottom number (denominator) and multiply by the top number (numerator) - to find 1/2 of 10, divide 10 by 2 to get 5. To find 3/4 of 8, first find 1/4 (8 / 4 = 2), then multiply by 3 (2 x 3 = 6).",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-2-level-12-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-2-level-12-quiz-q1",
+                      "questionText": "What fraction is shaded if 2 out of 4 equal parts are coloured?",
+                      "correctAnswer": "1/2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1/4",
+                        "1/2",
+                        "3/4",
+                        "2/2"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-12-quiz-q2",
+                      "questionText": "What is 1/2 of 12?",
+                      "correctAnswer": "6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-12-quiz-q3",
+                      "questionText": "What is 1/4 of 20?",
+                      "correctAnswer": "5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4",
+                        "5",
+                        "6",
+                        "10"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-12-quiz-q4",
+                      "questionText": "What is 1/3 of 9?",
+                      "correctAnswer": "3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-12-quiz-q5",
+                      "questionText": "What is 3/4 of 8?",
+                      "correctAnswer": "6",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4",
+                        "5",
+                        "6",
+                        "7"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-2-level-12-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-2-level-12-exam-q1",
+                      "questionText": "What is 1/2 of 16?",
+                      "correctAnswer": "8",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-12-exam-q2",
+                      "questionText": "What is 1/5 of 15?",
+                      "correctAnswer": "3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-12-exam-q3",
+                      "questionText": "What is 2/3 of 9?",
+                      "correctAnswer": "6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-12-exam-q4",
+                      "questionText": "What fraction is shaded if 3 out of 4 equal parts are coloured?",
+                      "correctAnswer": "3/4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1/4",
+                        "1/2",
+                        "3/4",
+                        "4/4"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-12-exam-q5",
+                      "questionText": "What is 1/4 of 24?",
+                      "correctAnswer": "6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-12-exam-q6",
+                      "questionText": "What is 3/5 of 10?",
+                      "correctAnswer": "6",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4",
+                        "5",
+                        "6",
+                        "7"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: More Number & Fractions"
+            },
+            {
+              "levelId": "math-2-level-13",
+              "levelName": "Comparing Mass & Capacity",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-2-level-13-lesson",
+                  "taskName": "Lesson: Comparing Mass & Capacity",
+                  "type": "lesson",
+                  "content": "Mass is how heavy something is, measured in grams (g) and kilograms (kg) - 1 kg = 1000 g. Capacity is how much liquid a container can hold, measured in millilitres (ml) and litres (l) - 1 l = 1000 ml. We can compare masses and capacities using scales and measuring jugs, and use the words heavier, lighter, more and less to describe the difference between two objects or containers.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-2-level-13-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-2-level-13-quiz-q1",
+                      "questionText": "How many grams are in 1 kilogram?",
+                      "correctAnswer": "1000",
+                      "type": "multiple-choice",
+                      "options": [
+                        "100",
+                        "1000",
+                        "10",
+                        "10000"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-13-quiz-q2",
+                      "questionText": "How many millilitres are in 1 litre?",
+                      "correctAnswer": "1000",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-13-quiz-q3",
+                      "questionText": "Which is heavier, 2 kg of apples or 1500 g of apples?",
+                      "correctAnswer": "2 kg",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2 kg",
+                        "1500 g",
+                        "They are equal"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-13-quiz-q4",
+                      "questionText": "How many grams is half a kilogram?",
+                      "correctAnswer": "500",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-13-quiz-q5",
+                      "questionText": "Which holds more, a 2-litre bottle or a 500 ml cup?",
+                      "correctAnswer": "2-litre bottle",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2-litre bottle",
+                        "500 ml cup",
+                        "They are equal"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-2-level-13-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-2-level-13-exam-q1",
+                      "questionText": "How many millilitres is half a litre?",
+                      "correctAnswer": "500",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-13-exam-q2",
+                      "questionText": "Which is lighter, 750 g or 1 kg?",
+                      "correctAnswer": "750 g",
+                      "type": "multiple-choice",
+                      "options": [
+                        "750 g",
+                        "1 kg",
+                        "They are equal"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-13-exam-q3",
+                      "questionText": "How many grams are in 3 kilograms?",
+                      "correctAnswer": "3000",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-13-exam-q4",
+                      "questionText": "Which holds less, a 1-litre jug or a 1500 ml jug?",
+                      "correctAnswer": "1-litre jug",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1-litre jug",
+                        "1500 ml jug",
+                        "They are equal"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-13-exam-q5",
+                      "questionText": "How many millilitres are in 2 litres?",
+                      "correctAnswer": "2000",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-13-exam-q6",
+                      "questionText": "Which is heavier, 1200 g or 1 kg?",
+                      "correctAnswer": "1200 g",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1200 g",
+                        "1 kg",
+                        "They are equal"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: More Number & Fractions"
             }
           ]
         },
@@ -17539,6 +18338,411 @@
                 }
               ],
               "moduleName": "Module 4: Data & Problem Solving"
+            },
+            {
+              "levelId": "math-3-level-11",
+              "levelName": "Formal Column Addition & Subtraction",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-3-level-11-lesson",
+                  "taskName": "Lesson: Formal Column Addition & Subtraction",
+                  "type": "lesson",
+                  "content": "Column addition and subtraction line numbers up by place value - ones under ones, tens under tens, hundreds under hundreds - so we can add or subtract each column in turn. In addition, if a column adds up to 10 or more, we carry the extra ten into the next column. In subtraction, if the top digit is smaller than the bottom digit, we exchange (borrow) 10 from the column to its left. Setting work out neatly in columns helps avoid mistakes with bigger numbers.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-3-level-11-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-3-level-11-quiz-q1",
+                      "questionText": "What is 347 + 256?",
+                      "correctAnswer": "603",
+                      "type": "multiple-choice",
+                      "options": [
+                        "503",
+                        "603",
+                        "613",
+                        "593"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-11-quiz-q2",
+                      "questionText": "What is 482 - 165?",
+                      "correctAnswer": "317",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-11-quiz-q3",
+                      "questionText": "What is 128 + 394?",
+                      "correctAnswer": "522",
+                      "type": "multiple-choice",
+                      "options": [
+                        "512",
+                        "522",
+                        "532",
+                        "502"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-11-quiz-q4",
+                      "questionText": "What is 700 - 348?",
+                      "correctAnswer": "352",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-11-quiz-q5",
+                      "questionText": "What is 256 + 178?",
+                      "correctAnswer": "434",
+                      "type": "multiple-choice",
+                      "options": [
+                        "424",
+                        "434",
+                        "444",
+                        "414"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-3-level-11-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-3-level-11-exam-q1",
+                      "questionText": "What is 563 + 279?",
+                      "correctAnswer": "842",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-11-exam-q2",
+                      "questionText": "What is 900 - 456?",
+                      "correctAnswer": "444",
+                      "type": "multiple-choice",
+                      "options": [
+                        "434",
+                        "444",
+                        "454",
+                        "464"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-11-exam-q3",
+                      "questionText": "What is 738 - 259?",
+                      "correctAnswer": "479",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-11-exam-q4",
+                      "questionText": "What is 415 + 386?",
+                      "correctAnswer": "801",
+                      "type": "multiple-choice",
+                      "options": [
+                        "791",
+                        "801",
+                        "811",
+                        "781"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-11-exam-q5",
+                      "questionText": "What is 604 - 275?",
+                      "correctAnswer": "329",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-11-exam-q6",
+                      "questionText": "What is 349 + 267?",
+                      "correctAnswer": "616",
+                      "type": "multiple-choice",
+                      "options": [
+                        "606",
+                        "616",
+                        "626",
+                        "596"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Fractions & Written Methods"
+            },
+            {
+              "levelId": "math-3-level-12",
+              "levelName": "Adding & Subtracting Fractions",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-3-level-12-lesson",
+                  "taskName": "Lesson: Adding & Subtracting Fractions",
+                  "type": "lesson",
+                  "content": "When fractions have the same denominator (bottom number), you can add or subtract them by just adding or subtracting the numerators (top numbers) and keeping the denominator the same. For example, 2/5 + 1/5 = 3/5, and 4/7 - 2/7 = 2/7. If the answer's numerator becomes equal to or bigger than the denominator, you may need to simplify it - for example 4/4 = 1 whole.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-3-level-12-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-3-level-12-quiz-q1",
+                      "questionText": "What is 2/6 + 3/6?",
+                      "correctAnswer": "5/6",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4/6",
+                        "5/6",
+                        "6/6",
+                        "5/12"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-12-quiz-q2",
+                      "questionText": "What is 3/8 + 2/8? (write as a fraction, e.g. 5/8)",
+                      "correctAnswer": "5/8",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-12-quiz-q3",
+                      "questionText": "What is 5/7 - 2/7?",
+                      "correctAnswer": "3/7",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2/7",
+                        "3/7",
+                        "7/7",
+                        "3/14"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-12-quiz-q4",
+                      "questionText": "What is 4/9 + 3/9? (write as a fraction, e.g. 7/9)",
+                      "correctAnswer": "7/9",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-12-quiz-q5",
+                      "questionText": "What is 7/10 - 4/10?",
+                      "correctAnswer": "3/10",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2/10",
+                        "3/10",
+                        "4/10",
+                        "3/20"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-3-level-12-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-3-level-12-exam-q1",
+                      "questionText": "What is 1/5 + 2/5? (write as a fraction, e.g. 3/5)",
+                      "correctAnswer": "3/5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-12-exam-q2",
+                      "questionText": "What is 6/8 - 3/8?",
+                      "correctAnswer": "3/8",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2/8",
+                        "3/8",
+                        "4/8",
+                        "9/8"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-12-exam-q3",
+                      "questionText": "What is 2/6 + 3/6? (write as a fraction, e.g. 5/6)",
+                      "correctAnswer": "5/6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-12-exam-q4",
+                      "questionText": "What is 5/9 - 2/9?",
+                      "correctAnswer": "3/9",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2/9",
+                        "3/9",
+                        "4/9",
+                        "3/18"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-12-exam-q5",
+                      "questionText": "What is 3/7 + 3/7? (write as a fraction, e.g. 6/7)",
+                      "correctAnswer": "6/7",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-12-exam-q6",
+                      "questionText": "What is 4/5 - 1/5?",
+                      "correctAnswer": "3/5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2/5",
+                        "3/5",
+                        "4/5",
+                        "3/10"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Fractions & Written Methods"
+            },
+            {
+              "levelId": "math-3-level-13",
+              "levelName": "Telling Time: Digital & 24-Hour Clock",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-3-level-13-lesson",
+                  "taskName": "Lesson: Telling Time: Digital & 24-Hour Clock",
+                  "type": "lesson",
+                  "content": "Analogue clocks have hands, but digital clocks show time as numbers, like 3:45. The 24-hour clock counts all the way from 00:00 (midnight) to 23:59 (one minute before the next midnight), instead of starting again at 1 after 12 noon. To change a 12-hour PM time to 24-hour time, add 12 - so 2:00 pm becomes 14:00. Morning (am) times before noon stay the same in both systems.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-3-level-13-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-3-level-13-quiz-q1",
+                      "questionText": "What is 3:00 pm in 24-hour time?",
+                      "correctAnswer": "15:00",
+                      "type": "multiple-choice",
+                      "options": [
+                        "13:00",
+                        "15:00",
+                        "03:00",
+                        "17:00"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-13-quiz-q2",
+                      "questionText": "What is 9:00 am in 24-hour time?",
+                      "correctAnswer": "09:00",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-13-quiz-q3",
+                      "questionText": "What time is 18:00 in 12-hour time?",
+                      "correctAnswer": "6:00 pm",
+                      "type": "multiple-choice",
+                      "options": [
+                        "6:00 am",
+                        "6:00 pm",
+                        "8:00 pm",
+                        "8:00 am"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-13-quiz-q4",
+                      "questionText": "What is 7:00 pm in 24-hour time?",
+                      "correctAnswer": "19:00",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-13-quiz-q5",
+                      "questionText": "What time is 09:30 in 12-hour time?",
+                      "correctAnswer": "9:30 am",
+                      "type": "multiple-choice",
+                      "options": [
+                        "9:30 am",
+                        "9:30 pm",
+                        "7:30 am",
+                        "11:30 am"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-3-level-13-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-3-level-13-exam-q1",
+                      "questionText": "What is 11:00 pm in 24-hour time?",
+                      "correctAnswer": "23:00",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-13-exam-q2",
+                      "questionText": "What time is 20:00 in 12-hour time?",
+                      "correctAnswer": "8:00 pm",
+                      "type": "multiple-choice",
+                      "options": [
+                        "6:00 pm",
+                        "8:00 pm",
+                        "10:00 pm",
+                        "8:00 am"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-13-exam-q3",
+                      "questionText": "What is 5:00 pm in 24-hour time?",
+                      "correctAnswer": "17:00",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-13-exam-q4",
+                      "questionText": "What time is 00:00 in words?",
+                      "correctAnswer": "Midnight",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Midnight",
+                        "Midday",
+                        "1 o'clock",
+                        "Noon"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-13-exam-q5",
+                      "questionText": "What is 12:00 midday in 24-hour time?",
+                      "correctAnswer": "12:00",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-13-exam-q6",
+                      "questionText": "What time is 15:45 in 12-hour time?",
+                      "correctAnswer": "3:45 pm",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1:45 pm",
+                        "3:45 pm",
+                        "5:45 pm",
+                        "3:45 am"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Fractions & Written Methods"
             }
           ]
         },
@@ -24811,6 +26015,411 @@
                 }
               ],
               "moduleName": "Module 4: Data & Problem Solving"
+            },
+            {
+              "levelId": "math-4-level-11",
+              "levelName": "Multiplying & Dividing by 10, 100 & 1,000",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-4-level-11-lesson",
+                  "taskName": "Lesson: Multiplying & Dividing by 10, 100 & 1,000",
+                  "type": "lesson",
+                  "content": "When you multiply a number by 10, every digit moves one place to the left, which looks like adding a zero for whole numbers - 24 x 10 = 240. Multiplying by 100 moves digits two places left, and by 1,000 moves them three places left. Dividing works the opposite way: digits move to the right, so 240 / 10 = 24 and 2400 / 100 = 24. Remember, the digits move, not just the decimal point being 'added'.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-4-level-11-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-4-level-11-quiz-q1",
+                      "questionText": "What is 36 x 10?",
+                      "correctAnswer": "360",
+                      "type": "multiple-choice",
+                      "options": [
+                        "306",
+                        "360",
+                        "3600",
+                        "36"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-11-quiz-q2",
+                      "questionText": "What is 470 / 10?",
+                      "correctAnswer": "47",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-11-quiz-q3",
+                      "questionText": "What is 25 x 100?",
+                      "correctAnswer": "2500",
+                      "type": "multiple-choice",
+                      "options": [
+                        "250",
+                        "2500",
+                        "25000",
+                        "2050"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-11-quiz-q4",
+                      "questionText": "What is 6300 / 100?",
+                      "correctAnswer": "63",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-11-quiz-q5",
+                      "questionText": "What is 8 x 1000?",
+                      "correctAnswer": "8000",
+                      "type": "multiple-choice",
+                      "options": [
+                        "800",
+                        "8000",
+                        "80000",
+                        "8"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-4-level-11-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-4-level-11-exam-q1",
+                      "questionText": "What is 54 x 10?",
+                      "correctAnswer": "540",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-11-exam-q2",
+                      "questionText": "What is 900 / 10?",
+                      "correctAnswer": "90",
+                      "type": "multiple-choice",
+                      "options": [
+                        "9",
+                        "90",
+                        "900",
+                        "9000"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-11-exam-q3",
+                      "questionText": "What is 12 x 100?",
+                      "correctAnswer": "1200",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-11-exam-q4",
+                      "questionText": "What is 4500 / 100?",
+                      "correctAnswer": "45",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4.5",
+                        "45",
+                        "450",
+                        "4500"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-11-exam-q5",
+                      "questionText": "What is 7 x 1000?",
+                      "correctAnswer": "7000",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-11-exam-q6",
+                      "questionText": "What is 63000 / 1000?",
+                      "correctAnswer": "63",
+                      "type": "multiple-choice",
+                      "options": [
+                        "6.3",
+                        "63",
+                        "630",
+                        "6300"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Number Skills & Shape"
+            },
+            {
+              "levelId": "math-4-level-12",
+              "levelName": "Rounding & Estimating",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-4-level-12-lesson",
+                  "taskName": "Lesson: Rounding & Estimating",
+                  "type": "lesson",
+                  "content": "Rounding makes numbers simpler while keeping them close to their real value - useful for checking if an answer is sensible. To round to the nearest 10, look at the ones digit: 5 or more rounds up, 4 or less rounds down, so 47 rounds to 50 and 43 rounds to 40. The same rule applies for rounding to the nearest 100 or 1,000, just look at the next digit down. Estimating means rounding numbers first to make a calculation quicker, like estimating 198 + 303 as 200 + 300 = 500.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-4-level-12-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-4-level-12-quiz-q1",
+                      "questionText": "Round 68 to the nearest 10.",
+                      "correctAnswer": "70",
+                      "type": "multiple-choice",
+                      "options": [
+                        "60",
+                        "70",
+                        "68",
+                        "80"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-12-quiz-q2",
+                      "questionText": "Round 432 to the nearest 100.",
+                      "correctAnswer": "400",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-12-quiz-q3",
+                      "questionText": "Round 3,650 to the nearest 1,000.",
+                      "correctAnswer": "4000",
+                      "type": "multiple-choice",
+                      "options": [
+                        "3000",
+                        "3500",
+                        "4000",
+                        "3600"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-12-quiz-q4",
+                      "questionText": "Round 85 to the nearest 10.",
+                      "correctAnswer": "90",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-12-quiz-q5",
+                      "questionText": "Estimate 198 + 402 by rounding to the nearest 100.",
+                      "correctAnswer": "600",
+                      "type": "multiple-choice",
+                      "options": [
+                        "500",
+                        "600",
+                        "700",
+                        "400"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-4-level-12-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-4-level-12-exam-q1",
+                      "questionText": "Round 76 to the nearest 10.",
+                      "correctAnswer": "80",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-12-exam-q2",
+                      "questionText": "Round 549 to the nearest 100.",
+                      "correctAnswer": "500",
+                      "type": "multiple-choice",
+                      "options": [
+                        "400",
+                        "500",
+                        "600",
+                        "550"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-12-exam-q3",
+                      "questionText": "Round 2,499 to the nearest 1,000.",
+                      "correctAnswer": "2000",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-12-exam-q4",
+                      "questionText": "Round 145 to the nearest 10.",
+                      "correctAnswer": "150",
+                      "type": "multiple-choice",
+                      "options": [
+                        "140",
+                        "150",
+                        "145",
+                        "100"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-12-exam-q5",
+                      "questionText": "Round 750 to the nearest 100.",
+                      "correctAnswer": "800",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-12-exam-q6",
+                      "questionText": "Estimate 297 - 101 by rounding to the nearest 100.",
+                      "correctAnswer": "200",
+                      "type": "multiple-choice",
+                      "options": [
+                        "100",
+                        "200",
+                        "300",
+                        "400"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Number Skills & Shape"
+            },
+            {
+              "levelId": "math-4-level-13",
+              "levelName": "Properties of Triangles & Quadrilaterals",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-4-level-13-lesson",
+                  "taskName": "Lesson: Properties of Triangles & Quadrilaterals",
+                  "type": "lesson",
+                  "content": "Triangles are named by their sides and angles: equilateral (3 equal sides), isosceles (2 equal sides), and scalene (no equal sides). All triangle angles add up to 180 degrees. Quadrilaterals have 4 sides and their angles add up to 360 degrees - squares and rectangles have 4 right angles, while a rhombus has 4 equal sides but angles that aren't all right angles, and a parallelogram has two pairs of parallel sides.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-4-level-13-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-4-level-13-quiz-q1",
+                      "questionText": "What do the angles in a triangle always add up to?",
+                      "correctAnswer": "180 degrees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "90 degrees",
+                        "180 degrees",
+                        "360 degrees",
+                        "270 degrees"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-13-quiz-q2",
+                      "questionText": "What is a triangle with 3 equal sides called?",
+                      "correctAnswer": "Equilateral",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-13-quiz-q3",
+                      "questionText": "What do the angles in a quadrilateral always add up to?",
+                      "correctAnswer": "360 degrees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "180 degrees",
+                        "270 degrees",
+                        "360 degrees",
+                        "400 degrees"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-13-quiz-q4",
+                      "questionText": "What is a triangle with no equal sides called?",
+                      "correctAnswer": "Scalene",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-13-quiz-q5",
+                      "questionText": "Which shape has 4 equal sides but is not always a square?",
+                      "correctAnswer": "Rhombus",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Rectangle",
+                        "Rhombus",
+                        "Trapezium",
+                        "Kite"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-4-level-13-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-4-level-13-exam-q1",
+                      "questionText": "What is a triangle with 2 equal sides called?",
+                      "correctAnswer": "Isosceles",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-13-exam-q2",
+                      "questionText": "Which quadrilateral has two pairs of parallel sides but no right angles needed?",
+                      "correctAnswer": "Parallelogram",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Square",
+                        "Parallelogram",
+                        "Kite",
+                        "Right-angled trapezium"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-13-exam-q3",
+                      "questionText": "A triangle has angles of 60 and 70 degrees. What is the third angle?",
+                      "correctAnswer": "50",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-13-exam-q4",
+                      "questionText": "Which shape always has 4 right angles?",
+                      "correctAnswer": "Rectangle",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Rhombus",
+                        "Rectangle",
+                        "Kite",
+                        "Trapezium"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-13-exam-q5",
+                      "questionText": "A quadrilateral has angles 90, 90, and 90 degrees. What is the fourth angle?",
+                      "correctAnswer": "90",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-13-exam-q6",
+                      "questionText": "Which triangle type has all three sides different lengths?",
+                      "correctAnswer": "Scalene",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Equilateral",
+                        "Isosceles",
+                        "Scalene",
+                        "Right-angled"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Number Skills & Shape"
             }
           ]
         },
@@ -32059,6 +33668,411 @@
                 }
               ],
               "moduleName": "Module 4: Equations, Graphs & GCSE Foundations"
+            },
+            {
+              "levelId": "math-5-level-11",
+              "levelName": "Prime Numbers, Factors & Multiples",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-5-level-11-lesson",
+                  "taskName": "Lesson: Prime Numbers, Factors & Multiples",
+                  "type": "lesson",
+                  "content": "A factor of a number divides into it exactly with no remainder - the factors of 12 are 1, 2, 3, 4, 6 and 12. A multiple is what you get when you multiply a number by a whole number - multiples of 4 are 4, 8, 12, 16... A prime number has exactly two factors: 1 and itself, like 2, 3, 5, 7, 11 and 13. Note that 1 is not prime, and 2 is the only even prime number.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-5-level-11-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-5-level-11-quiz-q1",
+                      "questionText": "Which of these is a factor of 20?",
+                      "correctAnswer": "5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "3",
+                        "5",
+                        "7",
+                        "9"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-11-quiz-q2",
+                      "questionText": "What is the first multiple of 6 that is greater than 20?",
+                      "correctAnswer": "24",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-11-quiz-q3",
+                      "questionText": "Which of these numbers is prime?",
+                      "correctAnswer": "13",
+                      "type": "multiple-choice",
+                      "options": [
+                        "12",
+                        "13",
+                        "14",
+                        "15"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-11-quiz-q4",
+                      "questionText": "List all factors of 10 and give the largest one.",
+                      "correctAnswer": "10",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-11-quiz-q5",
+                      "questionText": "Which of these is NOT a prime number?",
+                      "correctAnswer": "9",
+                      "type": "multiple-choice",
+                      "options": [
+                        "7",
+                        "9",
+                        "11",
+                        "13"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-5-level-11-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-5-level-11-exam-q1",
+                      "questionText": "What is the smallest common multiple of 3 and 4?",
+                      "correctAnswer": "12",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-11-exam-q2",
+                      "questionText": "Which of these is a factor of 24?",
+                      "correctAnswer": "8",
+                      "type": "multiple-choice",
+                      "options": [
+                        "5",
+                        "7",
+                        "8",
+                        "9"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-11-exam-q3",
+                      "questionText": "How many factors does the number 7 have?",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-11-exam-q4",
+                      "questionText": "Which of these numbers is prime?",
+                      "correctAnswer": "17",
+                      "type": "multiple-choice",
+                      "options": [
+                        "15",
+                        "16",
+                        "17",
+                        "18"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-11-exam-q5",
+                      "questionText": "What is the smallest common multiple of 2 and 5?",
+                      "correctAnswer": "10",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-11-exam-q6",
+                      "questionText": "Which of these is NOT a factor of 18?",
+                      "correctAnswer": "4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "3",
+                        "4",
+                        "6"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Number Theory & Volume"
+            },
+            {
+              "levelId": "math-5-level-12",
+              "levelName": "Multiplying & Dividing Fractions",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-5-level-12-lesson",
+                  "taskName": "Lesson: Multiplying & Dividing Fractions",
+                  "type": "lesson",
+                  "content": "To multiply fractions, multiply the numerators together and the denominators together: 2/3 x 1/4 = 2/12, which simplifies to 1/6. To divide by a fraction, flip (find the reciprocal of) the second fraction and multiply instead - so 1/2 / 1/4 becomes 1/2 x 4/1 = 4/2 = 2. To multiply a fraction by a whole number, multiply the numerator by the whole number and keep the denominator the same.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-5-level-12-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-5-level-12-quiz-q1",
+                      "questionText": "What is 1/2 x 1/3?",
+                      "correctAnswer": "1/6",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1/5",
+                        "1/6",
+                        "2/6",
+                        "1/3"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-12-quiz-q2",
+                      "questionText": "What is 2/5 x 5? (write as a whole number or fraction)",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-12-quiz-q3",
+                      "questionText": "What is 2/3 x 3/4?",
+                      "correctAnswer": "1/2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1/2",
+                        "5/12",
+                        "6/12",
+                        "2/3"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-12-quiz-q4",
+                      "questionText": "What is 1/4 / 1/2? (write as a fraction)",
+                      "correctAnswer": "1/2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-12-quiz-q5",
+                      "questionText": "What is 3/4 x 2/3?",
+                      "correctAnswer": "1/2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1/2",
+                        "5/12",
+                        "6/12",
+                        "2/3"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-5-level-12-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-5-level-12-exam-q1",
+                      "questionText": "What is 1/3 x 3? (write as a whole number)",
+                      "correctAnswer": "1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-12-exam-q2",
+                      "questionText": "What is 1/5 x 1/2?",
+                      "correctAnswer": "1/10",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1/7",
+                        "1/10",
+                        "2/10",
+                        "1/5"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-12-exam-q3",
+                      "questionText": "What is 1/3 / 1/6? (write as a whole number)",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-12-exam-q4",
+                      "questionText": "What is 3/5 x 2/3?",
+                      "correctAnswer": "2/5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2/5",
+                        "6/15",
+                        "5/8",
+                        "6/8"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-12-exam-q5",
+                      "questionText": "What is 3/8 x 8? (write as a whole number)",
+                      "correctAnswer": "3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-12-exam-q6",
+                      "questionText": "What is 1/2 / 1/4?",
+                      "correctAnswer": "2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1/8",
+                        "2",
+                        "4",
+                        "1/2"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Number Theory & Volume"
+            },
+            {
+              "levelId": "math-5-level-13",
+              "levelName": "Volume of Cubes & Cuboids",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-5-level-13-lesson",
+                  "taskName": "Lesson: Volume of Cubes & Cuboids",
+                  "type": "lesson",
+                  "content": "Volume tells us how much space a 3D shape takes up, measured in cubic units like cm cubed (cm3). To find the volume of a cube or cuboid, multiply length x width x height. A cube with sides of 4 cm has a volume of 4 x 4 x 4 = 64 cm3. A cuboid measuring 5 cm by 3 cm by 2 cm has a volume of 5 x 3 x 2 = 30 cm3. This works because you're stacking up layers of unit cubes to fill the shape.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-5-level-13-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-5-level-13-quiz-q1",
+                      "questionText": "What is the volume of a cube with sides of 3 cm?",
+                      "correctAnswer": "27 cm3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "9 cm3",
+                        "18 cm3",
+                        "27 cm3",
+                        "12 cm3"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-13-quiz-q2",
+                      "questionText": "A cuboid is 4 cm x 2 cm x 3 cm. What is its volume?",
+                      "correctAnswer": "24",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-13-quiz-q3",
+                      "questionText": "What is the volume of a cube with sides of 5 cm?",
+                      "correctAnswer": "125 cm3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "100 cm3",
+                        "125 cm3",
+                        "25 cm3",
+                        "150 cm3"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-13-quiz-q4",
+                      "questionText": "A cuboid is 6 cm x 2 cm x 2 cm. What is its volume?",
+                      "correctAnswer": "24",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-13-quiz-q5",
+                      "questionText": "What is the formula for the volume of a cuboid?",
+                      "correctAnswer": "length x width x height",
+                      "type": "multiple-choice",
+                      "options": [
+                        "length + width + height",
+                        "length x width x height",
+                        "2 x (length + width)",
+                        "length x width"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-5-level-13-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-5-level-13-exam-q1",
+                      "questionText": "A cuboid is 5 cm x 4 cm x 2 cm. What is its volume?",
+                      "correctAnswer": "40",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-13-exam-q2",
+                      "questionText": "What is the volume of a cube with sides of 2 cm?",
+                      "correctAnswer": "8 cm3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4 cm3",
+                        "6 cm3",
+                        "8 cm3",
+                        "16 cm3"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-13-exam-q3",
+                      "questionText": "A cuboid is 10 cm x 3 cm x 1 cm. What is its volume?",
+                      "correctAnswer": "30",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-13-exam-q4",
+                      "questionText": "A cube has a volume of 64 cm3. What is the length of one side?",
+                      "correctAnswer": "4 cm",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2 cm",
+                        "4 cm",
+                        "8 cm",
+                        "16 cm"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-13-exam-q5",
+                      "questionText": "A cuboid is 3 cm x 3 cm x 3 cm. What is its volume?",
+                      "correctAnswer": "27",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-13-exam-q6",
+                      "questionText": "What units is volume normally measured in?",
+                      "correctAnswer": "cm3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "cm",
+                        "cm2",
+                        "cm3",
+                        "kg"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Number Theory & Volume"
             }
           ]
         },
@@ -39217,6 +41231,411 @@
                 }
               ],
               "moduleName": "Module 4: Equations, Graphs & GCSE Foundations"
+            },
+            {
+              "levelId": "math-6-level-11",
+              "levelName": "Negative Numbers & Order of Operations (BIDMAS)",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-6-level-11-lesson",
+                  "taskName": "Lesson: Negative Numbers & Order of Operations (BIDMAS)",
+                  "type": "lesson",
+                  "content": "Negative numbers are less than zero, and when adding or subtracting them, think of moving along a number line - subtracting a negative is the same as adding a positive, so 5 - (-3) = 5 + 3 = 8. BIDMAS tells us the order to solve calculations: Brackets, Indices, Division/Multiplication (left to right), Addition/Subtraction (left to right). Without this order, the same calculation could give different wrong answers, so always follow BIDMAS carefully.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-6-level-11-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-6-level-11-quiz-q1",
+                      "questionText": "What is -3 + 7?",
+                      "correctAnswer": "4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "-4",
+                        "4",
+                        "10",
+                        "-10"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-11-quiz-q2",
+                      "questionText": "What is 5 - (-2)? (write as a number)",
+                      "correctAnswer": "7",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-11-quiz-q3",
+                      "questionText": "Using BIDMAS, what is 2 + 3 x 4?",
+                      "correctAnswer": "14",
+                      "type": "multiple-choice",
+                      "options": [
+                        "14",
+                        "20",
+                        "9",
+                        "24"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-11-quiz-q4",
+                      "questionText": "What is -8 + 3? (write as a number, use - for negative)",
+                      "correctAnswer": "-5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-11-quiz-q5",
+                      "questionText": "Using BIDMAS, what is (2 + 3) x 4?",
+                      "correctAnswer": "20",
+                      "type": "multiple-choice",
+                      "options": [
+                        "14",
+                        "20",
+                        "9",
+                        "24"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-6-level-11-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-6-level-11-exam-q1",
+                      "questionText": "What is -4 - 6? (write as a number, use - for negative)",
+                      "correctAnswer": "-10",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-11-exam-q2",
+                      "questionText": "What is -6 + 10?",
+                      "correctAnswer": "4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "-4",
+                        "4",
+                        "16",
+                        "-16"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-11-exam-q3",
+                      "questionText": "Using BIDMAS, what is 10 - 2 x 3?",
+                      "correctAnswer": "4",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-11-exam-q4",
+                      "questionText": "What is -10 - (-4)?",
+                      "correctAnswer": "-6",
+                      "type": "multiple-choice",
+                      "options": [
+                        "-14",
+                        "-6",
+                        "6",
+                        "14"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-11-exam-q5",
+                      "questionText": "Using BIDMAS, what is (10 - 2) x 3?",
+                      "correctAnswer": "24",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-11-exam-q6",
+                      "questionText": "What is -2 + -5?",
+                      "correctAnswer": "-7",
+                      "type": "multiple-choice",
+                      "options": [
+                        "-7",
+                        "7",
+                        "-3",
+                        "3"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Negative Numbers & Percentages"
+            },
+            {
+              "levelId": "math-6-level-12",
+              "levelName": "Percentages: Increase & Decrease",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-6-level-12-lesson",
+                  "taskName": "Lesson: Percentages: Increase & Decrease",
+                  "type": "lesson",
+                  "content": "To increase or decrease a value by a percentage, first find the percentage of the amount, then add it on (for an increase) or take it away (for a decrease). To find a 20% increase of 50: 20% of 50 = 10, so 50 + 10 = 60. To find a 15% decrease of 200: 15% of 200 = 30, so 200 - 30 = 170. Percentage increases and decreases are used everywhere in real life, from sale prices to interest rates.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-6-level-12-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-6-level-12-quiz-q1",
+                      "questionText": "Increase 40 by 10%. What is the new value?",
+                      "correctAnswer": "44",
+                      "type": "multiple-choice",
+                      "options": [
+                        "40",
+                        "44",
+                        "48",
+                        "50"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-12-quiz-q2",
+                      "questionText": "Decrease 80 by 25%. What is the new value?",
+                      "correctAnswer": "60",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-12-quiz-q3",
+                      "questionText": "Increase 200 by 50%. What is the new value?",
+                      "correctAnswer": "300",
+                      "type": "multiple-choice",
+                      "options": [
+                        "250",
+                        "300",
+                        "220",
+                        "350"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-12-quiz-q4",
+                      "questionText": "Decrease 50 by 20%. What is the new value?",
+                      "correctAnswer": "40",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-12-quiz-q5",
+                      "questionText": "Increase 60 by 5%. What is the new value?",
+                      "correctAnswer": "63",
+                      "type": "multiple-choice",
+                      "options": [
+                        "60",
+                        "63",
+                        "65",
+                        "66"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-6-level-12-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-6-level-12-exam-q1",
+                      "questionText": "Increase 90 by 10%. What is the new value?",
+                      "correctAnswer": "99",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-12-exam-q2",
+                      "questionText": "Decrease 120 by 25%. What is the new value?",
+                      "correctAnswer": "90",
+                      "type": "multiple-choice",
+                      "options": [
+                        "85",
+                        "90",
+                        "95",
+                        "100"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-12-exam-q3",
+                      "questionText": "Decrease 300 by 10%. What is the new value?",
+                      "correctAnswer": "270",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-12-exam-q4",
+                      "questionText": "Increase 150 by 20%. What is the new value?",
+                      "correctAnswer": "180",
+                      "type": "multiple-choice",
+                      "options": [
+                        "165",
+                        "170",
+                        "180",
+                        "190"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-12-exam-q5",
+                      "questionText": "Increase 40 by 50%. What is the new value?",
+                      "correctAnswer": "60",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-12-exam-q6",
+                      "questionText": "Decrease 400 by 15%. What is the new value?",
+                      "correctAnswer": "340",
+                      "type": "multiple-choice",
+                      "options": [
+                        "330",
+                        "340",
+                        "350",
+                        "360"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Negative Numbers & Percentages"
+            },
+            {
+              "levelId": "math-6-level-13",
+              "levelName": "Constructions & Loci",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-6-level-13-lesson",
+                  "taskName": "Lesson: Constructions & Loci",
+                  "type": "lesson",
+                  "content": "Using a ruler and pair of compasses, we can construct accurate shapes and lines. To bisect (cut exactly in half) a line, draw two arcs from each end that cross above and below the line, then join the crossing points. A locus is the set of all points that follow a given rule, like 'all points exactly 3 cm from a fixed point', which forms a circle. Constructions and loci are used in real-life problems like finding a location equally far from two towns.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-6-level-13-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-6-level-13-quiz-q1",
+                      "questionText": "What tool do you use, along with a ruler, for accurate constructions?",
+                      "correctAnswer": "Compasses",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Protractor",
+                        "Compasses",
+                        "Set square",
+                        "Calculator"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-13-quiz-q2",
+                      "questionText": "What is the name for cutting a line exactly in half?",
+                      "correctAnswer": "Bisecting",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-13-quiz-q3",
+                      "questionText": "What shape does the locus of points 5 cm from a fixed point make?",
+                      "correctAnswer": "A circle",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A square",
+                        "A circle",
+                        "A line",
+                        "A triangle"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-13-quiz-q4",
+                      "questionText": "A locus is all points that follow a given ___. Fill in the blank.",
+                      "correctAnswer": "rule",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-13-quiz-q5",
+                      "questionText": "What do we call the exact midpoint construction of a line called?",
+                      "correctAnswer": "Perpendicular bisector",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Angle bisector",
+                        "Perpendicular bisector",
+                        "Locus",
+                        "Arc"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-6-level-13-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-6-level-13-exam-q1",
+                      "questionText": "What tool measures angles when constructing shapes?",
+                      "correctAnswer": "Protractor",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-13-exam-q2",
+                      "questionText": "The locus of points equidistant from two fixed points forms what?",
+                      "correctAnswer": "A straight line",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A circle",
+                        "A straight line",
+                        "A curve",
+                        "A triangle"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-13-exam-q3",
+                      "questionText": "What do we call the line that bisects an angle exactly in half?",
+                      "correctAnswer": "Angle bisector",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-13-exam-q4",
+                      "questionText": "Which tool draws arcs and circles accurately?",
+                      "correctAnswer": "Compasses",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Ruler",
+                        "Compasses",
+                        "Protractor",
+                        "Set square"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-13-exam-q5",
+                      "questionText": "A circle is the locus of points a fixed ___ from a centre point. Fill in the blank.",
+                      "correctAnswer": "distance",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-13-exam-q6",
+                      "questionText": "What shape is formed by the locus of points within 4 cm of a point?",
+                      "correctAnswer": "A circle",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A square",
+                        "A circle",
+                        "A hexagon",
+                        "A line"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Negative Numbers & Percentages"
             }
           ]
         },
@@ -46333,6 +48752,411 @@
                 }
               ],
               "moduleName": "Module 4: Equations, Graphs & GCSE Foundations"
+            },
+            {
+              "levelId": "math-7-level-11",
+              "levelName": "Direct & Inverse Proportion",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-7-level-11-lesson",
+                  "taskName": "Lesson: Direct & Inverse Proportion",
+                  "type": "lesson",
+                  "content": "Two quantities are in direct proportion if they increase or decrease at the same rate - if y is directly proportional to x, then y = kx for some constant k, and doubling x doubles y. Two quantities are in inverse proportion if one increases as the other decreases, following y = k/x, so doubling x halves y. A classic example: the more workers on a job (direct relationship with speed), the less time it takes - but the time and number of workers are in inverse proportion.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-7-level-11-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-7-level-11-quiz-q1",
+                      "questionText": "If y is directly proportional to x and y = 12 when x = 4, what is y when x = 8?",
+                      "correctAnswer": "24",
+                      "type": "multiple-choice",
+                      "options": [
+                        "16",
+                        "20",
+                        "24",
+                        "28"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-11-quiz-q2",
+                      "questionText": "If 3 items cost 9 dollars, how much do 5 items cost (direct proportion)?",
+                      "correctAnswer": "15",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-11-quiz-q3",
+                      "questionText": "If y is inversely proportional to x and y = 6 when x = 2, what is y when x = 4?",
+                      "correctAnswer": "3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "3",
+                        "12",
+                        "24"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-11-quiz-q4",
+                      "questionText": "If 2 workers take 12 hours, how long would 4 workers take (inverse proportion)?",
+                      "correctAnswer": "6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-11-quiz-q5",
+                      "questionText": "Which equation shows direct proportion?",
+                      "correctAnswer": "y = kx",
+                      "type": "multiple-choice",
+                      "options": [
+                        "y = kx",
+                        "y = k/x",
+                        "y = k + x",
+                        "y = x - k"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-7-level-11-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-7-level-11-exam-q1",
+                      "questionText": "If y is directly proportional to x and y = 10 when x = 2, what is y when x = 5?",
+                      "correctAnswer": "25",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-11-exam-q2",
+                      "questionText": "Which equation shows inverse proportion?",
+                      "correctAnswer": "y = k/x",
+                      "type": "multiple-choice",
+                      "options": [
+                        "y = kx",
+                        "y = k/x",
+                        "y = k + x",
+                        "y = x - k"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-11-exam-q3",
+                      "questionText": "If 4 items cost 20 dollars, how much do 7 items cost (direct proportion)?",
+                      "correctAnswer": "35",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-11-exam-q4",
+                      "questionText": "If y is inversely proportional to x and y = 8 when x = 3, what is y when x = 6?",
+                      "correctAnswer": "4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "4",
+                        "16",
+                        "24"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-11-exam-q5",
+                      "questionText": "If 3 workers take 8 hours, how long would 6 workers take (inverse proportion)?",
+                      "correctAnswer": "4",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-11-exam-q6",
+                      "questionText": "As x doubles in inverse proportion, y does what?",
+                      "correctAnswer": "Halves",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Doubles",
+                        "Halves",
+                        "Stays the same",
+                        "Triples"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Proportion & Quadratics"
+            },
+            {
+              "levelId": "math-7-level-12",
+              "levelName": "Congruence & Similarity",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-7-level-12-lesson",
+                  "taskName": "Lesson: Congruence & Similarity",
+                  "type": "lesson",
+                  "content": "Two shapes are congruent if they are exactly the same size and shape - one could be rotated, reflected or moved on top of the other and match perfectly. Two shapes are similar if they are the same shape but different sizes, meaning one is an enlargement of the other with all angles equal and sides in the same ratio (scale factor). If a shape is enlarged by scale factor 2, every side doubles in length, but the angles stay exactly the same.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-7-level-12-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-7-level-12-quiz-q1",
+                      "questionText": "Two shapes that are exactly the same size and shape are called:",
+                      "correctAnswer": "Congruent",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Similar",
+                        "Congruent",
+                        "Equal",
+                        "Symmetrical"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-12-quiz-q2",
+                      "questionText": "A shape is enlarged by scale factor 3. A side that was 4 cm becomes what?",
+                      "correctAnswer": "12",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-12-quiz-q3",
+                      "questionText": "In similar shapes, what stays exactly the same?",
+                      "correctAnswer": "The angles",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The side lengths",
+                        "The angles",
+                        "The area",
+                        "The perimeter"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-12-quiz-q4",
+                      "questionText": "A shape enlarged by scale factor 2 has a side of 10 cm. What was the original side length?",
+                      "correctAnswer": "5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-12-quiz-q5",
+                      "questionText": "Which transformations always produce a congruent shape?",
+                      "correctAnswer": "Rotation, reflection, translation",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Enlargement only",
+                        "Rotation, reflection, translation",
+                        "Enlargement and rotation",
+                        "None of these"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-7-level-12-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-7-level-12-exam-q1",
+                      "questionText": "A shape is enlarged by scale factor 4. A side that was 3 cm becomes what?",
+                      "correctAnswer": "12",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-12-exam-q2",
+                      "questionText": "Two shapes are similar. What is true about their corresponding sides?",
+                      "correctAnswer": "They are in the same ratio",
+                      "type": "multiple-choice",
+                      "options": [
+                        "They are equal",
+                        "They are in the same ratio",
+                        "They are perpendicular",
+                        "They are parallel"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-12-exam-q3",
+                      "questionText": "A triangle with sides 6, 8, 10 is enlarged by scale factor 0.5. What is the new shortest side?",
+                      "correctAnswer": "3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-12-exam-q4",
+                      "questionText": "If two triangles have all three angles equal, are they always similar?",
+                      "correctAnswer": "Yes",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Yes",
+                        "No",
+                        "Only if congruent",
+                        "Only if right-angled"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-12-exam-q5",
+                      "questionText": "Two congruent shapes have a side of 7 cm on one shape. What is the matching side on the other?",
+                      "correctAnswer": "7",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-12-exam-q6",
+                      "questionText": "What is the scale factor if a shape's side grows from 5 cm to 20 cm?",
+                      "correctAnswer": "4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Proportion & Quadratics"
+            },
+            {
+              "levelId": "math-7-level-13",
+              "levelName": "Solving Quadratic Equations by Factorising",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-7-level-13-lesson",
+                  "taskName": "Lesson: Solving Quadratic Equations by Factorising",
+                  "type": "lesson",
+                  "content": "A quadratic equation has the form ax^2 + bx + c = 0. To solve by factorising, find two numbers that multiply to give c and add to give b, then write the equation as two brackets. For example, x^2 + 5x + 6 = 0 factorises to (x + 2)(x + 3) = 0, so x = -2 or x = -3. Once factorised, each bracket can be set equal to zero separately to find the solutions, since anything multiplied by zero equals zero.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-7-level-13-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-7-level-13-quiz-q1",
+                      "questionText": "Factorise x^2 + 7x + 12 = 0. What are the two brackets?",
+                      "correctAnswer": "(x + 3)(x + 4)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "(x + 3)(x + 4)",
+                        "(x + 2)(x + 6)",
+                        "(x + 1)(x + 12)",
+                        "(x + 5)(x + 2)"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-13-quiz-q2",
+                      "questionText": "Solve x^2 + 5x + 6 = 0. Give the smaller (more negative) solution.",
+                      "correctAnswer": "-3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-13-quiz-q3",
+                      "questionText": "Factorise x^2 - 5x + 6 = 0. What are the two brackets?",
+                      "correctAnswer": "(x - 2)(x - 3)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "(x - 2)(x - 3)",
+                        "(x + 2)(x + 3)",
+                        "(x - 1)(x - 6)",
+                        "(x - 6)(x + 1)"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-13-quiz-q4",
+                      "questionText": "Solve x^2 - 3x - 4 = 0. Give the larger solution.",
+                      "correctAnswer": "4",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-13-quiz-q5",
+                      "questionText": "In x^2 + bx + c, what do the two numbers in the brackets need to add to?",
+                      "correctAnswer": "b",
+                      "type": "multiple-choice",
+                      "options": [
+                        "c",
+                        "b",
+                        "a",
+                        "0"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-7-level-13-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-7-level-13-exam-q1",
+                      "questionText": "Solve x^2 + 8x + 15 = 0. Give the smaller (more negative) solution.",
+                      "correctAnswer": "-5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-13-exam-q2",
+                      "questionText": "Factorise x^2 + 3x - 10 = 0. What are the two brackets?",
+                      "correctAnswer": "(x + 5)(x - 2)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "(x + 5)(x - 2)",
+                        "(x - 5)(x + 2)",
+                        "(x + 10)(x - 1)",
+                        "(x + 1)(x - 10)"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-13-exam-q3",
+                      "questionText": "Solve x^2 - 7x + 12 = 0. Give the smaller solution.",
+                      "correctAnswer": "3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-13-exam-q4",
+                      "questionText": "Factorise x^2 - x - 6 = 0. What are the two brackets?",
+                      "correctAnswer": "(x - 3)(x + 2)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "(x - 3)(x + 2)",
+                        "(x + 3)(x - 2)",
+                        "(x - 6)(x + 1)",
+                        "(x + 6)(x - 1)"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-13-exam-q5",
+                      "questionText": "Solve x^2 + 2x - 8 = 0. Give the larger solution.",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-13-exam-q6",
+                      "questionText": "What must an equation equal before you can solve it by factorising this way?",
+                      "correctAnswer": "0",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1",
+                        "0",
+                        "The value of c",
+                        "The value of b"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Proportion & Quadratics"
             }
           ]
         },
@@ -53449,6 +56273,411 @@
                 }
               ],
               "moduleName": "Module 4: Equations, Graphs & GCSE Foundations"
+            },
+            {
+              "levelId": "math-8-level-11",
+              "levelName": "Trigonometric Graphs: Sine, Cosine & Tangent",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-8-level-11-lesson",
+                  "taskName": "Lesson: Trigonometric Graphs: Sine, Cosine & Tangent",
+                  "type": "lesson",
+                  "content": "The graphs of sin(x) and cos(x) are smooth waves that repeat every 360 degrees, oscillating between -1 and 1. The sine graph starts at 0 when x = 0, rises to 1 at x = 90, back to 0 at x = 180, down to -1 at x = 270, and back to 0 at x = 360. The cosine graph looks the same shape but starts at 1 when x = 0. The tangent graph is different: it repeats every 180 degrees and shoots off to infinity at 90 and 270 degrees, where it is undefined.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-8-level-11-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-8-level-11-quiz-q1",
+                      "questionText": "What is the value of sin(0 degrees)?",
+                      "correctAnswer": "0",
+                      "type": "multiple-choice",
+                      "options": [
+                        "0",
+                        "1",
+                        "-1",
+                        "0.5"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-11-quiz-q2",
+                      "questionText": "What is the value of cos(0 degrees)?",
+                      "correctAnswer": "1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-11-quiz-q3",
+                      "questionText": "Over what range of degrees does the sine graph repeat one full cycle?",
+                      "correctAnswer": "360 degrees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "90 degrees",
+                        "180 degrees",
+                        "270 degrees",
+                        "360 degrees"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-11-quiz-q4",
+                      "questionText": "What is the maximum value that sin(x) can reach?",
+                      "correctAnswer": "1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-11-quiz-q5",
+                      "questionText": "What is the value of sin(90 degrees)?",
+                      "correctAnswer": "1",
+                      "type": "multiple-choice",
+                      "options": [
+                        "0",
+                        "1",
+                        "-1",
+                        "0.5"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-8-level-11-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-8-level-11-exam-q1",
+                      "questionText": "What is the minimum value that cos(x) can reach?",
+                      "correctAnswer": "-1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-11-exam-q2",
+                      "questionText": "What is the value of sin(180 degrees)?",
+                      "correctAnswer": "0",
+                      "type": "multiple-choice",
+                      "options": [
+                        "0",
+                        "1",
+                        "-1",
+                        "0.5"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-11-exam-q3",
+                      "questionText": "Over what range of degrees does the tangent graph repeat one full cycle?",
+                      "correctAnswer": "180",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-11-exam-q4",
+                      "questionText": "What is the value of cos(180 degrees)?",
+                      "correctAnswer": "-1",
+                      "type": "multiple-choice",
+                      "options": [
+                        "0",
+                        "1",
+                        "-1",
+                        "0.5"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-11-exam-q5",
+                      "questionText": "What is the value of sin(270 degrees)?",
+                      "correctAnswer": "-1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-11-exam-q6",
+                      "questionText": "At which angles is the tangent graph undefined?",
+                      "correctAnswer": "90 and 270 degrees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "0 and 180 degrees",
+                        "90 and 270 degrees",
+                        "0 and 360 degrees",
+                        "45 and 135 degrees"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Trigonometry & Algebra"
+            },
+            {
+              "levelId": "math-8-level-12",
+              "levelName": "Algebraic Fractions",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-8-level-12-lesson",
+                  "taskName": "Lesson: Algebraic Fractions",
+                  "type": "lesson",
+                  "content": "Algebraic fractions work like number fractions but with expressions containing letters. To simplify them, factorise the numerator and denominator, then cancel any common factors - for example, (x^2 + 2x) / x simplifies to x + 2 after cancelling the common factor of x. To add or subtract algebraic fractions, find a common denominator first, just like with numbers.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-8-level-12-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-8-level-12-quiz-q1",
+                      "questionText": "Simplify (x^2 + 3x) / x.",
+                      "correctAnswer": "x + 3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "x + 3",
+                        "x + 3x",
+                        "3x",
+                        "x^2 + 3"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-12-quiz-q2",
+                      "questionText": "Simplify (4x) / (2x). Give your answer as a number.",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-12-quiz-q3",
+                      "questionText": "Simplify (x^2 - 4x) / x.",
+                      "correctAnswer": "x - 4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "x - 4",
+                        "x^2 - 4",
+                        "-4x",
+                        "x - 4x"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-12-quiz-q4",
+                      "questionText": "What is 1/x + 1/x? (write as a fraction using x, e.g. 2/x)",
+                      "correctAnswer": "2/x",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-12-quiz-q5",
+                      "questionText": "Simplify (5x^2) / (x).",
+                      "correctAnswer": "5x",
+                      "type": "multiple-choice",
+                      "options": [
+                        "5x",
+                        "5x^2",
+                        "x",
+                        "5"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-8-level-12-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-8-level-12-exam-q1",
+                      "questionText": "Simplify (6x) / (3x). Give your answer as a number.",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-12-exam-q2",
+                      "questionText": "Simplify (x^2 + 5x) / x.",
+                      "correctAnswer": "x + 5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "x + 5",
+                        "x^2 + 5",
+                        "5x",
+                        "x + 5x"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-12-exam-q3",
+                      "questionText": "What is 3/x + 2/x? (write as a fraction using x, e.g. 5/x)",
+                      "correctAnswer": "5/x",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-12-exam-q4",
+                      "questionText": "Simplify (x^2 - 6x) / x.",
+                      "correctAnswer": "x - 6",
+                      "type": "multiple-choice",
+                      "options": [
+                        "x - 6",
+                        "x^2 - 6",
+                        "-6x",
+                        "x - 6x"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-12-exam-q5",
+                      "questionText": "Simplify (10x^2) / (2x). (write as an expression, e.g. 5x)",
+                      "correctAnswer": "5x",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-12-exam-q6",
+                      "questionText": "What is 4/x - 1/x?",
+                      "correctAnswer": "3/x",
+                      "type": "multiple-choice",
+                      "options": [
+                        "3",
+                        "3/x",
+                        "4/x",
+                        "3x"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Trigonometry & Algebra"
+            },
+            {
+              "levelId": "math-8-level-13",
+              "levelName": "Histograms & Frequency Density",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-8-level-13-lesson",
+                  "taskName": "Lesson: Histograms & Frequency Density",
+                  "type": "lesson",
+                  "content": "Histograms show continuous data grouped into class intervals, but unlike bar charts, the bars can have different widths and it's the AREA of each bar that represents the frequency, not the height. To find the height of a bar (called frequency density), divide the frequency by the class width: frequency density = frequency / class width. This lets us fairly compare groups even when the class widths are different sizes.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-8-level-13-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-8-level-13-quiz-q1",
+                      "questionText": "In a histogram, what does the area of a bar represent?",
+                      "correctAnswer": "Frequency",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Frequency density",
+                        "Frequency",
+                        "Class width",
+                        "Total data"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-13-quiz-q2",
+                      "questionText": "A class has frequency 20 and class width 4. What is the frequency density?",
+                      "correctAnswer": "5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-13-quiz-q3",
+                      "questionText": "What is the formula for frequency density?",
+                      "correctAnswer": "frequency / class width",
+                      "type": "multiple-choice",
+                      "options": [
+                        "frequency x class width",
+                        "frequency / class width",
+                        "class width / frequency",
+                        "frequency + class width"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-13-quiz-q4",
+                      "questionText": "A class has frequency 15 and class width 3. What is the frequency density?",
+                      "correctAnswer": "5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-13-quiz-q5",
+                      "questionText": "How is a histogram different from a bar chart?",
+                      "correctAnswer": "Bars can have different widths and area represents frequency",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Bars are always the same width",
+                        "Bars can have different widths and area represents frequency",
+                        "There are no gaps in a bar chart",
+                        "Histograms only show categories"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-8-level-13-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-8-level-13-exam-q1",
+                      "questionText": "A class has frequency 30 and class width 5. What is the frequency density?",
+                      "correctAnswer": "6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-13-exam-q2",
+                      "questionText": "If frequency density is 4 and class width is 3, what is the frequency?",
+                      "correctAnswer": "12",
+                      "type": "multiple-choice",
+                      "options": [
+                        "7",
+                        "12",
+                        "1.33",
+                        "9"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-13-exam-q3",
+                      "questionText": "A class has frequency 24 and class width 6. What is the frequency density?",
+                      "correctAnswer": "4",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-13-exam-q4",
+                      "questionText": "What is plotted on the y-axis of a histogram?",
+                      "correctAnswer": "Frequency density",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Frequency",
+                        "Frequency density",
+                        "Class width",
+                        "Cumulative frequency"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-13-exam-q5",
+                      "questionText": "If frequency density is 2 and class width is 10, what is the frequency?",
+                      "correctAnswer": "20",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-13-exam-q6",
+                      "questionText": "Why do we use frequency density instead of frequency for histogram height?",
+                      "correctAnswer": "To fairly compare classes of different widths",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It looks nicer",
+                        "To fairly compare classes of different widths",
+                        "It is always a whole number",
+                        "It removes the need for a key"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Trigonometry & Algebra"
             }
           ]
         },
@@ -60481,6 +63710,411 @@
                 }
               ],
               "moduleName": "Module 4: Functions, Vectors & Exam Practice"
+            },
+            {
+              "levelId": "math-9-level-11",
+              "levelName": "The Sine Rule & Cosine Rule",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-9-level-11-lesson",
+                  "taskName": "Lesson: The Sine Rule & Cosine Rule",
+                  "type": "lesson",
+                  "content": "For any triangle (not just right-angled ones), the sine rule states a/sin(A) = b/sin(B) = c/sin(C), where each side is opposite its matching angle - useful for finding missing sides or angles. The cosine rule states a^2 = b^2 + c^2 - 2bc x cos(A), useful when you know two sides and the angle between them, or all three sides. Choose the sine rule when you have a matching side-angle pair, and the cosine rule otherwise.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-9-level-11-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-9-level-11-quiz-q1",
+                      "questionText": "The sine rule is written as a/sin(A) = b/sin(B) = ___",
+                      "correctAnswer": "c/sin(C)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "c/sin(C)",
+                        "c x sin(C)",
+                        "sin(C)/c",
+                        "C/sin(a)"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-11-quiz-q2",
+                      "questionText": "In the cosine rule a^2 = b^2 + c^2 - 2bc cos(A), which angle is used?",
+                      "correctAnswer": "A",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-11-quiz-q3",
+                      "questionText": "When should you use the sine rule?",
+                      "correctAnswer": "When you have a matching side-angle pair",
+                      "type": "multiple-choice",
+                      "options": [
+                        "When you know all three sides",
+                        "When you have a matching side-angle pair",
+                        "Only for right-angled triangles",
+                        "When you know two angles only"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-11-quiz-q4",
+                      "questionText": "The cosine rule can find a missing side if you know 2 sides and the ___ between them.",
+                      "correctAnswer": "angle",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-11-quiz-q5",
+                      "questionText": "The sine and cosine rules apply to which triangles?",
+                      "correctAnswer": "Any triangle",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Only right-angled triangles",
+                        "Only equilateral triangles",
+                        "Any triangle",
+                        "Only isosceles triangles"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-9-level-11-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-9-level-11-exam-q1",
+                      "questionText": "In the sine rule a/sin(A) = b/sin(B), if a matches angle A, what does b match?",
+                      "correctAnswer": "B",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-11-exam-q2",
+                      "questionText": "Which rule would you use if you know all three sides of a triangle and want an angle?",
+                      "correctAnswer": "Cosine rule",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Sine rule",
+                        "Cosine rule",
+                        "Pythagoras' theorem",
+                        "Area formula"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-11-exam-q3",
+                      "questionText": "What formula gives the cosine rule for side a? (a^2 = b^2 + c^2 - 2bc x ___)",
+                      "correctAnswer": "cos(A)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-11-exam-q4",
+                      "questionText": "Which rule is best for finding a missing side using two known angles and one side?",
+                      "correctAnswer": "Sine rule",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Sine rule",
+                        "Cosine rule",
+                        "Trigonometric ratios",
+                        "Area of a triangle formula"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-11-exam-q5",
+                      "questionText": "How many sides must you know to use the cosine rule to find an angle?",
+                      "correctAnswer": "3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-11-exam-q6",
+                      "questionText": "Does the sine rule work for right-angled triangles too?",
+                      "correctAnswer": "Yes",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Yes",
+                        "No",
+                        "Only for isosceles",
+                        "Only for obtuse triangles"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Advanced Trigonometry & Algebra"
+            },
+            {
+              "levelId": "math-9-level-12",
+              "levelName": "Completing the Square",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-9-level-12-lesson",
+                  "taskName": "Lesson: Completing the Square",
+                  "type": "lesson",
+                  "content": "Completing the square rewrites a quadratic x^2 + bx + c in the form (x + b/2)^2 - (b/2)^2 + c. For example, x^2 + 6x + 5 becomes (x + 3)^2 - 9 + 5 = (x + 3)^2 - 4. This form makes it easy to find the turning point of the graph (the minimum or maximum point), which is at (-b/2, the constant left over), and can also be used to solve quadratic equations without factorising.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-9-level-12-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-9-level-12-quiz-q1",
+                      "questionText": "Complete the square for x^2 + 4x + 1.",
+                      "correctAnswer": "(x + 2)^2 - 3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "(x + 2)^2 - 3",
+                        "(x + 4)^2 - 1",
+                        "(x + 2)^2 + 1",
+                        "(x + 2)^2 - 4"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-12-quiz-q2",
+                      "questionText": "For (x + 3)^2 - 4, what is the x-coordinate of the turning point?",
+                      "correctAnswer": "-3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-12-quiz-q3",
+                      "questionText": "Complete the square for x^2 + 2x + 5.",
+                      "correctAnswer": "(x + 1)^2 + 4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "(x + 1)^2 + 4",
+                        "(x + 2)^2 + 1",
+                        "(x + 1)^2 - 4",
+                        "(x + 1)^2 + 5"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-12-quiz-q4",
+                      "questionText": "For (x - 2)^2 + 7, what is the x-coordinate of the turning point?",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-12-quiz-q5",
+                      "questionText": "In x^2 + bx + c completed as (x + b/2)^2 + ..., what determines the x-coordinate of the turning point?",
+                      "correctAnswer": "-b/2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "b/2",
+                        "-b/2",
+                        "c",
+                        "-c"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-9-level-12-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-9-level-12-exam-q1",
+                      "questionText": "Complete the square for x^2 + 8x + 10. What is the constant left over after the bracket?",
+                      "correctAnswer": "-6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-12-exam-q2",
+                      "questionText": "Complete the square for x^2 - 6x + 2.",
+                      "correctAnswer": "(x - 3)^2 - 7",
+                      "type": "multiple-choice",
+                      "options": [
+                        "(x - 3)^2 - 7",
+                        "(x - 6)^2 + 2",
+                        "(x - 3)^2 + 7",
+                        "(x - 3)^2 - 2"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-12-exam-q3",
+                      "questionText": "For (x + 5)^2 - 10, what is the minimum value the expression can take?",
+                      "correctAnswer": "-10",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-12-exam-q4",
+                      "questionText": "Complete the square for x^2 - 4x - 1.",
+                      "correctAnswer": "(x - 2)^2 - 5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "(x - 2)^2 - 5",
+                        "(x - 4)^2 - 1",
+                        "(x - 2)^2 + 5",
+                        "(x - 2)^2 - 1"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-12-exam-q5",
+                      "questionText": "For (x + 1)^2 - 9, what are the two values of x when the expression equals 0?",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-12-exam-q6",
+                      "questionText": "Why is completing the square useful for graphs?",
+                      "correctAnswer": "It reveals the turning point directly",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It makes the graph a straight line",
+                        "It reveals the turning point directly",
+                        "It removes the need for axes",
+                        "It only works for cubics"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Advanced Trigonometry & Algebra"
+            },
+            {
+              "levelId": "math-9-level-13",
+              "levelName": "Compound Interest & Growth/Decay",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-9-level-13-lesson",
+                  "taskName": "Lesson: Compound Interest & Growth/Decay",
+                  "type": "lesson",
+                  "content": "Compound interest is calculated on the original amount plus any interest already added, so it grows faster than simple interest. The formula is: final amount = starting amount x (1 + rate/100)^n, where n is the number of time periods. For example, 1000 dollars invested at 5% for 3 years becomes 1000 x 1.05^3 = 1157.63 dollars. Decay works the same way but with (1 - rate/100)^n instead, for things that reduce over time, like a car's value depreciating.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-9-level-13-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-9-level-13-quiz-q1",
+                      "questionText": "What does compound interest calculate interest on?",
+                      "correctAnswer": "The original amount plus previously added interest",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Only the original amount",
+                        "The original amount plus previously added interest",
+                        "Only the interest earned last year",
+                        "A fixed amount each year"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-13-quiz-q2",
+                      "questionText": "In the formula amount x (1 + rate/100)^n, what does n represent?",
+                      "correctAnswer": "The number of time periods",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-13-quiz-q3",
+                      "questionText": "500 dollars grows at 10% compound interest for 2 years. What multiplier is used?",
+                      "correctAnswer": "1.1^2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1.1 x 2",
+                        "1.1^2",
+                        "0.1^2",
+                        "1.2^2"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-13-quiz-q4",
+                      "questionText": "For decay, what replaces (1 + rate/100) in the formula?",
+                      "correctAnswer": "(1 - rate/100)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-13-quiz-q5",
+                      "questionText": "A car worth 10,000 dollars depreciates by 20% each year. What is it worth after 1 year?",
+                      "correctAnswer": "8,000 dollars",
+                      "type": "multiple-choice",
+                      "options": [
+                        "8,000 dollars",
+                        "2,000 dollars",
+                        "9,800 dollars",
+                        "7,500 dollars"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-9-level-13-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-9-level-13-exam-q1",
+                      "questionText": "1000 dollars is invested at 10% compound interest. What is it worth after 1 year?",
+                      "correctAnswer": "1100",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-13-exam-q2",
+                      "questionText": "Which grows faster over many years, simple interest or compound interest, at the same rate?",
+                      "correctAnswer": "Compound interest",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Simple interest",
+                        "Compound interest",
+                        "They grow at the same rate",
+                        "Neither grows"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-13-exam-q3",
+                      "questionText": "A value of 200 decays by 10% each year. What is it after 1 year?",
+                      "correctAnswer": "180",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-13-exam-q4",
+                      "questionText": "What is the multiplier for a 15% decrease?",
+                      "correctAnswer": "0.85",
+                      "type": "multiple-choice",
+                      "options": [
+                        "0.15",
+                        "0.85",
+                        "1.15",
+                        "1.85"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-13-exam-q5",
+                      "questionText": "What is the multiplier for a 25% increase?",
+                      "correctAnswer": "1.25",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-13-exam-q6",
+                      "questionText": "800 dollars grows at 5% compound interest for 2 years. What multiplier is used?",
+                      "correctAnswer": "1.05^2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1.05 x 2",
+                        "1.05^2",
+                        "1.1^2",
+                        "0.95^2"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Advanced Trigonometry & Algebra"
             }
           ]
         },
@@ -67519,6 +71153,411 @@
                 }
               ],
               "moduleName": "Module 4: Functions, Vectors & Exam Practice"
+            },
+            {
+              "levelId": "math-10-level-11",
+              "levelName": "Vectors: Geometric Proof",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-10-level-11-lesson",
+                  "taskName": "Lesson: Vectors: Geometric Proof",
+                  "type": "lesson",
+                  "content": "Vectors can be used to prove facts about shapes, like showing two lines are parallel (one vector is a scalar multiple of the other) or that points lie on a straight line (collinear). If vector AB = 2 x vector CD, then AB is parallel to CD and twice as long. To prove three points A, B, C are collinear, show that vector AB is a scalar multiple of vector BC, meaning they point in the same direction along one straight line.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-10-level-11-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-10-level-11-quiz-q1",
+                      "questionText": "If vector AB = 3 x vector CD, what can we say about the two lines?",
+                      "correctAnswer": "AB is parallel to CD and 3 times as long",
+                      "type": "multiple-choice",
+                      "options": [
+                        "AB is perpendicular to CD",
+                        "AB is parallel to CD and 3 times as long",
+                        "AB and CD are equal",
+                        "AB is 3 times shorter than CD"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-11-quiz-q2",
+                      "questionText": "To show three points are collinear using vectors, what must be true about AB and BC?",
+                      "correctAnswer": "One is a scalar multiple of the other",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-11-quiz-q3",
+                      "questionText": "If vector a = (2, 4) and vector b = (1, 2), what is true?",
+                      "correctAnswer": "a = 2b, so they are parallel",
+                      "type": "multiple-choice",
+                      "options": [
+                        "a and b are perpendicular",
+                        "a = 2b, so they are parallel",
+                        "a and b are equal",
+                        "a = 4b"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-11-quiz-q4",
+                      "questionText": "What word describes points that lie on the same straight line?",
+                      "correctAnswer": "Collinear",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-11-quiz-q5",
+                      "questionText": "What does it mean if vector PQ is a scalar multiple of vector QR?",
+                      "correctAnswer": "P, Q and R are collinear",
+                      "type": "multiple-choice",
+                      "options": [
+                        "P, Q and R form a triangle",
+                        "P, Q and R are collinear",
+                        "PQ is perpendicular to QR",
+                        "PQ and QR are equal length"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-10-level-11-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-10-level-11-exam-q1",
+                      "questionText": "If vector XY = 4 x vector ZW, how many times longer is XY than ZW?",
+                      "correctAnswer": "4",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-11-exam-q2",
+                      "questionText": "Two vectors are parallel if one is what of the other?",
+                      "correctAnswer": "A scalar multiple",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A scalar multiple",
+                        "The negative",
+                        "Perpendicular",
+                        "Equal in length only"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-11-exam-q3",
+                      "questionText": "If M is the midpoint of AB, and vector AM = 1/2 vector AB, what fraction is vector MB of AB?",
+                      "correctAnswer": "1/2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-11-exam-q4",
+                      "questionText": "If vector a = (3, 6) and vector b = (1, 2), what scalar relates them?",
+                      "correctAnswer": "3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "3",
+                        "4",
+                        "6"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-11-exam-q5",
+                      "questionText": "To prove ABCD is a parallelogram using vectors, what must be true about AB and DC?",
+                      "correctAnswer": "They are equal",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-11-exam-q6",
+                      "questionText": "What does a negative scalar multiple of a vector do to its direction?",
+                      "correctAnswer": "Reverses it",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Doubles it",
+                        "Reverses it",
+                        "Keeps it the same",
+                        "Makes it zero"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Advanced Geometry & Equations"
+            },
+            {
+              "levelId": "math-10-level-12",
+              "levelName": "Advanced Circle Theorems",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-10-level-12-lesson",
+                  "taskName": "Lesson: Advanced Circle Theorems",
+                  "type": "lesson",
+                  "content": "Building on basic circle theorems, more advanced ones include: the alternate segment theorem (the angle between a tangent and a chord equals the angle in the alternate segment), and the fact that opposite angles in a cyclic quadrilateral (a quadrilateral with all 4 vertices on a circle) always add up to 180 degrees. Tangents drawn from the same external point to a circle are always equal in length, and the angle between a tangent and the radius at the point of contact is always 90 degrees.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-10-level-12-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-10-level-12-quiz-q1",
+                      "questionText": "What do opposite angles in a cyclic quadrilateral always add up to?",
+                      "correctAnswer": "180 degrees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "90 degrees",
+                        "180 degrees",
+                        "270 degrees",
+                        "360 degrees"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-12-quiz-q2",
+                      "questionText": "What angle does a tangent make with the radius at the point of contact?",
+                      "correctAnswer": "90",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-12-quiz-q3",
+                      "questionText": "The alternate segment theorem relates the angle between a tangent and a chord to what?",
+                      "correctAnswer": "The angle in the alternate segment",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The angle at the centre",
+                        "The angle in the alternate segment",
+                        "The angle in the same segment",
+                        "A right angle"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-12-quiz-q4",
+                      "questionText": "If two tangents are drawn from the same external point, how do their lengths compare?",
+                      "correctAnswer": "Equal",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-12-quiz-q5",
+                      "questionText": "A cyclic quadrilateral has one angle of 110 degrees. What is its opposite angle?",
+                      "correctAnswer": "70 degrees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "60 degrees",
+                        "70 degrees",
+                        "90 degrees",
+                        "110 degrees"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-10-level-12-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-10-level-12-exam-q1",
+                      "questionText": "A cyclic quadrilateral has one angle of 95 degrees. What is its opposite angle?",
+                      "correctAnswer": "85",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-12-exam-q2",
+                      "questionText": "What is a quadrilateral called if all 4 corners touch the circle?",
+                      "correctAnswer": "Cyclic quadrilateral",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Tangential quadrilateral",
+                        "Cyclic quadrilateral",
+                        "Inscribed triangle",
+                        "Chord quadrilateral"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-12-exam-q3",
+                      "questionText": "If a tangent from point P touches a circle at A, and another tangent from P touches at B, and PA = 6 cm, what is PB?",
+                      "correctAnswer": "6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-12-exam-q4",
+                      "questionText": "By the alternate segment theorem, the angle between tangent and chord equals what?",
+                      "correctAnswer": "The angle in the alternate segment",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The angle at the centre",
+                        "90 degrees",
+                        "The angle in the alternate segment",
+                        "180 degrees minus the angle"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-12-exam-q5",
+                      "questionText": "What is the angle between a tangent and the radius drawn to the point of contact?",
+                      "correctAnswer": "90",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-12-exam-q6",
+                      "questionText": "A cyclic quadrilateral has angles of 80, 100, x and y. If x is opposite 80, what is x?",
+                      "correctAnswer": "100 degrees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "80 degrees",
+                        "90 degrees",
+                        "100 degrees",
+                        "110 degrees"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Advanced Geometry & Equations"
+            },
+            {
+              "levelId": "math-10-level-13",
+              "levelName": "Simultaneous Equations: One Linear, One Quadratic",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-10-level-13-lesson",
+                  "taskName": "Lesson: Simultaneous Equations: One Linear, One Quadratic",
+                  "type": "lesson",
+                  "content": "When solving one linear and one quadratic equation together, rearrange the linear equation to make one variable the subject, then substitute it into the quadratic equation. This creates a single quadratic equation you can solve by factorising or the quadratic formula, giving two pairs of solutions (since the line usually crosses the curve at two points). Substitute your x-values back into the linear equation to find the matching y-values.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-10-level-13-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-10-level-13-quiz-q1",
+                      "questionText": "When solving simultaneous equations with one linear and one quadratic, what do you substitute?",
+                      "correctAnswer": "The linear equation into the quadratic",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The quadratic into the linear",
+                        "The linear equation into the quadratic",
+                        "Both equations into each other equally",
+                        "Neither, you graph them"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-13-quiz-q2",
+                      "questionText": "How many pairs of solutions does a line crossing a curve at two points usually give?",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-13-quiz-q3",
+                      "questionText": "Solve y = x + 1 and y = x^2 - 5 simultaneously. What quadratic do you get after substitution?",
+                      "correctAnswer": "x^2 - x - 6 = 0",
+                      "type": "multiple-choice",
+                      "options": [
+                        "x^2 - x - 6 = 0",
+                        "x^2 + x - 6 = 0",
+                        "x^2 - x + 6 = 0",
+                        "x^2 - 6 = 0"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-13-quiz-q4",
+                      "questionText": "For x^2 - x - 6 = 0, what are the factorised brackets? Give as (x - 3)(x ...)",
+                      "correctAnswer": "(x - 3)(x + 2)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-13-quiz-q5",
+                      "questionText": "Once you find x values, how do you find the matching y values?",
+                      "correctAnswer": "Substitute back into the linear equation",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Substitute back into the quadratic only",
+                        "Substitute back into the linear equation",
+                        "Use the quadratic formula again",
+                        "They are always zero"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-10-level-13-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-10-level-13-exam-q1",
+                      "questionText": "Solve y = x and y = x^2 - 2 simultaneously. What quadratic results after substitution?",
+                      "correctAnswer": "x^2 - x - 2 = 0",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-13-exam-q2",
+                      "questionText": "For x^2 - x - 2 = 0, what are the factorised brackets?",
+                      "correctAnswer": "(x - 2)(x + 1)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "(x - 2)(x + 1)",
+                        "(x + 2)(x - 1)",
+                        "(x - 1)(x + 2)",
+                        "(x - 2)(x - 1)"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-13-exam-q3",
+                      "questionText": "Using y = x and x = 2, what is the value of y?",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-13-exam-q4",
+                      "questionText": "If a line does not cross a curve at all, how many real solutions exist?",
+                      "correctAnswer": "0",
+                      "type": "multiple-choice",
+                      "options": [
+                        "0",
+                        "1",
+                        "2",
+                        "Infinite"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-13-exam-q5",
+                      "questionText": "If a line is tangent to a curve (touches at exactly one point), how many solutions are there?",
+                      "correctAnswer": "1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-13-exam-q6",
+                      "questionText": "Which method can always be used to solve the resulting quadratic if it doesn't factorise nicely?",
+                      "correctAnswer": "The quadratic formula",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Trial and error only",
+                        "The quadratic formula",
+                        "Long division",
+                        "Graphing only, no algebra"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 5: Advanced Geometry & Equations"
             }
           ]
         },

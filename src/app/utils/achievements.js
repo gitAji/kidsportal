@@ -78,7 +78,7 @@ export const ACHIEVEMENTS = [
     {
         id: "level_10",
         name: "Level 10 Legend",
-        description: "Complete all 10 levels in any subject!",
+        description: "Complete 10 different levels across your subjects!",
         emoji: "🌟",
         color: "from-cyan-300 to-sky-500",
         border: "border-sky-300",
