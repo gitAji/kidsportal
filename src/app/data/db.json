@@ -3781,6 +3781,411 @@
                 }
               ],
               "moduleName": "Module 5: Building Number Sense"
+            },
+            {
+              "levelId": "math-1-level-14",
+              "levelName": "Odd & Even Numbers",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-1-level-14-lesson",
+                  "taskName": "Lesson: Odd & Even Numbers",
+                  "type": "lesson",
+                  "content": "Even numbers can be split into two equal groups with nothing left over, and always end in 0, 2, 4, 6 or 8 - like 12 or 30. Odd numbers always have one left over when split into two groups, and end in 1, 3, 5, 7 or 9 - like 7 or 15. A quick way to check is to look only at the last digit of the number, no matter how big it is.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-1-level-14-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-1-level-14-quiz-q1",
+                      "questionText": "Is 8 an odd or an even number?",
+                      "correctAnswer": "Even",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Even",
+                        "Odd",
+                        "Neither",
+                        "Both"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-14-quiz-q2",
+                      "questionText": "What digit must an even number always end in, besides 0, 2, 4, or 6?",
+                      "correctAnswer": "8",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-14-quiz-q3",
+                      "questionText": "Is 15 an odd or an even number?",
+                      "correctAnswer": "Odd",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Even",
+                        "Odd",
+                        "Neither",
+                        "Both"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-14-quiz-q4",
+                      "questionText": "What is the smallest odd number greater than 0?",
+                      "correctAnswer": "1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-14-quiz-q5",
+                      "questionText": "Which of these is an even number?",
+                      "correctAnswer": "24",
+                      "type": "multiple-choice",
+                      "options": [
+                        "21",
+                        "23",
+                        "24",
+                        "25"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-1-level-14-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-1-level-14-exam-q1",
+                      "questionText": "What is the smallest even number greater than 0?",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-14-exam-q2",
+                      "questionText": "Which of these is an odd number?",
+                      "correctAnswer": "37",
+                      "type": "multiple-choice",
+                      "options": [
+                        "32",
+                        "34",
+                        "36",
+                        "37"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-14-exam-q3",
+                      "questionText": "If you split 10 sweets into two equal groups, how many are in each group?",
+                      "correctAnswer": "5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-14-exam-q4",
+                      "questionText": "Which digit tells you fastest whether a number is odd or even?",
+                      "correctAnswer": "The last digit",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The first digit",
+                        "The last digit",
+                        "The middle digit",
+                        "You must add all digits"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-14-exam-q5",
+                      "questionText": "Is 100 an odd or an even number?",
+                      "correctAnswer": "even",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-14-exam-q6",
+                      "questionText": "Which of these numbers is odd?",
+                      "correctAnswer": "19",
+                      "type": "multiple-choice",
+                      "options": [
+                        "16",
+                        "18",
+                        "19",
+                        "20"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Problem Solving & Patterns"
+            },
+            {
+              "levelId": "math-1-level-15",
+              "levelName": "Simple Addition & Subtraction Word Problems",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-1-level-15-lesson",
+                  "taskName": "Lesson: Simple Addition & Subtraction Word Problems",
+                  "type": "lesson",
+                  "content": "A word problem describes a real situation using words instead of just numbers, and you need to work out which operation to use. Words like 'altogether', 'in total' or 'join' often mean addition, while 'left', 'fewer' or 'difference' often mean subtraction. Reading the problem carefully and picturing what's happening helps you choose the right calculation.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-1-level-15-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-1-level-15-quiz-q1",
+                      "questionText": "Which word often signals an addition problem?",
+                      "correctAnswer": "Altogether",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Altogether",
+                        "Left",
+                        "Fewer",
+                        "Remain"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-15-quiz-q2",
+                      "questionText": "Tom has 4 apples and gets 3 more. How many does he have altogether?",
+                      "correctAnswer": "7",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-15-quiz-q3",
+                      "questionText": "Which word often signals a subtraction problem?",
+                      "correctAnswer": "Left",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Altogether",
+                        "In total",
+                        "Left",
+                        "Join"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-15-quiz-q4",
+                      "questionText": "Mia has 9 stickers and gives away 2. How many does she have left?",
+                      "correctAnswer": "7",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-15-quiz-q5",
+                      "questionText": "What is a good first step when solving a word problem?",
+                      "correctAnswer": "Read it carefully and picture what's happening",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Read it carefully and picture what's happening",
+                        "Guess an answer immediately",
+                        "Skip the words and just add",
+                        "Ignore the question"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-1-level-15-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-1-level-15-exam-q1",
+                      "questionText": "Sam has 6 marbles and finds 5 more. How many does he have in total?",
+                      "correctAnswer": "11",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-15-exam-q2",
+                      "questionText": "A problem says 'how many are left' - what operation does this usually need?",
+                      "correctAnswer": "Subtraction",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Addition",
+                        "Subtraction",
+                        "Multiplication",
+                        "Division"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-15-exam-q3",
+                      "questionText": "There are 12 birds and 4 fly away. How many birds remain?",
+                      "correctAnswer": "8",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-15-exam-q4",
+                      "questionText": "A problem says 'join together' - what operation does this usually need?",
+                      "correctAnswer": "Addition",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Addition",
+                        "Subtraction",
+                        "Multiplication",
+                        "Division"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-15-exam-q5",
+                      "questionText": "Lily had 15 pencils and used 6 of them. How many pencils does she still have?",
+                      "correctAnswer": "9",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-15-exam-q6",
+                      "questionText": "Why is picturing the situation helpful when solving a word problem?",
+                      "correctAnswer": "It helps you understand what is actually happening before you calculate",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It helps you understand what is actually happening before you calculate",
+                        "It has no real benefit",
+                        "It replaces the need for a calculation",
+                        "It only works for addition problems"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Problem Solving & Patterns"
+            },
+            {
+              "levelId": "math-1-level-16",
+              "levelName": "Patterns & Sequences",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-1-level-16-lesson",
+                  "taskName": "Lesson: Patterns & Sequences",
+                  "type": "lesson",
+                  "content": "A pattern is something that repeats or changes in a predictable way, which helps us guess what comes next. A number sequence like 2, 4, 6, 8 follows a rule (add 2 each time), and shape patterns like circle-square-circle-square follow a repeating rule too. Spotting the rule is the key to continuing any pattern correctly.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-1-level-16-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-1-level-16-quiz-q1",
+                      "questionText": "What comes next in the sequence 2, 4, 6, 8, __?",
+                      "correctAnswer": "10",
+                      "type": "multiple-choice",
+                      "options": [
+                        "9",
+                        "10",
+                        "11",
+                        "12"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-16-quiz-q2",
+                      "questionText": "What is the rule for the sequence 2, 4, 6, 8?",
+                      "correctAnswer": "add 2 each time",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-16-quiz-q3",
+                      "questionText": "What comes next in the pattern circle, square, circle, square, __?",
+                      "correctAnswer": "Circle",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Circle",
+                        "Square",
+                        "Triangle",
+                        "Star"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-16-quiz-q4",
+                      "questionText": "What comes next in the sequence 5, 10, 15, 20, __?",
+                      "correctAnswer": "25",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-16-quiz-q5",
+                      "questionText": "What is the first thing you should do to continue a pattern?",
+                      "correctAnswer": "Spot the rule it follows",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Spot the rule it follows",
+                        "Guess randomly",
+                        "Ignore earlier numbers",
+                        "Start from zero"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-1-level-16-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-1-level-16-exam-q1",
+                      "questionText": "What comes next in the sequence 1, 3, 5, 7, __?",
+                      "correctAnswer": "9",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-16-exam-q2",
+                      "questionText": "What is the rule for the sequence 1, 3, 5, 7?",
+                      "correctAnswer": "add 2 each time (odd numbers)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "add 1 each time",
+                        "add 2 each time (odd numbers)",
+                        "add 3 each time",
+                        "subtract 2 each time"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-16-exam-q3",
+                      "questionText": "What comes next in the sequence 20, 18, 16, 14, __?",
+                      "correctAnswer": "12",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-16-exam-q4",
+                      "questionText": "What is the rule for the sequence 20, 18, 16, 14?",
+                      "correctAnswer": "subtract 2 each time",
+                      "type": "multiple-choice",
+                      "options": [
+                        "add 2 each time",
+                        "subtract 2 each time",
+                        "add 4 each time",
+                        "subtract 4 each time"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-16-exam-q5",
+                      "questionText": "What comes next in the pattern red, blue, blue, red, blue, blue, __?",
+                      "correctAnswer": "red",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-1-level-16-exam-q6",
+                      "questionText": "Why is finding the rule useful in a pattern?",
+                      "correctAnswer": "It lets you predict what comes next correctly",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It lets you predict what comes next correctly",
+                        "It has no use",
+                        "It only works for shapes",
+                        "Patterns have no rules"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Problem Solving & Patterns"
             }
           ]
         },
@@ -13490,6 +13895,411 @@
                 }
               ],
               "moduleName": "Module 5: More Number & Fractions"
+            },
+            {
+              "levelId": "math-2-level-14",
+              "levelName": "3 & 4 Times Tables",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-2-level-14-lesson",
+                  "taskName": "Lesson: 3 & 4 Times Tables",
+                  "type": "lesson",
+                  "content": "The 3 times table goes 3, 6, 9, 12, 15... (adding 3 each time), and the 4 times table goes 4, 8, 12, 16, 20... (adding 4 each time). Knowing these by heart, alongside the 2, 5 and 10 times tables, makes multiplying and dividing much faster. A trick for the 4 times table: double a number, then double it again.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-2-level-14-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-2-level-14-quiz-q1",
+                      "questionText": "What is 3 x 4?",
+                      "correctAnswer": "12",
+                      "type": "multiple-choice",
+                      "options": [
+                        "9",
+                        "12",
+                        "15",
+                        "16"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-14-quiz-q2",
+                      "questionText": "What is 4 x 5?",
+                      "correctAnswer": "20",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-14-quiz-q3",
+                      "questionText": "What is 3 x 6?",
+                      "correctAnswer": "18",
+                      "type": "multiple-choice",
+                      "options": [
+                        "15",
+                        "18",
+                        "21",
+                        "24"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-14-quiz-q4",
+                      "questionText": "What is 4 x 4?",
+                      "correctAnswer": "16",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-14-quiz-q5",
+                      "questionText": "What trick helps with the 4 times table?",
+                      "correctAnswer": "Double a number, then double it again",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Double a number, then double it again",
+                        "Halve a number twice",
+                        "Add 10 each time",
+                        "Subtract 4 each time"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-2-level-14-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-2-level-14-exam-q1",
+                      "questionText": "What is 3 x 8?",
+                      "correctAnswer": "24",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-14-exam-q2",
+                      "questionText": "What is 4 x 7?",
+                      "correctAnswer": "28",
+                      "type": "multiple-choice",
+                      "options": [
+                        "24",
+                        "26",
+                        "28",
+                        "32"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-14-exam-q3",
+                      "questionText": "What is 3 x 9?",
+                      "correctAnswer": "27",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-14-exam-q4",
+                      "questionText": "What is 4 x 9?",
+                      "correctAnswer": "36",
+                      "type": "multiple-choice",
+                      "options": [
+                        "32",
+                        "34",
+                        "36",
+                        "40"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-14-exam-q5",
+                      "questionText": "What is 3 x 10?",
+                      "correctAnswer": "30",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-14-exam-q6",
+                      "questionText": "What comes next in the 4 times table after 4, 8, 12, 16?",
+                      "correctAnswer": "20",
+                      "type": "multiple-choice",
+                      "options": [
+                        "18",
+                        "20",
+                        "22",
+                        "24"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Multiplication Mastery & Geometry"
+            },
+            {
+              "levelId": "math-2-level-15",
+              "levelName": "2D Shape Properties: Sides & Vertices",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-2-level-15-lesson",
+                  "taskName": "Lesson: 2D Shape Properties: Sides & Vertices",
+                  "type": "lesson",
+                  "content": "Every 2D shape can be described by its number of sides (straight edges) and vertices (corners, where two sides meet). A triangle has 3 sides and 3 vertices, a square has 4 sides and 4 vertices, and a pentagon has 5 sides and 5 vertices. Counting sides and vertices carefully helps you identify and compare different shapes.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-2-level-15-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-2-level-15-quiz-q1",
+                      "questionText": "How many sides does a triangle have?",
+                      "correctAnswer": "3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-15-quiz-q2",
+                      "questionText": "How many vertices (corners) does a square have?",
+                      "correctAnswer": "4",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-15-quiz-q3",
+                      "questionText": "How many sides does a pentagon have?",
+                      "correctAnswer": "5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4",
+                        "5",
+                        "6",
+                        "7"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-15-quiz-q4",
+                      "questionText": "What do we call a corner where two sides of a shape meet?",
+                      "correctAnswer": "a vertex",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-15-quiz-q5",
+                      "questionText": "How many vertices does a hexagon have?",
+                      "correctAnswer": "6",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4",
+                        "5",
+                        "6",
+                        "7"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-2-level-15-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-2-level-15-exam-q1",
+                      "questionText": "How many sides does a hexagon have?",
+                      "correctAnswer": "6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-15-exam-q2",
+                      "questionText": "A shape has 4 sides and 4 vertices. What could it be?",
+                      "correctAnswer": "A square or rectangle",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A triangle",
+                        "A square or rectangle",
+                        "A pentagon",
+                        "A circle"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-15-exam-q3",
+                      "questionText": "How many sides does an octagon have?",
+                      "correctAnswer": "8",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-15-exam-q4",
+                      "questionText": "Which shape has no straight sides or vertices at all?",
+                      "correctAnswer": "A circle",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A triangle",
+                        "A square",
+                        "A circle",
+                        "A pentagon"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-15-exam-q5",
+                      "questionText": "If a shape has 3 vertices, how many sides must it have?",
+                      "correctAnswer": "3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-15-exam-q6",
+                      "questionText": "Why are sides and vertices useful for identifying shapes?",
+                      "correctAnswer": "They give a clear, countable way to describe and compare shapes",
+                      "type": "multiple-choice",
+                      "options": [
+                        "They give a clear, countable way to describe and compare shapes",
+                        "They have no use for identifying shapes",
+                        "Only colour matters for shapes",
+                        "Shapes cannot be compared this way"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Multiplication Mastery & Geometry"
+            },
+            {
+              "levelId": "math-2-level-16",
+              "levelName": "Telling Time to 5 Minutes",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-2-level-16-lesson",
+                  "taskName": "Lesson: Telling Time to 5 Minutes",
+                  "type": "lesson",
+                  "content": "On an analogue clock, the minute hand points to a number that shows minutes in steps of 5: pointing at 1 means 5 minutes past, pointing at 2 means 10 minutes past, and so on all the way to 12 (o'clock). Practising reading the minute hand in these 5-minute jumps helps you tell the time quickly and accurately.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-2-level-16-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-2-level-16-quiz-q1",
+                      "questionText": "If the minute hand points at the 1, how many minutes past the hour is it?",
+                      "correctAnswer": "5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "5",
+                        "10",
+                        "15",
+                        "20"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-16-quiz-q2",
+                      "questionText": "If the minute hand points at the 3, how many minutes past the hour is it?",
+                      "correctAnswer": "15",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-16-quiz-q3",
+                      "questionText": "If the minute hand points at the 6, what time is it, in relation to the hour?",
+                      "correctAnswer": "Half past",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Quarter past",
+                        "Half past",
+                        "Quarter to",
+                        "O'clock"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-16-quiz-q4",
+                      "questionText": "If the minute hand points at the 2, how many minutes past the hour is it?",
+                      "correctAnswer": "10",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-16-quiz-q5",
+                      "questionText": "If the minute hand points at the 12, what time is it, in relation to the hour?",
+                      "correctAnswer": "O'clock",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Quarter past",
+                        "Half past",
+                        "Quarter to",
+                        "O'clock"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-2-level-16-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-2-level-16-exam-q1",
+                      "questionText": "If the minute hand points at the 9, how many minutes past the hour is it?",
+                      "correctAnswer": "45",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-16-exam-q2",
+                      "questionText": "If the minute hand points at the 9, what time is it, in relation to the hour?",
+                      "correctAnswer": "Quarter to the next hour",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Quarter past",
+                        "Half past",
+                        "Quarter to the next hour",
+                        "O'clock"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-16-exam-q3",
+                      "questionText": "If the minute hand points at the 4, how many minutes past the hour is it?",
+                      "correctAnswer": "20",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-16-exam-q4",
+                      "questionText": "Each number on the clock face represents how many minutes?",
+                      "correctAnswer": "5 minutes",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1 minute",
+                        "5 minutes",
+                        "10 minutes",
+                        "15 minutes"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-16-exam-q5",
+                      "questionText": "If the minute hand points at the 11, how many minutes past the hour is it?",
+                      "correctAnswer": "55",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-2-level-16-exam-q6",
+                      "questionText": "Why does the minute hand jump in steps of 5 between each number?",
+                      "correctAnswer": "Because there are 5 minutes between each number on the clock face",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Because there are 5 minutes between each number on the clock face",
+                        "It actually jumps in steps of 1",
+                        "It has no pattern",
+                        "It jumps in steps of 10"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Multiplication Mastery & Geometry"
             }
           ]
         },
@@ -23198,6 +24008,411 @@
                 }
               ],
               "moduleName": "Module 5: Fractions & Written Methods"
+            },
+            {
+              "levelId": "math-3-level-14",
+              "levelName": "Multiplying 2-Digit by 1-Digit Numbers",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-3-level-14-lesson",
+                  "taskName": "Lesson: Multiplying 2-Digit by 1-Digit Numbers",
+                  "type": "lesson",
+                  "content": "To multiply a 2-digit number by a 1-digit number, split the 2-digit number into tens and ones, multiply each part separately, then add the results together. For 23 x 4: multiply 20 x 4 = 80, then 3 x 4 = 12, then add 80 + 12 = 92. This method, called partitioning, breaks a hard calculation into easier steps.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-3-level-14-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-3-level-14-quiz-q1",
+                      "questionText": "What is 23 x 4?",
+                      "correctAnswer": "92",
+                      "type": "multiple-choice",
+                      "options": [
+                        "82",
+                        "92",
+                        "102",
+                        "88"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-14-quiz-q2",
+                      "questionText": "What is 20 x 4?",
+                      "correctAnswer": "80",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-14-quiz-q3",
+                      "questionText": "What is 32 x 3?",
+                      "correctAnswer": "96",
+                      "type": "multiple-choice",
+                      "options": [
+                        "86",
+                        "90",
+                        "96",
+                        "106"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-14-quiz-q4",
+                      "questionText": "What is 3 x 4?",
+                      "correctAnswer": "12",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-14-quiz-q5",
+                      "questionText": "What do we call splitting a number into tens and ones to make multiplying easier?",
+                      "correctAnswer": "Partitioning",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Partitioning",
+                        "Rounding",
+                        "Estimating",
+                        "Dividing"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-3-level-14-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-3-level-14-exam-q1",
+                      "questionText": "What is 14 x 5?",
+                      "correctAnswer": "70",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-14-exam-q2",
+                      "questionText": "What is 41 x 3?",
+                      "correctAnswer": "123",
+                      "type": "multiple-choice",
+                      "options": [
+                        "113",
+                        "123",
+                        "133",
+                        "143"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-14-exam-q3",
+                      "questionText": "What is 52 x 4?",
+                      "correctAnswer": "208",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-14-exam-q4",
+                      "questionText": "What is 26 x 3?",
+                      "correctAnswer": "78",
+                      "type": "multiple-choice",
+                      "options": [
+                        "68",
+                        "78",
+                        "88",
+                        "96"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-14-exam-q5",
+                      "questionText": "What is 60 + 12?",
+                      "correctAnswer": "72",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-14-exam-q6",
+                      "questionText": "Why is partitioning a useful strategy?",
+                      "correctAnswer": "It breaks a hard calculation into easier smaller steps",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It breaks a hard calculation into easier smaller steps",
+                        "It makes calculations harder",
+                        "It only works for addition",
+                        "It has no real benefit"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Multiplication, Perimeter & Graphs"
+            },
+            {
+              "levelId": "math-3-level-15",
+              "levelName": "Perimeter of Simple Shapes",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-3-level-15-lesson",
+                  "taskName": "Lesson: Perimeter of Simple Shapes",
+                  "type": "lesson",
+                  "content": "Perimeter is the total distance all the way around the outside of a shape, found by adding up the length of every side. For a rectangle with length 6 cm and width 4 cm, the perimeter is 6 + 4 + 6 + 4 = 20 cm. For a square with sides of 5 cm, the perimeter is 5 x 4 = 20 cm, since all four sides are equal.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-3-level-15-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-3-level-15-quiz-q1",
+                      "questionText": "What is perimeter?",
+                      "correctAnswer": "The total distance around the outside of a shape",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The total distance around the outside of a shape",
+                        "The space inside a shape",
+                        "The number of sides a shape has",
+                        "The weight of a shape"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-15-quiz-q2",
+                      "questionText": "A square has sides of 6 cm. What is its perimeter?",
+                      "correctAnswer": "24",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-15-quiz-q3",
+                      "questionText": "What is the perimeter of a rectangle with length 8 cm and width 3 cm?",
+                      "correctAnswer": "22 cm",
+                      "type": "multiple-choice",
+                      "options": [
+                        "11 cm",
+                        "22 cm",
+                        "24 cm",
+                        "19 cm"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-15-quiz-q4",
+                      "questionText": "A triangle has sides of 3 cm, 4 cm and 5 cm. What is its perimeter?",
+                      "correctAnswer": "12",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-15-quiz-q5",
+                      "questionText": "How do you find the perimeter of any shape?",
+                      "correctAnswer": "Add up the length of every side",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Add up the length of every side",
+                        "Multiply the length and width",
+                        "Count the vertices",
+                        "Count the sides only"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-3-level-15-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-3-level-15-exam-q1",
+                      "questionText": "A square has sides of 9 cm. What is its perimeter?",
+                      "correctAnswer": "36",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-15-exam-q2",
+                      "questionText": "What is the perimeter of a rectangle with length 10 cm and width 5 cm?",
+                      "correctAnswer": "30 cm",
+                      "type": "multiple-choice",
+                      "options": [
+                        "15 cm",
+                        "25 cm",
+                        "30 cm",
+                        "50 cm"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-15-exam-q3",
+                      "questionText": "A pentagon has 5 equal sides of 4 cm each. What is its perimeter?",
+                      "correctAnswer": "20",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-15-exam-q4",
+                      "questionText": "If a square has a perimeter of 20 cm, how long is each side?",
+                      "correctAnswer": "5 cm",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4 cm",
+                        "5 cm",
+                        "10 cm",
+                        "20 cm"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-15-exam-q5",
+                      "questionText": "A rectangle has length 7 cm and width 2 cm. What is its perimeter?",
+                      "correctAnswer": "18",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-15-exam-q6",
+                      "questionText": "Why do all four sides count equally when finding perimeter?",
+                      "correctAnswer": "Perimeter measures the full distance around the shape's edge",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Perimeter measures the full distance around the shape's edge",
+                        "Only two sides matter for perimeter",
+                        "Perimeter ignores the width",
+                        "Only the longest side counts"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Multiplication, Perimeter & Graphs"
+            },
+            {
+              "levelId": "math-3-level-16",
+              "levelName": "Bar Charts & Pictograms",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-3-level-16-lesson",
+                  "taskName": "Lesson: Bar Charts & Pictograms",
+                  "type": "lesson",
+                  "content": "A bar chart uses rectangular bars to show how much or how many of something there is - the taller or longer the bar, the bigger the amount. Reading a bar chart means checking the height of each bar against the scale on the axis. Bar charts make it easy to quickly compare different categories, like favourite fruits or pets, at a glance.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-3-level-16-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-3-level-16-quiz-q1",
+                      "questionText": "What does the height of a bar in a bar chart represent?",
+                      "correctAnswer": "The amount or quantity for that category",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The amount or quantity for that category",
+                        "The colour of the category",
+                        "The name of the category only",
+                        "Nothing meaningful"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-16-quiz-q2",
+                      "questionText": "What should you check to read the exact value of a bar?",
+                      "correctAnswer": "the scale on the axis",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-16-quiz-q3",
+                      "questionText": "Why are bar charts useful?",
+                      "correctAnswer": "They make it easy to compare different categories at a glance",
+                      "type": "multiple-choice",
+                      "options": [
+                        "They make it easy to compare different categories at a glance",
+                        "They have no practical use",
+                        "They only work with words, not numbers",
+                        "Bar charts cannot be compared"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-16-quiz-q4",
+                      "questionText": "If one bar is taller than another, what does that tell you?",
+                      "correctAnswer": "that category has a bigger amount/value",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-16-quiz-q5",
+                      "questionText": "Give an example of something a bar chart could compare.",
+                      "correctAnswer": "Favourite fruits (or pets)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Favourite fruits (or pets)",
+                        "Nothing can be compared",
+                        "Only exact decimals",
+                        "Only time of day"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-3-level-16-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-3-level-16-exam-q1",
+                      "questionText": "What is the main visual element used in a bar chart to show data?",
+                      "correctAnswer": "bars (rectangles)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-16-exam-q2",
+                      "questionText": "What is the key difference between a bar chart and a pictogram?",
+                      "correctAnswer": "A pictogram uses repeated pictures/symbols instead of bars",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A pictogram uses repeated pictures/symbols instead of bars",
+                        "They are exactly identical",
+                        "Bar charts never use a scale",
+                        "Pictograms cannot show data"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-16-exam-q3",
+                      "questionText": "What must you know to correctly read how many each pictogram symbol represents?",
+                      "correctAnswer": "the key (legend)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-16-exam-q4",
+                      "questionText": "Which chart would be best for comparing 5 categories' exact amounts at a glance?",
+                      "correctAnswer": "A bar chart",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A bar chart",
+                        "A single number",
+                        "A list of words",
+                        "None of these"
+                      ]
+                    },
+                    {
+                      "questionId": "math-3-level-16-exam-q5",
+                      "questionText": "If a bar chart's y-axis goes up in steps of 2, and a bar reaches the 4th step, what value does it show?",
+                      "correctAnswer": "8",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-3-level-16-exam-q6",
+                      "questionText": "Why is checking the scale important before reading a bar chart's values?",
+                      "correctAnswer": "Bars can represent different amounts depending on the scale used",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Bars always represent exactly 1 unit",
+                        "Bars can represent different amounts depending on the scale used",
+                        "The scale never matters",
+                        "Scale only matters for pictograms"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Multiplication, Perimeter & Graphs"
             }
           ]
         },
@@ -32900,6 +34115,411 @@
                 }
               ],
               "moduleName": "Module 5: Number Skills & Shape"
+            },
+            {
+              "levelId": "math-4-level-14",
+              "levelName": "Introducing Decimals: Tenths & Hundredths",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-4-level-14-lesson",
+                  "taskName": "Lesson: Introducing Decimals: Tenths & Hundredths",
+                  "type": "lesson",
+                  "content": "A decimal point separates whole numbers from parts smaller than one. The first digit after the decimal point shows tenths (1/10), and the second shows hundredths (1/100) - so 0.3 means 3 tenths, and 0.25 means 25 hundredths. Decimals let us write fractions and measurements, like 1.5 metres, in a different but closely related way.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-4-level-14-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-4-level-14-quiz-q1",
+                      "questionText": "What does the first digit after a decimal point represent?",
+                      "correctAnswer": "Tenths",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Tenths",
+                        "Hundredths",
+                        "Thousandths",
+                        "Whole numbers"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-14-quiz-q2",
+                      "questionText": "What does 0.3 mean, as a fraction?",
+                      "correctAnswer": "3 tenths (3/10)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-14-quiz-q3",
+                      "questionText": "What does the second digit after a decimal point represent?",
+                      "correctAnswer": "Hundredths",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Tenths",
+                        "Hundredths",
+                        "Thousandths",
+                        "Whole numbers"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-14-quiz-q4",
+                      "questionText": "What does 0.25 mean, as a fraction?",
+                      "correctAnswer": "25 hundredths (25/100)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-14-quiz-q5",
+                      "questionText": "What does a decimal point do?",
+                      "correctAnswer": "Separates whole numbers from parts smaller than one",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Separates whole numbers from parts smaller than one",
+                        "Multiplies the number by 10",
+                        "Has no real purpose",
+                        "Divides the number in half"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-4-level-14-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-4-level-14-exam-q1",
+                      "questionText": "What is 1/10 written as a decimal?",
+                      "correctAnswer": "0.1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-14-exam-q2",
+                      "questionText": "What is 50/100 written as a decimal?",
+                      "correctAnswer": "0.5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "0.05",
+                        "0.5",
+                        "5.0",
+                        "0.50 is wrong"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-14-exam-q3",
+                      "questionText": "What is 7/10 written as a decimal?",
+                      "correctAnswer": "0.7",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-14-exam-q4",
+                      "questionText": "Which decimal is larger, 0.4 or 0.04?",
+                      "correctAnswer": "0.4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "0.4",
+                        "0.04",
+                        "They are equal",
+                        "Cannot be compared"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-14-exam-q5",
+                      "questionText": "What is 3/100 written as a decimal?",
+                      "correctAnswer": "0.03",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-14-exam-q6",
+                      "questionText": "Why are decimals useful for measurements, like 1.5 metres?",
+                      "correctAnswer": "They let us show parts of a whole number precisely",
+                      "type": "multiple-choice",
+                      "options": [
+                        "They let us show parts of a whole number precisely",
+                        "Decimals have no use in measurement",
+                        "Measurements never need decimals",
+                        "Decimals only work for money"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Decimals & Area"
+            },
+            {
+              "levelId": "math-4-level-15",
+              "levelName": "Area of Rectangles",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-4-level-15-lesson",
+                  "taskName": "Lesson: Area of Rectangles",
+                  "type": "lesson",
+                  "content": "Area tells us how much flat space a 2D shape covers, measured in square units like cm squared (cm2). To find the area of a rectangle, multiply its length by its width: a rectangle 5 cm long and 3 cm wide has an area of 5 x 3 = 15 cm2. Unlike perimeter (the distance around), area measures the space covered inside the shape.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-4-level-15-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-4-level-15-quiz-q1",
+                      "questionText": "What does area measure?",
+                      "correctAnswer": "How much flat space a shape covers",
+                      "type": "multiple-choice",
+                      "options": [
+                        "How much flat space a shape covers",
+                        "The distance around a shape",
+                        "The number of sides a shape has",
+                        "The weight of a shape"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-15-quiz-q2",
+                      "questionText": "What is the area of a rectangle 4 cm long and 3 cm wide?",
+                      "correctAnswer": "12",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-15-quiz-q3",
+                      "questionText": "What is the formula for the area of a rectangle?",
+                      "correctAnswer": "length x width",
+                      "type": "multiple-choice",
+                      "options": [
+                        "length x width",
+                        "length + width",
+                        "2 x (length + width)",
+                        "length - width"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-15-quiz-q4",
+                      "questionText": "What units is area typically measured in?",
+                      "correctAnswer": "square units (e.g. cm2)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-15-quiz-q5",
+                      "questionText": "How is area different from perimeter?",
+                      "correctAnswer": "Area measures space covered inside; perimeter measures distance around",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Area measures space covered inside; perimeter measures distance around",
+                        "They are exactly the same thing",
+                        "Perimeter measures inside space",
+                        "Area measures distance around"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-4-level-15-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-4-level-15-exam-q1",
+                      "questionText": "What is the area of a rectangle 7 cm long and 2 cm wide?",
+                      "correctAnswer": "14",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-15-exam-q2",
+                      "questionText": "What is the area of a square with sides of 6 cm?",
+                      "correctAnswer": "36 cm2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "24 cm2",
+                        "30 cm2",
+                        "36 cm2",
+                        "12 cm2"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-15-exam-q3",
+                      "questionText": "If a rectangle has an area of 20 cm2 and a width of 4 cm, what is its length?",
+                      "correctAnswer": "5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-15-exam-q4",
+                      "questionText": "What is the area of a rectangle 9 cm long and 3 cm wide?",
+                      "correctAnswer": "27 cm2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "12 cm2",
+                        "18 cm2",
+                        "27 cm2",
+                        "36 cm2"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-15-exam-q5",
+                      "questionText": "What is the area of a square with sides of 10 cm?",
+                      "correctAnswer": "100",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-15-exam-q6",
+                      "questionText": "Why do we use square units like cm2 to measure area?",
+                      "correctAnswer": "Because area measures a 2-dimensional covered space",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Because area measures a 2-dimensional covered space",
+                        "Square units are used for perimeter instead",
+                        "Area has no specific units",
+                        "Square units only apply to circles"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Decimals & Area"
+            },
+            {
+              "levelId": "math-4-level-16",
+              "levelName": "Negative Numbers on a Number Line",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-4-level-16-lesson",
+                  "taskName": "Lesson: Negative Numbers on a Number Line",
+                  "type": "lesson",
+                  "content": "A number line extends in both directions from zero: positive numbers to the right, negative numbers to the left. Negative numbers represent values below zero, like temperatures below freezing (-5 degrees) or a lift going below ground level (-2). The further left a number is on the number line, the smaller its value, even though it might look 'bigger' without the minus sign.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-4-level-16-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-4-level-16-quiz-q1",
+                      "questionText": "Where are negative numbers found on a number line?",
+                      "correctAnswer": "To the left of zero",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To the left of zero",
+                        "To the right of zero",
+                        "Exactly at zero",
+                        "They aren't on a number line"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-16-quiz-q2",
+                      "questionText": "Give an example of a situation where a negative number is used, besides temperature.",
+                      "correctAnswer": "a lift/floor below ground level (or debt)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-16-quiz-q3",
+                      "questionText": "Which is smaller, -5 or -2?",
+                      "correctAnswer": "-5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "-5",
+                        "-2",
+                        "They are equal",
+                        "Cannot be determined"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-16-quiz-q4",
+                      "questionText": "What does a temperature of -5 degrees mean?",
+                      "correctAnswer": "5 degrees below zero",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-16-quiz-q5",
+                      "questionText": "The further left a number is on a number line, what happens to its value?",
+                      "correctAnswer": "It gets smaller",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It gets smaller",
+                        "It gets bigger",
+                        "It stays the same",
+                        "It becomes positive"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-4-level-16-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-4-level-16-exam-q1",
+                      "questionText": "Which is bigger, -3 or 2?",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-16-exam-q2",
+                      "questionText": "Which is bigger, -1 or -10?",
+                      "correctAnswer": "-1",
+                      "type": "multiple-choice",
+                      "options": [
+                        "-1",
+                        "-10",
+                        "They are equal",
+                        "Cannot be determined"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-16-exam-q3",
+                      "questionText": "What is the opposite of -7 on a number line (same distance from zero)?",
+                      "correctAnswer": "7",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-16-exam-q4",
+                      "questionText": "Why might -10 look 'bigger' than -2 without understanding negative numbers?",
+                      "correctAnswer": "The number 10 is bigger than 2, but with a minus sign, -10 is actually smaller",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The number 10 is bigger than 2, but with a minus sign, -10 is actually smaller",
+                        "-10 is always smaller in every number system without exception",
+                        "Negative numbers don't follow any size rules",
+                        "-10 actually is bigger than -2"
+                      ]
+                    },
+                    {
+                      "questionId": "math-4-level-16-exam-q5",
+                      "questionText": "What is the value directly between -2 and 2 on a number line?",
+                      "correctAnswer": "0",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-4-level-16-exam-q6",
+                      "questionText": "Which best describes a number line's layout?",
+                      "correctAnswer": "Zero in the middle, positives to the right, negatives to the left",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Zero in the middle, positives to the right, negatives to the left",
+                        "All numbers are positive",
+                        "Negative numbers are on the right",
+                        "Zero is always on the far left"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Decimals & Area"
             }
           ]
         },
@@ -42578,6 +44198,411 @@
                 }
               ],
               "moduleName": "Module 5: Number Theory & Volume"
+            },
+            {
+              "levelId": "math-5-level-14",
+              "levelName": "Introducing Ratio",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-5-level-14-lesson",
+                  "taskName": "Lesson: Introducing Ratio",
+                  "type": "lesson",
+                  "content": "A ratio compares two or more quantities, showing how much of one thing there is compared to another, written with a colon like 3:2. If a recipe uses a ratio of 3:2 for flour to sugar, for every 3 parts flour, there are 2 parts sugar. Ratios can be simplified just like fractions - 4:6 simplifies to 2:3 by dividing both sides by 2.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-5-level-14-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-5-level-14-quiz-q1",
+                      "questionText": "What symbol is used to write a ratio?",
+                      "correctAnswer": "A colon (:)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A colon (:)",
+                        "A plus sign (+)",
+                        "A division sign (/)",
+                        "An equals sign (=)"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-14-quiz-q2",
+                      "questionText": "In a ratio of 3:2 flour to sugar, how many parts flour are there for every 2 parts sugar?",
+                      "correctAnswer": "3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-14-quiz-q3",
+                      "questionText": "Simplify the ratio 4:6.",
+                      "correctAnswer": "2:3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2:3",
+                        "1:2",
+                        "4:6 cannot simplify",
+                        "1:3"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-14-quiz-q4",
+                      "questionText": "What does a ratio compare?",
+                      "correctAnswer": "two or more quantities",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-14-quiz-q5",
+                      "questionText": "How do you simplify a ratio?",
+                      "correctAnswer": "Divide both sides by the same number",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Divide both sides by the same number",
+                        "Add the same number to both sides",
+                        "Multiply only one side",
+                        "Ratios cannot be simplified"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-5-level-14-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-5-level-14-exam-q1",
+                      "questionText": "Simplify the ratio 10:5.",
+                      "correctAnswer": "2:1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-14-exam-q2",
+                      "questionText": "A recipe has a ratio of 2:1 for water to rice. If you use 4 cups of water, how much rice do you need?",
+                      "correctAnswer": "2 cups",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1 cup",
+                        "2 cups",
+                        "4 cups",
+                        "8 cups"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-14-exam-q3",
+                      "questionText": "Simplify the ratio 9:12.",
+                      "correctAnswer": "3:4",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-14-exam-q4",
+                      "questionText": "If a class has a ratio of 3:2 for boys to girls, and there are 15 boys, how many girls are there?",
+                      "correctAnswer": "10",
+                      "type": "multiple-choice",
+                      "options": [
+                        "5",
+                        "10",
+                        "15",
+                        "20"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-14-exam-q5",
+                      "questionText": "What number would you divide both sides of 8:12 by to simplify it?",
+                      "correctAnswer": "4",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-14-exam-q6",
+                      "questionText": "Why are ratios useful in real life, like cooking?",
+                      "correctAnswer": "They help scale amounts up or down while keeping the same proportions",
+                      "type": "multiple-choice",
+                      "options": [
+                        "They help scale amounts up or down while keeping the same proportions",
+                        "Ratios have no real-life use",
+                        "Ratios only apply to numbers below 10",
+                        "Ratios cannot be used for recipes"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Ratio, Angles & Averages"
+            },
+            {
+              "levelId": "math-5-level-15",
+              "levelName": "Angles in a Straight Line & Around a Point",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-5-level-15-lesson",
+                  "taskName": "Lesson: Angles in a Straight Line & Around a Point",
+                  "type": "lesson",
+                  "content": "Angles on a straight line always add up to 180 degrees, and angles that go all the way around a single point add up to 360 degrees. If two angles are on a straight line and one is 110 degrees, the other must be 180 - 110 = 70 degrees. These facts let you find missing angles without needing to measure them directly.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-5-level-15-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-5-level-15-quiz-q1",
+                      "questionText": "What do angles on a straight line always add up to?",
+                      "correctAnswer": "180 degrees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "90 degrees",
+                        "180 degrees",
+                        "270 degrees",
+                        "360 degrees"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-15-quiz-q2",
+                      "questionText": "What do angles all the way around a point always add up to?",
+                      "correctAnswer": "360",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-15-quiz-q3",
+                      "questionText": "Two angles are on a straight line. One is 60 degrees. What is the other?",
+                      "correctAnswer": "120 degrees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "90 degrees",
+                        "110 degrees",
+                        "120 degrees",
+                        "140 degrees"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-15-quiz-q4",
+                      "questionText": "Three angles meet at a point: 90, 120, and an unknown angle. What is the unknown angle?",
+                      "correctAnswer": "150",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-15-quiz-q5",
+                      "questionText": "Why don't you need to measure an angle directly if you know the others on a line?",
+                      "correctAnswer": "You can calculate it because the angles must add to 180 or 360",
+                      "type": "multiple-choice",
+                      "options": [
+                        "You can calculate it because the angles must add to 180 or 360",
+                        "You always have to measure every angle",
+                        "Angles on a line never add to a fixed total",
+                        "This fact only works for right angles"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-5-level-15-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-5-level-15-exam-q1",
+                      "questionText": "Two angles are on a straight line. One is 95 degrees. What is the other?",
+                      "correctAnswer": "85",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-15-exam-q2",
+                      "questionText": "Four angles meet at a point: 90, 90, 90, and an unknown. What is the unknown?",
+                      "correctAnswer": "90 degrees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "60 degrees",
+                        "80 degrees",
+                        "90 degrees",
+                        "100 degrees"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-15-exam-q3",
+                      "questionText": "Two angles are on a straight line. One is 45 degrees. What is the other?",
+                      "correctAnswer": "135",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-15-exam-q4",
+                      "questionText": "What is the sum of angles around a point always equal to?",
+                      "correctAnswer": "360 degrees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "90 degrees",
+                        "180 degrees",
+                        "270 degrees",
+                        "360 degrees"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-15-exam-q5",
+                      "questionText": "Three angles meet at a point: 100, 100, and an unknown. What is the unknown?",
+                      "correctAnswer": "160",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-15-exam-q6",
+                      "questionText": "Why is it useful to know these two angle facts (180 and 360)?",
+                      "correctAnswer": "They let you find missing angles using calculation instead of measuring",
+                      "type": "multiple-choice",
+                      "options": [
+                        "They let you find missing angles using calculation instead of measuring",
+                        "They have no practical use in geometry",
+                        "They only apply to right angles",
+                        "Angles never relate to each other this way"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Ratio, Angles & Averages"
+            },
+            {
+              "levelId": "math-5-level-16",
+              "levelName": "Mean, Median, Mode & Range",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-5-level-16-lesson",
+                  "taskName": "Lesson: Mean, Median, Mode & Range",
+                  "type": "lesson",
+                  "content": "The mean is the average: add all the numbers together and divide by how many there are. The median is the middle value when numbers are put in order. The mode is the number that appears most often. The range is the difference between the biggest and smallest number. Together, these four measures describe a set of data from different angles.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-5-level-16-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-5-level-16-quiz-q1",
+                      "questionText": "How do you find the mean of a set of numbers?",
+                      "correctAnswer": "Add them all together and divide by how many there are",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Add them all together and divide by how many there are",
+                        "Find the middle number",
+                        "Find the most common number",
+                        "Subtract the smallest from the biggest"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-16-quiz-q2",
+                      "questionText": "What is the median of 3, 5, 7, 9, 11?",
+                      "correctAnswer": "7",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-16-quiz-q3",
+                      "questionText": "What is the mode of 2, 3, 3, 4, 5?",
+                      "correctAnswer": "3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-16-quiz-q4",
+                      "questionText": "What is the range of 4, 8, 15, 2, 10?",
+                      "correctAnswer": "13",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-16-quiz-q5",
+                      "questionText": "What does 'mode' mean in a data set?",
+                      "correctAnswer": "The number that appears most often",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The number that appears most often",
+                        "The middle number",
+                        "The average",
+                        "The biggest number"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-5-level-16-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-5-level-16-exam-q1",
+                      "questionText": "What is the mean of 2, 4, 6, 8?",
+                      "correctAnswer": "5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-16-exam-q2",
+                      "questionText": "What is the median of 1, 2, 3, 4?",
+                      "correctAnswer": "2.5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "2.5",
+                        "3",
+                        "3.5"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-16-exam-q3",
+                      "questionText": "What is the range of 20, 5, 15, 10?",
+                      "correctAnswer": "15",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-16-exam-q4",
+                      "questionText": "What is the mode of 7, 7, 8, 9, 9, 9?",
+                      "correctAnswer": "9",
+                      "type": "multiple-choice",
+                      "options": [
+                        "7",
+                        "8",
+                        "9",
+                        "There is no mode"
+                      ]
+                    },
+                    {
+                      "questionId": "math-5-level-16-exam-q5",
+                      "questionText": "What is the mean of 10, 20, 30?",
+                      "correctAnswer": "20",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-5-level-16-exam-q6",
+                      "questionText": "Why might you use the median instead of the mean for some data?",
+                      "correctAnswer": "The median isn't affected as much by one very large or small value",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The median isn't affected as much by one very large or small value",
+                        "The median and mean always give the exact same result",
+                        "The median is never useful",
+                        "Mean is always the better choice"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Ratio, Angles & Averages"
             }
           ]
         },
@@ -52166,6 +54191,411 @@
                 }
               ],
               "moduleName": "Module 5: Negative Numbers & Percentages"
+            },
+            {
+              "levelId": "math-6-level-14",
+              "levelName": "Simplifying Algebraic Expressions",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-6-level-14-lesson",
+                  "taskName": "Lesson: Simplifying Algebraic Expressions",
+                  "type": "lesson",
+                  "content": "To simplify an algebraic expression, combine 'like terms' - terms with exactly the same letter (variable). For example, 3x + 5x simplifies to 8x, because both terms have 'x'. But 3x + 5y cannot be combined, since x and y are different letters. Numbers without letters (constants) can also be combined together, like 4 + 7 = 11.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-6-level-14-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-6-level-14-quiz-q1",
+                      "questionText": "What are 'like terms'?",
+                      "correctAnswer": "Terms with exactly the same letter (variable)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Terms with exactly the same letter (variable)",
+                        "Any two numbers",
+                        "Terms with different letters",
+                        "Terms that are both negative"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-14-quiz-q2",
+                      "questionText": "Simplify 3x + 5x.",
+                      "correctAnswer": "8x",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-14-quiz-q3",
+                      "questionText": "Can 3x + 5y be simplified into one term?",
+                      "correctAnswer": "No, because x and y are different letters",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No, because x and y are different letters",
+                        "Yes, it becomes 8xy",
+                        "Yes, it becomes 8",
+                        "Yes, it becomes 15xy"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-14-quiz-q4",
+                      "questionText": "Simplify 7y - 2y.",
+                      "correctAnswer": "5y",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-14-quiz-q5",
+                      "questionText": "What can you do with constants (plain numbers) in an expression?",
+                      "correctAnswer": "Combine them together like normal numbers",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Combine them together like normal numbers",
+                        "They can never be combined",
+                        "They must be treated as variables",
+                        "They cancel out automatically"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-6-level-14-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-6-level-14-exam-q1",
+                      "questionText": "Simplify 4x + 3x + 2.",
+                      "correctAnswer": "7x + 2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-14-exam-q2",
+                      "questionText": "Simplify 6a + 3 - 2a.",
+                      "correctAnswer": "4a + 3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4a + 3",
+                        "4a - 3",
+                        "8a + 3",
+                        "4a + 1"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-14-exam-q3",
+                      "questionText": "Simplify 10b - 4b + 5.",
+                      "correctAnswer": "6b + 5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-14-exam-q4",
+                      "questionText": "Why can't you combine 2x and 3x2 (x squared) into one term?",
+                      "correctAnswer": "They are different powers of x, so not like terms",
+                      "type": "multiple-choice",
+                      "options": [
+                        "They are different powers of x, so not like terms",
+                        "They can always be combined into 5x",
+                        "x and x2 are identical terms",
+                        "Powers never matter in algebra"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-14-exam-q5",
+                      "questionText": "Simplify 5x + 2y + 3x.",
+                      "correctAnswer": "8x + 2y",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-14-exam-q6",
+                      "questionText": "What is the main goal of simplifying an algebraic expression?",
+                      "correctAnswer": "To write it in its shortest, clearest equivalent form",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To write it in its shortest, clearest equivalent form",
+                        "To make it as long as possible",
+                        "To remove all letters",
+                        "To turn it into a single number always"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Algebra Foundations & Circles"
+            },
+            {
+              "levelId": "math-6-level-15",
+              "levelName": "Circumference & Area of a Circle",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-6-level-15-lesson",
+                  "taskName": "Lesson: Circumference & Area of a Circle",
+                  "type": "lesson",
+                  "content": "The circumference (distance around a circle) is found using circumference = pi x diameter, or 2 x pi x radius, where pi is approximately 3.14. The area of a circle is found using area = pi x radius squared. A circle with radius 5 cm has a circumference of about 2 x 3.14 x 5 = 31.4 cm, and an area of about 3.14 x 5 x 5 = 78.5 cm2.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-6-level-15-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-6-level-15-quiz-q1",
+                      "questionText": "What is the approximate value of pi used in calculations?",
+                      "correctAnswer": "3.14",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2.14",
+                        "3.14",
+                        "4.14",
+                        "1.14"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-15-quiz-q2",
+                      "questionText": "What is the formula for a circle's circumference using diameter?",
+                      "correctAnswer": "circumference = pi x diameter",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-15-quiz-q3",
+                      "questionText": "What is the formula for a circle's area?",
+                      "correctAnswer": "pi x radius squared",
+                      "type": "multiple-choice",
+                      "options": [
+                        "pi x radius squared",
+                        "pi x diameter",
+                        "2 x pi x radius",
+                        "radius x diameter"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-15-quiz-q4",
+                      "questionText": "What do we call the distance from the centre of a circle to its edge?",
+                      "correctAnswer": "the radius",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-15-quiz-q5",
+                      "questionText": "What do we call the distance all the way across a circle, through the centre?",
+                      "correctAnswer": "The diameter",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The radius",
+                        "The diameter",
+                        "The circumference",
+                        "The area"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-6-level-15-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-6-level-15-exam-q1",
+                      "questionText": "If a circle has a radius of 5 cm, what is its diameter?",
+                      "correctAnswer": "10",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-15-exam-q2",
+                      "questionText": "What is the circumference of a circle with diameter 10 cm? (use pi = 3.14)",
+                      "correctAnswer": "31.4 cm",
+                      "type": "multiple-choice",
+                      "options": [
+                        "15.7 cm",
+                        "31.4 cm",
+                        "62.8 cm",
+                        "78.5 cm"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-15-exam-q3",
+                      "questionText": "What is the area of a circle with radius 5 cm? (use pi = 3.14, give to 1 decimal place)",
+                      "correctAnswer": "78.5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-15-exam-q4",
+                      "questionText": "What is the relationship between radius and diameter?",
+                      "correctAnswer": "The diameter is twice the radius",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The diameter is twice the radius",
+                        "They are always equal",
+                        "The radius is twice the diameter",
+                        "They have no relationship"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-15-exam-q5",
+                      "questionText": "What is the circumference of a circle with radius 3 cm? (use pi = 3.14, give to 1 decimal place)",
+                      "correctAnswer": "18.84",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-15-exam-q6",
+                      "questionText": "Why do circle formulas always use pi?",
+                      "correctAnswer": "Pi represents the fixed ratio between a circle's circumference and diameter",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Pi represents the fixed ratio between a circle's circumference and diameter",
+                        "Pi is just a random number with no meaning",
+                        "Pi only applies to very large circles",
+                        "Pi changes depending on the circle's size"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Algebra Foundations & Circles"
+            },
+            {
+              "levelId": "math-6-level-16",
+              "levelName": "Pie Charts",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-6-level-16-lesson",
+                  "taskName": "Lesson: Pie Charts",
+                  "type": "lesson",
+                  "content": "A pie chart shows data as slices of a circle, where each slice's size represents its proportion of the whole - a bigger slice means a bigger share of the total. Since a full circle is 360 degrees, you can find each slice's angle by working out its fraction of the total, then multiplying by 360. Pie charts are great for showing how parts make up a whole.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-6-level-16-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-6-level-16-quiz-q1",
+                      "questionText": "What does a pie chart show?",
+                      "correctAnswer": "Data as slices of a circle, showing proportions of a whole",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Data as slices of a circle, showing proportions of a whole",
+                        "Data as bars of different heights",
+                        "Data as points on a graph",
+                        "Only a single number"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-16-quiz-q2",
+                      "questionText": "How many degrees are there in a full circle, which a pie chart is based on?",
+                      "correctAnswer": "360",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-16-quiz-q3",
+                      "questionText": "What does a bigger slice in a pie chart represent?",
+                      "correctAnswer": "A bigger share of the total",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A bigger share of the total",
+                        "A smaller share of the total",
+                        "No particular meaning",
+                        "Always exactly half"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-16-quiz-q4",
+                      "questionText": "If a category makes up 1/4 of the data, how many degrees is its slice?",
+                      "correctAnswer": "90",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-16-quiz-q5",
+                      "questionText": "What are pie charts especially good for showing?",
+                      "correctAnswer": "How parts make up a whole",
+                      "type": "multiple-choice",
+                      "options": [
+                        "How parts make up a whole",
+                        "Exact changes over time",
+                        "Only negative numbers",
+                        "Comparing unrelated categories with no total"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-6-level-16-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-6-level-16-exam-q1",
+                      "questionText": "If a category makes up 1/2 of the data, how many degrees is its slice?",
+                      "correctAnswer": "180",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-16-exam-q2",
+                      "questionText": "If a category makes up 1/3 of the data, roughly how many degrees is its slice?",
+                      "correctAnswer": "120 degrees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "90 degrees",
+                        "120 degrees",
+                        "150 degrees",
+                        "180 degrees"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-16-exam-q3",
+                      "questionText": "What must all the slices of a pie chart add up to, in degrees?",
+                      "correctAnswer": "360",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-16-exam-q4",
+                      "questionText": "How do you calculate a slice's angle from its fraction of the total?",
+                      "correctAnswer": "Multiply the fraction by 360",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Multiply the fraction by 360",
+                        "Divide the fraction by 360",
+                        "Add 360 to the fraction",
+                        "Subtract the fraction from 360"
+                      ]
+                    },
+                    {
+                      "questionId": "math-6-level-16-exam-q5",
+                      "questionText": "If a category makes up 1/5 of the data, how many degrees is its slice?",
+                      "correctAnswer": "72",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-6-level-16-exam-q6",
+                      "questionText": "Why might a pie chart be a better choice than a bar chart for showing budget categories?",
+                      "correctAnswer": "It visually emphasises how each category contributes to the whole budget",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It visually emphasises how each category contributes to the whole budget",
+                        "Pie charts cannot show proportions",
+                        "Bar charts always show proportions better",
+                        "Pie charts are never useful for budgets"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Algebra Foundations & Circles"
             }
           ]
         },
@@ -61712,6 +64142,411 @@
                 }
               ],
               "moduleName": "Module 5: Proportion & Quadratics"
+            },
+            {
+              "levelId": "math-7-level-14",
+              "levelName": "Plotting & Interpreting Linear Graphs (y = mx + c)",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-7-level-14-lesson",
+                  "taskName": "Lesson: Plotting & Interpreting Linear Graphs (y = mx + c)",
+                  "type": "lesson",
+                  "content": "A linear graph is a straight line, described by the equation y = mx + c, where m is the gradient (steepness) and c is the y-intercept (where the line crosses the y-axis). For y = 2x + 3, the gradient is 2 (the line rises 2 for every 1 across), and the y-intercept is 3 (the line crosses the y-axis at 3).",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-7-level-14-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-7-level-14-quiz-q1",
+                      "questionText": "In y = mx + c, what does 'm' represent?",
+                      "correctAnswer": "The gradient (steepness)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The gradient (steepness)",
+                        "The y-intercept",
+                        "The x-intercept",
+                        "A constant with no meaning"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-14-quiz-q2",
+                      "questionText": "In y = mx + c, what does 'c' represent?",
+                      "correctAnswer": "the y-intercept",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-14-quiz-q3",
+                      "questionText": "In y = 2x + 3, what is the gradient?",
+                      "correctAnswer": "2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "3",
+                        "5",
+                        "1"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-14-quiz-q4",
+                      "questionText": "In y = 2x + 3, what is the y-intercept?",
+                      "correctAnswer": "3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-14-quiz-q5",
+                      "questionText": "What does the y-intercept tell you about a graph?",
+                      "correctAnswer": "Where the line crosses the y-axis",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Where the line crosses the y-axis",
+                        "The line's steepness",
+                        "Where the line crosses the x-axis",
+                        "The line's colour"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-7-level-14-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-7-level-14-exam-q1",
+                      "questionText": "In y = 5x - 1, what is the gradient?",
+                      "correctAnswer": "5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-14-exam-q2",
+                      "questionText": "In y = 5x - 1, what is the y-intercept?",
+                      "correctAnswer": "-1",
+                      "type": "multiple-choice",
+                      "options": [
+                        "5",
+                        "1",
+                        "-1",
+                        "0"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-14-exam-q3",
+                      "questionText": "If a line has a gradient of 3, how much does y increase for every 1 increase in x?",
+                      "correctAnswer": "3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-14-exam-q4",
+                      "questionText": "Which equation describes a line with gradient 4 and y-intercept 2?",
+                      "correctAnswer": "y = 4x + 2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "y = 4x + 2",
+                        "y = 2x + 4",
+                        "y = 4x - 2",
+                        "y = x + 6"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-14-exam-q5",
+                      "questionText": "What shape does the graph of y = mx + c always make?",
+                      "correctAnswer": "a straight line",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-14-exam-q6",
+                      "questionText": "Why is understanding gradient and y-intercept useful?",
+                      "correctAnswer": "They let you describe and sketch a straight line from its equation alone",
+                      "type": "multiple-choice",
+                      "options": [
+                        "They let you describe and sketch a straight line from its equation alone",
+                        "They have no connection to the graph's shape",
+                        "Gradient only matters for curves",
+                        "y-intercept never affects the graph"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Linear Graphs & Probability"
+            },
+            {
+              "levelId": "math-7-level-15",
+              "levelName": "Probability Basics",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-7-level-15-lesson",
+                  "taskName": "Lesson: Probability Basics",
+                  "type": "lesson",
+                  "content": "Probability measures how likely an event is to happen, given as a fraction, decimal or percentage between 0 (impossible) and 1 (certain). To find the probability of a simple event, divide the number of favourable outcomes by the total number of possible outcomes - the probability of rolling a 4 on a fair six-sided dice is 1/6, since there's one favourable outcome out of six possible ones.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-7-level-15-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-7-level-15-quiz-q1",
+                      "questionText": "What does a probability of 0 mean?",
+                      "correctAnswer": "The event is impossible",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The event is impossible",
+                        "The event is certain",
+                        "The event is likely",
+                        "The event has already happened"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-15-quiz-q2",
+                      "questionText": "What does a probability of 1 mean?",
+                      "correctAnswer": "the event is certain",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-15-quiz-q3",
+                      "questionText": "What is the probability of rolling a 4 on a fair six-sided dice?",
+                      "correctAnswer": "1/6",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1/6",
+                        "1/4",
+                        "1/2",
+                        "4/6"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-15-quiz-q4",
+                      "questionText": "How do you calculate a simple probability?",
+                      "correctAnswer": "favourable outcomes divided by total possible outcomes",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-15-quiz-q5",
+                      "questionText": "What is the probability of flipping heads on a fair coin?",
+                      "correctAnswer": "1/2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1/4",
+                        "1/3",
+                        "1/2",
+                        "1"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-7-level-15-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-7-level-15-exam-q1",
+                      "questionText": "What is the probability of rolling an even number on a fair six-sided dice?",
+                      "correctAnswer": "1/2 (3/6)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-15-exam-q2",
+                      "questionText": "What is the probability of picking a red ball from a bag with 3 red and 7 blue balls?",
+                      "correctAnswer": "3/10",
+                      "type": "multiple-choice",
+                      "options": [
+                        "3/7",
+                        "3/10",
+                        "7/10",
+                        "1/3"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-15-exam-q3",
+                      "questionText": "What range of values can a probability always fall between?",
+                      "correctAnswer": "0 and 1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-15-exam-q4",
+                      "questionText": "If an event's probability is 0.9, how likely is it?",
+                      "correctAnswer": "Very likely",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Very unlikely",
+                        "Somewhat unlikely",
+                        "Very likely",
+                        "Impossible"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-15-exam-q5",
+                      "questionText": "What is the probability of rolling a number greater than 6 on a fair six-sided dice?",
+                      "correctAnswer": "0",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-15-exam-q6",
+                      "questionText": "Why is probability always expressed between 0 and 1 (or 0% and 100%)?",
+                      "correctAnswer": "It represents the full range from impossible to certain",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It represents the full range from impossible to certain",
+                        "Probability can go above 1",
+                        "Probability is always exactly 0.5",
+                        "There is no fixed range for probability"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Linear Graphs & Probability"
+            },
+            {
+              "levelId": "math-7-level-16",
+              "levelName": "Standard Form",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-7-level-16-lesson",
+                  "taskName": "Lesson: Standard Form",
+                  "type": "lesson",
+                  "content": "Standard form writes very large or very small numbers compactly as A x 10^n, where A is between 1 and 10. For example, 5,000,000 in standard form is 5 x 10^6, and 0.0004 is 4 x 10^-4. A positive power of 10 means a large number, while a negative power means a small number (less than 1).",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-7-level-16-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-7-level-16-quiz-q1",
+                      "questionText": "In standard form, what range must 'A' fall between?",
+                      "correctAnswer": "1 and 10",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1 and 10",
+                        "0 and 1",
+                        "10 and 100",
+                        "0 and 100"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-16-quiz-q2",
+                      "questionText": "Write 5,000,000 in standard form.",
+                      "correctAnswer": "5 x 10^6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-16-quiz-q3",
+                      "questionText": "Write 0.0004 in standard form.",
+                      "correctAnswer": "4 x 10^-4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4 x 10^-4",
+                        "4 x 10^4",
+                        "0.4 x 10^-3",
+                        "4 x 10^-3"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-16-quiz-q4",
+                      "questionText": "What does a positive power of 10 in standard form indicate about the number?",
+                      "correctAnswer": "it is a large number",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-16-quiz-q5",
+                      "questionText": "What does a negative power of 10 in standard form indicate about the number?",
+                      "correctAnswer": "It is a small number, less than 1",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It is a small number, less than 1",
+                        "It is a large number",
+                        "It is always negative",
+                        "It has no special meaning"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-7-level-16-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-7-level-16-exam-q1",
+                      "questionText": "Write 320,000 in standard form.",
+                      "correctAnswer": "3.2 x 10^5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-16-exam-q2",
+                      "questionText": "Write 72,000 in standard form.",
+                      "correctAnswer": "7.2 x 10^4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "7.2 x 10^4",
+                        "72 x 10^3",
+                        "7.2 x 10^3",
+                        "0.72 x 10^5"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-16-exam-q3",
+                      "questionText": "Write 0.00056 in standard form.",
+                      "correctAnswer": "5.6 x 10^-4",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-16-exam-q4",
+                      "questionText": "What is 3 x 10^3 written as an ordinary number?",
+                      "correctAnswer": "3000",
+                      "type": "multiple-choice",
+                      "options": [
+                        "300",
+                        "3000",
+                        "30000",
+                        "3"
+                      ]
+                    },
+                    {
+                      "questionId": "math-7-level-16-exam-q5",
+                      "questionText": "What is 6 x 10^-2 written as an ordinary number?",
+                      "correctAnswer": "0.06",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-7-level-16-exam-q6",
+                      "questionText": "Why is standard form useful for very large or very small numbers?",
+                      "correctAnswer": "It writes them compactly and makes their size easier to compare",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It writes them compactly and makes their size easier to compare",
+                        "It only works for numbers between 1 and 10",
+                        "Standard form makes numbers harder to understand",
+                        "It has no real practical use"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Linear Graphs & Probability"
             }
           ]
         },
@@ -71258,6 +74093,411 @@
                 }
               ],
               "moduleName": "Module 5: Trigonometry & Algebra"
+            },
+            {
+              "levelId": "math-8-level-14",
+              "levelName": "Solving Simultaneous Linear Equations",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-8-level-14-lesson",
+                  "taskName": "Lesson: Solving Simultaneous Linear Equations",
+                  "type": "lesson",
+                  "content": "Simultaneous equations are two equations solved together to find values that satisfy both at once. One method is elimination: add or subtract the equations to cancel out one variable. For 2x + y = 10 and x + y = 6, subtracting gives x = 4, then substituting back gives y = 2. Both equations must be true for the same x and y values.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-8-level-14-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-8-level-14-quiz-q1",
+                      "questionText": "What does 'simultaneous equations' mean?",
+                      "correctAnswer": "Two or more equations solved together at once",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Two or more equations solved together at once",
+                        "A single equation solved twice",
+                        "Equations that can never be solved",
+                        "Equations with only one variable"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-14-quiz-q2",
+                      "questionText": "What is one method for solving simultaneous equations, mentioned in this lesson?",
+                      "correctAnswer": "elimination",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-14-quiz-q3",
+                      "questionText": "For 2x + y = 10 and x + y = 6, what is x after subtracting the equations?",
+                      "correctAnswer": "4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "4",
+                        "6",
+                        "10"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-14-quiz-q4",
+                      "questionText": "Once you know x = 4 from x + y = 6, what is y?",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-14-quiz-q5",
+                      "questionText": "What must be true about the x and y values found?",
+                      "correctAnswer": "They must satisfy both equations at the same time",
+                      "type": "multiple-choice",
+                      "options": [
+                        "They must satisfy both equations at the same time",
+                        "They only need to satisfy one equation",
+                        "x and y must always be equal",
+                        "There is no requirement"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-8-level-14-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-8-level-14-exam-q1",
+                      "questionText": "For x + y = 8 and x - y = 2, what is x after adding the equations?",
+                      "correctAnswer": "5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-14-exam-q2",
+                      "questionText": "Once you know x = 5 from x + y = 8, what is y?",
+                      "correctAnswer": "3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-14-exam-q3",
+                      "questionText": "For 3x + y = 11 and x + y = 5, what is x after subtracting?",
+                      "correctAnswer": "3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-14-exam-q4",
+                      "questionText": "Why do we add or subtract equations when eliminating a variable?",
+                      "correctAnswer": "To cancel out one variable so only one unknown remains",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To cancel out one variable so only one unknown remains",
+                        "To make the equations longer",
+                        "It has no mathematical purpose",
+                        "To create more unknowns"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-14-exam-q5",
+                      "questionText": "Once you know x = 3 from x + y = 5, what is y?",
+                      "correctAnswer": "2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-14-exam-q6",
+                      "questionText": "Why is checking your answer in both original equations a good idea?",
+                      "correctAnswer": "It confirms the solution satisfies both equations correctly",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It confirms the solution satisfies both equations correctly",
+                        "Checking is never necessary",
+                        "Only one equation needs to be satisfied",
+                        "It makes the answer less reliable"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Simultaneous Equations & Vectors Intro"
+            },
+            {
+              "levelId": "math-8-level-15",
+              "levelName": "Introduction to Vectors",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-8-level-15-lesson",
+                  "taskName": "Lesson: Introduction to Vectors",
+                  "type": "lesson",
+                  "content": "A vector represents a quantity with both size (magnitude) and direction, often written as a column like (3, 4), meaning 3 units across and 4 units up. Vectors can be added together by adding their matching components: (3, 4) + (1, 2) = (4, 6). Unlike a plain number, a vector always tells you which way something points, not just how much.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-8-level-15-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-8-level-15-quiz-q1",
+                      "questionText": "What does a vector represent?",
+                      "correctAnswer": "A quantity with both size and direction",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A quantity with both size and direction",
+                        "Only a size, with no direction",
+                        "Only a direction, with no size",
+                        "A single point with no movement"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-15-quiz-q2",
+                      "questionText": "In the vector (3, 4), what does the first number represent?",
+                      "correctAnswer": "movement across (horizontal)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-15-quiz-q3",
+                      "questionText": "What is (3, 4) + (1, 2)?",
+                      "correctAnswer": "(4, 6)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "(4, 6)",
+                        "(3, 6)",
+                        "(4, 4)",
+                        "(2, 2)"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-15-quiz-q4",
+                      "questionText": "How do you add two vectors together?",
+                      "correctAnswer": "add their matching components",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-15-quiz-q5",
+                      "questionText": "What is the key difference between a vector and a plain number?",
+                      "correctAnswer": "A vector includes direction, not just size",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A vector includes direction, not just size",
+                        "They are exactly the same",
+                        "A vector has no size",
+                        "A plain number always has direction too"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-8-level-15-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-8-level-15-exam-q1",
+                      "questionText": "What is (5, 2) + (2, 3)?",
+                      "correctAnswer": "(7, 5)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-15-exam-q2",
+                      "questionText": "What is (6, 1) + (-2, 4)?",
+                      "correctAnswer": "(4, 5)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "(4, 5)",
+                        "(8, 5)",
+                        "(4, -3)",
+                        "(8, -3)"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-15-exam-q3",
+                      "questionText": "In the vector (3, 4), what does the second number represent?",
+                      "correctAnswer": "movement up (vertical)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-15-exam-q4",
+                      "questionText": "Which of these is an example of a vector quantity in real life?",
+                      "correctAnswer": "Velocity (speed and direction)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Velocity (speed and direction)",
+                        "Temperature alone",
+                        "Mass alone",
+                        "Age alone"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-15-exam-q5",
+                      "questionText": "What is (0, 5) + (5, 0)?",
+                      "correctAnswer": "(5, 5)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-15-exam-q6",
+                      "questionText": "Why is 'direction' an important part of what a vector represents?",
+                      "correctAnswer": "It distinguishes a vector from a quantity that only has size",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It distinguishes a vector from a quantity that only has size",
+                        "Direction has no real importance",
+                        "All vectors point in the same direction",
+                        "Vectors never need direction"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Simultaneous Equations & Vectors Intro"
+            },
+            {
+              "levelId": "math-8-level-16",
+              "levelName": "Pythagoras' Theorem in 3D",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-8-level-16-lesson",
+                  "taskName": "Lesson: Pythagoras' Theorem in 3D",
+                  "type": "lesson",
+                  "content": "Pythagoras' theorem (a^2 + b^2 = c^2) can be extended into 3D to find the diagonal length through a cuboid. For a cuboid with length, width and height a, b and c, the diagonal distance is the square root of (a^2 + b^2 + c^2). This works by applying Pythagoras twice: once for the base rectangle, then again combining that with the height.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-8-level-16-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-8-level-16-quiz-q1",
+                      "questionText": "What formula finds the diagonal of a 3D cuboid with sides a, b, c?",
+                      "correctAnswer": "square root of (a^2 + b^2 + c^2)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "square root of (a^2 + b^2 + c^2)",
+                        "a + b + c",
+                        "a^2 + b^2",
+                        "square root of (a + b + c)"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-16-quiz-q2",
+                      "questionText": "What theorem is extended into 3D to solve this type of problem?",
+                      "correctAnswer": "Pythagoras' theorem",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-16-quiz-q3",
+                      "questionText": "How many times is Pythagoras' theorem effectively applied to solve a 3D diagonal?",
+                      "correctAnswer": "Twice",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Once",
+                        "Twice",
+                        "Three times",
+                        "It isn't applied at all"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-16-quiz-q4",
+                      "questionText": "What is the first step when extending Pythagoras into 3D?",
+                      "correctAnswer": "find the diagonal of the base rectangle",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-16-quiz-q5",
+                      "questionText": "What shape is being measured when finding a 3D diagonal through a cuboid?",
+                      "correctAnswer": "A cuboid (3D rectangular box)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A cuboid (3D rectangular box)",
+                        "A flat 2D rectangle",
+                        "A circle",
+                        "A single straight line with no shape"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-8-level-16-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-8-level-16-exam-q1",
+                      "questionText": "A cuboid has sides 3, 4, and 12. What is a^2 + b^2 + c^2?",
+                      "correctAnswer": "169",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-16-exam-q2",
+                      "questionText": "A cuboid has sides 3, 4 and 12, so a^2+b^2+c^2 = 169. What is the diagonal length?",
+                      "correctAnswer": "13",
+                      "type": "multiple-choice",
+                      "options": [
+                        "12",
+                        "13",
+                        "14",
+                        "15"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-16-exam-q3",
+                      "questionText": "What operation do you perform on (a^2 + b^2 + c^2) to find the final diagonal length?",
+                      "correctAnswer": "take the square root",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-16-exam-q4",
+                      "questionText": "Why does 3D Pythagoras combine all three dimensions (a, b, c)?",
+                      "correctAnswer": "Because the diagonal passes through all three dimensions of the cuboid",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Because the diagonal passes through all three dimensions of the cuboid",
+                        "Only two dimensions actually matter",
+                        "Height is never relevant to a 3D diagonal",
+                        "The formula ignores one dimension"
+                      ]
+                    },
+                    {
+                      "questionId": "math-8-level-16-exam-q5",
+                      "questionText": "A cuboid has sides 1, 2, and 2. What is a^2 + b^2 + c^2?",
+                      "correctAnswer": "9",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-8-level-16-exam-q6",
+                      "questionText": "Why is 3D Pythagoras useful in real life?",
+                      "correctAnswer": "It helps calculate real diagonal distances, like the longest item fitting in a box",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It helps calculate real diagonal distances, like the longest item fitting in a box",
+                        "It has no practical real-world use",
+                        "It only applies to imaginary shapes",
+                        "3D measurements never need this formula"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Simultaneous Equations & Vectors Intro"
             }
           ]
         },
@@ -80720,6 +83960,411 @@
                 }
               ],
               "moduleName": "Module 5: Advanced Trigonometry & Algebra"
+            },
+            {
+              "levelId": "math-9-level-14",
+              "levelName": "Function Notation",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-9-level-14-lesson",
+                  "taskName": "Lesson: Function Notation",
+                  "type": "lesson",
+                  "content": "Function notation, like f(x) = 2x + 3, is a compact way to describe a rule that turns an input (x) into an output. To evaluate f(3), substitute 3 for x: f(3) = 2(3) + 3 = 9. This notation makes it clear and quick to describe, calculate and compare different mathematical rules without rewriting a whole sentence each time.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-9-level-14-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-9-level-14-quiz-q1",
+                      "questionText": "What does f(x) = 2x + 3 describe?",
+                      "correctAnswer": "A rule that turns an input x into an output",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A rule that turns an input x into an output",
+                        "A single fixed number",
+                        "A type of shape",
+                        "A type of equation with no input"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-14-quiz-q2",
+                      "questionText": "If f(x) = 2x + 3, what is f(3)?",
+                      "correctAnswer": "9",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-14-quiz-q3",
+                      "questionText": "To evaluate f(5) when f(x) = 2x + 3, what do you do?",
+                      "correctAnswer": "Substitute 5 for x",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Substitute 5 for x",
+                        "Add 5 to the whole function",
+                        "Multiply the whole function by 5",
+                        "Ignore the 5 entirely"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-14-quiz-q4",
+                      "questionText": "If f(x) = 2x + 3, what is f(0)?",
+                      "correctAnswer": "3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-14-quiz-q5",
+                      "questionText": "Why is function notation useful?",
+                      "correctAnswer": "It compactly and clearly describes a mathematical rule",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It compactly and clearly describes a mathematical rule",
+                        "It has no real benefit over writing sentences",
+                        "It replaces the need for any input values",
+                        "It only works for addition"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-9-level-14-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-9-level-14-exam-q1",
+                      "questionText": "If f(x) = 3x - 1, what is f(4)?",
+                      "correctAnswer": "11",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-14-exam-q2",
+                      "questionText": "If f(x) = x^2 + 1, what is f(2)?",
+                      "correctAnswer": "5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "3",
+                        "4",
+                        "5",
+                        "6"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-14-exam-q3",
+                      "questionText": "If f(x) = 3x - 1, what is f(0)?",
+                      "correctAnswer": "-1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-14-exam-q4",
+                      "questionText": "If g(x) = 5x, what is g(10)?",
+                      "correctAnswer": "50",
+                      "type": "multiple-choice",
+                      "options": [
+                        "15",
+                        "25",
+                        "50",
+                        "500"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-14-exam-q5",
+                      "questionText": "If f(x) = x^2 + 1, what is f(3)?",
+                      "correctAnswer": "10",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-14-exam-q6",
+                      "questionText": "Why might mathematicians use different letters, like f and g, for different functions?",
+                      "correctAnswer": "To clearly distinguish between different rules in the same problem",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To clearly distinguish between different rules in the same problem",
+                        "Letters have no meaning in function notation",
+                        "Only the letter f is ever allowed",
+                        "It makes no difference which letter is used"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Functions & Transformations"
+            },
+            {
+              "levelId": "math-9-level-15",
+              "levelName": "Transformations of Graphs",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-9-level-15-lesson",
+                  "taskName": "Lesson: Transformations of Graphs",
+                  "type": "lesson",
+                  "content": "A graph's equation can be transformed to shift or reflect it: y = f(x) + a moves the graph up by a, y = f(x - a) moves it right by a, and y = -f(x) reflects it in the x-axis. Recognising these patterns lets you sketch a transformed graph quickly, without recalculating every point, just by understanding how the original graph has moved or flipped.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-9-level-15-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-9-level-15-quiz-q1",
+                      "questionText": "What does y = f(x) + a do to a graph?",
+                      "correctAnswer": "Moves it up by a",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Moves it up by a",
+                        "Moves it down by a",
+                        "Moves it right by a",
+                        "Reflects it"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-15-quiz-q2",
+                      "questionText": "What does y = f(x - a) do to a graph?",
+                      "correctAnswer": "moves it right by a",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-15-quiz-q3",
+                      "questionText": "What does y = -f(x) do to a graph?",
+                      "correctAnswer": "Reflects it in the x-axis",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Reflects it in the x-axis",
+                        "Moves it up",
+                        "Moves it right",
+                        "Stretches it"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-15-quiz-q4",
+                      "questionText": "What does recognising these transformation patterns let you avoid doing?",
+                      "correctAnswer": "recalculating every point of the graph",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-15-quiz-q5",
+                      "questionText": "What does y = f(x) - a do to a graph?",
+                      "correctAnswer": "Moves it down by a",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Moves it up by a",
+                        "Moves it down by a",
+                        "Moves it left by a",
+                        "Reflects it"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-9-level-15-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-9-level-15-exam-q1",
+                      "questionText": "What does y = f(x + a) do to a graph (note the plus sign inside)?",
+                      "correctAnswer": "moves it left by a",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-15-exam-q2",
+                      "questionText": "What does y = f(-x) do to a graph?",
+                      "correctAnswer": "Reflects it in the y-axis",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Reflects it in the x-axis",
+                        "Reflects it in the y-axis",
+                        "Moves it up",
+                        "Moves it right"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-15-exam-q3",
+                      "questionText": "If y = f(x) is shifted up by 3, how would you write the new equation?",
+                      "correctAnswer": "y = f(x) + 3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-15-exam-q4",
+                      "questionText": "Why is it useful to recognise these transformation rules?",
+                      "correctAnswer": "You can sketch a transformed graph quickly based on the original",
+                      "type": "multiple-choice",
+                      "options": [
+                        "You can sketch a transformed graph quickly based on the original",
+                        "Every transformed graph must be recalculated from scratch",
+                        "Transformations never affect a graph's shape",
+                        "These rules only apply to straight lines"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-15-exam-q5",
+                      "questionText": "If y = f(x) is reflected in the x-axis, how would you write the new equation?",
+                      "correctAnswer": "y = -f(x)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-15-exam-q6",
+                      "questionText": "Which best describes what a 'reflection' transformation does to a graph?",
+                      "correctAnswer": "It flips the graph over a line, like the x-axis or y-axis",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It flips the graph over a line, like the x-axis or y-axis",
+                        "It only moves the graph sideways",
+                        "It changes the graph's equation but not its shape",
+                        "Reflections only apply to circles"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Functions & Transformations"
+            },
+            {
+              "levelId": "math-9-level-16",
+              "levelName": "Surds",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-9-level-16-lesson",
+                  "taskName": "Lesson: Surds",
+                  "type": "lesson",
+                  "content": "A surd is a root (usually a square root) that cannot be simplified into a whole number, like the square root of 2 or the square root of 5 - these are irrational numbers with decimals that never end or repeat. Surds can sometimes be simplified: the square root of 12 = the square root of (4 x 3) = 2 x the square root of 3, by pulling out any square number factors.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-9-level-16-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-9-level-16-quiz-q1",
+                      "questionText": "What is a surd?",
+                      "correctAnswer": "A root that cannot be simplified into a whole number",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A root that cannot be simplified into a whole number",
+                        "Any whole number",
+                        "A fraction only",
+                        "A number with a decimal point"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-16-quiz-q2",
+                      "questionText": "Is the square root of 2 a surd? Why or why not (in one word - rational or irrational)?",
+                      "correctAnswer": "irrational",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-16-quiz-q3",
+                      "questionText": "Simplify the square root of 12.",
+                      "correctAnswer": "2 x square root of 3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2 x square root of 3",
+                        "3 x square root of 2",
+                        "4 x square root of 3",
+                        "square root of 12 cannot simplify"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-16-quiz-q4",
+                      "questionText": "What type of factor do you look for to simplify a surd, like in square root of 12 = square root of (4 x 3)?",
+                      "correctAnswer": "a square number factor",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-16-quiz-q5",
+                      "questionText": "Is the square root of 9 a surd?",
+                      "correctAnswer": "No, it simplifies to the whole number 3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No, it simplifies to the whole number 3",
+                        "Yes, it's always a surd",
+                        "It cannot be calculated",
+                        "It is irrational"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-9-level-16-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-9-level-16-exam-q1",
+                      "questionText": "Simplify the square root of 18.",
+                      "correctAnswer": "3 x square root of 2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-16-exam-q2",
+                      "questionText": "Simplify the square root of 8.",
+                      "correctAnswer": "2 x square root of 2",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2 x square root of 2",
+                        "4 x square root of 2",
+                        "2 x square root of 4",
+                        "square root of 8 cannot simplify"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-16-exam-q3",
+                      "questionText": "Simplify the square root of 20.",
+                      "correctAnswer": "2 x square root of 5",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-16-exam-q4",
+                      "questionText": "Why can't a surd's decimal value be written exactly?",
+                      "correctAnswer": "Because it is an irrational number with a decimal that never ends or repeats",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Because it is an irrational number with a decimal that never ends or repeats",
+                        "Surds always have exact whole number values",
+                        "Calculators cannot process surds at all",
+                        "Surds are the same as fractions"
+                      ]
+                    },
+                    {
+                      "questionId": "math-9-level-16-exam-q5",
+                      "questionText": "Simplify the square root of 50.",
+                      "correctAnswer": "5 x square root of 2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-9-level-16-exam-q6",
+                      "questionText": "Why is simplifying surds useful in mathematics?",
+                      "correctAnswer": "It gives an exact, simpler form instead of a long decimal approximation",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It gives an exact, simpler form instead of a long decimal approximation",
+                        "Simplifying surds has no mathematical benefit",
+                        "Surds cannot be simplified at all",
+                        "It only works for square roots of even numbers"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Functions & Transformations"
             }
           ]
         },
@@ -90188,6 +93833,411 @@
                 }
               ],
               "moduleName": "Module 5: Advanced Geometry & Equations"
+            },
+            {
+              "levelId": "math-10-level-14",
+              "levelName": "Introduction to Differentiation",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-10-level-14-lesson",
+                  "taskName": "Lesson: Introduction to Differentiation",
+                  "type": "lesson",
+                  "content": "Differentiation finds the gradient (rate of change) of a curve at any point, not just a straight line. For a function y = x^n, the derivative (differentiated result) is n x x^(n-1) - so for y = x^2, the derivative is 2x, meaning the gradient at x = 3 would be 2 x 3 = 6. This is a foundational GCSE/A-level tool for understanding how curves change.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-10-level-14-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-10-level-14-quiz-q1",
+                      "questionText": "What does differentiation find?",
+                      "correctAnswer": "The gradient (rate of change) of a curve at any point",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The gradient (rate of change) of a curve at any point",
+                        "The area under a curve",
+                        "The length of a curve",
+                        "Only the y-intercept"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-14-quiz-q2",
+                      "questionText": "For y = x^n, what is the general rule for the derivative?",
+                      "correctAnswer": "n x x^(n-1)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-14-quiz-q3",
+                      "questionText": "What is the derivative of y = x^2?",
+                      "correctAnswer": "2x",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2x",
+                        "x",
+                        "x^2",
+                        "2"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-14-quiz-q4",
+                      "questionText": "Using the derivative 2x for y = x^2, what is the gradient at x = 3?",
+                      "correctAnswer": "6",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-14-quiz-q5",
+                      "questionText": "Why is differentiation useful for curves, unlike straight lines?",
+                      "correctAnswer": "A curve's gradient changes at different points, unlike a straight line's constant gradient",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A curve's gradient changes at different points, unlike a straight line's constant gradient",
+                        "Curves have no gradient at all",
+                        "Straight lines need differentiation, not curves",
+                        "Differentiation only works on straight lines"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-10-level-14-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-10-level-14-exam-q1",
+                      "questionText": "What is the derivative of y = x^3?",
+                      "correctAnswer": "3x^2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-14-exam-q2",
+                      "questionText": "Using the derivative of y = x^3 (3x^2), what is the gradient at x = 2?",
+                      "correctAnswer": "12",
+                      "type": "multiple-choice",
+                      "options": [
+                        "6",
+                        "9",
+                        "12",
+                        "27"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-14-exam-q3",
+                      "questionText": "What is the derivative of y = x^4?",
+                      "correctAnswer": "4x^3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-14-exam-q4",
+                      "questionText": "What level of study does this lesson say differentiation is foundational to?",
+                      "correctAnswer": "GCSE/A-level",
+                      "type": "multiple-choice",
+                      "options": [
+                        "GCSE/A-level",
+                        "Primary school only",
+                        "It has no educational level",
+                        "University only, never school"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-14-exam-q5",
+                      "questionText": "What is the derivative of y = x^5?",
+                      "correctAnswer": "5x^4",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-14-exam-q6",
+                      "questionText": "Which best describes what 'rate of change' means for a curve?",
+                      "correctAnswer": "How quickly the curve's y-value is increasing or decreasing at a point",
+                      "type": "multiple-choice",
+                      "options": [
+                        "How quickly the curve's y-value is increasing or decreasing at a point",
+                        "The curve's total length",
+                        "The area enclosed by the curve",
+                        "The curve's starting point only"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Calculus Intro & Advanced Statistics"
+            },
+            {
+              "levelId": "math-10-level-15",
+              "levelName": "Cumulative Frequency & Box Plots",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-10-level-15-lesson",
+                  "taskName": "Lesson: Cumulative Frequency & Box Plots",
+                  "type": "lesson",
+                  "content": "A cumulative frequency graph shows the running total of frequencies as data increases, useful for finding the median and quartiles (values that split data into quarters) of large data sets. A box plot visually summarises this using a box (showing the middle 50% of data, between the lower and upper quartile) and 'whiskers' extending to the minimum and maximum values.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-10-level-15-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-10-level-15-quiz-q1",
+                      "questionText": "What does a cumulative frequency graph show?",
+                      "correctAnswer": "The running total of frequencies as data increases",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The running total of frequencies as data increases",
+                        "Only the mode of the data",
+                        "A single bar for each category",
+                        "The exact mean of the data"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-15-quiz-q2",
+                      "questionText": "What are 'quartiles'?",
+                      "correctAnswer": "values that split data into quarters",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-15-quiz-q3",
+                      "questionText": "What does the box in a box plot represent?",
+                      "correctAnswer": "The middle 50% of the data",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The middle 50% of the data",
+                        "Only the maximum value",
+                        "Only the minimum value",
+                        "The entire range of all data"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-15-quiz-q4",
+                      "questionText": "What do the 'whiskers' of a box plot extend to?",
+                      "correctAnswer": "the minimum and maximum values",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-15-quiz-q5",
+                      "questionText": "What can a cumulative frequency graph help you find?",
+                      "correctAnswer": "The median and quartiles of a large data set",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The median and quartiles of a large data set",
+                        "Only the mode",
+                        "Only individual raw values",
+                        "Nothing useful about the data"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-10-level-15-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-10-level-15-exam-q1",
+                      "questionText": "What is the term for the value exactly in the middle of a sorted data set?",
+                      "correctAnswer": "the median",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-15-exam-q2",
+                      "questionText": "Why is a box plot a useful visual summary of data?",
+                      "correctAnswer": "It shows the spread, median and quartiles all in one compact diagram",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It shows the spread, median and quartiles all in one compact diagram",
+                        "It only shows a single number",
+                        "Box plots cannot show the median",
+                        "It shows no information about spread"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-15-exam-q3",
+                      "questionText": "What is the name for the quartile that marks the boundary of the lowest 25% of data?",
+                      "correctAnswer": "the lower quartile",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-15-exam-q4",
+                      "questionText": "What is the name for the quartile that marks the boundary of the highest 25% of data (bottom 75%)?",
+                      "correctAnswer": "The upper quartile",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The lower quartile",
+                        "The upper quartile",
+                        "The median",
+                        "The mode"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-15-exam-q5",
+                      "questionText": "What does the interquartile range measure?",
+                      "correctAnswer": "the spread of the middle 50% of the data (upper quartile minus lower quartile)",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-15-exam-q6",
+                      "questionText": "Why might statisticians prefer quartiles and box plots over just the mean for some data?",
+                      "correctAnswer": "They show the data's spread and can reveal outliers the mean might hide",
+                      "type": "multiple-choice",
+                      "options": [
+                        "They show the data's spread and can reveal outliers the mean might hide",
+                        "Quartiles never provide useful information",
+                        "The mean always shows more detail than quartiles",
+                        "Box plots cannot represent spread at all"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Calculus Intro & Advanced Statistics"
+            },
+            {
+              "levelId": "math-10-level-16",
+              "levelName": "Algebraic Proof",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "math-10-level-16-lesson",
+                  "taskName": "Lesson: Algebraic Proof",
+                  "type": "lesson",
+                  "content": "Algebraic proof uses algebra to show a mathematical statement is always true, not just true for a few examples. To prove a statement like 'the sum of two consecutive numbers is always odd', represent the numbers algebraically as n and n+1, then show their sum (2n + 1) must always be odd, since 2n is always even and adding 1 makes it odd for any whole number n.",
+                  "questions": []
+                },
+                {
+                  "taskId": "math-10-level-16-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "math-10-level-16-quiz-q1",
+                      "questionText": "What is the purpose of algebraic proof?",
+                      "correctAnswer": "To show a mathematical statement is always true, not just for a few examples",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To show a mathematical statement is always true, not just for a few examples",
+                        "To test one single number",
+                        "To disprove every mathematical statement",
+                        "To avoid using algebra entirely"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-16-quiz-q2",
+                      "questionText": "How would you represent two consecutive whole numbers algebraically?",
+                      "correctAnswer": "n and n+1",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-16-quiz-q3",
+                      "questionText": "What is the sum of n and n+1?",
+                      "correctAnswer": "2n + 1",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2n + 1",
+                        "2n",
+                        "n^2 + 1",
+                        "2n - 1"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-16-quiz-q4",
+                      "questionText": "Why is 2n always an even number, for any whole number n?",
+                      "correctAnswer": "it is always a multiple of 2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-16-quiz-q5",
+                      "questionText": "Why does 2n + 1 always represent an odd number?",
+                      "correctAnswer": "Adding 1 to an always-even number (2n) makes it odd",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Adding 1 to an always-even number (2n) makes it odd",
+                        "2n + 1 is sometimes even and sometimes odd",
+                        "It only works for small values of n",
+                        "2n + 1 is unrelated to odd numbers"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "math-10-level-16-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "math-10-level-16-exam-q1",
+                      "questionText": "If you wanted to prove something about three consecutive numbers, how would you represent them algebraically?",
+                      "correctAnswer": "n, n+1, and n+2",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-16-exam-q2",
+                      "questionText": "Why is testing just a few examples not enough to prove a statement is always true?",
+                      "correctAnswer": "There could be some other number for which the statement fails",
+                      "type": "multiple-choice",
+                      "options": [
+                        "There could be some other number for which the statement fails",
+                        "Testing a few examples is always sufficient proof",
+                        "Algebra cannot be used to test more than a few numbers",
+                        "Numbers never behave differently from each other"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-16-exam-q3",
+                      "questionText": "What algebraic expression could represent 'double a number, then add 3'?",
+                      "correctAnswer": "2n + 3",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-16-exam-q4",
+                      "questionText": "Why is representing numbers with a letter like 'n' useful in a proof?",
+                      "correctAnswer": "It lets the proof apply to any whole number, not just specific examples",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It lets the proof apply to any whole number, not just specific examples",
+                        "Letters have no advantage over using specific numbers",
+                        "A proof using 'n' only works for n = 1",
+                        "Using a letter makes the proof less general"
+                      ]
+                    },
+                    {
+                      "questionId": "math-10-level-16-exam-q5",
+                      "questionText": "What must a valid algebraic proof show about the statement?",
+                      "correctAnswer": "that it holds true for all possible values, not just specific cases",
+                      "type": "identification"
+                    },
+                    {
+                      "questionId": "math-10-level-16-exam-q6",
+                      "questionText": "Which best summarises the goal of an algebraic proof?",
+                      "correctAnswer": "Demonstrating a general truth using algebraic representation rather than specific numbers",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Demonstrating a general truth using algebraic representation rather than specific numbers",
+                        "Finding one example where a statement is true",
+                        "Disproving a statement using a single counterexample only",
+                        "Avoiding the use of letters or variables"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 6: Calculus Intro & Advanced Statistics"
             }
           ]
         },
