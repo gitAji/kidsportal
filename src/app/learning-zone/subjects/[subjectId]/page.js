@@ -286,7 +286,8 @@ export default function SubjectLevelsPage() {
         completedCount,
         totalTasks,
         isCompleted,
-        isNextUp
+        isNextUp,
+        isSequential
       };
     });
   }, [levels, childStats, subjectId, childUser?.isSubscriptionActive, childUser?.sequentialProgression]);
@@ -578,8 +579,10 @@ export default function SubjectLevelsPage() {
                       </div>
                     )}
 
-                    {/* "Next up" unlocked badge */}
-                    {level.isNextUp && !level.isCompleted && (
+                    {/* "Next up" unlocked badge — only meaningful when the parent has
+                        level-locking (sequential progression) turned on; with Free
+                        Access, nothing was ever locked, so there's nothing to show as "unlocked" */}
+                    {level.isNextUp && !level.isCompleted && level.isSequential && (
                       <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
