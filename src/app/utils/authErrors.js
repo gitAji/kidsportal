@@ -5,8 +5,11 @@ const FRIENDLY_AUTH_ERRORS = {
   "auth/email-already-in-use": "An account already exists with this email. Try logging in instead.",
   "auth/invalid-email": "That email address doesn't look right. Please check and try again.",
   "auth/weak-password": "Please choose a stronger password (at least 6 characters).",
+  // Deliberately identical to auth/invalid-credential below: telling a
+  // caller "wrong password" vs. "no such account" lets them enumerate
+  // which emails have accounts here, so both map to the same generic text.
   "auth/wrong-password": "Incorrect email or password. Please try again.",
-  "auth/user-not-found": "We couldn't find an account with that email.",
+  "auth/user-not-found": "Incorrect email or password. Please try again.",
   "auth/invalid-credential": "Incorrect email or password. Please try again.",
   "auth/too-many-requests": "Too many attempts. Please wait a moment and try again.",
   "auth/network-request-failed": "We couldn't reach the server. Please check your connection and try again.",

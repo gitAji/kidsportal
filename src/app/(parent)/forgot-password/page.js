@@ -5,6 +5,7 @@ import { auth } from "@/firebase/config"; // Adjust the import path as necessary
 import { useRouter } from "next/navigation";
 import Header from "@/app/components/layout/header/Header";
 import Footer from "@/app/components/layout/footer/Footer";
+import { getFriendlyAuthError } from "@/app/utils/authErrors";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -21,8 +22,10 @@ export default function ForgotPasswordPage() {
       await sendPasswordResetEmail(auth, email);
       setMessage("Password reset email sent! Check your inbox.");
     } catch (err) {
-      setError(err.message);
       console.error("Error sending password reset email:", err);
+      // Firebase's own enumeration protection means this normally never
+      // fires for a bad email, but keep the fallback generic regardless.
+      setError(getFriendlyAuthError(err));
     }
   };
 

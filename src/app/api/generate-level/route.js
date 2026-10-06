@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { GoogleGenAI } from "@google/genai";
 import dbData from '@/app/data/db.json';
+import { safeErrorResponse } from '@/lib/apiError';
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -180,7 +181,6 @@ Keep a healthy mix of "multiple-choice" and "identification" question types acro
 
         return NextResponse.json(newLevel);
     } catch (error) {
-        console.error('Level Generation Error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('Level Generation Error:', error, 'Failed to generate level.');
     }
 }

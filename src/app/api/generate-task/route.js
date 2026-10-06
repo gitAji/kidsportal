@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { GoogleGenAI } from "@google/genai";
+import { safeErrorResponse } from '@/lib/apiError';
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -105,7 +106,6 @@ For each question, provide:
         return NextResponse.json(generatedTask);
 
     } catch (error) {
-        console.error('Task Generation Error:', error);
-        return NextResponse.json({ error: error.message, stack: error.stack }, { status: 500 });
+        return safeErrorResponse('Task Generation Error:', error, 'Failed to generate task.');
     }
 }

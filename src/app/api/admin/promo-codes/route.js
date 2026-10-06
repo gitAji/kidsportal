@@ -6,6 +6,7 @@
 import { NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
 import { verifySuperAdmin } from '@/lib/verifySuperAdmin';
+import { safeErrorResponse } from '@/lib/apiError';
 
 export async function GET(request) {
     const admin = await verifySuperAdmin(request);
@@ -38,8 +39,7 @@ export async function GET(request) {
         codes.sort((a, b) => b.createdAt - a.createdAt);
         return NextResponse.json({ codes });
     } catch (error) {
-        console.error('List promo codes error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('List promo codes error:', error, 'Failed to load promo codes.');
     }
 }
 
@@ -103,10 +103,9 @@ export async function POST(request) {
             couponId: coupon.id,
         });
     } catch (error) {
-        console.error('Create promo code error:', error);
         const message = /already exists/i.test(error.message || '')
             ? 'That code already exists. Choose a different one.'
-            : (error.message || 'Failed to create promo code.');
-        return NextResponse.json({ error: message }, { status: 500 });
+            : 'Failed to create promo code.';
+        return safeErrorResponse('Create promo code error:', error, message);
     }
 }

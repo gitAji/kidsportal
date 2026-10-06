@@ -6,6 +6,7 @@
 import { NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
 import { verifySuperAdmin } from '@/lib/verifySuperAdmin';
+import { safeErrorResponse } from '@/lib/apiError';
 
 export async function PATCH(request, { params }) {
     const admin = await verifySuperAdmin(request);
@@ -24,7 +25,6 @@ export async function PATCH(request, { params }) {
         const updated = await stripe.promotionCodes.update(id, { active });
         return NextResponse.json({ id: updated.id, active: updated.active });
     } catch (error) {
-        console.error('Update promo code error:', error);
-        return NextResponse.json({ error: error.message || 'Failed to update promo code.' }, { status: 500 });
+        return safeErrorResponse('Update promo code error:', error, 'Failed to update promo code.');
     }
 }

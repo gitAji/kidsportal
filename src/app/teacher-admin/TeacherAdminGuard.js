@@ -5,8 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/config";
 
 import { TeacherProvider } from "@/context/TeacherContext";
-
-const SUPER_ADMIN_EMAILS = ["kontaktaone@gmail.com"];
+import { SUPER_ADMIN_EMAILS } from "@/lib/superAdmin";
 
 // This guard verifies that the user is registered in the 'teachers' collection.
 export default function TeacherAdminGuard({ children }) {
@@ -15,21 +14,6 @@ export default function TeacherAdminGuard({ children }) {
     const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-        if (process.env.NODE_ENV === 'development') {
-            console.log("TeacherAdminGuard: COMPLETELY BYPASSING AUTH FOR TESTING IN DEV");
-            setProfile({
-                name: "Test Teacher Admin",
-                email: "teacher_test@example.com",
-                status: "active",
-                isCurriculumAdmin: true,
-                assignments: [
-                    { grade: 'all', subject: 'all' }
-                ]
-            });
-            setChecking(false);
-            return;
-        }
-
         console.log("TeacherAdminGuard: Monitoring auth state...");
         const unsub = onAuthStateChanged(auth, async (user) => {
             if (!user) {
@@ -53,18 +37,6 @@ export default function TeacherAdminGuard({ children }) {
                             name: "Super Admin",
                             email: email,
                             status: "active",
-                            isCurriculumAdmin: true,
-                            assignments: [{ grade: 'all', subject: 'all' }]
-                        });
-                        setChecking(false);
-                    } else if (process.env.NODE_ENV === 'development' && email === 'teacher_test@example.com') {
-                        console.log("TeacherAdminGuard: BYPASS ENABLED FOR TESTING");
-                        setProfile({
-                            id: teacherDoc.id || 'test_teacher',
-                            name: teacherDoc.data()?.name || "Test Teacher",
-                            email: email,
-                            status: "active",
-                            ...teacherDoc.data(),
                             isCurriculumAdmin: true,
                             assignments: [{ grade: 'all', subject: 'all' }]
                         });
