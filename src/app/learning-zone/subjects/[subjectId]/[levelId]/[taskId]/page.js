@@ -65,6 +65,8 @@ export default function TaskContentPage() {
   const [timeTaken, setTimeTaken] = useState(0);
   const [showDrawingTool, setShowDrawingTool] = useState(false);
   const [showKeyboard, setShowKeyboard] = useState(false);
+  const [isRecognizingHandwriting, setIsRecognizingHandwriting] = useState(false);
+  const [handwritingError, setHandwritingError] = useState(null);
   const [retriedThisTask, setRetriedThisTask] = useState(false);
   const [newAchievements, setNewAchievements] = useState([]);
   const [sessionHistory, setSessionHistory] = useState([]);
@@ -586,6 +588,36 @@ export default function TaskContentPage() {
     else setUserAnswer(a => a + key);
   };
 
+  // The "write on screen" paint tool hands back a raw canvas drawing —
+  // read the handwritten character(s) with AI and drop the recognized
+  // text straight into the answer input (editable, like typing), instead
+  // of submitting the drawing itself as the answer.
+  const handleDrawingFinish = async (imageData) => {
+    setShowDrawingTool(false);
+    setShowKeyboard(false);
+    setHandwritingError(null);
+    setIsRecognizingHandwriting(true);
+    try {
+      const res = await fetch('/api/recognize-handwriting', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageData, language: contentLanguage }),
+      });
+      const data = await res.json();
+      if (data.recognized) {
+        setUserAnswer(data.recognized);
+      } else {
+        setHandwritingError(data.error || "Couldn't read that — try writing a bit bigger!");
+        setTimeout(() => setHandwritingError(null), 4000);
+      }
+    } catch (err) {
+      setHandwritingError("Couldn't read that — try again!");
+      setTimeout(() => setHandwritingError(null), 4000);
+    } finally {
+      setIsRecognizingHandwriting(false);
+    }
+  };
+
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center p-8">
       <SkeletonLoader variant="page" message="Loading your adventure..." />
@@ -994,11 +1026,11 @@ export default function TaskContentPage() {
                 </div>
               ) : (
                 <div className="relative">
-                  <input type="text" value={userAnswer} onChange={e => setUserAnswer(e.target.value)} disabled={!!feedbackMessage || isCheckingAnswer}
-                    className={`w-full py-4 pl-14 pr-14 text-center text-2xl font-bold border-4 rounded-full focus:outline-none transition-colors ${feedbackMessage?.type === 'correct' ? 'border-green-400 bg-green-50' : feedbackMessage?.type === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-blue-400'} ${isCheckingAnswer ? 'opacity-50 cursor-wait bg-gray-50' : ''}`}
-                    placeholder="Type..." />
+                  <input type="text" value={isRecognizingHandwriting ? '' : userAnswer} onChange={e => setUserAnswer(e.target.value)} disabled={!!feedbackMessage || isCheckingAnswer || isRecognizingHandwriting}
+                    className={`w-full py-4 pl-14 pr-14 text-center text-2xl font-bold border-4 rounded-full focus:outline-none transition-colors ${feedbackMessage?.type === 'correct' ? 'border-green-400 bg-green-50' : feedbackMessage?.type === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-blue-400'} ${(isCheckingAnswer || isRecognizingHandwriting) ? 'opacity-50 cursor-wait bg-gray-50' : ''}`}
+                    placeholder={isRecognizingHandwriting ? 'Reading your handwriting...' : 'Type...'} />
 
-                  {!feedbackMessage && !isCheckingAnswer && (
+                  {!feedbackMessage && !isCheckingAnswer && !isRecognizingHandwriting && (
                     <>
                       <button
                         onClick={() => setShowKeyboard(!showKeyboard)}
@@ -1019,7 +1051,15 @@ export default function TaskContentPage() {
                       </button>
                     </>
                   )}
+
+                  {isRecognizingHandwriting && (
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 animate-spin text-cyan-500 text-xl">⏳</span>
+                  )}
                 </div>
+              )}
+
+              {handwritingError && (
+                <p className="text-center text-sm font-bold text-red-500 mt-2">{handwritingError}</p>
               )}
 
               {showKeyboard && !String(userAnswer).startsWith('data:image') && <div className="mt-4"><VirtualKeyboard onKeyPress={handleKeyPress} /></div>}
@@ -1053,11 +1093,7 @@ export default function TaskContentPage() {
                   <DrawingCanvas
                     width={typeof window !== 'undefined' ? (window.innerWidth > 800 ? 750 : window.innerWidth * 0.85) : 600}
                     height={400}
-                    onFinish={(imageData) => {
-                      setUserAnswer(imageData);
-                      setShowDrawingTool(false);
-                      setShowKeyboard(false);
-                    }}
+                    onFinish={handleDrawingFinish}
                   />
                 </div>
                 <p className="text-xs font-bold text-slate-400 mt-4 uppercase tracking-widest">{t('writing_instruction')}</p>
