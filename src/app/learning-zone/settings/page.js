@@ -9,7 +9,7 @@ import {
   FaPaw, FaRocket, FaCar, FaTree, FaSmile,
   FaStar, FaDragon, FaFish, FaHorse, FaCat,
   FaCheckCircle, FaVolumeUp, FaVolumeMute,
-  FaTrophy
+  FaTrophy, FaCog
 } from 'react-icons/fa';
 import CustomAvatar from '../../components/ui/CustomAvatar';
 import { useChild } from '../../providers/ChildProvider';
@@ -88,9 +88,16 @@ export default function SettingsPage() {
 
   return (
     <div className="flex flex-col relative font-sans">
+      {/* "Workshop" background motif — distinguishes Settings from the other
+          hub pages with a scatter of gear and palette icons */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-16 right-[8%] text-slate-200 opacity-50 text-7xl rotate-12"><FaCog /></div>
+        <div className="absolute bottom-20 left-[7%] text-slate-200 opacity-40 text-6xl -rotate-12"><FaPalette /></div>
+      </div>
+
       <MinimalBackButton />
 
-      <div className="max-w-2xl mx-auto px-4 py-8 space-y-6">
+      <div className="max-w-2xl mx-auto px-4 py-8 space-y-6 relative z-10">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-center flex items-center justify-center gap-3">
           <h1 className="text-2xl font-extrabold text-gray-800">My Settings ⚙️</h1>
           <Link href="/learning-zone/rewards" className="p-2 rounded-full hover:bg-yellow-50 text-yellow-500 transition-colors" aria-label="My Rewards">

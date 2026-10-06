@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useChild } from '../../providers/ChildProvider';
 import { ACHIEVEMENTS, loadUnlockedAchievements, loadStats } from '../../utils/achievements';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTrophy, FaLock } from 'react-icons/fa';
+import { FaTrophy, FaLock, FaMedal, FaCrown } from 'react-icons/fa';
 import Link from 'next/link';
 import SkeletonLoader from '../../components/ui/SkeletonLoader';
 import MinimalBackButton from '../../components/child/MinimalBackButton';
@@ -60,9 +60,17 @@ export default function RewardsPage() {
 
   return (
     <div className="flex flex-col p-2 sm:p-4 relative font-sans">
+      {/* "Trophy room" background motif — distinguishes Rewards from the other
+          hub pages with a scatter of medals and a crown */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-20 left-[8%] text-cyan-200 opacity-40 text-7xl rotate-[-8deg]"><FaMedal /></div>
+        <div className="absolute top-10 right-[10%] text-indigo-200 opacity-40 text-8xl rotate-12"><FaCrown /></div>
+        <div className="absolute bottom-16 right-[14%] text-cyan-200 opacity-30 text-6xl rotate-6"><FaMedal /></div>
+      </div>
+
       <MinimalBackButton />
 
-      <div className="max-w-3xl mx-auto px-4 py-8">
+      <div className="max-w-3xl mx-auto px-4 py-8 relative z-10">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-extrabold text-cyan-700 flex items-center justify-center gap-3">
             <FaTrophy /> My Rewards

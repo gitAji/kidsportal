@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { FaBook } from 'react-icons/fa';
+import { FaBook, FaFeatherAlt } from 'react-icons/fa';
 import { useChild } from '../../providers/ChildProvider';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import { getChildStats } from '@/app/utils/firestoreService';
@@ -46,8 +46,12 @@ export default function EnglishLabPage() {
 
   return (
     <div className="flex flex-col p-2 sm:p-4 relative font-sans">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-16 right-[8%] text-amber-100 opacity-60 text-7xl rotate-12 font-black">Aa</div>
+        <div className="absolute bottom-16 left-[9%] text-orange-100 opacity-60 text-7xl rotate-[-12deg]"><FaFeatherAlt /></div>
+      </div>
       <MinimalBackButton />
-      <div className="px-4 py-8">
+      <div className="px-4 py-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
