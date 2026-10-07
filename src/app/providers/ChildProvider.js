@@ -80,10 +80,16 @@ export function ChildProvider({ children }) {
               }
             }
 
-            setChildUser({ ...freshData, isSubscriptionActive: isSubActive });
+            // AI Tutor Pack is a separate $25/month add-on, independent of the
+            // main plan — a family on Premium or Free Trial still needs this
+            // to be active to see the AI Tutor Assistant unlocked.
+            const aiTutorStatus = parentData.aiTutorPack?.status;
+            const isAiTutorActive = !!parentData.aiTutorPack?.active || aiTutorStatus === 'active' || aiTutorStatus === 'trialing';
+
+            setChildUser({ ...freshData, isSubscriptionActive: isSubActive, isAiTutorPackActive: isAiTutorActive });
 
             // Re-set storage items
-            const storageData = { ...freshData, isSubscriptionActive: isSubActive };
+            const storageData = { ...freshData, isSubscriptionActive: isSubActive, isAiTutorPackActive: isAiTutorActive };
             if (localStorage.getItem("childUser")) {
               localStorage.setItem("childUser", JSON.stringify(storageData));
             } else {

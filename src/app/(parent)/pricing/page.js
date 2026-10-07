@@ -1,12 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { auth } from "@/firebase/config";
+import { auth, db } from "@/firebase/config";
+import { doc, onSnapshot } from "firebase/firestore";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaCheck, FaStar, FaRocket, FaShieldAlt,
   FaSpinner, FaGlobe, FaChevronDown, FaLock,
-  FaUserShield, FaCcStripe
+  FaUserShield, FaCcStripe, FaRobot
 } from "react-icons/fa";
 import { SiStripe } from "react-icons/si";
 
@@ -67,7 +68,57 @@ export default function PricingPage() {
   const [currencyCode, setCurrencyCode] = useState("USD");
   const [loadingPlan, setLoadingPlan] = useState(null);
   const [checkoutError, setCheckoutError] = useState(null);
+  const [hasAiTutorPack, setHasAiTutorPack] = useState(false);
+  const [loadingAiTutor, setLoadingAiTutor] = useState(false);
+  const [aiTutorError, setAiTutorError] = useState(null);
   const router = useRouter();
+
+  // Live-track whether this family already has the AI Tutor Pack, so the
+  // button reflects reality instead of letting someone buy it twice.
+  useEffect(() => {
+    const unsubAuth = auth.onAuthStateChanged((user) => {
+      if (!user) { setHasAiTutorPack(false); return; }
+      const ref = doc(db, "users", user.uid);
+      const unsubSnap = onSnapshot(ref, (snap) => {
+        setHasAiTutorPack(!!snap.data()?.aiTutorPack?.active);
+      });
+      return () => unsubSnap();
+    });
+    return () => unsubAuth();
+  }, []);
+
+  const handleAddAiTutor = async () => {
+    if (!auth.currentUser) {
+      router.push("/login?role=parent&redirect=" + encodeURIComponent("/pricing"));
+      return;
+    }
+
+    setAiTutorError(null);
+    setLoadingAiTutor(true);
+    try {
+      const idToken = await auth.currentUser.getIdToken();
+      const res = await fetch("/api/stripe/create-ai-tutor-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${idToken}` },
+        body: JSON.stringify({
+          uid: auth.currentUser.uid,
+          email: auth.currentUser.email,
+        }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        console.error("Stripe error:", data.error);
+        setAiTutorError("We couldn't start checkout. Please try again in a moment.");
+      }
+    } catch (err) {
+      console.error("AI Tutor checkout error:", err);
+      setAiTutorError("We couldn't start checkout. Please check your connection and try again.");
+    } finally {
+      setLoadingAiTutor(false);
+    }
+  };
 
   const currency = CURRENCY_PRICES[currencyCode];
   const monthlyDisplay = currency.monthly;
@@ -289,6 +340,43 @@ export default function PricingPage() {
             </motion.div>
           ))}
         </div>
+
+        {/* ── AI Tutor Pack add-on ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
+          className="w-full max-w-3xl mt-6 bg-white/70 backdrop-blur-md rounded-2xl p-6 sm:p-8 shadow-xl border border-indigo-200 flex flex-col sm:flex-row items-center gap-6"
+        >
+          <div className="w-16 h-16 flex-shrink-0 bg-gradient-to-br from-indigo-500 to-fuchsia-500 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
+            <FaRobot />
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap">
+              <h3 className="text-xl font-black text-slate-800">AI Tutor Pack</h3>
+              <span className="bg-indigo-100 text-indigo-600 text-xs font-bold px-3 py-1 rounded-full">+ $25/month</span>
+            </div>
+            <p className="text-slate-500 text-sm mt-1 max-w-md">
+              Unlock a personal AI tutor on every lesson: simpler explanations, live examples, and challenge questions — on top of any plan.
+            </p>
+            {aiTutorError && <p className="text-rose-600 text-xs font-semibold mt-2">{aiTutorError}</p>}
+          </div>
+          {hasAiTutorPack ? (
+            <div className="flex-shrink-0 flex items-center gap-2 bg-emerald-50 text-emerald-600 font-bold px-6 py-3 rounded-xl border border-emerald-200">
+              <FaCheck /> Added
+            </div>
+          ) : (
+            <button
+              onClick={handleAddAiTutor}
+              disabled={loadingAiTutor}
+              className="flex-shrink-0 bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:scale-105 active:scale-95 disabled:opacity-70 disabled:cursor-wait text-white py-3 px-6 rounded-xl font-bold shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              {loadingAiTutor ? (
+                <><FaSpinner className="animate-spin" /> Redirecting...</>
+              ) : (
+                <>Add AI Tutor · $25/mo</>
+              )}
+            </button>
+          )}
+        </motion.div>
 
         {/* ── Trust Row ── */}
         <motion.div

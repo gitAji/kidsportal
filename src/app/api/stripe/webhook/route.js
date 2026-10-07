@@ -85,6 +85,35 @@ async function updateSubscriptionInFirestore(uid, subscription, plan, cardData =
     );
 }
 
+// The AI Tutor Pack is a separate $25/month add-on subscription, independent
+// of the main Premium plan — it gets its own Firestore field so buying or
+// canceling one never touches the other's status.
+async function updateAiTutorPackInFirestore(uid, subscription) {
+    if (!uid) {
+        console.warn('Webhook: no firebaseUid found, skipping AI Tutor Pack Firestore update.');
+        return;
+    }
+    if (!adminDb) {
+        console.error('Webhook: adminDb not initialized. Check your environment variables.');
+        return;
+    }
+
+    await adminDb.doc(`users/${uid}`).set(
+        {
+            aiTutorPack: {
+                stripeSubscriptionId: subscription.id,
+                stripeCustomerId: typeof subscription.customer === 'string' ? subscription.customer : subscription.customer.id,
+                status: subscription.status,
+                active: subscription.status === 'active' || subscription.status === 'trialing',
+                currentPeriodEnd: Timestamp.fromMillis(subscription.current_period_end * 1000),
+                cancelAtPeriodEnd: subscription.cancel_at_period_end,
+                lastUpdated: Timestamp.now(),
+            },
+        },
+        { merge: true }
+    );
+}
+
 async function recordPaymentInFirestore(uid, invoice) {
     if (!uid || !adminDb) return;
 
@@ -133,6 +162,11 @@ export async function POST(request) {
                     const subscription = await stripe.subscriptions.retrieve(session.subscription);
                     let plan = session.metadata?.plan || subscription.metadata?.plan;
 
+                    if (plan === 'ai_tutor_pack') {
+                        await updateAiTutorPackInFirestore(uid, subscription);
+                        break;
+                    }
+
                     if (!plan) {
                         const priceId = subscription.items.data[0]?.price?.id;
                         plan = priceId === process.env.NEXT_PUBLIC_STRIPE_YEARLY_PRICE_ID ? 'premium_yearly' : 'premium_monthly';
@@ -164,8 +198,12 @@ export async function POST(request) {
                     const subscription = await stripe.subscriptions.retrieve(subscriptionId);
                     await recordPaymentInFirestore(uid, invoice);
 
-                    let plan = subscription.metadata?.plan || 'premium_monthly';
-                    await updateSubscriptionInFirestore(uid, subscription, plan);
+                    const plan = subscription.metadata?.plan;
+                    if (plan === 'ai_tutor_pack') {
+                        await updateAiTutorPackInFirestore(uid, subscription);
+                    } else {
+                        await updateSubscriptionInFirestore(uid, subscription, plan || 'premium_monthly');
+                    }
                 }
                 break;
             }
@@ -175,6 +213,12 @@ export async function POST(request) {
                 console.log(`Webhook: customer.subscription.updated for ${subscription.id}, status: ${subscription.status}`);
 
                 let plan = subscription.metadata?.plan;
+
+                if (plan === 'ai_tutor_pack') {
+                    await updateAiTutorPackInFirestore(uid, subscription);
+                    break;
+                }
+
                 if (!plan) {
                     const priceId = subscription.items.data[0]?.price?.id;
                     plan = priceId === process.env.NEXT_PUBLIC_STRIPE_YEARLY_PRICE_ID ? 'premium_yearly' : 'premium_monthly';
@@ -199,6 +243,24 @@ export async function POST(request) {
             case 'customer.subscription.deleted': {
                 const subscription = event.data.object;
                 console.log(`Webhook: customer.subscription.deleted for ${subscription.id}`);
+
+                if (subscription.metadata?.plan === 'ai_tutor_pack') {
+                    if (uid && adminDb) {
+                        await adminDb.doc(`users/${uid}`).set(
+                            {
+                                aiTutorPack: {
+                                    status: 'canceled',
+                                    active: false,
+                                    stripeSubscriptionId: subscription.id,
+                                    lastUpdated: Timestamp.now(),
+                                },
+                            },
+                            { merge: true }
+                        );
+                    }
+                    break;
+                }
+
                 if (uid && adminDb) {
                     await adminDb.doc(`users/${uid}`).set(
                         {
@@ -226,13 +288,30 @@ export async function POST(request) {
                     // Record the failed payment in history
                     await recordPaymentInFirestore(uid, invoice);
 
-                    await adminDb.doc(`users/${uid}`).set(
-                        {
-                            subscription: { status: 'past_due' },
-                            subscriptionStatus: 'past_due'
-                        },
-                        { merge: true }
-                    );
+                    let plan = null;
+                    if (invoice.subscription) {
+                        try {
+                            const subscription = await stripe.subscriptions.retrieve(invoice.subscription);
+                            plan = subscription.metadata?.plan;
+                        } catch (e) {
+                            console.error('Error retrieving subscription for payment_failed plan lookup:', e);
+                        }
+                    }
+
+                    if (plan === 'ai_tutor_pack') {
+                        await adminDb.doc(`users/${uid}`).set(
+                            { aiTutorPack: { status: 'past_due', active: false } },
+                            { merge: true }
+                        );
+                    } else {
+                        await adminDb.doc(`users/${uid}`).set(
+                            {
+                                subscription: { status: 'past_due' },
+                                subscriptionStatus: 'past_due'
+                            },
+                            { merge: true }
+                        );
+                    }
                 }
                 break;
             }

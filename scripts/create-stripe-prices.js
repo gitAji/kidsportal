@@ -73,6 +73,26 @@ async function main() {
         console.log(`NEXT_PUBLIC_STRIPE_MONTHLY_PRICE_ID_${cur.toUpperCase()}=${results.monthly[cur]}`);
         console.log(`NEXT_PUBLIC_STRIPE_YEARLY_PRICE_ID_${cur.toUpperCase()}=${results.yearly[cur]}`);
     }
+
+    console.log('\nCreating KidsPortal AI Tutor Pack add-on product...');
+
+    const aiTutorProduct = await stripe.products.create({
+        name: 'KidsPortal AI Tutor Pack',
+        description: 'Unlocks the AI Tutor Assistant on every lesson: simpler explanations, live examples, and challenge questions.',
+        metadata: { app: 'kidsportal', addon: 'ai_tutor_pack' },
+    });
+
+    const aiTutorPrice = await stripe.prices.create({
+        product: aiTutorProduct.id,
+        unit_amount: 2500, // $25.00
+        currency: 'usd',
+        recurring: { interval: 'month' },
+        nickname: 'AI Tutor Pack Monthly (USD)',
+    });
+
+    console.log(`✓ Product created: ${aiTutorProduct.id}`);
+    console.log(`✓ USD — monthly: ${aiTutorPrice.id}\n`);
+    console.log(`NEXT_PUBLIC_STRIPE_AI_TUTOR_PRICE_ID=${aiTutorPrice.id}`);
 }
 
 main().catch(console.error);

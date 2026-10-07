@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome,
-    FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage, FaCrown,
+    FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage,
     FaCalculator, FaFlask, FaLaptopCode, FaGlobeAmericas, FaCode, FaFeatherAlt,
 } from 'react-icons/fa';
 import { useLanguage } from '@/app/providers/LanguageProvider';
@@ -36,7 +36,9 @@ function getSubjectTheme(taskData) {
 
 export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const router = useRouter();
-    const isPremium = !!childUser?.isSubscriptionActive;
+    // The AI Tutor Assistant is its own $25/month add-on (separate from the
+    // main Premium plan) — gated on that purchase alone, not subscription status.
+    const hasAiTutorPack = !!childUser?.isAiTutorPackActive;
     const [activeTab, setActiveTab] = useState('lesson');
     const [aiResponse, setAiResponse] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -431,9 +433,9 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         <div className="flex-1">
                             <div className="flex items-center gap-2">
                                 <h3 className="text-lg sm:text-xl font-black text-white">AI Tutor Assistant</h3>
-                                {!isPremium && (
+                                {!hasAiTutorPack && (
                                     <span className="flex items-center gap-1 bg-amber-400 text-amber-900 text-[9px] sm:text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full">
-                                        <FaCrown className="text-[9px]" /> Premium
+                                        <FaRobot className="text-[9px]" /> Add-on
                                     </span>
                                 )}
                             </div>
@@ -441,23 +443,23 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         </div>
                     </div>
 
-                    {!isPremium ? (
-                        /* Upsell — AI Tutor is a Premium-only feature */
+                    {!hasAiTutorPack ? (
+                        /* Upsell — AI Tutor Assistant is a paid add-on pack */
                         <div className="p-6 sm:p-8 flex flex-col items-center text-center gap-4">
-                            <div className="w-16 h-16 bg-gradient-to-br from-amber-300 to-orange-400 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
-                                <FaCrown />
+                            <div className="w-16 h-16 bg-gradient-to-br from-indigo-400 to-fuchsia-500 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
+                                <FaRobot />
                             </div>
                             <div>
-                                <p className="font-black text-slate-800 text-lg leading-tight">Unlock the AI Tutor with Premium</p>
+                                <p className="font-black text-slate-800 text-lg leading-tight">Buy this AI Tutor Pack to enable your AI teacher!</p>
                                 <p className="text-slate-500 font-medium text-sm mt-1 max-w-sm">
-                                    Get simpler explanations, fun examples, and challenge questions from your AI tutor on every lesson.
+                                    Get simpler explanations, fun examples, and challenge questions from your AI tutor on every lesson — just $25/month.
                                 </p>
                             </div>
                             <Link
                                 href="/pricing"
                                 className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white font-black text-sm shadow-lg hover:scale-105 transition-all"
                             >
-                                <FaCrown /> Upgrade to Premium
+                                <FaRobot /> Add AI Tutor Pack
                             </Link>
                         </div>
                     ) : (
