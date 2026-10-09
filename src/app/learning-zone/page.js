@@ -9,7 +9,7 @@ import { getSubjectsByGrade, DEFAULT_LEARNING_SUBJECTS } from '../utils/learning
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
-import { FaStar, FaPlay, FaGamepad } from 'react-icons/fa';
+import { FaStar, FaPlay, FaGamepad, FaSun, FaCloud, FaMapMarkedAlt } from 'react-icons/fa';
 import { getChildStats } from '@/app/utils/firestoreService';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import TimeLimitBlockedScreen from '../components/child/TimeLimitBlockedScreen';
@@ -71,6 +71,16 @@ export default function LearningZonePage() {
 
   return (
     <div className="flex flex-col items-center sm:p-4 relative font-sans">
+
+      {/* "Basecamp" background motif — a warm sky with a sun and drifting clouds,
+          distinguishing Home from the map motif on Subjects and the arcade
+          glow on Games */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-10 right-[8%] text-yellow-300 opacity-40 text-8xl sm:text-9xl"><FaSun /></div>
+        <div className="absolute top-32 left-[6%] text-sky-200 opacity-50 text-7xl rotate-[-8deg]"><FaCloud /></div>
+        <div className="absolute bottom-24 right-[15%] text-sky-200 opacity-40 text-6xl rotate-[6deg]"><FaCloud /></div>
+        <div className="absolute bottom-10 left-[10%] text-amber-200 opacity-30 text-7xl rotate-12"><FaMapMarkedAlt /></div>
+      </div>
 
       {/* Welcome Banner */}
       <motion.div 
