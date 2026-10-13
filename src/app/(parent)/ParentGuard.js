@@ -5,39 +5,42 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/firebase/config";
 
+// Routes that require a logged-in parent account. /pricing is intentionally
+// excluded: it's linked from the public marketing site (CurriculumShowcase,
+// InteractiveLesson) for visitors who haven't signed up yet, and its own
+// "Subscribe" button already redirects to /login if no one is signed in —
+// gating the whole page here just blocked prospects from ever seeing prices
+// before creating an account.
+const WORKSPACE_PATHS = [
+    '/dashboard', '/analytics', '/child-dashboard', '/profile',
+    '/billing', '/child-profile', '/child-settings',
+    '/subscription-management', '/avatar-customizer', '/avatar-shop',
+    '/sticker-book', '/payment', '/grades'
+];
+
 /**
  * ParentGuard ensures:
  * 1. User is authenticated.
  * 2. User exists in the 'users' collection (where Parents are stored).
  * 3. Redirects to login if either condition is not met.
+ *
+ * Public marketing/content pages (home, about, pricing, etc.) are never
+ * gated: `checking` starts false for them so they render immediately on the
+ * server, instead of every page on the site shipping nothing but a loading
+ * spinner until a client-side Firebase check resolves.
  */
 export default function ParentGuard({ children }) {
     const router = useRouter();
     const pathname = usePathname();
-    const [checking, setChecking] = useState(true);
+    const isWorkspace = WORKSPACE_PATHS.some(path => pathname?.startsWith(path));
+    const [checking, setChecking] = useState(isWorkspace);
 
     useEffect(() => {
+        if (!isWorkspace) {
+            return;
+        }
+
         const unsub = onAuthStateChanged(auth, async (user) => {
-            // Check if we are on a path that requires a parent role.
-            // /pricing is intentionally excluded: it's linked from the public
-            // marketing site (CurriculumShowcase, InteractiveLesson) for
-            // visitors who haven't signed up yet, and its own "Subscribe"
-            // button already redirects to /login if no one is signed in —
-            // gating the whole page here just blocked prospects from ever
-            // seeing prices before creating an account.
-            const workspacePaths = [
-                '/dashboard', '/analytics', '/child-dashboard', '/profile',
-                '/billing', '/child-profile', '/child-settings',
-                '/subscription-management', '/avatar-customizer', '/avatar-shop',
-                '/sticker-book', '/payment', '/grades'
-            ];
-            const isWorkspace = workspacePaths.some(path => pathname?.startsWith(path));
-
-            if (!isWorkspace) {
-                setChecking(false);
-                return;
-            }
-
             if (!user) {
                 console.log("ParentGuard: No user, redirecting to login.");
                 router.replace("/login?role=parent&redirect=" + encodeURIComponent(pathname));
@@ -69,7 +72,7 @@ export default function ParentGuard({ children }) {
         });
 
         return () => unsub();
-    }, [router, pathname]);
+    }, [router, pathname, isWorkspace]);
 
     if (checking) {
         return (
