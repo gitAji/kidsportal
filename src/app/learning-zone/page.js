@@ -9,7 +9,7 @@ import { getSubjectsByGrade, DEFAULT_LEARNING_SUBJECTS } from '../utils/learning
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
-import { FaStar, FaPlay, FaGamepad, FaSun, FaCloud, FaMapMarkedAlt } from 'react-icons/fa';
+import { FaStar, FaPlay, FaGamepad, FaSun, FaCloud, FaMapMarkedAlt, FaFire } from 'react-icons/fa';
 import { getChildStats } from '@/app/utils/firestoreService';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import TimeLimitBlockedScreen from '../components/child/TimeLimitBlockedScreen';
@@ -127,6 +127,28 @@ export default function LearningZonePage() {
               </div>
             </div>
             <div className="bg-white text-[#DF5593] px-8 py-4 rounded-full font-black text-lg shadow-lg flex items-center gap-3 active:scale-95 transition-transform">
+              <FaPlay /> GO!
+            </div>
+          </motion.div>
+        </Link>
+
+        {/* Daily Challenge Promo Card */}
+        <Link href="/learning-zone/daily-challenge">
+          <motion.div
+            whileHover={{ scale: 1.02, y: -4 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full bg-[#FF9F43] rounded-[2.5rem] p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 shadow-[0_12px_0_#E07B20] hover:shadow-[0_8px_0_#E07B20] hover:translate-y-1 transition-all border-[6px] border-white cursor-pointer"
+          >
+            <div className="flex items-center gap-6">
+              <div className="w-20 h-20 bg-white/20 rounded-[1.5rem] flex items-center justify-center shadow-inner border-4 border-white/30">
+                <FaFire className="text-5xl text-white drop-shadow-sm" />
+              </div>
+              <div>
+                <h2 className="text-3xl sm:text-4xl font-black text-white drop-shadow-md mb-1">Daily Challenge!</h2>
+                <p className="text-white/90 font-bold text-lg">A quick mix of questions — keep your streak going.</p>
+              </div>
+            </div>
+            <div className="bg-white text-[#E07B20] px-8 py-4 rounded-full font-black text-lg shadow-lg flex items-center gap-3 active:scale-95 transition-transform">
               <FaPlay /> GO!
             </div>
           </motion.div>

@@ -7,7 +7,7 @@ import { useChild } from '@/app/providers/ChildProvider';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaStar, FaTrophy, FaSignOutAlt, FaCog, FaMedal, FaHome } from 'react-icons/fa';
+import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaStar, FaTrophy, FaSignOutAlt, FaCog, FaMedal, FaHome, FaFire } from 'react-icons/fa';
 import { loadStats } from '@/app/utils/achievements';
 
 export default function ChildLearningZoneHeader() {
@@ -192,6 +192,17 @@ export default function ChildLearningZoneHeader() {
                     <FaHome />
                   </div>
                   <span>Home</span>
+                </Link>
+
+                <Link
+                  href="/learning-zone/daily-challenge"
+                  onClick={() => setDropdownOpen(false)}
+                  className="flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-black text-slate-600 hover:bg-[#FF9F43] hover:text-white transition-all shadow-[0_4px_0_transparent] hover:shadow-[0_4px_0_#E07B20] hover:-translate-y-1 group"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-orange-500 flex items-center justify-center text-lg group-hover:bg-white/20 group-hover:text-white transition-all">
+                    <FaFire />
+                  </div>
+                  <span>Daily Challenge</span>
                 </Link>
 
                 <Link
