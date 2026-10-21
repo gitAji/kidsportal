@@ -708,6 +708,22 @@ export default function TaskContentPage() {
             {taskData.type !== 'lesson' && <p className="text-lg text-gray-400 bg-gray-100 rounded-full py-1 px-4 inline-block">⏳ {formatTime(timeTaken)}</p>}
           </div>
 
+          {/* Action buttons come right after the score, ahead of the (potentially long)
+              detailed recap below, so they're reachable without scrolling past it. */}
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-col gap-3">
+            <button onClick={() => router.back()} className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black px-6 py-4 rounded-full text-xl hover:scale-[1.02] transition-all shadow-lg shadow-blue-200/50 flex items-center justify-center gap-2">
+              <FaHome /> {t('backToMap')}
+            </button>
+            <div className="grid grid-cols-2 gap-3">
+              <button onClick={handleRetake} className="w-full bg-white text-emerald-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300 transition-all flex items-center justify-center gap-2">
+                <FaRedo /> {taskData.type === 'exam' ? t('retakeExam') : t('practiceAgain')}
+              </button>
+              <button onClick={() => router.push('/learning-zone/rewards')} className="w-full bg-white text-cyan-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-cyan-200 hover:bg-cyan-50 hover:border-cyan-300 transition-all flex items-center justify-center gap-2">
+                <FaGift /> {t('myRewards')}
+              </button>
+            </div>
+          </motion.div>
+
           <div className="mt-8 text-left">
             <h3 className="text-xl font-black text-slate-800 mb-4 flex items-center gap-2">
               <FaCheckCircle className="text-green-500" /> {t('detailedRecap')}
@@ -738,20 +754,6 @@ export default function TaskContentPage() {
               ))}
             </div>
           </div>
-
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-col gap-3 mt-8">
-            <button onClick={() => router.back()} className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black px-6 py-4 rounded-full text-xl hover:scale-[1.02] transition-all shadow-lg shadow-blue-200/50 flex items-center justify-center gap-2">
-              <FaHome /> {t('backToMap')}
-            </button>
-            <div className="grid grid-cols-2 gap-3">
-              <button onClick={handleRetake} className="w-full bg-white text-emerald-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300 transition-all flex items-center justify-center gap-2">
-                <FaRedo /> {taskData.type === 'exam' ? t('retakeExam') : t('practiceAgain')}
-              </button>
-              <button onClick={() => router.push('/learning-zone/rewards')} className="w-full bg-white text-cyan-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-cyan-200 hover:bg-cyan-50 hover:border-cyan-300 transition-all flex items-center justify-center gap-2">
-                <FaGift /> {t('myRewards')}
-              </button>
-            </div>
-          </motion.div>
         </motion.div>
 
         {newAchievements.length > 0 && (
