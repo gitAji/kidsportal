@@ -287,7 +287,8 @@ function UnifiedLoginPage() {
                                             onChange={(e) => setUsername(e.target.value)}
                                             className="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl pl-14 pr-6 py-4 text-slate-800 focus:border-blue-500 focus:bg-white outline-none transition-all font-semibold placeholder:text-slate-300"
                                             placeholder="e.g. leo123"
-                                            autoComplete="username"
+                                            name="student-username"
+                                            autoComplete="off"
                                             autoCapitalize="none"
                                             autoCorrect="off"
                                             spellCheck="false"
@@ -305,7 +306,8 @@ function UnifiedLoginPage() {
                                             onChange={(e) => setPassword(e.target.value)}
                                             className="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl pl-14 pr-6 py-4 text-slate-800 focus:border-blue-500 focus:bg-white outline-none transition-all font-semibold placeholder:text-slate-300"
                                             placeholder="Your secret password"
-                                            autoComplete="current-password"
+                                            name="student-password"
+                                            autoComplete="off"
                                             autoCapitalize="none"
                                             autoCorrect="off"
                                             spellCheck="false"
