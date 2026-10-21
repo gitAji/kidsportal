@@ -1064,7 +1064,7 @@ export default function TaskContentPage() {
                 <p className="text-center text-sm font-bold text-red-500 mt-2">{handwritingError}</p>
               )}
 
-              {showKeyboard && !String(userAnswer).startsWith('data:image') && <div className="mt-4"><VirtualKeyboard onKeyPress={handleKeyPress} /></div>}
+              {showKeyboard && !String(userAnswer).startsWith('data:image') && <div className="mt-4"><VirtualKeyboard onKeyPress={handleKeyPress} defaultLanguage={contentLanguage} /></div>}
             </div>
           )}
 
