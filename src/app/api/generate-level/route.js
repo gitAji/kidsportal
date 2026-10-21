@@ -3,6 +3,7 @@ import { adminDb } from '@/lib/firebaseAdmin';
 import { GoogleGenAI } from "@google/genai";
 import dbData from '@/app/data/db.json';
 import { safeErrorResponse } from '@/lib/apiError';
+import { missingGeminiKeyResponse } from '@/lib/geminiAuth';
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -48,6 +49,9 @@ async function getExistingLevels(gradeId, subjectId) {
 // student has finished every existing level in a subject, so there's
 // always somewhere further to go instead of a dead end.
 export async function POST(request) {
+    const missingKey = missingGeminiKeyResponse();
+    if (missingKey) return missingKey;
+
     try {
         const { gradeId, subjectId } = await request.json();
 

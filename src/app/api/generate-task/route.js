@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { GoogleGenAI } from "@google/genai";
 import { safeErrorResponse } from '@/lib/apiError';
+import { missingGeminiKeyResponse } from '@/lib/geminiAuth';
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -11,6 +12,9 @@ const model = "gemini-1.5-flash";
 
 // Create a customized task based on child past performance using Vertex AI / Gemini
 export async function POST(request) {
+    const missingKey = missingGeminiKeyResponse();
+    if (missingKey) return missingKey;
+
     try {
         const { gradeId, subjectId, levelId, taskId, childId } = await request.json();
 
