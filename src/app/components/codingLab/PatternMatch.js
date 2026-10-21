@@ -87,7 +87,7 @@ export default function PatternMatch() {
 
   return (
     <div className="flex flex-col lg:flex-row gap-6">
-      <div className="flex-1 flex flex-col items-center">
+      <div className="flex-1 min-w-0 flex flex-col items-center">
         <div className="flex items-center gap-2 mb-4 flex-wrap justify-center">
           {patternLevels.map((lvl, i) => (
             <button

@@ -3,18 +3,19 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../../data/db.json';
 import SkeletonLoader from '../../../../components/ui/SkeletonLoader';
-import { FaArrowLeft, FaHome, FaBookOpen, FaQuestionCircle, FaAward, FaStar, FaCheckCircle, FaTrophy } from 'react-icons/fa';
+import { FaBookOpen, FaQuestionCircle, FaAward, FaStar, FaCheckCircle, FaTrophy } from 'react-icons/fa';
 import { useChild } from '../../../../providers/ChildProvider';
 import { loadStats } from '../../../../utils/achievements';
+import MinimalBackButton from '../../../../components/child/MinimalBackButton';
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
-// A map for sleek task colors
+// A map for bouncy pastel task colors
 const taskColorMap = {
-  "lesson": "bg-gradient-to-br from-green-400 to-green-600 border-green-500",
-  "quiz": "bg-gradient-to-br from-blue-400 to-blue-600 border-blue-500",
-  "exam": "bg-gradient-to-br from-red-400 to-red-600 border-red-500",
-  "default": "bg-gradient-to-br from-gray-400 to-gray-600 border-gray-500",
+  "lesson": "bg-[#72E5A8] border-[#4CC287] border-white/50",
+  "quiz": "bg-[#72C6FF] border-[#40A5E5] border-white/50",
+  "exam": "bg-[#FF9B9B] border-[#FF7272] border-white/50",
+  "default": "bg-[#FFC972] border-[#E5A840] border-white/50",
 };
 
 const taskIconMap = {
@@ -143,12 +144,12 @@ export default function LevelTasksPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 p-4 sm:p-6 md:p-8 relative overflow-hidden">
+    <div className="flex flex-col p-2 sm:p-4 relative font-sans">
       {/* Background Decor */}
       <div className="absolute top-40 right-10 text-blue-200 opacity-30 text-8xl transform rotate-12"><FaQuestionCircle /></div>
       <div className="absolute top-20 left-10 text-green-200 opacity-40 text-9xl transform -rotate-12"><FaBookOpen /></div>
 
-      {/* Navigation handled by Global Header */}
+      <MinimalBackButton />
 
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -203,15 +204,6 @@ export default function LevelTasksPage() {
       >
         {levelData.tasks && levelData.tasks.length > 0 ? (
           levelData.tasks
-            .filter(task => {
-              const name = task.taskName?.toLowerCase().trim() || '';
-              const isGeneric = /^\[(quizz|quiz|exam|lesson)\s*\d*\]$/i.test(name) ||
-                /^(quizz|quiz|exam|lesson)\s*\d+$/i.test(name) ||
-                /^(quizz|quiz)\d+$/i.test(name) ||
-                ['new quiz', 'new lesson', 'new exam', 'quizz 1', 'quiz 1', 'lesson 1', 'exam 1'].includes(name) ||
-                name.includes('placeholder');
-              return !isGeneric;
-            })
             .map(task => {
               const Icon = taskIconMap[task.type?.toLowerCase()] || taskIconMap.default;
               const taskColor = taskColorMap[task.type?.toLowerCase()] || taskColorMap.default;
@@ -221,7 +213,7 @@ export default function LevelTasksPage() {
                 <motion.div
                   key={task.taskId}
                   onClick={() => router.push(`/learning-zone/subjects/${subjectId}/${levelId}/${task.taskId}`)}
-                  className={`${taskColor} text-white rounded-[2rem] shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[220px] relative overflow-hidden group border-b-8`}
+                  className={`${taskColor} text-white rounded-[2.5rem] shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[220px] relative overflow-hidden group border-b-[8px] border-x-[4px] border-t-4`}
                   variants={cardVariants}
                   whileHover="hover"
                   whileTap="tap"

@@ -76,36 +76,28 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
       };
 
       // 3. Advanced Voice Selection
+      const ENGLISH_PRIORITY = [
+        'Samantha', 'Google UK English Female', 'Google US English',
+        'Premium', 'Natural', 'Serena', 'Daniel', 'Victoria', 'Fiona'
+      ];
+      // A network-backed voice (Google/Microsoft's online voices) is almost
+      // always far clearer than an always-available local/offline one —
+      // `localService` is a real signal the Web Speech API exposes, not a
+      // guess, so prefer it whenever no named voice above matches.
+      const pickBestVoice = (candidates, priority = []) => {
+        for (const namePart of priority) {
+          const match = candidates.find(v => v.name.includes(namePart));
+          if (match) return match;
+        }
+        return candidates.find(v => !v.localService) || candidates[0];
+      };
+
       if (voices.length > 0) {
         const langCode = lang.split('-')[0].toLowerCase();
         const langVoices = voices.filter(v => v.lang.toLowerCase().startsWith(langCode));
-
-        let bestVoice;
-
-        if (langCode === 'en') {
-          // Priority list for Premium/Natural sounding English voices
-          const priority = [
-            'Samantha', 'Google UK English Female', 'Google US English',
-            'Premium', 'Natural', 'Serena', 'Daniel', 'Victoria', 'Fiona'
-          ];
-
-          for (const namePart of priority) {
-            bestVoice = langVoices.find(v => v.name.includes(namePart));
-            if (bestVoice) break;
-          }
-
-          if (!bestVoice) bestVoice = langVoices[0];
-        } else if (langCode === 'ta') {
-          // Priority for Tamil voices
-          const priority = ['Valluvar', 'Tamil', 'Google', 'Kanya', 'Vani'];
-          for (const namePart of priority) {
-            bestVoice = langVoices.find(v => v.name.includes(namePart));
-            if (bestVoice) break;
-          }
-          if (!bestVoice) bestVoice = langVoices[0];
-        } else {
-          bestVoice = langVoices[0];
-        }
+        const bestVoice = langCode === 'en'
+          ? pickBestVoice(langVoices, ENGLISH_PRIORITY)
+          : pickBestVoice(langVoices);
 
         if (bestVoice) {
           utterance.voice = bestVoice;

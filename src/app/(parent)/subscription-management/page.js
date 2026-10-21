@@ -176,7 +176,7 @@ const SubscriptionManagementPage = () => {
                 <div>
                   <h3 className="text-blue-900 font-bold mb-1">Premium Perks Active</h3>
                   <p className="text-blue-700/80 text-sm leading-relaxed">
-                    You currently have full access to all subjects, unlimited practice sessions, and comprehensive analytics for up to 10 children.
+                    You currently have full access to all subjects, unlimited practice sessions, and comprehensive analytics for up to 4 children.
                   </p>
                 </div>
               </div>

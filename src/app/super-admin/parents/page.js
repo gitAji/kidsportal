@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import {
-    collection, getDocs, doc, query, orderBy
-} from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import { motion } from 'framer-motion';
 import {
@@ -18,10 +16,34 @@ export default function ParentsManagement() {
     useEffect(() => {
         const fetchParents = async () => {
             try {
-                // Fetching from 'users' collection (which holds parents)
-                const q = query(collection(db, 'users'), orderBy('createdAt', 'desc'));
-                const snap = await getDocs(q);
-                setParents(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                // Not every parent doc has createdAt (accounts created before
+                // that field existed never got it retroactively), and
+                // Firestore's orderBy silently drops any doc missing the
+                // sorted field — ordering here would make older accounts
+                // vanish from the list entirely rather than just sort oddly.
+                // Fetch everything and sort client-side instead.
+                const snap = await getDocs(collection(db, 'users'));
+                const parentDocs = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+                // Children live in a subcollection (users/{uid}/children), not
+                // an array field on the parent doc, so the real count has to
+                // be fetched per parent.
+                const withChildCounts = await Promise.all(parentDocs.map(async (p) => {
+                    try {
+                        const childrenSnap = await getDocs(collection(db, 'users', p.id, 'children'));
+                        return { ...p, childCount: childrenSnap.size };
+                    } catch {
+                        return { ...p, childCount: 0 };
+                    }
+                }));
+
+                withChildCounts.sort((a, b) => {
+                    const aTime = a.createdAt?.toMillis?.() ?? 0;
+                    const bTime = b.createdAt?.toMillis?.() ?? 0;
+                    return bTime - aTime;
+                });
+
+                setParents(withChildCounts);
             } catch (error) {
                 console.error("Error fetching parents:", error);
             } finally {
@@ -104,7 +126,7 @@ export default function ParentsManagement() {
                                     <td className="px-8 py-5">
                                         <div className="flex items-center gap-2 text-slate-400 font-bold text-xs">
                                             <FaChild className="text-slate-600" />
-                                            <span className="bg-slate-900 px-2 py-0.5 rounded-md text-slate-300">{parent.children?.length || 0}</span>
+                                            <span className="bg-slate-900 px-2 py-0.5 rounded-md text-slate-300">{parent.childCount ?? 0}</span>
                                         </div>
                                     </td>
                                     <td className="px-8 py-5">

@@ -4,11 +4,7 @@ import { useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/firebase/config";
-
-// Fallback super admin email (always has access)
-const SUPER_ADMIN_EMAILS = [
-    "kontaktaone@gmail.com",
-];
+import { SUPER_ADMIN_EMAILS } from "@/lib/superAdmin";
 
 /**
  * SuperAdminGuard checks:

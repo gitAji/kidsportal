@@ -1,12 +1,19 @@
-import { adminDb } from '@/lib/firebaseAdmin';
+import { adminDb, adminAuth } from '@/lib/firebaseAdmin';
+import { FieldValue } from 'firebase-admin/firestore';
 
 export const POST = async (req) => {
     try {
-        const { username, password } = await req.json();
+        let { username, password } = await req.json();
 
         if (!username || !password) {
             return new Response(JSON.stringify({ error: "Username and password required" }), { status: 400 });
         }
+
+        // Defense-in-depth trim (the client already trims) — a stray space from
+        // a mobile keyboard's predictive-text bar shouldn't silently break an
+        // otherwise-correct login.
+        username = username.trim();
+        password = password.trim();
 
         if (!adminDb) {
             console.error("Child login failed: adminDb is not initialized — check FIREBASE_ADMIN_* env vars.");
@@ -29,7 +36,7 @@ export const POST = async (req) => {
 
         if (!childDoc.exists) {
             console.error(`Child login: child_usernames/${usernameKey} points at a missing child doc (parent ${parentUid}, child ${childId}).`);
-            return new Response(JSON.stringify({ error: `Child profile document missing (ID: ${childId})` }), { status: 404 });
+            return new Response(JSON.stringify({ error: "Invalid username or password." }), { status: 401 });
         }
 
         const childData = childDoc.data();
@@ -42,6 +49,34 @@ export const POST = async (req) => {
 
         if (childData.loginEnabled === false) {
             return new Response(JSON.stringify({ error: "Your account is currently disabled. Please ask your parent to enable it." }), { status: 403 });
+        }
+
+        // The learning zone stays locked until the parent's own account email
+        // is verified — Google sign-ins already come back verified, so this
+        // only ever blocks email/password parent accounts that haven't
+        // clicked the link yet.
+        if (adminAuth) {
+            try {
+                const parentRecord = await adminAuth.getUser(parentUid);
+                if (!parentRecord.emailVerified) {
+                    return new Response(JSON.stringify({
+                        error: "Ask your parent to verify their email before you can start learning! Check the inbox for the account they signed up with.",
+                        code: "PARENT_EMAIL_NOT_VERIFIED",
+                    }), { status: 403 });
+                }
+            } catch (err) {
+                console.error(`Child login: failed to check email verification for parent ${parentUid}`, err);
+                // Fail open on a transient Admin Auth error — don't lock a
+                // real family out of an already-working session over an
+                // infra hiccup unrelated to the actual verification policy.
+            }
+        }
+
+        // First-ever login, recorded once — lets admin tooling (e.g. the
+        // pilot-program dashboard) measure setup time without being bumped
+        // forward by every subsequent login.
+        if (!childData.firstLoginAt) {
+            await childDoc.ref.set({ firstLoginAt: FieldValue.serverTimestamp() }, { merge: true });
         }
 
         const { password: _password, ...childDataWithoutPassword } = childData;

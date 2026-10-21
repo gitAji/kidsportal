@@ -31,10 +31,14 @@ export default function ParentLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  // Routes that should use the Workspace (Sidebar) Layout
+  // Routes that should use the Workspace (Sidebar) Layout.
+  // /pricing is intentionally excluded — see the comment in ParentGuard.js:
+  // it's a public marketing page linked to logged-out visitors, and gating
+  // it here meant Googlebot (and every first-time visitor) only ever saw a
+  // loading spinner instead of the pricing content.
   const workspacePaths = [
     '/dashboard', '/analytics', '/child-dashboard', '/profile',
-    '/billing', '/pricing', '/child-profile', '/child-settings',
+    '/billing', '/child-profile', '/child-settings',
     '/subscription-management', '/avatar-customizer', '/avatar-shop',
     '/sticker-book', '/payment', '/grades', '/support'
   ];

@@ -99,13 +99,15 @@ export default function SuperAdminDashboard() {
 
     const fetchRecentParents = async () => {
         try {
-            const q = query(
-                collection(db, 'users'),
-                orderBy('createdAt', 'desc'),
-                limit(5)
-            );
-            const snap = await getDocs(q);
-            setRecentParents(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+            // Not every parent doc has createdAt (accounts created before
+            // that field existed never got it retroactively), and Firestore's
+            // orderBy silently drops any doc missing the sorted field — so
+            // ordering server-side here made this widget show nothing at all
+            // rather than just sort imperfectly. Sort client-side instead.
+            const snap = await getDocs(collection(db, 'users'));
+            const allParents = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            allParents.sort((a, b) => (b.createdAt?.toMillis?.() ?? 0) - (a.createdAt?.toMillis?.() ?? 0));
+            setRecentParents(allParents.slice(0, 5));
         } catch (error) {
             console.error("Error fetching recent parents:", error);
         }

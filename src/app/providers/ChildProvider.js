@@ -49,7 +49,12 @@ export function ChildProvider({ children }) {
             // Subscription check - align with new planType logic
             let isSubActive = false;
 
-            if (parentData.planType === 'paid') {
+            // Hand-picked pilot families (super-admin "Pilot Program") get
+            // full access regardless of billing status — this is the only
+            // override that skips the plan checks below entirely.
+            if (parentData.pilotAccess) {
+              isSubActive = true;
+            } else if (parentData.planType === 'paid') {
               // Paid plan is active if status is active or trialing
               const status = parentData.subscription?.status || parentData.subscriptionStatus;
               isSubActive = status === 'active' || status === 'trialing';
@@ -80,10 +85,17 @@ export function ChildProvider({ children }) {
               }
             }
 
-            setChildUser({ ...freshData, isSubscriptionActive: isSubActive });
+            // AI Tutor Pack is a separate $25/month add-on, independent of the
+            // main plan — a family on Premium or Free Trial still needs this
+            // to be active to see the AI Tutor Assistant unlocked. Pilot
+            // families get it too, so they can test the full experience.
+            const aiTutorStatus = parentData.aiTutorPack?.status;
+            const isAiTutorActive = !!parentData.pilotAccess || !!parentData.aiTutorPack?.active || aiTutorStatus === 'active' || aiTutorStatus === 'trialing';
+
+            setChildUser({ ...freshData, isSubscriptionActive: isSubActive, isAiTutorPackActive: isAiTutorActive });
 
             // Re-set storage items
-            const storageData = { ...freshData, isSubscriptionActive: isSubActive };
+            const storageData = { ...freshData, isSubscriptionActive: isSubActive, isAiTutorPackActive: isAiTutorActive };
             if (localStorage.getItem("childUser")) {
               localStorage.setItem("childUser", JSON.stringify(storageData));
             } else {
@@ -92,7 +104,14 @@ export function ChildProvider({ children }) {
           } else {
             localStorage.removeItem("childUser");
             sessionStorage.removeItem("childUser");
-            router.push("/child-login");
+            let reason = null;
+            try {
+              const body = await response.json();
+              if (body.code === "PARENT_EMAIL_NOT_VERIFIED") reason = "email_not_verified";
+            } catch {
+              // no JSON body — fall through to a plain redirect
+            }
+            router.push(reason ? `/child-login?reason=${reason}` : "/child-login");
           }
         } catch (error) {
           console.error("Error fetching child/parent data for provider:", error);

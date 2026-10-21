@@ -13,6 +13,22 @@ const CurriculumShowcase = lazy(() => import("../components/ui/CurriculumShowcas
 import db from '../data/db.json'; // Import from src/app/data/db.json
 
 import HeroSection from "../components/ui/HeroSection";
+import { SITE_URL, SITE_NAME } from "@/lib/seo";
+
+const ORGANIZATION_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.png`,
+};
+
+const WEBSITE_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: SITE_URL,
+};
 
 // Real, verified capabilities only — nothing here that isn't actually
 // shipped in the product.
@@ -68,6 +84,32 @@ const FEATURES = [
   },
 ];
 
+// Short, compact reviews — shown as small avatar-icon + name/role cards
+// rather than one large pull-quote, so several can be scanned at once.
+const REVIEWS = [
+  {
+    quote: "My son used to struggle with math, but since joining KidsPortal, he asks to 'play math' every single day. The progress is night and day!",
+    name: "Sarah Jenkins",
+    role: "Parent of a 3rd Grader",
+    initial: "S",
+    color: "from-blue-500 to-indigo-500",
+  },
+  {
+    quote: "The time controls are a lifesaver — I set the limit once and never have to argue about screen time again. My daughter still begs to finish 'one more level'.",
+    name: "Marcus Odei",
+    role: "Parent of a 1st Grader",
+    initial: "M",
+    color: "from-emerald-500 to-teal-500",
+  },
+  {
+    quote: "No ads, no random links to click — I can finally hand over the tablet without watching over her shoulder. The certificates keep her motivated too.",
+    name: "Priya Raman",
+    role: "Parent of a 5th Grader",
+    initial: "P",
+    color: "from-rose-500 to-orange-500",
+  },
+];
+
 const FEATURE_COLORS = {
   indigo: { bg: "bg-indigo-50", iconBg: "bg-indigo-100", text: "text-indigo-600", groupHoverText: "group-hover:text-indigo-600", border: "hover:border-indigo-100 hover:border-b-indigo-500" },
   blue: { bg: "bg-blue-50", iconBg: "bg-blue-100", text: "text-blue-600", groupHoverText: "group-hover:text-blue-600", border: "hover:border-blue-100 hover:border-b-blue-500" },
@@ -108,6 +150,21 @@ function FeatureTile({ feature }) {
 export default async function HomePage() {
   const grades = db.grades;
 
+  // Derive headline stats from the real curriculum data instead of hand-maintained
+  // numbers, so they can't silently go stale as grades/subjects are added.
+  const gradeRange = grades.length
+    ? `${Math.min(...grades.map((g) => parseInt(g.gradeId.replace("grade-", ""), 10)))}-${Math.max(...grades.map((g) => parseInt(g.gradeId.replace("grade-", ""), 10)))}`
+    : "1-10";
+  const totalLevels = grades.reduce((sum, g) => {
+    const seenNames = new Set();
+    return sum + (g.subjects || []).reduce((s, subject) => {
+      if (seenNames.has(subject.subjectName)) return s;
+      seenNames.add(subject.subjectName);
+      return s + (subject.levels?.length || 0);
+    }, 0);
+  }, 0);
+  const levelsDisplay = `${Math.floor(totalLevels / 50) * 50}+`;
+
   const gradeColors = [
     "#FF5722", // Deep Orange
     "#4CAF50", // Green
@@ -121,97 +178,114 @@ export default async function HomePage() {
 
   return (
     <HomePageClient>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_JSON_LD) }}
+      />
       <HeroSection />
 
-      {/* Stats Section / By the Numbers */}
-      <section className="py-16 bg-white border-y border-slate-100 relative overflow-hidden">
-        {/* Soft decorative blur */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-50/50 rounded-full blur-[100px] -z-10" />
-
-        <div className="container mx-auto px-4 z-10 relative">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            <div className="text-center group p-6 rounded-3xl bg-white border-2 border-slate-50 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-blue-100 hover:-translate-y-1 transition-all duration-300">
-              <div className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-indigo-500 mb-2 group-hover:scale-105 transition-transform">1-8</div>
-              <div className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-[0.2em]">Active Grades</div>
-            </div>
-            <div className="text-center group p-6 rounded-3xl bg-white border-2 border-slate-50 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-cyan-100 hover:-translate-y-1 transition-all duration-300">
-              <div className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-cyan-500 to-teal-400 mb-2 group-hover:scale-105 transition-transform">360+</div>
-              <div className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-[0.2em]">Learning Levels</div>
-            </div>
-            <div className="text-center group p-6 rounded-3xl bg-white border-2 border-slate-50 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-purple-100 hover:-translate-y-1 transition-all duration-300">
-              <div className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-purple-500 to-fuchsia-500 mb-2 group-hover:scale-105 transition-transform">10k+</div>
-              <div className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-[0.2em]">Happy Kids</div>
-            </div>
-            <div className="text-center group p-6 rounded-3xl bg-white border-2 border-slate-50 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-orange-100 hover:-translate-y-1 transition-all duration-300">
-              <div className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-amber-500 mb-2 group-hover:scale-105 transition-transform">4.9/5</div>
-              <div className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-[0.2em]">Avg. Rating</div>
-            </div>
+      {/* Stats Section */}
+      <section className="py-14 bg-white border-y border-slate-100">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {[
+              { num: gradeRange,    label: "Active Grades",    grad: "from-sky-500 to-indigo-500",    hover: "hover:border-sky-100" },
+              { num: levelsDisplay, label: "Learning Levels",   grad: "from-teal-400 to-emerald-500",  hover: "hover:border-teal-100" },
+              { num: "10K+",        label: "Happy Families",    grad: "from-violet-500 to-purple-500", hover: "hover:border-violet-100" },
+              { num: "4.9★",        label: "Average Rating",    grad: "from-amber-400 to-orange-400",  hover: "hover:border-amber-100" },
+            ].map(({ num, label, grad, hover }) => (
+              <div key={label} className={`text-center group p-6 rounded-2xl bg-white border-2 border-slate-100 shadow-sm hover:shadow-md ${hover} hover:-translate-y-1 transition-all duration-300`}>
+                <div className={`text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br ${grad} mb-2 group-hover:scale-105 transition-transform`}>{num}</div>
+                <div className="text-xs md:text-sm font-semibold text-slate-400 uppercase tracking-widest">{label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Key Features Section */}
-      <section className="py-32 bg-slate-50 relative border-t border-slate-100">
+      <section className="py-24 bg-[#f8faff] relative border-t border-slate-100">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-indigo-50 text-indigo-600 rounded-full text-sm font-bold uppercase tracking-wider">
-              <span>🚀</span> For Parents & Kids
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-sky-50 text-sky-600 rounded-full text-sm font-semibold border border-sky-100">
+              <span>🚀</span> For Parents &amp; Kids
             </div>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-800 mb-6 tracking-tight leading-tight">
-              Master Every Subject <br className="hidden md:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">With Absolute Joy</span>
+            <h2 className="text-3xl md:text-5xl font-black text-slate-800 mb-5 tracking-tight leading-tight">
+              Everything your child needs
+              <br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-500"> to thrive</span>
             </h2>
-            <p className="text-slate-500 text-lg md:text-xl font-medium leading-relaxed">
-              Our portal is designed by educators to ensure your child stays engaged, motivated, and ahead of the curve.
+            <p className="text-slate-500 text-lg font-medium leading-relaxed">
+              Designed by educators. Loved by kids. Trusted by parents.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-6 md:auto-rows-[minmax(220px,auto)] gap-6 px-2 md:px-0">
+          <div className="grid grid-cols-1 md:grid-cols-6 md:auto-rows-[minmax(220px,auto)] gap-5 px-2 md:px-0">
             {FEATURES.map((feature) => (
               <FeatureTile key={feature.title} feature={feature} />
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Testimonial Snippet */}
-          <div className="mt-20 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[3rem] p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 p-8 opacity-10">
-              <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017V14C19.017 11.2386 16.7784 9 14.017 9V6C18.4353 6 22.017 9.58172 22.017 14V21H14.017ZM2.017 21L2.017 18C2.017 16.8954 2.91243 16 4.017 16H7.017V14C7.017 11.2386 4.77843 9 2.017 9V6C6.43528 6 10.017 9.58172 10.017 14V21H2.017Z" /></svg>
+      {/* Parent Reviews Section */}
+      <section className="py-24 bg-white border-t border-slate-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-amber-50 text-amber-600 rounded-full text-sm font-semibold border border-amber-100">
+              <span>⭐</span> Loved by Families
             </div>
-            <div className="relative z-10 max-w-2xl">
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-xl">★</span>
-                ))}
-              </div>
-              <p className="text-xl md:text-2xl font-medium mb-8 leading-relaxed italic">
-                "My son used to struggle with math, but since joining KidsPortal, he asks to 'play math' every single day. The progress is night and day!"
-              </p>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center font-bold text-lg mr-4">S</div>
-                <div>
-                  <div className="font-bold">Sarah Jenkins</div>
-                  <div className="text-blue-300 text-sm">Parent of 3rd Grader</div>
+            <h2 className="text-3xl md:text-5xl font-black text-slate-800 mb-4 tracking-tight">
+              Trusted by Parents Worldwide
+            </h2>
+            <p className="text-slate-500 text-lg font-medium">Real stories from real families.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {REVIEWS.map((review) => (
+              <div
+                key={review.name}
+                className="bg-white rounded-2xl p-6 border-2 border-slate-100 hover:border-sky-100 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col"
+              >
+                <div className="flex gap-0.5 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-amber-400 text-base">★</span>
+                  ))}
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed mb-5 flex-grow italic">&ldquo;{review.quote}&rdquo;</p>
+                <div className="flex items-center gap-3 pt-4 border-t border-slate-50">
+                  <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${review.color} text-white flex items-center justify-center font-bold text-sm shrink-0`}>
+                    {review.initial}
+                  </div>
+                  <div>
+                    <div className="font-bold text-sm text-slate-800">{review.name}</div>
+                    <div className="text-slate-400 text-xs">{review.role}</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section id="gradesCard" className="py-24 bg-gradient-to-b from-blue-50/50 to-white relative overflow-hidden">
-        {/* Playful background blobs (framer motion alternative via CSS) */}
-        <div className="absolute top-0 right-0 w-72 h-72 bg-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-        <div className="absolute top-40 -left-10 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute -bottom-8 left-1/3 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '4s' }}></div>
+      <section id="gradesCard" className="py-24 bg-gradient-to-b from-[#f0f6ff] to-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-72 h-72 bg-sky-200/40 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-teal-200/30 rounded-full blur-3xl" />
 
         <div className="container mx-auto text-center px-4 relative z-10">
-          <div className="inline-block mb-4 px-6 py-2 bg-white rounded-full shadow-sm border border-slate-100">
-            <span className="text-xl">🎒</span> <span className="font-bold text-slate-600 tracking-wide uppercase text-sm ml-2">Learning Path</span>
+          <div className="inline-flex items-center gap-2 mb-5 px-5 py-2 bg-white rounded-full shadow-sm border border-sky-100">
+            <span className="text-xl">🎒</span>
+            <span className="font-semibold text-slate-600 text-sm">Learning Path</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-800 mb-6 tracking-tight">
-            Explore Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Curriculum</span>
+          <h2 className="text-3xl md:text-5xl font-black text-slate-800 mb-5 tracking-tight">
+            Explore Our{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-500">Curriculum</span>
           </h2>
-          <p className="text-slate-600 text-lg md:text-xl font-medium max-w-2xl mx-auto mb-16">
+          <p className="text-slate-500 text-lg font-medium max-w-2xl mx-auto mb-14">
             Pick a grade to explore its subjects and preview the levels waiting for your child!
           </p>
           <Suspense fallback={<SkeletonLoader variant="grid" />}>

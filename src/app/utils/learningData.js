@@ -1,5 +1,12 @@
 import db from '../data/db.json';
 
+// The subjects a family sees when they've never touched the "Learning
+// Subjects" toggles in Profile — every subject that actually has curriculum
+// content in db.json. Keep this in sync with that set; the toggle screen
+// also lists subjects (Art, Music, History, ...) that have no content yet,
+// so it intentionally stays broader than this default.
+export const DEFAULT_LEARNING_SUBJECTS = ['English', 'Math', 'Science', 'Tamil', 'Computer Science', 'Coding'];
+
 /**
  * Fetches subjects from db.json based on the child's grade,
  * filtered by the parent's chosen learning subjects.

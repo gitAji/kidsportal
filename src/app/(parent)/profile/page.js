@@ -18,6 +18,8 @@ import {
 } from "react-icons/fa";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
 import { CURRENCY_PRICES, NATIVE_CURRENCIES, countryToCurrency, checkoutCurrency } from "@/lib/pricingConfig";
+import { DEFAULT_LEARNING_SUBJECTS } from "@/app/utils/learningData";
+import { resolveSubscription } from "@/lib/subscriptionStatus";
 
 // ── Shared input style ─────────────────────────────────────────────
 const inputCls = "w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-blue-400 block px-4 py-3 transition-all outline-none placeholder:text-slate-300";
@@ -85,7 +87,7 @@ export default function SettingsPage() {
   const [postalCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
   const [learningLanguage, setLearningLanguage] = useState("English");
-  const [learningSubjects, setLearningSubjects] = useState(["English", "Math", "Science"]);
+  const [learningSubjects, setLearningSubjects] = useState(DEFAULT_LEARNING_SUBJECTS);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isGoogleSignIn, setIsGoogleSignIn] = useState(false);
@@ -105,6 +107,7 @@ export default function SettingsPage() {
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
   const [portalLoading, setPortalLoading] = useState(false);
+  const [portalError, setPortalError] = useState("");
 
   // ── Auth + data fetch ──────────────────────────────────────────
   useEffect(() => {
@@ -135,7 +138,7 @@ export default function SettingsPage() {
           setPostalCode(d.postalCode || "");
           setCountry(d.country || "");
           setLearningLanguage(d.learningLanguage || "English");
-          setLearningSubjects(d.learningSubjects || ["English", "Math", "Science"]);
+          setLearningSubjects(d.learningSubjects || DEFAULT_LEARNING_SUBJECTS);
         }
       } catch (err) {
         console.error(err);
@@ -156,19 +159,7 @@ export default function SettingsPage() {
       // Live subscription listener
       const ref = doc(db, "users", u.uid);
       const unsubSnap = onSnapshot(ref, (snap) => {
-        const data = snap.data() || {};
-        const createdAt = data.createdAt?.toDate
-          ? data.createdAt.toDate()
-          : data.createdAt ? new Date(data.createdAt) : null;
-
-        if (!data.subscription) {
-          const base = createdAt || new Date();
-          const trialEnd = new Date(base);
-          trialEnd.setMonth(trialEnd.getMonth() + 1);
-          setSub({ plan: "trial", status: trialEnd > new Date() ? "active" : "expired", currentPeriodEnd: trialEnd });
-        } else {
-          setSub(data.subscription);
-        }
+        setSub(resolveSubscription(snap.data()));
       });
 
       setLoading(false);
@@ -237,6 +228,7 @@ export default function SettingsPage() {
   // ── Stripe Portal ──────────────────────────────────────────────
   const openPortal = async () => {
     setPortalLoading(true);
+    setPortalError("");
     try {
       const idToken = await user.getIdToken();
       const res = await fetch("/api/stripe/create-portal-session", {
@@ -245,9 +237,14 @@ export default function SettingsPage() {
         body: JSON.stringify({ uid: user.uid }),
       });
       const data = await res.json();
-      if (data.url) window.location.href = data.url;
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        setPortalError(data.error || "Could not open the billing portal. Please try again.");
+      }
     } catch (err) {
       console.error(err);
+      setPortalError("Network error — please check your connection and try again.");
     } finally {
       setPortalLoading(false);
     }
@@ -542,6 +539,12 @@ export default function SettingsPage() {
                   </div>
                 </div>
 
+                {portalError && (
+                  <p className="mt-4 text-xs text-red-500 font-bold bg-red-50 border border-red-100 p-3 rounded-xl">
+                    {portalError}
+                  </p>
+                )}
+
                 {/* Card on file */}
                 {cardLast4 && (
                   <div className="mt-4 pt-4 border-t border-slate-50 flex items-center gap-3">
@@ -587,7 +590,7 @@ export default function SettingsPage() {
                     <div className="grid grid-cols-2 gap-2 mb-5">
                       {[
                         "Full access all grades",
-                        "Up to 5 children accounts",
+                        "Up to 4 children accounts",
                         "Detailed analytics",
                         "Priority support",
                       ].map(f => (
@@ -693,6 +696,11 @@ export default function SettingsPage() {
               {/* Already subscribed — manage in portal */}
               {isPaid && (
                 <div className="space-y-3">
+                  {portalError && (
+                    <p className="text-xs text-red-500 font-bold bg-red-50 border border-red-100 p-3 rounded-xl">
+                      {portalError}
+                    </p>
+                  )}
                   <button
                     onClick={openPortal}
                     disabled={portalLoading}
@@ -706,7 +714,7 @@ export default function SettingsPage() {
                       disabled={portalLoading}
                       className="text-[11px] text-slate-300 hover:text-red-400 transition-colors font-medium underline underline-offset-2 decoration-dashed"
                     >
-                      Cancel membership
+                      Cancel or change plan on Stripe →
                     </button>
                   </div>
                 </div>

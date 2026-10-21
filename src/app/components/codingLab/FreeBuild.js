@@ -125,23 +125,28 @@ export default function FreeBuild() {
 
   return (
     <div className="flex flex-col lg:flex-row gap-6">
-      <div className="flex-1 flex flex-col items-center">
+      <div className="flex-1 min-w-0 flex flex-col items-center">
         <p className="text-sm font-bold text-slate-400 mb-3 text-center max-w-md">
           No goal here — just build! Move, turn, and stamp shapes to draw whatever you like.
         </p>
-        <div
-          className="relative rounded-2xl overflow-hidden shadow-inner border-2 border-slate-200"
-          style={{ width: CANVAS_SIZE, height: CANVAS_SIZE }}
-        >
-          <canvas ref={canvasRef} width={CANVAS_SIZE} height={CANVAS_SIZE} className="absolute inset-0" />
-          <motion.div
-            className="absolute flex items-center justify-center text-2xl pointer-events-none"
-            style={{ width: 28, height: 28, marginLeft: -14, marginTop: -14 }}
-            animate={{ x: turtle.x, y: turtle.y, rotate: turtle.dir * 90 }}
-            transition={{ duration: STEP_MS / 1000, ease: 'linear' }}
+        {/* The canvas draws at fixed pixel coordinates, so on phones it
+            scrolls horizontally within its own box rather than shrinking
+            (which would desync the pencil overlay from the drawing). */}
+        <div className="max-w-full overflow-x-auto">
+          <div
+            className="relative rounded-2xl overflow-hidden shadow-inner border-2 border-slate-200 mx-auto"
+            style={{ width: CANVAS_SIZE, height: CANVAS_SIZE }}
           >
-            ✏️
-          </motion.div>
+            <canvas ref={canvasRef} width={CANVAS_SIZE} height={CANVAS_SIZE} className="absolute inset-0" />
+            <motion.div
+              className="absolute flex items-center justify-center text-2xl pointer-events-none"
+              style={{ width: 28, height: 28, marginLeft: -14, marginTop: -14 }}
+              animate={{ x: turtle.x, y: turtle.y, rotate: turtle.dir * 90 }}
+              transition={{ duration: STEP_MS / 1000, ease: 'linear' }}
+            >
+              ✏️
+            </motion.div>
+          </div>
         </div>
 
         <div className="mt-5 flex items-center gap-3 flex-wrap justify-center">

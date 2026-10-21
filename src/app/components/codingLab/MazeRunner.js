@@ -123,7 +123,7 @@ export default function MazeRunner() {
   return (
     <div className="flex flex-col lg:flex-row gap-6">
       {/* Game board */}
-      <div className="flex-1 flex flex-col items-center">
+      <div className="flex-1 min-w-0 flex flex-col items-center">
         <div className="flex items-center gap-2 mb-4 flex-wrap justify-center">
           {mazeLevels.map((lvl, i) => (
             <button
@@ -139,34 +139,39 @@ export default function MazeRunner() {
           ))}
         </div>
 
-        <div
-          className="relative bg-slate-100 rounded-2xl p-3 shadow-inner"
-          style={{ width: gridWidth * CELL + 24 }}
-        >
-          <div className="relative" style={{ width: gridWidth * CELL, height: level.grid.length * CELL }}>
-            {level.grid.map((line, r) => (
-              [...Array(gridWidth)].map((_, c) => {
-                const ch = line[c] || '#';
-                const wall = ch === '#';
-                return (
-                  <div
-                    key={`${r}-${c}`}
-                    className={`absolute rounded-md ${wall ? 'bg-slate-300' : 'bg-white border border-slate-200'}`}
-                    style={{ left: c * CELL + 2, top: r * CELL + 2, width: CELL - 4, height: CELL - 4 }}
-                  >
-                    {ch === 'G' && <span className="flex items-center justify-center h-full text-2xl">🏁</span>}
-                  </div>
-                );
-              })
-            ))}
-            <motion.div
-              className="absolute flex items-center justify-center text-3xl"
-              style={{ width: CELL, height: CELL }}
-              animate={{ x: pos.col * CELL, y: pos.row * CELL, rotate: pos.dir * 90 }}
-              transition={{ duration: STEP_MS / 1000, ease: 'easeInOut' }}
-            >
-              🤖
-            </motion.div>
+        {/* Wider mazes (e.g. the 10-cell-wide corridor) don't fit a phone
+            screen at a fixed cell size — scroll the board horizontally
+            within its own box instead of overflowing the whole page. */}
+        <div className="max-w-full overflow-x-auto">
+          <div
+            className="relative bg-slate-100 rounded-2xl p-3 shadow-inner mx-auto"
+            style={{ width: gridWidth * CELL + 24 }}
+          >
+            <div className="relative" style={{ width: gridWidth * CELL, height: level.grid.length * CELL }}>
+              {level.grid.map((line, r) => (
+                [...Array(gridWidth)].map((_, c) => {
+                  const ch = line[c] || '#';
+                  const wall = ch === '#';
+                  return (
+                    <div
+                      key={`${r}-${c}`}
+                      className={`absolute rounded-md ${wall ? 'bg-slate-300' : 'bg-white border border-slate-200'}`}
+                      style={{ left: c * CELL + 2, top: r * CELL + 2, width: CELL - 4, height: CELL - 4 }}
+                    >
+                      {ch === 'G' && <span className="flex items-center justify-center h-full text-2xl">🏁</span>}
+                    </div>
+                  );
+                })
+              ))}
+              <motion.div
+                className="absolute flex items-center justify-center text-3xl"
+                style={{ width: CELL, height: CELL }}
+                animate={{ x: pos.col * CELL, y: pos.row * CELL, rotate: pos.dir * 90 }}
+                transition={{ duration: STEP_MS / 1000, ease: 'easeInOut' }}
+              >
+                🤖
+              </motion.div>
+            </div>
           </div>
         </div>
 

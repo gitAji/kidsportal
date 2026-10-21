@@ -1,17 +1,44 @@
 "use client";
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome, FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage, FaCrown } from 'react-icons/fa';
+import {
+    FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome,
+    FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage,
+    FaCalculator, FaFlask, FaLaptopCode, FaGlobeAmericas, FaCode, FaFeatherAlt, FaLock,
+} from 'react-icons/fa';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Image from 'next/image';
 import AudioPlayer from './AudioPlayer';
 
 const SWIPE_THRESHOLD = 80;
 
+// A visual identity per subject — icon + gradient — used to theme the
+// companion panel and give each lesson a distinct feel instead of every
+// subject looking like the same blue card. Matched loosely against
+// subjectId/taskId since those aren't perfectly standardized across the
+// curriculum data.
+const SUBJECT_THEMES = [
+    { match: /math/i, icon: FaCalculator, gradient: 'from-blue-500 to-indigo-500', glow: 'bg-blue-300/30' },
+    { match: /science/i, icon: FaFlask, gradient: 'from-emerald-500 to-teal-500', glow: 'bg-emerald-300/30' },
+    { match: /computerscience|computer.?science/i, icon: FaLaptopCode, gradient: 'from-sky-500 to-blue-600', glow: 'bg-sky-300/30' },
+    { match: /coding/i, icon: FaCode, gradient: 'from-violet-500 to-purple-500', glow: 'bg-violet-300/30' },
+    { match: /tamil/i, icon: FaFeatherAlt, gradient: 'from-orange-500 to-rose-500', glow: 'bg-orange-300/30' },
+    { match: /english/i, icon: FaBookOpen, gradient: 'from-cyan-500 to-blue-500', glow: 'bg-cyan-300/30' },
+];
+const DEFAULT_THEME = { icon: FaGlobeAmericas, gradient: 'from-blue-500 to-cyan-500', glow: 'bg-blue-300/30' };
+
+function getSubjectTheme(taskData) {
+    const key = `${taskData?.subjectId || ''} ${taskData?.taskId || ''}`;
+    return SUBJECT_THEMES.find(t => t.match.test(key)) || DEFAULT_THEME;
+}
+
 export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const router = useRouter();
-    const isPremium = !!childUser?.isSubscriptionActive;
+    // The AI Tutor Assistant is its own $25/month add-on (separate from the
+    // main Premium plan) — gated on that purchase alone, not subscription status.
+    const hasAiTutorPack = !!childUser?.isAiTutorPackActive;
     const [activeTab, setActiveTab] = useState('lesson');
     const [aiResponse, setAiResponse] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -22,12 +49,14 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const [starsEarned, setStarsEarned] = useState(0);
     const [starPop, setStarPop] = useState(false);
     const [mascotMessage, setMascotMessage] = useState(null);
+    const theme = getSubjectTheme(taskData);
+    const ThemeIcon = theme.icon;
     const isTamilSubject = taskData?.subjectId?.toLowerCase().includes('tamil') ||
         taskData?.taskId?.toLowerCase().includes('tamil') ||
         (typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('tamil'));
 
     const [contentLanguage, setContentLanguage] = useState(isTamilSubject ? 'ta' : 'en');
-    const { language, languageLoaded } = useLanguage();
+    const { language, languageLoaded, t } = useLanguage();
 
     // Once the parent's global learning-language preference has loaded,
     // default non-Tamil-subject content to it too — so a family that picked
@@ -131,8 +160,8 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     // child picked in Settings — lessons previously showed no mascot at all,
     // unlike quizzes.
     const professor = childUser?.professorCharacter === 'panda'
-        ? { name: 'Smart Panda', img: '/images/smart-panda.png' }
-        : { name: 'Professor Owl', img: '/images/professor-owl.png' };
+        ? { name: t('panda_name'), img: '/images/smart-panda.png' }
+        : { name: t('owl_name'), img: '/images/professor-owl.png' };
 
     // Cheer the student on at a few key moments rather than on every single
     // sentence, so the mascot feels encouraging instead of chatty.
@@ -193,7 +222,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
 
             {/* Sticky Top Navigation */}
             <div className="w-full sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/50 shadow-sm">
-                <div className="max-w-5xl mx-auto flex items-center justify-center gap-3 px-4 sm:px-6 py-3">
+                <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 px-4 sm:px-6 py-3">
                     {/* Center: Compact Progress */}
                     <div className="flex items-center gap-3 w-full max-w-sm">
                         <div className="flex-1 h-2 bg-slate-200/60 rounded-full overflow-hidden">
@@ -221,7 +250,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
             </div>
 
             {/* Main Content */}
-            <div className="w-full max-w-4xl px-4 sm:px-6 py-6 sm:py-10 flex-grow flex flex-col z-10">
+            <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10 flex-grow z-10 flex flex-col min-w-0">
 
                 {/* Lesson Title Card */}
                 <motion.div
@@ -229,9 +258,9 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-6 sm:mb-10"
                 >
-                    <div className="inline-flex items-center gap-2 bg-blue-100/60 text-blue-600 rounded-full px-4 py-1.5 mb-3">
-                        <FaBookOpen className="text-xs" />
-                        <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest">Interactive Lesson</span>
+                    <div className={`inline-flex items-center gap-2 bg-gradient-to-r ${theme.gradient} text-white rounded-full px-4 py-1.5 mb-3 shadow-md`}>
+                        <ThemeIcon className="text-xs" />
+                        <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest">{taskData.subjectId || 'Interactive Lesson'}</span>
                     </div>
                     <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-800 leading-tight">
                         {cleanStr(taskData.taskName)}
@@ -301,8 +330,27 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             </div>
                         )}
 
-                        {/* Content Area with Animation — swipeable on touch devices */}
-                        <div className="px-5 sm:px-8 py-8 sm:py-12 md:py-16 min-h-[200px] sm:min-h-[280px] flex flex-col items-center justify-center touch-pan-y">
+                        {/* Content Area with Animation — swipeable on touch devices.
+                            A giant watermark icon + a couple of slowly floating
+                            accent shapes give the concept some visual presence
+                            instead of it being a plain wall of text. */}
+                        <div className="relative px-5 sm:px-8 py-8 sm:py-12 md:py-16 min-h-[220px] sm:min-h-[300px] flex flex-col items-center justify-center touch-pan-y overflow-hidden">
+                            <ThemeIcon className={`absolute -z-0 text-[9rem] sm:text-[13rem] text-transparent bg-clip-text bg-gradient-to-br ${theme.gradient} opacity-[0.06] pointer-events-none select-none`} />
+                            <motion.div
+                                animate={{ y: [0, -14, 0], rotate: [0, 6, 0] }}
+                                transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+                                className={`hidden sm:flex absolute top-6 left-6 w-12 h-12 rounded-2xl bg-gradient-to-br ${theme.gradient} items-center justify-center text-white shadow-lg opacity-90`}
+                            >
+                                <ThemeIcon className="text-lg" />
+                            </motion.div>
+                            <motion.div
+                                animate={{ y: [0, 12, 0] }}
+                                transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut', delay: 0.5 }}
+                                className="hidden sm:flex absolute bottom-8 right-8 w-8 h-8 rounded-full bg-amber-300/80 items-center justify-center text-white shadow-md"
+                            >
+                                <FaStar className="text-xs" />
+                            </motion.div>
+
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={validCurrentSentenceIndex}
@@ -314,7 +362,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                     dragConstraints={{ left: 0, right: 0 }}
                                     dragElastic={0.7}
                                     onDragEnd={(_, info) => handleSwipe(info.offset.x)}
-                                    className="w-full text-center cursor-grab active:cursor-grabbing"
+                                    className="relative w-full text-center cursor-grab active:cursor-grabbing"
                                 >
                                     <p className="text-xl sm:text-3xl md:text-4xl text-slate-800 font-extrabold leading-snug sm:leading-tight max-w-2xl mx-auto">
                                         {isTranslating ? <span className="animate-pulse text-indigo-400">Translating...</span> : sentences[validCurrentSentenceIndex]}
@@ -328,7 +376,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             {/* Listen Button */}
                             <AudioPlayer
                                 text={sentences[validCurrentSentenceIndex]}
-                                lang={contentLanguage === 'ta' ? 'ta-IN' : 'en-US'}
+                                lang="en-US"
                                 label="Listen"
                                 icon={<FaVolumeUp />}
                                 customClassName="inline-flex items-center gap-2 bg-white px-4 sm:px-5 py-2.5 sm:py-3 text-blue-600 rounded-xl sm:rounded-2xl font-bold shadow-sm hover:shadow-md hover:bg-blue-50 transition-all cursor-pointer border border-blue-100 text-sm sm:text-base"
@@ -385,9 +433,9 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         <div className="flex-1">
                             <div className="flex items-center gap-2">
                                 <h3 className="text-lg sm:text-xl font-black text-white">AI Tutor Assistant</h3>
-                                {!isPremium && (
+                                {!hasAiTutorPack && (
                                     <span className="flex items-center gap-1 bg-amber-400 text-amber-900 text-[9px] sm:text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full">
-                                        <FaCrown className="text-[9px]" /> Premium
+                                        <FaRobot className="text-[9px]" /> Add-on
                                     </span>
                                 )}
                             </div>
@@ -395,25 +443,43 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         </div>
                     </div>
 
-                    {!isPremium ? (
-                        /* Upsell — AI Tutor is a Premium-only feature */
-                        <div className="p-6 sm:p-8 flex flex-col items-center text-center gap-4">
-                            <div className="w-16 h-16 bg-gradient-to-br from-amber-300 to-orange-400 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
-                                <FaCrown />
+                    {!hasAiTutorPack ? (
+                        childUser ? (
+                            /* Shown to the child themselves: no link to the payment/pricing
+                               page — kids should never be able to reach checkout on their
+                               own. A parent upgrades from their own dashboard instead. */
+                            <div className="p-6 sm:p-8 flex flex-col items-center text-center gap-4">
+                                <div className="w-16 h-16 bg-slate-200 rounded-2xl flex items-center justify-center text-slate-400 text-2xl shadow-inner">
+                                    <FaLock />
+                                </div>
+                                <div>
+                                    <p className="font-black text-slate-800 text-lg leading-tight">AI Tutor isn't available yet</p>
+                                    <p className="text-slate-500 font-medium text-sm mt-1 max-w-sm">
+                                        Ask a parent to turn on the AI Tutor Pack for you from their account.
+                                    </p>
+                                </div>
                             </div>
-                            <div>
-                                <p className="font-black text-slate-800 text-lg leading-tight">Unlock the AI Tutor with Premium</p>
-                                <p className="text-slate-500 font-medium text-sm mt-1 max-w-sm">
-                                    Get simpler explanations, fun examples, and challenge questions from your AI tutor on every lesson.
-                                </p>
+                        ) : (
+                            /* Teacher/admin preview (no childUser) — not a kid, so the
+                               upsell link to pricing is fine here. */
+                            <div className="p-6 sm:p-8 flex flex-col items-center text-center gap-4">
+                                <div className="w-16 h-16 bg-gradient-to-br from-indigo-400 to-fuchsia-500 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
+                                    <FaRobot />
+                                </div>
+                                <div>
+                                    <p className="font-black text-slate-800 text-lg leading-tight">Buy this AI Tutor Pack to enable your AI teacher!</p>
+                                    <p className="text-slate-500 font-medium text-sm mt-1 max-w-sm">
+                                        Get simpler explanations, fun examples, and challenge questions from your AI tutor on every lesson — just $25/month.
+                                    </p>
+                                </div>
+                                <Link
+                                    href="/pricing"
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white font-black text-sm shadow-lg hover:scale-105 transition-all"
+                                >
+                                    <FaRobot /> Add AI Tutor Pack
+                                </Link>
                             </div>
-                            <Link
-                                href="/pricing"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white font-black text-sm shadow-lg hover:scale-105 transition-all"
-                            >
-                                <FaCrown /> Upgrade to Premium
-                            </Link>
-                        </div>
+                        )
                     ) : (
                     /* Tutor Action Buttons */
                     <div className="p-4 sm:p-6">
@@ -493,30 +559,59 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                     </div>
                     )}
                 </motion.div>
-            </div>
+              </div>
 
-            {/* Persistent Professor Companion */}
-            <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none">
-                <AnimatePresence>
-                    {mascotMessage && (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.8, y: 10 }}
-                            className="mb-3 max-w-[220px] bg-white rounded-2xl rounded-br-sm shadow-xl border border-slate-100 px-4 py-3"
-                        >
-                            <p className="text-sm font-bold text-slate-700 leading-snug">{mascotMessage}</p>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+            {/* AI Tutor Avatar (Matches Quiz/Exam design) */}
+            <div className="fixed bottom-4 md:bottom-8 right-4 md:right-8 z-[100] flex flex-col justify-end items-end pointer-events-none">
+              {/* Mascot Speech Bubble */}
+              <AnimatePresence mode="wait">
+                {mascotMessage && (
+                  <motion.div
+                    key="speech-bubble"
+                    initial={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
+                    className="bg-white/95 backdrop-blur-md rounded-3xl rounded-br-sm shadow-2xl p-4 md:p-5 mb-3 max-w-[260px] md:max-w-sm border-4 border-indigo-300 overflow-hidden pointer-events-auto relative"
+                  >
+                    <div className="absolute top-0 right-0 p-1 opacity-20">
+                      <FaStar className="text-yellow-400 text-xs" />
+                    </div>
+                    <p className="font-bold text-slate-700 text-sm md:text-base leading-snug">
+                      {mascotMessage}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Professor Character */}
+              <div className="relative pointer-events-auto mt-2">
+                {/* Name Tag */}
                 <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", bounce: 0.5, delay: 0.3 }}
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white shadow-xl border-4 border-white overflow-hidden relative pointer-events-auto"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="hidden sm:block absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-30 whitespace-nowrap"
                 >
-                    <Image src={professor.img} alt={professor.name} fill className="object-contain p-1.5" />
+                  {professor.name}
                 </motion.div>
+
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
+                  className="w-16 h-16 sm:w-28 sm:h-28 md:w-44 md:h-44 flex items-center justify-center mr-2 relative z-20 group"
+                >
+                  <div className="relative w-full h-full bg-white rounded-full border-[5px] shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex items-center justify-center transition-all duration-300 border-indigo-200 group-hover:border-indigo-400 group-hover:shadow-[0_15px_35px_rgba(99,102,241,0.3)]">
+                    <div className="relative w-[85%] h-[85%] mt-3">
+                      <Image
+                        src={professor.img}
+                        alt={professor.name}
+                        fill
+                        className="object-contain transition-transform duration-300 group-hover:scale-110"
+                        priority
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             </div>
         </div>
     );

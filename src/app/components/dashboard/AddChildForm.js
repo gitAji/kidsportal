@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { doc, getDoc, setDoc, updateDoc, collection, runTransaction } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, collection, runTransaction, serverTimestamp } from 'firebase/firestore';
 import { auth } from '../../../firebase/auth';
 import { app } from '../../../firebase/config';
 import { getFirestore } from 'firebase/firestore';
@@ -16,6 +16,12 @@ const avatars = [
   { id: 'smile', icon: <FaSmile />, color: 'from-yellow-400 to-amber-500' },
   { id: 'default', icon: <FaUserCircle />, color: 'from-indigo-400 to-cyan-500' },
 ];
+
+// Must match db.json's grade names exactly ("Grade 1".."Grade 10") — some
+// downstream lookups (e.g. dbData.grades.find(g => g.gradeName === grade))
+// require an exact match, so this used to be a free-text field a typo could
+// silently break (a child assigned "2nd" or "Grade2" saw an empty subject list).
+const GRADE_OPTIONS = Array.from({ length: 10 }, (_, i) => `Grade ${i + 1}`);
 
 const generatePassword = () => {
   const adjectives = ['Happy', 'Sunny', 'Brave', 'Clever', 'Fast'];
@@ -118,6 +124,9 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
           // minutes from the child's Settings tab.
           timeLimits: { enabled: false, dailyMinutes: 60, weeklyMinutes: 300 },
           timeExtensionRequest: null,
+          // Lets admin tooling (e.g. the pilot-program dashboard) measure
+          // setup time — minutes from account creation to first login.
+          createdAt: serverTimestamp(),
         };
 
         await runTransaction(db, async (t) => {
@@ -224,7 +233,12 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
               </div>
               <div className="flex-1">
                 <label htmlFor="childGrade" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">Grade</label>
-                <input type="text" id="childGrade" className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800" placeholder="2nd" value={grade} onChange={(e) => setGrade(e.target.value)} required />
+                <select id="childGrade" className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800" value={grade} onChange={(e) => setGrade(e.target.value)} required>
+                  <option value="" disabled>Select grade</option>
+                  {GRADE_OPTIONS.map((g) => (
+                    <option key={g} value={g}>{g}</option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>

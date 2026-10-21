@@ -4,9 +4,10 @@ import { useRouter } from 'next/navigation';
 import { useChild } from '../../providers/ChildProvider';
 import { ACHIEVEMENTS, loadUnlockedAchievements, loadStats } from '../../utils/achievements';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTrophy, FaLock, FaHome } from 'react-icons/fa';
+import { FaTrophy, FaLock, FaMedal, FaCrown } from 'react-icons/fa';
 import Link from 'next/link';
 import SkeletonLoader from '../../components/ui/SkeletonLoader';
+import MinimalBackButton from '../../components/child/MinimalBackButton';
 
 export default function RewardsPage() {
   const { childUser } = useChild();
@@ -58,14 +59,24 @@ export default function RewardsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-indigo-100">
-      <div className="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-cyan-100 shadow-sm px-4 py-3 flex items-center justify-between">
-        <button onClick={() => router.back()} className="px-4 py-2 rounded-full hover:bg-cyan-50 transition-colors text-cyan-600 font-semibold text-sm">← Back</button>
-        <h1 className="text-xl font-extrabold text-cyan-700 flex items-center gap-2"><FaTrophy /> My Rewards</h1>
-        <Link href="/learning-zone" className="p-2 rounded-full hover:bg-cyan-50 transition-colors text-cyan-600"><FaHome /></Link>
+    <div className="flex flex-col p-2 sm:p-4 relative font-sans">
+      {/* "Trophy room" background motif — distinguishes Rewards from the other
+          hub pages with a scatter of medals and a crown */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-20 left-[8%] text-cyan-200 opacity-40 text-7xl rotate-[-8deg]"><FaMedal /></div>
+        <div className="absolute top-10 right-[10%] text-indigo-200 opacity-40 text-8xl rotate-12"><FaCrown /></div>
+        <div className="absolute bottom-16 right-[14%] text-cyan-200 opacity-30 text-6xl rotate-6"><FaMedal /></div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 py-8">
+      <MinimalBackButton />
+
+      <div className="max-w-3xl mx-auto px-4 py-8 relative z-10">
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-cyan-700 flex items-center justify-center gap-3">
+            <FaTrophy /> My Rewards
+          </h1>
+        </motion.div>
+
         {/* Stats Banner */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
           className="bg-gradient-to-r from-cyan-600 to-indigo-600 rounded-3xl p-6 text-white mb-8 shadow-xl shadow-cyan-200 flex flex-col sm:flex-row items-center justify-between gap-6">
@@ -138,9 +149,9 @@ export default function RewardsPage() {
                   <motion.div key={ach.id} layout
                     initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
                     transition={{ delay: i * 0.03 }}
-                    className={`relative rounded-3xl p-5 text-center border-2 shadow-md transition-all duration-300 overflow-hidden ${isUnlocked
-                      ? `bg-gradient-to-br ${ach.color} ${ach.border} shadow-lg`
-                      : 'bg-white border-gray-200 opacity-60'
+                    className={`relative rounded-3xl p-5 text-center transition-all duration-300 overflow-hidden shadow-lg hover:shadow-xl border-b-[6px] border-x-[3px] border-t-2 ${isUnlocked
+                      ? `bg-gradient-to-br ${ach.color} border-white/50`
+                      : 'bg-white border-slate-200 opacity-60'
                       }`}>
                     {!isUnlocked && (
                       <div className="absolute inset-0 flex items-center justify-center bg-gray-100/80 backdrop-blur-[2px] rounded-3xl">

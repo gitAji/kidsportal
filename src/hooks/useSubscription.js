@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
+import { resolveSubscription } from '@/lib/subscriptionStatus';
 
 export function useSubscription() {
   const [subscription, setSubscription] = useState(null);
@@ -22,8 +23,7 @@ export function useSubscription() {
 
       const userRef = doc(db, 'users', user.uid);
       unsubscribeSnapshot = onSnapshot(userRef, (snap) => {
-        const data = snap.data();
-        setSubscription(data?.subscription || null);
+        setSubscription(resolveSubscription(snap.data()));
         setLoading(false);
       });
     });

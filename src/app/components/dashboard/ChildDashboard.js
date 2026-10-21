@@ -739,8 +739,12 @@ const ChildDashboard = ({ child, onClose }) => {
             <div className="flex flex-col gap-3">
               <button
                 onClick={() => {
-                  const storage = localStorage;
-                  storage.setItem("childUser", JSON.stringify(childData));
+                  // A sibling's sessionStorage session (e.g. from "Launch
+                  // Learning Zone" on the children list) would otherwise be
+                  // orphaned here, and could resurface and shadow this child
+                  // the next time ChildProvider checks it.
+                  sessionStorage.removeItem("childUser");
+                  localStorage.setItem("childUser", JSON.stringify(childData));
                   router.push("/learning-zone");
                 }}
                 className="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black uppercase tracking-widest text-xs rounded-xl shadow-lg hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-2 group"

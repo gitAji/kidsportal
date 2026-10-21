@@ -10,7 +10,20 @@ export default function CurriculumShowcase({ grades, themeColors }) {
   const [gradeIndex, setGradeIndex] = useState(0);
   const [selectedSubjectId, setSelectedSubjectId] = useState(null);
 
-  const grade = grades[gradeIndex];
+  const grade = useMemo(() => {
+    const g = grades[gradeIndex];
+    if (!g?.subjects) return g;
+    // Some grades have duplicate subject entries under different IDs
+    // (e.g. an English and a Tamil-named entry that both say "Science") —
+    // keep only the first one per displayed name so the list never repeats.
+    const seenNames = new Set();
+    const subjects = g.subjects.filter((s) => {
+      if (seenNames.has(s.subjectName)) return false;
+      seenNames.add(s.subjectName);
+      return true;
+    });
+    return { ...g, subjects };
+  }, [grades, gradeIndex]);
   const themeColor = themeColors[gradeIndex % themeColors.length];
 
   const selectedSubject = useMemo(() => {
@@ -126,7 +139,7 @@ export default function CurriculumShowcase({ grades, themeColors }) {
                       Level 1 is free to try. Subscribe to unlock every level in every subject.
                     </p>
                     <a
-                      href="#pricing"
+                      href="/pricing"
                       className="w-full sm:w-auto flex-shrink-0 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-xs font-black uppercase tracking-widest rounded-xl hover:shadow-lg hover:shadow-blue-500/20 transition-all text-center"
                     >
                       See Pricing

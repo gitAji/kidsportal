@@ -6,7 +6,7 @@ import Image from "next/image";
 import {
     FaUsers, FaChalkboardTeacher, FaUserShield, FaCreditCard,
     FaSignOutAlt, FaHome, FaChartBar, FaBars, FaTimes,
-    FaTicketAlt, FaCog, FaUsersCog
+    FaTicketAlt, FaCog, FaUsersCog, FaGift, FaUserAstronaut
 } from "react-icons/fa";
 import SuperAdminGuard from "./SuperAdminGuard";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
@@ -18,7 +18,9 @@ const navItems = [
     { name: 'Dashboard', path: '/super-admin', icon: <FaChartBar /> },
     { name: 'Teachers', path: '/super-admin/teachers', icon: <FaChalkboardTeacher /> },
     { name: 'Parents', path: '/super-admin/parents', icon: <FaUsers /> },
+    { name: 'Pilot Program', path: '/super-admin/pilot-program', icon: <FaUserAstronaut /> },
     { name: 'Subscriptions', path: '/super-admin/subscriptions', icon: <FaCreditCard /> },
+    { name: 'Promo Codes', path: '/super-admin/promo-codes', icon: <FaGift /> },
     { name: 'Tickets', path: '/super-admin/tickets', icon: <FaTicketAlt /> },
     { name: 'Learning Config', path: '/super-admin/learning-config', icon: <FaCog /> },
     { name: 'Team & Roles', path: '/super-admin/team', icon: <FaUsersCog /> },

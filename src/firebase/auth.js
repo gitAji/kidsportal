@@ -7,7 +7,7 @@ import {
   signOut,
   sendEmailVerification,
 } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -17,6 +17,7 @@ export const signInWithGoogle = async (onSuccess, isTeacherFlow = false) => {
     if (auth.currentUser) {
       await signOut(auth);
       sessionStorage.removeItem("childUser");
+      localStorage.removeItem("childUser");
     }
 
     const result = await signInWithPopup(auth, googleProvider);
@@ -59,6 +60,10 @@ export const signInWithGoogle = async (onSuccess, isTeacherFlow = false) => {
           currentPeriodEnd: trialEnd,
           trialStartedAt: new Date(),
         };
+        // Every other admin-listed collection (teachers, tickets, admins)
+        // sets this at creation and orders by it — the parents list needs
+        // it too, or Firestore's orderBy silently drops any doc missing it.
+        userData.createdAt = serverTimestamp();
       }
 
       await setDoc(userRef, userData, { merge: true });
@@ -78,6 +83,7 @@ export const signUpWithEmail = async (email, password, name, onSuccess) => {
     if (auth.currentUser) {
       await signOut(auth);
       sessionStorage.removeItem("childUser");
+      localStorage.removeItem("childUser");
     }
 
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -99,7 +105,8 @@ export const signUpWithEmail = async (email, password, name, onSuccess) => {
         status: 'active',
         currentPeriodEnd: trialEnd,
         trialStartedAt: new Date(),
-      }
+      },
+      createdAt: serverTimestamp(),
     });
 
     // Ask Firebase to email the new account a verification link. A failure
@@ -133,6 +140,7 @@ export const signInWithEmail = async (email, password, isTeacherFlow = false) =>
     if (auth.currentUser) {
       await signOut(auth);
       sessionStorage.removeItem("childUser");
+      localStorage.removeItem("childUser");
     }
 
     const result = await signInWithEmailAndPassword(auth, email, password);
@@ -159,6 +167,7 @@ export const logout = async () => {
     await signOut(auth);
     // Clear session storage on logout
     sessionStorage.removeItem("childUser");
+    localStorage.removeItem("childUser");
     // You might want to clear other session-related items here too
     // sessionStorage.clear(); // Use this if you want to clear everything
   } catch (error) {

@@ -15,9 +15,30 @@ import { FaLanguage } from 'react-icons/fa';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import confetti from 'canvas-confetti';
 import { recordTaskCompletion, checkAchievements } from '../../../../../utils/achievements';
+import { shuffleQuestions, applySavedQuestionOrder } from '../../../../../utils/shuffle';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import Image from 'next/image';
+import MinimalBackButton from '../../../../../components/child/MinimalBackButton';
+
+// Quiz/exam questions (and multiple-choice options) get shuffled so
+// retaking the same lesson doesn't show an identical, memorizable order.
+// A page refresh mid-attempt reuses whatever order was already saved,
+// so the student's in-progress currentQuestionIndex still lines up.
+function prepareTaskData(task, childId) {
+  if (!task || (task.type !== 'quiz' && task.type !== 'exam') || !task.questions?.length) {
+    return task;
+  }
+  try {
+    const progressKey = `kidsportal_progress_${childId}_${task.taskId}`;
+    const saved = JSON.parse(localStorage.getItem(progressKey) || 'null');
+    if (saved?.questionOrder) {
+      const reordered = applySavedQuestionOrder(task, saved.questionOrder);
+      if (reordered !== task) return reordered;
+    }
+  } catch (e) { /* fall through to a fresh shuffle */ }
+  return { ...task, questions: shuffleQuestions(task.questions) };
+}
 
 export default function TaskContentPage() {
   const { childUser } = useChild();
@@ -44,6 +65,8 @@ export default function TaskContentPage() {
   const [timeTaken, setTimeTaken] = useState(0);
   const [showDrawingTool, setShowDrawingTool] = useState(false);
   const [showKeyboard, setShowKeyboard] = useState(false);
+  const [isRecognizingHandwriting, setIsRecognizingHandwriting] = useState(false);
+  const [handwritingError, setHandwritingError] = useState(null);
   const [retriedThisTask, setRetriedThisTask] = useState(false);
   const [newAchievements, setNewAchievements] = useState([]);
   const [sessionHistory, setSessionHistory] = useState([]);
@@ -79,7 +102,8 @@ export default function TaskContentPage() {
           const levelData = snap.data();
           const found = levelData.tasks?.find(t => t.taskId === taskId);
           if (found) {
-            setTaskData(found);
+            const prepared = prepareTaskData(found, childUser.uid || childUser.id);
+            setTaskData(prepared);
             if ((found.type === 'quiz' || found.type === 'exam') && found.timeLimit) {
               setTimeLeft(found.timeLimit);
               setTimerActive(true);
@@ -126,7 +150,7 @@ export default function TaskContentPage() {
         }
       }
 
-      setTaskData(task || null);
+      setTaskData(task ? prepareTaskData(task, childUser.uid || childUser.id) : null);
       if (task && (task.type === 'quiz' || task.type === 'exam') && task.timeLimit) {
         setTimeLeft(task.timeLimit);
         setTimerActive(true);
@@ -196,7 +220,8 @@ export default function TaskContentPage() {
         wrongAnswersCount,
         timeTaken,
         sessionHistory,
-        timeLeft
+        timeLeft,
+        questionOrder: taskData.questions?.map(q => q.questionId)
       }));
     }
   }, [currentQuestionIndex, score, correctAnswersCount, wrongAnswersCount, timeTaken, sessionHistory, timeLeft, taskData, childUser, quizCompleted]);
@@ -474,6 +499,9 @@ export default function TaskContentPage() {
 
   // Retake the exam / practice the quiz or lesson again — every attempt is logged for parents.
   const handleRetake = () => {
+    // Fresh shuffle each retake, so practising the same lesson again doesn't
+    // show the identical question (and option) order every time.
+    setTaskData(prev => (prev?.questions?.length ? { ...prev, questions: shuffleQuestions(prev.questions) } : prev));
     setCurrentQuestionIndex(0);
     setUserAnswer('');
     setFeedbackMessage(null);
@@ -560,6 +588,36 @@ export default function TaskContentPage() {
     else setUserAnswer(a => a + key);
   };
 
+  // The "write on screen" paint tool hands back a raw canvas drawing —
+  // read the handwritten character(s) with AI and drop the recognized
+  // text straight into the answer input (editable, like typing), instead
+  // of submitting the drawing itself as the answer.
+  const handleDrawingFinish = async (imageData) => {
+    setShowDrawingTool(false);
+    setShowKeyboard(false);
+    setHandwritingError(null);
+    setIsRecognizingHandwriting(true);
+    try {
+      const res = await fetch('/api/recognize-handwriting', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageData, language: contentLanguage }),
+      });
+      const data = await res.json();
+      if (data.recognized) {
+        setUserAnswer(data.recognized);
+      } else {
+        setHandwritingError(data.error || "Couldn't read that — try writing a bit bigger!");
+        setTimeout(() => setHandwritingError(null), 4000);
+      }
+    } catch (err) {
+      setHandwritingError("Couldn't read that — try again!");
+      setTimeout(() => setHandwritingError(null), 4000);
+    } finally {
+      setIsRecognizingHandwriting(false);
+    }
+  };
+
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center p-8">
       <SkeletonLoader variant="page" message="Loading your adventure..." />
@@ -572,7 +630,7 @@ export default function TaskContentPage() {
     if (quizCompleted) {
       // Re-using the success screen for lesson completions with achievements
       return (
-        <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-100 p-4 flex flex-col items-center justify-center gap-6">
+        <div className="flex flex-col items-center justify-center gap-6 p-2 sm:p-4 relative font-sans">
           <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", bounce: 0.5 }}
             className="p-10 text-center bg-white/80 backdrop-blur-md rounded-[3rem] shadow-2xl max-w-lg w-full border-4 border-white">
             <SuccessBadge icon={<FaStar size={100} className="text-yellow-400" />} ringColor="rgba(250, 204, 21, 0.5)" />
@@ -610,11 +668,14 @@ export default function TaskContentPage() {
     }
 
     return (
-      <InteractiveLesson
-        taskData={taskData}
-        childUser={childUser}
-        onComplete={handleLessonComplete}
-      />
+      <>
+        <MinimalBackButton />
+        <InteractiveLesson
+          taskData={taskData}
+          childUser={childUser}
+          onComplete={handleLessonComplete}
+        />
+      </>
     );
   }
 
@@ -647,6 +708,22 @@ export default function TaskContentPage() {
             {taskData.type !== 'lesson' && <p className="text-lg text-gray-400 bg-gray-100 rounded-full py-1 px-4 inline-block">⏳ {formatTime(timeTaken)}</p>}
           </div>
 
+          {/* Action buttons come right after the score, ahead of the (potentially long)
+              detailed recap below, so they're reachable without scrolling past it. */}
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-col gap-3">
+            <button onClick={() => router.back()} className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black px-6 py-4 rounded-full text-xl hover:scale-[1.02] transition-all shadow-lg shadow-blue-200/50 flex items-center justify-center gap-2">
+              <FaHome /> {t('backToMap')}
+            </button>
+            <div className="grid grid-cols-2 gap-3">
+              <button onClick={handleRetake} className="w-full bg-white text-emerald-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300 transition-all flex items-center justify-center gap-2">
+                <FaRedo /> {taskData.type === 'exam' ? t('retakeExam') : t('practiceAgain')}
+              </button>
+              <button onClick={() => router.push('/learning-zone/rewards')} className="w-full bg-white text-cyan-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-cyan-200 hover:bg-cyan-50 hover:border-cyan-300 transition-all flex items-center justify-center gap-2">
+                <FaGift /> {t('myRewards')}
+              </button>
+            </div>
+          </motion.div>
+
           <div className="mt-8 text-left">
             <h3 className="text-xl font-black text-slate-800 mb-4 flex items-center gap-2">
               <FaCheckCircle className="text-green-500" /> {t('detailedRecap')}
@@ -677,20 +754,6 @@ export default function TaskContentPage() {
               ))}
             </div>
           </div>
-
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-col gap-3 mt-8">
-            <button onClick={() => router.back()} className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black px-6 py-4 rounded-full text-xl hover:scale-[1.02] transition-all shadow-lg shadow-blue-200/50 flex items-center justify-center gap-2">
-              <FaHome /> {t('backToMap')}
-            </button>
-            <div className="grid grid-cols-2 gap-3">
-              <button onClick={handleRetake} className="w-full bg-white text-emerald-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300 transition-all flex items-center justify-center gap-2">
-                <FaRedo /> {taskData.type === 'exam' ? t('retakeExam') : t('practiceAgain')}
-              </button>
-              <button onClick={() => router.push('/learning-zone/rewards')} className="w-full bg-white text-cyan-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-cyan-200 hover:bg-cyan-50 hover:border-cyan-300 transition-all flex items-center justify-center gap-2">
-                <FaGift /> {t('myRewards')}
-              </button>
-            </div>
-          </motion.div>
         </motion.div>
 
         {newAchievements.length > 0 && (
@@ -715,6 +778,7 @@ export default function TaskContentPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 relative overflow-hidden flex flex-col items-center">
+      <MinimalBackButton />
       <AnimatePresence>
         {feedbackMessage?.type === 'correct' && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-green-100 -z-10" />}
         {feedbackMessage?.type === 'wrong' && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-red-50 -z-10" />}
@@ -897,7 +961,7 @@ export default function TaskContentPage() {
             <div className="mt-3 bg-blue-50 text-blue-500 rounded-full hover:bg-blue-100 transition-colors">
               <AudioPlayer
                 text={cleanString(displayQuestion?.questionText)}
-                lang={contentLanguage === 'ta' ? 'ta-IN' : 'en-US'}
+                lang="en-US"
               />
             </div>
             {isTranslating && <p className="text-xs text-indigo-500 font-bold mt-2 animate-pulse">Translating...</p>}
@@ -964,11 +1028,11 @@ export default function TaskContentPage() {
                 </div>
               ) : (
                 <div className="relative">
-                  <input type="text" value={userAnswer} onChange={e => setUserAnswer(e.target.value)} disabled={!!feedbackMessage || isCheckingAnswer}
-                    className={`w-full py-4 pl-14 pr-14 text-center text-2xl font-bold border-4 rounded-full focus:outline-none transition-colors ${feedbackMessage?.type === 'correct' ? 'border-green-400 bg-green-50' : feedbackMessage?.type === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-blue-400'} ${isCheckingAnswer ? 'opacity-50 cursor-wait bg-gray-50' : ''}`}
-                    placeholder="Type..." />
+                  <input type="text" value={isRecognizingHandwriting ? '' : userAnswer} onChange={e => setUserAnswer(e.target.value)} disabled={!!feedbackMessage || isCheckingAnswer || isRecognizingHandwriting}
+                    className={`w-full py-4 pl-14 pr-14 text-center text-2xl font-bold border-4 rounded-full focus:outline-none transition-colors ${feedbackMessage?.type === 'correct' ? 'border-green-400 bg-green-50' : feedbackMessage?.type === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-blue-400'} ${(isCheckingAnswer || isRecognizingHandwriting) ? 'opacity-50 cursor-wait bg-gray-50' : ''}`}
+                    placeholder={isRecognizingHandwriting ? 'Reading your handwriting...' : 'Type...'} />
 
-                  {!feedbackMessage && !isCheckingAnswer && (
+                  {!feedbackMessage && !isCheckingAnswer && !isRecognizingHandwriting && (
                     <>
                       <button
                         onClick={() => setShowKeyboard(!showKeyboard)}
@@ -989,7 +1053,15 @@ export default function TaskContentPage() {
                       </button>
                     </>
                   )}
+
+                  {isRecognizingHandwriting && (
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 animate-spin text-cyan-500 text-xl">⏳</span>
+                  )}
                 </div>
+              )}
+
+              {handwritingError && (
+                <p className="text-center text-sm font-bold text-red-500 mt-2">{handwritingError}</p>
               )}
 
               {showKeyboard && !String(userAnswer).startsWith('data:image') && <div className="mt-4"><VirtualKeyboard onKeyPress={handleKeyPress} /></div>}
@@ -1023,11 +1095,7 @@ export default function TaskContentPage() {
                   <DrawingCanvas
                     width={typeof window !== 'undefined' ? (window.innerWidth > 800 ? 750 : window.innerWidth * 0.85) : 600}
                     height={400}
-                    onFinish={(imageData) => {
-                      setUserAnswer(imageData);
-                      setShowDrawingTool(false);
-                      setShowKeyboard(false);
-                    }}
+                    onFinish={handleDrawingFinish}
                   />
                 </div>
                 <p className="text-xs font-bold text-slate-400 mt-4 uppercase tracking-widest">{t('writing_instruction')}</p>
@@ -1124,7 +1192,7 @@ export default function TaskContentPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-30 whitespace-nowrap"
+              className="hidden sm:block absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-black uppercase tracking-tighter px-3 py-1 rounded-full shadow-lg border border-slate-700 z-30 whitespace-nowrap"
             >
               {professor.name}
             </motion.div>
@@ -1142,7 +1210,7 @@ export default function TaskContentPage() {
                 duration: isCheckingAnswer ? 0.6 : 3.5,
                 ease: "easeInOut"
               }}
-              className="w-28 h-28 md:w-44 md:h-44 flex items-center justify-center mr-2 relative z-20 group"
+              className="w-16 h-16 sm:w-28 sm:h-28 md:w-44 md:h-44 flex items-center justify-center mr-2 relative z-20 group"
             >
               <div className={`relative w-full h-full bg-white rounded-full border-[5px] shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex items-center justify-center transition-all duration-300 ${feedbackMessage?.type === 'correct' ? 'border-green-400 shadow-[0_15px_35px_rgba(74,222,128,0.3)]' : feedbackMessage?.type === 'wrong' ? 'border-red-400 shadow-[0_15px_35px_rgba(248,113,113,0.3)]' : 'border-indigo-200 group-hover:border-indigo-400 group-hover:shadow-[0_15px_35px_rgba(99,102,241,0.3)]'}`}>
                 <div className="relative w-[85%] h-[85%] mt-3">

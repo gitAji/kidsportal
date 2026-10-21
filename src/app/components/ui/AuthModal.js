@@ -7,6 +7,7 @@ import { faEnvelope, faLock, faUser, faTimes, faArrowRight } from "@fortawesome/
 import { signInWithGoogle, signInWithEmail, signUpWithEmail } from "../../../firebase/auth";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { getFriendlyAuthError } from "@/app/utils/authErrors";
 
 export default function AuthModal({
   isModalOpen,
@@ -47,13 +48,14 @@ export default function AuthModal({
           setIsLoading(false);
           return;
         }
-        await signUpWithEmail(email, password, firstName, lastName, () => setIsModalOpen(false));
+        await signUpWithEmail(email, password, `${firstName} ${lastName}`.trim(), () => setIsModalOpen(false));
       } else {
-        await signInWithEmail(email, password, () => setIsModalOpen(false));
+        await signInWithEmail(email, password);
+        setIsModalOpen(false);
       }
       router.push("/");
     } catch (err) {
-      setError(err.message);
+      setError(getFriendlyAuthError(err));
     } finally {
       setIsLoading(false);
     }
@@ -66,7 +68,7 @@ export default function AuthModal({
       await signInWithGoogle(() => setIsModalOpen(false));
       router.push("/");
     } catch (err) {
-      setError(err.message);
+      setError(getFriendlyAuthError(err));
     } finally {
       setIsLoading(false);
     }

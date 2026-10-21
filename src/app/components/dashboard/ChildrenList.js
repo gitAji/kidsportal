@@ -8,11 +8,12 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import CustomAvatar from '../ui/CustomAvatar';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaArrowRight, FaChartBar, FaStar, FaCheckCircle, FaGraduationCap, FaClock, FaTimes } from 'react-icons/fa';
+import { FaArrowRight, FaChartBar, FaStar, FaCheckCircle, FaGraduationCap, FaClock, FaTimes, FaPlay, FaUserCircle, FaKey } from 'react-icons/fa';
 import { getChildStats, grantBonusTime } from '@/app/utils/firestoreService';
 import { loadStats } from '@/app/utils/achievements';
 import { computeLevelProgress } from '@/app/utils/childProgress';
 import { getDateKey } from '@/app/utils/timeLimits';
+import { DEFAULT_LEARNING_SUBJECTS } from '@/app/utils/learningData';
 
 function formatLastActive(ts) {
   if (!ts) return null;
@@ -129,8 +130,6 @@ function TimeRequestBanner({ child, onGrant, onDismiss }) {
   );
 }
 
-const DEFAULT_LEARNING_SUBJECTS = ["English", "Math", "Science", "Tamil"];
-
 const ChildrenList = ({ refreshKey } = {}) => {
   const [children, setChildren] = useState([]);
   const [learningSubjects, setLearningSubjects] = useState(DEFAULT_LEARNING_SUBJECTS);
@@ -197,6 +196,10 @@ const ChildrenList = ({ refreshKey } = {}) => {
   }, [children.length]);
 
   const handleManageChild = (child) => {
+    // A sibling's direct Student Zone login (or an earlier "Launch Student
+    // Zone") can leave a stale localStorage entry that would otherwise
+    // outrank this child's sessionStorage entry in ChildProvider.
+    localStorage.removeItem('childUser');
     sessionStorage.setItem('childUser', JSON.stringify(child));
     router.push('/child-dashboard');
   };
@@ -279,11 +282,37 @@ const ChildrenList = ({ refreshKey } = {}) => {
                         <span className="text-[10px] font-bold text-slate-400">• {lastActive}</span>
                       )}
                     </div>
+                    <div className="flex items-center gap-3 mt-2">
+                      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md" title="Child Username">
+                        <FaUserCircle className="text-slate-400" /> {child.username}
+                      </div>
+                      {child.password && (
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md" title="Child Password">
+                          <FaKey className="text-slate-400" /> {child.password}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
 
-                <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-blue-50 group-hover:text-blue-500 transition-all flex-shrink-0">
-                  <FaArrowRight className="text-sm" />
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // See handleManageChild above — clear a sibling's stale
+                      // localStorage session so it can't outrank this one.
+                      localStorage.removeItem('childUser');
+                      sessionStorage.setItem('childUser', JSON.stringify(child));
+                      router.push('/learning-zone');
+                    }}
+                    className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-sm"
+                    title="Launch Learning Zone"
+                  >
+                    <FaPlay className="text-sm ml-0.5" />
+                  </button>
+                  <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-blue-50 group-hover:text-blue-500 transition-all">
+                    <FaArrowRight className="text-sm" />
+                  </div>
                 </div>
               </div>
 

@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
 import { getStripe } from '@/lib/stripe';
+import { safeErrorResponse } from '@/lib/apiError';
 
 export async function POST(request) {
     // Only allow in development
@@ -98,7 +99,6 @@ export async function POST(request) {
 
         return NextResponse.json({ success: true, message: "Demo billing data seeded!" });
     } catch (error) {
-        console.error("Seeding error:", error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('Seeding error:', error, 'Failed to seed demo billing data.');
     }
 }

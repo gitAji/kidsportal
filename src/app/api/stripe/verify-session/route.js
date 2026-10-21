@@ -3,10 +3,12 @@ import { NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
+import { getVerifiedUid } from '@/lib/verifyAuth';
+import { safeErrorResponse } from '@/lib/apiError';
 
 export async function POST(request) {
     try {
-        const { sessionId, uid } = await request.json();
+        const { sessionId, uid: clientUid } = await request.json();
 
         if (!sessionId) return NextResponse.json({ error: 'Missing sessionId' }, { status: 400 });
 
@@ -18,7 +20,22 @@ export async function POST(request) {
         if (session.payment_status === 'paid' || session.status === 'complete') {
             const subscription = session.subscription;
             const invoice = session.invoice;
-            const firebaseUid = uid || session.metadata?.firebaseUid || (typeof subscription !== 'string' ? subscription.metadata?.firebaseUid : null);
+
+            // Trust the uid Stripe already has on file for this session (set server-side
+            // when we created the checkout session) over whatever the client claims —
+            // otherwise anyone who gets hold of a completed sessionId (e.g. from a
+            // browser Referer header or shared screenshot) could call this endpoint
+            // with their own uid and grant themselves premium off someone else's payment.
+            const metadataUid = session.metadata?.firebaseUid || (typeof subscription !== 'string' ? subscription.metadata?.firebaseUid : null);
+            let firebaseUid = metadataUid;
+            if (!firebaseUid && clientUid) {
+                // No metadata to fall back on — only trust the client-supplied uid if
+                // the caller can actually prove they are that signed-in user.
+                const verifiedUid = await getVerifiedUid(request);
+                if (verifiedUid && verifiedUid === clientUid) {
+                    firebaseUid = clientUid;
+                }
+            }
 
             if (firebaseUid && adminDb) {
                 const userRef = adminDb.doc(`users/${firebaseUid}`);
@@ -87,7 +104,6 @@ export async function POST(request) {
 
         return NextResponse.json({ success: false, status: session.payment_status });
     } catch (error) {
-        console.error('Verify session error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('Verify session error:', error, 'Failed to verify payment.');
     }
 }
