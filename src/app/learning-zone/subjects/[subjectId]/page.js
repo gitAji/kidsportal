@@ -7,7 +7,7 @@ import { FaLock, FaStar, FaCheckCircle, FaUnlockAlt, FaLanguage, FaRandom, FaCod
 import { useChild } from '../../../providers/ChildProvider';
 import { useLanguage } from '../../../providers/LanguageProvider';
 import MinimalBackButton from '../../../components/child/MinimalBackButton';
-import { loadStats } from '../../../utils/achievements';
+import { loadStats, saveStats } from '../../../utils/achievements';
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { SUBJECT_STYLE_MAP, SUBJECT_ICON_MAP } from '../../../utils/subjectStyles';
@@ -152,10 +152,31 @@ export default function SubjectLevelsPage() {
   // ── Stats: refresh on mount, on focus, and on visibility change ───────────
   // Separated from the Firestore fetch so stats always update when the student
   // navigates back after completing a task (Next.js may cache the page).
-  const refreshStats = useCallback(() => {
+  const refreshStats = useCallback(async () => {
     const childId = childUser?.uid || childUser?.id;
-    if (childId) {
-      setChildStats(loadStats(childId));
+    if (!childId) return;
+    const local = loadStats(childId);
+    setChildStats(local);
+
+    // Reconcile completed-levels state with Firestore — this is how a
+    // parent's "reset this level" action (which only writes to Firestore)
+    // becomes visible here: Firestore is authoritative for which tasks
+    // count as completed, so a task the parent un-completed drops out of
+    // the merged list even though it's still in this browser's local copy.
+    try {
+      const fsStats = await getChildStats(childId);
+      if (fsStats && Array.isArray(fsStats.completedTasks_list)) {
+        const reconciled = {
+          ...local,
+          completedTasks_list: fsStats.completedTasks_list,
+          levelsCompleted: fsStats.levelsCompleted || [],
+        };
+        saveStats(childId, reconciled);
+        setChildStats(reconciled);
+      }
+    } catch {
+      // Firestore unreachable — keep showing local state, no reset visible
+      // this time, but nothing breaks.
     }
   }, [childUser]);
 
