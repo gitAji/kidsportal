@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenAI } from "@google/genai";
+import { missingGeminiKeyResponse } from '@/lib/geminiAuth';
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -9,6 +10,9 @@ const ai = new GoogleGenAI({
 // "write on screen" tool can hand a real answer back to the identification
 // input instead of submitting the raw drawing as the answer itself.
 export async function POST(request) {
+    const missingKey = missingGeminiKeyResponse();
+    if (missingKey) return missingKey;
+
     try {
         const { imageData, language } = await request.json();
 
