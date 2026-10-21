@@ -11,6 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 import { signInWithGoogle } from "@/firebase/auth";
 import { auth, db } from "@/firebase/config";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { getFriendlyAuthError } from "@/app/utils/authErrors";
 
 export default function TeacherLoginWrapper() {
     return (
@@ -53,7 +54,7 @@ function TeacherLoginPage() {
             if (err.message === "TEACHER_PROHIBITED") {
                 setError("This account is already registered as a Parent. Please use a different email for your Teacher account.");
             } else {
-                setError(err.message || "Something went wrong. Please try again.");
+                setError(getFriendlyAuthError(err));
             }
         } finally {
             setLoading(false);
@@ -101,10 +102,8 @@ function TeacherLoginPage() {
             console.error("Email Auth Error:", err);
             if (err.code === 'auth/email-already-in-use') {
                 setError("This email is already registered. Try signing in.");
-            } else if (err.code === 'auth/wrong-password') {
-                setError("Incorrect password.");
             } else {
-                setError(err.message || "Authentication failed.");
+                setError(getFriendlyAuthError(err));
             }
         } finally {
             setLoading(false);

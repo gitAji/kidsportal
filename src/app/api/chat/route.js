@@ -1,6 +1,7 @@
 // /src/app/api/chat/route.js
 
 import { GoogleGenAI } from "@google/genai";
+import { missingGeminiKeyResponse } from '@/lib/geminiAuth';
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -33,6 +34,9 @@ const chat = ai.chats.create({
 
 // Handle POST request
 export const POST = async (req) => {
+  const missingKey = missingGeminiKeyResponse();
+  if (missingKey) return missingKey;
+
   const { message } = await req.json(); // Parse the incoming request body
 
   try {

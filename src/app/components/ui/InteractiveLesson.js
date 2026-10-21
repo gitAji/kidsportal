@@ -3,8 +3,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome,
-    FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage, FaCrown,
-    FaCalculator, FaFlask, FaLaptopCode, FaGlobeAmericas, FaCode, FaFeatherAlt,
+    FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage,
+    FaCalculator, FaFlask, FaLaptopCode, FaGlobeAmericas, FaCode, FaFeatherAlt, FaLock,
 } from 'react-icons/fa';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import { useRouter } from 'next/navigation';
@@ -36,7 +36,9 @@ function getSubjectTheme(taskData) {
 
 export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const router = useRouter();
-    const isPremium = !!childUser?.isSubscriptionActive;
+    // The AI Tutor Assistant is its own $25/month add-on (separate from the
+    // main Premium plan) — gated on that purchase alone, not subscription status.
+    const hasAiTutorPack = !!childUser?.isAiTutorPackActive;
     const [activeTab, setActiveTab] = useState('lesson');
     const [aiResponse, setAiResponse] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -431,9 +433,9 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         <div className="flex-1">
                             <div className="flex items-center gap-2">
                                 <h3 className="text-lg sm:text-xl font-black text-white">AI Tutor Assistant</h3>
-                                {!isPremium && (
+                                {!hasAiTutorPack && (
                                     <span className="flex items-center gap-1 bg-amber-400 text-amber-900 text-[9px] sm:text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full">
-                                        <FaCrown className="text-[9px]" /> Premium
+                                        <FaRobot className="text-[9px]" /> Add-on
                                     </span>
                                 )}
                             </div>
@@ -441,25 +443,43 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         </div>
                     </div>
 
-                    {!isPremium ? (
-                        /* Upsell — AI Tutor is a Premium-only feature */
-                        <div className="p-6 sm:p-8 flex flex-col items-center text-center gap-4">
-                            <div className="w-16 h-16 bg-gradient-to-br from-amber-300 to-orange-400 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
-                                <FaCrown />
+                    {!hasAiTutorPack ? (
+                        childUser ? (
+                            /* Shown to the child themselves: no link to the payment/pricing
+                               page — kids should never be able to reach checkout on their
+                               own. A parent upgrades from their own dashboard instead. */
+                            <div className="p-6 sm:p-8 flex flex-col items-center text-center gap-4">
+                                <div className="w-16 h-16 bg-slate-200 rounded-2xl flex items-center justify-center text-slate-400 text-2xl shadow-inner">
+                                    <FaLock />
+                                </div>
+                                <div>
+                                    <p className="font-black text-slate-800 text-lg leading-tight">AI Tutor isn't available yet</p>
+                                    <p className="text-slate-500 font-medium text-sm mt-1 max-w-sm">
+                                        Ask a parent to turn on the AI Tutor Pack for you from their account.
+                                    </p>
+                                </div>
                             </div>
-                            <div>
-                                <p className="font-black text-slate-800 text-lg leading-tight">Unlock the AI Tutor with Premium</p>
-                                <p className="text-slate-500 font-medium text-sm mt-1 max-w-sm">
-                                    Get simpler explanations, fun examples, and challenge questions from your AI tutor on every lesson.
-                                </p>
+                        ) : (
+                            /* Teacher/admin preview (no childUser) — not a kid, so the
+                               upsell link to pricing is fine here. */
+                            <div className="p-6 sm:p-8 flex flex-col items-center text-center gap-4">
+                                <div className="w-16 h-16 bg-gradient-to-br from-indigo-400 to-fuchsia-500 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
+                                    <FaRobot />
+                                </div>
+                                <div>
+                                    <p className="font-black text-slate-800 text-lg leading-tight">Buy this AI Tutor Pack to enable your AI teacher!</p>
+                                    <p className="text-slate-500 font-medium text-sm mt-1 max-w-sm">
+                                        Get simpler explanations, fun examples, and challenge questions from your AI tutor on every lesson — just $25/month.
+                                    </p>
+                                </div>
+                                <Link
+                                    href="/pricing"
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white font-black text-sm shadow-lg hover:scale-105 transition-all"
+                                >
+                                    <FaRobot /> Add AI Tutor Pack
+                                </Link>
                             </div>
-                            <Link
-                                href="/pricing"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white font-black text-sm shadow-lg hover:scale-105 transition-all"
-                            >
-                                <FaCrown /> Upgrade to Premium
-                            </Link>
-                        </div>
+                        )
                     ) : (
                     /* Tutor Action Buttons */
                     <div className="p-4 sm:p-6">

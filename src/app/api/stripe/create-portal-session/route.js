@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { getVerifiedUid } from '@/lib/verifyAuth';
+import { safeErrorResponse } from '@/lib/apiError';
 
 export async function POST(request) {
     try {
@@ -39,7 +40,6 @@ export async function POST(request) {
 
         return NextResponse.json({ url: portalSession.url });
     } catch (error) {
-        console.error('Stripe portal session error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('Stripe portal session error:', error, 'Failed to open billing portal.');
     }
 }

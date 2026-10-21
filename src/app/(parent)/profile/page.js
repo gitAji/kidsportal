@@ -107,6 +107,7 @@ export default function SettingsPage() {
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
   const [portalLoading, setPortalLoading] = useState(false);
+  const [portalError, setPortalError] = useState("");
 
   // ── Auth + data fetch ──────────────────────────────────────────
   useEffect(() => {
@@ -227,6 +228,7 @@ export default function SettingsPage() {
   // ── Stripe Portal ──────────────────────────────────────────────
   const openPortal = async () => {
     setPortalLoading(true);
+    setPortalError("");
     try {
       const idToken = await user.getIdToken();
       const res = await fetch("/api/stripe/create-portal-session", {
@@ -235,9 +237,14 @@ export default function SettingsPage() {
         body: JSON.stringify({ uid: user.uid }),
       });
       const data = await res.json();
-      if (data.url) window.location.href = data.url;
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        setPortalError(data.error || "Could not open the billing portal. Please try again.");
+      }
     } catch (err) {
       console.error(err);
+      setPortalError("Network error — please check your connection and try again.");
     } finally {
       setPortalLoading(false);
     }
@@ -532,6 +539,12 @@ export default function SettingsPage() {
                   </div>
                 </div>
 
+                {portalError && (
+                  <p className="mt-4 text-xs text-red-500 font-bold bg-red-50 border border-red-100 p-3 rounded-xl">
+                    {portalError}
+                  </p>
+                )}
+
                 {/* Card on file */}
                 {cardLast4 && (
                   <div className="mt-4 pt-4 border-t border-slate-50 flex items-center gap-3">
@@ -683,6 +696,11 @@ export default function SettingsPage() {
               {/* Already subscribed — manage in portal */}
               {isPaid && (
                 <div className="space-y-3">
+                  {portalError && (
+                    <p className="text-xs text-red-500 font-bold bg-red-50 border border-red-100 p-3 rounded-xl">
+                      {portalError}
+                    </p>
+                  )}
                   <button
                     onClick={openPortal}
                     disabled={portalLoading}
@@ -696,7 +714,7 @@ export default function SettingsPage() {
                       disabled={portalLoading}
                       className="text-[11px] text-slate-300 hover:text-red-400 transition-colors font-medium underline underline-offset-2 decoration-dashed"
                     >
-                      Cancel membership
+                      Cancel or change plan on Stripe →
                     </button>
                   </div>
                 </div>

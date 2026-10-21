@@ -196,6 +196,10 @@ const ChildrenList = ({ refreshKey } = {}) => {
   }, [children.length]);
 
   const handleManageChild = (child) => {
+    // A sibling's direct Student Zone login (or an earlier "Launch Student
+    // Zone") can leave a stale localStorage entry that would otherwise
+    // outrank this child's sessionStorage entry in ChildProvider.
+    localStorage.removeItem('childUser');
     sessionStorage.setItem('childUser', JSON.stringify(child));
     router.push('/child-dashboard');
   };
@@ -295,6 +299,9 @@ const ChildrenList = ({ refreshKey } = {}) => {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
+                      // See handleManageChild above — clear a sibling's stale
+                      // localStorage session so it can't outrank this one.
+                      localStorage.removeItem('childUser');
                       sessionStorage.setItem('childUser', JSON.stringify(child));
                       router.push('/learning-zone');
                     }}

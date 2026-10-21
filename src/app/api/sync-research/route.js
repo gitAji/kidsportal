@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenAI, Type } from "@google/genai";
+import { safeErrorResponse } from '@/lib/apiError';
+import { missingGeminiKeyResponse } from '@/lib/geminiAuth';
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -8,6 +10,9 @@ const ai = new GoogleGenAI({
 const model = "gemini-1.5-flash";
 
 export async function POST(request) {
+    const missingKey = missingGeminiKeyResponse();
+    if (missingKey) return missingKey;
+
     try {
         const { gradeId, subjectId } = await request.json();
 
@@ -79,27 +84,16 @@ export async function POST(request) {
             }
         };
 
-        const genModel = ai.getGenerativeModel({
+        const result = await ai.models.generateContent({
             model: "gemini-1.5-flash",
-            generationConfig: generationConfig
+            contents: prompt,
+            config: generationConfig,
         });
-
-        const result = await genModel.generateContent(prompt);
-        const responseText = result.response.text();
-        const syncResult = JSON.parse(responseText);
+        const syncResult = JSON.parse(result.text);
 
         return NextResponse.json(syncResult);
 
     } catch (error) {
-        console.error('CRITICAL: Sync Research Error:', error);
-        console.error('Error Details:', {
-            message: error.message,
-            stack: error.stack,
-            cause: error.cause
-        });
-        return NextResponse.json({
-            error: error.message,
-            details: "Please check server logs for CRITICAL: Sync Research Error"
-        }, { status: 500 });
+        return safeErrorResponse('CRITICAL: Sync Research Error:', error, 'Failed to sync research.');
     }
 }

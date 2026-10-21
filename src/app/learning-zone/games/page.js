@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FaLock, FaPlay, FaStar, FaGamepad } from 'react-icons/fa';
+import { FaLock, FaPlay, FaStar, FaGamepad, FaDice, FaPuzzlePiece } from 'react-icons/fa';
 import { useChild } from '../../providers/ChildProvider';
 import dbData from '../../data/db.json';
 import { loadStats } from '../../utils/achievements';
@@ -24,11 +24,19 @@ export default function GamesHubPage() {
 
   return (
     <div className="flex flex-col p-2 sm:p-4 relative font-sans">
+      {/* "Arcade" background motif — distinguishes Games from Home's sky and
+          Subjects' map, with a playful scatter of dice and puzzle pieces */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-14 left-[7%] text-violet-200 opacity-50 text-7xl rotate-[-10deg]"><FaDice /></div>
+        <div className="absolute top-28 right-[9%] text-pink-200 opacity-40 text-8xl rotate-12"><FaPuzzlePiece /></div>
+        <div className="absolute bottom-16 left-[12%] text-fuchsia-200 opacity-40 text-6xl rotate-6"><FaPuzzlePiece /></div>
+      </div>
+
       <MinimalBackButton />
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-10"
+        className="text-center mb-10 relative z-10"
       >
         <div className="inline-flex items-center gap-2 bg-white px-6 py-1.5 rounded-full text-sm font-bold text-violet-600 mb-4 shadow-sm uppercase tracking-wider">
           <FaGamepad /> {childUser.grade} Games

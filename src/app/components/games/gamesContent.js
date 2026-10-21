@@ -36,6 +36,45 @@
 //   - grade-3 "திசைகள் (Directions)"          tap-match     (Directions & Locations)
 //   - grade-4 "பழமொழி (Proverbs)"             tap-match     (Proverbs (Pazhamozhi))
 //   - grade-5 "திருக்குறள் (Thirukkural)"      tap-match     (Thirukkural: Aram Pal)
+//
+// A new `sequence-order` engine (tap the shuffled steps of a task into
+// their correct logical order) lets kids practice recognizing a logical
+// task directly, rather than only answering questions about one. Every
+// grade 1-10 gets one, tied to that grade's Coding subject and grounded
+// in the "Sequencing" topic already in its syllabus — difficulty escalates
+// from everyday routines (grade 1-3) through algorithmic thinking
+// (grade 5-6: biggest-of-a-list, binary search intuition) to named
+// algorithms and real workflows (grade 9-10: linear/binary/selection
+// search & sort, the software development lifecycle):
+//   - grade-1  "Put It In Order!"          Brushing teeth / sandwich / bedtime routine
+//   - grade-2  "Order the Steps!"          Watering a plant / a Scratch-style program / toast
+//   - grade-3  "What's the Right Order?"   Toast with jam / crossing the road / handwashing
+//   - grade-4  "Think It Through!"         Paper airplane / library search / debugging
+//   - grade-5  "Step by Step"              Making tea / finding the largest number / packing a bag
+//   - grade-6  "Logical Steps"             If-then umbrella logic / dictionary search / a smoothie
+//   - grade-7  "Sort the Steps"            Bubble-sort intuition / baking / troubleshooting
+//   - grade-8  "Plan It Out"               Scientific method / writing a function / group project
+//   - grade-9  "Algorithm Order"           Linear search / binary search / planning an essay
+//   - grade-10 "Sequence the Solution"     SDLC / selection sort / interview prep
+//
+// A new `pattern-continue` engine (a row of pattern tiles plus one blank,
+// tap the option that continues it) — modeled after the classic "continue
+// the pattern" exercise format, reimplemented with this app's own game
+// chrome rather than copying a reference UI wholesale. Every grade 1-10
+// gets one, tied to that grade's Math subject (where "Patterns &
+// Sequences" already lives in the syllabus), escalating from repeating
+// shape/color patterns through skip-counting to recognizing the rule
+// behind square/cube numbers, geometric sequences and Fibonacci:
+//   - grade-1  "Continue the Pattern!"  Repeating shape & color patterns (AB, ABB)
+//   - grade-2  "What Comes Next?"       Skip counting by 2s, 5s, 10s
+//   - grade-3  "Spot the Rule!"         Descending steps, odd numbers, skip counting by 3
+//   - grade-4  "Pattern Power"          Skip counting by 7s/10s, doubling
+//   - grade-5  "Number Patterns"        Doubling, dividing by 3, square numbers
+//   - grade-6  "Pattern Detective"      Triangular numbers, Fibonacci, ×3 geometric
+//   - grade-7  "Sequence Sense"         Arithmetic sequences, ÷2, ×3 powers
+//   - grade-8  "Pattern Master"         Fibonacci-style, square numbers, ÷2 powers
+//   - grade-9  "Advanced Patterns"      Cube numbers, n(n+1), growing-gap sequences
+//   - grade-10 "Pattern Genius"         Quadratic-rule sequences, Fibonacci continued
 import { GENERATED_GAMES_BY_GRADE } from './gamesContentGenerated';
 
 const HAND_CRAFTED_GAMES_BY_GRADE = {
@@ -220,6 +259,51 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
         ],
       },
     },
+    {
+      id: 'sequence-order-g1',
+      subjectId: 'coding-1',
+      subjectLabel: 'Coding',
+      title: 'Put It In Order!',
+      description: 'Tap the steps in the right order to complete each task!',
+      engine: 'sequence-order',
+      icon: '📋',
+      color: 'from-violet-500 to-purple-600',
+      data: {
+        instruction: 'Every task is really a sequence — tap the steps in the order they must happen!',
+        rounds: [
+          {
+            prompt: 'Brushing Your Teeth',
+            steps: ['Wet the toothbrush', 'Add toothpaste', 'Brush your teeth', 'Rinse your mouth'],
+          },
+          {
+            prompt: 'Making a Sandwich',
+            steps: ['Get two slices of bread', 'Spread butter on one slice', 'Add the filling', 'Put the slices together'],
+          },
+          {
+            prompt: 'Getting Ready for Bed',
+            steps: ['Put on pajamas', 'Brush your teeth', 'Read a story', 'Turn off the light'],
+          },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g1',
+      subjectId: 'math-1',
+      subjectLabel: 'Math',
+      title: 'Continue the Pattern!',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['➕', '🔵', '➕', '🔵', '➕', '🔵'], options: ['➕', '🔵', '⭐', '🟦'], correctIndex: 0 },
+          { sequence: ['🔴', '🔵', '🔵', '🔴', '🔵', '🔵'], options: ['🔵', '🔴', '🟢', '🟡'], correctIndex: 1 },
+          { sequence: ['⭐', '🔺', '⭐', '🔺', '⭐', '🔺'], options: ['🔺', '⭐', '🔵', '🟩'], correctIndex: 1 },
+        ],
+      },
+    },
   ],
   'grade-2': [
     {
@@ -240,6 +324,51 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
           { id: 'ke', front: 'க + ே', match: 'கே' },
           { id: 'kai', front: 'க + ை', match: 'கை' },
           { id: 'ko', front: 'க + ொ', match: 'கொ' },
+        ],
+      },
+    },
+    {
+      id: 'sequence-order-g2',
+      subjectId: 'coding-2',
+      subjectLabel: 'Coding',
+      title: 'Order the Steps!',
+      description: 'Tap the steps in the right order to complete each task!',
+      engine: 'sequence-order',
+      icon: '📋',
+      color: 'from-violet-500 to-purple-600',
+      data: {
+        instruction: 'Every task is really a sequence — tap the steps in the order they must happen!',
+        rounds: [
+          {
+            prompt: 'Watering a Plant',
+            steps: ['Fill the watering can', 'Carry it to the plant', 'Pour water on the soil', 'Put the can away'],
+          },
+          {
+            prompt: 'Starting a Computer Program',
+            steps: ['Click the green flag', 'The character moves forward', 'The character turns', 'The character says hello'],
+          },
+          {
+            prompt: 'Making Toast',
+            steps: ['Put bread in the toaster', 'Push the lever down', 'Wait for it to pop up', 'Spread butter on the toast'],
+          },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g2',
+      subjectId: 'math-2',
+      subjectLabel: 'Math',
+      title: "What Comes Next?",
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['2', '4', '6', '8'], options: ['9', '10', '11', '12'], correctIndex: 1 },
+          { sequence: ['5', '10', '15', '20'], options: ['22', '24', '25', '30'], correctIndex: 2 },
+          { sequence: ['10', '20', '30', '40'], options: ['45', '50', '55', '60'], correctIndex: 1 },
         ],
       },
     },
@@ -270,6 +399,51 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
           { id: 'herbivore', x: 55, y: 68, label: 'Consumer (Herbivore)' },
           { id: 'predator', x: 78, y: 55, label: 'Consumer (Predator)' },
           { id: 'decomposer', x: 45, y: 88, label: 'Decomposer' },
+        ],
+      },
+    },
+    {
+      id: 'sequence-order-g7',
+      subjectId: 'coding-7',
+      subjectLabel: 'Coding',
+      title: 'Sort the Steps',
+      description: 'Tap the steps in the right order to complete each task!',
+      engine: 'sequence-order',
+      icon: '📋',
+      color: 'from-violet-500 to-purple-600',
+      data: {
+        instruction: 'Every task is really a sequence — tap the steps in the order they must happen!',
+        rounds: [
+          {
+            prompt: 'Sorting Cards by Size (like a computer sorts a list!)',
+            steps: ['Compare the first two cards', "Swap them if they're in the wrong order", 'Move to the next pair', 'Repeat until no swaps are needed'],
+          },
+          {
+            prompt: 'Baking Cookies from a Recipe',
+            steps: ['Preheat the oven', 'Mix the dry ingredients', 'Mix in the wet ingredients', 'Spoon dough onto a tray', 'Bake for the set time'],
+          },
+          {
+            prompt: 'Troubleshooting a Printer That Won\'t Print',
+            steps: ["Check if the printer is turned on", "Check if there's paper loaded", "Check if there's a paper jam", 'Try printing again'],
+          },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g7',
+      subjectId: 'math-7',
+      subjectLabel: 'Math',
+      title: 'Sequence Sense',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['5', '8', '11', '14'], options: ['16', '17', '18', '20'], correctIndex: 1 },
+          { sequence: ['64', '32', '16', '8'], options: ['2', '4', '6', '8'], correctIndex: 1 },
+          { sequence: ['3', '9', '27', '81'], options: ['162', '200', '243', '324'], correctIndex: 2 },
         ],
       },
     },
@@ -319,6 +493,51 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
           { prompt: '"கிழக்கு" (where the sun rises) means:', options: ['East', 'West', 'North'], correctIndex: 0 },
           { prompt: '"மேற்கு" means:', options: ['West', 'East', 'South'], correctIndex: 0 },
           { prompt: 'Which word means "above / up"?', options: ['கீழே', 'மேலே', 'பக்கத்தில்'], correctIndex: 1 },
+        ],
+      },
+    },
+    {
+      id: 'sequence-order-g3',
+      subjectId: 'coding-3',
+      subjectLabel: 'Coding',
+      title: "What's the Right Order?",
+      description: 'Tap the steps in the right order to complete each task!',
+      engine: 'sequence-order',
+      icon: '📋',
+      color: 'from-violet-500 to-purple-600',
+      data: {
+        instruction: 'Every task is really a sequence — tap the steps in the order they must happen!',
+        rounds: [
+          {
+            prompt: 'Making Toast with Jam',
+            steps: ['Toast the bread', 'Let it cool slightly', 'Spread butter', 'Spread jam', 'Cut it in half'],
+          },
+          {
+            prompt: 'Crossing the Road Safely',
+            steps: ['Stop at the curb', 'Look left and right', 'Listen for traffic', "Walk when it's clear"],
+          },
+          {
+            prompt: 'Washing Your Hands',
+            steps: ['Wet your hands', 'Add soap', 'Scrub for 20 seconds', 'Rinse', 'Dry with a towel'],
+          },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g3',
+      subjectId: 'math-3',
+      subjectLabel: 'Math',
+      title: 'Spot the Rule!',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['20', '18', '16', '14'], options: ['10', '11', '12', '13'], correctIndex: 2 },
+          { sequence: ['1', '3', '5', '7'], options: ['8', '9', '10', '11'], correctIndex: 1 },
+          { sequence: ['3', '6', '9', '12'], options: ['14', '15', '16', '18'], correctIndex: 1 },
         ],
       },
     },
@@ -396,6 +615,51 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
         ],
       },
     },
+    {
+      id: 'sequence-order-g4',
+      subjectId: 'coding-4',
+      subjectLabel: 'Coding',
+      title: 'Think It Through!',
+      description: 'Tap the steps in the right order to complete each task!',
+      engine: 'sequence-order',
+      icon: '📋',
+      color: 'from-violet-500 to-purple-600',
+      data: {
+        instruction: 'Every task is really a sequence — tap the steps in the order they must happen!',
+        rounds: [
+          {
+            prompt: 'Folding a Paper Airplane',
+            steps: ['Fold the paper in half lengthwise', 'Fold the top corners in', 'Fold the wings down', 'Test fly it'],
+          },
+          {
+            prompt: 'Finding a Book in the Library',
+            steps: ['Check the catalogue for the shelf number', 'Walk to that shelf', 'Scan the titles in order', 'Pick out the book'],
+          },
+          {
+            prompt: 'Debugging a Program That Isn\'t Working',
+            steps: ['Run the program', "Notice it doesn't work as expected", 'Find the line causing the problem', 'Fix that line', 'Run it again'],
+          },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g4',
+      subjectId: 'math-4',
+      subjectLabel: 'Math',
+      title: 'Pattern Power',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['7', '14', '21', '28'], options: ['32', '34', '35', '42'], correctIndex: 2 },
+          { sequence: ['100', '90', '80', '70'], options: ['50', '60', '65', '70'], correctIndex: 1 },
+          { sequence: ['2', '4', '8', '16'], options: ['24', '30', '32', '64'], correctIndex: 2 },
+        ],
+      },
+    },
   ],
   'grade-5': [
     {
@@ -445,6 +709,51 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
         ],
       },
     },
+    {
+      id: 'sequence-order-g5',
+      subjectId: 'coding-5',
+      subjectLabel: 'Coding',
+      title: 'Step by Step',
+      description: 'Tap the steps in the right order to complete each task!',
+      engine: 'sequence-order',
+      icon: '📋',
+      color: 'from-violet-500 to-purple-600',
+      data: {
+        instruction: 'Every task is really a sequence — tap the steps in the order they must happen!',
+        rounds: [
+          {
+            prompt: 'Making a Cup of Tea',
+            steps: ['Boil the kettle', 'Put a tea bag in the cup', 'Pour in hot water', 'Let it steep', 'Remove the tea bag'],
+          },
+          {
+            prompt: 'Finding the Largest Number in a List (like a computer would!)',
+            steps: ['Look at the first number and call it the biggest so far', 'Compare it to the next number', 'If the next number is bigger, make it the new biggest so far', 'Repeat until every number has been checked'],
+          },
+          {
+            prompt: 'Packing a School Bag',
+            steps: ['Check your timetable for the day', 'Pack the books you need', 'Pack your pencil case', 'Pack your lunch', 'Zip up the bag'],
+          },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g5',
+      subjectId: 'math-5',
+      subjectLabel: 'Math',
+      title: 'Number Patterns',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['1', '2', '4', '8', '16'], options: ['24', '28', '32', '36'], correctIndex: 2 },
+          { sequence: ['81', '27', '9', '3'], options: ['0', '1', '2', '3'], correctIndex: 1 },
+          { sequence: ['1', '4', '9', '16'], options: ['20', '23', '25', '30'], correctIndex: 2 },
+        ],
+      },
+    },
   ],
   'grade-6': [
     {
@@ -474,6 +783,192 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
           { id: 'nucleus', x: 38, y: 48, label: 'Nucleus' },
           { id: 'vacuole', x: 68, y: 55, label: 'Vacuole' },
           { id: 'chloroplast', x: 55, y: 25, label: 'Chloroplast' },
+        ],
+      },
+    },
+    {
+      id: 'sequence-order-g6',
+      subjectId: 'coding-6',
+      subjectLabel: 'Coding',
+      title: 'Logical Steps',
+      description: 'Tap the steps in the right order to complete each task!',
+      engine: 'sequence-order',
+      icon: '📋',
+      color: 'from-violet-500 to-purple-600',
+      data: {
+        instruction: 'Every task is really a sequence — tap the steps in the order they must happen!',
+        rounds: [
+          {
+            prompt: 'An If-Then Decision: Should You Take an Umbrella?',
+            steps: ['Check if it is raining', 'If yes, take an umbrella', 'If no, leave the umbrella at home', 'Walk outside'],
+          },
+          {
+            prompt: 'Searching for a Word in a Dictionary',
+            steps: ['Open the dictionary near the middle', "Check if your word's letter comes before or after", 'Narrow down to the correct half', 'Repeat until you find the word'],
+          },
+          {
+            prompt: 'Making a Smoothie',
+            steps: ['Gather the fruit', 'Wash the fruit', 'Put fruit and milk in the blender', 'Blend until smooth', 'Pour into a glass'],
+          },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g6',
+      subjectId: 'math-6',
+      subjectLabel: 'Math',
+      title: 'Pattern Detective',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['1', '3', '6', '10'], options: ['13', '14', '15', '16'], correctIndex: 2 },
+          { sequence: ['1', '1', '2', '3', '5'], options: ['6', '7', '8', '9'], correctIndex: 2 },
+          { sequence: ['2', '6', '18', '54'], options: ['108', '150', '162', '216'], correctIndex: 2 },
+        ],
+      },
+    },
+  ],
+  'grade-8': [
+    {
+      id: 'sequence-order-g8',
+      subjectId: 'coding-8',
+      subjectLabel: 'Coding',
+      title: 'Plan It Out',
+      description: 'Tap the steps in the right order to complete each task!',
+      engine: 'sequence-order',
+      icon: '📋',
+      color: 'from-violet-500 to-purple-600',
+      data: {
+        instruction: 'Every task is really a sequence — tap the steps in the order they must happen!',
+        rounds: [
+          {
+            prompt: 'The Scientific Method',
+            steps: ['Ask a question', 'Form a hypothesis', 'Run an experiment', 'Record the results', 'Draw a conclusion'],
+          },
+          {
+            prompt: 'Writing and Testing a Function',
+            steps: ['Plan what the function should do', 'Write the code', 'Test it with sample inputs', 'Fix any bugs', 'Use it in your program'],
+          },
+          {
+            prompt: 'Organising a Group Project',
+            steps: ['Agree on the goal', 'Split the tasks among the team', 'Each person does their part', 'Combine all the parts', 'Review the finished project'],
+          },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g8',
+      subjectId: 'math-8',
+      subjectLabel: 'Math',
+      title: 'Pattern Master',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['2', '3', '5', '8', '13'], options: ['18', '19', '20', '21'], correctIndex: 3 },
+          { sequence: ['1', '4', '9', '16', '25'], options: ['30', '32', '35', '36'], correctIndex: 3 },
+          { sequence: ['128', '64', '32', '16'], options: ['4', '6', '8', '10'], correctIndex: 2 },
+        ],
+      },
+    },
+  ],
+  'grade-9': [
+    {
+      id: 'sequence-order-g9',
+      subjectId: 'coding-9',
+      subjectLabel: 'Coding',
+      title: 'Algorithm Order',
+      description: 'Tap the steps in the right order to complete each task!',
+      engine: 'sequence-order',
+      icon: '📋',
+      color: 'from-violet-500 to-purple-600',
+      data: {
+        instruction: 'Every task is really a sequence — tap the steps in the order they must happen!',
+        rounds: [
+          {
+            prompt: 'Linear Search Algorithm',
+            steps: ['Start at the first item in the list', "Check if it matches what you're looking for", 'If not, move to the next item', 'Repeat until you find it or reach the end'],
+          },
+          {
+            prompt: 'Binary Search Algorithm (on a sorted list)',
+            steps: ['Look at the middle item of the sorted list', 'If it matches, stop — you found it', "If your target is smaller, search the left half next", "If your target is bigger, search the right half next"],
+          },
+          {
+            prompt: 'Planning a Research Essay',
+            steps: ['Choose a topic', 'Research and gather sources', 'Create an outline', 'Write a first draft', 'Edit and proofread'],
+          },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g9',
+      subjectId: 'math-9',
+      subjectLabel: 'Math',
+      title: 'Advanced Patterns',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['1', '8', '27', '64'], options: ['100', '110', '120', '125'], correctIndex: 3 },
+          { sequence: ['2', '6', '12', '20', '30'], options: ['36', '40', '42', '44'], correctIndex: 2 },
+          { sequence: ['7', '11', '16', '22', '29'], options: ['35', '36', '37', '38'], correctIndex: 2 },
+        ],
+      },
+    },
+  ],
+  'grade-10': [
+    {
+      id: 'sequence-order-g10',
+      subjectId: 'coding-10',
+      subjectLabel: 'Coding',
+      title: 'Sequence the Solution',
+      description: 'Tap the steps in the right order to complete each task!',
+      engine: 'sequence-order',
+      icon: '📋',
+      color: 'from-violet-500 to-purple-600',
+      data: {
+        instruction: 'Every task is really a sequence — tap the steps in the order they must happen!',
+        rounds: [
+          {
+            prompt: 'The Software Development Lifecycle',
+            steps: ['Gather requirements', 'Design the system', 'Write the code', 'Test for bugs', 'Deploy and maintain it'],
+          },
+          {
+            prompt: 'Selection Sort Algorithm',
+            steps: ['Find the smallest item in the unsorted part of the list', 'Swap it with the first unsorted item', 'Move the sorted boundary forward by one', 'Repeat until the whole list is sorted'],
+          },
+          {
+            prompt: 'Preparing for a Job Interview',
+            steps: ['Research the company', 'Practice common questions', 'Prepare questions to ask', 'Dress appropriately', 'Follow up with a thank-you note'],
+          },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g10',
+      subjectId: 'math-10',
+      subjectLabel: 'Math',
+      title: 'Pattern Genius',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['3', '6', '11', '18', '27'], options: ['34', '36', '38', '40'], correctIndex: 2 },
+          { sequence: ['1', '2', '4', '7', '11', '16'], options: ['20', '21', '22', '23'], correctIndex: 2 },
+          { sequence: ['1', '1', '2', '3', '5', '8', '13'], options: ['18', '20', '21', '24'], correctIndex: 2 },
         ],
       },
     },

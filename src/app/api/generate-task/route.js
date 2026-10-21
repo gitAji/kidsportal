@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { GoogleGenAI } from "@google/genai";
+import { safeErrorResponse } from '@/lib/apiError';
+import { missingGeminiKeyResponse } from '@/lib/geminiAuth';
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -10,6 +12,9 @@ const model = "gemini-1.5-flash";
 
 // Create a customized task based on child past performance using Vertex AI / Gemini
 export async function POST(request) {
+    const missingKey = missingGeminiKeyResponse();
+    if (missingKey) return missingKey;
+
     try {
         const { gradeId, subjectId, levelId, taskId, childId } = await request.json();
 
@@ -60,10 +65,10 @@ For each question, provide:
 3. options: Array of exactly 4 strings if multiple-choice. Omit this if identification.
 4. correctAnswer: The correct answer string.`;
 
-        // Corrected standard SDK call for @google/genai
-        const genModel = ai.getGenerativeModel({ 
+        const result = await ai.models.generateContent({
             model: "gemini-1.5-flash",
-            generationConfig: {
+            contents: prompt,
+            config: {
                 temperature: 0.7,
                 responseMimeType: "application/json",
                 responseSchema: {
@@ -94,9 +99,7 @@ For each question, provide:
                 }
             }
         });
-
-        const result = await genModel.generateContent(prompt);
-        const generatedTask = JSON.parse(result.response.text());
+        const generatedTask = JSON.parse(result.text);
 
         // Ensure we stamp it with the requested IDs
         generatedTask.taskId = taskId;
@@ -105,7 +108,6 @@ For each question, provide:
         return NextResponse.json(generatedTask);
 
     } catch (error) {
-        console.error('Task Generation Error:', error);
-        return NextResponse.json({ error: error.message, stack: error.stack }, { status: 500 });
+        return safeErrorResponse('Task Generation Error:', error, 'Failed to generate task.');
     }
 }

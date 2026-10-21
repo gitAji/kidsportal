@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { GoogleGenAI } from "@google/genai";
 import dbData from '@/app/data/db.json';
+import { safeErrorResponse } from '@/lib/apiError';
+import { missingGeminiKeyResponse } from '@/lib/geminiAuth';
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -47,6 +49,9 @@ async function getExistingLevels(gradeId, subjectId) {
 // student has finished every existing level in a subject, so there's
 // always somewhere further to go instead of a dead end.
 export async function POST(request) {
+    const missingKey = missingGeminiKeyResponse();
+    if (missingKey) return missingKey;
+
     try {
         const { gradeId, subjectId } = await request.json();
 
@@ -81,9 +86,10 @@ Generate exactly one new level with:
 
 Keep a healthy mix of "multiple-choice" and "identification" question types across the quiz and exam.`;
 
-        const genModel = ai.getGenerativeModel({
+        const result = await ai.models.generateContent({
             model: "gemini-1.5-flash",
-            generationConfig: {
+            contents: prompt,
+            config: {
                 temperature: 0.8,
                 responseMimeType: "application/json",
                 responseSchema: {
@@ -124,9 +130,7 @@ Keep a healthy mix of "multiple-choice" and "identification" question types acro
                 }
             }
         });
-
-        const result = await genModel.generateContent(prompt);
-        const generated = JSON.parse(result.response.text());
+        const generated = JSON.parse(result.text);
 
         const newLevel = {
             levelId,
@@ -180,7 +184,6 @@ Keep a healthy mix of "multiple-choice" and "identification" question types acro
 
         return NextResponse.json(newLevel);
     } catch (error) {
-        console.error('Level Generation Error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('Level Generation Error:', error, 'Failed to generate level.');
     }
 }

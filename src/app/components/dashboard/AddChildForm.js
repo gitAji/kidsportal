@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { doc, getDoc, setDoc, updateDoc, collection, runTransaction } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, collection, runTransaction, serverTimestamp } from 'firebase/firestore';
 import { auth } from '../../../firebase/auth';
 import { app } from '../../../firebase/config';
 import { getFirestore } from 'firebase/firestore';
@@ -34,6 +34,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
   const db = getFirestore(app);
   const [name, setName] = useState(childToEdit?.name || '');
   const [age, setAge] = useState(childToEdit?.age || '');
+  const [weight, setWeight] = useState(childToEdit?.weight || '');
   const [grade, setGrade] = useState(childToEdit?.grade || '');
   const [username, setUsername] = useState(childToEdit?.username || '');
   const [password, setPassword] = useState('');
@@ -93,7 +94,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
       if (childToEdit) {
         // Update existing
         childRef = doc(db, "users", parentUid, "children", childToEdit.id);
-        const updates = { name, age: parseInt(age), grade, username, avatar: selectedAvatar, sequentialProgression };
+        const updates = { name, age: parseInt(age), weight: weight ? parseFloat(weight) : null, grade, username, avatar: selectedAvatar, sequentialProgression };
         if (password) updates.password = password;
 
         if (username !== childToEdit.username) {
@@ -115,7 +116,7 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
         // Create new
         childRef = doc(collection(db, "users", parentUid, "children"));
         const newChildData = {
-          name, age: parseInt(age), grade, username, avatar: selectedAvatar,
+          name, age: parseInt(age), weight: weight ? parseFloat(weight) : null, grade, username, avatar: selectedAvatar,
           password, loginEnabled: true, photoURL: '', assignedTasks: [], points: 0,
           stickers: [], progress: { overall: 0, subjects: {} }, parentUid,
           professorCharacter: 'owl', timeAlertsEnabled: true,
@@ -124,6 +125,9 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
           // minutes from the child's Settings tab.
           timeLimits: { enabled: false, dailyMinutes: 60, weeklyMinutes: 300 },
           timeExtensionRequest: null,
+          // Lets admin tooling (e.g. the pilot-program dashboard) measure
+          // setup time — minutes from account creation to first login.
+          createdAt: serverTimestamp(),
         };
 
         await runTransaction(db, async (t) => {
@@ -237,6 +241,10 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
                   ))}
                 </select>
               </div>
+            </div>
+            <div>
+              <label htmlFor="childWeight" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">Weight (kg) <span className="text-slate-300 normal-case font-medium">— optional</span></label>
+              <input type="number" id="childWeight" min="0" step="0.1" className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800" placeholder="e.g. 24.5" value={weight} onChange={(e) => setWeight(e.target.value)} />
             </div>
           </div>
         </div>

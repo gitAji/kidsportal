@@ -13,6 +13,22 @@ const CurriculumShowcase = lazy(() => import("../components/ui/CurriculumShowcas
 import db from '../data/db.json'; // Import from src/app/data/db.json
 
 import HeroSection from "../components/ui/HeroSection";
+import { SITE_URL, SITE_NAME } from "@/lib/seo";
+
+const ORGANIZATION_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.png`,
+};
+
+const WEBSITE_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: SITE_URL,
+};
 
 // Real, verified capabilities only — nothing here that isn't actually
 // shipped in the product.
@@ -162,6 +178,14 @@ export default async function HomePage() {
 
   return (
     <HomePageClient>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_JSON_LD) }}
+      />
       <HeroSection />
 
       {/* Stats Section */}

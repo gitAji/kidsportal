@@ -65,6 +65,8 @@ export default function TaskContentPage() {
   const [timeTaken, setTimeTaken] = useState(0);
   const [showDrawingTool, setShowDrawingTool] = useState(false);
   const [showKeyboard, setShowKeyboard] = useState(false);
+  const [isRecognizingHandwriting, setIsRecognizingHandwriting] = useState(false);
+  const [handwritingError, setHandwritingError] = useState(null);
   const [retriedThisTask, setRetriedThisTask] = useState(false);
   const [newAchievements, setNewAchievements] = useState([]);
   const [sessionHistory, setSessionHistory] = useState([]);
@@ -586,6 +588,36 @@ export default function TaskContentPage() {
     else setUserAnswer(a => a + key);
   };
 
+  // The "write on screen" paint tool hands back a raw canvas drawing —
+  // read the handwritten character(s) with AI and drop the recognized
+  // text straight into the answer input (editable, like typing), instead
+  // of submitting the drawing itself as the answer.
+  const handleDrawingFinish = async (imageData) => {
+    setShowDrawingTool(false);
+    setShowKeyboard(false);
+    setHandwritingError(null);
+    setIsRecognizingHandwriting(true);
+    try {
+      const res = await fetch('/api/recognize-handwriting', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageData, language: contentLanguage }),
+      });
+      const data = await res.json();
+      if (data.recognized) {
+        setUserAnswer(data.recognized);
+      } else {
+        setHandwritingError(data.error || "Couldn't read that — try writing a bit bigger!");
+        setTimeout(() => setHandwritingError(null), 4000);
+      }
+    } catch (err) {
+      setHandwritingError("Couldn't read that — try again!");
+      setTimeout(() => setHandwritingError(null), 4000);
+    } finally {
+      setIsRecognizingHandwriting(false);
+    }
+  };
+
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center p-8">
       <SkeletonLoader variant="page" message="Loading your adventure..." />
@@ -676,6 +708,22 @@ export default function TaskContentPage() {
             {taskData.type !== 'lesson' && <p className="text-lg text-gray-400 bg-gray-100 rounded-full py-1 px-4 inline-block">⏳ {formatTime(timeTaken)}</p>}
           </div>
 
+          {/* Action buttons come right after the score, ahead of the (potentially long)
+              detailed recap below, so they're reachable without scrolling past it. */}
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-col gap-3">
+            <button onClick={() => router.back()} className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black px-6 py-4 rounded-full text-xl hover:scale-[1.02] transition-all shadow-lg shadow-blue-200/50 flex items-center justify-center gap-2">
+              <FaHome /> {t('backToMap')}
+            </button>
+            <div className="grid grid-cols-2 gap-3">
+              <button onClick={handleRetake} className="w-full bg-white text-emerald-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300 transition-all flex items-center justify-center gap-2">
+                <FaRedo /> {taskData.type === 'exam' ? t('retakeExam') : t('practiceAgain')}
+              </button>
+              <button onClick={() => router.push('/learning-zone/rewards')} className="w-full bg-white text-cyan-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-cyan-200 hover:bg-cyan-50 hover:border-cyan-300 transition-all flex items-center justify-center gap-2">
+                <FaGift /> {t('myRewards')}
+              </button>
+            </div>
+          </motion.div>
+
           <div className="mt-8 text-left">
             <h3 className="text-xl font-black text-slate-800 mb-4 flex items-center gap-2">
               <FaCheckCircle className="text-green-500" /> {t('detailedRecap')}
@@ -706,20 +754,6 @@ export default function TaskContentPage() {
               ))}
             </div>
           </div>
-
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-col gap-3 mt-8">
-            <button onClick={() => router.back()} className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black px-6 py-4 rounded-full text-xl hover:scale-[1.02] transition-all shadow-lg shadow-blue-200/50 flex items-center justify-center gap-2">
-              <FaHome /> {t('backToMap')}
-            </button>
-            <div className="grid grid-cols-2 gap-3">
-              <button onClick={handleRetake} className="w-full bg-white text-emerald-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300 transition-all flex items-center justify-center gap-2">
-                <FaRedo /> {taskData.type === 'exam' ? t('retakeExam') : t('practiceAgain')}
-              </button>
-              <button onClick={() => router.push('/learning-zone/rewards')} className="w-full bg-white text-cyan-600 font-bold px-6 py-3.5 rounded-full text-lg border-2 border-cyan-200 hover:bg-cyan-50 hover:border-cyan-300 transition-all flex items-center justify-center gap-2">
-                <FaGift /> {t('myRewards')}
-              </button>
-            </div>
-          </motion.div>
         </motion.div>
 
         {newAchievements.length > 0 && (
@@ -994,11 +1028,11 @@ export default function TaskContentPage() {
                 </div>
               ) : (
                 <div className="relative">
-                  <input type="text" value={userAnswer} onChange={e => setUserAnswer(e.target.value)} disabled={!!feedbackMessage || isCheckingAnswer}
-                    className={`w-full py-4 pl-14 pr-14 text-center text-2xl font-bold border-4 rounded-full focus:outline-none transition-colors ${feedbackMessage?.type === 'correct' ? 'border-green-400 bg-green-50' : feedbackMessage?.type === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-blue-400'} ${isCheckingAnswer ? 'opacity-50 cursor-wait bg-gray-50' : ''}`}
-                    placeholder="Type..." />
+                  <input type="text" value={isRecognizingHandwriting ? '' : userAnswer} onChange={e => setUserAnswer(e.target.value)} disabled={!!feedbackMessage || isCheckingAnswer || isRecognizingHandwriting}
+                    className={`w-full py-4 pl-14 pr-14 text-center text-2xl font-bold border-4 rounded-full focus:outline-none transition-colors ${feedbackMessage?.type === 'correct' ? 'border-green-400 bg-green-50' : feedbackMessage?.type === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-blue-400'} ${(isCheckingAnswer || isRecognizingHandwriting) ? 'opacity-50 cursor-wait bg-gray-50' : ''}`}
+                    placeholder={isRecognizingHandwriting ? 'Reading your handwriting...' : 'Type...'} />
 
-                  {!feedbackMessage && !isCheckingAnswer && (
+                  {!feedbackMessage && !isCheckingAnswer && !isRecognizingHandwriting && (
                     <>
                       <button
                         onClick={() => setShowKeyboard(!showKeyboard)}
@@ -1019,7 +1053,15 @@ export default function TaskContentPage() {
                       </button>
                     </>
                   )}
+
+                  {isRecognizingHandwriting && (
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 animate-spin text-cyan-500 text-xl">⏳</span>
+                  )}
                 </div>
+              )}
+
+              {handwritingError && (
+                <p className="text-center text-sm font-bold text-red-500 mt-2">{handwritingError}</p>
               )}
 
               {showKeyboard && !String(userAnswer).startsWith('data:image') && <div className="mt-4"><VirtualKeyboard onKeyPress={handleKeyPress} /></div>}
@@ -1053,11 +1095,7 @@ export default function TaskContentPage() {
                   <DrawingCanvas
                     width={typeof window !== 'undefined' ? (window.innerWidth > 800 ? 750 : window.innerWidth * 0.85) : 600}
                     height={400}
-                    onFinish={(imageData) => {
-                      setUserAnswer(imageData);
-                      setShowDrawingTool(false);
-                      setShowKeyboard(false);
-                    }}
+                    onFinish={handleDrawingFinish}
                   />
                 </div>
                 <p className="text-xs font-bold text-slate-400 mt-4 uppercase tracking-widest">{t('writing_instruction')}</p>

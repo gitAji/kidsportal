@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { FaCode } from 'react-icons/fa';
+import { FaCode, FaRobot } from 'react-icons/fa';
 import { useChild } from '../../providers/ChildProvider';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import { getChildStats } from '@/app/utils/firestoreService';
@@ -47,12 +47,16 @@ export default function CodingLabPage() {
 
   return (
     <div className="flex flex-col p-2 sm:p-4 relative font-sans">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-16 right-[8%] text-violet-100 opacity-60 text-7xl rotate-12"><FaRobot /></div>
+        <div className="absolute bottom-16 left-[9%] text-cyan-100 opacity-60 text-7xl rotate-[-10deg] font-black">{'{ }'}</div>
+      </div>
       <MinimalBackButton />
 
       <motion.div
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-10"
+        className="text-center mb-10 relative z-10"
       >
         <div className="inline-flex items-center gap-2 bg-violet-100 text-violet-700 px-5 py-2 rounded-full text-sm font-black uppercase tracking-wider mb-4">
           <FaCode /> Build Lab

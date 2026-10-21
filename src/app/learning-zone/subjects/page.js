@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import dbData from '../../data/db.json';
 import SkeletonLoader from '../../components/ui/SkeletonLoader';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaMapMarkedAlt, FaCompass } from 'react-icons/fa';
 import Image from 'next/image';
 
 import MinimalBackButton from '../../components/child/MinimalBackButton';
@@ -38,13 +38,23 @@ export default function SubjectsPage() {
 
   return (
     <div className="flex flex-col p-2 sm:p-4 relative font-sans">
+      {/* "Treasure map" background motif — distinguishes the Subjects hub from
+          Home's sky/basecamp feel and Games' arcade glow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-16 right-[10%] text-teal-200 opacity-40 text-8xl rotate-12"><FaCompass /></div>
+        <div className="absolute bottom-20 left-[8%] text-amber-200 opacity-40 text-9xl -rotate-6"><FaMapMarkedAlt /></div>
+      </div>
+
       <MinimalBackButton />
-      
+
       <motion.div
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-10 mt-6"
+        className="text-center mb-10 mt-6 relative z-10"
       >
+        <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 px-5 py-2 rounded-full text-sm font-black uppercase tracking-wider mb-4">
+          <FaCompass /> Pick Your Path
+        </div>
         <h1 className="text-4xl md:text-6xl font-black text-slate-800 drop-shadow-sm tracking-tight mb-4">
           Choose a Subject!
         </h1>

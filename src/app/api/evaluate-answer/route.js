@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import OpenAI from "openai";
+import { safeErrorResponse } from '@/lib/apiError';
 
 const model = "grok-4.6";
 
@@ -45,7 +46,6 @@ Respond ONLY with valid JSON matching this exact shape, no extra text: {"isCorre
         return NextResponse.json(evaluation);
 
     } catch (error) {
-        console.error('AI Evaluation Error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('AI Evaluation Error:', error, 'Failed to evaluate answer.');
     }
 }

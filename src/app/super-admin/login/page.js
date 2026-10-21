@@ -9,10 +9,8 @@ import { auth, db } from "@/firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import Image from "next/image";
-
-const SUPER_ADMIN_EMAILS = [
-    "kontaktaone@gmail.com",
-];
+import { SUPER_ADMIN_EMAILS } from "@/lib/superAdmin";
+import { getFriendlyAuthError } from "@/app/utils/authErrors";
 
 export default function SuperAdminLoginPage() {
     const router = useRouter();
@@ -87,7 +85,7 @@ export default function SuperAdminLoginPage() {
             setError("ACCESS_DENIED");
         } catch (err) {
             console.error("Super Admin auth error:", err);
-            setError(err.message || "Something went wrong.");
+            setError(getFriendlyAuthError(err));
         } finally {
             setLoading(false);
         }

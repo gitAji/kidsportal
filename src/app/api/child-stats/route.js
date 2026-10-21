@@ -4,6 +4,7 @@
 import { NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { FieldValue } from 'firebase-admin/firestore';
+import { safeErrorResponse } from '@/lib/apiError';
 
 // GET — Fetch stats + achievements for a child
 export async function GET(request) {
@@ -34,8 +35,7 @@ export async function GET(request) {
 
         return NextResponse.json({ stats, achievements });
     } catch (error) {
-        console.error('Child stats GET error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('Child stats GET error:', error, 'Failed to load stats.');
     }
 }
 
@@ -133,7 +133,6 @@ export async function POST(request) {
 
         return NextResponse.json({ success: true });
     } catch (error) {
-        console.error('Child stats POST error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('Child stats POST error:', error, 'Failed to save stats.');
     }
 }

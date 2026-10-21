@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenAI, Type } from "@google/genai";
+import { safeErrorResponse } from '@/lib/apiError';
+import { missingGeminiKeyResponse } from '@/lib/geminiAuth';
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -8,6 +10,9 @@ const ai = new GoogleGenAI({
 const model = "gemini-2.5-flash-lite";
 
 export async function POST(request) {
+    const missingKey = missingGeminiKeyResponse();
+    if (missingKey) return missingKey;
+
     try {
         const { question, targetLanguage } = await request.json();
 
@@ -50,7 +55,6 @@ Respond ONLY with valid JSON matching the exact original schema structure.`;
         return NextResponse.json({ translatedData });
 
     } catch (error) {
-        console.error('Translation Error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return safeErrorResponse('Translation Error:', error, 'Failed to translate question.');
     }
 }

@@ -11,6 +11,8 @@ import TapMatchGame from '../../../components/games/TapMatchGame';
 import MemoryPairsGame from '../../../components/games/MemoryPairsGame';
 import TimedReflexGame from '../../../components/games/TimedReflexGame';
 import LabelDropGame from '../../../components/games/LabelDropGame';
+import SequenceOrderGame from '../../../components/games/SequenceOrderGame';
+import PatternContinueGame from '../../../components/games/PatternContinueGame';
 import MinimalBackButton from '../../../components/child/MinimalBackButton';
 
 const ENGINES = {
@@ -18,6 +20,8 @@ const ENGINES = {
   'memory-pairs': MemoryPairsGame,
   'timed-reflex': TimedReflexGame,
   'label-diagram': LabelDropGame,
+  'sequence-order': SequenceOrderGame,
+  'pattern-continue': PatternContinueGame,
 };
 
 export default function GamePlayerPage() {

@@ -46,7 +46,7 @@ export default function RegisterPage() {
         setLoading(true);
         try {
             await signUpWithEmail(email, password, name);
-            router.push("/dashboard");
+            router.push("/onboarding");
         } catch (err) {
             setError(err.message === "TEACHER_PROHIBITED" ? err.message : getFriendlyAuthError(err));
         } finally {
@@ -59,7 +59,7 @@ export default function RegisterPage() {
         setLoading(true);
         try {
             await signInWithGoogle();
-            router.push("/dashboard");
+            router.push("/onboarding");
         } catch (err) {
             setError(err.message === "TEACHER_PROHIBITED" ? err.message : getFriendlyAuthError(err));
         } finally {
