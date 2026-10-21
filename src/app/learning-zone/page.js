@@ -9,11 +9,24 @@ import { getSubjectsByGrade, DEFAULT_LEARNING_SUBJECTS } from '../utils/learning
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
-import { FaStar, FaPlay, FaGamepad, FaSun, FaCloud, FaMapMarkedAlt } from 'react-icons/fa';
+import {
+  FaStar, FaPlay, FaGamepad, FaSun, FaCloud, FaMapMarkedAlt, FaFire, FaTrophy,
+  FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile,
+} from 'react-icons/fa';
 import { getChildStats } from '@/app/utils/firestoreService';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import TimeLimitBlockedScreen from '../components/child/TimeLimitBlockedScreen';
 import { SUBJECT_STYLE_MAP as subjectStyleMap, SUBJECT_ICON_MAP as subjectIconMap } from '../utils/subjectStyles';
+import { loadStats } from '../utils/achievements';
+
+const AVATAR_ICONS = { paw: FaPaw, rocket: FaRocket, car: FaCar, tree: FaTree, smile: FaSmile };
+
+function timeGreeting(date = new Date()) {
+  const hour = date.getHours();
+  if (hour < 12) return 'Good morning';
+  if (hour < 18) return 'Good afternoon';
+  return 'Good evening';
+}
 
 export default function LearningZonePage() {
   const { childUser } = useChild();
@@ -21,12 +34,18 @@ export default function LearningZonePage() {
   const [subjects, setSubjects] = useState([]);
   const [subjectsLoading, setSubjectsLoading] = useState(true);
   const [timeStatus, setTimeStatus] = useState(null);
+  const [stats, setStats] = useState({ level: 1, points: 0 });
+  const [greeting, setGreeting] = useState(timeGreeting());
 
-  const professor = React.useMemo(() => {
-    const char = childUser?.professorCharacter || 'owl';
-    if (char === 'panda') return { name: t('panda_name'), img: '/images/smart-panda.png', emoji: '🐼' };
-    return { name: t('owl_name'), img: '/images/professor-owl.png', emoji: '🦉' };
-  }, [childUser, t]);
+  useEffect(() => {
+    const childId = childUser?.uid || childUser?.id;
+    if (!childId) return;
+    const localStats = loadStats(childId);
+    setStats({ level: localStats.currentLevel || 1, points: localStats.totalScore || 0 });
+    // Re-evaluate the greeting on mount too, in case this page was left
+    // open across a time-of-day boundary (e.g. a tablet left on overnight).
+    setGreeting(timeGreeting());
+  }, [childUser]);
 
   useEffect(() => {
     const loadSubjects = async () => {
@@ -69,8 +88,30 @@ export default function LearningZonePage() {
   if (!childUser) return null;
   if (timeStatus?.isBlocked) return <TimeLimitBlockedScreen status={timeStatus} />;
 
+  const xpIntoLevel = stats.points % 100;
+
+  const renderSmallAvatar = () => {
+    if (childUser.photoURL) {
+      return (
+        <Image
+          src={childUser.photoURL}
+          alt={childUser.name}
+          width={56}
+          height={56}
+          className="w-14 h-14 rounded-2xl object-cover border-4 border-white shadow-lg"
+        />
+      );
+    }
+    const AvatarIcon = AVATAR_ICONS[childUser.avatar] || FaUserCircle;
+    return (
+      <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-2xl shadow-lg border-4 border-white shrink-0">
+        <AvatarIcon />
+      </div>
+    );
+  };
+
   return (
-    <div className="flex flex-col items-center sm:p-4 relative font-sans">
+    <div className="flex flex-col items-center p-2 sm:p-4 relative font-sans">
 
       {/* "Basecamp" background motif — a warm sky with a sun and drifting clouds,
           distinguishing Home from the map motif on Subjects and the arcade
@@ -87,52 +128,49 @@ export default function LearningZonePage() {
         initial={{ opacity: 0, y: -20, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
-        className="relative z-10 w-full max-w-5xl mx-auto mt-6 mb-12"
+        className="relative z-10 w-full max-w-5xl mx-auto mt-16 sm:mt-6 mb-12"
       >
-        <div className="bg-white/80 backdrop-blur-xl border-4 border-white shadow-xl rounded-[2.5rem] p-6 sm:p-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
-          <div className="relative w-28 h-28 sm:w-36 sm:h-36 shrink-0 bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-full border-4 border-white shadow-lg overflow-hidden flex items-center justify-center">
-             <Image src={professor.img} alt={professor.name} fill className="object-contain scale-[0.85] translate-y-2" priority />
-          </div>
-          <div className="text-center sm:text-left flex-grow">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-yellow-100 text-yellow-700 rounded-full font-black text-sm uppercase tracking-widest mb-3 border border-yellow-200 shadow-sm">
-               <FaStar /> {childUser.grade} Explorer
+        <div className="bg-white/80 backdrop-blur-xl border-4 border-white shadow-xl rounded-[2.5rem] p-6 sm:p-8 flex flex-col gap-5">
+          <div className="flex items-center gap-4">
+            {renderSmallAvatar()}
+            <div className="min-w-0 flex-grow">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full font-black text-xs uppercase tracking-widest mb-1.5 border border-yellow-200 shadow-sm">
+                <FaStar className="text-[10px]" /> {childUser.grade} Explorer
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight leading-tight">
+                {greeting}, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500">{childUser.name}</span>!
+              </h1>
+              <p className="text-sm sm:text-base font-bold text-slate-500 mt-0.5">
+                Ready for today&apos;s adventure? 🚀
+              </p>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-black text-slate-800 tracking-tight leading-tight mb-2">
-              Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500">{childUser.name}</span>!
-            </h1>
-            <p className="text-lg sm:text-xl font-bold text-slate-500">
-              What adventure are we going on today? 🚀
-            </p>
+          </div>
+
+          {/* Level progress */}
+          <div>
+            <div className="flex items-center justify-between mb-1.5 px-0.5">
+              <span className="flex items-center gap-1.5 text-xs font-black text-slate-500 uppercase tracking-wider">
+                <FaTrophy className="text-amber-400" /> Level {stats.level}
+              </span>
+              <span className="text-xs font-black text-slate-400">{xpIntoLevel}/100 XP</span>
+            </div>
+            <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+              <motion.div
+                className="bg-gradient-to-r from-blue-400 to-indigo-500 h-full rounded-full"
+                initial={{ width: 0 }}
+                animate={{ width: `${xpIntoLevel}%` }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              />
+            </div>
           </div>
         </div>
       </motion.div>
 
       {/* Main Content Area */}
       <div className="w-full max-w-5xl mx-auto z-10 relative">
-        
-        {/* Games Promo Card */}
-        <Link href="/learning-zone/games">
-          <motion.div 
-            whileHover={{ scale: 1.02, y: -4 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full bg-[#FF79B3] rounded-[2.5rem] p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 shadow-[0_12px_0_#DF5593] hover:shadow-[0_8px_0_#DF5593] hover:translate-y-1 transition-all border-[6px] border-white cursor-pointer"
-          >
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 bg-white/20 rounded-[1.5rem] flex items-center justify-center shadow-inner border-4 border-white/30">
-                <FaGamepad className="text-5xl text-white drop-shadow-sm" />
-              </div>
-              <div>
-                <h2 className="text-3xl sm:text-4xl font-black text-white drop-shadow-md mb-1">Play Games!</h2>
-                <p className="text-white/90 font-bold text-lg">Earn stars and learn while having fun.</p>
-              </div>
-            </div>
-            <div className="bg-white text-[#DF5593] px-8 py-4 rounded-full font-black text-lg shadow-lg flex items-center gap-3 active:scale-95 transition-transform">
-              <FaPlay /> GO!
-            </div>
-          </motion.div>
-        </Link>
 
-        {/* Subjects Grid */}
+        {/* Subjects Grid — the core content leads, so a kid reaches real
+            lessons without scrolling past promo banners first. */}
         <div className="flex items-center gap-3 mb-6 px-2">
            <div className="w-2 h-8 bg-blue-500 rounded-full" />
            <h2 className="text-3xl font-black text-slate-700">Your Subjects</h2>
@@ -141,8 +179,8 @@ export default function LearningZonePage() {
         {subjectsLoading ? (
           <SkeletonLoader variant="subjects" count={6} />
         ) : (
-          <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pb-20"
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
             initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
           >
             {subjects.map((subject) => {
@@ -152,7 +190,7 @@ export default function LearningZonePage() {
 
               return (
                 <Link key={subject.subjectId} href={`/learning-zone/subjects/${subject.subjectId}`}>
-                  <motion.div 
+                  <motion.div
                     variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1, transition: { type: "spring", bounce: 0.5 } } }}
                     whileHover={{ scale: 1.05, y: -4 }}
                     whileTap={{ scale: 0.95 }}
@@ -160,7 +198,7 @@ export default function LearningZonePage() {
                   >
                     <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
                     <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/5 rounded-full blur-xl" />
-                    
+
                     <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-inner mb-4 relative z-10">
                       <Icon className={`text-5xl ${style.icon}`} />
                     </div>
@@ -171,6 +209,52 @@ export default function LearningZonePage() {
             })}
           </motion.div>
         )}
+
+        {/* Games + Daily Challenge — compact side-by-side row, below the
+            subjects so they're a bonus, not the first thing in the way. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-10 pb-20">
+          <Link href="/learning-zone/games">
+            <motion.div
+              whileHover={{ scale: 1.02, y: -3 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-[#FF79B3] rounded-[2rem] p-5 sm:p-6 flex items-center justify-between gap-4 shadow-[0_8px_0_#DF5593] hover:shadow-[0_5px_0_#DF5593] hover:translate-y-1 transition-all border-4 border-white cursor-pointer h-full"
+            >
+              <div className="flex items-center gap-4 min-w-0">
+                <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center shadow-inner border-2 border-white/30 shrink-0">
+                  <FaGamepad className="text-3xl text-white drop-shadow-sm" />
+                </div>
+                <div className="min-w-0">
+                  <h2 className="text-xl sm:text-2xl font-black text-white drop-shadow-md leading-tight">Play Games!</h2>
+                  <p className="text-white/90 font-bold text-sm">Earn stars and have fun.</p>
+                </div>
+              </div>
+              <div className="bg-white text-[#DF5593] px-5 py-2.5 rounded-full font-black text-sm shadow flex items-center gap-2 shrink-0">
+                <FaPlay className="text-xs" /> GO!
+              </div>
+            </motion.div>
+          </Link>
+
+          <Link href="/learning-zone/daily-challenge">
+            <motion.div
+              whileHover={{ scale: 1.02, y: -3 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-[#FF9F43] rounded-[2rem] p-5 sm:p-6 flex items-center justify-between gap-4 shadow-[0_8px_0_#E07B20] hover:shadow-[0_5px_0_#E07B20] hover:translate-y-1 transition-all border-4 border-white cursor-pointer h-full"
+            >
+              <div className="flex items-center gap-4 min-w-0">
+                <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center shadow-inner border-2 border-white/30 shrink-0">
+                  <FaFire className="text-3xl text-white drop-shadow-sm" />
+                </div>
+                <div className="min-w-0">
+                  <h2 className="text-xl sm:text-2xl font-black text-white drop-shadow-md leading-tight">Daily Challenge!</h2>
+                  <p className="text-white/90 font-bold text-sm">Keep your streak going.</p>
+                </div>
+              </div>
+              <div className="bg-white text-[#E07B20] px-5 py-2.5 rounded-full font-black text-sm shadow flex items-center gap-2 shrink-0">
+                <FaPlay className="text-xs" /> GO!
+              </div>
+            </motion.div>
+          </Link>
+        </div>
       </div>
 
     </div>
