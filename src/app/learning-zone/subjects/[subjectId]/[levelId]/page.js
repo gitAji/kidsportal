@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../../data/db.json';
 import SkeletonLoader from '../../../../components/ui/SkeletonLoader';
-import { FaBookOpen, FaQuestionCircle, FaAward, FaStar, FaCheckCircle, FaTrophy } from 'react-icons/fa';
+import { FaBookOpen, FaQuestionCircle, FaAward, FaStar, FaCheckCircle, FaTrophy, FaLock } from 'react-icons/fa';
 import { useChild } from '../../../../providers/ChildProvider';
 import { loadStats } from '../../../../utils/achievements';
 import MinimalBackButton from '../../../../components/child/MinimalBackButton';
@@ -37,6 +37,7 @@ export default function LevelTasksPage() {
   const params = useParams();
   const { subjectId, levelId } = params;
   const [greeting, setGreeting] = useState(null);
+  const [shakeTaskId, setShakeTaskId] = useState(null);
 
   useEffect(() => {
     if (childUser && levelData && !loading) {
@@ -129,6 +130,15 @@ export default function LevelTasksPage() {
     return levelData.tasks.every(t => completedIds.includes(t.taskId));
   }, [levelData, childStats]);
 
+  // ── Quiz/Exam stay locked until the level's Lesson is completed ───────────
+  // (a task finished before this gate existed stays unlocked, so no one
+  // loses access to something they already did).
+  const lessonTask = useMemo(
+    () => levelData?.tasks?.find(t => t.type?.toLowerCase() === 'lesson'),
+    [levelData]
+  );
+  const isLessonDone = !lessonTask || !!childStats?.completedTasks_list?.includes(lessonTask.taskId);
+
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center p-8">
       <SkeletonLoader variant="page" message="Getting your tasks ready..." />
@@ -208,15 +218,24 @@ export default function LevelTasksPage() {
               const Icon = taskIconMap[task.type?.toLowerCase()] || taskIconMap.default;
               const taskColor = taskColorMap[task.type?.toLowerCase()] || taskColorMap.default;
               const isDone = childStats?.completedTasks_list?.includes(task.taskId);
+              const isLocked = task.type?.toLowerCase() !== 'lesson' && !isLessonDone && !isDone;
 
               return (
                 <motion.div
                   key={task.taskId}
-                  onClick={() => router.push(`/learning-zone/subjects/${subjectId}/${levelId}/${task.taskId}`)}
-                  className={`${taskColor} text-white rounded-[2.5rem] shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[220px] relative overflow-hidden group border-b-[8px] border-x-[4px] border-t-4`}
+                  onClick={() => {
+                    if (isLocked) {
+                      setShakeTaskId(task.taskId);
+                      setTimeout(() => setShakeTaskId(null), 500);
+                      return;
+                    }
+                    router.push(`/learning-zone/subjects/${subjectId}/${levelId}/${task.taskId}`);
+                  }}
+                  className={`${taskColor} text-white rounded-[2.5rem] shadow-xl p-8 text-center flex flex-col items-center justify-center min-h-[220px] relative overflow-hidden group border-b-[8px] border-x-[4px] border-t-4 transition-all ${isLocked ? 'opacity-60 saturate-50 cursor-not-allowed' : 'cursor-pointer'}`}
                   variants={cardVariants}
-                  whileHover="hover"
-                  whileTap="tap"
+                  whileHover={isLocked ? undefined : "hover"}
+                  whileTap={isLocked ? undefined : "tap"}
+                  animate={shakeTaskId === task.taskId ? { x: [0, -8, 8, -8, 8, 0] } : "visible"}
                 >
                   {/* Decorative overlay for cards */}
                   <div className="absolute -bottom-5 -right-5 text-white opacity-20 transform rotate-12 group-hover:-rotate-12 transition-transform duration-500 ease-in-out">
@@ -236,20 +255,37 @@ export default function LevelTasksPage() {
                     </div>
                   )}
 
-                  <div className="bg-white/20 p-4 rounded-full mb-4 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                    <Icon size={36} className="text-white" />
-                  </div>
+                  {isLocked ? (
+                    // Locked state replaces the usual icon/title/badge, centered
+                    // in the card, so it's unmistakable without hiding which
+                    // task (color/icon still show through faintly behind it).
+                    <div className="flex flex-col items-center justify-center gap-3 z-10">
+                      <div className="bg-white/25 p-4 rounded-full shadow-inner">
+                        <FaLock size={30} className="text-white" />
+                      </div>
+                      <h2 className="text-xl font-extrabold drop-shadow-md">Locked</h2>
+                      <p className="text-sm font-bold text-white/90 max-w-[14rem]">
+                        Finish the Lesson first! 📖
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="bg-white/20 p-4 rounded-full mb-4 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                        <Icon size={36} className="text-white" />
+                      </div>
 
-                  <h2 className="text-2xl font-extrabold mb-2 drop-shadow-md z-10 leading-tight">
-                    {task.taskName?.replace(/^\[.*?\]\s*/i, "").replace(/^(quizz|quiz|exam|lesson)\s*\d+[:\s-]*\s*/i, "").trim()}
-                  </h2>
+                      <h2 className="text-2xl font-extrabold mb-2 drop-shadow-md z-10 leading-tight">
+                        {task.taskName?.replace(/^\[.*?\]\s*/i, "").replace(/^(quizz|quiz|exam|lesson)\s*\d+[:\s-]*\s*/i, "").trim()}
+                      </h2>
 
-                  <div className="mt-auto bg-black/20 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide z-10 flex items-center gap-2">
-                    {task.type}
-                    {isDone && (
-                      <FaCheckCircle className="text-green-300" title="Completed!" />
-                    )}
-                  </div>
+                      <div className="mt-auto bg-black/20 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide z-10 flex items-center gap-2">
+                        {task.type}
+                        {isDone && (
+                          <FaCheckCircle className="text-green-300" title="Completed!" />
+                        )}
+                      </div>
+                    </>
+                  )}
                 </motion.div>
               );
             })
