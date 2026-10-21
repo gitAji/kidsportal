@@ -117,10 +117,13 @@ function UnifiedLoginPage() {
     const loginAsStudent = async () => {
         if (!username || !password) throw new Error("Please enter both username and password.");
         try {
+            // Trim stray whitespace — iOS's predictive-text bar commonly adds a
+            // trailing space when a suggestion is tapped, which would otherwise
+            // silently break the exact-match password check below.
             const res = await fetch("/api/child-login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username: username.toLowerCase(), password })
+                body: JSON.stringify({ username: username.trim().toLowerCase(), password: password.trim() })
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || "Login failed.");
@@ -279,6 +282,10 @@ function UnifiedLoginPage() {
                                             onChange={(e) => setUsername(e.target.value)}
                                             className="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl pl-14 pr-6 py-4 text-slate-800 focus:border-blue-500 focus:bg-white outline-none transition-all font-semibold placeholder:text-slate-300"
                                             placeholder="e.g. leo123"
+                                            autoComplete="username"
+                                            autoCapitalize="none"
+                                            autoCorrect="off"
+                                            spellCheck="false"
                                             required
                                         />
                                     </div>
@@ -293,6 +300,10 @@ function UnifiedLoginPage() {
                                             onChange={(e) => setPassword(e.target.value)}
                                             className="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl pl-14 pr-6 py-4 text-slate-800 focus:border-blue-500 focus:bg-white outline-none transition-all font-semibold placeholder:text-slate-300"
                                             placeholder="Your secret password"
+                                            autoComplete="current-password"
+                                            autoCapitalize="none"
+                                            autoCorrect="off"
+                                            spellCheck="false"
                                             required
                                         />
                                     </div>
