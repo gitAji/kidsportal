@@ -9,11 +9,24 @@ import { getSubjectsByGrade, DEFAULT_LEARNING_SUBJECTS } from '../utils/learning
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
-import { FaStar, FaPlay, FaGamepad, FaSun, FaCloud, FaMapMarkedAlt, FaFire } from 'react-icons/fa';
+import {
+  FaStar, FaPlay, FaGamepad, FaSun, FaCloud, FaMapMarkedAlt, FaFire, FaTrophy,
+  FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile,
+} from 'react-icons/fa';
 import { getChildStats } from '@/app/utils/firestoreService';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import TimeLimitBlockedScreen from '../components/child/TimeLimitBlockedScreen';
 import { SUBJECT_STYLE_MAP as subjectStyleMap, SUBJECT_ICON_MAP as subjectIconMap } from '../utils/subjectStyles';
+import { loadStats } from '../utils/achievements';
+
+const AVATAR_ICONS = { paw: FaPaw, rocket: FaRocket, car: FaCar, tree: FaTree, smile: FaSmile };
+
+function timeGreeting(date = new Date()) {
+  const hour = date.getHours();
+  if (hour < 12) return 'Good morning';
+  if (hour < 18) return 'Good afternoon';
+  return 'Good evening';
+}
 
 export default function LearningZonePage() {
   const { childUser } = useChild();
@@ -21,12 +34,18 @@ export default function LearningZonePage() {
   const [subjects, setSubjects] = useState([]);
   const [subjectsLoading, setSubjectsLoading] = useState(true);
   const [timeStatus, setTimeStatus] = useState(null);
+  const [stats, setStats] = useState({ level: 1, points: 0 });
+  const [greeting, setGreeting] = useState(timeGreeting());
 
-  const professor = React.useMemo(() => {
-    const char = childUser?.professorCharacter || 'owl';
-    if (char === 'panda') return { name: t('panda_name'), img: '/images/smart-panda.png', emoji: '🐼' };
-    return { name: t('owl_name'), img: '/images/professor-owl.png', emoji: '🦉' };
-  }, [childUser, t]);
+  useEffect(() => {
+    const childId = childUser?.uid || childUser?.id;
+    if (!childId) return;
+    const localStats = loadStats(childId);
+    setStats({ level: localStats.currentLevel || 1, points: localStats.totalScore || 0 });
+    // Re-evaluate the greeting on mount too, in case this page was left
+    // open across a time-of-day boundary (e.g. a tablet left on overnight).
+    setGreeting(timeGreeting());
+  }, [childUser]);
 
   useEffect(() => {
     const loadSubjects = async () => {
@@ -69,6 +88,28 @@ export default function LearningZonePage() {
   if (!childUser) return null;
   if (timeStatus?.isBlocked) return <TimeLimitBlockedScreen status={timeStatus} />;
 
+  const xpIntoLevel = stats.points % 100;
+
+  const renderSmallAvatar = () => {
+    if (childUser.photoURL) {
+      return (
+        <Image
+          src={childUser.photoURL}
+          alt={childUser.name}
+          width={56}
+          height={56}
+          className="w-14 h-14 rounded-2xl object-cover border-4 border-white shadow-lg"
+        />
+      );
+    }
+    const AvatarIcon = AVATAR_ICONS[childUser.avatar] || FaUserCircle;
+    return (
+      <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-2xl shadow-lg border-4 border-white shrink-0">
+        <AvatarIcon />
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col items-center p-2 sm:p-4 relative font-sans">
 
@@ -89,20 +130,38 @@ export default function LearningZonePage() {
         transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
         className="relative z-10 w-full max-w-5xl mx-auto mt-16 sm:mt-6 mb-12"
       >
-        <div className="bg-white/80 backdrop-blur-xl border-4 border-white shadow-xl rounded-[2.5rem] p-6 sm:p-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
-          <div className="relative w-28 h-28 sm:w-36 sm:h-36 shrink-0 bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-full border-4 border-white shadow-lg overflow-hidden flex items-center justify-center">
-             <Image src={professor.img} alt={professor.name} fill className="object-contain scale-[0.85] translate-y-2" priority />
-          </div>
-          <div className="text-center sm:text-left flex-grow">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-yellow-100 text-yellow-700 rounded-full font-black text-sm uppercase tracking-widest mb-3 border border-yellow-200 shadow-sm">
-               <FaStar /> {childUser.grade} Explorer
+        <div className="bg-white/80 backdrop-blur-xl border-4 border-white shadow-xl rounded-[2.5rem] p-6 sm:p-8 flex flex-col gap-5">
+          <div className="flex items-center gap-4">
+            {renderSmallAvatar()}
+            <div className="min-w-0 flex-grow">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full font-black text-xs uppercase tracking-widest mb-1.5 border border-yellow-200 shadow-sm">
+                <FaStar className="text-[10px]" /> {childUser.grade} Explorer
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight leading-tight">
+                {greeting}, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500">{childUser.name}</span>!
+              </h1>
+              <p className="text-sm sm:text-base font-bold text-slate-500 mt-0.5">
+                Ready for today&apos;s adventure? 🚀
+              </p>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-black text-slate-800 tracking-tight leading-tight mb-2">
-              Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500">{childUser.name}</span>!
-            </h1>
-            <p className="text-lg sm:text-xl font-bold text-slate-500">
-              What adventure are we going on today? 🚀
-            </p>
+          </div>
+
+          {/* Level progress */}
+          <div>
+            <div className="flex items-center justify-between mb-1.5 px-0.5">
+              <span className="flex items-center gap-1.5 text-xs font-black text-slate-500 uppercase tracking-wider">
+                <FaTrophy className="text-amber-400" /> Level {stats.level}
+              </span>
+              <span className="text-xs font-black text-slate-400">{xpIntoLevel}/100 XP</span>
+            </div>
+            <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+              <motion.div
+                className="bg-gradient-to-r from-blue-400 to-indigo-500 h-full rounded-full"
+                initial={{ width: 0 }}
+                animate={{ width: `${xpIntoLevel}%` }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              />
+            </div>
           </div>
         </div>
       </motion.div>
