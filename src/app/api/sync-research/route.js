@@ -84,14 +84,12 @@ export async function POST(request) {
             }
         };
 
-        const genModel = ai.getGenerativeModel({
+        const result = await ai.models.generateContent({
             model: "gemini-1.5-flash",
-            generationConfig: generationConfig
+            contents: prompt,
+            config: generationConfig,
         });
-
-        const result = await genModel.generateContent(prompt);
-        const responseText = result.response.text();
-        const syncResult = JSON.parse(responseText);
+        const syncResult = JSON.parse(result.text);
 
         return NextResponse.json(syncResult);
 

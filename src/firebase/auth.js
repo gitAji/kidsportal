@@ -17,6 +17,7 @@ export const signInWithGoogle = async (onSuccess, isTeacherFlow = false) => {
     if (auth.currentUser) {
       await signOut(auth);
       sessionStorage.removeItem("childUser");
+      localStorage.removeItem("childUser");
     }
 
     const result = await signInWithPopup(auth, googleProvider);
@@ -82,6 +83,7 @@ export const signUpWithEmail = async (email, password, name, onSuccess) => {
     if (auth.currentUser) {
       await signOut(auth);
       sessionStorage.removeItem("childUser");
+      localStorage.removeItem("childUser");
     }
 
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -138,6 +140,7 @@ export const signInWithEmail = async (email, password, isTeacherFlow = false) =>
     if (auth.currentUser) {
       await signOut(auth);
       sessionStorage.removeItem("childUser");
+      localStorage.removeItem("childUser");
     }
 
     const result = await signInWithEmailAndPassword(auth, email, password);
@@ -164,6 +167,7 @@ export const logout = async () => {
     await signOut(auth);
     // Clear session storage on logout
     sessionStorage.removeItem("childUser");
+    localStorage.removeItem("childUser");
     // You might want to clear other session-related items here too
     // sessionStorage.clear(); // Use this if you want to clear everything
   } catch (error) {

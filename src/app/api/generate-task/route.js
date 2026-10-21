@@ -65,10 +65,10 @@ For each question, provide:
 3. options: Array of exactly 4 strings if multiple-choice. Omit this if identification.
 4. correctAnswer: The correct answer string.`;
 
-        // Corrected standard SDK call for @google/genai
-        const genModel = ai.getGenerativeModel({ 
+        const result = await ai.models.generateContent({
             model: "gemini-1.5-flash",
-            generationConfig: {
+            contents: prompt,
+            config: {
                 temperature: 0.7,
                 responseMimeType: "application/json",
                 responseSchema: {
@@ -99,9 +99,7 @@ For each question, provide:
                 }
             }
         });
-
-        const result = await genModel.generateContent(prompt);
-        const generatedTask = JSON.parse(result.response.text());
+        const generatedTask = JSON.parse(result.text);
 
         // Ensure we stamp it with the requested IDs
         generatedTask.taskId = taskId;

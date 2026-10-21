@@ -86,9 +86,10 @@ Generate exactly one new level with:
 
 Keep a healthy mix of "multiple-choice" and "identification" question types across the quiz and exam.`;
 
-        const genModel = ai.getGenerativeModel({
+        const result = await ai.models.generateContent({
             model: "gemini-1.5-flash",
-            generationConfig: {
+            contents: prompt,
+            config: {
                 temperature: 0.8,
                 responseMimeType: "application/json",
                 responseSchema: {
@@ -129,9 +130,7 @@ Keep a healthy mix of "multiple-choice" and "identification" question types acro
                 }
             }
         });
-
-        const result = await genModel.generateContent(prompt);
-        const generated = JSON.parse(result.response.text());
+        const generated = JSON.parse(result.text);
 
         const newLevel = {
             levelId,

@@ -31,12 +31,14 @@ ${language === 'ta' ? "The child is writing in Tamil script." : "The child is wr
 Transcribe EXACTLY what they wrote as plain text: just the word, letters, or number itself, with no extra commentary, quotes, or punctuation.
 If the canvas is blank, or you genuinely cannot make out any real writing, respond with exactly: UNREADABLE`;
 
-        const genModel = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
-        const result = await genModel.generateContent([
-            prompt,
-            { inlineData: { mimeType, data: base64 } },
-        ]);
-        const text = result.response.text().trim();
+        const result = await ai.models.generateContent({
+            model: "gemini-1.5-flash",
+            contents: [
+                prompt,
+                { inlineData: { mimeType, data: base64 } },
+            ],
+        });
+        const text = result.text.trim();
 
         if (!text || text.toUpperCase() === 'UNREADABLE') {
             return NextResponse.json({ recognized: null, error: "Couldn't read that — try writing a little bigger!" });
