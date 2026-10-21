@@ -125,6 +125,11 @@ function UnifiedLoginPage() {
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || "Login failed.");
 
+            // Clear any other child's session that might still be sitting in
+            // sessionStorage (e.g. from a parent's "Launch Learning Zone" for a
+            // sibling on this device) — otherwise ChildProvider could end up
+            // loading the wrong child.
+            sessionStorage.removeItem("childUser");
             localStorage.setItem("childUser", JSON.stringify(data.child));
             router.push("/learning-zone");
         } catch (err) {
