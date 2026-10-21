@@ -111,7 +111,7 @@ export default function SettingsPage() {
             {avatars.find(a => a.id === selectedAvatar)?.icon || <FaUserCircle />}
           </div>
           <p className="font-extrabold text-2xl drop-shadow">{childUser.name}</p>
-          <p className="text-white/80 text-sm mt-1">Grade {childUser.gradeId?.replace('grade', '')}</p>
+          <p className="text-white/80 text-sm mt-1">{childUser.grade}</p>
         </motion.div>
 
         {/* Avatar Picker */}
