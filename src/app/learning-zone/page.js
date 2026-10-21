@@ -70,7 +70,7 @@ export default function LearningZonePage() {
   if (timeStatus?.isBlocked) return <TimeLimitBlockedScreen status={timeStatus} />;
 
   return (
-    <div className="flex flex-col items-center sm:p-4 relative font-sans">
+    <div className="flex flex-col items-center p-2 sm:p-4 relative font-sans">
 
       {/* "Basecamp" background motif — a warm sky with a sun and drifting clouds,
           distinguishing Home from the map motif on Subjects and the arcade
@@ -87,7 +87,7 @@ export default function LearningZonePage() {
         initial={{ opacity: 0, y: -20, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
-        className="relative z-10 w-full max-w-5xl mx-auto mt-6 mb-12"
+        className="relative z-10 w-full max-w-5xl mx-auto mt-16 sm:mt-6 mb-12"
       >
         <div className="bg-white/80 backdrop-blur-xl border-4 border-white shadow-xl rounded-[2.5rem] p-6 sm:p-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
           <div className="relative w-28 h-28 sm:w-36 sm:h-36 shrink-0 bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-full border-4 border-white shadow-lg overflow-hidden flex items-center justify-center">
@@ -109,52 +109,9 @@ export default function LearningZonePage() {
 
       {/* Main Content Area */}
       <div className="w-full max-w-5xl mx-auto z-10 relative">
-        
-        {/* Games Promo Card */}
-        <Link href="/learning-zone/games">
-          <motion.div 
-            whileHover={{ scale: 1.02, y: -4 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full bg-[#FF79B3] rounded-[2.5rem] p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 shadow-[0_12px_0_#DF5593] hover:shadow-[0_8px_0_#DF5593] hover:translate-y-1 transition-all border-[6px] border-white cursor-pointer"
-          >
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 bg-white/20 rounded-[1.5rem] flex items-center justify-center shadow-inner border-4 border-white/30">
-                <FaGamepad className="text-5xl text-white drop-shadow-sm" />
-              </div>
-              <div>
-                <h2 className="text-3xl sm:text-4xl font-black text-white drop-shadow-md mb-1">Play Games!</h2>
-                <p className="text-white/90 font-bold text-lg">Earn stars and learn while having fun.</p>
-              </div>
-            </div>
-            <div className="bg-white text-[#DF5593] px-8 py-4 rounded-full font-black text-lg shadow-lg flex items-center gap-3 active:scale-95 transition-transform">
-              <FaPlay /> GO!
-            </div>
-          </motion.div>
-        </Link>
 
-        {/* Daily Challenge Promo Card */}
-        <Link href="/learning-zone/daily-challenge">
-          <motion.div
-            whileHover={{ scale: 1.02, y: -4 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full bg-[#FF9F43] rounded-[2.5rem] p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 shadow-[0_12px_0_#E07B20] hover:shadow-[0_8px_0_#E07B20] hover:translate-y-1 transition-all border-[6px] border-white cursor-pointer"
-          >
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 bg-white/20 rounded-[1.5rem] flex items-center justify-center shadow-inner border-4 border-white/30">
-                <FaFire className="text-5xl text-white drop-shadow-sm" />
-              </div>
-              <div>
-                <h2 className="text-3xl sm:text-4xl font-black text-white drop-shadow-md mb-1">Daily Challenge!</h2>
-                <p className="text-white/90 font-bold text-lg">A quick mix of questions — keep your streak going.</p>
-              </div>
-            </div>
-            <div className="bg-white text-[#E07B20] px-8 py-4 rounded-full font-black text-lg shadow-lg flex items-center gap-3 active:scale-95 transition-transform">
-              <FaPlay /> GO!
-            </div>
-          </motion.div>
-        </Link>
-
-        {/* Subjects Grid */}
+        {/* Subjects Grid — the core content leads, so a kid reaches real
+            lessons without scrolling past promo banners first. */}
         <div className="flex items-center gap-3 mb-6 px-2">
            <div className="w-2 h-8 bg-blue-500 rounded-full" />
            <h2 className="text-3xl font-black text-slate-700">Your Subjects</h2>
@@ -163,8 +120,8 @@ export default function LearningZonePage() {
         {subjectsLoading ? (
           <SkeletonLoader variant="subjects" count={6} />
         ) : (
-          <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pb-20"
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
             initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
           >
             {subjects.map((subject) => {
@@ -174,7 +131,7 @@ export default function LearningZonePage() {
 
               return (
                 <Link key={subject.subjectId} href={`/learning-zone/subjects/${subject.subjectId}`}>
-                  <motion.div 
+                  <motion.div
                     variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1, transition: { type: "spring", bounce: 0.5 } } }}
                     whileHover={{ scale: 1.05, y: -4 }}
                     whileTap={{ scale: 0.95 }}
@@ -182,7 +139,7 @@ export default function LearningZonePage() {
                   >
                     <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
                     <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/5 rounded-full blur-xl" />
-                    
+
                     <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-inner mb-4 relative z-10">
                       <Icon className={`text-5xl ${style.icon}`} />
                     </div>
@@ -193,6 +150,52 @@ export default function LearningZonePage() {
             })}
           </motion.div>
         )}
+
+        {/* Games + Daily Challenge — compact side-by-side row, below the
+            subjects so they're a bonus, not the first thing in the way. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-10 pb-20">
+          <Link href="/learning-zone/games">
+            <motion.div
+              whileHover={{ scale: 1.02, y: -3 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-[#FF79B3] rounded-[2rem] p-5 sm:p-6 flex items-center justify-between gap-4 shadow-[0_8px_0_#DF5593] hover:shadow-[0_5px_0_#DF5593] hover:translate-y-1 transition-all border-4 border-white cursor-pointer h-full"
+            >
+              <div className="flex items-center gap-4 min-w-0">
+                <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center shadow-inner border-2 border-white/30 shrink-0">
+                  <FaGamepad className="text-3xl text-white drop-shadow-sm" />
+                </div>
+                <div className="min-w-0">
+                  <h2 className="text-xl sm:text-2xl font-black text-white drop-shadow-md leading-tight">Play Games!</h2>
+                  <p className="text-white/90 font-bold text-sm">Earn stars and have fun.</p>
+                </div>
+              </div>
+              <div className="bg-white text-[#DF5593] px-5 py-2.5 rounded-full font-black text-sm shadow flex items-center gap-2 shrink-0">
+                <FaPlay className="text-xs" /> GO!
+              </div>
+            </motion.div>
+          </Link>
+
+          <Link href="/learning-zone/daily-challenge">
+            <motion.div
+              whileHover={{ scale: 1.02, y: -3 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-[#FF9F43] rounded-[2rem] p-5 sm:p-6 flex items-center justify-between gap-4 shadow-[0_8px_0_#E07B20] hover:shadow-[0_5px_0_#E07B20] hover:translate-y-1 transition-all border-4 border-white cursor-pointer h-full"
+            >
+              <div className="flex items-center gap-4 min-w-0">
+                <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center shadow-inner border-2 border-white/30 shrink-0">
+                  <FaFire className="text-3xl text-white drop-shadow-sm" />
+                </div>
+                <div className="min-w-0">
+                  <h2 className="text-xl sm:text-2xl font-black text-white drop-shadow-md leading-tight">Daily Challenge!</h2>
+                  <p className="text-white/90 font-bold text-sm">Keep your streak going.</p>
+                </div>
+              </div>
+              <div className="bg-white text-[#E07B20] px-5 py-2.5 rounded-full font-black text-sm shadow flex items-center gap-2 shrink-0">
+                <FaPlay className="text-xs" /> GO!
+              </div>
+            </motion.div>
+          </Link>
+        </div>
       </div>
 
     </div>

@@ -7,6 +7,7 @@ import { FaArrowRight, FaCheck, FaTimes } from 'react-icons/fa';
 import { useChild } from '../../../providers/ChildProvider';
 import { getDailyChallengeQuestions, recordDailyChallengeCompletion } from '../../../utils/dailyChallenge';
 import GameCompleteScreen from '../../../components/games/GameCompleteScreen';
+import MinimalBackButton from '../../../components/child/MinimalBackButton';
 
 function isCorrectAnswer(answer, correctAnswer) {
   return String(answer).toLowerCase().trim() === String(correctAnswer).toLowerCase().trim();
@@ -62,37 +63,43 @@ export default function DailyChallengePlayPage() {
 
   if (questions.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-6">
-        <div className="bg-white rounded-[2.5rem] shadow-xl p-10 text-center max-w-md border-4 border-white">
-          <h1 className="text-2xl font-black text-slate-800 mb-3">No challenge available yet</h1>
-          <p className="text-slate-500 font-bold mb-6">Finish a few lessons first, then come back!</p>
-          <button
-            onClick={() => router.push('/learning-zone/daily-challenge')}
-            className="bg-slate-800 text-white font-black px-8 py-3 rounded-full"
-          >
-            Back
-          </button>
+      <>
+        <MinimalBackButton />
+        <div className="min-h-screen flex items-center justify-center p-6">
+          <div className="bg-white rounded-[2.5rem] shadow-xl p-10 text-center max-w-md border-4 border-white">
+            <h1 className="text-2xl font-black text-slate-800 mb-3">No challenge available yet</h1>
+            <p className="text-slate-500 font-bold mb-6">Finish a few lessons first, then come back!</p>
+            <button
+              onClick={() => router.push('/learning-zone/daily-challenge')}
+              className="bg-slate-800 text-white font-black px-8 py-3 rounded-full"
+            >
+              Back
+            </button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   if (finished) {
     const stars = correctCount === questions.length ? 3 : correctCount >= Math.ceil(questions.length * 0.6) ? 2 : correctCount > 0 ? 1 : 0;
     return (
-      <GameCompleteScreen
-        title="Challenge Complete!"
-        stars={stars}
-        message={`You got ${correctCount} out of ${questions.length} right. Come back tomorrow to keep your streak going!`}
-        onPlayAgain={() => {
-          setIndex(0);
-          setSelectedAnswer(null);
-          setShowResult(false);
-          setCorrectCount(0);
-          setFinished(false);
-        }}
-        onBackToGames={() => router.push('/learning-zone/daily-challenge')}
-      />
+      <>
+        <MinimalBackButton />
+        <GameCompleteScreen
+          title="Challenge Complete!"
+          stars={stars}
+          message={`You got ${correctCount} out of ${questions.length} right. Come back tomorrow to keep your streak going!`}
+          onPlayAgain={() => {
+            setIndex(0);
+            setSelectedAnswer(null);
+            setShowResult(false);
+            setCorrectCount(0);
+            setFinished(false);
+          }}
+          onBackToGames={() => router.push('/learning-zone/daily-challenge')}
+        />
+      </>
     );
   }
 
@@ -121,6 +128,7 @@ export default function DailyChallengePlayPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-orange-50 to-amber-100">
+      <MinimalBackButton />
       <div className="w-full max-w-xl">
         <div className="flex items-center justify-between mb-6">
           <span className="text-sm font-black text-slate-500 uppercase tracking-widest">{question.subjectName}</span>
