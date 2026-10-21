@@ -70,7 +70,7 @@ export default function LearningZonePage() {
   if (timeStatus?.isBlocked) return <TimeLimitBlockedScreen status={timeStatus} />;
 
   return (
-    <div className="flex flex-col items-center sm:p-4 relative font-sans">
+    <div className="flex flex-col items-center p-2 sm:p-4 relative font-sans">
 
       {/* "Basecamp" background motif — a warm sky with a sun and drifting clouds,
           distinguishing Home from the map motif on Subjects and the arcade
@@ -87,7 +87,7 @@ export default function LearningZonePage() {
         initial={{ opacity: 0, y: -20, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
-        className="relative z-10 w-full max-w-5xl mx-auto mt-6 mb-12"
+        className="relative z-10 w-full max-w-5xl mx-auto mt-16 sm:mt-6 mb-12"
       >
         <div className="bg-white/80 backdrop-blur-xl border-4 border-white shadow-xl rounded-[2.5rem] p-6 sm:p-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
           <div className="relative w-28 h-28 sm:w-36 sm:h-36 shrink-0 bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-full border-4 border-white shadow-lg overflow-hidden flex items-center justify-center">
