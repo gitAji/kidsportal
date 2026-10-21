@@ -3,11 +3,17 @@ import { FieldValue } from 'firebase-admin/firestore';
 
 export const POST = async (req) => {
     try {
-        const { username, password } = await req.json();
+        let { username, password } = await req.json();
 
         if (!username || !password) {
             return new Response(JSON.stringify({ error: "Username and password required" }), { status: 400 });
         }
+
+        // Defense-in-depth trim (the client already trims) — a stray space from
+        // a mobile keyboard's predictive-text bar shouldn't silently break an
+        // otherwise-correct login.
+        username = username.trim();
+        password = password.trim();
 
         if (!adminDb) {
             console.error("Child login failed: adminDb is not initialized — check FIREBASE_ADMIN_* env vars.");
