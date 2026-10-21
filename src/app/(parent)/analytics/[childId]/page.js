@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "@/firebase/config";
@@ -10,13 +10,15 @@ import {
 } from "@/app/utils/firestoreService";
 import { loadStats, loadUnlockedAchievements, ACHIEVEMENTS } from "@/app/utils/achievements";
 import { getSubjectsByGrade, DEFAULT_LEARNING_SUBJECTS } from "@/app/utils/learningData";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   FaArrowLeft, FaStar, FaTrophy, FaClock, FaCheckCircle, FaTimesCircle,
   FaMedal, FaBookOpen, FaBrain, FaHistory, FaRedo, FaGraduationCap,
-  FaChartPie, FaLayerGroup, FaPrint, FaFire,
+  FaChartPie, FaLayerGroup, FaPrint, FaFire, FaUndo,
+  FaExclamationTriangle, FaTimes,
 } from "react-icons/fa";
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from "recharts";
 import CustomAvatar from "@/app/components/ui/CustomAvatar";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
 
@@ -102,6 +104,16 @@ function SectionCard({ icon, title, right, children }) {
   );
 }
 
+function RadarTooltip({ active, payload }) {
+  if (!active || !payload?.length) return null;
+  const p = payload[0];
+  return (
+    <div className="bg-slate-800 text-white rounded-lg px-3 py-2 shadow-lg text-xs font-bold">
+      {p.payload.subject}: {p.value}% complete
+    </div>
+  );
+}
+
 function ModuleBadge({ status, pct }) {
   if (status === "finished") {
     return <span className="flex items-center gap-1 text-[11px] font-black uppercase tracking-wider text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full px-2.5 py-1"><FaCheckCircle className="text-[10px]" /> Finished</span>;
@@ -124,53 +136,92 @@ export default function ChildReportPage() {
   const [history, setHistory] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [error, setError] = useState(null);
+  const [parentUid, setParentUid] = useState(null);
+  const [resetTarget, setResetTarget] = useState(null); // { levelId, levelName, subjectName, taskIds } | null
+  const [resetting, setResetting] = useState(false);
+  const [resetMessage, setResetMessage] = useState(null);
+
+  const loadReport = useCallback(async (uid) => {
+    try {
+      const childSnap = await getDoc(doc(db, "users", uid, "children", childId));
+      if (!childSnap.exists()) {
+        setError("This learner couldn't be found.");
+        setLoading(false);
+        return;
+      }
+      const childData = { id: childSnap.id, ...childSnap.data() };
+      setChild(childData);
+
+      // Parent's chosen subjects for this family (falls back to the same
+      // default set used across the Learning Zone).
+      let learningSubjects = DEFAULT_LEARNING_SUBJECTS;
+      try {
+        const parentSnap = await getDoc(doc(db, "users", uid));
+        if (parentSnap.exists() && parentSnap.data().learningSubjects) {
+          learningSubjects = parentSnap.data().learningSubjects;
+        }
+      } catch { /* use default */ }
+
+      const gradeId = deriveGradeId(childData);
+      const gradeSubjects = gradeId ? getSubjectsByGrade(gradeId, learningSubjects) : [];
+      setSubjects(gradeSubjects);
+
+      const [fsStats, fsAch, fsHistory] = await Promise.all([
+        getChildStats(childId).catch(() => ({})),
+        getChildAchievements(childId).catch(() => []),
+        getChildTaskHistory(childId, 500).catch(() => []),
+      ]);
+
+      setStats(Object.keys(fsStats).length ? fsStats : loadStats(childId));
+      setAchievements(
+        fsAch.length ? fsAch : loadUnlockedAchievements(childId).map((id) => ACHIEVEMENTS.find((a) => a.id === id)).filter(Boolean)
+      );
+      setHistory(fsHistory);
+    } catch (e) {
+      console.error("Failed to load child report:", e);
+      setError("We couldn't load this report right now.");
+    }
+    setLoading(false);
+  }, [childId]);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (u) => {
       if (!u) { setLoading(false); router.push("/login"); return; }
-      try {
-        const childSnap = await getDoc(doc(db, "users", u.uid, "children", childId));
-        if (!childSnap.exists()) {
-          setError("This learner couldn't be found.");
-          setLoading(false);
-          return;
-        }
-        const childData = { id: childSnap.id, ...childSnap.data() };
-        setChild(childData);
-
-        // Parent's chosen subjects for this family (falls back to the same
-        // default set used across the Learning Zone).
-        let learningSubjects = DEFAULT_LEARNING_SUBJECTS;
-        try {
-          const parentSnap = await getDoc(doc(db, "users", u.uid));
-          if (parentSnap.exists() && parentSnap.data().learningSubjects) {
-            learningSubjects = parentSnap.data().learningSubjects;
-          }
-        } catch { /* use default */ }
-
-        const gradeId = deriveGradeId(childData);
-        const gradeSubjects = gradeId ? getSubjectsByGrade(gradeId, learningSubjects) : [];
-        setSubjects(gradeSubjects);
-
-        const [fsStats, fsAch, fsHistory] = await Promise.all([
-          getChildStats(childId).catch(() => ({})),
-          getChildAchievements(childId).catch(() => []),
-          getChildTaskHistory(childId, 500).catch(() => []),
-        ]);
-
-        setStats(Object.keys(fsStats).length ? fsStats : loadStats(childId));
-        setAchievements(
-          fsAch.length ? fsAch : loadUnlockedAchievements(childId).map((id) => ACHIEVEMENTS.find((a) => a.id === id)).filter(Boolean)
-        );
-        setHistory(fsHistory);
-      } catch (e) {
-        console.error("Failed to load child report:", e);
-        setError("We couldn't load this report right now.");
-      }
-      setLoading(false);
+      setParentUid(u.uid);
+      await loadReport(u.uid);
     });
     return () => unsub();
-  }, [childId, router]);
+  }, [childId, router, loadReport]);
+
+  useEffect(() => {
+    if (!resetMessage) return;
+    const t = setTimeout(() => setResetMessage(null), 5000);
+    return () => clearTimeout(t);
+  }, [resetMessage]);
+
+  async function handleResetLevel() {
+    if (!resetTarget || !parentUid) return;
+    setResetting(true);
+    try {
+      const res = await fetch("/api/reset-level", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          childId, parentUid,
+          levelId: resetTarget.levelId,
+          taskIds: resetTarget.taskIds,
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setResetMessage({ type: "success", text: `${resetTarget.levelName} has been reset — it'll show as not completed next time they open it.` });
+      setResetTarget(null);
+      await loadReport(parentUid);
+    } catch (e) {
+      console.error("Failed to reset level:", e);
+      setResetMessage({ type: "error", text: "Couldn't reset this level right now. Please try again." });
+    }
+    setResetting(false);
+  }
 
   // ── Derived report data ──────────────────────────────────────────
   const completedTaskIds = useMemo(() => new Set(stats?.completedTasks_list || []), [stats]);
@@ -216,13 +267,18 @@ export default function ChildReportPage() {
     });
   }, [subjects, completedTaskIds, history]);
 
-  // Quick lookup: levelId -> { levelName, subjectName } for friendly names
-  // in the exam-results and activity-log sections below.
+  // Quick lookup: levelId -> { levelName, subjectName, taskIds } for friendly
+  // names in the exam-results/activity-log sections, and the task IDs a
+  // "Reset Level" action needs to un-complete.
   const levelLookup = useMemo(() => {
     const map = {};
     subjects.forEach((s) => {
       (s.levels || []).forEach((l) => {
-        map[l.levelId] = { levelName: l.levelName, subjectName: s.subjectName || subjectDisplayName(s.subjectId) };
+        map[l.levelId] = {
+          levelName: l.levelName,
+          subjectName: s.subjectName || subjectDisplayName(s.subjectId),
+          taskIds: (l.tasks || []).map((t) => t.taskId),
+        };
       });
     });
     return map;
@@ -255,6 +311,11 @@ export default function ChildReportPage() {
       })
       .sort((a, b) => (b.latest.timestamp?.seconds || 0) - (a.latest.timestamp?.seconds || 0));
   }, [examEntries]);
+
+  const radarData = useMemo(
+    () => subjectReports.map((s) => ({ subject: s.subjectName, pct: s.pct })),
+    [subjectReports]
+  );
 
   const totalLevelsAll = subjectReports.reduce((n, s) => n + s.totalLevels, 0);
   const completedLevelsAll = subjectReports.reduce((n, s) => n + s.completedLevels, 0);
@@ -349,6 +410,50 @@ export default function ChildReportPage() {
           </div>
         </SectionCard>
 
+        {/* ── Progress at a Glance (radar) ── */}
+        <SectionCard icon={<FaBullseye className="text-blue-500" />} title="Progress at a Glance">
+          {radarData.length < 3 ? (
+            <p className="text-sm font-bold text-slate-400 text-center py-8">
+              Add a few more subjects to see this as a chart — meanwhile, see the breakdown below.
+            </p>
+          ) : (
+            <div className="flex flex-col items-center">
+              <div className="w-full h-72 sm:h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <RadarChart data={radarData} outerRadius="60%" margin={{ top: 20, right: 40, bottom: 20, left: 40 }}>
+                    <PolarGrid stroke="#e2e8f0" />
+                    <PolarAngleAxis
+                      dataKey="subject"
+                      tick={{ fill: "#475569", fontSize: 12, fontWeight: 700 }}
+                      tickFormatter={(name) => (name === "Computer Science" ? "Comp. Sci." : name)}
+                    />
+                    <PolarRadiusAxis
+                      domain={[0, 100]}
+                      tickCount={5}
+                      tick={{ fill: "#94a3b8", fontSize: 10 }}
+                      axisLine={false}
+                    />
+                    <Radar
+                      dataKey="pct"
+                      stroke="#3b82f6"
+                      fill="#3b82f6"
+                      fillOpacity={0.25}
+                      strokeWidth={2}
+                    />
+                    <Tooltip content={<RadarTooltip />} />
+                  </RadarChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="text-center mt-2">
+                <p className="text-3xl font-black text-slate-800">{overallPct}%</p>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">
+                  Overall curriculum progress across {subjectReports.length} subjects
+                </p>
+              </div>
+            </div>
+          )}
+        </SectionCard>
+
         {/* ── Per-Subject Progress & Modules ── */}
         <SectionCard icon={<FaLayerGroup className="text-violet-500" />} title="Subjects, Levels & Modules">
           {subjectReports.length === 0 ? (
@@ -414,11 +519,26 @@ export default function ChildReportPage() {
                           {group.attemptCount} attempt{group.attemptCount === 1 ? "" : "s"} • Best score: {group.bestPct}%
                         </p>
                       </div>
-                      {bestTier && (
-                        <span className={`flex items-center gap-1 text-[11px] font-black uppercase tracking-wider rounded-full px-2.5 py-1 border flex-shrink-0 ${bestTier.color}`}>
-                          {bestTier.emoji} Best: {bestTier.label}
-                        </span>
-                      )}
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        {bestTier && (
+                          <span className={`flex items-center gap-1 text-[11px] font-black uppercase tracking-wider rounded-full px-2.5 py-1 border ${bestTier.color}`}>
+                            {bestTier.emoji} Best: {bestTier.label}
+                          </span>
+                        )}
+                        <button
+                          onClick={() => setResetTarget({
+                            levelId: group.levelId,
+                            levelName: lookup.levelName || group.levelId,
+                            subjectName: lookup.subjectName || subjectDisplayName(group.subjectId),
+                            taskIds: lookup.taskIds || [],
+                          })}
+                          disabled={!lookup.taskIds?.length}
+                          className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider rounded-full px-2.5 py-1 border border-slate-200 text-slate-500 bg-white hover:border-rose-300 hover:text-rose-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                          title="Mark this level as not completed so they can try it again"
+                        >
+                          <FaUndo className="text-[10px]" /> Reset Level
+                        </button>
+                      </div>
                     </div>
                     <div className="p-4 space-y-2">
                       {group.attempts.map((a) => {
@@ -511,6 +631,69 @@ export default function ChildReportPage() {
           )}
         </SectionCard>
       </div>
+
+      {/* ── Reset Level confirmation ── */}
+      <AnimatePresence>
+        {resetTarget && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 print:hidden"
+            onClick={() => !resetting && setResetTarget(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6"
+            >
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-500 flex-shrink-0">
+                  <FaExclamationTriangle />
+                </div>
+                <button onClick={() => !resetting && setResetTarget(null)} className="text-slate-400 hover:text-slate-600">
+                  <FaTimes />
+                </button>
+              </div>
+              <h3 className="text-base font-black text-slate-800 mb-1">Reset &quot;{resetTarget.levelName}&quot;?</h3>
+              <p className="text-sm text-slate-500 font-medium mb-4">
+                This marks the level as not completed so {child?.name || "they"} can try it again, and clears its past quiz/exam attempts from this report. Any XP or stars already earned stay — this doesn&apos;t take those away.
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setResetTarget(null)}
+                  disabled={resetting}
+                  className="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition-colors disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleResetLevel}
+                  disabled={resetting}
+                  className="flex-1 px-4 py-2.5 rounded-xl bg-rose-500 text-white font-bold text-sm hover:bg-rose-600 transition-colors disabled:opacity-50"
+                >
+                  {resetting ? "Resetting…" : "Reset Level"}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Reset result toast ── */}
+      <AnimatePresence>
+        {resetMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 print:hidden"
+          >
+            <div className={`flex items-center gap-3 px-5 py-3 rounded-2xl shadow-lg border text-sm font-bold ${resetMessage.type === "success" ? "bg-emerald-50 border-emerald-100 text-emerald-700" : "bg-rose-50 border-rose-100 text-rose-700"}`}>
+              {resetMessage.text}
+              <button onClick={() => setResetMessage(null)} className="text-slate-400 hover:text-slate-600">
+                <FaTimes />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
