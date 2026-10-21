@@ -18,6 +18,7 @@ import {
   FaChartPie, FaLayerGroup, FaPrint, FaFire, FaUndo,
   FaExclamationTriangle, FaTimes,
 } from "react-icons/fa";
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from "recharts";
 import CustomAvatar from "@/app/components/ui/CustomAvatar";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
 
@@ -99,6 +100,16 @@ function SectionCard({ icon, title, right, children }) {
         {right && <div className="ml-auto">{right}</div>}
       </div>
       <div className="p-6">{children}</div>
+    </div>
+  );
+}
+
+function RadarTooltip({ active, payload }) {
+  if (!active || !payload?.length) return null;
+  const p = payload[0];
+  return (
+    <div className="bg-slate-800 text-white rounded-lg px-3 py-2 shadow-lg text-xs font-bold">
+      {p.payload.subject}: {p.value}% complete
     </div>
   );
 }
@@ -301,6 +312,11 @@ export default function ChildReportPage() {
       .sort((a, b) => (b.latest.timestamp?.seconds || 0) - (a.latest.timestamp?.seconds || 0));
   }, [examEntries]);
 
+  const radarData = useMemo(
+    () => subjectReports.map((s) => ({ subject: s.subjectName, pct: s.pct })),
+    [subjectReports]
+  );
+
   const totalLevelsAll = subjectReports.reduce((n, s) => n + s.totalLevels, 0);
   const completedLevelsAll = subjectReports.reduce((n, s) => n + s.completedLevels, 0);
   const overallPct = totalLevelsAll > 0 ? Math.round((completedLevelsAll / totalLevelsAll) * 100) : 0;
@@ -392,6 +408,50 @@ export default function ChildReportPage() {
               </div>
             ))}
           </div>
+        </SectionCard>
+
+        {/* ── Progress at a Glance (radar) ── */}
+        <SectionCard icon={<FaBullseye className="text-blue-500" />} title="Progress at a Glance">
+          {radarData.length < 3 ? (
+            <p className="text-sm font-bold text-slate-400 text-center py-8">
+              Add a few more subjects to see this as a chart — meanwhile, see the breakdown below.
+            </p>
+          ) : (
+            <div className="flex flex-col items-center">
+              <div className="w-full h-72 sm:h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <RadarChart data={radarData} outerRadius="60%" margin={{ top: 20, right: 40, bottom: 20, left: 40 }}>
+                    <PolarGrid stroke="#e2e8f0" />
+                    <PolarAngleAxis
+                      dataKey="subject"
+                      tick={{ fill: "#475569", fontSize: 12, fontWeight: 700 }}
+                      tickFormatter={(name) => (name === "Computer Science" ? "Comp. Sci." : name)}
+                    />
+                    <PolarRadiusAxis
+                      domain={[0, 100]}
+                      tickCount={5}
+                      tick={{ fill: "#94a3b8", fontSize: 10 }}
+                      axisLine={false}
+                    />
+                    <Radar
+                      dataKey="pct"
+                      stroke="#3b82f6"
+                      fill="#3b82f6"
+                      fillOpacity={0.25}
+                      strokeWidth={2}
+                    />
+                    <Tooltip content={<RadarTooltip />} />
+                  </RadarChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="text-center mt-2">
+                <p className="text-3xl font-black text-slate-800">{overallPct}%</p>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">
+                  Overall curriculum progress across {subjectReports.length} subjects
+                </p>
+              </div>
+            </div>
+          )}
         </SectionCard>
 
         {/* ── Per-Subject Progress & Modules ── */}

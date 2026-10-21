@@ -1,4 +1,5 @@
 import { adminDb, adminAuth } from '@/lib/firebaseAdmin';
+import { FieldValue } from 'firebase-admin/firestore';
 
 export const POST = async (req) => {
     try {
@@ -63,6 +64,13 @@ export const POST = async (req) => {
                 // real family out of an already-working session over an
                 // infra hiccup unrelated to the actual verification policy.
             }
+        }
+
+        // First-ever login, recorded once — lets admin tooling (e.g. the
+        // pilot-program dashboard) measure setup time without being bumped
+        // forward by every subsequent login.
+        if (!childData.firstLoginAt) {
+            await childDoc.ref.set({ firstLoginAt: FieldValue.serverTimestamp() }, { merge: true });
         }
 
         const { password: _password, ...childDataWithoutPassword } = childData;
