@@ -56,6 +56,25 @@
 //   - grade-8  "Plan It Out"               Scientific method / writing a function / group project
 //   - grade-9  "Algorithm Order"           Linear search / binary search / planning an essay
 //   - grade-10 "Sequence the Solution"     SDLC / selection sort / interview prep
+//
+// A new `pattern-continue` engine (a row of pattern tiles plus one blank,
+// tap the option that continues it) — modeled after the classic "continue
+// the pattern" exercise format, reimplemented with this app's own game
+// chrome rather than copying a reference UI wholesale. Every grade 1-10
+// gets one, tied to that grade's Math subject (where "Patterns &
+// Sequences" already lives in the syllabus), escalating from repeating
+// shape/color patterns through skip-counting to recognizing the rule
+// behind square/cube numbers, geometric sequences and Fibonacci:
+//   - grade-1  "Continue the Pattern!"  Repeating shape & color patterns (AB, ABB)
+//   - grade-2  "What Comes Next?"       Skip counting by 2s, 5s, 10s
+//   - grade-3  "Spot the Rule!"         Descending steps, odd numbers, skip counting by 3
+//   - grade-4  "Pattern Power"          Skip counting by 7s/10s, doubling
+//   - grade-5  "Number Patterns"        Doubling, dividing by 3, square numbers
+//   - grade-6  "Pattern Detective"      Triangular numbers, Fibonacci, ×3 geometric
+//   - grade-7  "Sequence Sense"         Arithmetic sequences, ÷2, ×3 powers
+//   - grade-8  "Pattern Master"         Fibonacci-style, square numbers, ÷2 powers
+//   - grade-9  "Advanced Patterns"      Cube numbers, n(n+1), growing-gap sequences
+//   - grade-10 "Pattern Genius"         Quadratic-rule sequences, Fibonacci continued
 import { GENERATED_GAMES_BY_GRADE } from './gamesContentGenerated';
 
 const HAND_CRAFTED_GAMES_BY_GRADE = {
@@ -267,6 +286,24 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
         ],
       },
     },
+    {
+      id: 'pattern-continue-g1',
+      subjectId: 'math-1',
+      subjectLabel: 'Math',
+      title: 'Continue the Pattern!',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['➕', '🔵', '➕', '🔵', '➕', '🔵'], options: ['➕', '🔵', '⭐', '🟦'], correctIndex: 0 },
+          { sequence: ['🔴', '🔵', '🔵', '🔴', '🔵', '🔵'], options: ['🔵', '🔴', '🟢', '🟡'], correctIndex: 1 },
+          { sequence: ['⭐', '🔺', '⭐', '🔺', '⭐', '🔺'], options: ['🔺', '⭐', '🔵', '🟩'], correctIndex: 1 },
+        ],
+      },
+    },
   ],
   'grade-2': [
     {
@@ -314,6 +351,24 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
             prompt: 'Making Toast',
             steps: ['Put bread in the toaster', 'Push the lever down', 'Wait for it to pop up', 'Spread butter on the toast'],
           },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g2',
+      subjectId: 'math-2',
+      subjectLabel: 'Math',
+      title: "What Comes Next?",
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['2', '4', '6', '8'], options: ['9', '10', '11', '12'], correctIndex: 1 },
+          { sequence: ['5', '10', '15', '20'], options: ['22', '24', '25', '30'], correctIndex: 2 },
+          { sequence: ['10', '20', '30', '40'], options: ['45', '50', '55', '60'], correctIndex: 1 },
         ],
       },
     },
@@ -371,6 +426,24 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
             prompt: 'Troubleshooting a Printer That Won\'t Print',
             steps: ["Check if the printer is turned on", "Check if there's paper loaded", "Check if there's a paper jam", 'Try printing again'],
           },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g7',
+      subjectId: 'math-7',
+      subjectLabel: 'Math',
+      title: 'Sequence Sense',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['5', '8', '11', '14'], options: ['16', '17', '18', '20'], correctIndex: 1 },
+          { sequence: ['64', '32', '16', '8'], options: ['2', '4', '6', '8'], correctIndex: 1 },
+          { sequence: ['3', '9', '27', '81'], options: ['162', '200', '243', '324'], correctIndex: 2 },
         ],
       },
     },
@@ -447,6 +520,24 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
             prompt: 'Washing Your Hands',
             steps: ['Wet your hands', 'Add soap', 'Scrub for 20 seconds', 'Rinse', 'Dry with a towel'],
           },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g3',
+      subjectId: 'math-3',
+      subjectLabel: 'Math',
+      title: 'Spot the Rule!',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['20', '18', '16', '14'], options: ['10', '11', '12', '13'], correctIndex: 2 },
+          { sequence: ['1', '3', '5', '7'], options: ['8', '9', '10', '11'], correctIndex: 1 },
+          { sequence: ['3', '6', '9', '12'], options: ['14', '15', '16', '18'], correctIndex: 1 },
         ],
       },
     },
@@ -551,6 +642,24 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
         ],
       },
     },
+    {
+      id: 'pattern-continue-g4',
+      subjectId: 'math-4',
+      subjectLabel: 'Math',
+      title: 'Pattern Power',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['7', '14', '21', '28'], options: ['32', '34', '35', '42'], correctIndex: 2 },
+          { sequence: ['100', '90', '80', '70'], options: ['50', '60', '65', '70'], correctIndex: 1 },
+          { sequence: ['2', '4', '8', '16'], options: ['24', '30', '32', '64'], correctIndex: 2 },
+        ],
+      },
+    },
   ],
   'grade-5': [
     {
@@ -627,6 +736,24 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
         ],
       },
     },
+    {
+      id: 'pattern-continue-g5',
+      subjectId: 'math-5',
+      subjectLabel: 'Math',
+      title: 'Number Patterns',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['1', '2', '4', '8', '16'], options: ['24', '28', '32', '36'], correctIndex: 2 },
+          { sequence: ['81', '27', '9', '3'], options: ['0', '1', '2', '3'], correctIndex: 1 },
+          { sequence: ['1', '4', '9', '16'], options: ['20', '23', '25', '30'], correctIndex: 2 },
+        ],
+      },
+    },
   ],
   'grade-6': [
     {
@@ -686,6 +813,24 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
         ],
       },
     },
+    {
+      id: 'pattern-continue-g6',
+      subjectId: 'math-6',
+      subjectLabel: 'Math',
+      title: 'Pattern Detective',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['1', '3', '6', '10'], options: ['13', '14', '15', '16'], correctIndex: 2 },
+          { sequence: ['1', '1', '2', '3', '5'], options: ['6', '7', '8', '9'], correctIndex: 2 },
+          { sequence: ['2', '6', '18', '54'], options: ['108', '150', '162', '216'], correctIndex: 2 },
+        ],
+      },
+    },
   ],
   'grade-8': [
     {
@@ -712,6 +857,24 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
             prompt: 'Organising a Group Project',
             steps: ['Agree on the goal', 'Split the tasks among the team', 'Each person does their part', 'Combine all the parts', 'Review the finished project'],
           },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g8',
+      subjectId: 'math-8',
+      subjectLabel: 'Math',
+      title: 'Pattern Master',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['2', '3', '5', '8', '13'], options: ['18', '19', '20', '21'], correctIndex: 3 },
+          { sequence: ['1', '4', '9', '16', '25'], options: ['30', '32', '35', '36'], correctIndex: 3 },
+          { sequence: ['128', '64', '32', '16'], options: ['4', '6', '8', '10'], correctIndex: 2 },
         ],
       },
     },
@@ -744,6 +907,24 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
         ],
       },
     },
+    {
+      id: 'pattern-continue-g9',
+      subjectId: 'math-9',
+      subjectLabel: 'Math',
+      title: 'Advanced Patterns',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['1', '8', '27', '64'], options: ['100', '110', '120', '125'], correctIndex: 3 },
+          { sequence: ['2', '6', '12', '20', '30'], options: ['36', '40', '42', '44'], correctIndex: 2 },
+          { sequence: ['7', '11', '16', '22', '29'], options: ['35', '36', '37', '38'], correctIndex: 2 },
+        ],
+      },
+    },
   ],
   'grade-10': [
     {
@@ -770,6 +951,24 @@ const HAND_CRAFTED_GAMES_BY_GRADE = {
             prompt: 'Preparing for a Job Interview',
             steps: ['Research the company', 'Practice common questions', 'Prepare questions to ask', 'Dress appropriately', 'Follow up with a thank-you note'],
           },
+        ],
+      },
+    },
+    {
+      id: 'pattern-continue-g10',
+      subjectId: 'math-10',
+      subjectLabel: 'Math',
+      title: 'Pattern Genius',
+      description: 'Spot the rule, then tap what comes next!',
+      engine: 'pattern-continue',
+      icon: '🧩',
+      color: 'from-sky-500 to-blue-600',
+      data: {
+        instruction: 'Look at the number pattern, spot the rule, then tap what comes next!',
+        rounds: [
+          { sequence: ['3', '6', '11', '18', '27'], options: ['34', '36', '38', '40'], correctIndex: 2 },
+          { sequence: ['1', '2', '4', '7', '11', '16'], options: ['20', '21', '22', '23'], correctIndex: 2 },
+          { sequence: ['1', '1', '2', '3', '5', '8', '13'], options: ['18', '20', '21', '24'], correctIndex: 2 },
         ],
       },
     },
