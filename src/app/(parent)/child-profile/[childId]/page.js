@@ -219,6 +219,11 @@ export default function ChildProfilePage() {
                     <p className="text-lg text-[var(--foreground)] mb-2">
                       <strong>Age:</strong> {childData.age}
                     </p>
+                    {childData.weight != null && childData.weight !== '' && (
+                      <p className="text-lg text-[var(--foreground)] mb-2">
+                        <strong>Weight:</strong> {childData.weight} kg
+                      </p>
+                    )}
                     <p className="text-lg text-[var(--foreground)] mb-2">
                       <strong>Grade:</strong> {childData.grade}
                     </p>
