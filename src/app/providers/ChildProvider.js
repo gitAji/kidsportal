@@ -49,7 +49,12 @@ export function ChildProvider({ children }) {
             // Subscription check - align with new planType logic
             let isSubActive = false;
 
-            if (parentData.planType === 'paid') {
+            // Hand-picked pilot families (super-admin "Pilot Program") get
+            // full access regardless of billing status — this is the only
+            // override that skips the plan checks below entirely.
+            if (parentData.pilotAccess) {
+              isSubActive = true;
+            } else if (parentData.planType === 'paid') {
               // Paid plan is active if status is active or trialing
               const status = parentData.subscription?.status || parentData.subscriptionStatus;
               isSubActive = status === 'active' || status === 'trialing';
@@ -82,9 +87,10 @@ export function ChildProvider({ children }) {
 
             // AI Tutor Pack is a separate $25/month add-on, independent of the
             // main plan — a family on Premium or Free Trial still needs this
-            // to be active to see the AI Tutor Assistant unlocked.
+            // to be active to see the AI Tutor Assistant unlocked. Pilot
+            // families get it too, so they can test the full experience.
             const aiTutorStatus = parentData.aiTutorPack?.status;
-            const isAiTutorActive = !!parentData.aiTutorPack?.active || aiTutorStatus === 'active' || aiTutorStatus === 'trialing';
+            const isAiTutorActive = !!parentData.pilotAccess || !!parentData.aiTutorPack?.active || aiTutorStatus === 'active' || aiTutorStatus === 'trialing';
 
             setChildUser({ ...freshData, isSubscriptionActive: isSubActive, isAiTutorPackActive: isAiTutorActive });
 

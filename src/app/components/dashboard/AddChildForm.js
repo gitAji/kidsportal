@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { doc, getDoc, setDoc, updateDoc, collection, runTransaction } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, collection, runTransaction, serverTimestamp } from 'firebase/firestore';
 import { auth } from '../../../firebase/auth';
 import { app } from '../../../firebase/config';
 import { getFirestore } from 'firebase/firestore';
@@ -124,6 +124,9 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
           // minutes from the child's Settings tab.
           timeLimits: { enabled: false, dailyMinutes: 60, weeklyMinutes: 300 },
           timeExtensionRequest: null,
+          // Lets admin tooling (e.g. the pilot-program dashboard) measure
+          // setup time — minutes from account creation to first login.
+          createdAt: serverTimestamp(),
         };
 
         await runTransaction(db, async (t) => {
