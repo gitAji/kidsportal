@@ -11,7 +11,7 @@ import { db } from '@/firebase/config';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
 import {
   FaStar, FaPlay, FaGamepad, FaSun, FaCloud, FaMapMarkedAlt, FaFire, FaTrophy,
-  FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile,
+  FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaHandPointDown,
 } from 'react-icons/fa';
 import { getChildStats } from '@/app/utils/firestoreService';
 import { getTimeStatus } from '@/app/utils/timeLimits';
@@ -89,6 +89,11 @@ export default function LearningZonePage() {
   if (timeStatus?.isBlocked) return <TimeLimitBlockedScreen status={timeStatus} />;
 
   const xpIntoLevel = stats.points % 100;
+
+  // Younger explorers get a bouncing "start here" pointer at the first
+  // subject card, since they're less likely to already know a subjects
+  // grid is tappable.
+  const needsPointer = childUser.gradeId === 'grade-1' || childUser.gradeId === 'grade-2';
 
   const renderSmallAvatar = () => {
     if (childUser.photoURL) {
@@ -183,28 +188,44 @@ export default function LearningZonePage() {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
             initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
           >
-            {subjects.map((subject) => {
+            {subjects.map((subject, index) => {
               const Icon = subjectIconMap[subject.subjectName] || subjectIconMap.default;
               const style = subjectStyleMap[subject.subjectName] || subjectStyleMap.default;
               const displayName = t(`subjects.${subject.subjectName}`) || subject.subjectName;
+              const showPointer = needsPointer && index === 0;
 
               return (
-                <Link key={subject.subjectId} href={`/learning-zone/subjects/${subject.subjectId}`}>
-                  <motion.div
-                    variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1, transition: { type: "spring", bounce: 0.5 } } }}
-                    whileHover={{ scale: 1.05, y: -4 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${style.bg} ${style.border} border-b-[8px] border-r-[4px] border-l-4 border-t-4 rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center cursor-pointer shadow-lg hover:shadow-xl transition-all h-[240px] relative overflow-hidden`}
-                  >
-                    <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
-                    <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/5 rounded-full blur-xl" />
+                <div key={subject.subjectId} className="relative">
+                  {showPointer && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: [0, -10, 0] }}
+                      transition={{ opacity: { duration: 0.4 }, y: { duration: 1.1, repeat: Infinity, ease: "easeInOut" } }}
+                      className="absolute -top-16 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none"
+                    >
+                      <span className="bg-yellow-300 text-yellow-900 font-black text-sm px-4 py-1.5 rounded-full shadow-md whitespace-nowrap border-2 border-white">
+                        Start here! 👋
+                      </span>
+                      <FaHandPointDown className="text-yellow-300 text-4xl drop-shadow-md -mt-1" />
+                    </motion.div>
+                  )}
+                  <Link href={`/learning-zone/subjects/${subject.subjectId}`}>
+                    <motion.div
+                      variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1, transition: { type: "spring", bounce: 0.5 } } }}
+                      whileHover={{ scale: 1.05, y: -4 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`${style.bg} ${style.border} border-b-[8px] border-r-[4px] border-l-4 border-t-4 rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center cursor-pointer shadow-lg hover:shadow-xl transition-all h-[240px] relative overflow-hidden`}
+                    >
+                      <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
+                      <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/5 rounded-full blur-xl" />
 
-                    <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-inner mb-4 relative z-10">
-                      <Icon className={`text-5xl ${style.icon}`} />
-                    </div>
-                    <h3 className="text-2xl font-black text-white drop-shadow-sm relative z-10">{displayName}</h3>
-                  </motion.div>
-                </Link>
+                      <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-inner mb-4 relative z-10">
+                        <Icon className={`text-5xl ${style.icon}`} />
+                      </div>
+                      <h3 className="text-2xl font-black text-white drop-shadow-sm relative z-10">{displayName}</h3>
+                    </motion.div>
+                  </Link>
+                </div>
               );
             })}
           </motion.div>
