@@ -63,6 +63,7 @@ export default function TaskContentPage() {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
   const [timerActive, setTimerActive] = useState(false);
+  const [timeAlert, setTimeAlert] = useState(null);
   const [timeTaken, setTimeTaken] = useState(0);
   const [showDrawingTool, setShowDrawingTool] = useState(false);
   const [showKeyboard, setShowKeyboard] = useState(false);
@@ -232,11 +233,15 @@ export default function TaskContentPage() {
     const timer = setInterval(() => {
       setTimeLeft(p => {
         const next = p - 1;
-        // Time alerts logic
+        // Time alerts logic — a separate, non-blocking toast. This used to
+        // reuse feedbackMessage, which every answer input/submit button
+        // treats as "an answer was just checked, lock the UI" — so the
+        // 1-minute warning was silently locking the student out of
+        // answering for the rest of the question.
         if (childUser?.timeAlertsEnabled) {
-          if (next === 60) setFeedbackMessage({ type: 'info', message: t('one_min_left') });
-          if (next === 30) setFeedbackMessage({ type: 'info', message: t('thirty_sec_left') });
-          if (next === 10) setFeedbackMessage({ type: 'info', message: t('ten_sec_left') });
+          if (next === 60) setTimeAlert(t('one_min_left'));
+          if (next === 30) setTimeAlert(t('thirty_sec_left'));
+          if (next === 10) setTimeAlert(t('ten_sec_left'));
         }
         return next;
       });
@@ -244,6 +249,12 @@ export default function TaskContentPage() {
     }, 1000);
     return () => clearInterval(timer);
   }, [timerActive, timeLeft, childUser, professor]);
+
+  useEffect(() => {
+    if (!timeAlert) return;
+    const dismiss = setTimeout(() => setTimeAlert(null), 3000);
+    return () => clearTimeout(dismiss);
+  }, [timeAlert]);
 
   useEffect(() => {
     if (timeLeft <= 0 && timerActive) {
@@ -867,11 +878,23 @@ export default function TaskContentPage() {
           </div>
 
           {(taskData.type === 'quiz' || taskData.type === 'exam') && taskData.timeLimit && (
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 relative">
               <div className={`px-6 py-3 rounded-2xl flex flex-col items-center justify-center border-b-4 transition-colors ${timeLeft <= 10 ? 'bg-red-500 text-white border-red-700 animate-pulse' : 'bg-white text-slate-600 border-slate-200 shadow-md'}`}>
                 <p className="text-xs font-black uppercase tracking-wider opacity-80 leading-none mb-1">{t('time_left')}</p>
                 <p className="text-2xl font-black font-mono leading-none tracking-tighter">{formatTime(timeLeft)}</p>
               </div>
+              <AnimatePresence>
+                {timeAlert && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.9 }}
+                    className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-amber-100 text-amber-800 border-2 border-amber-300 px-4 py-1.5 rounded-full text-xs font-black whitespace-nowrap shadow-lg z-20 pointer-events-none"
+                  >
+                    {timeAlert}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           )}
         </div>
