@@ -86,7 +86,11 @@ export default function ParentLayout({ children }) {
         <div className="flex bg-slate-50 h-screen overflow-hidden">
           <ParentSidebar />
           <div className="flex-grow flex flex-col h-full overflow-hidden min-w-0">
-            <main className="flex-grow overflow-y-auto bg-slate-50/50 flex flex-col">
+            {/* pt-16 clears the fixed mobile hamburger (ParentSidebar, top-4
+                left-4, z-[60]) — without it, page content starting at the
+                very top (e.g. the dashboard's own avatar/heading) renders
+                underneath the button instead of below it. */}
+            <main className="flex-grow overflow-y-auto bg-slate-50/50 flex flex-col pt-16 md:pt-0">
               <EmailVerificationBanner user={user} />
               <div className="flex-grow">
                 <Suspense fallback={<DashboardSkeleton />}>
