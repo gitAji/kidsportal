@@ -197,14 +197,14 @@ export default function LevelTasksPage() {
       )}
 
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full max-w-7xl mx-auto z-10 relative pb-20"
+        className="flex flex-wrap justify-center items-start gap-6 md:gap-8 w-full max-w-5xl mx-auto z-10 relative pb-20"
         initial="hidden"
         animate="visible"
         variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
       >
         {levelData.tasks && levelData.tasks.length > 0 ? (
           levelData.tasks
-            .map(task => {
+            .map((task, index) => {
               const Icon = taskIconMap[task.type?.toLowerCase()] || taskIconMap.default;
               const taskColor = taskColorMap[task.type?.toLowerCase()] || taskColorMap.default;
               const isDone = childStats?.completedTasks_list?.includes(task.taskId);
@@ -213,7 +213,7 @@ export default function LevelTasksPage() {
                 <motion.div
                   key={task.taskId}
                   onClick={() => router.push(`/learning-zone/subjects/${subjectId}/${levelId}/${task.taskId}`)}
-                  className={`${taskColor} text-white rounded-[2.5rem] shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[220px] relative overflow-hidden group border-b-[8px] border-x-[4px] border-t-4`}
+                  className={`${taskColor} text-white rounded-[2.5rem] shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[240px] relative overflow-hidden group border-b-[8px] border-x-[4px] border-t-4 w-full sm:w-[280px]`}
                   variants={cardVariants}
                   whileHover="hover"
                   whileTap="tap"
@@ -221,6 +221,11 @@ export default function LevelTasksPage() {
                   {/* Decorative overlay for cards */}
                   <div className="absolute -bottom-5 -right-5 text-white opacity-20 transform rotate-12 group-hover:-rotate-12 transition-transform duration-500 ease-in-out">
                     <Icon size={100} />
+                  </div>
+
+                  {/* Step order badge, guides a kid on what to do first */}
+                  <div className="absolute top-4 left-4 z-40 w-8 h-8 rounded-full bg-white/25 backdrop-blur-sm flex items-center justify-center font-black text-sm shadow-inner border border-white/30">
+                    {index + 1}
                   </div>
 
                   {/* Small checkmark badge when task is done */}
@@ -254,7 +259,7 @@ export default function LevelTasksPage() {
               );
             })
         ) : (
-          <p className="text-center text-gray-600 col-span-full font-bold text-xl bg-white p-8 rounded-2xl shadow-sm">
+          <p className="text-center text-gray-600 font-bold text-xl bg-white p-8 rounded-2xl shadow-sm">
             No tasks found for this level yet.
           </p>
         )}
