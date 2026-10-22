@@ -52,6 +52,7 @@ export default function TaskContentPage() {
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
+  const [traceFeedback, setTraceFeedback] = useState(null);
   const [feedbackMessage, setFeedbackMessage] = useState(null);
   const [score, setScore] = useState(0);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
@@ -1075,11 +1076,24 @@ export default function TaskContentPage() {
               </div>
               <DrawingCanvas
                 template={currentQuestion.correctAnswer}
-                onFinish={(data) => {
+                onFinish={(data, match) => {
+                  // match is a client-side pattern check (no AI/network call)
+                  // of the drawn strokes against the template shape — see
+                  // src/app/utils/traceMatch.js.
+                  if (match && !match.passed) {
+                    setTraceFeedback("Try to trace a little more of the letter! ✏️");
+                    setTimeout(() => setTraceFeedback(null), 3000);
+                    return;
+                  }
                   setUserAnswer("done");
                   handleSubmitAnswer("done");
                 }}
               />
+              {traceFeedback && (
+                <p className="mt-3 text-center text-sm font-bold text-amber-700 bg-amber-50 border-2 border-amber-200 rounded-full px-5 py-2">
+                  {traceFeedback}
+                </p>
+              )}
             </div>
           )}
 
