@@ -107,15 +107,15 @@ const ParentDashboard = () => {
     <div className="min-h-screen bg-slate-50">
 
       {/* ── Page Header ── */}
-      <div className="bg-white border-b border-slate-100 px-8 py-6">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-white border-b border-slate-100 px-4 sm:px-8 py-6">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-5">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-100 overflow-hidden flex-shrink-0">
               {auth.currentUser?.photoURL
                 ? <img src={auth.currentUser.photoURL} alt="Profile" className="w-full h-full object-cover" />
                 : <FaUserCircle className="text-xl" />}
             </div>
-            <div>
+            <div className="min-w-0">
               <h1 className="text-xl font-black text-slate-800 tracking-tight leading-tight">
                 Welcome back, <span className="text-blue-600">{displayName}</span>
               </h1>
@@ -123,37 +123,35 @@ const ParentDashboard = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => atChildLimit ? setShowLimitModal(true) : setShowAddChildModal(true)}
+              className={`w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 font-black rounded-full shadow-lg transition-all text-sm uppercase tracking-widest border-2 border-transparent order-1 sm:order-2 ${atChildLimit
+                ? 'bg-slate-100 text-slate-400 hover:border-slate-200'
+                : 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:shadow-cyan-400/40 hover:border-white/20'
+                }`}
+            >
+              {atChildLimit
+                ? <><FaLock className="text-xs" /> Add Learner</>
+                : <><FaPlus className="text-xs" /> Add Learner</>}
+            </motion.button>
             <Link
               href="/analytics"
-              className="flex items-center gap-2 px-5 py-3 rounded-full border border-slate-200 text-slate-600 font-bold text-sm hover:border-blue-400 hover:text-blue-600 transition-all bg-white"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-slate-200 text-slate-600 font-bold text-sm hover:border-blue-400 hover:text-blue-600 transition-all bg-white order-2 sm:order-1"
             >
               <FaChartLine className="text-xs" /> Full Analytics
             </Link>
-            <div className="flex flex-col items-end gap-1.5">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => atChildLimit ? setShowLimitModal(true) : setShowAddChildModal(true)}
-                className={`group flex items-center justify-center gap-2 px-6 py-3 font-black rounded-full shadow-lg transition-all text-sm uppercase tracking-widest border-2 border-transparent ${atChildLimit
-                  ? 'bg-slate-100 text-slate-400 hover:border-slate-200'
-                  : 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:shadow-cyan-400/40 hover:border-white/20'
-                  }`}
-              >
-                {atChildLimit
-                  ? <><FaLock className="text-xs" /> Add Learner</>
-                  : <><FaPlus className="text-xs group-hover:rotate-90 transition-transform duration-300" /> Add Learner</>}
-              </motion.button>
-              <p className="text-[10px] font-bold text-slate-300 uppercase tracking-wider pr-1">
-                {childCount} / {childLimit} learners used
-              </p>
-            </div>
+            <p className="text-[10px] font-bold text-slate-300 uppercase tracking-wider text-center sm:text-right order-3">
+              {childCount} / {childLimit} learners used
+            </p>
           </div>
         </div>
       </div>
 
       {/* ── Content ── */}
-      <div className="max-w-7xl mx-auto px-8 py-8 space-y-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-6">
 
         {/* Family learning overview */}
         {overviewLoading ? (
