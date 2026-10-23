@@ -796,10 +796,16 @@ export default function TaskContentPage() {
         {feedbackMessage?.type === 'wrong' && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-red-50 -z-10" />}
       </AnimatePresence>
 
-      <div className="w-full max-w-4xl p-4 sm:p-6 md:p-8 flex-grow flex flex-col">
+      <div className="w-full max-w-4xl pt-20 px-4 pb-4 sm:p-6 md:p-8 flex-grow flex flex-col">
+        {/* pt-20 on mobile clears the fixed back button / avatar menu
+            (top-4, z-[300]/z-[400] — see MinimalBackButton and
+            ChildLearningZoneHeader) — without it, this row rendered right
+            behind them, hiding the "Correct"/"Wrong" counts. flex-wrap plus
+            the reduced mobile gap/padding below keep the three cards from
+            overflowing a narrow phone width even once they clear the icons. */}
         <div className="flex items-center justify-center mb-4 w-full max-w-4xl">
-          <div className="flex gap-3 h-14">
-            <div className="bg-white shadow-md rounded-2xl px-6 py-2 flex items-center gap-3 border-b-4 border-yellow-200">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+            <div className="bg-white shadow-md rounded-2xl px-3 sm:px-6 py-2 flex items-center gap-2 sm:gap-3 border-b-4 border-yellow-200">
               <div className="bg-yellow-100 p-2 rounded-xl text-yellow-600">
                 <FaStar className="text-xl" />
               </div>
@@ -809,7 +815,7 @@ export default function TaskContentPage() {
               </div>
             </div>
 
-            <div className="bg-white shadow-md rounded-2xl px-6 py-2 flex items-center gap-3 border-b-4 border-green-200">
+            <div className="bg-white shadow-md rounded-2xl px-3 sm:px-6 py-2 flex items-center gap-2 sm:gap-3 border-b-4 border-green-200">
               <div className="bg-green-100 p-2 rounded-xl text-green-600">
                 <FaCheckCircle className="text-xl" />
               </div>
@@ -819,7 +825,7 @@ export default function TaskContentPage() {
               </div>
             </div>
 
-            <div className="bg-white shadow-md rounded-2xl px-6 py-2 flex items-center gap-3 border-b-4 border-red-200">
+            <div className="bg-white shadow-md rounded-2xl px-3 sm:px-6 py-2 flex items-center gap-2 sm:gap-3 border-b-4 border-red-200">
               <div className="bg-red-100 p-2 rounded-xl text-red-600">
                 <FaTimesCircle className="text-xl" />
               </div>

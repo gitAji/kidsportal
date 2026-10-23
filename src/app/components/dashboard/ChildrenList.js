@@ -282,13 +282,13 @@ const ChildrenList = ({ refreshKey } = {}) => {
                         <span className="text-[10px] font-bold text-slate-400">• {lastActive}</span>
                       )}
                     </div>
-                    <div className="flex items-center gap-3 mt-2">
-                      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md" title="Child Username">
-                        <FaUserCircle className="text-slate-400" /> {child.username}
+                    <div className="flex items-center gap-3 mt-2 flex-wrap">
+                      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md max-w-full" title="Child Username">
+                        <FaUserCircle className="text-slate-400 flex-shrink-0" /> <span className="truncate">{child.username}</span>
                       </div>
                       {child.password && (
-                        <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md" title="Child Password">
-                          <FaKey className="text-slate-400" /> {child.password}
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md max-w-full" title="Child Password">
+                          <FaKey className="text-slate-400 flex-shrink-0" /> <span className="truncate">{child.password}</span>
                         </div>
                       )}
                     </div>
