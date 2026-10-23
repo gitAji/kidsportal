@@ -23,6 +23,16 @@ const avatars = [
 // silently break (a child assigned "2nd" or "Grade2" saw an empty subject list).
 const GRADE_OPTIONS = Array.from({ length: 10 }, (_, i) => `Grade ${i + 1}`);
 
+// UK school-year convention: a child turning 6 starts Year 1 ("Grade 1"
+// here), age 7 -> Grade 2, etc. — age minus 5, clamped to the 1-10 range
+// this app supports.
+const gradeForAge = (ageValue) => {
+  const ageNum = parseInt(ageValue, 10);
+  if (isNaN(ageNum)) return '';
+  const gradeNum = Math.min(10, Math.max(1, ageNum - 5));
+  return `Grade ${gradeNum}`;
+};
+
 const generatePassword = () => {
   const adjectives = ['Happy', 'Sunny', 'Brave', 'Clever', 'Fast'];
   const nouns = ['Fox', 'Lion', 'Bear', 'Tiger', 'Panda'];
@@ -39,6 +49,10 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
   const [username, setUsername] = useState(childToEdit?.username || '');
   const [password, setPassword] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState(childToEdit?.avatar || 'default');
+  // Tracks whether `grade` is still following the age-based suggestion, so
+  // typing an age fills it in, but a parent's deliberate grade pick (e.g. a
+  // child ahead or behind their expected year) is never silently overwritten.
+  const gradeAutoSyncedRef = useRef(!childToEdit?.grade || childToEdit.grade === gradeForAge(childToEdit?.age));
   const [sequentialProgression, setSequentialProgression] = useState(childToEdit?.sequentialProgression !== undefined ? childToEdit.sequentialProgression : true);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -68,6 +82,20 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
     debounced(username, childToEdit);
     return () => debounced.cancel();
   }, [username, childToEdit]);
+
+  const handleAgeChange = (e) => {
+    const value = e.target.value;
+    setAge(value);
+    if (gradeAutoSyncedRef.current) {
+      const suggested = gradeForAge(value);
+      if (suggested) setGrade(suggested);
+    }
+  };
+
+  const handleGradeChange = (e) => {
+    gradeAutoSyncedRef.current = false;
+    setGrade(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -230,11 +258,11 @@ const AddChildForm = ({ onClose, childToEdit, onSaveSuccess }) => {
             <div className="flex gap-4">
               <div className="flex-1">
                 <label htmlFor="childAge" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">Age</label>
-                <input type="number" id="childAge" className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800" placeholder="7" value={age} onChange={(e) => setAge(e.target.value)} required />
+                <input type="number" id="childAge" className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800" placeholder="7" value={age} onChange={handleAgeChange} required />
               </div>
               <div className="flex-1">
                 <label htmlFor="childGrade" className="block text-xs font-bold uppercase tracking-wider mb-1.5 text-slate-500">Grade</label>
-                <select id="childGrade" className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800" value={grade} onChange={(e) => setGrade(e.target.value)} required>
+                <select id="childGrade" className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl focus:ring-0 focus:border-blue-500 transition-colors font-semibold text-slate-800" value={grade} onChange={handleGradeChange} required>
                   <option value="" disabled>Select grade</option>
                   {GRADE_OPTIONS.map((g) => (
                     <option key={g} value={g}>{g}</option>
