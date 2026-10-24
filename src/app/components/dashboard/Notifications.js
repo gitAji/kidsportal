@@ -14,9 +14,9 @@ const Notifications = ({ notifications }) => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className={`flex gap-4 p-4 rounded-2xl border transition-colors ${notification.read
+                className={`flex gap-4 p-4 rounded-lg border transition-colors ${notification.read
                     ? 'bg-slate-50 border-slate-100'
-                    : 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-100 shadow-sm'
+                    : 'bg-blue-50 border-blue-100'
                   }`}
               >
                 <div className={`mt-1 flex-shrink-0 ${notification.read ? 'text-slate-400' : 'text-blue-500'}`}>
