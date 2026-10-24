@@ -107,14 +107,14 @@ const ParentDashboard = () => {
 
       {/* ── Page Header ── */}
       <div className="bg-white border-b border-slate-200 px-4 sm:px-8 py-5">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-5">
           <div className="flex items-center gap-4">
             <div className="w-11 h-11 rounded-xl bg-blue-600 flex items-center justify-center text-white overflow-hidden flex-shrink-0">
               {auth.currentUser?.photoURL
                 ? <img src={auth.currentUser.photoURL} alt="Profile" className="w-full h-full object-cover" />
                 : <FaUserCircle className="text-lg" />}
             </div>
-            <div>
+            <div className="min-w-0">
               <h1 className="text-lg font-semibold text-slate-800 leading-tight">
                 Welcome back, <span className="text-blue-600">{displayName}</span>
               </h1>
@@ -122,29 +122,27 @@ const ParentDashboard = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <button
+              onClick={() => atChildLimit ? setShowLimitModal(true) : setShowAddChildModal(true)}
+              className={`w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 font-medium rounded-lg transition-colors text-sm order-1 sm:order-2 ${atChildLimit
+                ? 'bg-slate-100 text-slate-400'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
+                }`}
+            >
+              {atChildLimit
+                ? <><FaLock className="text-xs" /> Add Learner</>
+                : <><FaPlus className="text-xs" /> Add Learner</>}
+            </button>
             <Link
               href="/analytics"
-              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 text-slate-600 font-medium text-sm hover:border-slate-300 hover:bg-slate-50 transition-colors bg-white flex-1 sm:flex-initial"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 text-slate-600 font-medium text-sm hover:border-slate-300 hover:bg-slate-50 transition-colors bg-white order-2 sm:order-1"
             >
               <FaChartLine className="text-xs" /> Full Analytics
             </Link>
-            <div className="flex flex-col items-end gap-1 flex-1 sm:flex-initial">
-              <button
-                onClick={() => atChildLimit ? setShowLimitModal(true) : setShowAddChildModal(true)}
-                className={`w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 font-medium rounded-lg transition-colors text-sm ${atChildLimit
-                  ? 'bg-slate-100 text-slate-400'
-                  : 'bg-blue-600 text-white hover:bg-blue-700'
-                  }`}
-              >
-                {atChildLimit
-                  ? <><FaLock className="text-xs" /> Add Learner</>
-                  : <><FaPlus className="text-xs" /> Add Learner</>}
-              </button>
-              <p className="text-[11px] text-slate-400 pr-1">
-                {childCount} / {childLimit} learners used
-              </p>
-            </div>
+            <p className="text-[11px] text-slate-400 text-center sm:text-right order-3">
+              {childCount} / {childLimit} learners used
+            </p>
           </div>
         </div>
       </div>

@@ -8,8 +8,6 @@ import {
 import { SiStripe } from 'react-icons/si';
 
 export default function DashboardFooter() {
-    const currentYear = new Date().getFullYear();
-
     return (
         <footer className="bg-white border-t border-slate-100 py-10">
             <div className="max-w-7xl mx-auto px-8">
@@ -68,10 +66,6 @@ export default function DashboardFooter() {
                         <FaCcStripe className="text-2xl" />
                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">PCI Compliant Payments</span>
                     </div>
-
-                    <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">
-                        &copy; {currentYear} KidsPortal Limited. Registered in England.
-                    </p>
                 </div>
             </div>
         </footer>
