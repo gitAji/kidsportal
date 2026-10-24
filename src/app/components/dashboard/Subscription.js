@@ -81,7 +81,7 @@ const Subscription = () => {
           <FaCrown />
         </div>
         <div className="flex-grow min-w-0">
-          <p className="text-base font-black text-slate-800 leading-tight">
+          <p className="text-base font-semibold text-slate-800 leading-tight">
             {isPaid ? getPlanLabel(sub?.plan) : (isStripeSubscription ? 'Premium Trial' : 'Free Trial')}
           </p>
           <p className="text-xs text-slate-400 font-medium mt-1 flex items-center gap-1">
@@ -93,7 +93,7 @@ const Subscription = () => {
         </div>
 
         {/* Status pill */}
-        <span className={`text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full flex-shrink-0 ${isPaid && isActive ? 'bg-green-100 text-green-600' :
+        <span className={`text-[10px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full flex-shrink-0 ${isPaid && isActive ? 'bg-green-100 text-green-600' :
           isActive ? 'bg-blue-100 text-blue-600' :
             isExpired ? 'bg-red-100 text-red-500' :
               'bg-slate-100 text-slate-400'
@@ -136,8 +136,8 @@ const Subscription = () => {
         href="/billing"
         className={
           isPaid
-            ? "w-full py-2.5 flex items-center justify-center gap-2 text-xs font-black rounded-xl border border-slate-100 bg-slate-50 text-slate-600 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-all"
-            : "w-full py-3 flex items-center justify-center gap-2 text-sm font-black rounded-xl text-white bg-gradient-to-r from-blue-600 to-cyan-500 shadow-lg shadow-blue-200 hover:scale-[1.02] hover:shadow-cyan-300 active:scale-[0.98] transition-all"
+            ? "w-full py-2.5 flex items-center justify-center gap-2 text-xs font-semibold rounded-lg border border-slate-200 bg-slate-50 text-slate-600 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+            : "w-full py-3 flex items-center justify-center gap-2 text-sm font-semibold rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-colors"
         }
       >
         {isExpired ? 'Renew Now' : isPaid ? 'Manage Billing' : 'Upgrade to Premium'}
