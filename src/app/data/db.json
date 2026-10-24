@@ -3806,7 +3806,7 @@
                     },
                     {
                       "questionId": "math-1-level-6-quiz-q5",
-                      "questionText": "How many pence make \u00a33?",
+                      "questionText": "How many pence make £3?",
                       "correctAnswer": "300",
                       "type": "multiple-choice",
                       "options": [
@@ -3824,7 +3824,7 @@
                     },
                     {
                       "questionId": "math-1-level-6-quiz-q7",
-                      "questionText": "Which amount equals \u00a35?",
+                      "questionText": "Which amount equals £5?",
                       "correctAnswer": "500p",
                       "type": "multiple-choice",
                       "options": [
@@ -3888,24 +3888,24 @@
                     {
                       "questionId": "math-1-level-6-exam-q6",
                       "questionText": "What is 80p + 45p?",
-                      "correctAnswer": "\u00a31.25",
+                      "correctAnswer": "£1.25",
                       "type": "identification"
                     },
                     {
                       "questionId": "math-1-level-6-exam-q7",
-                      "questionText": "You have \u00a310 and spend \u00a33.60. How much is left?",
-                      "correctAnswer": "\u00a36.40",
+                      "questionText": "You have £10 and spend £3.60. How much is left?",
+                      "correctAnswer": "£6.40",
                       "type": "multiple-choice",
                       "options": [
-                        "\u00a36.40",
-                        "\u00a33.60",
-                        "\u00a37.40",
-                        "\u00a36.60"
+                        "£6.40",
+                        "£3.60",
+                        "£7.40",
+                        "£6.60"
                       ]
                     },
                     {
                       "questionId": "math-1-level-6-exam-q8",
-                      "questionText": "What is \u00a32.75 written in pence?",
+                      "questionText": "What is £2.75 written in pence?",
                       "correctAnswer": "275p",
                       "type": "identification"
                     }
@@ -169495,6 +169495,24 @@
     "premiumLevelsStart": 3
   },
   "syllabusDocuments": [
+    {
+      "id": "english-syllabus",
+      "subjectName": "English",
+      "title": "English Curriculum & Syllabus Guide",
+      "description": "Every topic covered in KidsPortal's English subject, Grade 1 through 10, with notes on how each grade aligns with England's National Curriculum for English, plus the roughly equivalent US grade band for families comparing against Common Core ELA standards.",
+      "fileUrl": "/documents/english-curriculum-syllabus.pdf",
+      "gradeRange": "Grade 1 - Grade 10",
+      "updatedAt": "2026-10-24"
+    },
+    {
+      "id": "maths-syllabus",
+      "subjectName": "Maths",
+      "title": "Maths Curriculum & Syllabus Guide",
+      "description": "Every topic covered in KidsPortal's Maths subject, Grade 1 through 10, with notes on how each grade aligns with England's National Curriculum for Mathematics, plus the roughly equivalent US grade band for families comparing against Common Core Math standards.",
+      "fileUrl": "/documents/maths-curriculum-syllabus.pdf",
+      "gradeRange": "Grade 1 - Grade 10",
+      "updatedAt": "2026-10-24"
+    },
     {
       "id": "tamil-syllabus",
       "subjectName": "Tamil",
