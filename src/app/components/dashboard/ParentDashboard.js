@@ -125,7 +125,7 @@ const ParentDashboard = () => {
           <div className="flex flex-col sm:flex-row sm:items-center gap-3">
             <button
               onClick={() => atChildLimit ? setShowLimitModal(true) : setShowAddChildModal(true)}
-              className={`w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 font-medium rounded-lg transition-colors text-sm order-1 sm:order-2 ${atChildLimit
+              className={`w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-3 font-medium rounded-lg transition-colors text-sm order-1 sm:order-2 ${atChildLimit
                 ? 'bg-slate-100 text-slate-400'
                 : 'bg-blue-600 text-white hover:bg-blue-700'
                 }`}
@@ -136,9 +136,9 @@ const ParentDashboard = () => {
             </button>
             <Link
               href="/analytics"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 text-slate-600 font-medium text-sm hover:border-slate-300 hover:bg-slate-50 transition-colors bg-white order-2 sm:order-1"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-slate-200 text-slate-600 font-medium text-sm hover:border-slate-300 hover:bg-slate-50 transition-colors bg-white order-2 sm:order-1"
             >
-              <FaChartLine className="text-xs" /> Full Analytics
+              <FaChartLine className="text-xs" /> All Reports
             </Link>
             <p className="text-[11px] text-slate-400 text-center sm:text-right order-3">
               {childCount} / {childLimit} learners used
