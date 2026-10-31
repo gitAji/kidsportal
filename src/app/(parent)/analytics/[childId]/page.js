@@ -15,7 +15,7 @@ import Link from "next/link";
 import {
   FaArrowLeft, FaStar, FaTrophy, FaClock, FaCheckCircle, FaTimesCircle,
   FaMedal, FaBookOpen, FaBrain, FaHistory, FaRedo, FaGraduationCap,
-  FaChartPie, FaLayerGroup, FaPrint, FaFire, FaUndo,
+  FaChartPie, FaLayerGroup, FaPrint, FaFire, FaUndo, FaBullseye,
   FaExclamationTriangle, FaTimes,
 } from "react-icons/fa";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from "recharts";

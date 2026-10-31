@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import CustomAvatar from '../ui/CustomAvatar';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaArrowRight, FaChartBar, FaStar, FaCheckCircle, FaGraduationCap, FaClock, FaTimes, FaPlay, FaUserCircle, FaKey } from 'react-icons/fa';
+import { FaChartBar, FaStar, FaCheckCircle, FaGraduationCap, FaClock, FaTimes, FaPlay, FaUserCircle, FaKey } from 'react-icons/fa';
 import { getChildStats, grantBonusTime } from '@/app/utils/firestoreService';
 import { loadStats } from '@/app/utils/achievements';
 import { computeLevelProgress } from '@/app/utils/childProgress';
@@ -62,15 +62,15 @@ function ChildQuickStats({ child, learningSubjects }) {
 
   return (
     <div className="flex flex-wrap gap-2">
-      <span className="inline-flex items-center gap-1.5 text-[11px] font-black text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full px-2.5 py-1">
+      <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-md px-2.5 py-1">
         <FaCheckCircle className="text-[10px]" /> {tasks} tasks
       </span>
       {totalLevels > 0 && (
-        <span className="inline-flex items-center gap-1.5 text-[11px] font-black text-blue-600 bg-blue-50 border border-blue-100 rounded-full px-2.5 py-1">
+        <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-md px-2.5 py-1">
           <FaGraduationCap className="text-[10px]" /> {completedLevels}/{totalLevels} levels
         </span>
       )}
-      <span className="inline-flex items-center gap-1.5 text-[11px] font-black text-amber-600 bg-amber-50 border border-amber-100 rounded-full px-2.5 py-1">
+      <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-amber-700 bg-amber-50 border border-amber-100 rounded-md px-2.5 py-1">
         <FaStar className="text-[10px]" /> {xp.toLocaleString()} XP
       </span>
     </div>
@@ -250,13 +250,7 @@ const ChildrenList = ({ refreshKey } = {}) => {
   if (loading) {
     return (
       <div className="flex justify-center p-12">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-          className="text-5xl"
-        >
-          🎨
-        </motion.div>
+        <div className="w-8 h-8 border-2 border-slate-200 border-t-blue-500 rounded-full animate-spin" />
       </div>
     );
   }
@@ -286,25 +280,22 @@ const ChildrenList = ({ refreshKey } = {}) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
-              className="group relative bg-white rounded-2xl border border-slate-200 p-5 hover:border-blue-500 hover:shadow-xl transition-all"
+              className="relative bg-white rounded-xl border border-slate-200 p-4 sm:p-5"
             >
-              <div
-                onClick={() => handleManageChild(child)}
-                className="flex items-center justify-between gap-4 cursor-pointer"
-              >
-                <div className="flex items-center gap-5 min-w-0">
-                  <div className="w-16 h-16 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                    <CustomAvatar child={child} size="text-3xl" />
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3 sm:gap-4 min-w-[140px] flex-1">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center flex-shrink-0">
+                    <CustomAvatar child={child} size="text-2xl" />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="text-xl font-bold text-slate-800 truncate">{child.name}</h3>
-                    <div className="flex items-center gap-2 mt-1 flex-wrap">
-                      <span className="text-[10px] font-black uppercase text-blue-500 tracking-wider">Grade {child.grade} Explorer</span>
+                    <h3 className="text-base sm:text-lg font-semibold text-slate-800 truncate">{child.name}</h3>
+                    <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+                      <span className="text-[11px] font-medium text-blue-600">Grade {child.grade} Explorer</span>
                       {lastActive && (
-                        <span className="text-[10px] font-bold text-slate-400">• {lastActive}</span>
+                        <span className="text-[11px] text-slate-400">• {lastActive}</span>
                       )}
                     </div>
-                    <div className="flex items-center gap-3 mt-2 flex-wrap">
+                    <div className="flex items-center gap-2 mt-2 flex-wrap">
                       <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md max-w-full" title="Child Username">
                         <FaUserCircle className="text-slate-400 flex-shrink-0" /> <span className="truncate">{child.username}</span>
                       </div>
@@ -317,36 +308,44 @@ const ChildrenList = ({ refreshKey } = {}) => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 flex-shrink-0">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // See handleManageChild above — clear a sibling's stale
-                      // localStorage session so it can't outrank this one.
-                      localStorage.removeItem('childUser');
-                      sessionStorage.setItem('childUser', JSON.stringify(child));
-                      router.push('/learning-zone');
-                    }}
-                    className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-sm"
-                    title="Launch Learning Zone"
-                  >
-                    <FaPlay className="text-sm ml-0.5" />
-                  </button>
-                  <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-blue-50 group-hover:text-blue-500 transition-all">
-                    <FaArrowRight className="text-sm" />
-                  </div>
-                </div>
+                {/* Labeled, not icon-only — a parent who isn't comfortable
+                    with apps shouldn't have to guess what a bare play-icon
+                    button does. */}
+                <button
+                  onClick={() => {
+                    // See handleManageChild above — clear a sibling's stale
+                    // localStorage session so it can't outrank this one.
+                    localStorage.removeItem('childUser');
+                    sessionStorage.setItem('childUser', JSON.stringify(child));
+                    router.push('/learning-zone');
+                  }}
+                  className="flex-shrink-0 flex items-center justify-center gap-2 h-11 px-4 rounded-lg bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors"
+                >
+                  <FaPlay className="text-xs" /> Start Learning
+                </button>
               </div>
 
-              <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+              <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between gap-4">
                 <ChildQuickStats child={child} learningSubjects={learningSubjects} />
-                <Link
-                  href={`/analytics/${child.id}`}
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 text-[11px] font-black text-slate-500 hover:text-blue-600 transition-colors flex-shrink-0"
-                >
-                  <FaChartBar className="text-[10px]" /> Report
-                </Link>
+                {/* Explicit, labeled links — not an unmarked "click the
+                    whole card" affordance, which a touch-screen parent has
+                    no way to discover. py-2.5 keeps their text small but
+                    gives each a ~44px tap target, not just the text's own
+                    line-height. */}
+                <div className="flex items-center gap-5 flex-shrink-0 -my-2.5">
+                  <button
+                    onClick={() => handleManageChild(child)}
+                    className="py-2.5 text-[11px] font-semibold text-slate-500 hover:text-blue-600 transition-colors"
+                  >
+                    Manage
+                  </button>
+                  <Link
+                    href={`/analytics/${child.id}`}
+                    className="inline-flex items-center gap-1.5 py-2.5 text-[11px] font-semibold text-slate-500 hover:text-blue-600 transition-colors"
+                  >
+                    <FaChartBar className="text-[10px]" /> Report
+                  </Link>
+                </div>
               </div>
 
               <AnimatePresence>
