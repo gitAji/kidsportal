@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { collection, doc, getDoc, query, getDocs, onSnapshot, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, setDoc, query, getDocs, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../../../firebase/config';
 import { auth } from '../../../firebase/auth';
 import { useRouter } from 'next/navigation';
@@ -165,6 +165,28 @@ const ChildrenList = ({ refreshKey } = {}) => {
         if (parentSnap?.exists() && Array.isArray(parentSnap.data().learningSubjects) && parentSnap.data().learningSubjects.length > 0) {
           setLearningSubjects(parentSnap.data().learningSubjects);
         }
+
+        // Self-heal the child_usernames registry: /api/child-login looks a
+        // child up by this doc, so a child whose entry is missing (stale
+        // data from before this registry existed, or an interrupted write)
+        // can be launched fine from here — which reads the child doc
+        // directly — but can never log in independently, failing with
+        // "Invalid username or password" even with the right credentials.
+        // Only fills in a MISSING entry; never overwrites one that already
+        // exists, in case it legitimately belongs to a different child.
+        childrenData.forEach(async (child) => {
+          if (!child.username) return;
+          const usernameKey = child.username.toLowerCase();
+          try {
+            const usernameSnap = await getDoc(doc(db, 'child_usernames', usernameKey));
+            if (!usernameSnap.exists()) {
+              await setDoc(doc(db, 'child_usernames', usernameKey), { parentUid, childId: child.id });
+            }
+          } catch {
+            // Best-effort repair — a failure here shouldn't affect the
+            // dashboard, and it'll just retry next time the list loads.
+          }
+        });
       } catch (err) {
         console.error("Error fetching children:", err);
         setError("Failed to load children data.");
