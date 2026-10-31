@@ -52,6 +52,7 @@ export default function TaskContentPage() {
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
+  const [traceFeedback, setTraceFeedback] = useState(null);
   const [feedbackMessage, setFeedbackMessage] = useState(null);
   const [score, setScore] = useState(0);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
@@ -62,6 +63,7 @@ export default function TaskContentPage() {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
   const [timerActive, setTimerActive] = useState(false);
+  const [timeAlert, setTimeAlert] = useState(null);
   const [timeTaken, setTimeTaken] = useState(0);
   const [showDrawingTool, setShowDrawingTool] = useState(false);
   const [showKeyboard, setShowKeyboard] = useState(false);
@@ -231,11 +233,15 @@ export default function TaskContentPage() {
     const timer = setInterval(() => {
       setTimeLeft(p => {
         const next = p - 1;
-        // Time alerts logic
+        // Time alerts logic — a separate, non-blocking toast. This used to
+        // reuse feedbackMessage, which every answer input/submit button
+        // treats as "an answer was just checked, lock the UI" — so the
+        // 1-minute warning was silently locking the student out of
+        // answering for the rest of the question.
         if (childUser?.timeAlertsEnabled) {
-          if (next === 60) setFeedbackMessage({ type: 'info', message: t('one_min_left') });
-          if (next === 30) setFeedbackMessage({ type: 'info', message: t('thirty_sec_left') });
-          if (next === 10) setFeedbackMessage({ type: 'info', message: t('ten_sec_left') });
+          if (next === 60) setTimeAlert(t('one_min_left'));
+          if (next === 30) setTimeAlert(t('thirty_sec_left'));
+          if (next === 10) setTimeAlert(t('ten_sec_left'));
         }
         return next;
       });
@@ -243,6 +249,12 @@ export default function TaskContentPage() {
     }, 1000);
     return () => clearInterval(timer);
   }, [timerActive, timeLeft, childUser, professor]);
+
+  useEffect(() => {
+    if (!timeAlert) return;
+    const dismiss = setTimeout(() => setTimeAlert(null), 3000);
+    return () => clearTimeout(dismiss);
+  }, [timeAlert]);
 
   useEffect(() => {
     if (timeLeft <= 0 && timerActive) {
@@ -784,10 +796,16 @@ export default function TaskContentPage() {
         {feedbackMessage?.type === 'wrong' && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-red-50 -z-10" />}
       </AnimatePresence>
 
-      <div className="w-full max-w-4xl p-4 sm:p-6 md:p-8 flex-grow flex flex-col">
+      <div className="w-full max-w-4xl pt-20 px-4 pb-4 sm:p-6 md:p-8 flex-grow flex flex-col">
+        {/* pt-20 on mobile clears the fixed back button / avatar menu
+            (top-4, z-[300]/z-[400] — see MinimalBackButton and
+            ChildLearningZoneHeader) — without it, this row rendered right
+            behind them, hiding the "Correct"/"Wrong" counts. flex-wrap plus
+            the reduced mobile gap/padding below keep the three cards from
+            overflowing a narrow phone width even once they clear the icons. */}
         <div className="flex items-center justify-center mb-4 w-full max-w-4xl">
-          <div className="flex gap-3 h-14">
-            <div className="bg-white shadow-md rounded-2xl px-6 py-2 flex items-center gap-3 border-b-4 border-yellow-200">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+            <div className="bg-white shadow-md rounded-2xl px-3 sm:px-6 py-2 flex items-center gap-2 sm:gap-3 border-b-4 border-yellow-200">
               <div className="bg-yellow-100 p-2 rounded-xl text-yellow-600">
                 <FaStar className="text-xl" />
               </div>
@@ -797,7 +815,7 @@ export default function TaskContentPage() {
               </div>
             </div>
 
-            <div className="bg-white shadow-md rounded-2xl px-6 py-2 flex items-center gap-3 border-b-4 border-green-200">
+            <div className="bg-white shadow-md rounded-2xl px-3 sm:px-6 py-2 flex items-center gap-2 sm:gap-3 border-b-4 border-green-200">
               <div className="bg-green-100 p-2 rounded-xl text-green-600">
                 <FaCheckCircle className="text-xl" />
               </div>
@@ -807,7 +825,7 @@ export default function TaskContentPage() {
               </div>
             </div>
 
-            <div className="bg-white shadow-md rounded-2xl px-6 py-2 flex items-center gap-3 border-b-4 border-red-200">
+            <div className="bg-white shadow-md rounded-2xl px-3 sm:px-6 py-2 flex items-center gap-2 sm:gap-3 border-b-4 border-red-200">
               <div className="bg-red-100 p-2 rounded-xl text-red-600">
                 <FaTimesCircle className="text-xl" />
               </div>
@@ -866,11 +884,23 @@ export default function TaskContentPage() {
           </div>
 
           {(taskData.type === 'quiz' || taskData.type === 'exam') && taskData.timeLimit && (
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 relative">
               <div className={`px-6 py-3 rounded-2xl flex flex-col items-center justify-center border-b-4 transition-colors ${timeLeft <= 10 ? 'bg-red-500 text-white border-red-700 animate-pulse' : 'bg-white text-slate-600 border-slate-200 shadow-md'}`}>
                 <p className="text-xs font-black uppercase tracking-wider opacity-80 leading-none mb-1">{t('time_left')}</p>
                 <p className="text-2xl font-black font-mono leading-none tracking-tighter">{formatTime(timeLeft)}</p>
               </div>
+              <AnimatePresence>
+                {timeAlert && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.9 }}
+                    className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-amber-100 text-amber-800 border-2 border-amber-300 px-4 py-1.5 rounded-full text-xs font-black whitespace-nowrap shadow-lg z-20 pointer-events-none"
+                  >
+                    {timeAlert}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           )}
         </div>
@@ -1075,11 +1105,24 @@ export default function TaskContentPage() {
               </div>
               <DrawingCanvas
                 template={currentQuestion.correctAnswer}
-                onFinish={(data) => {
+                onFinish={(data, match) => {
+                  // match is a client-side pattern check (no AI/network call)
+                  // of the drawn strokes against the template shape — see
+                  // src/app/utils/traceMatch.js.
+                  if (match && !match.passed) {
+                    setTraceFeedback("Try to trace a little more of the letter! ✏️");
+                    setTimeout(() => setTraceFeedback(null), 3000);
+                    return;
+                  }
                   setUserAnswer("done");
                   handleSubmitAnswer("done");
                 }}
               />
+              {traceFeedback && (
+                <p className="mt-3 text-center text-sm font-bold text-amber-700 bg-amber-50 border-2 border-amber-200 rounded-full px-5 py-2">
+                  {traceFeedback}
+                </p>
+              )}
             </div>
           )}
 
