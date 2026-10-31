@@ -1,8 +1,10 @@
-[build]
-  functions = "netlify/functions"  # Where your Netlify functions live
-  publish = ".next"  # The folder where your site is built (adjust if needed)
-
-[[redirects]]
-  from = "/api/chat/*"
-  to = "/.netlify/functions/chat"
-  status = 200
+# Netlify auto-detects Next.js (App Router) and manages its own build
+# and Functions/Edge Functions via the managed Next.js Runtime — no
+# [build] command, publish directory, or plugin needs to be declared
+# here. An earlier `publish = ".next"` override here made Netlify serve
+# the raw .next build output as static files instead of running it
+# through the Next.js Runtime, which is why dynamic routes (any
+# server-rendered page or /api/* route) 404'd on the live site while
+# static pages kept working. Leave this file empty of build overrides
+# unless there's a specific setting Netlify's framework detection can't
+# infer on its own.
