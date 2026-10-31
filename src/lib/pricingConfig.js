@@ -56,14 +56,17 @@ export function checkoutCurrency(country = "") {
  * Plan metadata shown on cards / badges.
  */
 export const PLAN_META = {
-    free_trial: { label: "Free Trial", children: 2, color: "amber" },
+    // 'trial' is the plan value resolveSubscription() actually returns for
+    // free-trial accounts (see subscriptionStatus.js / firebase/auth.js) —
+    // keep this key in sync with that, not with the planType/label string.
+    trial: { label: "Free Trial", children: 2, color: "amber" },
     premium_monthly: { label: "Premium Monthly", children: 4, color: "blue" },
     premium_yearly: { label: "Premium Yearly", children: 4, color: "indigo" },
     free: { label: "Free", children: 2, color: "slate" },
 };
 
-/** How many child profiles a plan allows. Falls back to the free-trial cap
- * for any plan not in PLAN_META (e.g. no subscription yet). */
+/** How many child profiles a plan allows. Falls back to the trial cap for
+ * any plan not in PLAN_META (e.g. no subscription yet). */
 export function childLimitForPlan(plan) {
-    return PLAN_META[plan]?.children ?? PLAN_META.free_trial.children;
+    return PLAN_META[plan]?.children ?? PLAN_META.trial.children;
 }
