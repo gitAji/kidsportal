@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaFileContract, FaUserCheck, FaCreditCard, FaCopyright, FaBan, FaEnvelope, FaGavel, FaShieldAlt } from 'react-icons/fa';
+import { FaFileContract, FaUserCheck, FaCreditCard, FaCopyright, FaBan, FaEnvelope, FaGavel, FaShieldAlt, FaExternalLinkAlt } from 'react-icons/fa';
 
 const SectionHeader = ({ icon: Icon, title, color }) => (
   <div className="flex items-center gap-4 mb-6">
@@ -140,11 +140,22 @@ export default function TermsOfServicePage() {
               </p>
             </div>
 
+            {/* Third-Party Links */}
+            <div className="mb-16 border-b border-slate-50 pb-16">
+              <SectionHeader icon={FaExternalLinkAlt} title="7. Third-Party Links" color="bg-cyan-600" />
+              <p className="text-slate-600 leading-relaxed text-lg">
+                Our site may link out to third-party websites or services that are not owned or controlled by KidsPortal. Each of those sites has its own terms and conditions and its own privacy policy, which are separate from ours and are not something we write or control.
+              </p>
+              <p className="mt-4 text-slate-600 leading-relaxed">
+                If you choose to visit or use a linked third-party site, you do so at your own discretion and must follow that site&apos;s own terms and conditions. We are not responsible for the content, policies, or practices of any third-party site, and including a link does not mean we endorse it.
+              </p>
+            </div>
+
             {/* Contact */}
             <div className="bg-indigo-900 rounded-[2.5rem] p-12 text-center text-white relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-transparent" />
               <div className="relative z-10">
-                <SectionHeader icon={FaEnvelope} title="7. Get in Touch" color="bg-white text-indigo-900" />
+                <SectionHeader icon={FaEnvelope} title="8. Get in Touch" color="bg-white text-indigo-900" />
                 <p className="text-indigo-200 mb-8 font-medium">
                   Have questions about our rules or your rights? Our support team is here to help clarify anything.
                 </p>
