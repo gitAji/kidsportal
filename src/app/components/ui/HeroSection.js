@@ -4,34 +4,106 @@ import Link from "next/link";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/auth";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaRocket, FaPlusCircle, FaPlay, FaShieldAlt, FaStar } from "react-icons/fa";
+import {
+  FaRocket, FaPlayCircle, FaCompass, FaTrophy, FaCheck,
+  FaCalculator, FaMicroscope, FaBookOpen, FaCode, FaLanguage,
+} from "react-icons/fa";
 
 const FLOATERS = [
-  { emoji: "🚀", top: "10%", left: "5%",  delay: 0,   dur: 5.5 },
-  { emoji: "⭐", top: "18%", right: "6%", delay: 0.6, dur: 4.8 },
-  { emoji: "🎨", top: "60%", left: "3%",  delay: 1.1, dur: 6.2 },
-  { emoji: "🧪", top: "72%", right: "4%", delay: 1.6, dur: 5.8 },
-  { emoji: "📚", top: "35%", right: "8%", delay: 0.3, dur: 5   },
-  { emoji: "🎮", top: "82%", left: "7%",  delay: 0.9, dur: 6   },
+  { emoji: "🚀", top: "8%", left: "4%", delay: 0, dur: 5.5 },
+  { emoji: "🎨", top: "58%", left: "2%", delay: 1.1, dur: 6.2 },
+  { emoji: "🎮", top: "85%", left: "6%", delay: 0.9, dur: 6 },
 ];
 
-const SUBJECTS = ["🧮 Math", "🔬 Science", "📖 English", "💻 Coding", "🌿 Tamil"];
-
-const TRUST_ITEMS = [
-  { icon: <FaShieldAlt />, text: "Safe & Ad-Free", color: "text-teal-600 bg-teal-50 border-teal-100" },
-  { icon: <FaStar />,      text: "4.9 / 5 Stars",  color: "text-amber-500 bg-amber-50 border-amber-100" },
-  { icon: "🏅",            text: "10K+ Families",   color: "text-indigo-600 bg-indigo-50 border-indigo-100" },
+// Mirrors SUBJECT_STYLE_MAP (src/app/utils/subjectStyles.js) so the hero's
+// color-coding matches what kids actually see once they're in the Learning
+// Zone, instead of inventing a second palette just for this page.
+const SUBJECT_TABS = [
+  { label: "Math", icon: FaCalculator, bg: "bg-[#72C6FF]", color: "text-[#1C7DC9]" },
+  { label: "Science", icon: FaMicroscope, bg: "bg-[#FFC972]", color: "text-[#B9811F]" },
+  { label: "English", icon: FaBookOpen, bg: "bg-[#FF9B9B]", color: "text-[#D94F4F]" },
+  { label: "Coding", icon: FaCode, bg: "bg-[#C48CFF]", color: "text-[#8A3FE5]" },
+  { label: "Tamil", icon: FaLanguage, bg: "bg-[#72E5A8]", color: "text-[#2F9A64]" },
 ];
 
-const STATS = [
-  { value: "10K+", label: "Happy Families",  grad: "from-sky-500 to-indigo-500" },
-  { value: "4.9★", label: "App Rating",       grad: "from-amber-400 to-orange-400" },
-  { value: "150+", label: "Learning Levels",  grad: "from-teal-400 to-emerald-500" },
-];
+function ActivityPreviewCard() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ delay: 0.3, duration: 0.6 }}
+      className="relative bg-white rounded-[2rem] shadow-2xl shadow-indigo-200/50 border border-slate-100 p-6 sm:p-7 w-full max-w-md mx-auto lg:mx-0"
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between gap-3 pb-5 mb-5 border-b border-slate-100">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-sky-100 to-indigo-100 flex items-center justify-center text-xl flex-shrink-0">
+            🧮
+          </div>
+          <div className="min-w-0">
+            <p className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">Interactive Activity</p>
+            <p className="font-black text-slate-800 text-sm sm:text-base truncate">Math Wizards: Geometry Quest</p>
+          </div>
+        </div>
+        <span className="flex-shrink-0 px-3 py-1.5 rounded-full bg-sky-50 text-sky-600 text-[11px] font-bold border border-sky-100">
+          Ages 6-10
+        </span>
+      </div>
+
+      {/* Question */}
+      <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100 mb-5">
+        <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-2">Lesson 3 &bull; Level 12</p>
+        <p className="font-bold text-slate-800 text-base sm:text-lg leading-snug mb-5">
+          Which shape has exactly 3 sides and 3 angles?
+        </p>
+
+        <div className="grid grid-cols-3 gap-3">
+          <div className="flex flex-col items-center gap-2 py-4 rounded-2xl bg-white border-2 border-slate-100">
+            <div className="w-7 h-7 rounded-md border-[3px] border-amber-400" />
+            <span className="text-xs font-bold text-slate-500">Square</span>
+          </div>
+          <div className="relative flex flex-col items-center gap-2 py-4 rounded-2xl bg-emerald-50 border-2 border-emerald-300">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <path d="M13 3 L24 23 L2 23 Z" stroke="#10b981" strokeWidth="3" strokeLinejoin="round" fill="none" />
+            </svg>
+            <span className="text-xs font-bold text-emerald-700">Triangle</span>
+            <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">
+              <FaCheck />
+            </span>
+          </div>
+          <div className="flex flex-col items-center gap-2 py-4 rounded-2xl bg-white border-2 border-slate-100">
+            <div className="w-7 h-7 rounded-full border-[3px] border-sky-400" />
+            <span className="text-xs font-bold text-slate-500">Circle</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Progress + streak */}
+      <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex-1 min-w-0">
+          <p className="text-[11px] font-bold text-slate-400 mb-2">Child Progress Tracking</p>
+          <div className="h-2.5 rounded-full bg-slate-100 overflow-hidden">
+            <div className="h-full rounded-full bg-gradient-to-r from-sky-500 to-indigo-500" style={{ width: "78%" }} />
+          </div>
+        </div>
+        <div className="flex-shrink-0 flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-xl px-3 py-2">
+          <span className="w-7 h-7 rounded-full bg-amber-400 text-white flex items-center justify-center text-xs">
+            <FaTrophy />
+          </span>
+          <div className="leading-tight">
+            <p className="text-[9px] font-black text-amber-600 uppercase tracking-wide">Daily Streak</p>
+            <p className="text-xs font-bold text-slate-700">7 Days!</p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function HeroSection() {
   const [user, setUser]       = useState(null);
   const [loading, setLoading] = useState(true);
+  const [activeSubject, setActiveSubject] = useState("Math");
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => { setUser(u); setLoading(false); });
@@ -52,13 +124,14 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Floating emoji (desktop) */}
+      {/* Floating emoji (desktop) — kept to the left margin so they never
+          sit behind the activity preview card on the right */}
       <div className="absolute inset-0 pointer-events-none hidden lg:block">
-        {FLOATERS.map(({ emoji, top, left, right, delay, dur }) => (
+        {FLOATERS.map(({ emoji, top, left, delay, dur }) => (
           <motion.span
             key={emoji}
             className="absolute text-4xl select-none drop-shadow-lg"
-            style={{ top, left, right }}
+            style={{ top, left }}
             animate={{ y: ["-12px", "12px"], rotate: [-3, 3] }}
             transition={{ duration: dur, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay }}
           >
@@ -100,119 +173,99 @@ export default function HeroSection() {
           ) : (
             /* ── Public ── */
             <motion.div key="out" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="max-w-5xl mx-auto"
+              className="grid lg:grid-cols-2 gap-14 lg:gap-10 items-center max-w-6xl mx-auto"
             >
-              {/* Trust pills row */}
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
-                className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8"
-              >
-                {TRUST_ITEMS.map(({ icon, text, color }) => (
-                  <span key={text} className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold ${color}`}>
-                    <span className="text-sm">{icon}</span> {text}
-                  </span>
-                ))}
-              </motion.div>
-
-              {/* Badge */}
-              <div className="flex justify-center mb-6">
-                <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1 }}
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white shadow-sm border border-sky-100"
+              {/* Left: copy */}
+              <div className="text-center lg:text-left">
+                {/* Headline */}
+                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+                  className="text-4xl sm:text-6xl font-black text-slate-800 leading-[1.08] tracking-tight mb-5"
                 >
-                  <span className="text-indigo-500 text-xs">✦</span>
-                  <span className="text-slate-600 text-xs sm:text-sm font-bold uppercase tracking-widest">The Ultimate Kids Learning Portal</span>
-                  <span className="text-sky-400 text-xs">✦</span>
+                  Where Kids Fall in Love
+                  <br className="hidden lg:block" />{" "}
+                  with{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500">
+                    Learning
+                  </span>
+                </motion.h1>
+
+                {/* Subtitle */}
+                <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}
+                  className="text-slate-500 text-base sm:text-lg font-medium max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed"
+                >
+                  Expert-designed curriculum, AI-guided tutoring, and gamified rewards — all inside a safe, ad-free platform your child will look forward to every single day.
+                </motion.p>
+
+                {/* Subject tabs */}
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.26 }}
+                  className="mb-9"
+                >
+                  <p className="text-slate-400 text-[11px] font-black uppercase tracking-widest mb-3">Explore Core Subjects:</p>
+                  <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+                    {SUBJECT_TABS.map(({ label, icon: Icon, bg, color }) => (
+                      <button
+                        key={label}
+                        type="button"
+                        onClick={() => setActiveSubject(label)}
+                        className={`flex items-center gap-2 pl-2 pr-4 py-2 rounded-xl text-sm font-bold transition-all ${
+                          activeSubject === label
+                            ? "bg-white text-slate-800 shadow-md shadow-slate-200/70 ring-1 ring-slate-100"
+                            : "text-slate-500 hover:bg-white/60"
+                        }`}
+                      >
+                        <span className={`w-6 h-6 rounded-lg flex items-center justify-center text-[11px] ${bg} ${color}`}>
+                          <Icon />
+                        </span>
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* CTAs */}
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.34 }}
+                  className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10"
+                >
+                  <Link href="/register"
+                    className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-base sm:text-lg text-white bg-gradient-to-r from-sky-500 to-indigo-500 shadow-xl shadow-sky-200/60 hover:shadow-sky-300/70 hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <FaPlayCircle className="text-xl" />
+                    Start Free Trial <span className="font-normal opacity-90">— No Credit Card</span>
+                  </Link>
+
+                  <Link href="#gradesCard" scroll={true}
+                    className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-base sm:text-lg text-slate-700 bg-white border-2 border-slate-200 shadow-sm hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <FaCompass className="text-slate-400 group-hover:text-indigo-500 transition-colors" />
+                    Explore Curriculum
+                  </Link>
+                </motion.div>
+
+                {/* Social proof */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.44 }}
+                  className="flex items-center justify-center lg:justify-start gap-3"
+                >
+                  <div className="flex -space-x-2 flex-shrink-0">
+                    {["🧒", "👦", "👧", "🧑"].map((e, i) => (
+                      <span key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-sky-400 to-indigo-400 flex items-center justify-center text-sm border-2 border-white shadow-sm">
+                        {e}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="text-left">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-amber-400 text-sm tracking-tight">★★★★★</span>
+                      <span className="text-slate-700 font-bold text-sm">4.9/5</span>
+                    </div>
+                    <p className="text-slate-400 text-xs sm:text-sm font-medium">
+                      Trusted by <span className="font-bold text-slate-600">10,000+</span> happy families worldwide
+                    </p>
+                  </div>
                 </motion.div>
               </div>
 
-              {/* Headline */}
-              <div className="text-center mb-5">
-                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
-                  className="text-4xl sm:text-6xl md:text-7xl font-black text-slate-800 leading-[1.06] tracking-tight"
-                >
-                  Where Kids
-                  <br className="hidden sm:block" />
-                  <span className="relative inline-block ml-2 sm:ml-0">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500">
-                      Fall in Love with Learning
-                    </span>
-                    <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 400 10" fill="none">
-                      <path d="M2 7 Q 100 1, 200 7 Q 300 13, 398 7" stroke="url(#ug)" strokeWidth="3" strokeLinecap="round" fill="none"/>
-                      <defs>
-                        <linearGradient id="ug" x1="0" y1="0" x2="1" y2="0">
-                          <stop offset="0%" stopColor="#0ea5e9"/>
-                          <stop offset="50%" stopColor="#6366f1"/>
-                          <stop offset="100%" stopColor="#8b5cf6"/>
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </span>
-                </motion.h1>
-              </div>
-
-              {/* Subtitle */}
-              <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 }}
-                className="text-center text-slate-500 text-base sm:text-lg md:text-xl font-medium max-w-2xl mx-auto mb-8 leading-relaxed"
-              >
-                Expert curriculum · AI tutor · Fun games &amp; rewards — all in one safe, ad-free platform your
-                child will <span className="text-slate-700 font-bold">love</span> every day.
-              </motion.p>
-
-              {/* Subject pills */}
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-                className="flex flex-wrap items-center justify-center gap-2 mb-10"
-              >
-                {SUBJECTS.map((s) => (
-                  <span key={s} className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-slate-200 text-slate-600 text-sm font-semibold shadow-sm hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700 transition-all cursor-default">
-                    {s}
-                  </span>
-                ))}
-              </motion.div>
-
-              {/* CTAs */}
-              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38 }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
-              >
-                <Link href="/register"
-                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-9 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg text-white bg-gradient-to-r from-sky-500 to-indigo-500 shadow-xl shadow-sky-200/60 hover:shadow-sky-300/70 hover:-translate-y-1 transition-all duration-300"
-                >
-                  <FaPlusCircle className="group-hover:rotate-90 transition-transform duration-300" />
-                  Start Free — No Credit Card
-                </Link>
-
-                <Link href="#gradesCard" scroll={true}
-                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-9 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg text-slate-700 bg-white border-2 border-slate-200 shadow-sm hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 hover:-translate-y-1 transition-all duration-300"
-                >
-                  <FaPlay className="text-xs text-slate-400 group-hover:translate-x-1 transition-transform" />
-                  Explore Curriculum
-                </Link>
-              </motion.div>
-
-              {/* Stats */}
-              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.46 }}
-                className="grid grid-cols-3 gap-3 sm:gap-5 max-w-md sm:max-w-xl mx-auto"
-              >
-                {STATS.map(({ value, label, grad }) => (
-                  <div key={label} className="flex flex-col items-center gap-1 bg-white border border-slate-100 rounded-2xl px-3 py-4 shadow-sm hover:shadow-md transition-shadow">
-                    <span className={`text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-br ${grad}`}>{value}</span>
-                    <span className="text-slate-400 text-[10px] sm:text-xs font-semibold text-center">{label}</span>
-                  </div>
-                ))}
-              </motion.div>
-
-              {/* Social proof */}
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.56 }}
-                className="flex items-center justify-center gap-3 mt-8 text-slate-400 text-xs sm:text-sm font-medium"
-              >
-                <div className="flex -space-x-2">
-                  {["🧒", "👦", "👧", "🧑"].map((e, i) => (
-                    <span key={i} className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-sky-400 to-indigo-400 flex items-center justify-center text-xs border-2 border-white shadow-sm">
-                      {e}
-                    </span>
-                  ))}
-                </div>
-                <span>Loved by 10,000+ families worldwide</span>
-                <span className="text-yellow-400 tracking-tight">★★★★★</span>
-              </motion.div>
+              {/* Right: activity preview */}
+              <ActivityPreviewCard />
             </motion.div>
           )}
         </AnimatePresence>
