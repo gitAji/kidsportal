@@ -204,7 +204,7 @@ export default function LearningZonePage() {
                       className="absolute -top-16 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none"
                     >
                       <span className="bg-yellow-300 text-yellow-900 font-black text-sm px-4 py-1.5 rounded-full shadow-md whitespace-nowrap border-2 border-white">
-                        Start here! 👋
+                        Complete the levels! 👋
                       </span>
                       <FaHandPointDown className="text-yellow-300 text-4xl drop-shadow-md -mt-1" />
                     </motion.div>
