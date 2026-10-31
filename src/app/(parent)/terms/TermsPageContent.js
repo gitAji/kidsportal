@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaFileContract, FaUserCheck, FaCreditCard, FaCopyright, FaBan, FaEnvelope, FaGavel } from 'react-icons/fa';
+import { FaFileContract, FaUserCheck, FaCreditCard, FaCopyright, FaBan, FaEnvelope, FaGavel, FaShieldAlt } from 'react-icons/fa';
 
 const SectionHeader = ({ icon: Icon, title, color }) => (
   <div className="flex items-center gap-4 mb-6">
@@ -39,7 +39,7 @@ export default function TermsOfServicePage() {
               Clear rules for a safe and inspiring community. By joining KidsPortal, you agree to follow these guidelines.
             </p>
             <div className="mt-8 text-[10px] font-black text-slate-500 uppercase tracking-[3px]">
-              Valid from: March 1, 2026
+              Valid from: March 1, 2026 &middot; Last updated: October 31, 2026
             </div>
           </motion.div>
         </div>
@@ -70,9 +70,37 @@ export default function TermsOfServicePage() {
               </p>
             </div>
 
+            {/* Account Sharing & Access Monitoring */}
+            <div className="mb-16 border-b border-slate-50 pb-16">
+              <SectionHeader icon={FaShieldAlt} title="3. One Family, One Account" color="bg-emerald-600" />
+              <p className="text-slate-600 leading-relaxed text-lg">
+                Your account — and every child login within it, including the Learning Zone — is licensed for the exclusive use of your own household. You may not share your parent credentials, PIN, or any child&apos;s Learning Zone login with anyone outside your family, and no one other than your own children may use a child profile to access the Learning Zone.
+              </p>
+              <div className="bg-slate-50 rounded-[2rem] p-8 border border-slate-100 mt-6">
+                <ul className="space-y-3 text-slate-700 text-sm font-bold">
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0"></span>
+                    <span>We monitor the IP addresses used to log in to parent and child accounts, and we may block logins from other IP addresses or locations we flag as suspicious.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0"></span>
+                    <span>A child&apos;s Learning Zone profile should only ever be used from your registered household — it should not be logged into from a different place by a different person, or logged into from multiple separate locations.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0"></span>
+                    <span>Traveling or temporarily somewhere else? Contact us before you go so we can authorize the new location for your account. Logging in from an unapproved location without telling us may get that login blocked.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0"></span>
+                    <span>Accounts found to be shared with, or used by, anyone outside the registered family will be suspended or permanently blocked.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
             {/* Subscriptions */}
             <div className="mb-16 border-b border-slate-50 pb-16">
-              <SectionHeader icon={FaCreditCard} title="3. Subscriptions & Payments" color="bg-blue-600" />
+              <SectionHeader icon={FaCreditCard} title="4. Subscriptions & Payments" color="bg-blue-600" />
               <div className="bg-slate-50 rounded-[2rem] p-8 border border-slate-100 mb-6">
                 <p className="text-slate-600 leading-relaxed font-medium">
                   We offer flexible monthly and yearly plans to fuel your child&apos;s curiosity. By selecting a premium plan, you agree to the associated fees.
@@ -95,7 +123,7 @@ export default function TermsOfServicePage() {
 
             {/* Intellectual Property */}
             <div className="mb-16 border-b border-slate-50 pb-16">
-              <SectionHeader icon={FaCopyright} title="4. Digital Ownership" color="bg-amber-600" />
+              <SectionHeader icon={FaCopyright} title="5. Digital Ownership" color="bg-amber-600" />
               <p className="text-slate-600 leading-relaxed text-lg italic">
                 &quot;Every lesson is a treasure, every game is a masterpiece.&quot;
               </p>
@@ -106,7 +134,7 @@ export default function TermsOfServicePage() {
 
             {/* Termination */}
             <div className="mb-16 border-b border-slate-50 pb-16">
-              <SectionHeader icon={FaBan} title="5. Respectful Conduct" color="bg-rose-600" />
+              <SectionHeader icon={FaBan} title="6. Respectful Conduct" color="bg-rose-600" />
               <p className="text-slate-600 leading-relaxed text-lg">
                 We maintain a safe harbor for children. We reserve the right to suspend any account that engages in harmful, fraudulent, or inappropriate behavior that compromises the safety of our community.
               </p>
@@ -116,7 +144,7 @@ export default function TermsOfServicePage() {
             <div className="bg-indigo-900 rounded-[2.5rem] p-12 text-center text-white relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-transparent" />
               <div className="relative z-10">
-                <SectionHeader icon={FaEnvelope} title="6. Get in Touch" color="bg-white text-indigo-900" />
+                <SectionHeader icon={FaEnvelope} title="7. Get in Touch" color="bg-white text-indigo-900" />
                 <p className="text-indigo-200 mb-8 font-medium">
                   Have questions about our rules or your rights? Our support team is here to help clarify anything.
                 </p>
