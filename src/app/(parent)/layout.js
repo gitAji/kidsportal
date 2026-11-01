@@ -22,7 +22,6 @@ const RightSidePanel = dynamic(() => import("@/app/components/RightSidePanel"), 
 const ParentSidebar = dynamic(() => import("@/app/components/layout/ParentSidebar"), { ssr: false });
 const HowItWorksContent = dynamic(() => import("@/app/components/HowItWorksContent"));
 const AboutUsContent = dynamic(() => import("@/app/components/AboutUsContent"));
-const OurTeamContent = dynamic(() => import("@/app/components/OurTeamContent"));
 
 export default function ParentLayout({ children }) {
   const [user, setUser] = useState(null);
@@ -114,7 +113,6 @@ export default function ParentLayout({ children }) {
             setIsRegister={(isRegister) => openModal(isRegister)}
             setIsHowItWorksOpen={() => openPanel('howItWorks')}
             setIsAboutUsOpen={() => openPanel('about')}
-            setIsOurTeamOpen={() => openPanel('team')}
           />
           <main className="flex-grow">
             <Suspense fallback={<PageLoader message="Initializing your workspace..." />}>
@@ -133,9 +131,6 @@ export default function ParentLayout({ children }) {
           </RightSidePanel>
           <RightSidePanel panelName="About Us" isOpen={panelState.about} onClose={() => closePanel('about')}>
             <AboutUsContent onClose={() => closePanel('about')} />
-          </RightSidePanel>
-          <RightSidePanel panelName="Our Team" isOpen={panelState.team} onClose={() => closePanel('team')}>
-            <OurTeamContent onClose={() => closePanel('team')} />
           </RightSidePanel>
           {showExitIntentModal && (
             <ExitIntentModal
