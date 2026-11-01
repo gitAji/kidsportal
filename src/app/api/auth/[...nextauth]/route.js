@@ -9,19 +9,15 @@ export const authOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
-        // Add your user validation logic here.
-        // For example, you might query a database to find a user by email
-        // and then compare the provided password with the stored hashed password.
-        // If the credentials are valid, return a user object.
-        // Otherwise, return null.
-
-        // Placeholder for demonstration:
-        if (credentials.email === "test@example.com" && credentials.password === "password") {
-          return { id: "1", name: "Test User", email: "test@example.com" };
-        } else {
-          return null;
-        }
+      async authorize() {
+        // Real account creation/sign-in goes through Firebase Auth
+        // (src/firebase/auth.js) — nothing in the app calls next-auth's
+        // signIn("credentials", ...), so this provider has no real user
+        // store to check against. It used to accept a hardcoded
+        // test@example.com / password combo as unfinished tutorial
+        // scaffolding, which was a live backdoor; disabled until it's
+        // wired up to an actual credential store.
+        return null;
       },
     }),
   ],
