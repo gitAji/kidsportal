@@ -9,14 +9,36 @@ import {
   FaCalculator, FaMicroscope, FaBookOpen, FaCode, FaLanguage,
 } from "react-icons/fa";
 
-// Simple math-themed floaters (shape outlines + a small equation chip)
-// instead of rocket/palette/controller emoji — ties the hero's background
-// decoration to the shapes already used in the activity preview card.
-const FLOATERS = [
-  { type: "circle", top: "8%", left: "4%", delay: 0, dur: 5.5 },
-  { type: "equation", text: "6 × 7 = 42", top: "54%", left: "1.5%", delay: 0.8, dur: 6.5 },
-  { type: "triangle", top: "85%", left: "6%", delay: 1.3, dur: 6 },
-];
+// Faint science-themed background motifs (an atom + a molecule) instead of
+// foreground floaters — they read as texture behind the copy rather than
+// competing with it, and fit "learning" more broadly than a math-only motif.
+function AtomDecoration({ className }) {
+  return (
+    <svg viewBox="0 0 120 120" className={className} fill="none">
+      <circle cx="60" cy="60" r="7" fill="currentColor" />
+      <ellipse cx="60" cy="60" rx="52" ry="20" stroke="currentColor" strokeWidth="2.5" />
+      <ellipse cx="60" cy="60" rx="52" ry="20" stroke="currentColor" strokeWidth="2.5" transform="rotate(60 60 60)" />
+      <ellipse cx="60" cy="60" rx="52" ry="20" stroke="currentColor" strokeWidth="2.5" transform="rotate(120 60 60)" />
+      <circle cx="112" cy="60" r="5" fill="currentColor" />
+    </svg>
+  );
+}
+
+function MoleculeDecoration({ className }) {
+  return (
+    <svg viewBox="0 0 120 120" className={className} fill="none">
+      <line x1="38" y1="40" x2="72" y2="26" stroke="currentColor" strokeWidth="2.5" />
+      <line x1="38" y1="40" x2="30" y2="80" stroke="currentColor" strokeWidth="2.5" />
+      <line x1="38" y1="40" x2="80" y2="70" stroke="currentColor" strokeWidth="2.5" />
+      <line x1="80" y1="70" x2="100" y2="42" stroke="currentColor" strokeWidth="2.5" />
+      <circle cx="38" cy="40" r="11" fill="currentColor" />
+      <circle cx="72" cy="26" r="7" fill="currentColor" />
+      <circle cx="30" cy="80" r="7" fill="currentColor" />
+      <circle cx="80" cy="70" r="9" fill="currentColor" />
+      <circle cx="100" cy="42" r="6" fill="currentColor" />
+    </svg>
+  );
+}
 
 // Mirrors SUBJECT_STYLE_MAP (src/app/utils/subjectStyles.js) so the hero's
 // color-coding matches what kids actually see once they're in the Learning
@@ -201,34 +223,25 @@ export default function HeroSection() {
         <div className="absolute inset-0 opacity-[0.025]"
           style={{ backgroundImage: "radial-gradient(circle, #64748b 1px, transparent 1px)", backgroundSize: "32px 32px" }}
         />
-      </div>
 
-      {/* Floating emoji (desktop) — kept to the left margin so they never
-          sit behind the activity preview card on the right */}
-      <div className="absolute inset-0 pointer-events-none hidden lg:block">
-        {FLOATERS.map(({ type, text, top, left, delay, dur }) => (
-          <motion.div
-            key={type + top}
-            className="absolute select-none"
-            style={{ top, left }}
-            animate={{ y: ["-10px", "10px"], rotate: type === "equation" ? 0 : [-4, 4] }}
-            transition={{ duration: dur, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay }}
-          >
-            {type === "circle" && (
-              <div className="w-9 h-9 rounded-full border-[3px] border-sky-300/80" />
-            )}
-            {type === "triangle" && (
-              <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-                <path d="M17 4 L31 30 L3 30 Z" stroke="#c4b5fd" strokeWidth="3" strokeLinejoin="round" fill="none" />
-              </svg>
-            )}
-            {type === "equation" && (
-              <div className="px-3 py-1.5 rounded-xl bg-white/80 backdrop-blur border border-indigo-100 shadow-sm font-black text-sm text-indigo-400">
-                {text}
-              </div>
-            )}
-          </motion.div>
-        ))}
+        {/* Atom + molecule background motifs (desktop) — kept to the left
+            margin so they never sit behind the activity preview card */}
+        <motion.div
+          className="hidden lg:block absolute text-sky-400/40"
+          style={{ top: "4%", left: "2%", width: 190, height: 190 }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
+        >
+          <AtomDecoration className="w-full h-full" />
+        </motion.div>
+        <motion.div
+          className="hidden lg:block absolute text-violet-400/35"
+          style={{ bottom: "6%", left: "1%", width: 150, height: 150 }}
+          animate={{ y: ["-8px", "8px"] }}
+          transition={{ duration: 6, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+        >
+          <MoleculeDecoration className="w-full h-full" />
+        </motion.div>
       </div>
 
       <div className="relative z-10 w-full container mx-auto px-4 sm:px-6 py-16 sm:py-24">
