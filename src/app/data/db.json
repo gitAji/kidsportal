@@ -169499,28 +169499,28 @@
       "id": "english-syllabus",
       "subjectName": "English",
       "title": "English Curriculum & Syllabus Guide",
-      "description": "Every topic covered in KidsPortal's English subject, Grade 1 through 10, with notes on how each grade aligns with England's National Curriculum for English, plus the roughly equivalent US grade band for families comparing against Common Core ELA standards.",
+      "description": "Every topic covered in KidsPortal's English subject, Grade 1 through 10, organised into our Seedlings/Explorers/Navigators/Pathfinders learning bands, with notes on how each grade aligns with Cambridge Primary & Lower Secondary English and England's National Curriculum, plus the roughly equivalent US grade band for families comparing against Common Core ELA standards.",
       "fileUrl": "/documents/english-curriculum-syllabus.pdf",
       "gradeRange": "Grade 1 - Grade 10",
-      "updatedAt": "2026-10-24"
+      "updatedAt": "2026-11-01"
     },
     {
       "id": "maths-syllabus",
       "subjectName": "Maths",
       "title": "Maths Curriculum & Syllabus Guide",
-      "description": "Every topic covered in KidsPortal's Maths subject, Grade 1 through 10, with notes on how each grade aligns with England's National Curriculum for Mathematics, plus the roughly equivalent US grade band for families comparing against Common Core Math standards.",
+      "description": "Every topic covered in KidsPortal's Maths subject, Grade 1 through 10, organised into our Seedlings/Explorers/Navigators/Pathfinders learning bands, with notes on how each grade aligns with Cambridge Primary Maths and England's National Curriculum, plus the roughly equivalent US grade band for families comparing against Common Core Math standards.",
       "fileUrl": "/documents/maths-curriculum-syllabus.pdf",
       "gradeRange": "Grade 1 - Grade 10",
-      "updatedAt": "2026-10-24"
+      "updatedAt": "2026-11-01"
     },
     {
       "id": "tamil-syllabus",
       "subjectName": "Tamil",
       "title": "Tamil Language Curriculum & Syllabus Guide",
-      "description": "Every topic covered in KidsPortal's Tamil subject, Grade 1 through 10, with notes on how each grade aligns with Tamil Nadu's Samacheer Kalvi curriculum, Sri Lanka's Tamil-medium school syllabus (NIE), and Malaysia's Tamil-medium primary curriculum (SJK(T) / KSSR-DSKP).",
+      "description": "Every topic covered in KidsPortal's Tamil subject (Heritage track), Grade 1 through 10, with notes on how each grade aligns with Sri Lanka's NIE Tamil-medium syllabus, Tamil Nadu's Samacheer Kalvi curriculum, and Malaysia's Tamil-medium primary curriculum (SJK(T) / KSSR-DSKP).",
       "fileUrl": "/documents/tamil-curriculum-syllabus.pdf",
       "gradeRange": "Grade 1 - Grade 10",
-      "updatedAt": "2026-09-24"
+      "updatedAt": "2026-11-01"
     }
   ]
 }
