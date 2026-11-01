@@ -5,7 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/auth";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  FaRocket, FaPlayCircle, FaCompass, FaTrophy, FaCheck,
+  FaRocket, FaPlayCircle, FaCompass, FaTrophy, FaCheck, FaTimes,
   FaCalculator, FaMicroscope, FaBookOpen, FaCode, FaLanguage,
 } from "react-icons/fa";
 
@@ -26,7 +26,41 @@ const SUBJECT_TABS = [
   { label: "Tamil", icon: FaLanguage, bg: "bg-[#72E5A8]", color: "text-[#2F9A64]" },
 ];
 
+const GEOMETRY_OPTIONS = [
+  { label: "Square", shape: "square" },
+  { label: "Triangle", shape: "triangle" },
+  { label: "Circle", shape: "circle" },
+];
+const GEOMETRY_ANSWER = "Triangle";
+
+function ShapeGlyph({ shape, active }) {
+  if (shape === "triangle") {
+    return (
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <path d="M13 3 L24 23 L2 23 Z" stroke={active ? "#10b981" : "#94a3b8"} strokeWidth="3" strokeLinejoin="round" fill="none" />
+      </svg>
+    );
+  }
+  if (shape === "circle") {
+    return <div className={`w-7 h-7 rounded-full border-[3px] ${active ? "border-sky-400" : "border-slate-300"}`} />;
+  }
+  return <div className={`w-7 h-7 rounded-md border-[3px] ${active ? "border-amber-400" : "border-slate-300"}`} />;
+}
+
 function ActivityPreviewCard() {
+  const [selected, setSelected] = useState(null);
+
+  function handlePick(label) {
+    if (selected) return; // lock in the first answer, same as the real quiz UI
+    setSelected(label);
+  }
+
+  function handleReset() {
+    setSelected(null);
+  }
+
+  const isCorrect = selected === GEOMETRY_ANSWER;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30, scale: 0.97 }}
@@ -58,24 +92,66 @@ function ActivityPreviewCard() {
         </p>
 
         <div className="grid grid-cols-3 gap-3">
-          <div className="flex flex-col items-center gap-2 py-4 rounded-2xl bg-white border-2 border-slate-100">
-            <div className="w-7 h-7 rounded-md border-[3px] border-amber-400" />
-            <span className="text-xs font-bold text-slate-500">Square</span>
-          </div>
-          <div className="relative flex flex-col items-center gap-2 py-4 rounded-2xl bg-emerald-50 border-2 border-emerald-300">
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-              <path d="M13 3 L24 23 L2 23 Z" stroke="#10b981" strokeWidth="3" strokeLinejoin="round" fill="none" />
-            </svg>
-            <span className="text-xs font-bold text-emerald-700">Triangle</span>
-            <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">
-              <FaCheck />
-            </span>
-          </div>
-          <div className="flex flex-col items-center gap-2 py-4 rounded-2xl bg-white border-2 border-slate-100">
-            <div className="w-7 h-7 rounded-full border-[3px] border-sky-400" />
-            <span className="text-xs font-bold text-slate-500">Circle</span>
-          </div>
+          {GEOMETRY_OPTIONS.map(({ label, shape }) => {
+            const isPicked = selected === label;
+            const showAsCorrect = selected && label === GEOMETRY_ANSWER;
+            const showAsWrong = isPicked && label !== GEOMETRY_ANSWER;
+            return (
+              <button
+                key={label}
+                type="button"
+                onClick={() => handlePick(label)}
+                aria-pressed={isPicked}
+                disabled={!!selected}
+                className={`relative flex flex-col items-center gap-2 py-4 rounded-2xl border-2 transition-all ${
+                  showAsCorrect
+                    ? "bg-emerald-50 border-emerald-300"
+                    : showAsWrong
+                    ? "bg-red-50 border-red-300"
+                    : "bg-white border-slate-100"
+                } ${!selected ? "hover:border-indigo-200 hover:-translate-y-0.5 cursor-pointer" : "cursor-default"}`}
+              >
+                <ShapeGlyph shape={shape} active={showAsCorrect || (!selected)} />
+                <span className={`text-xs font-bold ${showAsCorrect ? "text-emerald-700" : showAsWrong ? "text-red-600" : "text-slate-500"}`}>
+                  {label}
+                </span>
+                {showAsCorrect && (
+                  <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">
+                    <FaCheck />
+                  </span>
+                )}
+                {showAsWrong && (
+                  <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 text-white flex items-center justify-center text-[10px]">
+                    <FaTimes />
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
+
+        <AnimatePresence mode="wait">
+          {selected && (
+            <motion.div
+              key={isCorrect ? "correct" : "wrong"}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className={`mt-4 flex items-center justify-between gap-3 rounded-xl px-4 py-2.5 text-sm font-bold ${
+                isCorrect ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-600"
+              }`}
+            >
+              <span>{isCorrect ? "🎉 Correct! A triangle has 3 sides and 3 angles." : "Not quite — a triangle has 3 sides. Try again!"}</span>
+              <button
+                type="button"
+                onClick={handleReset}
+                className="flex-shrink-0 underline underline-offset-2 hover:opacity-70"
+              >
+                Retry
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Progress + streak */}
