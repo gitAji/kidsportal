@@ -138,12 +138,30 @@ const SUBJECT_TABS = [
   { label: "Tamil", icon: FaLanguage, bg: "bg-[#72E5A8]", color: "text-[#2F9A64]" },
 ];
 
-const GEOMETRY_OPTIONS = [
-  { label: "Square", shape: "square" },
-  { label: "Triangle", shape: "triangle" },
-  { label: "Circle", shape: "circle" },
+// Two questions, one picked at random per page load, so repeat visitors
+// (and anyone who refreshes) don't always see the same triangle question.
+const GEOMETRY_QUESTIONS = [
+  {
+    question: "Which shape has exactly 3 sides and 3 angles?",
+    options: [
+      { label: "Square", shape: "square" },
+      { label: "Triangle", shape: "triangle" },
+      { label: "Circle", shape: "circle" },
+    ],
+    answer: "Triangle",
+    explain: "A triangle has 3 sides and 3 angles.",
+  },
+  {
+    question: "Which shape has no corners at all, so it rolls smoothly?",
+    options: [
+      { label: "Square", shape: "square" },
+      { label: "Triangle", shape: "triangle" },
+      { label: "Circle", shape: "circle" },
+    ],
+    answer: "Circle",
+    explain: "A circle has no corners, so it rolls smoothly.",
+  },
 ];
-const GEOMETRY_ANSWER = "Triangle";
 
 function ShapeGlyph({ shape, active }) {
   if (shape === "triangle") {
@@ -160,6 +178,10 @@ function ShapeGlyph({ shape, active }) {
 }
 
 function ActivityPreviewCard() {
+  // Lazy initializer runs once on mount, client-side only (this card never
+  // appears in the server-rendered HTML — see the `loading` gate above —
+  // so there's no server/client random-pick mismatch to worry about).
+  const [quiz] = useState(() => GEOMETRY_QUESTIONS[Math.floor(Math.random() * GEOMETRY_QUESTIONS.length)]);
   const [selected, setSelected] = useState(null);
 
   function handlePick(label) {
@@ -171,7 +193,7 @@ function ActivityPreviewCard() {
     setSelected(null);
   }
 
-  const isCorrect = selected === GEOMETRY_ANSWER;
+  const isCorrect = selected === quiz.answer;
 
   return (
     <motion.div
@@ -200,14 +222,14 @@ function ActivityPreviewCard() {
       <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100 mb-5">
         <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-2">Lesson 3 &bull; Level 12</p>
         <p className="font-bold text-slate-800 text-base sm:text-lg leading-snug mb-5">
-          Which shape has exactly 3 sides and 3 angles?
+          {quiz.question}
         </p>
 
         <div className="grid grid-cols-3 gap-3">
-          {GEOMETRY_OPTIONS.map(({ label, shape }) => {
+          {quiz.options.map(({ label, shape }) => {
             const isPicked = selected === label;
-            const showAsCorrect = selected && label === GEOMETRY_ANSWER;
-            const showAsWrong = isPicked && label !== GEOMETRY_ANSWER;
+            const showAsCorrect = selected && label === quiz.answer;
+            const showAsWrong = isPicked && label !== quiz.answer;
             return (
               <button
                 key={label}
@@ -253,7 +275,7 @@ function ActivityPreviewCard() {
                 isCorrect ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-600"
               }`}
             >
-              <span>{isCorrect ? "🎉 Correct! A triangle has 3 sides and 3 angles." : "Not quite — a triangle has 3 sides. Try again!"}</span>
+              <span>{isCorrect ? `🎉 Correct! ${quiz.explain}` : `Not quite — ${quiz.explain} Try again!`}</span>
               <button
                 type="button"
                 onClick={handleReset}
