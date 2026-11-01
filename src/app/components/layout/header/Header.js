@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, logout } from "@/firebase/auth";
-import { FaBell, FaUserCircle, FaCaretDown, FaQuestionCircle, FaUsers, FaHome, FaGraduationCap, FaEnvelope, FaInfoCircle, FaShieldAlt, FaStar } from "react-icons/fa";
+import { FaBell, FaUserCircle, FaCaretDown, FaQuestionCircle, FaHome, FaGraduationCap, FaEnvelope, FaInfoCircle, FaShieldAlt, FaStar } from "react-icons/fa";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { motion, AnimatePresence } from "framer-motion";
@@ -17,7 +17,6 @@ export default function Header({
   setIsRegister,
   setIsHowItWorksOpen,
   setIsAboutUsOpen,
-  setIsOurTeamOpen,
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
@@ -143,9 +142,6 @@ export default function Header({
             <div className="flex items-center gap-4">
               <button onClick={setIsHowItWorksOpen} className="flex items-center gap-1.5 opacity-90 hover:opacity-100 transition-opacity">
                 <FaQuestionCircle className="text-[10px]" /> How It Works
-              </button>
-              <button onClick={setIsOurTeamOpen} className="hidden md:flex items-center gap-1.5 opacity-90 hover:opacity-100 transition-opacity">
-                <FaUsers className="text-[10px]" /> Our Team
               </button>
             </div>
           </div>
