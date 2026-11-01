@@ -9,21 +9,6 @@ import {
   FaCalculator, FaMicroscope, FaBookOpen, FaCode, FaLanguage,
 } from "react-icons/fa";
 
-// Faint science-themed background motifs (an atom + a molecule) instead of
-// foreground floaters — they read as texture behind the copy rather than
-// competing with it, and fit "learning" more broadly than a math-only motif.
-function AtomDecoration({ className }) {
-  return (
-    <svg viewBox="0 0 120 120" className={className} fill="none">
-      <circle cx="60" cy="60" r="7" fill="currentColor" />
-      <ellipse cx="60" cy="60" rx="52" ry="20" stroke="currentColor" strokeWidth="2.5" />
-      <ellipse cx="60" cy="60" rx="52" ry="20" stroke="currentColor" strokeWidth="2.5" transform="rotate(60 60 60)" />
-      <ellipse cx="60" cy="60" rx="52" ry="20" stroke="currentColor" strokeWidth="2.5" transform="rotate(120 60 60)" />
-      <circle cx="112" cy="60" r="5" fill="currentColor" />
-    </svg>
-  );
-}
-
 // A bright, friendly solar system filling the whole right column behind the
 // activity card — a smiling sun, bold saturated planets (one with a
 // Saturn-style ring, instantly recognizable to kids), dashed "pathway"
@@ -139,22 +124,6 @@ function SolarSystemDecoration() {
         </div>
       ))}
     </div>
-  );
-}
-
-function MoleculeDecoration({ className }) {
-  return (
-    <svg viewBox="0 0 120 120" className={className} fill="none">
-      <line x1="38" y1="40" x2="72" y2="26" stroke="currentColor" strokeWidth="2.5" />
-      <line x1="38" y1="40" x2="30" y2="80" stroke="currentColor" strokeWidth="2.5" />
-      <line x1="38" y1="40" x2="80" y2="70" stroke="currentColor" strokeWidth="2.5" />
-      <line x1="80" y1="70" x2="100" y2="42" stroke="currentColor" strokeWidth="2.5" />
-      <circle cx="38" cy="40" r="11" fill="currentColor" />
-      <circle cx="72" cy="26" r="7" fill="currentColor" />
-      <circle cx="30" cy="80" r="7" fill="currentColor" />
-      <circle cx="80" cy="70" r="9" fill="currentColor" />
-      <circle cx="100" cy="42" r="6" fill="currentColor" />
-    </svg>
   );
 }
 
@@ -341,25 +310,6 @@ export default function HeroSection() {
         <div className="absolute inset-0 opacity-[0.025]"
           style={{ backgroundImage: "radial-gradient(circle, #64748b 1px, transparent 1px)", backgroundSize: "32px 32px" }}
         />
-
-        {/* Atom + molecule background motifs (desktop) — kept to the left
-            margin so they never sit behind the activity preview card */}
-        <motion.div
-          className="hidden lg:block absolute text-sky-400/40"
-          style={{ top: "4%", left: "2%", width: 190, height: 190 }}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
-        >
-          <AtomDecoration className="w-full h-full" />
-        </motion.div>
-        <motion.div
-          className="hidden lg:block absolute text-violet-400/35"
-          style={{ bottom: "6%", left: "1%", width: 150, height: 150 }}
-          animate={{ y: ["-8px", "8px"] }}
-          transition={{ duration: 6, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-        >
-          <MoleculeDecoration className="w-full h-full" />
-        </motion.div>
       </div>
 
       <div className="relative z-10 w-full container mx-auto px-4 sm:px-6 py-16 sm:py-24">
