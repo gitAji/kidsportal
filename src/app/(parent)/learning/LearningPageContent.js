@@ -2,6 +2,8 @@
 import React from 'react';
 import SubjectsSection from '../../components/learning/SubjectsSection';
 import HowWeMakeLearningFunSection from '../../components/learning/HowWeMakeLearningFunSection';
+import LearningBandsSection from '../../components/learning/LearningBandsSection';
+import MasterySystemSection from '../../components/learning/MasterySystemSection';
 import CurriculumShowcase from '../../components/ui/CurriculumShowcase';
 import { motion } from "framer-motion";
 import { FaFilePdf, FaDownload } from "react-icons/fa";
@@ -77,6 +79,14 @@ export default function LearningPage() {
 
         <SubjectsSection />
 
+        <div className="mt-32">
+          <LearningBandsSection />
+        </div>
+
+        <div className="mt-32">
+          <MasterySystemSection />
+        </div>
+
         {/* Full grade-by-grade, subject-by-subject curriculum browser —
             real levels and task counts, not marketing copy. */}
         <motion.div
@@ -108,7 +118,8 @@ export default function LearningPage() {
                 Download the <span className="text-blue-600">Syllabus</span>
               </h2>
               <p className="text-slate-500 font-medium">
-                Prefer a document you can save or print? Every topic, grade by grade.
+                Prefer a document you can save, print or share? Here&apos;s a snapshot overview of each subject &mdash;
+                the interactive browser above always reflects the live, up-to-date curriculum.
               </p>
             </div>
             <div className="space-y-4">
