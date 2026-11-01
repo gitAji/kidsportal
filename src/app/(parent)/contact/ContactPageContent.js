@@ -29,18 +29,17 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <section className="bg-slate-900 py-28 relative overflow-hidden text-center">
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <div className="absolute top-0 left-0 w-72 h-72 bg-blue-500 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 right-0 w-72 h-72 bg-purple-500 rounded-full blur-[120px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500 rounded-full blur-[140px] opacity-40" />
+      <section className="bg-gradient-to-br from-[#eef6ff] via-[#f0f4ff] to-[#f5f0ff] py-28 relative overflow-hidden text-center">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-0 w-72 h-72 bg-sky-200/40 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 right-0 w-72 h-72 bg-violet-200/40 rounded-full blur-[120px]" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase mb-8"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-sky-100 shadow-sm text-sky-600 text-xs font-black tracking-widest uppercase mb-8"
           >
             <FaQuestionCircle /> We&apos;re here to help
           </motion.div>
@@ -48,15 +47,15 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight"
+            className="text-4xl md:text-6xl font-black text-slate-800 mb-6 tracking-tight"
           >
-            Get in Touch
+            Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500">Touch</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-blue-100/60 text-lg max-w-xl mx-auto"
+            className="text-slate-500 text-lg max-w-xl mx-auto"
           >
             Have a question about a lesson or your subscription? We&apos;re here to help you and your little learner every step of the way.
           </motion.p>

@@ -17,10 +17,10 @@ export default function TermsOfServicePage() {
   return (
     <div className="bg-slate-50 font-sans">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden bg-slate-900 text-white">
-        <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-600 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-600 rounded-full blur-[100px]" />
+      <section className="relative py-20 overflow-hidden bg-gradient-to-br from-[#eef6ff] via-[#f0f4ff] to-[#f5f0ff]">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-24 -left-24 w-96 h-96 bg-sky-200/40 rounded-full blur-[120px]" />
+          <div className="absolute top-1/2 -right-24 w-80 h-80 bg-violet-200/40 rounded-full blur-[100px]" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10 text-center">
@@ -29,16 +29,16 @@ export default function TermsOfServicePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-black uppercase tracking-[2px] mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-sky-100 shadow-sm text-sky-600 text-[10px] font-black uppercase tracking-[2px] mb-6">
               <FaGavel /> Rules of Adventure
             </div>
-            <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
-              Terms of <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Service</span>
+            <h1 className="text-5xl md:text-7xl font-black text-slate-800 mb-6 tracking-tight">
+              Terms of <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500">Service</span>
             </h1>
-            <p className="text-slate-400 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
+            <p className="text-slate-500 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
               Clear rules for a safe and inspiring community. By joining KidsPortal, you agree to follow these guidelines.
             </p>
-            <div className="mt-8 text-[10px] font-black text-slate-500 uppercase tracking-[3px]">
+            <div className="mt-8 text-[10px] font-black text-slate-400 uppercase tracking-[3px]">
               Valid from: March 1, 2026 &middot; Last updated: October 31, 2026
             </div>
           </motion.div>
@@ -155,7 +155,12 @@ export default function TermsOfServicePage() {
             <div className="bg-indigo-900 rounded-[2.5rem] p-12 text-center text-white relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-transparent" />
               <div className="relative z-10">
-                <SectionHeader icon={FaEnvelope} title="8. Get in Touch" color="bg-white text-indigo-900" />
+                <div className="flex items-center justify-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg bg-white text-indigo-900">
+                    <FaEnvelope />
+                  </div>
+                  <h2 className="text-2xl font-black text-white tracking-tight uppercase tracking-[1px]">8. Get in Touch</h2>
+                </div>
                 <p className="text-indigo-200 mb-8 font-medium">
                   Have questions about our rules or your rights? Our support team is here to help clarify anything.
                 </p>

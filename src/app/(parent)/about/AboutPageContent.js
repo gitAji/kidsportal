@@ -36,11 +36,11 @@ export default function AboutUsPage() {
     return (
         <div className="bg-white font-sans">
             {/* ── Hero Section ── */}
-            <section className="relative py-32 overflow-hidden bg-slate-900 border-b border-white/5">
-                <div className="absolute inset-0 opacity-20">
-                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.3),transparent_50%)]" />
-                    <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600 rounded-full blur-[120px]" />
-                    <div className="absolute top-1/2 left-1/4 w-80 h-80 bg-cyan-500 rounded-full blur-[100px]" />
+            <section className="relative py-32 overflow-hidden bg-gradient-to-br from-[#eef6ff] via-[#f0f4ff] to-[#f5f0ff]">
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-sky-200/40 rounded-full blur-[130px]" />
+                    <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-violet-200/40 rounded-full blur-[120px]" />
+                    <div className="absolute top-1/2 left-1/4 w-80 h-80 bg-teal-200/30 rounded-full blur-[100px]" />
                 </div>
 
                 <div className="container mx-auto px-6 relative z-10 text-center">
@@ -49,14 +49,14 @@ export default function AboutUsPage() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-[3px] mb-8">
+                        <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-sky-100 shadow-sm text-sky-600 text-[10px] font-black uppercase tracking-[3px] mb-8">
                             <FaStar /> Our Mission
                         </div>
-                        <h1 className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter">
+                        <h1 className="text-5xl md:text-8xl font-black text-slate-800 mb-8 tracking-tighter">
                             Making Learning <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-400">Pure Magic.</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500">Pure Magic.</span>
                         </h1>
-                        <p className="text-slate-400 max-w-2xl mx-auto text-xl font-medium leading-relaxed">
+                        <p className="text-slate-500 max-w-2xl mx-auto text-xl font-medium leading-relaxed">
                             KidsPortal was founded with a single, radical idea: that education should be as engaging as a child&apos;s favorite game.
                         </p>
                     </motion.div>
