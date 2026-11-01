@@ -7,7 +7,6 @@ export const useUI = () => useContext(UIContext);
 
 export const UIProvider = ({ children }) => {
   const [panelState, setPanelState] = useState({
-    team: false,
     howItWorks: false,
     about: false,
   });

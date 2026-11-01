@@ -9,7 +9,6 @@ import AuthModal from "./ui/AuthModal";
 import RightSidePanel from "./RightSidePanel";
 import HowItWorksContent from "./HowItWorksContent";
 import AboutUsContent from "./AboutUsContent";
-import OurTeamContent from "./OurTeamContent";
 import ExitIntentModal from "./ui/ExitIntentModal";
 import { useUI } from "../providers/UIProvider"; // Import the context hook
 
@@ -48,7 +47,6 @@ export default function ClientLayoutWrapper({ children }) {
         setIsRegister={(isRegister) => openModal(isRegister)}
         setIsHowItWorksOpen={() => openPanel('howItWorks')}
         setIsAboutUsOpen={() => openPanel('about')}
-        setIsOurTeamOpen={() => openPanel('team')}
       />
       <main className="flex-grow">{children}</main>
       <Footer />
@@ -63,9 +61,6 @@ export default function ClientLayoutWrapper({ children }) {
       </RightSidePanel>
       <RightSidePanel panelName="About Us" isOpen={panelState.about} onClose={() => closePanel('about')}>
         <AboutUsContent />
-      </RightSidePanel>
-      <RightSidePanel panelName="Our Team" isOpen={panelState.team} onClose={() => closePanel('team')}>
-        <OurTeamContent />
       </RightSidePanel>
       {showExitIntentModal && (
         <ExitIntentModal

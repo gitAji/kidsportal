@@ -38,49 +38,42 @@ const FEATURES = [
     title: "AI Learning Assistant",
     description: "A built-in AI tutor guides every lesson, quiz, and exam — explaining concepts and answering questions in real time, whenever your child gets stuck.",
     color: "indigo",
-    size: "hero",
   },
   {
     icon: FaClock,
     title: "Parental Time Controls",
     description: "Set daily and weekly time limits per child. Once time's up, they can ask for more — and you decide.",
     color: "blue",
-    size: "tall",
   },
   {
     icon: FaCertificate,
     title: "Certificates of Achievement",
     description: "Downloadable Gold, Silver & Bronze certificates once real progress is made.",
     color: "amber",
-    size: "tall",
   },
   {
     icon: FaChartLine,
     title: "Real Progress Analytics",
     description: "See exactly what's been completed, when, and how well — tasks, levels, XP, and weekly trends, all from real activity.",
     color: "violet",
-    size: "wide",
   },
   {
     icon: FaShieldAlt,
     title: "Zero Ads, Zero Distractions",
     description: "No ads. No third-party links. Nothing on screen except learning.",
     color: "emerald",
-    size: "wide",
   },
   {
     icon: FaBookOpen,
     title: "Ever-Growing Curriculum",
     description: "10 grades and multiple subjects — from English and Math to Coding — regularly expanded by our curriculum team.",
     color: "cyan",
-    size: "wide",
   },
   {
     icon: FaSmile,
     title: "Built for Kids",
     description: "Playful, gamified, and safe by design — stickers, XP, avatars, and a friendly professor guide.",
     color: "rose",
-    size: "wide",
   },
 ];
 
@@ -111,38 +104,27 @@ const REVIEWS = [
 ];
 
 const FEATURE_COLORS = {
-  indigo: { bg: "bg-indigo-50", iconBg: "bg-indigo-100", text: "text-indigo-600", groupHoverText: "group-hover:text-indigo-600", border: "hover:border-indigo-100 hover:border-b-indigo-500" },
-  blue: { bg: "bg-blue-50", iconBg: "bg-blue-100", text: "text-blue-600", groupHoverText: "group-hover:text-blue-600", border: "hover:border-blue-100 hover:border-b-blue-500" },
-  amber: { bg: "bg-amber-50", iconBg: "bg-amber-100", text: "text-amber-600", groupHoverText: "group-hover:text-amber-600", border: "hover:border-amber-100 hover:border-b-amber-500" },
-  violet: { bg: "bg-violet-50", iconBg: "bg-violet-100", text: "text-violet-600", groupHoverText: "group-hover:text-violet-600", border: "hover:border-violet-100 hover:border-b-violet-500" },
-  emerald: { bg: "bg-emerald-50", iconBg: "bg-emerald-100", text: "text-emerald-600", groupHoverText: "group-hover:text-emerald-600", border: "hover:border-emerald-100 hover:border-b-emerald-500" },
-  cyan: { bg: "bg-cyan-50", iconBg: "bg-cyan-100", text: "text-cyan-600", groupHoverText: "group-hover:text-cyan-600", border: "hover:border-cyan-100 hover:border-b-cyan-500" },
-  rose: { bg: "bg-rose-50", iconBg: "bg-rose-100", text: "text-rose-600", groupHoverText: "group-hover:text-rose-600", border: "hover:border-rose-100 hover:border-b-rose-500" },
-};
-
-// Bento sizing on a 6-col grid: the AI hero tile spans 4 cols x 2 rows,
-// the two "tall" tiles fill the remaining 2 cols (1 row each), and the
-// four "wide" tiles pair up into two more rows of 3+3.
-const FEATURE_SIZE_CLASSES = {
-  hero: "md:col-span-4 md:row-span-2",
-  tall: "md:col-span-2",
-  wide: "md:col-span-3",
+  indigo: { bg: "bg-indigo-50", iconBg: "bg-indigo-100", text: "text-indigo-600", groupHoverText: "group-hover:text-indigo-600", border: "hover:border-indigo-200" },
+  blue: { bg: "bg-blue-50", iconBg: "bg-blue-100", text: "text-blue-600", groupHoverText: "group-hover:text-blue-600", border: "hover:border-blue-200" },
+  amber: { bg: "bg-amber-50", iconBg: "bg-amber-100", text: "text-amber-600", groupHoverText: "group-hover:text-amber-600", border: "hover:border-amber-200" },
+  violet: { bg: "bg-violet-50", iconBg: "bg-violet-100", text: "text-violet-600", groupHoverText: "group-hover:text-violet-600", border: "hover:border-violet-200" },
+  emerald: { bg: "bg-emerald-50", iconBg: "bg-emerald-100", text: "text-emerald-600", groupHoverText: "group-hover:text-emerald-600", border: "hover:border-emerald-200" },
+  cyan: { bg: "bg-cyan-50", iconBg: "bg-cyan-100", text: "text-cyan-600", groupHoverText: "group-hover:text-cyan-600", border: "hover:border-cyan-200" },
+  rose: { bg: "bg-rose-50", iconBg: "bg-rose-100", text: "text-rose-600", groupHoverText: "group-hover:text-rose-600", border: "hover:border-rose-200" },
 };
 
 function FeatureTile({ feature }) {
   const c = FEATURE_COLORS[feature.color];
   const Icon = feature.icon;
-  const isHero = feature.size === "hero";
   return (
-    <div
-      className={`group bg-white p-8 ${isHero ? "md:p-10" : ""} rounded-[2rem] border-2 border-slate-100 border-b-[6px] ${c.border} hover:-translate-y-1 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden flex flex-col justify-center ${FEATURE_SIZE_CLASSES[feature.size]}`}
-    >
-      <div className={`absolute top-0 right-0 w-32 h-32 ${c.bg} rounded-full blur-3xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700 opacity-50`} />
-      <div className={`${isHero ? "w-20 h-20 text-4xl" : "w-14 h-14 text-2xl"} ${c.iconBg} rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-6 group-hover:scale-110 transition-all duration-300 relative z-10`}>
+    <div className={`group flex gap-4 bg-white p-6 rounded-2xl border-2 border-slate-100 ${c.border} hover:-translate-y-0.5 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_12px_28px_rgb(0,0,0,0.06)] transition-all duration-300`}>
+      <div className={`flex-shrink-0 w-12 h-12 text-xl ${c.iconBg} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
         <Icon className={c.text} />
       </div>
-      <h3 className={`${isHero ? "text-3xl" : "text-xl"} font-black text-slate-800 mb-3 ${c.groupHoverText} transition-colors relative z-10`}>{feature.title}</h3>
-      <p className={`text-slate-500 ${isHero ? "text-lg" : "text-sm"} leading-relaxed relative z-10 font-medium`}>{feature.description}</p>
+      <div>
+        <h3 className={`text-base font-black text-slate-800 mb-1.5 ${c.groupHoverText} transition-colors`}>{feature.title}</h3>
+        <p className="text-slate-500 text-sm leading-relaxed font-medium">{feature.description}</p>
+      </div>
     </div>
   );
 }
@@ -224,7 +206,7 @@ export default async function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-6 md:auto-rows-[minmax(220px,auto)] gap-5 px-2 md:px-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {FEATURES.map((feature) => (
               <FeatureTile key={feature.title} feature={feature} />
             ))}
