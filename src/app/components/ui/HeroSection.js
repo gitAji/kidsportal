@@ -24,6 +24,124 @@ function AtomDecoration({ className }) {
   );
 }
 
+// A bright, friendly solar system filling the whole right column behind the
+// activity card — a smiling sun, bold saturated planets (one with a
+// Saturn-style ring, instantly recognizable to kids), dashed "pathway"
+// orbits, and a few twinkling stars. Sized to the column itself (percentage,
+// not fixed px) so it scales with the viewport and reaches the column's
+// edges instead of sitting as a small corner decoration.
+const PLANETS = [
+  { radiusPct: 20, size: 16, color: "bg-sky-500", dur: 9, startDeg: 15 },
+  { radiusPct: 31, size: 22, color: "bg-emerald-500", dur: 15, startDeg: 150 },
+  { radiusPct: 42, size: 18, color: "bg-violet-500", dur: 21, startDeg: 255 },
+  { radiusPct: 50, size: 25, color: "bg-amber-500", dur: 28, startDeg: 75, ring: true },
+];
+
+const SPARKLES = [
+  { top: "9%", left: "10%", size: 13, delay: 0, dur: 2.4 },
+  { top: "20%", left: "82%", size: 10, delay: 0.6, dur: 2.8 },
+  { top: "70%", left: "9%", size: 11, delay: 1.1, dur: 2.2 },
+  { top: "84%", left: "76%", size: 14, delay: 0.3, dur: 3 },
+  { top: "48%", left: "93%", size: 9, delay: 1.6, dur: 2.6 },
+];
+
+function Sparkle({ size }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0 C12 6 14 10 20 12 C14 14 12 18 12 24 C12 18 10 14 4 12 C10 10 12 6 12 0 Z" />
+    </svg>
+  );
+}
+
+function SolarSystemDecoration() {
+  return (
+    <div className="relative w-full h-full">
+      {/* Twinkling stars */}
+      {SPARKLES.map((s, i) => (
+        <motion.span
+          key={`spark-${i}`}
+          className="absolute text-amber-300"
+          style={{ top: s.top, left: s.left }}
+          animate={{ opacity: [0.2, 1, 0.2], scale: [0.8, 1.2, 0.8] }}
+          transition={{ duration: s.dur, repeat: Infinity, ease: "easeInOut", delay: s.delay }}
+        >
+          <Sparkle size={s.size} />
+        </motion.span>
+      ))}
+
+      {/* Dashed orbit paths */}
+      {PLANETS.map(({ radiusPct }, i) => (
+        <svg
+          key={`orbit-${i}`}
+          className="absolute top-1/2 left-1/2"
+          style={{ width: `${radiusPct * 2}%`, height: `${radiusPct * 2}%`, transform: "translate(-50%, -50%)" }}
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
+          <circle cx="50" cy="50" r="48" fill="none" stroke="#a5b4fc" strokeOpacity="0.5" strokeWidth="2" strokeDasharray="4 7" />
+        </svg>
+      ))}
+
+      {/* Sun, with a friendly face and a gentle "breathing" pulse */}
+      <motion.div
+        className="absolute top-1/2 left-1/2"
+        style={{ x: "-50%", y: "-50%" }}
+        animate={{ scale: [1, 1.06, 1] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="absolute inset-0 rounded-full blur-2xl bg-amber-300/50 scale-[2.2]" />
+        <svg width="60" height="60" viewBox="0 0 60 60" className="relative">
+          <defs>
+            <radialGradient id="heroSunGrad" cx="35%" cy="30%" r="70%">
+              <stop offset="0%" stopColor="#fde68a" />
+              <stop offset="100%" stopColor="#f59e0b" />
+            </radialGradient>
+          </defs>
+          <circle cx="30" cy="30" r="26" fill="url(#heroSunGrad)" />
+          <circle cx="22" cy="28" r="2.4" fill="#92400e" />
+          <circle cx="38" cy="28" r="2.4" fill="#92400e" />
+          <path d="M20 36 Q30 44 40 36" stroke="#92400e" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+        </svg>
+      </motion.div>
+
+      {/* Planets */}
+      {PLANETS.map(({ radiusPct, size, color, dur, startDeg, ring }, i) => (
+        <div
+          key={`planet-${i}`}
+          className="absolute top-1/2 left-1/2"
+          style={{ width: `${radiusPct * 2}%`, height: `${radiusPct * 2}%`, transform: "translate(-50%, -50%)" }}
+        >
+          <motion.div
+            className="absolute inset-0"
+            initial={{ rotate: startDeg }}
+            animate={{ rotate: startDeg + 360 }}
+            transition={{ duration: dur, repeat: Infinity, ease: "linear" }}
+          >
+            <div
+              className="absolute"
+              style={{ top: `calc(50% - ${size / 2}px)`, left: `calc(100% - ${size / 2}px)`, width: size, height: size }}
+            >
+              {ring && (
+                <div
+                  className="absolute rounded-full border-2 border-amber-300/90"
+                  style={{
+                    width: size * 2.1,
+                    height: size * 0.85,
+                    top: (size - size * 0.85) / 2,
+                    left: (size - size * 2.1) / 2,
+                    transform: "rotate(-18deg)",
+                  }}
+                />
+              )}
+              <div className={`absolute inset-0 rounded-full ${color} shadow-md ring-2 ring-white/70`} />
+            </div>
+          </motion.div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function MoleculeDecoration({ className }) {
   return (
     <svg viewBox="0 0 120 120" className={className} fill="none">
@@ -307,11 +425,13 @@ export default function HeroSection() {
                   <p className="text-slate-400 text-[11px] font-black uppercase tracking-widest mb-3">Explore Core Subjects:</p>
                   <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
                     {SUBJECT_TABS.map(({ label, icon: Icon, bg, color }) => (
-                      <button
+                      <motion.button
                         key={label}
                         type="button"
                         onClick={() => setActiveSubject(label)}
-                        className={`flex items-center gap-2 pl-2 pr-4 py-2 rounded-xl text-sm font-bold transition-all ${
+                        whileHover={{ y: -3, scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`flex items-center gap-2 pl-2 pr-4 py-2 rounded-xl text-sm font-bold transition-colors ${
                           activeSubject === label
                             ? "bg-white text-slate-800 shadow-md shadow-slate-200/70 ring-1 ring-slate-100"
                             : "text-slate-500 hover:bg-white/60"
@@ -321,7 +441,7 @@ export default function HeroSection() {
                           <Icon />
                         </span>
                         {label}
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
                 </motion.div>
@@ -330,12 +450,20 @@ export default function HeroSection() {
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.34 }}
                   className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10"
                 >
-                  <Link href="/register"
-                    className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-base sm:text-lg text-white bg-gradient-to-r from-sky-500 to-indigo-500 shadow-xl shadow-sky-200/60 hover:shadow-sky-300/70 hover:-translate-y-1 transition-all duration-300"
-                  >
-                    <FaPlayCircle className="text-xl" />
-                    Start Free Trial <span className="font-normal opacity-90">— No Credit Card</span>
-                  </Link>
+                  <div className="relative w-full sm:w-auto">
+                    <motion.span
+                      aria-hidden="true"
+                      className="absolute inset-0 rounded-2xl bg-sky-400/60 blur-md"
+                      animate={{ opacity: [0.5, 0.9, 0.5], scale: [1, 1.06, 1] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                    />
+                    <Link href="/register"
+                      className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-base sm:text-lg text-white bg-gradient-to-r from-sky-500 to-indigo-500 shadow-xl shadow-sky-200/60 hover:shadow-sky-300/70 hover:-translate-y-1 transition-all duration-300"
+                    >
+                      <FaPlayCircle className="text-xl" />
+                      Start Free Trial <span className="font-normal opacity-90">— No Credit Card</span>
+                    </Link>
+                  </div>
 
                   <Link href="#gradesCard" scroll={true}
                     className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-base sm:text-lg text-slate-700 bg-white border-2 border-slate-200 shadow-sm hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 hover:-translate-y-1 transition-all duration-300"
@@ -368,8 +496,14 @@ export default function HeroSection() {
                 </motion.div>
               </div>
 
-              {/* Right: activity preview */}
-              <ActivityPreviewCard />
+              {/* Right: solar system animation filling the column, with the
+                  activity preview floating on top of it */}
+              <div className="relative self-stretch flex items-center justify-center min-h-[420px] py-8">
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                  <SolarSystemDecoration />
+                </div>
+                <ActivityPreviewCard />
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
