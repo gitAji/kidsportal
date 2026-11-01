@@ -135,26 +135,26 @@ export default function HelpPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative bg-slate-900 py-32 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 -left-1/4 w-1/2 h-full bg-blue-600 rounded-full blur-[160px] opacity-20" />
-          <div className="absolute bottom-0 -right-1/4 w-1/2 h-full bg-purple-600 rounded-full blur-[160px] opacity-20" />
+      <section className="relative bg-gradient-to-br from-[#eef6ff] via-[#f0f4ff] to-[#f5f0ff] py-32 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 -left-1/4 w-1/2 h-full bg-sky-200/40 rounded-full blur-[160px]" />
+          <div className="absolute bottom-0 -right-1/4 w-1/2 h-full bg-violet-200/40 rounded-full blur-[160px]" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-black tracking-widest uppercase mb-8"
+            className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-sky-100 shadow-sm text-sky-600 text-sm font-black tracking-widest uppercase mb-8"
           >
             <FaQuestionCircle /> Help Center
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tight"
+            className="text-5xl md:text-7xl font-black text-slate-800 mb-8 tracking-tight"
           >
-            How can we <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">help you today?</span>
+            How can we <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500">help you today?</span>
           </motion.h1>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -162,7 +162,7 @@ export default function HelpPage() {
             transition={{ delay: 0.1 }}
             className="max-w-2xl mx-auto relative group"
           >
-            <div className="absolute inset-y-0 left-6 flex items-center text-slate-500 group-focus-within:text-blue-500 transition-colors">
+            <div className="absolute inset-y-0 left-6 flex items-center text-slate-400 group-focus-within:text-sky-500 transition-colors">
               <FaSearch className="text-xl" />
             </div>
             <input
@@ -170,7 +170,7 @@ export default function HelpPage() {
               placeholder="Search for articles, guides, or subjects..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full py-6 pl-16 pr-8 rounded-[2.5rem] bg-white text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all text-xl shadow-2xl"
+              className="w-full py-6 pl-16 pr-8 rounded-[2.5rem] bg-white text-slate-800 placeholder-slate-400 border border-slate-100 shadow-xl focus:outline-none focus:ring-4 focus:ring-sky-500/20 transition-all text-xl"
             />
           </motion.div>
         </div>
@@ -280,7 +280,7 @@ export default function HelpPage() {
               <div className="bg-yellow-400 w-16 h-16 rounded-2xl flex items-center justify-center text-slate-900 text-2xl mx-auto mb-8 shadow-lg shadow-yellow-400/20">
                 <FaChalkboardTeacher />
               </div>
-              <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">Need a helping hand?</h2>
+              <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">Need a helping hand?</h2>
               <p className="text-slate-400 text-xl font-medium mb-12 max-w-2xl mx-auto leading-relaxed">
                 Connect with our education success team. Whether it&apos;s a technical hurdle or a learning path question, we&apos;re here for your family.
               </p>

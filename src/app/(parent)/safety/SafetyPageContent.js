@@ -24,11 +24,10 @@ export default function SafetyHubPage() {
     return (
         <div className="bg-slate-50 font-sans">
             {/* ── Hero ── */}
-            <section className="relative py-32 bg-slate-900 overflow-hidden">
-                <div className="absolute inset-0">
-                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.2),transparent_50%)]" />
-                    <div className="absolute -top-20 -right-20 w-96 h-96 bg-emerald-600 rounded-full blur-[140px] opacity-20" />
-                    <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-600 rounded-full blur-[120px] opacity-20" />
+            <section className="relative py-32 bg-gradient-to-br from-[#eef6ff] via-[#f0f4ff] to-[#f5f0ff] overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute -top-20 -right-20 w-96 h-96 bg-teal-200/40 rounded-full blur-[140px]" />
+                    <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-sky-200/40 rounded-full blur-[120px]" />
                 </div>
 
                 <div className="container mx-auto px-6 relative z-10 text-center">
@@ -36,14 +35,14 @@ export default function SafetyHubPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-[3px] mb-8">
+                        <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-sky-100 shadow-sm text-sky-600 text-[10px] font-black uppercase tracking-[3px] mb-8">
                             <FaShieldAlt className="text-xs" /> Certified Safety Harbor
                         </div>
-                        <h1 className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter leading-tight">
+                        <h1 className="text-5xl md:text-8xl font-black text-slate-800 mb-8 tracking-tighter leading-tight">
                             Your Child&apos;s Safety <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-blue-400">Our #1 Priority.</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500">Our #1 Priority.</span>
                         </h1>
-                        <p className="text-slate-400 max-w-2xl mx-auto text-xl font-medium leading-relaxed">
+                        <p className="text-slate-500 max-w-2xl mx-auto text-xl font-medium leading-relaxed">
                             We&apos;ve built more than a portal—we&apos;ve built a fortress for young minds. Explore our safety standards and parent guarantees.
                         </p>
                     </motion.div>
