@@ -9,10 +9,13 @@ import {
   FaCalculator, FaMicroscope, FaBookOpen, FaCode, FaLanguage,
 } from "react-icons/fa";
 
+// Simple math-themed floaters (shape outlines + a small equation chip)
+// instead of rocket/palette/controller emoji — ties the hero's background
+// decoration to the shapes already used in the activity preview card.
 const FLOATERS = [
-  { emoji: "🚀", top: "8%", left: "4%", delay: 0, dur: 5.5 },
-  { emoji: "🎨", top: "58%", left: "2%", delay: 1.1, dur: 6.2 },
-  { emoji: "🎮", top: "85%", left: "6%", delay: 0.9, dur: 6 },
+  { type: "circle", top: "8%", left: "4%", delay: 0, dur: 5.5 },
+  { type: "equation", text: "6 × 7 = 42", top: "54%", left: "1.5%", delay: 0.8, dur: 6.5 },
+  { type: "triangle", top: "85%", left: "6%", delay: 1.3, dur: 6 },
 ];
 
 // Mirrors SUBJECT_STYLE_MAP (src/app/utils/subjectStyles.js) so the hero's
@@ -127,16 +130,28 @@ export default function HeroSection() {
       {/* Floating emoji (desktop) — kept to the left margin so they never
           sit behind the activity preview card on the right */}
       <div className="absolute inset-0 pointer-events-none hidden lg:block">
-        {FLOATERS.map(({ emoji, top, left, delay, dur }) => (
-          <motion.span
-            key={emoji}
-            className="absolute text-4xl select-none drop-shadow-lg"
+        {FLOATERS.map(({ type, text, top, left, delay, dur }) => (
+          <motion.div
+            key={type + top}
+            className="absolute select-none"
             style={{ top, left }}
-            animate={{ y: ["-12px", "12px"], rotate: [-3, 3] }}
+            animate={{ y: ["-10px", "10px"], rotate: type === "equation" ? 0 : [-4, 4] }}
             transition={{ duration: dur, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay }}
           >
-            {emoji}
-          </motion.span>
+            {type === "circle" && (
+              <div className="w-9 h-9 rounded-full border-[3px] border-sky-300/80" />
+            )}
+            {type === "triangle" && (
+              <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+                <path d="M17 4 L31 30 L3 30 Z" stroke="#c4b5fd" strokeWidth="3" strokeLinejoin="round" fill="none" />
+              </svg>
+            )}
+            {type === "equation" && (
+              <div className="px-3 py-1.5 rounded-xl bg-white/80 backdrop-blur border border-indigo-100 shadow-sm font-black text-sm text-indigo-400">
+                {text}
+              </div>
+            )}
+          </motion.div>
         ))}
       </div>
 
