@@ -11,37 +11,43 @@ const subjects = [
     name: 'English',
     icon: <FaBook size={32} />,
     color: 'from-blue-500 to-blue-700',
-    description: 'Phonics, spelling, grammar, and reading comprehension — building from early word patterns to fluent, confident writing.'
+    description: 'Phonics, spelling, grammar, and reading comprehension — building from early word patterns to fluent, confident writing.',
+    benchmark: 'Benchmarked to Cambridge Primary English',
   },
   {
     name: 'Math',
     icon: <FaCalculator size={32} />,
     color: 'from-cyan-500 to-cyan-700',
-    description: 'Number sense, place value, arithmetic, and problem solving — practiced through interactive lessons, quizzes, and games.'
+    description: 'Number sense, place value, arithmetic, and problem solving — practiced through interactive lessons, quizzes, and games.',
+    benchmark: 'Benchmarked to Cambridge Primary Maths',
   },
   {
     name: 'Tamil',
     icon: <FaLanguage size={32} />,
     color: 'from-orange-500 to-rose-600',
-    description: 'From the uyir ezhuthukkal (vowels) and consonants up through reading and writing fluency in Tamil.'
+    description: 'From the uyir ezhuthukkal (vowels) and consonants up through reading and writing fluency in Tamil.',
+    benchmark: 'Benchmarked to Sri Lanka NIE & Tamil Nadu Samacheer Kalvi',
   },
   {
     name: 'Science',
     icon: <FaFlask size={32} />,
     color: 'from-teal-500 to-teal-700',
-    description: 'Living things, habitats, matter, and the natural world — explored through real lessons and hands-on quizzes.'
+    description: 'Living things, habitats, matter, and the natural world — explored through real lessons and hands-on quizzes.',
+    benchmark: 'Benchmarked to Cambridge Primary Science',
   },
   {
     name: 'Computer Science',
     icon: <FaLaptopCode size={32} />,
     color: 'from-sky-500 to-blue-600',
-    description: 'What a computer actually is, its parts, and how we use it — the foundation before kids start writing code.'
+    description: 'What a computer actually is, its parts, and how we use it — the foundation before kids start writing code.',
+    benchmark: 'Benchmarked to Cambridge Computing & CSTA',
   },
   {
     name: 'Coding',
     icon: <FaCode size={32} />,
     color: 'from-violet-500 to-purple-700',
-    description: 'Real block-based coding in our Build Lab — solve mazes and match patterns by snapping code blocks together.'
+    description: 'Real block-based coding in our Build Lab — solve mazes and match patterns by snapping code blocks together.',
+    benchmark: 'Benchmarked to CSTA Algorithms & Programming',
   },
 ];
 
@@ -70,9 +76,13 @@ const SubjectsSection = () => {
                 {subject.name}
               </h3>
 
-              <p className="text-slate-500 font-medium text-sm leading-relaxed mb-8">
+              <p className="text-slate-500 font-medium text-sm leading-relaxed mb-4">
                 {subject.description}
               </p>
+
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-8">
+                {subject.benchmark}
+              </span>
 
               <a
                 href="#curriculum-browser"
