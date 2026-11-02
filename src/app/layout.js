@@ -43,6 +43,7 @@ export const metadata = {
 };
 
 import { UIProvider } from "./providers/UIProvider";
+import CookieConsentBanner from "./components/ui/CookieConsentBanner";
 
 export default function RootLayout({ children }) {
   return (
@@ -54,6 +55,7 @@ export default function RootLayout({ children }) {
         <SessionProviderWrapper>
           <UIProvider>{children}</UIProvider>
         </SessionProviderWrapper>
+        <CookieConsentBanner />
       </body>
     </html>
   );
