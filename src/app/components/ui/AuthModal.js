@@ -91,10 +91,12 @@ export default function AuthModal({
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden relative"
+            className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden relative max-h-[90vh] flex flex-col"
           >
-            {/* Header with Background Gradient */}
-            <div className="bg-gradient-to-r from-blue-600 to-cyan-500 p-8 text-white relative">
+            {/* Header with Background Gradient — stays fixed (flex-shrink-0)
+                so the close button is always reachable even when the body
+                below has to scroll on a short mobile screen */}
+            <div className="flex-shrink-0 bg-gradient-to-r from-blue-600 to-cyan-500 p-6 sm:p-8 text-white relative">
               <button
                 className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
                 onClick={() => setIsModalOpen(false)}
@@ -102,7 +104,7 @@ export default function AuthModal({
                 <FontAwesomeIcon icon={faTimes} className="text-xl" />
               </button>
 
-              <h3 className="text-3xl font-black mb-2">
+              <h3 className="text-2xl sm:text-3xl font-black mb-2">
                 {isRegister ? "Start Your Journey" : "Welcome Back!"}
               </h3>
               <p className="text-blue-100 text-sm font-medium">
@@ -112,7 +114,7 @@ export default function AuthModal({
               </p>
             </div>
 
-            <div className="p-8">
+            <div className="p-6 sm:p-8 overflow-y-auto flex-1 min-h-0">
               {error && (
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
@@ -232,7 +234,7 @@ export default function AuthModal({
                 </button>
               </form>
 
-              <div className="relative my-8 text-center">
+              <div className="relative my-6 sm:my-8 text-center">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-slate-100"></div>
                 </div>
@@ -250,7 +252,7 @@ export default function AuthModal({
                 </button>
               </div>
 
-              <p className="mt-8 text-center text-sm text-slate-500 font-medium">
+              <p className="mt-6 sm:mt-8 text-center text-sm text-slate-500 font-medium">
                 {isRegister
                   ? "Already have an account?"
                   : "New to KidsPortal?"}{" "}
