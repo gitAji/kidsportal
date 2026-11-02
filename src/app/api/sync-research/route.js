@@ -7,7 +7,7 @@ const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
 });
 
-const model = "gemini-1.5-flash";
+const model = "gemini-2.5-flash-lite";
 
 export async function POST(request) {
     const missingKey = missingGeminiKeyResponse();
@@ -85,7 +85,7 @@ export async function POST(request) {
         };
 
         const result = await ai.models.generateContent({
-            model: "gemini-1.5-flash",
+            model: "gemini-2.5-flash-lite",
             contents: prompt,
             config: generationConfig,
         });

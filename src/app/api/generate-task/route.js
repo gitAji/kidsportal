@@ -8,7 +8,7 @@ const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
 });
 
-const model = "gemini-1.5-flash";
+const model = "gemini-2.5-flash-lite";
 
 // Create a customized task based on child past performance using Vertex AI / Gemini
 export async function POST(request) {
@@ -66,7 +66,7 @@ For each question, provide:
 4. correctAnswer: The correct answer string.`;
 
         const result = await ai.models.generateContent({
-            model: "gemini-1.5-flash",
+            model: "gemini-2.5-flash-lite",
             contents: prompt,
             config: {
                 temperature: 0.7,

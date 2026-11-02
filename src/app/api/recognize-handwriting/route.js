@@ -32,7 +32,7 @@ Transcribe EXACTLY what they wrote as plain text: just the word, letters, or num
 If the canvas is blank, or you genuinely cannot make out any real writing, respond with exactly: UNREADABLE`;
 
         const result = await ai.models.generateContent({
-            model: "gemini-1.5-flash",
+            model: "gemini-2.5-flash-lite",
             contents: [
                 prompt,
                 { inlineData: { mimeType, data: base64 } },
