@@ -6,6 +6,7 @@ import {
   updateEmail,
   updatePassword,
   sendEmailVerification,
+  signOut,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "@/firebase/config";
@@ -15,6 +16,7 @@ import {
   FaUserCircle, FaCreditCard, FaCheckCircle,
   FaSpinner, FaShieldAlt, FaPaypal, FaLock,
   FaToggleOn, FaToggleOff, FaSave, FaExclamationTriangle,
+  FaTrashAlt, FaTimes,
 } from "react-icons/fa";
 import { DashboardSkeleton } from "@/app/components/ui/SkeletonLoader";
 import { CURRENCY_PRICES, NATIVE_CURRENCIES, countryToCurrency, checkoutCurrency } from "@/lib/pricingConfig";
@@ -99,6 +101,12 @@ export default function SettingsPage() {
   // Profile save state
   const [saving, setSaving] = useState(false);
   const [saveMsg, setSaveMsg] = useState({ type: "", text: "" });
+
+  // Account deletion
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteConfirmText, setDeleteConfirmText] = useState("");
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
 
   // Billing
   const [sub, setSub] = useState(null);
@@ -201,6 +209,30 @@ export default function SettingsPage() {
       setSaving(false);
       setPassword("");
       setConfirmPassword("");
+    }
+  };
+
+  // ── Delete account ─────────────────────────────────────────────
+  const handleDeleteAccount = async () => {
+    setDeleteError("");
+    setDeleting(true);
+    try {
+      const idToken = await user.getIdToken();
+      const res = await fetch("/api/account/delete", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${idToken}` },
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setDeleteError(data.error || "Failed to delete account. Please try again.");
+        setDeleting(false);
+        return;
+      }
+      await signOut(auth);
+      router.push("/?accountDeleted=1");
+    } catch (err) {
+      setDeleteError("Network error. Please try again.");
+      setDeleting(false);
     }
   };
 
@@ -479,6 +511,28 @@ export default function SettingsPage() {
                   </div>
                 </Card>
 
+                {/* Danger Zone */}
+                <div className="bg-white rounded-2xl border-2 border-red-100 overflow-hidden">
+                  <div className="px-6 py-4 border-b border-red-50">
+                    <h3 className="text-xs font-black text-red-500 uppercase tracking-wider">Danger Zone</h3>
+                  </div>
+                  <div className="p-6 flex items-center justify-between gap-4 flex-wrap">
+                    <div>
+                      <p className="text-sm font-bold text-slate-700">Delete your account</p>
+                      <p className="text-xs text-slate-400 font-medium mt-0.5 max-w-md">
+                        Permanently deletes your account, every child profile, and all associated progress data. This cannot be undone.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => { setShowDeleteModal(true); setDeleteConfirmText(""); setDeleteError(""); }}
+                      className="flex items-center gap-2 px-5 py-2.5 bg-red-50 text-red-600 text-sm font-black rounded-xl hover:bg-red-100 transition-all flex-shrink-0"
+                    >
+                      <FaTrashAlt className="text-xs" /> Delete Account
+                    </button>
+                  </div>
+                </div>
+
                 <div className="flex justify-end">
                   <button
                     type="submit"
@@ -730,6 +784,71 @@ export default function SettingsPage() {
 
         </AnimatePresence>
       </div>
+
+      {/* Delete account confirmation modal */}
+      <AnimatePresence>
+        {showDeleteModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[300] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => !deleting && setShowDeleteModal(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-7"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className="w-11 h-11 rounded-xl bg-red-50 text-red-500 flex items-center justify-center text-xl flex-shrink-0">
+                  <FaExclamationTriangle />
+                </div>
+                <button onClick={() => setShowDeleteModal(false)} disabled={deleting} className="text-slate-300 hover:text-slate-500 disabled:opacity-40">
+                  <FaTimes />
+                </button>
+              </div>
+              <h3 className="text-lg font-black text-slate-800 mb-2">Delete your account?</h3>
+              <p className="text-sm text-slate-500 font-medium leading-relaxed mb-5">
+                This permanently deletes your account, every child profile, all progress and stats, and cancels any active subscription. This cannot be undone.
+              </p>
+              <label className="block text-xs font-black text-slate-500 uppercase tracking-wider mb-1.5">
+                Type <span className="text-red-500">DELETE</span> to confirm
+              </label>
+              <input
+                className={inputCls}
+                value={deleteConfirmText}
+                onChange={(e) => setDeleteConfirmText(e.target.value)}
+                placeholder="DELETE"
+                disabled={deleting}
+              />
+              {deleteError && (
+                <p className="mt-3 text-xs text-red-500 font-bold bg-red-50 border border-red-100 p-3 rounded-xl">{deleteError}</p>
+              )}
+              <div className="flex gap-3 mt-6">
+                <button
+                  type="button"
+                  onClick={() => setShowDeleteModal(false)}
+                  disabled={deleting}
+                  className="flex-1 py-3 rounded-xl text-sm font-bold text-slate-600 border-2 border-slate-100 hover:border-slate-200 transition-colors disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleDeleteAccount}
+                  disabled={deleteConfirmText !== "DELETE" || deleting}
+                  className="flex-1 py-3 rounded-xl text-sm font-black text-white bg-red-600 hover:bg-red-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {deleting ? <><FaSpinner className="animate-spin" /> Deleting…</> : "Delete Forever"}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

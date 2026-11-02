@@ -38,13 +38,17 @@ if (typeof window !== 'undefined' || Object.keys(firebaseConfig).every(key => fi
       realtimeDb = getDatabase(app);
     } catch (e) { }
     storage = getStorage(app);
-
-    if (typeof window !== 'undefined') {
-      isSupported().then(supported => {
-        if (supported) analytics = getAnalytics(app);
-      });
-    }
   }
 }
 
-export { app, auth, db, realtimeDb, storage, analytics };
+// Analytics loads Google's tracking script and sets cookies/identifiers, so
+// it must only start after the visitor has given cookie consent (see
+// CookieConsentBanner) — never on page load, unlike auth/db/storage above.
+function initAnalytics() {
+  if (analytics || typeof window === 'undefined' || !app) return;
+  isSupported().then(supported => {
+    if (supported) analytics = getAnalytics(app);
+  });
+}
+
+export { app, auth, db, realtimeDb, storage, analytics, initAnalytics };
