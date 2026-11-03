@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { FaVolumeUp, FaStop } from 'react-icons/fa';
 
-export default function AudioPlayer({ text, lang = 'en-US', label, customClassName, icon }) {
+export default function AudioPlayer({ text, lang = 'en-US', label, customClassName, icon, autoPlay = false }) {
   const [voices, setVoices] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -39,12 +39,7 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
     }
   }, []);
 
-  const speakText = (e) => {
-    if (e) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-
+  const speak = useCallback(() => {
     if ('speechSynthesis' in window) {
       // If already playing, stop it
       if (isPlaying) {
@@ -109,11 +104,29 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
     } else {
       console.warn("Text-to-speech not supported in this browser.");
     }
+  }, [isPlaying, stopSpeech, text, lang, voices]);
+
+  const handleClick = (e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+    speak();
   };
+
+  // For early-grade lessons the narration should start on its own as soon
+  // as a card appears, instead of waiting for a tap — a short delay lets
+  // the card's enter animation start first.
+  useEffect(() => {
+    if (!autoPlay || !text) return;
+    const id = setTimeout(() => speak(), 300);
+    return () => clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- fire once per new card, not on every isPlaying toggle
+  }, [text, autoPlay]);
 
   return (
     <button
-      onClick={speakText}
+      onClick={handleClick}
       className={customClassName || `p-3 rounded-full ${isPlaying ? 'bg-red-100 text-red-600 hover:bg-red-200 animate-pulse' : 'bg-blue-100 text-blue-600 hover:bg-blue-200'} transition-all shadow-md active:scale-90`}
       aria-label={isPlaying ? "Stop audio" : "Play sound"}
     >

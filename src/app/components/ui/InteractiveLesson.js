@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import AudioPlayer from './AudioPlayer';
+import { getConceptEmoji } from '@/app/utils/conceptEmoji';
 
 const SWIPE_THRESHOLD = 80;
 
@@ -51,6 +52,12 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const [mascotMessage, setMascotMessage] = useState(null);
     const theme = getSubjectTheme(taskData);
     const ThemeIcon = theme.icon;
+    // Grades 1-3 get picture-first flashcards instead of reading full
+    // sentences — a big icon per fact, auto-played narration, and each
+    // sentence broken down into shorter chunks so there's less text on
+    // screen at once.
+    const gradeNum = parseInt((childUser?.gradeId || taskData?.gradeId || '').replace(/[^0-9]/g, ''), 10);
+    const isEarlyGrade = gradeNum >= 1 && gradeNum <= 3;
     const isTamilSubject = taskData?.subjectId?.toLowerCase().includes('tamil') ||
         taskData?.taskId?.toLowerCase().includes('tamil') ||
         (typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('tamil'));
@@ -120,11 +127,25 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
             .trim();
     };
 
+    // Breaks one sentence into shorter chunks (on commas/conjunctions first,
+    // then by a fixed word count) so an early grader never sees more than a
+    // handful of words on a card at once.
+    const splitIntoShortChunks = (sentence) => {
+        const words = sentence.split(/\s+/).filter(Boolean);
+        if (words.length <= 6) return [sentence];
+        const clauses = sentence.split(/,\s*|\s+(?:and|but|because|so)\s+/i).map(s => s.trim()).filter(Boolean);
+        if (clauses.length > 1) return clauses;
+        const chunks = [];
+        for (let i = 0; i < words.length; i += 6) chunks.push(words.slice(i, i + 6).join(' '));
+        return chunks;
+    };
+
     const displayContent = translatedContent || taskData?.content || "";
     const cleanContent = displayContent.replace(/[*#_]/g, "");
-    const sentences = (cleanContent.match(/[^.!?]+[.!?]+/g) || [cleanContent])
+    const rawSentences = (cleanContent.match(/[^.!?]+[.!?]+/g) || [cleanContent])
         .map(s => cleanStr(s.trim()))
         .filter(s => s.length > 0);
+    const sentences = isEarlyGrade ? rawSentences.flatMap(splitIntoShortChunks) : rawSentences;
     const validCurrentSentenceIndex = Math.min(currentSentenceIndex, Math.max(0, sentences.length - 1));
     const isLastSentence = validCurrentSentenceIndex === sentences.length - 1;
     const progress = sentences.length > 0 ? ((validCurrentSentenceIndex + 1) / sentences.length) * 100 : 0;
@@ -288,7 +309,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             </div>
 
                             {/* Step Dots */}
-                            <div className="flex gap-1.5 sm:gap-2">
+                            <div className="flex flex-wrap justify-end gap-1.5 sm:gap-2 max-w-[140px] sm:max-w-[220px]">
                                 {sentences.map((_, idx) => (
                                     <button
                                         key={idx}
@@ -364,7 +385,14 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                     onDragEnd={(_, info) => handleSwipe(info.offset.x)}
                                     className="relative w-full text-center cursor-grab active:cursor-grabbing"
                                 >
-                                    <p className="text-xl sm:text-3xl md:text-4xl text-slate-800 font-extrabold leading-snug sm:leading-tight max-w-2xl mx-auto">
+                                    {isEarlyGrade && (
+                                        <div className={`w-20 h-20 sm:w-28 sm:h-28 mb-4 sm:mb-6 mx-auto rounded-3xl bg-gradient-to-br ${theme.gradient} flex items-center justify-center text-5xl sm:text-7xl shadow-lg`}>
+                                            <span role="img" aria-hidden="true">{getConceptEmoji(sentences[validCurrentSentenceIndex], taskData?.subjectId)}</span>
+                                        </div>
+                                    )}
+                                    <p className={isEarlyGrade
+                                        ? "text-2xl sm:text-4xl md:text-5xl text-slate-800 font-black leading-snug text-center max-w-xl mx-auto"
+                                        : "text-xl sm:text-3xl md:text-4xl text-slate-800 font-extrabold leading-snug sm:leading-tight max-w-2xl mx-auto"}>
                                         {isTranslating ? <span className="animate-pulse text-indigo-400">Translating...</span> : sentences[validCurrentSentenceIndex]}
                                     </p>
                                 </motion.div>
@@ -379,6 +407,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                 lang="en-US"
                                 label="Listen"
                                 icon={<FaVolumeUp />}
+                                autoPlay={isEarlyGrade}
                                 customClassName="inline-flex items-center gap-2 bg-white px-4 sm:px-5 py-2.5 sm:py-3 text-blue-600 rounded-xl sm:rounded-2xl font-bold shadow-sm hover:shadow-md hover:bg-blue-50 transition-all cursor-pointer border border-blue-100 text-sm sm:text-base"
                             />
 
