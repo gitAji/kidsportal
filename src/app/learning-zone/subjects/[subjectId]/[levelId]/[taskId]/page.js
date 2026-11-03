@@ -20,6 +20,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import Image from 'next/image';
 import MinimalBackButton from '../../../../../components/child/MinimalBackButton';
+import { trackEvent } from '../../../../../utils/trackEvent';
 
 // Quiz/exam questions (and multiple-choice options) get shuffled so
 // retaking the same lesson doesn't show an identical, memorizable order.
@@ -161,6 +162,17 @@ export default function TaskContentPage() {
     };
     fetchTask();
   }, [childUser, subjectId, levelId, taskId, router]);
+
+  // Logged once per task load, independent of the final completion sync
+  // below — so an abandoned quiz/exam still shows up as "started" instead
+  // of leaving no trace at all.
+  useEffect(() => {
+    if (!taskData || !(childUser?.uid || childUser?.id)) return;
+    trackEvent(childUser.uid || childUser.id, 'task_started', {
+      taskId: taskData.taskId, subjectId, levelId, type: taskData.type,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- fire once per distinct task load
+  }, [taskData?.taskId]);
 
   // Professor Greeting & Character Setup
   const professor = useMemo(() => {
@@ -410,6 +422,15 @@ export default function TaskContentPage() {
       attempts: attemptNumber,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
+    // Logged immediately (not batched until the final completion sync) so an
+    // abandoned quiz still leaves per-question data behind.
+    if (childUser?.uid || childUser?.id) {
+      trackEvent(childUser.uid || childUser.id, 'quiz_answer_submitted', {
+        taskId: taskData.taskId, subjectId, levelId, type: currentQuestion.type,
+        questionIndex: currentQuestionIndex + 1, totalQuestions: taskData.questions.length,
+        isCorrect, attempt: attemptNumber,
+      });
+    }
     setSessionHistory(prev => [historyItem, ...prev]);
     setTimerActive(false);
 
@@ -618,13 +639,16 @@ export default function TaskContentPage() {
       const data = await res.json();
       if (data.recognized) {
         setUserAnswer(data.recognized);
+        trackEvent(childUser?.uid || childUser?.id, 'handwriting_tool_used', { taskId: taskData?.taskId, success: true });
       } else {
         setHandwritingError(data.error || "Couldn't read that — try writing a bit bigger!");
         setTimeout(() => setHandwritingError(null), 4000);
+        trackEvent(childUser?.uid || childUser?.id, 'handwriting_tool_used', { taskId: taskData?.taskId, success: false });
       }
     } catch (err) {
       setHandwritingError("Couldn't read that — try again!");
       setTimeout(() => setHandwritingError(null), 4000);
+      trackEvent(childUser?.uid || childUser?.id, 'handwriting_tool_used', { taskId: taskData?.taskId, success: false });
     } finally {
       setIsRecognizingHandwriting(false);
     }
@@ -992,6 +1016,7 @@ export default function TaskContentPage() {
               <AudioPlayer
                 text={cleanString(displayQuestion?.questionText)}
                 lang="en-US"
+                onPlay={() => trackEvent(childUser?.uid || childUser?.id, 'audio_listen_used', { taskId: taskData?.taskId, questionIndex: currentQuestionIndex + 1 })}
               />
             </div>
             {isTranslating && <p className="text-xs text-indigo-500 font-bold mt-2 animate-pulse">Translating...</p>}
@@ -1074,7 +1099,7 @@ export default function TaskContentPage() {
                       </button>
 
                       <button
-                        onClick={() => setShowDrawingTool(true)}
+                        onClick={() => { setShowDrawingTool(true); trackEvent(childUser?.uid || childUser?.id, 'drawing_tool_opened', { taskId: taskData?.taskId }); }}
                         className="absolute right-2 top-1/2 -translate-y-1/2 bg-cyan-100 text-cyan-600 p-3 rounded-full hover:bg-cyan-200 transition-colors shadow-sm cursor-pointer z-10"
                         title="Write on Screen"
                         type="button"
