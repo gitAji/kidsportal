@@ -57,17 +57,25 @@ export default function SuperAdminDashboard() {
             // Fetch parents
             const parentsSnap = await getDocs(collection(db, 'users'));
 
-            // Fetch all children using collection group query
+            // Fetch all children using a collection group query
             let totalStudents = 0;
             try {
                 const childrenSnap = await getDocs(collectionGroup(db, 'children'));
                 totalStudents = childrenSnap.size;
-            } catch {
-                // Fallback: count from parent docs
-                totalStudents = parentsSnap.docs.reduce((acc, doc) => {
-                    const data = doc.data();
-                    return acc + (data.children?.length || 0);
-                }, 0);
+            } catch (err) {
+                // Fallback: children live in a users/{uid}/children subcollection,
+                // not an array field on the parent doc, so count per parent instead
+                // of reading a field that was never there.
+                console.error("Collection group query for children failed, falling back to per-parent count:", err);
+                const counts = await Promise.all(parentsSnap.docs.map(async (p) => {
+                    try {
+                        const childrenOfParent = await getDocs(collection(db, 'users', p.id, 'children'));
+                        return childrenOfParent.size;
+                    } catch {
+                        return 0;
+                    }
+                }));
+                totalStudents = counts.reduce((acc, n) => acc + n, 0);
             }
 
             setStats({
