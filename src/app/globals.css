@@ -17,67 +17,15 @@
   --error-red: #e74c3c;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    /* Pure black for maximum contrast */
-    --foreground: #ffffff;
-    /* Pure white for text */
-    --heading-color: #ffffff;
-    /* Pure white for headings */
-    --primary-blue: #63b3ed;
-    /* Slightly brighter blue */
-    --deep-ocean: #90cdf4;
-    /* Lighter blue for contrast */
-    --link-color: #63b3ed;
-    /* Consistent with primary blue */
-    --success-green: #48bb78;
-    /* Slightly brighter green */
-    --warning-orange: #f6ad55;
-    /* Slightly brighter orange */
-    --error-red: #fc8181;
-    /* Slightly brighter red */
-  }
-
-  .info-box {
-    background-color: #2d3748;
-    /* Elevated background for info box in dark mode */
-    color: var(--foreground);
-    /* Ensure text color is readable */
-  }
-
-  .info-box h2,
-  .info-box p,
-  .info-box strong {
-    color: var(--foreground);
-    /* Ensure text within info box is readable */
-  }
-
-  .info-box .flex.items-center.p-4 {
-    background-color: #4a5568;
-    /* Slightly lighter background for FAQ items */
-  }
-
-  .info-box .text-gray-700 {
-    color: var(--foreground);
-    /* Adjust text color for readability */
-  }
-
-  .info-box .text-blue-500 {
-    color: var(--primary-blue);
-    /* Ensure link color is consistent */
-  }
-
-  .info-box .close-btn {
-    background-color: #e53e3e;
-    /* Adjusted close button color */
-  }
-
-  .info-box .close-btn:hover {
-    background-color: #c53030;
-    /* Adjusted close button hover color */
-  }
-}
+/* This app is light-themed only — every component hardcodes its own
+   Tailwind colors (bg-white, text-slate-800, etc.) rather than reading
+   --foreground/--background, so there's no real dark theme to support.
+   A `prefers-color-scheme: dark` override here used to flip those two
+   variables to pure white-on-black globally for any element that forgot
+   to set its own text color class, making it invisible against the
+   element's own (still-light) background — e.g. the Learning Zone's
+   typed-answer input, which has no explicit text color. Removed; add it
+   back only alongside an actual, fully-themed dark mode. */
 
 body {
   color: var(--foreground);

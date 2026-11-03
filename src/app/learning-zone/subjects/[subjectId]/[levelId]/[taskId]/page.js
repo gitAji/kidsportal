@@ -1059,7 +1059,7 @@ export default function TaskContentPage() {
               ) : (
                 <div className="relative">
                   <input type="text" value={isRecognizingHandwriting ? '' : userAnswer} onChange={e => setUserAnswer(e.target.value)} disabled={!!feedbackMessage || isCheckingAnswer || isRecognizingHandwriting}
-                    className={`w-full py-4 pl-14 pr-14 text-center text-2xl font-bold border-4 rounded-full focus:outline-none transition-colors ${feedbackMessage?.type === 'correct' ? 'border-green-400 bg-green-50' : feedbackMessage?.type === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-blue-400'} ${(isCheckingAnswer || isRecognizingHandwriting) ? 'opacity-50 cursor-wait bg-gray-50' : ''}`}
+                    className={`w-full py-4 pl-14 pr-14 text-center text-2xl font-bold text-gray-800 border-4 rounded-full focus:outline-none transition-colors ${feedbackMessage?.type === 'correct' ? 'border-green-400 bg-green-50' : feedbackMessage?.type === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-blue-400'} ${(isCheckingAnswer || isRecognizingHandwriting) ? 'opacity-50 cursor-wait bg-gray-50' : ''}`}
                     placeholder={isRecognizingHandwriting ? 'Reading your handwriting...' : 'Type...'} />
 
                   {!feedbackMessage && !isCheckingAnswer && !isRecognizingHandwriting && (

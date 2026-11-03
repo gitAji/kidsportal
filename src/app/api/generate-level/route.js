@@ -67,6 +67,11 @@ export async function POST(request) {
         const gradeNumber = parseInt(gradeId.replace(/\D/g, ''), 10) || '';
         const subjectName = getSubjectDisplayName(subjectId);
         const isTamil = subjectId.toLowerCase().includes('tamil');
+        // Grade 1-2 kids are still learning to type/spell, so keep their
+        // questions tap-to-select only instead of testing typing ability.
+        const questionTypeRule = gradeNumber && gradeNumber <= 2
+            ? 'Every question must be type "multiple-choice" (4 options) — this grade is still learning to type and spell, so there must be NO "identification" (typed-answer) questions at all.'
+            : 'Keep a healthy mix of "multiple-choice" and "identification" question types across the quiz and exam.';
 
         const prompt = `You are an expert curriculum designer creating the NEXT level for a ${subjectName} course for Grade ${gradeNumber} students (age-appropriate for that grade).
 
@@ -84,7 +89,7 @@ Generate exactly one new level with:
 - quizQuestions: exactly 4 questions practicing the concept, each with a questionText, a type of either "multiple-choice" (with exactly 4 options) or "identification" (typed answer, no options), and the correctAnswer
 - examQuestions: exactly 5 questions that are somewhat harder than the quiz, same type/options/correctAnswer shape
 
-Keep a healthy mix of "multiple-choice" and "identification" question types across the quiz and exam.`;
+${questionTypeRule}`;
 
         const result = await ai.models.generateContent({
             model: "gemini-1.5-flash",
