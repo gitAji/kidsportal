@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { FaVolumeUp, FaStop } from 'react-icons/fa';
 
-export default function AudioPlayer({ text, lang = 'en-US', label, customClassName, icon, autoPlay = false }) {
+export default function AudioPlayer({ text, lang = 'en-US', label, customClassName, icon, autoPlay = false, onPlay }) {
   const [voices, setVoices] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -48,6 +48,7 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
       }
 
       window.speechSynthesis.cancel();
+      onPlay?.();
 
       // 1. Clean up text: Strip Markdown (**, #, etc.) and emojis for cleaner speech
       const cleanText = (text || "")
@@ -104,7 +105,7 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
     } else {
       console.warn("Text-to-speech not supported in this browser.");
     }
-  }, [isPlaying, stopSpeech, text, lang, voices]);
+  }, [isPlaying, stopSpeech, text, lang, voices, onPlay]);
 
   const handleClick = (e) => {
     if (e) {

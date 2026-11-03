@@ -12,6 +12,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import AudioPlayer from './AudioPlayer';
 import { getConceptEmoji } from '@/app/utils/conceptEmoji';
+import { trackEvent } from '@/app/utils/trackEvent';
 
 const SWIPE_THRESHOLD = 80;
 
@@ -58,6 +59,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     // screen at once.
     const gradeNum = parseInt((childUser?.gradeId || taskData?.gradeId || '').replace(/[^0-9]/g, ''), 10);
     const isEarlyGrade = gradeNum >= 1 && gradeNum <= 3;
+    const childId = childUser?.uid || childUser?.id;
     const isTamilSubject = taskData?.subjectId?.toLowerCase().includes('tamil') ||
         taskData?.taskId?.toLowerCase().includes('tamil') ||
         (typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('tamil'));
@@ -174,8 +176,24 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
         import('canvas-confetti').then(({ default: confetti }) => {
             confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
         });
+        trackEvent(childId, 'lesson_completed', { taskId: taskData?.taskId, subjectId: taskData?.subjectId, totalCards: sentences.length });
         onComplete();
     };
+
+    // Logs each card as the child reaches it — this is what shows where in a
+    // lesson kids actually stop reading/listening, not just whether they
+    // finished it.
+    useEffect(() => {
+        if (sentences.length === 0) return;
+        trackEvent(childId, 'lesson_card_viewed', {
+            taskId: taskData?.taskId,
+            subjectId: taskData?.subjectId,
+            cardIndex: validCurrentSentenceIndex + 1,
+            totalCards: sentences.length,
+            mode: isEarlyGrade ? 'flashcard' : 'sentence',
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- log once per card change, not on every taskData/sentences identity change
+    }, [validCurrentSentenceIndex, childId]);
 
     // A friendly professor companion, reusing the same character/name the
     // child picked in Settings — lessons previously showed no mascot at all,
@@ -208,6 +226,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
         setIsLoading(true);
         setAiResponse('');
         setCurrentPromptType(actionType);
+        trackEvent(childId, 'ai_tutor_used', { taskId: taskData?.taskId, actionType });
 
         try {
             const res = await fetch('/api/tutor', {
@@ -408,6 +427,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                 label="Listen"
                                 icon={<FaVolumeUp />}
                                 autoPlay={isEarlyGrade}
+                                onPlay={() => trackEvent(childId, 'audio_listen_used', { taskId: taskData?.taskId, cardIndex: validCurrentSentenceIndex + 1 })}
                                 customClassName="inline-flex items-center gap-2 bg-white px-4 sm:px-5 py-2.5 sm:py-3 text-blue-600 rounded-xl sm:rounded-2xl font-bold shadow-sm hover:shadow-md hover:bg-blue-50 transition-all cursor-pointer border border-blue-100 text-sm sm:text-base"
                             />
 

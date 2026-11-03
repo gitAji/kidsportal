@@ -98,6 +98,22 @@ export async function getChildTaskHistory(childId, maxEntries = 200) {
     return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }
 
+/**
+ * Raw behavior-event log for a child (lesson card views, Listen/AI-tutor/
+ * paint-tool taps, per-question answers) — newest first. Written by
+ * /api/behavior-event as interactions happen, independent of task
+ * completion, so an abandoned task still leaves a trail here.
+ */
+export async function getChildBehaviorEvents(childId, maxEntries = 500) {
+    const q = query(
+        collection(db, 'childStats', childId, 'behaviorEvents'),
+        orderBy('timestamp', 'desc'),
+        limit(maxEntries)
+    );
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
 // ── SCREEN TIME LIMITS ──────────────────────────────────────────────────────
 
 /** Add elapsed minutes to a child's usage total for a given date (YYYY-MM-DD). */
