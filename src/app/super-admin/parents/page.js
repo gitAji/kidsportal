@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase/config';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
     FaUsers, FaChild, FaEnvelope, FaCalendarAlt, FaSearch,
@@ -124,10 +125,14 @@ export default function ParentsManagement() {
                                         </div>
                                     </td>
                                     <td className="px-8 py-5">
-                                        <div className="flex items-center gap-2 text-slate-400 font-bold text-xs">
+                                        <Link
+                                            href={`/super-admin/students?q=${encodeURIComponent(parent.email || '')}`}
+                                            className="flex items-center gap-2 text-slate-400 hover:text-emerald-400 font-bold text-xs transition-colors w-fit"
+                                            title="View this parent's students"
+                                        >
                                             <FaChild className="text-slate-600" />
-                                            <span className="bg-slate-900 px-2 py-0.5 rounded-md text-slate-300">{parent.childCount ?? 0}</span>
-                                        </div>
+                                            <span className="bg-slate-900 px-2 py-0.5 rounded-md text-slate-300 group-hover:text-emerald-400">{parent.childCount ?? 0}</span>
+                                        </Link>
                                     </td>
                                     <td className="px-8 py-5">
                                         <span className={`px-2.5 py-1 rounded-full text-[9px] font-black tracking-widest uppercase border ${parent.status === 'blocked'
