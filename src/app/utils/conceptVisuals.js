@@ -9,10 +9,19 @@
 // here as more concept visuals are built.
 import ShapeExplorer from '@/app/components/ui/concept-visuals/ShapeExplorer';
 import PerimeterTracer from '@/app/components/ui/concept-visuals/PerimeterTracer';
+import ClockExplorer from '@/app/components/ui/concept-visuals/ClockExplorer';
 
 const CONCEPT_VISUALS = {
   'math-2-level-15-lesson': { Component: ShapeExplorer, props: {} },
   'math-2-level-5-lesson': { Component: PerimeterTracer, props: { length: 5, width: 3, unit: 'cm' } },
+  'math-1-level-17-lesson': {
+    Component: ClockExplorer,
+    props: { times: [{ hour: 3, minute: 0 }, { hour: 7, minute: 30 }, { hour: 11, minute: 0 }] },
+  },
+  'math-2-level-16-lesson': {
+    Component: ClockExplorer,
+    props: { times: [{ hour: 5, minute: 5 }, { hour: 8, minute: 15 }, { hour: 2, minute: 30 }, { hour: 6, minute: 45 }] },
+  },
 };
 
 export function getConceptVisual(taskId) {
