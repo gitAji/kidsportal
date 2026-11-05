@@ -11,7 +11,6 @@ import InteractiveLesson from '../../../../../components/ui/InteractiveLesson';
 import SuccessBadge from '../../../../../components/ui/SuccessBadge';
 import CountUpNumber from '../../../../../components/ui/CountUpNumber';
 import { motion, AnimatePresence } from "framer-motion";
-import { FaLanguage } from 'react-icons/fa';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import confetti from 'canvas-confetti';
 import { recordTaskCompletion, checkAchievements } from '../../../../../utils/achievements';
@@ -75,19 +74,11 @@ export default function TaskContentPage() {
   const [sessionHistory, setSessionHistory] = useState([]);
   const [isCheckingAnswer, setIsCheckingAnswer] = useState(false);
   const [clickedCountingItems, setClickedCountingItems] = useState([]);
-  const [translatedQuestion, setTranslatedQuestion] = useState(null);
-  const [isTranslating, setIsTranslating] = useState(false);
-  const [contentLanguage, setContentLanguage] = useState(isTamilSubject ? 'ta' : 'en');
-
-  // Once the parent's global learning-language preference has loaded, default
-  // non-Tamil-subject content to it too — so a family that picked Tamil in
-  // Settings gets Tamil content everywhere, not just the Tamil subject, and
-  // doesn't have to manually re-toggle on every single lesson.
-  useEffect(() => {
-    if (!isTamilSubject && languageLoaded && language === 'ta') {
-      setContentLanguage('ta');
-    }
-  }, [isTamilSubject, languageLoaded, language]);
+  // Content always shows in its own subject's natural language (Tamil for
+  // the Tamil course, English everywhere else) — no translation toggle, so
+  // there's no risk of text in one script being read aloud by an English
+  // voice (unintelligible) or vice versa.
+  const contentLanguage = isTamilSubject ? 'ta' : 'en';
 
   const correctSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/correct.mp3') : null, []);
   const incorrectSound = useMemo(() => typeof Audio !== 'undefined' ? new Audio('/sounds/incorrect.mp3') : null, []);
@@ -279,41 +270,6 @@ export default function TaskContentPage() {
 
   const currentQuestion = taskData?.questions?.[currentQuestionIndex];
 
-  useEffect(() => {
-    setTranslatedQuestion(null);
-    if (!currentQuestion) return;
-
-    // Decide if we need translation
-    const needsTranslation = (isTamilSubject && contentLanguage === 'en') || (!isTamilSubject && contentLanguage === 'ta');
-    const targetLang = contentLanguage === 'ta' ? 'ta' : 'en';
-
-    if (needsTranslation) {
-      const fetchTranslation = async () => {
-        setIsTranslating(true);
-        try {
-          const res = await fetch('/api/translate-question', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question: currentQuestion, targetLanguage: targetLang })
-          });
-          const data = await res.json();
-          if (data.translatedData) {
-            setTranslatedQuestion(data.translatedData);
-          }
-        } catch (e) {
-          console.error("Translation failed", e);
-        } finally {
-          setIsTranslating(false);
-        }
-      };
-
-      const handler = setTimeout(() => {
-        fetchTranslation();
-      }, 300);
-      return () => clearTimeout(handler);
-    }
-  }, [currentQuestionIndex, currentQuestion, isTamilSubject, contentLanguage]);
-
   const cleanString = (str) => {
     if (str === null || str === undefined) return "";
     const s = String(str);
@@ -324,7 +280,7 @@ export default function TaskContentPage() {
       .trim();
   };
 
-  const displayQuestion = translatedQuestion ? { ...currentQuestion, ...translatedQuestion } : currentQuestion;
+  const displayQuestion = currentQuestion;
 
   const handleSubmitAnswer = async (overrideAnswer) => {
     if (!currentQuestion) return;
@@ -333,8 +289,17 @@ export default function TaskContentPage() {
     const answerToCheck = typeof overrideAnswer !== 'undefined' ? overrideAnswer : userAnswer;
     if (answerToCheck === undefined || answerToCheck === null || answerToCheck === '') return;
 
-    // Standard string matching logic for multiple choice or as fallback
-    let isCorrect = String(answerToCheck).toLowerCase().trim() === String(currentQuestion.correctAnswer).toLowerCase().trim();
+    // Standard string matching logic for multiple choice or as fallback for
+    // typed answers (used outright if the AI grader below doesn't run or
+    // fails). Collapses whitespace and strips trailing sentence punctuation
+    // so a correct typed answer like "Paris." or "paris " isn't marked wrong
+    // just for a missing/extra full stop or stray space.
+    const normalizeForComparison = (str) => String(str)
+      .toLowerCase()
+      .trim()
+      .replace(/[.!?,;:]+$/, '')
+      .replace(/\s+/g, ' ');
+    let isCorrect = normalizeForComparison(answerToCheck) === normalizeForComparison(currentQuestion.correctAnswer);
     let message = isCorrect ? t('feedbackGood') : t('feedbackBad');
 
     if (currentQuestion.type === 'writing') {
@@ -820,42 +785,45 @@ export default function TaskContentPage() {
         {feedbackMessage?.type === 'wrong' && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-red-50 -z-10" />}
       </AnimatePresence>
 
-      <div className="w-full max-w-4xl pt-20 px-4 pb-4 sm:p-6 md:p-8 flex-grow flex flex-col">
-        {/* pt-20 on mobile clears the fixed back button / avatar menu
-            (top-4, z-[300]/z-[400] — see MinimalBackButton and
+      <div className="w-full max-w-4xl pt-16 sm:pt-20 px-3 sm:px-4 pb-4 sm:p-6 md:p-8 flex-grow flex flex-col">
+        {/* pt-16/pt-20 clears the fixed back button / avatar menu (top-4,
+            z-[300]/z-[400] — see MinimalBackButton and
             ChildLearningZoneHeader) — without it, this row rendered right
             behind them, hiding the "Correct"/"Wrong" counts. flex-wrap plus
             the reduced mobile gap/padding below keep the three cards from
-            overflowing a narrow phone width even once they clear the icons. */}
-        <div className="flex items-center justify-center mb-4 w-full max-w-4xl">
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-            <div className="bg-white shadow-md rounded-2xl px-3 sm:px-6 py-2 flex items-center gap-2 sm:gap-3 border-b-4 border-yellow-200">
-              <div className="bg-yellow-100 p-2 rounded-xl text-yellow-600">
-                <FaStar className="text-xl" />
+            overflowing a narrow phone width even once they clear the icons.
+            Everything in this header is sized down on mobile (vs sm:/md:)
+            so a question and its answers can fit a phone screen without
+            scrolling. */}
+        <div className="flex items-center justify-center mb-2 sm:mb-4 w-full max-w-4xl">
+          <div className="flex flex-wrap justify-center gap-1.5 sm:gap-3">
+            <div className="bg-white shadow-md rounded-xl sm:rounded-2xl px-2 sm:px-6 py-1 sm:py-2 flex items-center gap-1.5 sm:gap-3 border-b-4 border-yellow-200">
+              <div className="bg-yellow-100 p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-yellow-600">
+                <FaStar className="text-sm sm:text-xl" />
               </div>
               <div>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">{t('scoreLabel')}</p>
-                <p className="font-black text-slate-800 text-xl leading-none">{score}</p>
+                <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider leading-none mb-0.5 sm:mb-1">{t('scoreLabel')}</p>
+                <p className="font-black text-slate-800 text-sm sm:text-xl leading-none">{score}</p>
               </div>
             </div>
 
-            <div className="bg-white shadow-md rounded-2xl px-3 sm:px-6 py-2 flex items-center gap-2 sm:gap-3 border-b-4 border-green-200">
-              <div className="bg-green-100 p-2 rounded-xl text-green-600">
-                <FaCheckCircle className="text-xl" />
+            <div className="bg-white shadow-md rounded-xl sm:rounded-2xl px-2 sm:px-6 py-1 sm:py-2 flex items-center gap-1.5 sm:gap-3 border-b-4 border-green-200">
+              <div className="bg-green-100 p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-green-600">
+                <FaCheckCircle className="text-sm sm:text-xl" />
               </div>
               <div>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">{t('correctText')}</p>
-                <p className="font-black text-slate-800 text-xl leading-none">{correctAnswersCount}</p>
+                <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider leading-none mb-0.5 sm:mb-1">{t('correctText')}</p>
+                <p className="font-black text-slate-800 text-sm sm:text-xl leading-none">{correctAnswersCount}</p>
               </div>
             </div>
 
-            <div className="bg-white shadow-md rounded-2xl px-3 sm:px-6 py-2 flex items-center gap-2 sm:gap-3 border-b-4 border-red-200">
-              <div className="bg-red-100 p-2 rounded-xl text-red-600">
-                <FaTimesCircle className="text-xl" />
+            <div className="bg-white shadow-md rounded-xl sm:rounded-2xl px-2 sm:px-6 py-1 sm:py-2 flex items-center gap-1.5 sm:gap-3 border-b-4 border-red-200">
+              <div className="bg-red-100 p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-red-600">
+                <FaTimesCircle className="text-sm sm:text-xl" />
               </div>
               <div>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider leading-none mb-1">{t('wrongText')}</p>
-                <p className="font-black text-slate-800 text-xl leading-none">{wrongAnswersCount}</p>
+                <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider leading-none mb-0.5 sm:mb-1">{t('wrongText')}</p>
+                <p className="font-black text-slate-800 text-sm sm:text-xl leading-none">{wrongAnswersCount}</p>
               </div>
             </div>
           </div>
@@ -863,7 +831,7 @@ export default function TaskContentPage() {
 
         {/* Task Media (Video/Audio) for non-lessons */}
         {(taskData.type === 'quiz' || taskData.type === 'exam') && (taskData.videoUrl || taskData.audioUrl) && (
-          <div className="w-full max-w-4xl mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="w-full max-w-4xl mb-3 sm:mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
             {taskData.videoUrl && (
               <div className="bg-white rounded-3xl p-4 shadow-xl border border-slate-100 overflow-hidden aspect-video">
                 <iframe
@@ -887,17 +855,17 @@ export default function TaskContentPage() {
           </div>
         )}
 
-        <div className="w-full max-w-4xl flex items-center gap-6 mb-8">
-          <div className="flex-grow flex flex-col gap-2">
+        <div className="w-full max-w-4xl flex items-center gap-3 sm:gap-6 mb-3 sm:mb-8">
+          <div className="flex-grow flex flex-col gap-1 sm:gap-2">
             <div className="flex justify-between items-end px-1">
-              <p className="text-sm font-black text-slate-400 uppercase tracking-wider">
+              <p className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-wider">
                 {taskData.type} Progress
               </p>
-              <p className="text-sm font-black text-slate-600">
+              <p className="text-xs sm:text-sm font-black text-slate-600">
                 {t('question')} {currentQuestionIndex + 1} of {totalQuestions}
               </p>
             </div>
-            <div className="h-4 w-full bg-slate-200/50 rounded-full p-1 overflow-hidden backdrop-blur-sm border border-white/50 shadow-inner">
+            <div className="h-2.5 sm:h-4 w-full bg-slate-200/50 rounded-full p-1 overflow-hidden backdrop-blur-sm border border-white/50 shadow-inner">
               <motion.div
                 className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"
                 initial={{ width: 0 }}
@@ -909,9 +877,9 @@ export default function TaskContentPage() {
 
           {(taskData.type === 'quiz' || taskData.type === 'exam') && taskData.timeLimit && (
             <div className="flex-shrink-0 relative">
-              <div className={`px-6 py-3 rounded-2xl flex flex-col items-center justify-center border-b-4 transition-colors ${timeLeft <= 10 ? 'bg-red-500 text-white border-red-700 animate-pulse' : 'bg-white text-slate-600 border-slate-200 shadow-md'}`}>
-                <p className="text-xs font-black uppercase tracking-wider opacity-80 leading-none mb-1">{t('time_left')}</p>
-                <p className="text-2xl font-black font-mono leading-none tracking-tighter">{formatTime(timeLeft)}</p>
+              <div className={`px-3 sm:px-6 py-1.5 sm:py-3 rounded-xl sm:rounded-2xl flex flex-col items-center justify-center border-b-4 transition-colors ${timeLeft <= 10 ? 'bg-red-500 text-white border-red-700 animate-pulse' : 'bg-white text-slate-600 border-slate-200 shadow-md'}`}>
+                <p className="text-[9px] sm:text-xs font-black uppercase tracking-wider opacity-80 leading-none mb-0.5 sm:mb-1">{t('time_left')}</p>
+                <p className="text-base sm:text-2xl font-black font-mono leading-none tracking-tighter">{formatTime(timeLeft)}</p>
               </div>
               <AnimatePresence>
                 {timeAlert && (
@@ -929,7 +897,7 @@ export default function TaskContentPage() {
           )}
         </div>
 
-        <div className="bg-white rounded-[2rem] shadow-xl p-8 mb-6 border border-slate-100 relative max-w-3xl w-full mx-auto">
+        <div className="bg-white rounded-2xl sm:rounded-[2rem] shadow-xl p-3 sm:p-8 mb-3 sm:mb-6 border border-slate-100 relative max-w-3xl w-full mx-auto">
           {feedbackMessage && (feedbackMessage.type === 'correct' || feedbackMessage.type === 'wrong') && (
             <motion.div initial={{ scale: 0.5, opacity: 0, x: 20 }} animate={{ scale: 1, opacity: 1, x: 0 }}
               className={`absolute top-4 right-4 px-4 py-1.5 rounded-2xl font-black shadow-lg text-sm flex items-center gap-2 z-20 tracking-widest uppercase border-2 border-white ${feedbackMessage.type === 'correct' ? 'bg-green-500 text-white shadow-green-200' : 'bg-red-500 text-white shadow-red-200'}`}>
@@ -937,17 +905,7 @@ export default function TaskContentPage() {
             </motion.div>
           )}
 
-          {languageLoaded && !feedbackMessage && (
-            <button
-              onClick={() => setContentLanguage(prev => prev === 'en' ? 'ta' : 'en')}
-              className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-black text-xs shadow drop-shadow-sm hover:scale-105 active:scale-95 transition-transform z-20"
-            >
-              <FaLanguage size={14} />
-              <span>{contentLanguage === 'en' ? 'தமிழ்' : 'English'}</span>
-            </button>
-          )}
-
-          <div className="text-2xl font-bold mb-8 flex flex-col items-center text-center text-gray-800 mt-4">
+          <div className="text-base sm:text-2xl font-bold mb-3 sm:mb-8 flex flex-col items-center text-center text-gray-800 mt-2 sm:mt-4">
             {/* Question Image */}
             {currentQuestion.imageUrl && currentQuestion.type !== 'counting' && (
               <motion.div
@@ -1019,11 +977,10 @@ export default function TaskContentPage() {
                 onPlay={() => trackEvent(childUser?.uid || childUser?.id, 'audio_listen_used', { taskId: taskData?.taskId, questionIndex: currentQuestionIndex + 1 })}
               />
             </div>
-            {isTranslating && <p className="text-xs text-indigo-500 font-bold mt-2 animate-pulse">Translating...</p>}
           </div>
 
           {displayQuestion?.options && (
-            <div className={currentQuestion.type === 'counting' ? "flex flex-wrap justify-center gap-4 bg-gray-100/50 p-6 rounded-[2rem] max-w-2xl mx-auto" : "grid grid-cols-1 md:grid-cols-2 gap-4"}>
+            <div className={currentQuestion.type === 'counting' ? "flex flex-wrap justify-center gap-4 bg-gray-100/50 p-6 rounded-[2rem] max-w-2xl mx-auto" : "grid grid-cols-2 gap-2 sm:gap-4"}>
               {(displayQuestion.options || []).map((opt, i) => ({ original: opt, index: i }))
                 .filter(item => item.original !== null && item.original !== undefined && String(item.original).trim() !== '')
                 .map((item, index) => {
@@ -1058,14 +1015,33 @@ export default function TaskContentPage() {
                     } else if (isSelected) style = "bg-blue-100 border-2 border-blue-500 text-blue-800 scale-[1.02] shadow-sm";
                   }
 
-                  return (
-                    <button key={index} onClick={() => {
+                  const selectButton = (
+                    <button key="select" onClick={() => {
                       if (!feedbackMessage) {
                         setUserAnswer(originalOption);
                         handleSubmitAnswer(originalOption);
                       }
-                    }} disabled={!!feedbackMessage || isTranslating}
-                      className={currentQuestion.type === 'counting' ? `w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full transition-all duration-300 font-black text-2xl sm:text-3xl md:text-4xl flex items-center justify-center ${style}` : `p-6 rounded-2xl transition-all duration-300 font-bold text-xl ${style}`}>{optionText}</button>
+                    }} disabled={!!feedbackMessage}
+                      className={currentQuestion.type === 'counting' ? `w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full transition-all duration-300 font-black text-2xl sm:text-3xl md:text-4xl flex items-center justify-center ${style}` : `w-full h-full p-2.5 sm:p-6 pr-10 sm:pr-14 rounded-xl sm:rounded-2xl transition-all duration-300 font-bold text-sm sm:text-xl text-left ${style}`}>{optionText}</button>
+                  );
+
+                  // Early readers can't always read all 4 options unaided —
+                  // a small Listen button per option, not just on the
+                  // question itself. Rendered as a sibling (not nested
+                  // inside the answer button, which would be invalid HTML)
+                  // positioned on top of it; AudioPlayer already stops the
+                  // click from bubbling into selecting the answer.
+                  if (currentQuestion.type === 'counting') return selectButton;
+
+                  return (
+                    <div key={index} className="relative">
+                      {selectButton}
+                      <AudioPlayer
+                        text={optionText}
+                        lang="en-US"
+                        customClassName="absolute right-1.5 sm:right-3 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 rounded-full bg-white/90 text-blue-500 hover:bg-blue-50 shadow-sm border border-blue-100 transition-colors z-10"
+                      />
+                    </div>
                   );
                 })}
             </div>

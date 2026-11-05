@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome,
-    FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap, FaLanguage,
+    FaArrowRight, FaPlay, FaStar, FaVolumeUp, FaBookOpen, FaGraduationCap,
     FaCalculator, FaFlask, FaLaptopCode, FaGlobeAmericas, FaCode, FaFeatherAlt, FaLock,
 } from 'react-icons/fa';
 import { useLanguage } from '@/app/providers/LanguageProvider';
@@ -46,8 +46,6 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const [isLoading, setIsLoading] = useState(false);
     const [currentPromptType, setCurrentPromptType] = useState(null);
     const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
-    const [translatedContent, setTranslatedContent] = useState(null);
-    const [isTranslating, setIsTranslating] = useState(false);
     const [starsEarned, setStarsEarned] = useState(0);
     const [starPop, setStarPop] = useState(false);
     const [mascotMessage, setMascotMessage] = useState(null);
@@ -68,64 +66,11 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const gradeNum = parseInt((childUser?.gradeId || taskData?.gradeId || '').replace(/[^0-9]/g, ''), 10);
     const isEarlyGrade = gradeNum >= 1 && gradeNum <= 3;
     const childId = childUser?.uid || childUser?.id;
-    const isTamilSubject = taskData?.subjectId?.toLowerCase().includes('tamil') ||
-        taskData?.taskId?.toLowerCase().includes('tamil') ||
-        (typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('tamil'));
-
-    const [contentLanguage, setContentLanguage] = useState(isTamilSubject ? 'ta' : 'en');
-    const { language, languageLoaded, t } = useLanguage();
-
-    // Once the parent's global learning-language preference has loaded,
-    // default non-Tamil-subject content to it too — so a family that picked
-    // Tamil in Settings gets Tamil content everywhere, not just the Tamil
-    // subject, and doesn't have to manually re-toggle on every lesson.
-    useEffect(() => {
-        if (!isTamilSubject && languageLoaded && language === 'ta') {
-            setContentLanguage('ta');
-        }
-    }, [isTamilSubject, languageLoaded, language]);
-
-    // Check if the current content appears to be English
-    const isEnglishContent = useCallback((text) => {
-        if (!text) return true;
-        const englishLetters = text.match(/[a-zA-Z]/g);
-        return englishLetters && englishLetters.length > (text.length * 0.2); // If > 20% are English letters
-    }, []);
+    const { t } = useLanguage();
 
     React.useEffect(() => {
-        setTranslatedContent(null);
         setCurrentSentenceIndex(0);
-        if (!taskData?.content) return;
-
-        // Force translation if target language differs from detected/likely source
-        // If content is English but user wants Tamil -> Translate to TA
-        // If content is Tamil but user wants English -> Translate to EN
-        const contentIsEn = isEnglishContent(taskData.content);
-        const needsTranslation = (contentIsEn && contentLanguage === 'ta') || (!contentIsEn && contentLanguage === 'en');
-        const targetLang = contentLanguage === 'ta' ? 'ta' : 'en';
-
-        if (needsTranslation) {
-            const fetchTranslation = async () => {
-                setIsTranslating(true);
-                try {
-                    const res = await fetch('/api/translate', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ text: taskData.content, targetLanguage: targetLang })
-                    });
-                    const data = await res.json();
-                    if (data.translatedText) {
-                        setTranslatedContent(data.translatedText);
-                    }
-                } catch (e) {
-                    console.error("Translation failed", e);
-                } finally {
-                    setIsTranslating(false);
-                }
-            };
-            fetchTranslation();
-        }
-    }, [taskData, contentLanguage, isEnglishContent]);
+    }, [taskData]);
 
     // Safely split text into sentences, filter out empty strings, and remove Markdown characters like ** or #
     // Clean strings like "[EXAM 2] Question" or "Quizz 1: Question" or "Lesson 2 - Question"
@@ -142,7 +87,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     // to keep cards short, but that routinely produced nonsense fragments
     // ("and the second digit tells") with no complete thought on screen —
     // worse than a slightly longer, grammatical sentence.
-    const displayContent = translatedContent || taskData?.content || "";
+    const displayContent = taskData?.content || "";
     const cleanContent = displayContent.replace(/[*#_]/g, "");
     const sentences = (cleanContent.match(/[^.!?]+[.!?]+/g) || [cleanContent])
         .map(s => cleanStr(s.trim()))
@@ -440,19 +385,6 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             </div>
                         )}
 
-                        {/* Card Language Toggle */}
-                        {languageLoaded && (
-                            <div className={`absolute ${taskData.videoUrl ? 'bottom-5' : 'top-16 sm:top-20'} right-5 sm:right-8 z-20`}>
-                                <button
-                                    onClick={() => setContentLanguage(prev => prev === 'en' ? 'ta' : 'en')}
-                                    className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-black text-[10px] shadow drop-shadow-sm hover:scale-105 active:scale-95 transition-transform"
-                                >
-                                    <FaLanguage size={14} />
-                                    <span>{contentLanguage === 'en' ? 'தமிழ்' : 'English'}</span>
-                                </button>
-                            </div>
-                        )}
-
                         {isEarlyGrade ? (
                             /* Tap-to-discover board: every fact in the lesson sits
                                face-down as a tile. The child explores in whatever
@@ -505,9 +437,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                                                     {getConceptEmoji(sentence, taskData?.subjectId)}
                                                                 </span>
                                                                 <p className="text-xs sm:text-sm font-bold text-slate-700 leading-snug">
-                                                                    {isTranslating
-                                                                        ? <span className="animate-pulse text-indigo-400">Translating...</span>
-                                                                        : speaking ? renderReadAlongText(sentence) : sentence}
+                                                                    {speaking ? renderReadAlongText(sentence) : sentence}
                                                                 </p>
                                                                 <AudioPlayer
                                                                     text={sentence}
@@ -582,7 +512,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                             className="relative w-full text-center cursor-grab active:cursor-grabbing"
                                         >
                                             <p className="text-xl sm:text-3xl md:text-4xl text-slate-800 font-extrabold leading-snug sm:leading-tight max-w-2xl mx-auto">
-                                                {isTranslating ? <span className="animate-pulse text-indigo-400">Translating...</span> : sentences[validCurrentSentenceIndex]}
+                                                {sentences[validCurrentSentenceIndex]}
                                             </p>
                                         </motion.div>
                                     </AnimatePresence>
@@ -639,6 +569,15 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                 </div>
 
                 {/* AI Interactive Tutor Section */}
+                {!hasAiTutorPack && childUser ? (
+                    /* The pack isn't active for this child — a kid shouldn't see a
+                       big upsell card for a feature that's off, just a small,
+                       unobtrusive sign. A parent turns it on from their dashboard. */
+                    <div className="flex items-center justify-center gap-2 py-2.5 sm:py-3 rounded-2xl bg-slate-100 border border-slate-200 text-slate-400 font-black text-xs sm:text-sm uppercase tracking-wide">
+                        <FaLock className="text-[10px] sm:text-xs" />
+                        <span>AI Teacher: Off</span>
+                    </div>
+                ) : (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -664,22 +603,6 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                     </div>
 
                     {!hasAiTutorPack ? (
-                        childUser ? (
-                            /* Shown to the child themselves: no link to the payment/pricing
-                               page — kids should never be able to reach checkout on their
-                               own. A parent upgrades from their own dashboard instead. */
-                            <div className="p-6 sm:p-8 flex flex-col items-center text-center gap-4">
-                                <div className="w-16 h-16 bg-slate-200 rounded-2xl flex items-center justify-center text-slate-400 text-2xl shadow-inner">
-                                    <FaLock />
-                                </div>
-                                <div>
-                                    <p className="font-black text-slate-800 text-lg leading-tight">AI Tutor isn't available yet</p>
-                                    <p className="text-slate-500 font-medium text-sm mt-1 max-w-sm">
-                                        Ask a parent to turn on the AI Tutor Pack for you from their account.
-                                    </p>
-                                </div>
-                            </div>
-                        ) : (
                             /* Teacher/admin preview (no childUser) — not a kid, so the
                                upsell link to pricing is fine here. */
                             <div className="p-6 sm:p-8 flex flex-col items-center text-center gap-4">
@@ -699,7 +622,6 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                     <FaRobot /> Add AI Tutor Pack
                                 </Link>
                             </div>
-                        )
                     ) : (
                     /* Tutor Action Buttons */
                     <div className="p-4 sm:p-6">
@@ -779,6 +701,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                     </div>
                     )}
                 </motion.div>
+                )}
               </div>
 
             {/* AI Tutor Avatar (Matches Quiz/Exam design) */}
