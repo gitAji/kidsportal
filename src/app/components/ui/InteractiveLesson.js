@@ -753,12 +753,19 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                 >
                   <div className="relative w-full h-full bg-white rounded-full border-[5px] shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex items-center justify-center transition-all duration-300 border-indigo-200 group-hover:border-indigo-400 group-hover:shadow-[0_15px_35px_rgba(99,102,241,0.3)]">
                     <div className="relative w-[85%] h-[85%] mt-3" style={{ transform: `scale(${professor.scale || 1})` }}>
+                      {/* No `priority` here: this is a decorative floating
+                          mascot, not above-the-fold critical content.
+                          `priority` makes Next.js inject a high-priority
+                          preload for this image, which competes with the
+                          JS bundle for bandwidth on a slow connection —
+                          that delays hydration, which is what actually
+                          makes the page feel frozen/unclickable for a few
+                          seconds, not the image itself. */}
                       <Image
                         src={professor.img}
                         alt={professor.name}
                         fill
                         className="object-contain transition-transform duration-300 group-hover:scale-110"
-                        priority
                       />
                     </div>
                   </div>

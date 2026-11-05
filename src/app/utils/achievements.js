@@ -211,6 +211,26 @@ const STATS_KEY = "kidsportal_stats";
 
 // ── Stats helpers ────────────────────────────────────────────────────────────
 
+// Consecutive calendar days with at least one completed task, counting
+// back from today — distinct from stats.uniqueDays, which is a lifetime
+// total of active days, not a current streak. If nothing's been done yet
+// today, count back from yesterday instead, so an active streak doesn't
+// look broken before the child has played anything today.
+export function computeStreak(uniqueDaysList) {
+    if (!uniqueDaysList || uniqueDaysList.length === 0) return 0;
+    const days = new Set(uniqueDaysList.map(d => new Date(d).toDateString()));
+    const cursor = new Date();
+    if (!days.has(cursor.toDateString())) {
+        cursor.setDate(cursor.getDate() - 1);
+    }
+    let streak = 0;
+    while (days.has(cursor.toDateString())) {
+        streak++;
+        cursor.setDate(cursor.getDate() - 1);
+    }
+    return streak;
+}
+
 export function loadStats(childId) {
     if (typeof window === "undefined") return {};
     try {

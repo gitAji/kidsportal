@@ -18,7 +18,7 @@ import { getTimeStatus } from '@/app/utils/timeLimits';
 import TimeLimitBlockedScreen from '../components/child/TimeLimitBlockedScreen';
 import ReviewReminderCard from '../components/child/ReviewReminderCard';
 import { SUBJECT_STYLE_MAP as subjectStyleMap, SUBJECT_ICON_MAP as subjectIconMap } from '../utils/subjectStyles';
-import { loadStats } from '../utils/achievements';
+import { loadStats, computeStreak } from '../utils/achievements';
 
 const AVATAR_ICONS = { paw: FaPaw, rocket: FaRocket, car: FaCar, tree: FaTree, smile: FaSmile };
 
@@ -27,27 +27,6 @@ function timeGreeting(date = new Date()) {
   if (hour < 12) return 'Good morning';
   if (hour < 18) return 'Good afternoon';
   return 'Good evening';
-}
-
-// Consecutive calendar days with at least one completed task, counting
-// back from today — distinct from stats.uniqueDays (achievements.js),
-// which is a lifetime total of active days, not a current streak. If
-// nothing's been done yet today, count back from yesterday instead, so an
-// active streak doesn't look broken before the child has played anything
-// today.
-function computeStreak(uniqueDaysList) {
-  if (!uniqueDaysList || uniqueDaysList.length === 0) return 0;
-  const days = new Set(uniqueDaysList.map(d => new Date(d).toDateString()));
-  const cursor = new Date();
-  if (!days.has(cursor.toDateString())) {
-    cursor.setDate(cursor.getDate() - 1);
-  }
-  let streak = 0;
-  while (days.has(cursor.toDateString())) {
-    streak++;
-    cursor.setDate(cursor.getDate() - 1);
-  }
-  return streak;
 }
 
 export default function LearningZonePage() {
