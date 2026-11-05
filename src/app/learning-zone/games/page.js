@@ -84,8 +84,8 @@ export default function GamesHubPage() {
                 )}
                 {bestStars > 0 && (
                   <div className="flex items-center gap-0.5">
-                    {[0, 1, 2].map(i => (
-                      <FaStar key={i} className={i < bestStars ? 'text-yellow-300' : 'text-white/30'} size={16} />
+                    {[0, 1, 2, 3, 4].map(i => (
+                      <FaStar key={i} className={i < bestStars ? 'text-yellow-300' : 'text-white/30'} size={12} />
                     ))}
                   </div>
                 )}

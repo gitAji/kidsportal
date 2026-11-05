@@ -68,7 +68,9 @@ export default function LabelDropGame({ game, onFinish }) {
   const remaining = tray.filter((t) => !placed[t.zoneId]);
 
   const starsFor = () => {
-    if (wrongAttempts === 0) return 3;
+    if (wrongAttempts === 0) return 5;
+    if (wrongAttempts === 1) return 4;
+    if (wrongAttempts === 2) return 3;
     if (wrongAttempts <= zones.length) return 2;
     return 1;
   };
