@@ -192,7 +192,12 @@ export default function SubjectLevelsPage() {
   }, [refreshStats]);
 
   // ── Firestore levels: only fetched once per subject ────────────────────────
+  // Guarded against stale responses: if a child taps from Subject A to
+  // Subject B before A's fetch resolves, A's slower response must not land
+  // after B's and overwrite the screen with Subject A's levels (checkmarks
+  // included) under Subject B's URL/header.
   useEffect(() => {
+    let cancelled = false;
     const fetchFirestoreLevels = async () => {
       if (!childUser || !childUser.gradeId) {
         if (!childUser && !sessionStorage.getItem("childUser")) {
@@ -202,6 +207,7 @@ export default function SubjectLevelsPage() {
       }
 
       setLoading(true);
+      setLevels([]);
       try {
         const q = query(
           collection(db, 'levels'),
@@ -209,6 +215,7 @@ export default function SubjectLevelsPage() {
         );
 
         const snap = await getDocs(q);
+        if (cancelled) return;
         const data = snap.docs
           .map(doc => ({ id: doc.id, ...doc.data() }))
           .filter(doc => doc.gradeId === childUser.gradeId);
@@ -237,6 +244,7 @@ export default function SubjectLevelsPage() {
         setLevels(sortedData);
       } catch (err) {
         console.error("Error fetching levels:", err);
+        if (cancelled) return;
         // Fallback to local on error too
         const cleanSubjectId = decodeURIComponent(subjectId)?.toLowerCase().replace(/ /g, '-');
         const gradeData = dbData.grades.find(g => g.gradeId?.toLowerCase().replace(/-/g, '') === childUser.gradeId?.toLowerCase().replace(/-/g, ''));
@@ -248,11 +256,12 @@ export default function SubjectLevelsPage() {
           setLevels(subject.levels);
         }
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
 
     fetchFirestoreLevels();
+    return () => { cancelled = true; };
   }, [childUser, subjectId, router]);
 
   const processedLevels = useMemo(() => {
