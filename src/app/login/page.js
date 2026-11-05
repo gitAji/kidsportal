@@ -29,7 +29,15 @@ export default function LoginPage() {
 function UnifiedLoginPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const [activeRole, setActiveRole] = useState("parent"); // parent, student
+    // Read straight from the URL on the very first render — searchParams is
+    // already available synchronously here, so there's no need to wait for
+    // the effect below to correct it. Defaulting this to "parent" and fixing
+    // it up in an effect meant the Parent Portal form (email/password,
+    // "Continue with Google") could flash on screen for one render on
+    // /login?role=student, in the same window the kid's own login lives in.
+    const [activeRole, setActiveRole] = useState(() => (
+        searchParams.get('role') === 'student' ? 'student' : 'parent'
+    )); // parent, student
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState(""); // For students
