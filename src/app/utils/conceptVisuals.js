@@ -9,10 +9,14 @@
 // here as more concept visuals are built.
 import ShapeExplorer from '@/app/components/ui/concept-visuals/ShapeExplorer';
 import PerimeterTracer from '@/app/components/ui/concept-visuals/PerimeterTracer';
+import CoinCounter from '@/app/components/ui/concept-visuals/CoinCounter';
 
 const CONCEPT_VISUALS = {
   'math-2-level-15-lesson': { Component: ShapeExplorer, props: {} },
   'math-2-level-5-lesson': { Component: PerimeterTracer, props: { length: 5, width: 3, unit: 'cm' } },
+  'math-1-level-15-lesson': { Component: CoinCounter, props: { coins: [1, 2, 5, 10] } },
+  'math-1-level-16-lesson': { Component: CoinCounter, props: { coins: [10, 20, 50] } },
+  'math-2-level-19-lesson': { Component: CoinCounter, props: { coins: [500, 200, 100, 50] } },
 };
 
 export function getConceptVisual(taskId) {
