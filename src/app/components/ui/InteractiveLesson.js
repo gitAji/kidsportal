@@ -13,6 +13,7 @@ import Image from 'next/image';
 import AudioPlayer from './AudioPlayer';
 import { getConceptEmoji } from '@/app/utils/conceptEmoji';
 import { trackEvent } from '@/app/utils/trackEvent';
+import { getConceptVisual } from '@/app/utils/conceptVisuals';
 
 const SWIPE_THRESHOLD = 80;
 
@@ -66,6 +67,12 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const gradeNum = parseInt((childUser?.gradeId || taskData?.gradeId || '').replace(/[^0-9]/g, ''), 10);
     const isEarlyGrade = gradeNum >= 1 && gradeNum <= 3;
     const childId = childUser?.uid || childUser?.id;
+    // Some lessons (e.g. shape/geometry concepts) have a dedicated
+    // interactive visual instead of the card-based flow — tapping an
+    // actual shape to count its sides, or tracing a rectangle's perimeter,
+    // teaches those concepts far better than flipping a card and reading a
+    // paragraph. See utils/conceptVisuals.js.
+    const conceptVisual = getConceptVisual(taskData?.taskId);
     const { t } = useLanguage();
 
     React.useEffect(() => {
@@ -345,7 +352,10 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                         {/* Card Top Accent Bar */}
                         <div className="h-1.5 bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500" />
 
-                        {/* Concept Number Badge */}
+                        {/* Concept Number Badge — not meaningful for a
+                            dedicated concept visual, which tracks its own
+                            tap-to-count progress instead of a sentence index. */}
+                        {!conceptVisual && (
                         <div className="flex items-center justify-between px-5 sm:px-8 pt-5 sm:pt-6">
                             <div className="flex items-center gap-2.5">
                                 <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
@@ -375,6 +385,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                 </div>
                             )}
                         </div>
+                        )}
 
                         {/* Optional Video Header */}
                         {taskData.videoUrl && (
@@ -389,7 +400,9 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                             </div>
                         )}
 
-                        {isEarlyGrade ? (
+                        {conceptVisual ? (
+                            <conceptVisual.Component {...conceptVisual.props} onComplete={handleFinish} />
+                        ) : isEarlyGrade ? (
                             /* Tap-to-discover board: every fact in the lesson sits
                                face-down as a tile. The child explores in whatever
                                order they like instead of being forced through a
