@@ -166,10 +166,14 @@ export default function TaskContentPage() {
   }, [taskData?.taskId]);
 
   // Professor Greeting & Character Setup
+  // scale compensates for the source artwork itself: the panda character
+  // sits with noticeably more empty padding around it on its canvas than
+  // the owl (measured ~67% vs ~82% horizontal fill), so at the same frame
+  // size it renders visibly smaller unless scaled up to match.
   const professor = useMemo(() => {
     const char = childUser?.professorCharacter || 'owl';
-    if (char === 'panda') return { name: t('panda_name'), img: '/images/smart-panda.png', defaultMsg: t('panda_default_msg') };
-    return { name: t('owl_name'), img: '/images/professor-owl.png', defaultMsg: t('owl_default_msg') };
+    if (char === 'panda') return { id: 'panda', name: t('panda_name'), img: '/images/smart-panda.png', defaultMsg: t('panda_default_msg'), scale: 1.22 };
+    return { id: 'owl', name: t('owl_name'), img: '/images/professor-owl.png', defaultMsg: t('owl_default_msg'), scale: 1 };
   }, [childUser, t]);
 
   useEffect(() => {
@@ -1246,6 +1250,12 @@ export default function TaskContentPage() {
                 y: [0, -10, 0],
                 rotate: [0, -3, 3, -3, 0],
                 scale: [1, 1.05, 1]
+              } : professor.id === 'panda' ? {
+                // The panda's art has a raised waving paw — a little
+                // shoulder-to-shoulder rocking reads as it actually waving,
+                // instead of just bobbing in place like a static sticker.
+                y: [0, -6, 0],
+                rotate: [0, -4, 4, -4, 0]
               } : {
                 y: [0, -6, 0]
               }}
@@ -1257,7 +1267,7 @@ export default function TaskContentPage() {
               className="w-16 h-16 sm:w-28 sm:h-28 md:w-44 md:h-44 flex items-center justify-center mr-2 relative z-20 group"
             >
               <div className={`relative w-full h-full bg-white rounded-full border-[5px] shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex items-center justify-center transition-all duration-300 ${feedbackMessage?.type === 'correct' ? 'border-green-400 shadow-[0_15px_35px_rgba(74,222,128,0.3)]' : feedbackMessage?.type === 'wrong' ? 'border-red-400 shadow-[0_15px_35px_rgba(248,113,113,0.3)]' : 'border-indigo-200 group-hover:border-indigo-400 group-hover:shadow-[0_15px_35px_rgba(99,102,241,0.3)]'}`}>
-                <div className="relative w-[85%] h-[85%] mt-3">
+                <div className="relative w-[85%] h-[85%] mt-3" style={{ transform: `scale(${professor.scale || 1})` }}>
                   <Image
                     src={professor.img}
                     alt={professor.name}
