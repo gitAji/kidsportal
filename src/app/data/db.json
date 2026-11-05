@@ -24401,7 +24401,7 @@
                       "correctAnswer": "354",
                       "type": "multiple-choice",
                       "options": [
-                        "700 + 30 + 8",
+                        "454",
                         "400",
                         "803",
                         "354"
@@ -24449,7 +24449,7 @@
                         "400",
                         "390",
                         "999",
-                        "700 + 30 + 8"
+                        "410"
                       ]
                     },
                     {
@@ -24802,7 +24802,7 @@
                       "options": [
                         "5/10",
                         "6/10",
-                        "10",
+                        "4/10",
                         "3/10"
                       ]
                     },
@@ -25225,7 +25225,7 @@
                       "options": [
                         "9:45am",
                         "9:00pm",
-                        "6",
+                        "10:45am",
                         "15:00"
                       ]
                     },
@@ -25280,7 +25280,7 @@
                       "correctAnswer": "4:45pm",
                       "type": "multiple-choice",
                       "options": [
-                        "6",
+                        "5:45pm",
                         "9:00pm",
                         "4:45pm",
                         "20:05"
@@ -25364,10 +25364,10 @@
                       "correctAnswer": "4",
                       "type": "multiple-choice",
                       "options": [
-                        "180",
-                        "90",
+                        "2",
+                        "3",
                         "4",
-                        "Acute"
+                        "1"
                       ]
                     },
                     {
@@ -25389,9 +25389,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "Acute",
-                        "4",
+                        "Right",
                         "obtuse",
-                        "90"
+                        "Reflex"
                       ]
                     }
                   ]
@@ -25421,10 +25421,10 @@
                       "correctAnswer": "4",
                       "type": "multiple-choice",
                       "options": [
-                        "180",
+                        "2",
                         "4",
-                        "90",
-                        "Acute"
+                        "3",
+                        "1"
                       ]
                     },
                     {
@@ -25445,10 +25445,10 @@
                       "correctAnswer": "4",
                       "type": "multiple-choice",
                       "options": [
-                        "Acute",
+                        "1",
                         "4",
-                        "180",
-                        "obtuse"
+                        "2",
+                        "3"
                       ]
                     },
                     {
@@ -25506,7 +25506,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "4",
-                        "Tart",
+                        "24",
                         "30",
                         "75"
                       ]
@@ -25529,10 +25529,10 @@
                       "correctAnswer": "4",
                       "type": "multiple-choice",
                       "options": [
-                        "Tuesday",
+                        "6",
                         "75",
                         "4",
-                        "Tart"
+                        "10"
                       ]
                     }
                   ]
@@ -25565,7 +25565,7 @@
                         "5mm",
                         "4",
                         "30",
-                        "Tuesday"
+                        "20mm"
                       ]
                     },
                     {
@@ -25586,7 +25586,7 @@
                       "correctAnswer": "75",
                       "type": "multiple-choice",
                       "options": [
-                        "Tart",
+                        "70",
                         "75",
                         "4",
                         "30"
@@ -26173,7 +26173,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "2000",
-                        "2-litre bottle",
+                        "250",
                         "750 g",
                         "500"
                       ]
@@ -26221,7 +26221,7 @@
                         "500",
                         "2000",
                         "1000",
-                        "2-litre bottle"
+                        "3000"
                       ]
                     },
                     {
@@ -26334,7 +26334,7 @@
                       "correctAnswer": "24",
                       "type": "multiple-choice",
                       "options": [
-                        "Double a number, then double it again",
+                        "32",
                         "24",
                         "36",
                         "27"
@@ -26608,9 +26608,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "15",
-                        "55",
-                        "Because there are 5 minutes between each number on the clock face",
-                        "Quarter to the next hour"
+                        "5",
+                        "45",
+                        "55"
                       ]
                     },
                     {
@@ -26665,7 +26665,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "45",
-                        "Because there are 5 minutes between each number on the clock face",
+                        "35",
                         "55",
                         "10"
                       ]
@@ -26690,8 +26690,8 @@
                       "options": [
                         "5",
                         "20",
-                        "Quarter to the next hour",
-                        "O'clock"
+                        "25",
+                        "10"
                       ]
                     },
                     {
@@ -26712,7 +26712,7 @@
                       "correctAnswer": "55",
                       "type": "multiple-choice",
                       "options": [
-                        "Half past",
+                        "45",
                         "5",
                         "55",
                         "10"
@@ -26772,9 +26772,9 @@
                       "correctAnswer": "4",
                       "type": "multiple-choice",
                       "options": [
-                        "Because multiplying groups together and dividing a total into groups undo each other",
+                        "3",
                         "5",
-                        "Because division means every group gets exactly the same amount",
+                        "6",
                         "4"
                       ]
                     },
@@ -26798,7 +26798,7 @@
                       "options": [
                         "3",
                         "4",
-                        "Multiplication",
+                        "2",
                         "5"
                       ]
                     },
@@ -26830,9 +26830,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "8",
-                        "Sharing a number of things equally into groups",
+                        "10",
                         "5",
-                        "Because multiplying groups together and dividing a total into groups undo each other"
+                        "4"
                       ]
                     },
                     {
@@ -26853,9 +26853,9 @@
                       "correctAnswer": "8",
                       "type": "multiple-choice",
                       "options": [
-                        "Sharing a number of things equally into groups",
-                        "Because multiplying groups together and dividing a total into groups undo each other",
-                        "Multiplication",
+                        "6",
+                        "12",
+                        "4",
                         "8"
                       ]
                     },
@@ -26879,8 +26879,8 @@
                       "options": [
                         "5",
                         "4",
-                        "Because multiplying groups together and dividing a total into groups undo each other",
-                        "Because division means every group gets exactly the same amount"
+                        "8",
+                        "2"
                       ]
                     },
                     {
@@ -26963,7 +26963,7 @@
                       "options": [
                         "2",
                         "1/2",
-                        "They let you split something into equal parts everyone can have a fair share of",
+                        "4",
                         "1/2 (one half)"
                       ]
                     },
@@ -26996,7 +26996,7 @@
                       "options": [
                         "1/2",
                         "3 quarters (3/4)",
-                        "They let you split something into equal parts everyone can have a fair share of",
+                        "2",
                         "4"
                       ]
                     },
@@ -27045,7 +27045,7 @@
                         "2/8 (which is also 1/4)",
                         "3 quarters (3/4)",
                         "1/2 (one half)",
-                        "4"
+                        "1/8"
                       ]
                     },
                     {
@@ -27105,7 +27105,7 @@
                         "13",
                         "7",
                         "15",
-                        "Because notes are usually worth more, giving a clear starting total"
+                        "9"
                       ]
                     },
                     {
@@ -27126,8 +27126,8 @@
                       "correctAnswer": "2.50",
                       "type": "multiple-choice",
                       "options": [
-                        "Because notes are usually worth more, giving a clear starting total",
-                        "So you know you have enough money and get the correct change",
+                        "1.50",
+                        "3",
                         "2.50",
                         "8"
                       ]
@@ -27209,7 +27209,7 @@
                       "options": [
                         "8",
                         "17",
-                        "The value of every coin and note",
+                        "15",
                         "10.50"
                       ]
                     },
@@ -27268,9 +27268,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "100",
-                        "different sized objects are easier to measure and describe using a unit that suits their size",
-                        "Metres (m)",
-                        "a pencil is much shorter than a metre, so the measurement would be an awkward small fraction"
+                        "10",
+                        "1000",
+                        "50"
                       ]
                     },
                     {
@@ -27291,10 +27291,10 @@
                       "correctAnswer": "about 15 cm",
                       "type": "multiple-choice",
                       "options": [
-                        "Metres (m)",
+                        "about 1.5 cm",
                         "about 15 cm",
-                        "It helps you choose a sensible unit quickly, rather than getting a confusing, awkward number",
-                        "How big the thing you're measuring is"
+                        "about 150 cm",
+                        "about 1.5 m"
                       ]
                     },
                     {
@@ -27325,9 +27325,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "200",
-                        "It helps you choose a sensible unit quickly, rather than getting a confusing, awkward number",
-                        "It would need a much bigger number, making it harder to work with than a simple metre measurement",
-                        "Metres (m)"
+                        "20",
+                        "2000",
+                        "400"
                       ]
                     },
                     {
@@ -27349,9 +27349,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "a pencil is much shorter than a metre, so the measurement would be an awkward small fraction",
-                        "Centimetres (cm)",
-                        "200",
-                        "Metres (m)"
+                        "A pencil is longer than a metre, so the number would be too big",
+                        "Centimetres can never be converted to metres",
+                        "There is no real difference between the two units"
                       ]
                     },
                     {
@@ -27372,10 +27372,10 @@
                       "correctAnswer": "different sized objects are easier to measure and describe using a unit that suits their size",
                       "type": "multiple-choice",
                       "options": [
-                        "Metres (m)",
-                        "120 cm",
-                        "about 15 cm",
-                        "different sized objects are easier to measure and describe using a unit that suits their size"
+                        "different sized objects are easier to measure and describe using a unit that suits their size",
+                        "Only one unit is ever needed for any length",
+                        "Centimetres and metres always give the exact same number",
+                        "Metres are only used for very tiny objects"
                       ]
                     },
                     {
@@ -27432,10 +27432,10 @@
                       "correctAnswer": "1000",
                       "type": "multiple-choice",
                       "options": [
-                        "Recipe ingredients are often light, so grams give a more precise and sensible reading than kilograms",
-                        "it lets both very light and much heavier objects be measured using a sensibly sized number",
-                        "an apple is much lighter than a kilogram, so its weight would be an awkward small fraction of a kilogram",
-                        "1000"
+                        "1000",
+                        "100",
+                        "10000",
+                        "500"
                       ]
                     },
                     {
@@ -27456,10 +27456,10 @@
                       "correctAnswer": "about 150 g",
                       "type": "multiple-choice",
                       "options": [
-                        "an apple is much lighter than a kilogram, so its weight would be an awkward small fraction of a kilogram",
+                        "about 15 g",
                         "about 150 g",
-                        "it lets both very light and much heavier objects be measured using a sensibly sized number",
-                        "Grams (g)"
+                        "about 1500 g",
+                        "about 1.5 kg"
                       ]
                     },
                     {
@@ -27489,10 +27489,10 @@
                       "correctAnswer": "2000",
                       "type": "multiple-choice",
                       "options": [
-                        "A bag of rice is quite heavy, so its weight in the much smaller gram unit becomes a large number",
                         "2000",
-                        "about 150 g",
-                        "Grams (g)"
+                        "200",
+                        "20000",
+                        "1500"
                       ]
                     },
                     {
@@ -27513,10 +27513,10 @@
                       "correctAnswer": "an apple is much lighter than a kilogram, so its weight would be an awkward small fraction of a kilogram",
                       "type": "multiple-choice",
                       "options": [
-                        "Recipe ingredients are often light, so grams give a more precise and sensible reading than kilograms",
                         "an apple is much lighter than a kilogram, so its weight would be an awkward small fraction of a kilogram",
-                        "about 150 g",
-                        "2000"
+                        "An apple weighs more than a kilogram",
+                        "Kilograms can only measure liquids",
+                        "There is no difference between grams and kilograms"
                       ]
                     },
                     {
@@ -27538,9 +27538,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "it lets both very light and much heavier objects be measured using a sensibly sized number",
-                        "How heavy the object is",
                         "A bag of rice is quite heavy, so its weight in the much smaller gram unit becomes a large number",
-                        "1500 g"
+                        "Only kilograms should ever be used for weight",
+                        "Grams and kilograms always show the same number"
                       ]
                     },
                     {
@@ -27598,9 +27598,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "in groups of 5",
-                        "8",
-                        "It introduces the basic idea of recording and counting data by category, which more advanced charts build on",
-                        "It lets you record each response immediately as it happens, rather than trying to remember them all later"
+                        "in groups of 10",
+                        "in groups of 2",
+                        "randomly, with no grouping"
                       ]
                     },
                     {
@@ -27655,9 +27655,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "8",
-                        "the tally chart's totals for each category can be used directly to decide the height of each bar",
-                        "How many times something happens",
-                        "count them up to find the total for each category"
+                        "6",
+                        "10",
+                        "9"
                       ]
                     },
                     {
@@ -27678,10 +27678,10 @@
                       "correctAnswer": "it gives a fast, simple way to record and count each person's response as it's given",
                       "type": "multiple-choice",
                       "options": [
-                        "A line crossing through the other four",
                         "it gives a fast, simple way to record and count each person's response as it's given",
-                        "the tally chart's totals for each category can be used directly to decide the height of each bar",
-                        "It introduces the basic idea of recording and counting data by category, which more advanced charts build on"
+                        "It is the only way results can ever be recorded",
+                        "Tally charts cannot be used for surveys",
+                        "Surveys should never be recorded while data is being collected"
                       ]
                     },
                     {
@@ -27704,8 +27704,8 @@
                       "options": [
                         "Once totalled, you can easily see which category happened more or less often",
                         "the tally chart's totals for each category can be used directly to decide the height of each bar",
-                        "How many times something happens",
-                        "It lets you count in fives rather than counting every single mark one by one, which is faster"
+                        "Tally charts and bar charts have no connection to each other",
+                        "Bar charts must always be made before any tally chart"
                       ]
                     },
                     {
@@ -45179,7 +45179,7 @@
                       "options": [
                         "0.7",
                         "0.35",
-                        "7/10",
+                        "0.45",
                         "0.75"
                       ]
                     },
@@ -45201,9 +45201,9 @@
                       "correctAnswer": "0.7",
                       "type": "multiple-choice",
                       "options": [
-                        "9/100",
+                        "0.6",
                         "0.75",
-                        "7/10",
+                        "0.8",
                         "0.7"
                       ]
                     }
@@ -45235,7 +45235,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "0.6",
-                        "9/100",
+                        "0.65",
                         "0.75",
                         "0.7"
                       ]
@@ -45258,8 +45258,8 @@
                       "correctAnswer": "0.35",
                       "type": "multiple-choice",
                       "options": [
-                        "9/100",
-                        "7/10",
+                        "0.45",
+                        "0.55",
                         "0.35",
                         "0.28"
                       ]
@@ -45741,9 +45741,9 @@
                       "correctAnswer": "(4,5)",
                       "type": "multiple-choice",
                       "options": [
-                        "A",
+                        "(4,6)",
                         "(4,5)",
-                        "Infinite",
+                        "(5,4)",
                         "(5,3)"
                       ]
                     },
@@ -45800,8 +45800,8 @@
                       "options": [
                         "(4,5)",
                         "(7,1)",
-                        "4",
-                        "Infinite"
+                        "(1,7)",
+                        "(7,2)"
                       ]
                     },
                     {
@@ -45823,8 +45823,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "(4,5)",
-                        "A",
-                        "3",
+                        "(2,6)",
+                        "(5,2)",
                         "(5,3)"
                       ]
                     },
@@ -46821,11 +46821,11 @@
                     {
                       "questionId": "math-3-level-15-quiz-q2",
                       "questionText": "A square has sides of 6 cm. What is its perimeter?",
-                      "correctAnswer": "24",
+                      "correctAnswer": "24 cm",
                       "type": "multiple-choice",
                       "options": [
-                        "24",
-                        "12",
+                        "24 cm",
+                        "12 cm",
                         "30 cm",
                         "5 cm"
                       ]
@@ -46845,13 +46845,13 @@
                     {
                       "questionId": "math-3-level-15-quiz-q4",
                       "questionText": "A triangle has sides of 3 cm, 4 cm and 5 cm. What is its perimeter?",
-                      "correctAnswer": "12",
+                      "correctAnswer": "12 cm",
                       "type": "multiple-choice",
                       "options": [
-                        "12",
-                        "The total distance around the outside of a shape",
-                        "Add up the length of every side",
-                        "24"
+                        "12 cm",
+                        "10 cm",
+                        "14 cm",
+                        "24 cm"
                       ]
                     },
                     {
@@ -46878,13 +46878,13 @@
                     {
                       "questionId": "math-3-level-15-exam-q1",
                       "questionText": "A square has sides of 9 cm. What is its perimeter?",
-                      "correctAnswer": "36",
+                      "correctAnswer": "36 cm",
                       "type": "multiple-choice",
                       "options": [
-                        "36",
-                        "22 cm",
-                        "12",
-                        "Add up the length of every side"
+                        "36 cm",
+                        "40 cm",
+                        "18 cm",
+                        "45 cm"
                       ]
                     },
                     {
@@ -46902,12 +46902,12 @@
                     {
                       "questionId": "math-3-level-15-exam-q3",
                       "questionText": "A pentagon has 5 equal sides of 4 cm each. What is its perimeter?",
-                      "correctAnswer": "20",
+                      "correctAnswer": "20 cm",
                       "type": "multiple-choice",
                       "options": [
-                        "20",
-                        "18",
-                        "24",
+                        "20 cm",
+                        "18 cm",
+                        "24 cm",
                         "30 cm"
                       ]
                     },
@@ -46926,13 +46926,13 @@
                     {
                       "questionId": "math-3-level-15-exam-q5",
                       "questionText": "A rectangle has length 7 cm and width 2 cm. What is its perimeter?",
-                      "correctAnswer": "18",
+                      "correctAnswer": "18 cm",
                       "type": "multiple-choice",
                       "options": [
-                        "12",
-                        "18",
-                        "24",
-                        "The total distance around the outside of a shape"
+                        "12 cm",
+                        "18 cm",
+                        "24 cm",
+                        "16 cm"
                       ]
                     },
                     {
@@ -47015,7 +47015,7 @@
                       "options": [
                         "that category has a bigger amount/value",
                         "The amount or quantity for that category",
-                        "8",
+                        "Nothing can be concluded from bar height",
                         "the scale on the axis"
                       ]
                     },
@@ -47072,7 +47072,7 @@
                       "options": [
                         "the key (legend)",
                         "Bars can represent different amounts depending on the scale used",
-                        "8",
+                        "the title of the chart",
                         "bars (rectangles)"
                       ]
                     },
@@ -47094,10 +47094,10 @@
                       "correctAnswer": "8",
                       "type": "multiple-choice",
                       "options": [
-                        "the scale on the axis",
+                        "6",
                         "8",
-                        "Bars can represent different amounts depending on the scale used",
-                        "A bar chart"
+                        "10",
+                        "4"
                       ]
                     },
                     {
@@ -47319,10 +47319,10 @@
                       "correctAnswer": "millilitres (ml)",
                       "type": "multiple-choice",
                       "options": [
-                        "3",
-                        "1.5 litres",
                         "millilitres (ml)",
-                        "Divide by 1000"
+                        "1.5 litres",
+                        "litres (l)",
+                        "centilitres (cl)"
                       ]
                     },
                     {
@@ -47343,9 +47343,9 @@
                       "correctAnswer": "2000",
                       "type": "multiple-choice",
                       "options": [
-                        "Divide by 1000",
+                        "3000",
                         "2000",
-                        "millilitres (ml)",
+                        "1000",
                         "500"
                       ]
                     },
@@ -47377,9 +47377,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "3",
-                        "Divide by 1000",
-                        "2000",
-                        "500"
+                        "30",
+                        "2",
+                        "5"
                       ]
                     },
                     {
@@ -47400,10 +47400,10 @@
                       "correctAnswer": "500",
                       "type": "multiple-choice",
                       "options": [
-                        "3",
+                        "250",
                         "500",
-                        "millilitres (ml)",
-                        "Divide by 1000"
+                        "1000",
+                        "750"
                       ]
                     },
                     {
@@ -47424,10 +47424,10 @@
                       "correctAnswer": "2250",
                       "type": "multiple-choice",
                       "options": [
-                        "1.5 litres",
+                        "2000",
                         "500",
                         "2250",
-                        "millilitres (ml)"
+                        "2500"
                       ]
                     },
                     {
@@ -47982,7 +47982,7 @@
                         "8 (5+1+1+1)",
                         "5",
                         "1",
-                        "IV means 4 (5-1), while VI means 6 (5+1) - the order of the letters changes the meaning"
+                        "6"
                       ]
                     },
                     {
@@ -48003,9 +48003,9 @@
                       "correctAnswer": "3",
                       "type": "multiple-choice",
                       "options": [
-                        "It is a rule in the Roman numeral system that signals the smaller value should be taken away from the bigger one",
+                        "2",
                         "3",
-                        "They still appear in real contexts today, like clock faces, so recognising them is a practical skill",
+                        "4",
                         "9"
                       ]
                     },
@@ -48037,7 +48037,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "9",
-                        "They still appear in real contexts today, like clock faces, so recognising them is a practical skill",
+                        "8",
                         "1",
                         "10"
                       ]
@@ -48060,10 +48060,10 @@
                       "correctAnswer": "IV means 4 (5-1), while VI means 6 (5+1) - the order of the letters changes the meaning",
                       "type": "multiple-choice",
                       "options": [
-                        "9",
-                        "5",
-                        "It is a rule in the Roman numeral system that signals the smaller value should be taken away from the bigger one",
-                        "IV means 4 (5-1), while VI means 6 (5+1) - the order of the letters changes the meaning"
+                        "IV means 4 (5-1), while VI means 6 (5+1) - the order of the letters changes the meaning",
+                        "IV and VI both mean the same number, 6",
+                        "The order of letters in Roman numerals never matters",
+                        "IV means 6 and VI means 4"
                       ]
                     },
                     {
@@ -48086,7 +48086,7 @@
                       "options": [
                         "8 (5+1+1+1)",
                         "1",
-                        "It is a rule in the Roman numeral system that signals the smaller value should be taken away from the bigger one",
+                        "7",
                         "9"
                       ]
                     },
