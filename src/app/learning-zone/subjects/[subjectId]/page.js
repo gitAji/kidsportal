@@ -10,7 +10,7 @@ import MinimalBackButton from '../../../components/child/MinimalBackButton';
 import { loadStats, saveStats } from '../../../utils/achievements';
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { SUBJECT_STYLE_MAP, SUBJECT_ICON_MAP } from '../../../utils/subjectStyles';
+import { SUBJECT_STYLE_MAP, SUBJECT_ICON_MAP, getLevelShade } from '../../../utils/subjectStyles';
 
 // Friendly display names for subjectId prefixes (e.g. "math-3" -> "Math"),
 // so kids never see a raw internal ID like "MATH-3" in the UI.
@@ -297,6 +297,11 @@ export default function SubjectLevelsPage() {
       // Update for the next level in the array
       previousCompleted = isCompleted;
 
+      // A lighter shade of the subject's own color at Level 1, stepping
+      // darker toward the last level — so the level grid itself hints at
+      // progression, on top of the "Level X" label and progress bar.
+      const shade = getLevelShade(subjectStyle.hex, subjectStyle.borderHex, index, levels.length);
+
       return {
         ...level,
         overrideIsLocked: dynamicIsLocked,
@@ -308,10 +313,11 @@ export default function SubjectLevelsPage() {
         totalTasks,
         isCompleted,
         isNextUp,
-        isSequential
+        isSequential,
+        shade,
       };
     });
-  }, [levels, childStats, subjectId, childUser?.isSubscriptionActive, childUser?.sequentialProgression]);
+  }, [levels, childStats, subjectId, childUser?.isSubscriptionActive, childUser?.sequentialProgression, subjectStyle]);
 
   // Once every level in the subject is finished, offer a shuffled "Replay
   // Round" for review practice. This only reorders what's displayed —
@@ -556,10 +562,15 @@ export default function SubjectLevelsPage() {
               {moduleLevels.map((level, index) => {
                 // If it's locked by previous progression OR hard-locked in DB
                 const isLocked = level.overrideIsLocked || level.isLocked;
-                // Every level in this subject shares the subject's own
-                // color (matching its tile on the Learning Zone hub)
-                // instead of cycling through every subject's color.
-                const cardBg = isLocked ? "bg-slate-300 border-slate-400" : `${subjectStyle.bg} ${subjectStyle.border}`;
+                // Every level in this subject shares the subject's own hue
+                // (matching its tile on the Learning Zone hub) instead of
+                // cycling through every subject's color, but steps from a
+                // lighter shade at Level 1 to a darker one at the last
+                // level (level.shade, computed in processedLevels) — Tailwind
+                // can't turn a runtime hex into a class, so unlocked cards
+                // get their color via inline style instead of a bg-[...] class.
+                const cardBgClass = isLocked ? "bg-slate-300 border-slate-400" : "";
+                const cardStyle = isLocked ? undefined : { backgroundColor: level.shade.bg, borderColor: level.shade.border };
 
                 const totalTasks = level.totalTasks;
                 const completedCount = level.completedCount;
@@ -568,7 +579,8 @@ export default function SubjectLevelsPage() {
                   <motion.div
                     key={level.levelId}
                     onClick={() => handleLevelClick(level)}
-                    className={`${cardBg} text-white rounded-[2.5rem] shadow-lg hover:shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[260px] relative overflow-hidden group border-b-[8px] border-x-[4px] border-t-4 ${isLocked ? 'opacity-80 grayscale-[0.5]' : ''} ${level.isNextUp ? 'ring-4 ring-green-400 ring-offset-4 ring-offset-transparent' : ''}`}
+                    style={cardStyle}
+                    className={`${cardBgClass} text-white rounded-[2.5rem] shadow-lg hover:shadow-xl p-8 text-center cursor-pointer flex flex-col items-center justify-center min-h-[260px] relative overflow-hidden group border-b-[8px] border-x-[4px] border-t-4 ${isLocked ? 'opacity-80 grayscale-[0.5]' : ''} ${level.isNextUp ? 'ring-4 ring-green-400 ring-offset-4 ring-offset-transparent' : ''}`}
                     variants={cardVariants}
                     whileHover={!isLocked ? "hover" : { scale: 1.02 }}
                     whileTap="tap"
@@ -616,8 +628,12 @@ export default function SubjectLevelsPage() {
                       </motion.div>
                     )}
 
-                    {/* White circle + subject-colored icon, matching the icon badge on this subject's hub tile */}
-                    <div className={`w-20 h-20 rounded-full mb-6 shadow-inner flex items-center justify-center text-4xl relative z-10 ${isLocked ? 'bg-slate-400 text-slate-200' : `bg-white ${subjectStyle.icon} group-hover:rotate-12 transition-transform duration-300`}`}>
+                    {/* White circle + subject-colored icon, tinted to this
+                        level's own shade so it matches its card */}
+                    <div
+                      style={isLocked ? undefined : { color: level.shade.border }}
+                      className={`w-20 h-20 rounded-full mb-6 shadow-inner flex items-center justify-center text-4xl relative z-10 ${isLocked ? 'bg-slate-400 text-slate-200' : 'bg-white group-hover:rotate-12 transition-transform duration-300'}`}
+                    >
                       {isLocked ? <FaLock /> : (level.badgeEmoji || <SubjectIcon />)}
                     </div>
 
