@@ -11,9 +11,9 @@ import { db } from '@/firebase/config';
 import SkeletonLoader from '../components/ui/SkeletonLoader';
 import {
   FaStar, FaPlay, FaGamepad, FaSun, FaCloud, FaMapMarkedAlt, FaFire, FaTrophy,
-  FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaHandPointDown,
+  FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaHandPointDown, FaArrowRight,
 } from 'react-icons/fa';
-import { getChildStats } from '@/app/utils/firestoreService';
+import { getChildStats, getChildTaskHistory } from '@/app/utils/firestoreService';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import TimeLimitBlockedScreen from '../components/child/TimeLimitBlockedScreen';
 import { SUBJECT_STYLE_MAP as subjectStyleMap, SUBJECT_ICON_MAP as subjectIconMap } from '../utils/subjectStyles';
@@ -28,23 +28,72 @@ function timeGreeting(date = new Date()) {
   return 'Good evening';
 }
 
+// Consecutive calendar days with at least one completed task, counting
+// back from today — distinct from stats.uniqueDays (achievements.js),
+// which is a lifetime total of active days, not a current streak. If
+// nothing's been done yet today, count back from yesterday instead, so an
+// active streak doesn't look broken before the child has played anything
+// today.
+function computeStreak(uniqueDaysList) {
+  if (!uniqueDaysList || uniqueDaysList.length === 0) return 0;
+  const days = new Set(uniqueDaysList.map(d => new Date(d).toDateString()));
+  const cursor = new Date();
+  if (!days.has(cursor.toDateString())) {
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  let streak = 0;
+  while (days.has(cursor.toDateString())) {
+    streak++;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  return streak;
+}
+
 export default function LearningZonePage() {
   const { childUser } = useChild();
   const { t } = useLanguage();
   const [subjects, setSubjects] = useState([]);
   const [subjectsLoading, setSubjectsLoading] = useState(true);
   const [timeStatus, setTimeStatus] = useState(null);
-  const [stats, setStats] = useState({ level: 1, points: 0 });
+  const [stats, setStats] = useState({ level: 1, points: 0, streak: 0, levelsCompleted: [] });
   const [greeting, setGreeting] = useState(timeGreeting());
+  const [continueTask, setContinueTask] = useState(null);
 
   useEffect(() => {
     const childId = childUser?.uid || childUser?.id;
     if (!childId) return;
     const localStats = loadStats(childId);
-    setStats({ level: localStats.currentLevel || 1, points: localStats.totalScore || 0 });
+    setStats({
+      level: localStats.currentLevel || 1,
+      points: localStats.totalScore || 0,
+      streak: computeStreak(localStats.uniqueDays_list),
+      levelsCompleted: localStats.levelsCompleted || [],
+    });
     // Re-evaluate the greeting on mount too, in case this page was left
     // open across a time-of-day boundary (e.g. a tablet left on overnight).
     setGreeting(timeGreeting());
+  }, [childUser]);
+
+  // "Continue where you left off" — jump straight back into the most
+  // recently played task instead of making the child re-navigate
+  // Home -> Subject -> Level -> Task every time. Re-opening a task that
+  // was already finished is harmless (the task page just shows results/
+  // retry), so this doesn't need to know whether it was completed.
+  useEffect(() => {
+    const childId = childUser?.uid || childUser?.id;
+    if (!childId) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const [mostRecent] = await getChildTaskHistory(childId, 1);
+        if (!cancelled && mostRecent?.taskId && mostRecent?.subjectId && mostRecent?.levelId) {
+          setContinueTask(mostRecent);
+        }
+      } catch {
+        // No history yet, or Firestore unreachable — just skip the card.
+      }
+    })();
+    return () => { cancelled = true; };
   }, [childUser]);
 
   useEffect(() => {
@@ -139,8 +188,19 @@ export default function LearningZonePage() {
           <div className="flex items-center gap-4">
             {renderSmallAvatar()}
             <div className="min-w-0 flex-grow">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full font-black text-xs uppercase tracking-widest mb-1.5 border border-yellow-200 shadow-sm">
-                <FaStar className="text-[10px]" /> {childUser.grade} Explorer
+              <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full font-black text-xs uppercase tracking-widest border border-yellow-200 shadow-sm">
+                  <FaStar className="text-[10px]" /> {childUser.grade} Explorer
+                </div>
+                {stats.streak >= 1 && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.7 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-orange-100 text-orange-600 rounded-full font-black text-xs uppercase tracking-widest border border-orange-200 shadow-sm"
+                  >
+                    <FaFire className="text-[10px]" /> {stats.streak}-day streak
+                  </motion.div>
+                )}
               </div>
               <h1 className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight leading-tight">
                 {greeting}, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500">{childUser.name}</span>!
@@ -171,6 +231,45 @@ export default function LearningZonePage() {
         </div>
       </motion.div>
 
+      {/* Continue where you left off — jumps straight back into the most
+          recent task instead of re-navigating Home -> Subject -> Level ->
+          Task. Sits above the subjects grid since it's the single most
+          useful action for a returning child. */}
+      {continueTask && (() => {
+        const continueSubjectName = subjects.find(s => s.subjectId === continueTask.subjectId)?.subjectName;
+        const continueStyle = subjectStyleMap[continueSubjectName] || subjectStyleMap.default;
+        const ContinueIcon = subjectIconMap[continueSubjectName] || subjectIconMap.default;
+        const actionLabel = continueTask.type === 'lesson' ? 'Resume Lesson'
+          : continueTask.type === 'exam' ? 'Resume Exam'
+            : 'Resume Quiz';
+
+        return (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="relative z-10 w-full max-w-5xl mx-auto mb-10"
+          >
+            <Link href={`/learning-zone/subjects/${continueTask.subjectId}/${continueTask.levelId}/${continueTask.taskId}`}>
+              <div className={`${continueStyle.bg} ${continueStyle.border} border-b-[6px] border-x-4 border-t-4 rounded-[2rem] p-5 sm:p-6 flex items-center gap-4 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all cursor-pointer`}>
+                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-inner shrink-0">
+                  <ContinueIcon className={`text-2xl ${continueStyle.icon}`} />
+                </div>
+                <div className="min-w-0 flex-grow">
+                  <p className="text-white/80 font-black text-[10px] uppercase tracking-widest mb-0.5">Continue where you left off</p>
+                  <h3 className="text-white font-black text-lg sm:text-xl leading-tight truncate drop-shadow-sm">
+                    {continueTask.taskName || 'Your last task'}
+                  </h3>
+                </div>
+                <div className="bg-white px-4 sm:px-5 py-2.5 rounded-full font-black text-sm shadow flex items-center gap-2 shrink-0" style={{ color: continueStyle.borderHex }}>
+                  {actionLabel} <FaArrowRight className="text-xs" />
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+        );
+      })()}
+
       {/* Main Content Area */}
       <div className="w-full max-w-5xl mx-auto z-10 relative">
 
@@ -193,6 +292,16 @@ export default function LearningZonePage() {
               const style = subjectStyleMap[subject.subjectName] || subjectStyleMap.default;
               const displayName = t(`subjects.${subject.subjectName}`) || subject.subjectName;
               const showPointer = needsPointer && index === 0;
+
+              // Levels completed in this subject so far, out of this
+              // subject's curriculum total — levelId is always prefixed
+              // "{subjectId}-level-", so no cross-subject match risk.
+              // totalLevels reflects db.json's static curriculum only (not
+              // any AI-generated bonus levels beyond it), same approximation
+              // used elsewhere on a subject's own level-list page.
+              const totalLevels = subject.levels?.length || 0;
+              const completedLevels = stats.levelsCompleted.filter(id => id.startsWith(`${subject.subjectId}-level-`)).length;
+              const levelProgressPct = totalLevels > 0 ? Math.min(100, Math.round((completedLevels / totalLevels) * 100)) : 0;
 
               return (
                 <div key={subject.subjectId} className="relative">
@@ -219,10 +328,31 @@ export default function LearningZonePage() {
                       <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
                       <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/5 rounded-full blur-xl" />
 
+                      {/* Level progress so far in this subject — so the hub
+                          itself shows how far along a kid is, not just a
+                          flat "tap to enter" tile. */}
+                      {totalLevels > 0 && (
+                        <div className="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+                          <FaTrophy className="text-[10px] text-amber-400" />
+                          <span className={`text-[11px] font-black ${style.icon}`}>{completedLevels}/{totalLevels}</span>
+                        </div>
+                      )}
+
                       <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-inner mb-4 relative z-10">
                         <Icon className={`text-5xl ${style.icon}`} />
                       </div>
                       <h3 className="text-2xl font-black text-white drop-shadow-sm relative z-10">{displayName}</h3>
+
+                      {totalLevels > 0 && (
+                        <div className="w-full max-w-[140px] h-1.5 bg-black/15 rounded-full overflow-hidden mt-3 relative z-10">
+                          <motion.div
+                            className="h-full bg-white rounded-full"
+                            initial={{ width: 0 }}
+                            animate={{ width: `${levelProgressPct}%` }}
+                            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                          />
+                        </div>
+                      )}
                     </motion.div>
                   </Link>
                 </div>
