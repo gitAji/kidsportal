@@ -24989,7 +24989,7 @@
                         "48cm",
                         "22cm",
                         "24cm",
-                        "22m"
+                        "36cm"
                       ]
                     },
                     {
@@ -25012,7 +25012,7 @@
                       "options": [
                         "12cm",
                         "28cm",
-                        "22m",
+                        "24cm",
                         "30cm"
                       ]
                     },
@@ -25054,7 +25054,7 @@
                   "taskId": "math-2-level-6-lesson",
                   "taskName": "Lesson: Money: Problem Solving",
                   "type": "lesson",
-                  "content": "We can use addition and subtraction of money to solve real problems, like working out change or a total bill. To find change, subtract the cost from the amount paid: if a book costs £3.40 and you pay with a £5 note, the change is £5.00 - £3.40 = £1.60.",
+                  "content": "We can use addition and subtraction of money to solve real problems, like working out change or a total bill. To find change, subtract the cost from the amount paid: if a toy costs £2.50 and you pay with a £5 note, the change is £5.00 − £2.50 = £2.50, because £2.50 + £2.50 = £5.00.",
                   "questions": []
                 },
                 {
@@ -25066,51 +25066,51 @@
                   "questions": [
                     {
                       "questionId": "math-2-level-6-quiz-q1",
-                      "questionText": "Tom buys a book for £3.40 and pays with a £5 note. How much change does he get?",
-                      "correctAnswer": "£1.60",
+                      "questionText": "Tom buys a toy for £2.50 and pays with a £5 note. How much change does he get?",
                       "type": "multiple-choice",
                       "options": [
-                        "£3.60",
-                        "£1.60",
-                        "£1.01",
-                        "£4.65"
-                      ]
+                        "£2.50",
+                        "£3.50",
+                        "£1.50",
+                        "£2.00"
+                      ],
+                      "correctAnswer": "£2.50"
                     },
                     {
                       "questionId": "math-2-level-6-quiz-q2",
-                      "questionText": "Amy buys a pencil for 45p and a rubber for 30p. How much does she spend in total?",
-                      "correctAnswer": "75p",
+                      "questionText": "Amy buys a pencil for £0.40 and a rubber for £0.30. How much does she spend in total?",
                       "type": "multiple-choice",
                       "options": [
-                        "75p",
-                        "65p",
-                        "85p",
-                        "15p"
-                      ]
+                        "£0.70",
+                        "£0.60",
+                        "£0.80",
+                        "£0.10"
+                      ],
+                      "correctAnswer": "£0.70"
                     },
                     {
                       "questionId": "math-2-level-6-quiz-q3",
-                      "questionText": "Sam has £10 and spends £6.75. How much money does he have left?",
-                      "correctAnswer": "£3.25",
+                      "questionText": "Sam has £10 and spends £4. How much money does he have left?",
                       "type": "multiple-choice",
                       "options": [
-                        "£4.65",
-                        "£1.60",
-                        "£4.00",
-                        "£3.25"
-                      ]
+                        "£6.00",
+                        "£5.00",
+                        "£7.00",
+                        "£4.00"
+                      ],
+                      "correctAnswer": "£6.00"
                     },
                     {
                       "questionId": "math-2-level-6-quiz-q4",
-                      "questionText": "Three items cost £1.20 each. What is the total cost?",
-                      "correctAnswer": "£3.60",
+                      "questionText": "Three toys cost £2.00 each. What is the total cost?",
                       "type": "multiple-choice",
                       "options": [
-                        "£3.60",
-                        "£3.20",
-                        "£4.20",
-                        "£2.60"
-                      ]
+                        "£6.00",
+                        "£5.00",
+                        "£4.00",
+                        "£8.00"
+                      ],
+                      "correctAnswer": "£6.00"
                     }
                   ]
                 },
@@ -25123,63 +25123,63 @@
                   "questions": [
                     {
                       "questionId": "math-2-level-6-exam-q1",
-                      "questionText": "Priya buys a toy for £4.60 and pays with a £10 note. How much change does she get?",
-                      "correctAnswer": "£5.40",
+                      "questionText": "Priya buys a book for £3.50 and pays with a £5 note. How much change does she get?",
                       "type": "multiple-choice",
                       "options": [
-                        "£5.40",
-                        "£3.25",
+                        "£1.50",
+                        "£2.50",
                         "£1.00",
-                        "£4.00"
-                      ]
+                        "£2.00"
+                      ],
+                      "correctAnswer": "£1.50"
                     },
                     {
                       "questionId": "math-2-level-6-exam-q2",
-                      "questionText": "Two items cost £2.25 and £1.75. What is the total?",
-                      "correctAnswer": "£4.00",
+                      "questionText": "Two toys cost £2.25 and £1.75. What is the total?",
                       "type": "multiple-choice",
                       "options": [
                         "£4.00",
                         "£3.50",
                         "£4.50",
-                        "£0.50"
-                      ]
+                        "£3.00"
+                      ],
+                      "correctAnswer": "£4.00"
                     },
                     {
                       "questionId": "math-2-level-6-exam-q3",
-                      "questionText": "Leo has £7.50 and buys a snack for £2.85. How much does he have left?",
-                      "correctAnswer": "£4.65",
+                      "questionText": "Leo has £8 and buys a toy for £3.50. How much does he have left?",
                       "type": "multiple-choice",
                       "options": [
-                        "£3.25",
-                        "75p",
-                        "£4.65",
-                        "£1.00"
-                      ]
+                        "£4.50",
+                        "£5.50",
+                        "£4.00",
+                        "£3.50"
+                      ],
+                      "correctAnswer": "£4.50"
                     },
                     {
                       "questionId": "math-2-level-6-exam-q4",
-                      "questionText": "A pack of pens costs £3.99 and Zara pays with a £5 note. How much change does she get?",
-                      "correctAnswer": "£1.01",
+                      "questionText": "A pack of pens costs £4.50 and Zara pays with a £5 note. How much change does she get?",
                       "type": "multiple-choice",
                       "options": [
-                        "£1.01",
-                        "£1.99",
-                        "£1.11",
-                        "£2.01"
-                      ]
+                        "£0.50",
+                        "£1.50",
+                        "£0.60",
+                        "£1.00"
+                      ],
+                      "correctAnswer": "£0.50"
                     },
                     {
                       "questionId": "math-2-level-6-exam-q5",
-                      "questionText": "Four sweets cost 25p each. What is the total cost?",
-                      "correctAnswer": "£1.00",
+                      "questionText": "Four sweets cost £0.25 each. What is the total cost?",
                       "type": "multiple-choice",
                       "options": [
                         "£1.00",
-                        "75p",
-                        "£1.01",
-                        "£4.00"
-                      ]
+                        "£0.75",
+                        "£1.25",
+                        "£0.80"
+                      ],
+                      "correctAnswer": "£1.00"
                     }
                   ]
                 }
@@ -26442,7 +26442,7 @@
                       "correctAnswer": "4",
                       "type": "multiple-choice",
                       "options": [
-                        "a vertex",
+                        "3",
                         "8",
                         "5",
                         "4"
@@ -26466,10 +26466,10 @@
                       "correctAnswer": "a vertex",
                       "type": "multiple-choice",
                       "options": [
-                        "4",
-                        "A circle",
                         "a vertex",
-                        "5"
+                        "a side",
+                        "an edge",
+                        "a diagonal"
                       ]
                     },
                     {
@@ -26499,10 +26499,10 @@
                       "correctAnswer": "6",
                       "type": "multiple-choice",
                       "options": [
-                        "They give a clear, countable way to describe and compare shapes",
                         "5",
                         "6",
-                        "3"
+                        "3",
+                        "7"
                       ]
                     },
                     {
@@ -26525,8 +26525,8 @@
                       "options": [
                         "6",
                         "8",
-                        "a vertex",
-                        "They give a clear, countable way to describe and compare shapes"
+                        "7",
+                        "9"
                       ]
                     },
                     {
@@ -26547,8 +26547,8 @@
                       "correctAnswer": "3",
                       "type": "multiple-choice",
                       "options": [
-                        "They give a clear, countable way to describe and compare shapes",
-                        "a vertex",
+                        "2",
+                        "4",
                         "6",
                         "3"
                       ]
