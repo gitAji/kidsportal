@@ -464,51 +464,68 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                     {sentences.map((sentence, idx) => {
                                         const revealed = revealedTiles.has(idx);
                                         const speaking = speakingTileIndex === idx;
-                                        return revealed ? (
-                                            <motion.div
+                                        const faceStyle = { backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' };
+                                        return (
+                                            <div
                                                 key={idx}
-                                                initial={{ opacity: 0, scale: 0.85 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                                                className="relative min-h-[9rem] sm:min-h-[11rem] rounded-2xl sm:rounded-3xl bg-white border-2 border-amber-100 shadow-md p-3 sm:p-4 flex flex-col items-center justify-center gap-1.5 sm:gap-2 text-center"
+                                                className="relative min-h-[9rem] sm:min-h-[11rem]"
+                                                style={{ perspective: 1000, WebkitPerspective: 1000 }}
                                             >
-                                                <span className="absolute top-2 right-2 text-amber-400">
-                                                    <FaStar className="text-sm" />
-                                                </span>
-                                                <span className="text-3xl sm:text-4xl" role="img" aria-hidden="true">
-                                                    {getConceptEmoji(sentence, taskData?.subjectId)}
-                                                </span>
-                                                <p className="text-xs sm:text-sm font-bold text-slate-700 leading-snug">
-                                                    {isTranslating
-                                                        ? <span className="animate-pulse text-indigo-400">Translating...</span>
-                                                        : speaking ? renderReadAlongText(sentence) : sentence}
-                                                </p>
-                                                <AudioPlayer
-                                                    text={sentence}
-                                                    lang="en-US"
-                                                    icon={<FaVolumeUp className="text-xs" />}
-                                                    autoPlay
-                                                    onPlay={() => {
-                                                        setSpeakingTileIndex(idx);
-                                                        trackEvent(childId, 'audio_listen_used', { taskId: taskData?.taskId, cardIndex: idx + 1 });
-                                                    }}
-                                                    onWordBoundary={(charIndex, charLength) => setActiveWordRange(charIndex < 0 ? null : { charIndex, charLength })}
-                                                    customClassName="p-1.5 rounded-full bg-blue-50 text-blue-500 hover:bg-blue-100 transition-colors"
-                                                />
-                                            </motion.div>
-                                        ) : (
-                                            <motion.button
-                                                key={idx}
-                                                type="button"
-                                                onClick={() => handleTileTap(idx)}
-                                                whileTap={{ scale: 0.92 }}
-                                                whileHover={{ scale: 1.03 }}
-                                                aria-label="Tap to discover this fact"
-                                                className={`min-h-[9rem] sm:min-h-[11rem] rounded-2xl sm:rounded-3xl bg-gradient-to-br ${theme.gradient} flex flex-col items-center justify-center gap-1.5 shadow-lg text-white`}
-                                            >
-                                                <span className="text-3xl sm:text-4xl">❓</span>
-                                                <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest opacity-80">Tap me!</span>
-                                            </motion.button>
+                                                <motion.div
+                                                    className="relative w-full h-full"
+                                                    style={{ transformStyle: 'preserve-3d', WebkitTransformStyle: 'preserve-3d' }}
+                                                    animate={{ rotateY: revealed ? 180 : 0 }}
+                                                    transition={{ duration: 0.5, ease: 'easeInOut' }}
+                                                >
+                                                    {/* Front face — face-down, tap to flip */}
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => handleTileTap(idx)}
+                                                        disabled={revealed}
+                                                        aria-label="Tap to flip this card"
+                                                        style={faceStyle}
+                                                        className={`absolute inset-0 w-full h-full rounded-2xl sm:rounded-3xl bg-gradient-to-br ${theme.gradient} flex flex-col items-center justify-center gap-1.5 shadow-lg text-white active:scale-95 transition-transform`}
+                                                    >
+                                                        <span className="text-3xl sm:text-4xl">❓</span>
+                                                        <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest opacity-80">Tap me!</span>
+                                                    </button>
+
+                                                    {/* Back face — the revealed fact, pre-rotated so it faces
+                                                        forward once the card above has flipped 180deg */}
+                                                    <div
+                                                        style={{ ...faceStyle, transform: 'rotateY(180deg)' }}
+                                                        className="absolute inset-0 w-full h-full rounded-2xl sm:rounded-3xl bg-white border-2 border-amber-100 shadow-md p-3 sm:p-4 flex flex-col items-center justify-center gap-1.5 sm:gap-2 text-center"
+                                                    >
+                                                        {revealed && (
+                                                            <>
+                                                                <span className="absolute top-2 right-2 text-amber-400">
+                                                                    <FaStar className="text-sm" />
+                                                                </span>
+                                                                <span className="text-3xl sm:text-4xl" role="img" aria-hidden="true">
+                                                                    {getConceptEmoji(sentence, taskData?.subjectId)}
+                                                                </span>
+                                                                <p className="text-xs sm:text-sm font-bold text-slate-700 leading-snug">
+                                                                    {isTranslating
+                                                                        ? <span className="animate-pulse text-indigo-400">Translating...</span>
+                                                                        : speaking ? renderReadAlongText(sentence) : sentence}
+                                                                </p>
+                                                                <AudioPlayer
+                                                                    text={sentence}
+                                                                    lang="en-US"
+                                                                    icon={<FaVolumeUp className="text-xs" />}
+                                                                    autoPlay
+                                                                    onPlay={() => {
+                                                                        setSpeakingTileIndex(idx);
+                                                                        trackEvent(childId, 'audio_listen_used', { taskId: taskData?.taskId, cardIndex: idx + 1 });
+                                                                    }}
+                                                                    onWordBoundary={(charIndex, charLength) => setActiveWordRange(charIndex < 0 ? null : { charIndex, charLength })}
+                                                                    customClassName="p-1.5 rounded-full bg-blue-50 text-blue-500 hover:bg-blue-100 transition-colors"
+                                                                />
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                </motion.div>
+                                            </div>
                                         );
                                     })}
                                 </div>
