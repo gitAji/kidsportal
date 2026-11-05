@@ -14,15 +14,15 @@ export default function GameCompleteScreen({ title, stars, message, onPlayAgain,
       >
         <h1 className="text-3xl font-black text-slate-800 mb-4">{title}</h1>
 
-        <div className="flex justify-center gap-2 mb-4">
-          {[0, 1, 2].map((i) => (
+        <div className="flex justify-center gap-1.5 sm:gap-2 mb-4">
+          {[0, 1, 2, 3, 4].map((i) => (
             <motion.div
               key={i}
               initial={{ scale: 0, rotate: -30 }}
               animate={{ scale: 1, rotate: 0 }}
-              transition={{ delay: 0.2 + i * 0.15, type: 'spring', bounce: 0.6 }}
+              transition={{ delay: 0.2 + i * 0.1, type: 'spring', bounce: 0.6 }}
             >
-              <FaStar size={44} className={i < stars ? 'text-yellow-400 drop-shadow' : 'text-slate-200'} />
+              <FaStar size={34} className={i < stars ? 'text-yellow-400 drop-shadow' : 'text-slate-200'} />
             </motion.div>
           ))}
         </div>

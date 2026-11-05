@@ -68,7 +68,9 @@ export default function LabelDropGame({ game, onFinish }) {
   const remaining = tray.filter((t) => !placed[t.zoneId]);
 
   const starsFor = () => {
-    if (wrongAttempts === 0) return 3;
+    if (wrongAttempts === 0) return 5;
+    if (wrongAttempts === 1) return 4;
+    if (wrongAttempts === 2) return 3;
     if (wrongAttempts <= zones.length) return 2;
     return 1;
   };
@@ -162,7 +164,19 @@ export default function LabelDropGame({ game, onFinish }) {
                   ? 'bg-green-500 text-white shadow-lg'
                   : 'bg-white/70 border-2 border-dashed border-slate-400 text-slate-400'
                   }`}
-                style={{ left: `${zone.x}%`, top: `${zone.y}%`, width: 76, height: 76 }}
+                // A zone authored close to an edge (e.g. a "Root" label near
+                // the bottom of a plant diagram) would otherwise have half
+                // its 76px circle sliced off by the diagram's overflow-hidden
+                // frame — clamp() keeps the circle's center at least one
+                // radius away from every edge so the whole target, and its
+                // drag-and-drop hit area, always stays fully visible and
+                // reachable, whatever x/y the diagram data uses.
+                style={{
+                  left: `clamp(38px, ${zone.x}%, calc(100% - 38px))`,
+                  top: `clamp(38px, ${zone.y}%, calc(100% - 38px))`,
+                  width: 76,
+                  height: 76,
+                }}
               >
                 {isPlaced ? (
                   <span className="flex flex-col items-center gap-0.5">

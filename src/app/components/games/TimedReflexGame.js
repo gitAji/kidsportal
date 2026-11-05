@@ -50,8 +50,10 @@ export default function TimedReflexGame({ game, onFinish }) {
 
   const starsFor = () => {
     const pct = found.length / totalTargets;
-    if (pct === 1 && wrongTaps === 0) return 3;
-    if (pct === 1 || pct >= 0.7) return 2;
+    if (pct === 1 && wrongTaps === 0) return 5;
+    if (pct === 1) return 4;
+    if (pct >= 0.7) return 3;
+    if (pct >= 0.4) return 2;
     if (found.length > 0) return 1;
     return 0;
   };

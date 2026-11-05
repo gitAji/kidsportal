@@ -18,8 +18,10 @@ export default function TapMatchGame({ game, onFinish }) {
 
   const starsFor = (correct, total) => {
     const pct = correct / total;
-    if (pct === 1) return 3;
-    if (pct >= 0.6) return 2;
+    if (pct === 1) return 5;
+    if (pct >= 0.8) return 4;
+    if (pct >= 0.6) return 3;
+    if (pct >= 0.4) return 2;
     if (pct > 0) return 1;
     return 0;
   };

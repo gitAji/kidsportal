@@ -36,8 +36,10 @@ export default function MemoryPairsGame({ game, onFinish }) {
 
   const starsFor = (moveCount) => {
     // Fewer moves than 1.5x the pair count is a great result for a young player.
-    if (moveCount <= totalPairs * 1.3) return 3;
-    if (moveCount <= totalPairs * 2) return 2;
+    if (moveCount <= totalPairs * 1.3) return 5;
+    if (moveCount <= totalPairs * 1.6) return 4;
+    if (moveCount <= totalPairs * 2) return 3;
+    if (moveCount <= totalPairs * 2.5) return 2;
     return 1;
   };
 
