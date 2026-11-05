@@ -708,8 +708,19 @@ export default function TaskContentPage() {
           )}
           <div className="bg-white rounded-3xl p-6 shadow-inner mb-8">
             <p className="text-3xl font-black text-gray-800 mb-1">{t('scoreLabel')}: <span className="text-green-500"><CountUpNumber value={score} /></span></p>
-            <p className="text-xl text-gray-600 mb-1">✅ <span className="font-bold text-green-500">{correctAnswersCount}</span> / {totalQuestions}</p>
-            <p className="text-xl text-gray-600 mb-3">❌ <span className="font-bold text-red-500">{wrongAnswersCount}</span></p>
+            <p className="text-xl text-gray-600 mb-1">✅ <span className="font-bold text-green-500">{correctAnswersCount}</span> / {totalQuestions} correct</p>
+            {/* wrongAnswersCount counts wrong SUBMISSIONS (a question
+                gets one retry, so it can contribute here even though it
+                ends up counted as correct above) — showing it as a bare
+                "❌ N" next to "N/N correct" reads as a contradiction.
+                Framing it as retries needed, separately from the final
+                score, keeps both numbers true at once instead of looking
+                like they disagree. */}
+            {wrongAnswersCount > 0 && (
+              <p className="text-sm text-gray-500 mb-3">
+                🔄 <span className="font-bold text-amber-500">{wrongAnswersCount}</span> {wrongAnswersCount === 1 ? 'attempt' : 'attempts'} needed a retry
+              </p>
+            )}
             {taskData.type !== 'lesson' && <p className="text-lg text-gray-400 bg-gray-100 rounded-full py-1 px-4 inline-block">⏳ {formatTime(timeTaken)}</p>}
           </div>
 
