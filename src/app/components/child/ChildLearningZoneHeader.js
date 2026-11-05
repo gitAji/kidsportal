@@ -7,7 +7,7 @@ import { useChild } from '@/app/providers/ChildProvider';
 import { useLanguage } from '@/app/providers/LanguageProvider';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaStar, FaTrophy, FaSignOutAlt, FaCog, FaMedal, FaHome, FaFire } from 'react-icons/fa';
+import { FaUserCircle, FaPaw, FaRocket, FaCar, FaTree, FaSmile, FaStar, FaTrophy, FaSignOutAlt, FaThLarge } from 'react-icons/fa';
 import { loadStats } from '@/app/utils/achievements';
 
 export default function ChildLearningZoneHeader() {
@@ -181,50 +181,20 @@ export default function ChildLearningZoneHeader() {
                 </div>
               </div>
 
-              {/* Dropdown Content */}
+              {/* Dropdown Content — just the two links a kid ever needs:
+                  Dashboard (which now holds Overview/Rewards/Settings as
+                  tabs) and Logout. Everything that used to be separate
+                  links here lives inside the Dashboard instead. */}
               <div className="p-4 space-y-2">
                 <Link
-                  href="/learning-zone"
+                  href="/learning-zone/dashboard"
                   onClick={() => setDropdownOpen(false)}
-                  className="flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-black text-slate-600 hover:bg-[#72E5A8] hover:text-white transition-all shadow-[0_4px_0_transparent] hover:shadow-[0_4px_0_#4CC287] hover:-translate-y-1 group"
+                  className="flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-black text-slate-600 hover:bg-[#72C6FF] hover:text-white transition-all shadow-[0_4px_0_transparent] hover:shadow-[0_4px_0_#40A5E5] hover:-translate-y-1 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-emerald-500 flex items-center justify-center text-lg group-hover:bg-white/20 group-hover:text-white transition-all">
-                    <FaHome />
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-blue-500 flex items-center justify-center text-lg group-hover:bg-white/20 group-hover:text-white transition-all">
+                    <FaThLarge />
                   </div>
-                  <span>Home</span>
-                </Link>
-
-                <Link
-                  href="/learning-zone/daily-challenge"
-                  onClick={() => setDropdownOpen(false)}
-                  className="flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-black text-slate-600 hover:bg-[#FF9F43] hover:text-white transition-all shadow-[0_4px_0_transparent] hover:shadow-[0_4px_0_#E07B20] hover:-translate-y-1 group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-orange-500 flex items-center justify-center text-lg group-hover:bg-white/20 group-hover:text-white transition-all">
-                    <FaFire />
-                  </div>
-                  <span>Daily Challenge</span>
-                </Link>
-
-                <Link
-                  href="/learning-zone/rewards"
-                  onClick={() => setDropdownOpen(false)}
-                  className="flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-black text-slate-600 hover:bg-[#FFC972] hover:text-white transition-all shadow-[0_4px_0_transparent] hover:shadow-[0_4px_0_#E5A840] hover:-translate-y-1 group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-amber-500 flex items-center justify-center text-lg group-hover:bg-white/20 group-hover:text-white transition-all">
-                    <FaMedal />
-                  </div>
-                  <span>{t('achievements')}</span>
-                </Link>
-
-                <Link
-                  href="/learning-zone/settings"
-                  onClick={() => setDropdownOpen(false)}
-                  className="flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-black text-slate-600 hover:bg-[#8CEFFF] hover:text-white transition-all shadow-[0_4px_0_transparent] hover:shadow-[0_4px_0_#5CCEE5] hover:-translate-y-1 group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-cyan-500 flex items-center justify-center text-lg group-hover:bg-white/20 group-hover:text-white transition-all">
-                    <FaCog />
-                  </div>
-                  <span>{t('settings')}</span>
+                  <span>Dashboard</span>
                 </Link>
 
                 <div className="my-2 border-t border-slate-100" />
