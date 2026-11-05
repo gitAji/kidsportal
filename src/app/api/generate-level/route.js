@@ -67,9 +67,9 @@ export async function POST(request) {
         const gradeNumber = parseInt(gradeId.replace(/\D/g, ''), 10) || '';
         const subjectName = getSubjectDisplayName(subjectId);
         const isTamil = subjectId.toLowerCase().includes('tamil');
-        // Grade 1-2 kids are still learning to type/spell, so keep their
+        // Grade 1-3 kids are still learning to type/spell, so keep their
         // questions tap-to-select only instead of testing typing ability.
-        const questionTypeRule = gradeNumber && gradeNumber <= 2
+        const questionTypeRule = gradeNumber && gradeNumber <= 3
             ? 'Every question must be type "multiple-choice" (4 options) — this grade is still learning to type and spell, so there must be NO "identification" (typed-answer) questions at all.'
             : 'Keep a healthy mix of "multiple-choice" and "identification" question types across the quiz and exam.';
 
