@@ -575,8 +575,12 @@ const ChildDashboard = ({ child, onClose }) => {
 
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                       {[
-                        { id: 'owl', name: 'Professor Owl', img: '/images/professor-owl.png', color: 'from-blue-500 to-indigo-600' },
-                        { id: 'panda', name: 'Smart Panda', img: '/images/smart-panda.png', color: 'from-emerald-500 to-teal-600' }, // Updated placeholder to actual panda image
+                        { id: 'owl', name: 'Professor Owl', img: '/images/professor-owl.png', color: 'from-blue-500 to-indigo-600', scale: 1 },
+                        // scale compensates for the source artwork: the panda
+                        // sits with more empty padding around it on its canvas
+                        // than the owl, so it renders visibly smaller at the
+                        // same thumbnail size unless scaled up to match.
+                        { id: 'panda', name: 'Smart Panda', img: '/images/smart-panda.png', color: 'from-emerald-500 to-teal-600', scale: 1.22 },
                       ].map((prof) => (
                         <button
                           key={prof.id}
@@ -589,7 +593,7 @@ const ChildDashboard = ({ child, onClose }) => {
                         >
                           <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${prof.color} p-1 shadow-md group-hover:scale-110 transition-transform`}>
                             <div className="w-full h-full bg-white rounded-full overflow-hidden relative">
-                              <Image src={prof.img} alt={prof.name} fill className="object-contain p-1" />
+                              <Image src={prof.img} alt={prof.name} fill className="object-contain p-1" style={{ transform: `scale(${prof.scale})` }} />
                             </div>
                           </div>
                           <span className={`text-[10px] font-black uppercase tracking-widest ${professorCharacter === prof.id ? 'text-indigo-600' : 'text-slate-400'}`}>
