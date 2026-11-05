@@ -16,6 +16,7 @@ import {
 import { getChildStats } from '@/app/utils/firestoreService';
 import { getTimeStatus } from '@/app/utils/timeLimits';
 import TimeLimitBlockedScreen from '../components/child/TimeLimitBlockedScreen';
+import ReviewReminderCard from '../components/child/ReviewReminderCard';
 import { SUBJECT_STYLE_MAP as subjectStyleMap, SUBJECT_ICON_MAP as subjectIconMap } from '../utils/subjectStyles';
 import { loadStats } from '../utils/achievements';
 
@@ -117,6 +118,8 @@ export default function LearningZonePage() {
 
   return (
     <div className="flex flex-col items-center p-2 sm:p-4 relative font-sans">
+
+      <ReviewReminderCard childUser={childUser} />
 
       {/* "Basecamp" background motif — a warm sky with a sun and drifting clouds,
           distinguishing Home from the map motif on Subjects and the arcade

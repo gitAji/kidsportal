@@ -37,6 +37,12 @@ function UnifiedLoginPage() {
     const [loading, setLoading] = useState(false);
     const [verifying, setVerifying] = useState(true);
 
+    // Reached via the header's "Student Login" link or the /child-login
+    // redirect — a kid's own entry point, which should stay simple and
+    // never offer a path into the Parent Portal (parents already have
+    // their own "Login" button/modal on the home page).
+    const lockedToStudent = searchParams.get('role') === 'student';
+
     // Roles Configuration
     const roles = [
         { id: 'parent', title: 'Parent Portal', icon: <FaUsers />, color: 'blue', desc: 'Family Dashboard' },
@@ -185,39 +191,60 @@ function UnifiedLoginPage() {
                         >
                             <FaHome /> Back to home
                         </motion.button>
-                        <h1 className="text-5xl md:text-6xl font-black text-slate-900 leading-tight tracking-tight mb-6">
-                            Pick your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">destination.</span>
-                        </h1>
-                        <p className="text-slate-500 text-lg font-medium max-w-md">
-                            Welcome back! Choose your account type to continue your learning journey.
-                        </p>
+                        {lockedToStudent ? (
+                            <>
+                                <h1 className="text-5xl md:text-6xl font-black text-slate-900 leading-tight tracking-tight mb-6">
+                                    Welcome to the <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500">Student Zone.</span>
+                                </h1>
+                                <p className="text-slate-500 text-lg font-medium max-w-md">
+                                    Enter your username and password to jump back into your learning adventure.
+                                </p>
+                            </>
+                        ) : (
+                            <>
+                                <h1 className="text-5xl md:text-6xl font-black text-slate-900 leading-tight tracking-tight mb-6">
+                                    Pick your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">destination.</span>
+                                </h1>
+                                <p className="text-slate-500 text-lg font-medium max-w-md">
+                                    Welcome back! Choose your account type to continue your learning journey.
+                                </p>
+                            </>
+                        )}
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {roles.map((role) => (
-                            <button
-                                key={role.id}
-                                onClick={() => { setActiveRole(role.id); setError(""); }}
-                                className={`p-8 rounded-[2.5rem] border-2 transition-all duration-300 text-left group relative overflow-hidden ${activeRole === role.id
-                                    ? `bg-white border-blue-500 shadow-2xl shadow-blue-500/10`
-                                    : 'bg-slate-50 border-slate-100 hover:border-slate-200'
-                                    }`}
-                            >
-                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6 transition-all duration-300 ${activeRole === role.id
-                                    ? `bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-lg`
-                                    : `bg-white text-slate-400 group-hover:text-blue-500`
-                                    }`}>
-                                    {role.icon}
-                                </div>
-                                <h3 className={`font-black text-xl mb-1 transition-colors ${activeRole === role.id ? 'text-slate-900' : 'text-slate-400 group-hover:text-slate-600'}`}>
-                                    {role.title}
-                                </h3>
-                                <p className="text-xs uppercase font-bold tracking-widest text-slate-400 group-hover:text-slate-500 transition-colors">
-                                    {role.desc}
-                                </p>
-                            </button>
-                        ))}
-                    </div>
+                    {/* The role picker only makes sense when a parent could land
+                        here with either destination in mind. A kid who came in
+                        through the dedicated Student Login link already knows
+                        where they are — showing a "Parent Portal" option here
+                        too would just be a second, confusing way into it, when
+                        the home page's own Login button already covers that. */}
+                    {!lockedToStudent && (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            {roles.map((role) => (
+                                <button
+                                    key={role.id}
+                                    onClick={() => { setActiveRole(role.id); setError(""); }}
+                                    className={`p-8 rounded-[2.5rem] border-2 transition-all duration-300 text-left group relative overflow-hidden ${activeRole === role.id
+                                        ? `bg-white border-blue-500 shadow-2xl shadow-blue-500/10`
+                                        : 'bg-slate-50 border-slate-100 hover:border-slate-200'
+                                        }`}
+                                >
+                                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6 transition-all duration-300 ${activeRole === role.id
+                                        ? `bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-lg`
+                                        : `bg-white text-slate-400 group-hover:text-blue-500`
+                                        }`}>
+                                        {role.icon}
+                                    </div>
+                                    <h3 className={`font-black text-xl mb-1 transition-colors ${activeRole === role.id ? 'text-slate-900' : 'text-slate-400 group-hover:text-slate-600'}`}>
+                                        {role.title}
+                                    </h3>
+                                    <p className="text-xs uppercase font-bold tracking-widest text-slate-400 group-hover:text-slate-500 transition-colors">
+                                        {role.desc}
+                                    </p>
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 {/* ── Right Side: Premium Unified Form ── */}
