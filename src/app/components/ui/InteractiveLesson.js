@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     FaLightbulb, FaRobot, FaSmileWink, FaBrain, FaCheckCircle, FaSpinner, FaArrowLeft, FaHome,
@@ -51,6 +51,12 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const [starsEarned, setStarsEarned] = useState(0);
     const [starPop, setStarPop] = useState(false);
     const [mascotMessage, setMascotMessage] = useState(null);
+    // Which word the narration is currently speaking, as a {charIndex,
+    // charLength} range into the active card's text — drives the
+    // read-along highlight for early grades. null = nothing highlighted.
+    const [activeWordRange, setActiveWordRange] = useState(null);
+    const [emojiPop, setEmojiPop] = useState(false);
+    const currentStoneRef = useRef(null);
     const theme = getSubjectTheme(taskData);
     const ThemeIcon = theme.icon;
     // Grades 1-3 get picture-first flashcards instead of reading full
@@ -170,6 +176,55 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const handleSwipe = (offsetX) => {
         if (offsetX <= -SWIPE_THRESHOLD) handleNext();
         else if (offsetX >= SWIPE_THRESHOLD) handlePrev();
+    };
+
+    // The read-along highlight only ever means something for the card
+    // currently on screen — drop it the moment that card changes, instead
+    // of leaving a stale word lit up from the previous card.
+    useEffect(() => {
+        setActiveWordRange(null);
+    }, [validCurrentSentenceIndex]);
+
+    // Keeps the current stepping stone scrolled into view as the lesson
+    // advances, so a long path never leaves the "you are here" marker
+    // scrolled off to the side.
+    useEffect(() => {
+        currentStoneRef.current?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }, [validCurrentSentenceIndex]);
+
+    // Makes the big concept icon itself an interactive touch target
+    // (a tap bounces, pops a sound and briefly sparkles) instead of being
+    // purely decorative — small thing, but it's the difference between a
+    // card you look at and a card you play with.
+    const handleEmojiTap = () => {
+        setEmojiPop(true);
+        setTimeout(() => setEmojiPop(false), 400);
+        if (typeof Audio !== 'undefined') {
+            const pop = new Audio('/sounds/pop.mp3');
+            pop.volume = 0.5;
+            pop.play().catch(() => {});
+        }
+    };
+
+    // Renders the current card's text with the word the narration is
+    // saying right now highlighted, using the {charIndex, charLength}
+    // boundary AudioPlayer reports — a read-along effect like Khan
+    // Academy Kids / Epic!, built on the browser's own speech boundaries
+    // rather than any new content or AI call.
+    const renderReadAlongText = (text) => {
+        if (!activeWordRange || activeWordRange.charIndex < 0 || !text) return text;
+        const { charIndex, charLength } = activeWordRange;
+        const end = charLength > 0 ? charIndex + charLength : text.indexOf(' ', charIndex) === -1 ? text.length : text.indexOf(' ', charIndex);
+        if (charIndex >= text.length) return text;
+        return (
+            <>
+                {text.slice(0, charIndex)}
+                <span className="bg-amber-200/80 text-slate-900 rounded-md px-1 -mx-1 transition-colors">
+                    {text.slice(charIndex, end)}
+                </span>
+                {text.slice(end)}
+            </>
+        );
     };
 
     const handleFinish = () => {
@@ -327,22 +382,63 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                 </div>
                             </div>
 
-                            {/* Step Dots */}
-                            <div className="flex flex-wrap justify-end gap-1.5 sm:gap-2 max-w-[140px] sm:max-w-[220px]">
-                                {sentences.map((_, idx) => (
-                                    <button
-                                        key={idx}
-                                        onClick={() => setCurrentSentenceIndex(idx)}
-                                        className={`rounded-full transition-all duration-300 ${idx === currentSentenceIndex
-                                            ? 'w-6 sm:w-8 h-2.5 sm:h-3 bg-gradient-to-r from-blue-500 to-cyan-400 shadow-md shadow-blue-400/30'
-                                            : idx < currentSentenceIndex
-                                                ? 'w-2.5 sm:w-3 h-2.5 sm:h-3 bg-blue-300 hover:bg-blue-400 cursor-pointer'
-                                                : 'w-2.5 sm:w-3 h-2.5 sm:h-3 bg-slate-200 hover:bg-slate-300 cursor-pointer'
-                                            }`}
-                                    />
-                                ))}
-                            </div>
+                            {/* Step Dots (older grades) */}
+                            {!isEarlyGrade && (
+                                <div className="flex flex-wrap justify-end gap-1.5 sm:gap-2 max-w-[140px] sm:max-w-[220px]">
+                                    {sentences.map((_, idx) => (
+                                        <button
+                                            key={idx}
+                                            onClick={() => setCurrentSentenceIndex(idx)}
+                                            className={`rounded-full transition-all duration-300 ${idx === currentSentenceIndex
+                                                ? 'w-6 sm:w-8 h-2.5 sm:h-3 bg-gradient-to-r from-blue-500 to-cyan-400 shadow-md shadow-blue-400/30'
+                                                : idx < currentSentenceIndex
+                                                    ? 'w-2.5 sm:w-3 h-2.5 sm:h-3 bg-blue-300 hover:bg-blue-400 cursor-pointer'
+                                                    : 'w-2.5 sm:w-3 h-2.5 sm:h-3 bg-slate-200 hover:bg-slate-300 cursor-pointer'
+                                                }`}
+                                        />
+                                    ))}
+                                </div>
+                            )}
                         </div>
+
+                        {/* Stepping-stone path (early grades) — a game-board-style
+                            progress trail instead of plain dots: each stone is big
+                            enough to tap, completed ones carry a star, and the
+                            current one pulses so it's obvious where you are. */}
+                        {isEarlyGrade && (
+                            <div className="px-5 sm:px-8 pt-4 overflow-x-auto">
+                                <div className="relative flex items-center gap-2 sm:gap-3 min-w-max pb-2">
+                                    <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1.5 bg-slate-100 rounded-full -z-0" />
+                                    {sentences.map((_, idx) => {
+                                        const done = idx < validCurrentSentenceIndex;
+                                        const current = idx === validCurrentSentenceIndex;
+                                        return (
+                                            <button
+                                                key={idx}
+                                                ref={current ? currentStoneRef : undefined}
+                                                type="button"
+                                                onClick={() => setCurrentSentenceIndex(idx)}
+                                                aria-label={`Go to step ${idx + 1}`}
+                                                className="relative z-10 flex-shrink-0"
+                                            >
+                                                <motion.div
+                                                    animate={current ? { scale: [1, 1.15, 1] } : { scale: 1 }}
+                                                    transition={{ repeat: current ? Infinity : 0, duration: 1.4 }}
+                                                    className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-black text-xs sm:text-sm shadow-md transition-colors ${current
+                                                        ? `bg-gradient-to-br ${theme.gradient} text-white shadow-lg`
+                                                        : done
+                                                            ? 'bg-amber-100 text-amber-500'
+                                                            : 'bg-slate-100 text-slate-400'
+                                                        }`}
+                                                >
+                                                    {done ? <FaStar className="text-sm" /> : idx + 1}
+                                                </motion.div>
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
 
                         {/* Optional Video Header */}
                         {taskData.videoUrl && (
@@ -405,14 +501,26 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                     className="relative w-full text-center cursor-grab active:cursor-grabbing"
                                 >
                                     {isEarlyGrade && (
-                                        <div className={`w-20 h-20 sm:w-28 sm:h-28 mb-4 sm:mb-6 mx-auto rounded-3xl bg-gradient-to-br ${theme.gradient} flex items-center justify-center text-5xl sm:text-7xl shadow-lg`}>
+                                        <motion.button
+                                            type="button"
+                                            onClick={handleEmojiTap}
+                                            whileTap={{ scale: 0.85, rotate: [0, -8, 8, 0] }}
+                                            animate={emojiPop ? { scale: [1, 1.2, 1] } : {}}
+                                            transition={{ duration: 0.4 }}
+                                            aria-label="Tap the picture!"
+                                            className={`w-20 h-20 sm:w-28 sm:h-28 mb-4 sm:mb-6 mx-auto rounded-3xl bg-gradient-to-br ${theme.gradient} flex items-center justify-center text-5xl sm:text-7xl shadow-lg cursor-pointer`}
+                                        >
                                             <span role="img" aria-hidden="true">{getConceptEmoji(sentences[validCurrentSentenceIndex], taskData?.subjectId)}</span>
-                                        </div>
+                                        </motion.button>
                                     )}
                                     <p className={isEarlyGrade
                                         ? "text-2xl sm:text-4xl md:text-5xl text-slate-800 font-black leading-snug text-center max-w-xl mx-auto"
                                         : "text-xl sm:text-3xl md:text-4xl text-slate-800 font-extrabold leading-snug sm:leading-tight max-w-2xl mx-auto"}>
-                                        {isTranslating ? <span className="animate-pulse text-indigo-400">Translating...</span> : sentences[validCurrentSentenceIndex]}
+                                        {isTranslating
+                                            ? <span className="animate-pulse text-indigo-400">Translating...</span>
+                                            : isEarlyGrade
+                                                ? renderReadAlongText(sentences[validCurrentSentenceIndex])
+                                                : sentences[validCurrentSentenceIndex]}
                                     </p>
                                 </motion.div>
                             </AnimatePresence>
@@ -428,6 +536,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                 icon={<FaVolumeUp />}
                                 autoPlay={isEarlyGrade}
                                 onPlay={() => trackEvent(childId, 'audio_listen_used', { taskId: taskData?.taskId, cardIndex: validCurrentSentenceIndex + 1 })}
+                                onWordBoundary={isEarlyGrade ? (charIndex, charLength) => setActiveWordRange(charIndex < 0 ? null : { charIndex, charLength }) : undefined}
                                 customClassName="inline-flex items-center gap-2 bg-white px-4 sm:px-5 py-2.5 sm:py-3 text-blue-600 rounded-xl sm:rounded-2xl font-bold shadow-sm hover:shadow-md hover:bg-blue-50 transition-all cursor-pointer border border-blue-100 text-sm sm:text-base"
                             />
 

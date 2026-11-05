@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { FaVolumeUp, FaStop } from 'react-icons/fa';
 
-export default function AudioPlayer({ text, lang = 'en-US', label, customClassName, icon, autoPlay = false, onPlay }) {
+export default function AudioPlayer({ text, lang = 'en-US', label, customClassName, icon, autoPlay = false, onPlay, onWordBoundary }) {
   const [voices, setVoices] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -36,8 +36,9 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
+      onWordBoundary?.(-1, 0);
     }
-  }, []);
+  }, [onWordBoundary]);
 
   const speak = useCallback(() => {
     if ('speechSynthesis' in window) {
@@ -65,11 +66,24 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
       utterance.volume = 1.0;
 
       utterance.onstart = () => setIsPlaying(true);
-      utterance.onend = () => setIsPlaying(false);
+      utterance.onend = () => {
+        setIsPlaying(false);
+        onWordBoundary?.(-1, 0);
+      };
       utterance.onerror = (err) => {
         console.error("Speech error:", err);
         setIsPlaying(false);
       };
+      // Not every browser fires word boundaries (Safari in particular is
+      // unreliable here) — treat this as a progressive enhancement for
+      // read-along highlighting, never something the lesson depends on.
+      if (onWordBoundary) {
+        utterance.onboundary = (event) => {
+          if (event.name === 'word' || event.name === undefined) {
+            onWordBoundary(event.charIndex, event.charLength || 0);
+          }
+        };
+      }
 
       // 3. Advanced Voice Selection
       const ENGLISH_PRIORITY = [
@@ -105,7 +119,7 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
     } else {
       console.warn("Text-to-speech not supported in this browser.");
     }
-  }, [isPlaying, stopSpeech, text, lang, voices, onPlay]);
+  }, [isPlaying, stopSpeech, text, lang, voices, onPlay, onWordBoundary]);
 
   const handleClick = (e) => {
     if (e) {
