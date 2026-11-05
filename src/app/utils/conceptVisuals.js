@@ -10,6 +10,7 @@
 import ShapeExplorer from '@/app/components/ui/concept-visuals/ShapeExplorer';
 import PerimeterTracer from '@/app/components/ui/concept-visuals/PerimeterTracer';
 import ClockExplorer from '@/app/components/ui/concept-visuals/ClockExplorer';
+import AngleExplorer from '@/app/components/ui/concept-visuals/AngleExplorer';
 
 const CONCEPT_VISUALS = {
   'math-2-level-15-lesson': { Component: ShapeExplorer, props: {} },
@@ -22,6 +23,9 @@ const CONCEPT_VISUALS = {
     Component: ClockExplorer,
     props: { times: [{ hour: 5, minute: 5 }, { hour: 8, minute: 15 }, { hour: 2, minute: 30 }, { hour: 6, minute: 45 }] },
   },
+  'math-2-level-8-lesson': { Component: AngleExplorer, props: { angles: [45, 90, 135, 180] } },
+  'math-4-level-7-lesson': { Component: AngleExplorer, props: { angles: [60, 90, 150, 200] } },
+  'math-5-level-15-lesson': { Component: AngleExplorer, props: { angles: [40, 90, 180, 300] } },
 };
 
 export function getConceptVisual(taskId) {
