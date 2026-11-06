@@ -14,6 +14,8 @@ import BarChartExplorer from '@/app/components/ui/concept-visuals/BarChartExplor
 import CoinCounter from '@/app/components/ui/concept-visuals/CoinCounter';
 import AngleExplorer from '@/app/components/ui/concept-visuals/AngleExplorer';
 import WeightBalance from '@/app/components/ui/concept-visuals/WeightBalance';
+import CuboidVolumeExplorer from '@/app/components/ui/concept-visuals/CuboidVolumeExplorer';
+import ProbabilityExplorer from '@/app/components/ui/concept-visuals/ProbabilityExplorer';
 
 const CONCEPT_VISUALS = {
   'math-2-level-15-lesson': { Component: ShapeExplorer, props: {} },
@@ -64,6 +66,25 @@ const CONCEPT_VISUALS = {
     props: { pairs: [
       { left: { label: '1 kg weight', grams: 1000 }, right: { label: '1,000 one-gram candies', grams: 1000 } },
       { left: { label: 'A 500 g bag of rice', grams: 500 }, right: { label: 'Two 250 g weights', grams: 500 } },
+    ] },
+  },
+  'math-5-level-13-lesson': { Component: CuboidVolumeExplorer, props: { length: 4, width: 3, height: 2, unit: 'cm' } },
+  'math-5-level-20-lesson': { Component: CuboidVolumeExplorer, props: { length: 5, width: 2, height: 3, unit: 'cm' } },
+  'math-6-level-18-lesson': { Component: CuboidVolumeExplorer, props: { length: 6, width: 4, height: 3, unit: 'cm' } },
+  'math-6-level-7-lesson': {
+    Component: ProbabilityExplorer,
+    props: { outcomes: [
+      { label: 'Red', count: 3, color: '#f87171' },
+      { label: 'Blue', count: 2, color: '#60a5fa' },
+      { label: 'Yellow', count: 1, color: '#fbbf24' },
+    ] },
+  },
+  'math-7-level-15-lesson': {
+    Component: ProbabilityExplorer,
+    props: { outcomes: [
+      { label: 'Green', count: 4, color: '#34d399' },
+      { label: 'Purple', count: 3, color: '#a78bfa' },
+      { label: 'Orange', count: 5, color: '#fb923c' },
     ] },
   },
 };
