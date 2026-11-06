@@ -14,6 +14,8 @@ import BarChartExplorer from '@/app/components/ui/concept-visuals/BarChartExplor
 import CoinCounter from '@/app/components/ui/concept-visuals/CoinCounter';
 import AngleExplorer from '@/app/components/ui/concept-visuals/AngleExplorer';
 import WeightBalance from '@/app/components/ui/concept-visuals/WeightBalance';
+import AreaGridExplorer from '@/app/components/ui/concept-visuals/AreaGridExplorer';
+import PieChartExplorer from '@/app/components/ui/concept-visuals/PieChartExplorer';
 
 const CONCEPT_VISUALS = {
   'math-2-level-15-lesson': { Component: ShapeExplorer, props: {} },
@@ -65,6 +67,16 @@ const CONCEPT_VISUALS = {
       { left: { label: '1 kg weight', grams: 1000 }, right: { label: '1,000 one-gram candies', grams: 1000 } },
       { left: { label: 'A 500 g bag of rice', grams: 500 }, right: { label: 'Two 250 g weights', grams: 500 } },
     ] },
+  },
+  'math-3-level-20-lesson': { Component: AreaGridExplorer, props: { rows: 4, cols: 6, unit: 'cm' } },
+  'math-4-level-15-lesson': { Component: AreaGridExplorer, props: { rows: 3, cols: 5, unit: 'm' } },
+  'math-5-level-9-lesson': {
+    Component: PieChartExplorer,
+    props: { slices: [{ label: 'Football', value: 5 }, { label: 'Cricket', value: 3 }, { label: 'Tennis', value: 2 }], unit: 'votes' },
+  },
+  'math-6-level-16-lesson': {
+    Component: PieChartExplorer,
+    props: { slices: [{ label: 'Walk', value: 8 }, { label: 'Bus', value: 5 }, { label: 'Car', value: 3 }, { label: 'Cycle', value: 4 }], unit: 'children' },
   },
 };
 
