@@ -279,8 +279,11 @@ export default function LevelTasksPage() {
                         <Icon size={36} className="text-white" />
                       </div>
 
-                      <h2 className="text-2xl font-extrabold mb-2 drop-shadow-md z-10 leading-tight">
-                        {task.taskName?.replace(/^\[.*?\]\s*/i, "").replace(/^(quizz|quiz|exam|lesson)\s*\d+[:\s-]*\s*/i, "").trim()}
+                      <h2 className="text-2xl font-extrabold mb-2 drop-shadow-md z-10 leading-tight line-clamp-2">
+                        {task.taskName
+                          ?.replace(/^\[.*?\]\s*/i, "")
+                          .replace(/^(quizz|quiz|exam|lesson)\s*\d*[:\s-]*\s*/i, "")
+                          .trim()}
                       </h2>
 
                       <div className="mt-auto bg-black/20 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide z-10 flex items-center gap-2">
