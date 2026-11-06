@@ -107,8 +107,9 @@ export default function WeightBalance({ pairs, onComplete }) {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
-          className="relative w-full max-w-sm aspect-[11/8]"
+          className="w-full max-w-sm"
         >
+          <div className="relative w-full aspect-[11/8]">
           <svg viewBox="0 0 220 160" className="w-full h-full">
             {/* Stand */}
             <line x1={PIVOT.x} y1={PIVOT.y} x2={PIVOT.x} y2={150} stroke="#92400e" strokeWidth={8} strokeLinecap="round" />
@@ -149,9 +150,10 @@ export default function WeightBalance({ pairs, onComplete }) {
               )}
             </g>
           </svg>
+          </div>
 
           {/* Labels under each pan */}
-          <div className="flex justify-between -mt-2 px-2">
+          <div className="flex justify-between mt-1 px-2">
             <span className="text-xs sm:text-sm font-black text-slate-600 text-center w-[42%] leading-tight">
               {pair.left.label}{leftRevealed && <span className="block text-emerald-600">{formatGrams(pair.left.grams)}</span>}
             </span>
