@@ -5,12 +5,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import GameCompleteScreen from './GameCompleteScreen';
+import AudioPlayer from '../ui/AudioPlayer';
+import { isEarlyGrade } from '../../utils/gradeHelpers';
 
 // Shows a repeating/growing sequence as a row of tiles with one blank tile
 // at the end, then lets the kid tap an option to fill it in — tests
 // recognizing a pattern's rule and predicting what comes next.
-export default function PatternContinueGame({ game, onFinish }) {
+export default function PatternContinueGame({ game, onFinish, gradeId }) {
   const { instruction, rounds } = game.data;
+  const showVoice = isEarlyGrade(gradeId);
   const [roundIndex, setRoundIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -72,7 +75,12 @@ export default function PatternContinueGame({ game, onFinish }) {
         <p className="text-center text-sm font-black text-slate-400 uppercase mb-2">
           {game.title} — {roundIndex + 1} / {rounds.length}
         </p>
-        <p className="text-center text-slate-500 font-bold mb-8">{instruction}</p>
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <p className="text-center text-slate-500 font-bold">{instruction}</p>
+          {showVoice && instruction && (
+            <AudioPlayer text={instruction} lang="en-GB" customClassName="p-2 rounded-full bg-blue-50 text-blue-500 hover:bg-blue-100 transition-all flex-shrink-0" />
+          )}
+        </div>
 
         <div className="bg-white rounded-[2rem] shadow-xl p-6 sm:p-8 mb-6">
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">

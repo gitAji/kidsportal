@@ -4,6 +4,8 @@ import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import GameCompleteScreen from './GameCompleteScreen';
+import AudioPlayer from '../ui/AudioPlayer';
+import { isEarlyGrade } from '../../utils/gradeHelpers';
 
 function shuffle(arr) {
   const a = [...arr];
@@ -22,8 +24,9 @@ function buildDeck(pairs) {
   return shuffle(cards);
 }
 
-export default function MemoryPairsGame({ game, onFinish }) {
+export default function MemoryPairsGame({ game, onFinish, gradeId }) {
   const { instruction, pairs } = game.data;
+  const showVoice = isEarlyGrade(gradeId);
   const [deck, setDeck] = useState(() => buildDeck(pairs));
   const [flipped, setFlipped] = useState([]); // indices currently face-up (unmatched)
   const [matched, setMatched] = useState([]); // pairIds already matched
@@ -97,7 +100,12 @@ export default function MemoryPairsGame({ game, onFinish }) {
         <p className="text-center text-sm font-black text-slate-400 uppercase mb-2">
           {game.title} — {matched.length} / {totalPairs} pairs
         </p>
-        <p className="text-center text-slate-500 font-bold mb-8">{instruction}</p>
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <p className="text-center text-slate-500 font-bold">{instruction}</p>
+          {showVoice && instruction && (
+            <AudioPlayer text={instruction} lang="en-GB" customClassName="p-2 rounded-full bg-blue-50 text-blue-500 hover:bg-blue-100 transition-all flex-shrink-0" />
+          )}
+        </div>
 
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4">
           {deck.map((card, index) => {

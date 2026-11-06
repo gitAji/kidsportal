@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { FaCheckCircle } from 'react-icons/fa';
 import GameCompleteScreen from './GameCompleteScreen';
+import AudioPlayer from '../ui/AudioPlayer';
+import { isEarlyGrade } from '../../utils/gradeHelpers';
 
 // Fisher-Yates, same pattern used by the other game engines.
 function shuffle(arr) {
@@ -36,8 +38,9 @@ function DiagramShape({ shape }) {
   return <Tag {...props} />;
 }
 
-export default function LabelDropGame({ game, onFinish }) {
+export default function LabelDropGame({ game, onFinish, gradeId }) {
   const { instruction, viewBox = '0 0 100 100', background, shapes = [], zones } = game.data;
+  const showVoice = isEarlyGrade(gradeId);
 
   const [placed, setPlaced] = useState({}); // zoneId -> label, once correctly dropped
   const [wrongAttempts, setWrongAttempts] = useState(0);
@@ -134,7 +137,12 @@ export default function LabelDropGame({ game, onFinish }) {
         <p className="text-center text-sm font-black text-slate-400 uppercase mb-2">
           {game.title} — {Object.keys(placed).length} / {zones.length} labelled
         </p>
-        <p className="text-center text-slate-500 font-bold mb-6">{instruction}</p>
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <p className="text-center text-slate-500 font-bold">{instruction}</p>
+          {showVoice && instruction && (
+            <AudioPlayer text={instruction} lang="en-GB" customClassName="p-2 rounded-full bg-blue-50 text-blue-500 hover:bg-blue-100 transition-all flex-shrink-0" />
+          )}
+        </div>
 
         {/* Diagram */}
         <div

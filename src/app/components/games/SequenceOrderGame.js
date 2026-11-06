@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { FaCheckCircle, FaTimesCircle, FaUndo } from 'react-icons/fa';
 import GameCompleteScreen from './GameCompleteScreen';
+import AudioPlayer from '../ui/AudioPlayer';
+import { isEarlyGrade } from '../../utils/gradeHelpers';
 
 function shuffle(arr) {
   const a = [...arr];
@@ -20,8 +22,9 @@ function shuffle(arr) {
 // placed step sends it back to the pool), then checks the result. Tracked
 // by each step's original index rather than its text, so two steps that
 // happen to share wording never get confused with each other.
-export default function SequenceOrderGame({ game, onFinish }) {
+export default function SequenceOrderGame({ game, onFinish, gradeId }) {
   const { instruction, rounds } = game.data;
+  const showVoice = isEarlyGrade(gradeId);
   const [roundIndex, setRoundIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [done, setDone] = useState(false);
@@ -95,7 +98,12 @@ export default function SequenceOrderGame({ game, onFinish }) {
         <p className="text-center text-sm font-black text-slate-400 uppercase mb-2">
           {game.title} — {roundIndex + 1} / {rounds.length}
         </p>
-        <p className="text-center text-slate-500 font-bold mb-6">{instruction}</p>
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <p className="text-center text-slate-500 font-bold">{instruction}</p>
+          {showVoice && instruction && (
+            <AudioPlayer text={instruction} lang="en-GB" customClassName="p-2 rounded-full bg-blue-50 text-blue-500 hover:bg-blue-100 transition-all flex-shrink-0" />
+          )}
+        </div>
 
         <div className="bg-white rounded-[2rem] shadow-xl p-6 sm:p-8 text-center mb-6">
           <p className="font-black text-slate-800 text-xl sm:text-2xl">{round.prompt}</p>

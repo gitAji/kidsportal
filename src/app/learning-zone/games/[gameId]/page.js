@@ -86,7 +86,7 @@ export default function GamePlayerPage() {
   return (
     <>
       <MinimalBackButton />
-      <Engine game={game} onFinish={handleFinish} />
+      <Engine game={game} onFinish={handleFinish} gradeId={childUser?.gradeId} />
     </>
   );
 }

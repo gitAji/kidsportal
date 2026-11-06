@@ -5,9 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import GameCompleteScreen from './GameCompleteScreen';
+import AudioPlayer from '../ui/AudioPlayer';
+import { isEarlyGrade } from '../../utils/gradeHelpers';
 
-export default function TapMatchGame({ game, onFinish }) {
+export default function TapMatchGame({ game, onFinish, gradeId }) {
   const { instruction, rounds } = game.data;
+  const showVoice = isEarlyGrade(gradeId);
   const [roundIndex, setRoundIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -67,7 +70,12 @@ export default function TapMatchGame({ game, onFinish }) {
         <p className="text-center text-sm font-black text-slate-400 uppercase mb-2">
           {game.title} — {roundIndex + 1} / {rounds.length}
         </p>
-        <p className="text-center text-slate-500 font-bold mb-8">{instruction}</p>
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <p className="text-center text-slate-500 font-bold">{instruction}</p>
+          {showVoice && instruction && (
+            <AudioPlayer text={instruction} lang="en-GB" customClassName="p-2 rounded-full bg-blue-50 text-blue-500 hover:bg-blue-100 transition-all flex-shrink-0" />
+          )}
+        </div>
 
         <div className="bg-white rounded-[2rem] shadow-xl p-8 sm:p-10 text-center mb-6">
           <p className={`font-black text-slate-800 whitespace-pre-line ${round.prompt.length > 60 ? 'text-xl sm:text-2xl' : round.prompt.length > 24 ? 'text-2xl sm:text-4xl' : 'text-5xl sm:text-6xl'}`}>
