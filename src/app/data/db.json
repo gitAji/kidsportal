@@ -5950,7 +5950,7 @@
                   "taskId": "math-1-level-15-lesson",
                   "taskName": "Lesson: Counting Coins & Simple Money",
                   "type": "lesson",
-                  "content": "Coins come in different values, like 1p, 2p, 5p and 10p, and we add their values together to find a total amount of money. To count a group of coins, add up each coin's value one at a time - two 5p coins and one 2p coin make 5 + 5 + 2 = 12p. Knowing coin values well helps you add money quickly.",
+                  "content": "Coins come in different values, like 1p, 2p, 5p and 10p, and we add their values together to find a total amount of money. A good way to count a group of coins is to start with the biggest coin first, then add the smaller ones, which keeps the numbers easy to track. To count a group of coins, add up each coin's value one at a time: two 5p coins and one 2p coin make 5 + 5 + 2 = 12p. Here's another example: one 10p coin, one 5p coin and two 1p coins make 10 + 5 + 1 + 1 = 17p. Once you reach 100p, that's the same as £1, since 100 pence make one pound. After adding up your coins, it's a good habit to count them again to check your answer is correct. Knowing coin values well helps you add money quickly, like when you're counting your own money to buy a snack or a toy.",
                   "questions": []
                 },
                 {
