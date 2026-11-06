@@ -14,6 +14,9 @@ import BarChartExplorer from '@/app/components/ui/concept-visuals/BarChartExplor
 import CoinCounter from '@/app/components/ui/concept-visuals/CoinCounter';
 import AngleExplorer from '@/app/components/ui/concept-visuals/AngleExplorer';
 import WeightBalance from '@/app/components/ui/concept-visuals/WeightBalance';
+import NumberLineExplorer from '@/app/components/ui/concept-visuals/NumberLineExplorer';
+import FractionShapeExplorer from '@/app/components/ui/concept-visuals/FractionShapeExplorer';
+import CoordinatePlotter from '@/app/components/ui/concept-visuals/CoordinatePlotter';
 
 const CONCEPT_VISUALS = {
   'math-2-level-15-lesson': { Component: ShapeExplorer, props: {} },
@@ -65,6 +68,54 @@ const CONCEPT_VISUALS = {
       { left: { label: '1 kg weight', grams: 1000 }, right: { label: '1,000 one-gram candies', grams: 1000 } },
       { left: { label: 'A 500 g bag of rice', grams: 500 }, right: { label: 'Two 250 g weights', grams: 500 } },
     ] },
+  },
+  'math-1-level-3-lesson': {
+    Component: NumberLineExplorer,
+    props: { min: 0, max: 50, points: [{ value: 12, label: '12' }, { value: 38, label: '38' }, { value: 23, label: '23' }, { value: 45, label: '45' }] },
+  },
+  'math-3-level-2-lesson': {
+    Component: NumberLineExplorer,
+    props: { min: -10, max: 10, points: [{ value: -5, label: '-5' }, { value: 3, label: '3' }, { value: -2, label: '-2' }, { value: 7, label: '7' }] },
+  },
+  'math-4-level-16-lesson': {
+    Component: NumberLineExplorer,
+    props: { min: -10, max: 10, points: [{ value: -8, label: '-8' }, { value: -3, label: '-3' }, { value: 0, label: '0' }, { value: 5, label: '5' }] },
+  },
+  'math-6-level-22-lesson': {
+    Component: NumberLineExplorer,
+    props: { min: -15, max: 15, points: [{ value: -12, label: '-12' }, { value: 4, label: '4' }, { value: -7, label: '-7' }, { value: 9, label: '9' }] },
+  },
+  'math-1-level-18-lesson': {
+    Component: FractionShapeExplorer,
+    props: { examples: [{ totalParts: 2, shadedParts: 1, shape: 'circle' }, { totalParts: 4, shadedParts: 1, shape: 'circle' }] },
+  },
+  'math-2-level-4-lesson': {
+    Component: FractionShapeExplorer,
+    props: { examples: [{ totalParts: 10, shadedParts: 3, shape: 'bar' }, { totalParts: 10, shadedParts: 7, shape: 'bar' }] },
+  },
+  'math-2-level-12-lesson': {
+    Component: FractionShapeExplorer,
+    props: { examples: [{ totalParts: 4, shadedParts: 3, shape: 'circle' }, { totalParts: 8, shadedParts: 5, shape: 'bar' }] },
+  },
+  'math-2-level-18-lesson': {
+    Component: FractionShapeExplorer,
+    props: { examples: [{ totalParts: 2, shadedParts: 1, shape: 'circle' }, { totalParts: 4, shadedParts: 3, shape: 'circle' }] },
+  },
+  'math-3-level-17-lesson': {
+    Component: FractionShapeExplorer,
+    props: { examples: [{ totalParts: 4, shadedParts: 2, shape: 'bar' }, { totalParts: 8, shadedParts: 4, shape: 'bar' }] },
+  },
+  'math-4-level-21-lesson': {
+    Component: CoordinatePlotter,
+    props: { range: { minX: 0, maxX: 6, minY: 0, maxY: 6 }, points: [{ x: 2, y: 3, label: 'A' }, { x: 5, y: 1, label: 'B' }, { x: 4, y: 4, label: 'C' }] },
+  },
+  'math-3-level-8-lesson': {
+    Component: CoordinatePlotter,
+    props: { range: { minX: 0, maxX: 8, minY: 0, maxY: 8 }, points: [{ x: 4, y: 5, label: 'A' }, { x: 7, y: 1, label: 'B' }, { x: 5, y: 3, label: 'C' }] },
+  },
+  'math-5-level-18-lesson': {
+    Component: CoordinatePlotter,
+    props: { range: { minX: -5, maxX: 5, minY: -5, maxY: 5 }, points: [{ x: 3, y: 2, label: 'A' }, { x: -2, y: 4, label: 'B' }, { x: -3, y: -3, label: 'C' }, { x: 4, y: -2, label: 'D' }] },
   },
 };
 
