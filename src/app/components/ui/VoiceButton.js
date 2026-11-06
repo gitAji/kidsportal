@@ -3,7 +3,7 @@
 import React from "react";
 import { FaVolumeUp } from "react-icons/fa"; // Importing a volume icon from react-icons
 
-const VoiceButton = ({ questionText, lang = "en-US" }) => {
+const VoiceButton = ({ questionText, lang = "en-GB" }) => {
   const speakQuestion = () => {
     const synth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(questionText);

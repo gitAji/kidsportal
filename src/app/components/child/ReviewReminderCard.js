@@ -147,7 +147,7 @@ export default function ReviewReminderCard({ childUser }) {
                                             <p className="font-black text-slate-800 text-lg leading-snug">{current.correctAnswer}</p>
                                             <AudioPlayer
                                                 text={`${current.question}. The answer is ${current.correctAnswer}.`}
-                                                lang="en-US"
+                                                lang="en-GB"
                                                 icon={<FaVolumeUp className="text-xs" />}
                                                 customClassName="mt-1 p-2 rounded-full bg-blue-50 text-blue-500 hover:bg-blue-100 transition-colors"
                                             />

@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { FaVolumeUp, FaStop } from 'react-icons/fa';
 
-export default function AudioPlayer({ text, lang = 'en-US', label, customClassName, icon, autoPlay = false, onPlay, onWordBoundary }) {
+export default function AudioPlayer({ text, lang = 'en-GB', label, customClassName, icon, autoPlay = false, onPlay, onWordBoundary }) {
   const [voices, setVoices] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -85,10 +85,12 @@ export default function AudioPlayer({ text, lang = 'en-US', label, customClassNa
         };
       }
 
-      // 3. Advanced Voice Selection
+      // 3. Advanced Voice Selection — this is a UK curriculum app, so a
+      // British voice is tried first; US/other English voices are still
+      // listed as fallbacks for browsers/devices with no UK voice at all.
       const ENGLISH_PRIORITY = [
-        'Samantha', 'Google UK English Female', 'Google US English',
-        'Premium', 'Natural', 'Serena', 'Daniel', 'Victoria', 'Fiona'
+        'Google UK English Female', 'Google UK English Male', 'Daniel', 'Serena', 'Kate',
+        'Samantha', 'Google US English', 'Premium', 'Natural', 'Victoria', 'Fiona'
       ];
       // A network-backed voice (Google/Microsoft's online voices) is almost
       // always far clearer than an always-available local/offline one —
