@@ -2,6 +2,7 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaCheckCircle, FaVolumeUp, FaRedo } from 'react-icons/fa';
+import MoneyPiece, { isNoteValue } from '@/app/components/ui/Money';
 
 function speak(text) {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -34,12 +35,6 @@ function speakPence(pence) {
   if (rem === 0) return `${pounds} pound${pounds === 1 ? '' : 's'}`;
   return `${pounds} pound${pounds === 1 ? '' : 's'} and ${rem} pence`;
 }
-
-const COIN_STYLE = {
-  1: { d: 34, bg: '#fbbf24' }, 2: { d: 38, bg: '#fbbf24' }, 5: { d: 30, bg: '#cbd5e1' },
-  10: { d: 36, bg: '#cbd5e1' }, 20: { d: 32, bg: '#cbd5e1' }, 50: { d: 42, bg: '#cbd5e1' },
-  100: { d: 40, bg: '#fbbf24' }, 200: { d: 44, bg: '#fbbf24' },
-};
 
 // A row of coins/notes a kid taps, in any order, to build up a running
 // total — the same "tap each piece, hear its value, watch the total grow"
@@ -80,7 +75,7 @@ export default function CoinCounter({ coins, onComplete }) {
       <div className="flex flex-wrap items-end justify-center gap-4 sm:gap-6 min-h-[7rem]">
         {PIECES.map((value, idx) => {
           const isTagged = tagged.has(idx);
-          const style = COIN_STYLE[value] || { d: 36, bg: '#cbd5e1' };
+          const isNote = isNoteValue(value);
           return (
             <motion.button
               key={idx}
@@ -93,16 +88,10 @@ export default function CoinCounter({ coins, onComplete }) {
               style={{ cursor: isTagged ? 'default' : 'pointer' }}
             >
               <div
-                className="rounded-full flex items-center justify-center font-black text-slate-700 shadow-md border-4"
-                style={{
-                  width: style.d + 20, height: style.d + 20,
-                  background: isTagged ? '#d1fae5' : style.bg,
-                  borderColor: isTagged ? '#10b981' : '#fff',
-                  fontSize: value >= 100 ? '0.8rem' : '0.95rem',
-                  transition: 'background 0.2s, border-color 0.2s',
-                }}
+                className="rounded-2xl flex items-center justify-center p-1.5 shadow-md border-[3px] transition-colors"
+                style={{ borderColor: isTagged ? '#10b981' : 'transparent', background: isTagged ? '#d1fae5' : 'transparent' }}
               >
-                {formatPence(value)}
+                <MoneyPiece value={value} coinSize={isNote ? 44 : 56} noteWidth={92} />
               </div>
               {isTagged && (
                 <motion.span initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}>
