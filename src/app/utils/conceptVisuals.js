@@ -11,6 +11,9 @@ import ShapeExplorer from '@/app/components/ui/concept-visuals/ShapeExplorer';
 import PerimeterTracer from '@/app/components/ui/concept-visuals/PerimeterTracer';
 import ClockExplorer from '@/app/components/ui/concept-visuals/ClockExplorer';
 import BarChartExplorer from '@/app/components/ui/concept-visuals/BarChartExplorer';
+import CoinCounter from '@/app/components/ui/concept-visuals/CoinCounter';
+import AngleExplorer from '@/app/components/ui/concept-visuals/AngleExplorer';
+import WeightBalance from '@/app/components/ui/concept-visuals/WeightBalance';
 
 const CONCEPT_VISUALS = {
   'math-2-level-15-lesson': { Component: ShapeExplorer, props: {} },
@@ -30,6 +33,38 @@ const CONCEPT_VISUALS = {
   'math-3-level-16-lesson': {
     Component: BarChartExplorer,
     props: { bars: [{ label: 'Apples', value: 12 }, { label: 'Bananas', value: 8 }, { label: 'Oranges', value: 5 }, { label: 'Grapes', value: 10 }], unit: 'children' },
+  },
+  // Restored below: these two components (CoinCounter, AngleExplorer) and
+  // their wiring here were dropped silently when PR #124 merged Test into
+  // its branch and a conflict on this exact file got resolved in favor of
+  // the wrong side — the component files survived, the wiring didn't, so
+  // these 6 lessons silently fell back to the old flip-card flow.
+  'math-1-level-15-lesson': { Component: CoinCounter, props: { coins: [1, 2, 5, 10] } },
+  'math-1-level-16-lesson': { Component: CoinCounter, props: { coins: [10, 20, 50] } },
+  'math-2-level-19-lesson': { Component: CoinCounter, props: { coins: [500, 200, 100, 50] } },
+  'math-2-level-8-lesson': { Component: AngleExplorer, props: { angles: [45, 90, 135, 180] } },
+  'math-4-level-7-lesson': { Component: AngleExplorer, props: { angles: [60, 90, 150, 200] } },
+  'math-5-level-15-lesson': { Component: AngleExplorer, props: { angles: [40, 90, 180, 300] } },
+  'math-1-level-12-lesson': {
+    Component: WeightBalance,
+    props: { pairs: [
+      { left: { label: 'A feather', grams: 5 }, right: { label: 'A brick', grams: 2000 } },
+      { left: { label: 'An apple', grams: 150 }, right: { label: 'A watermelon', grams: 3000 } },
+    ] },
+  },
+  'math-2-level-13-lesson': {
+    Component: WeightBalance,
+    props: { pairs: [
+      { left: { label: 'A bag of flour', grams: 1500 }, right: { label: 'A bag of sugar', grams: 1000 } },
+      { left: { label: 'A kitten', grams: 1200 }, right: { label: 'A kitten', grams: 1200 } },
+    ] },
+  },
+  'math-2-level-21-lesson': {
+    Component: WeightBalance,
+    props: { pairs: [
+      { left: { label: '1 kg weight', grams: 1000 }, right: { label: '1,000 one-gram candies', grams: 1000 } },
+      { left: { label: 'A 500 g bag of rice', grams: 500 }, right: { label: 'Two 250 g weights', grams: 500 } },
+    ] },
   },
 };
 
