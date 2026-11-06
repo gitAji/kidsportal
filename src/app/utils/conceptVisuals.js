@@ -17,12 +17,7 @@ import WeightBalance from '@/app/components/ui/concept-visuals/WeightBalance';
 import NumberLineExplorer from '@/app/components/ui/concept-visuals/NumberLineExplorer';
 import FractionShapeExplorer from '@/app/components/ui/concept-visuals/FractionShapeExplorer';
 import CoordinatePlotter from '@/app/components/ui/concept-visuals/CoordinatePlotter';
-import AreaGridExplorer from '@/app/components/ui/concept-visuals/AreaGridExplorer';
-import PieChartExplorer from '@/app/components/ui/concept-visuals/PieChartExplorer';
-import CuboidVolumeExplorer from '@/app/components/ui/concept-visuals/CuboidVolumeExplorer';
-import ProbabilityExplorer from '@/app/components/ui/concept-visuals/ProbabilityExplorer';
-import CircleExplorer from '@/app/components/ui/concept-visuals/CircleExplorer';
-import SymmetryExplorer from '@/app/components/ui/concept-visuals/SymmetryExplorer';
+import PlaceValueExplorer from '@/app/components/ui/concept-visuals/PlaceValueExplorer';
 
 const CONCEPT_VISUALS = {
   'math-2-level-15-lesson': { Component: ShapeExplorer, props: {} },
@@ -123,52 +118,11 @@ const CONCEPT_VISUALS = {
     Component: CoordinatePlotter,
     props: { range: { minX: -5, maxX: 5, minY: -5, maxY: 5 }, points: [{ x: 3, y: 2, label: 'A' }, { x: -2, y: 4, label: 'B' }, { x: -3, y: -3, label: 'C' }, { x: 4, y: -2, label: 'D' }] },
   },
-  // Restored below: these four components (AreaGridExplorer,
-  // PieChartExplorer, CuboidVolumeExplorer, ProbabilityExplorer) and
-  // their wiring here were dropped silently when PRs #128 and #129 each
-  // merged Test into their branch and a conflict on this exact file got
-  // resolved in favor of the wrong side, for the third time this
-  // session (after #124's Coin/Angle loss) — the component files
-  // survived, the wiring didn't, so these 10 lessons silently fell back
-  // to the old flip-card flow despite both PRs showing as merged.
-  'math-3-level-20-lesson': { Component: AreaGridExplorer, props: { rows: 4, cols: 6, unit: 'cm' } },
-  'math-4-level-15-lesson': { Component: AreaGridExplorer, props: { rows: 3, cols: 5, unit: 'm' } },
-  'math-5-level-9-lesson': {
-    Component: PieChartExplorer,
-    props: { slices: [{ label: 'Football', value: 5 }, { label: 'Cricket', value: 3 }, { label: 'Tennis', value: 2 }], unit: 'votes' },
-  },
-  'math-6-level-16-lesson': {
-    Component: PieChartExplorer,
-    props: { slices: [{ label: 'Walk', value: 8 }, { label: 'Bus', value: 5 }, { label: 'Car', value: 3 }, { label: 'Cycle', value: 4 }], unit: 'children' },
-  },
-  'math-5-level-13-lesson': { Component: CuboidVolumeExplorer, props: { length: 4, width: 3, height: 2, unit: 'cm' } },
-  'math-5-level-20-lesson': { Component: CuboidVolumeExplorer, props: { length: 5, width: 2, height: 3, unit: 'cm' } },
-  'math-6-level-18-lesson': { Component: CuboidVolumeExplorer, props: { length: 6, width: 4, height: 3, unit: 'cm' } },
-  'math-6-level-7-lesson': {
-    Component: ProbabilityExplorer,
-    props: { outcomes: [
-      { label: 'Red', count: 3, color: '#f87171' },
-      { label: 'Blue', count: 2, color: '#60a5fa' },
-      { label: 'Yellow', count: 1, color: '#fbbf24' },
-    ] },
-  },
-  'math-7-level-15-lesson': {
-    Component: ProbabilityExplorer,
-    props: { outcomes: [
-      { label: 'Green', count: 4, color: '#34d399' },
-      { label: 'Purple', count: 3, color: '#a78bfa' },
-      { label: 'Orange', count: 5, color: '#fb923c' },
-    ] },
-  },
-  'math-6-level-15-lesson': { Component: CircleExplorer, props: { radius: 5, unit: 'cm' } },
-  'math-8-level-21-lesson': { Component: CircleExplorer, props: { radius: 7, unit: 'cm' } },
-  // Restored below: a fourth occurrence of the same dropped-wiring
-  // regression, this time from PR #130 — SymmetryExplorer.js survived
-  // as a file, this entry did not.
-  'math-4-level-18-lesson': {
-    Component: SymmetryExplorer,
-    props: { shapes: [{ name: 'Equilateral Triangle', sides: 3 }, { name: 'Square', sides: 4 }, { name: 'Regular Pentagon', sides: 5 }, { name: 'Regular Hexagon', sides: 6 }] },
-  },
+  'math-1-level-7-lesson': { Component: PlaceValueExplorer, props: { numbers: [58, 94] } },
+  'math-2-level-1-lesson': { Component: PlaceValueExplorer, props: { numbers: [481, 803] } },
+  'math-3-level-1-lesson': { Component: PlaceValueExplorer, props: { numbers: [4672, 9105] } },
+  'math-4-level-1-lesson': { Component: PlaceValueExplorer, props: { numbers: [385420, 920006] } },
+  'math-5-level-1-lesson': { Component: PlaceValueExplorer, props: { numbers: [4582917, 10350026] } },
 };
 
 export function getConceptVisual(taskId) {
