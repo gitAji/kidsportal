@@ -14,6 +14,7 @@ import BarChartExplorer from '@/app/components/ui/concept-visuals/BarChartExplor
 import CoinCounter from '@/app/components/ui/concept-visuals/CoinCounter';
 import AngleExplorer from '@/app/components/ui/concept-visuals/AngleExplorer';
 import WeightBalance from '@/app/components/ui/concept-visuals/WeightBalance';
+import SymmetryExplorer from '@/app/components/ui/concept-visuals/SymmetryExplorer';
 
 const CONCEPT_VISUALS = {
   'math-2-level-15-lesson': { Component: ShapeExplorer, props: {} },
@@ -65,6 +66,10 @@ const CONCEPT_VISUALS = {
       { left: { label: '1 kg weight', grams: 1000 }, right: { label: '1,000 one-gram candies', grams: 1000 } },
       { left: { label: 'A 500 g bag of rice', grams: 500 }, right: { label: 'Two 250 g weights', grams: 500 } },
     ] },
+  },
+  'math-4-level-18-lesson': {
+    Component: SymmetryExplorer,
+    props: { shapes: [{ name: 'Equilateral Triangle', sides: 3 }, { name: 'Square', sides: 4 }, { name: 'Regular Pentagon', sides: 5 }, { name: 'Regular Hexagon', sides: 6 }] },
   },
 };
 
