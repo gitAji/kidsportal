@@ -458,7 +458,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                                                 </p>
                                                                 <AudioPlayer
                                                                     text={sentence}
-                                                                    lang="en-US"
+                                                                    lang="en-GB"
                                                                     icon={<FaVolumeUp className="text-xs" />}
                                                                     autoPlay
                                                                     onPlay={() => {
@@ -540,7 +540,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                     {/* Listen Button */}
                                     <AudioPlayer
                                         text={sentences[validCurrentSentenceIndex]}
-                                        lang="en-US"
+                                        lang="en-GB"
                                         label="Listen"
                                         icon={<FaVolumeUp />}
                                         onPlay={() => trackEvent(childId, 'audio_listen_used', { taskId: taskData?.taskId, cardIndex: validCurrentSentenceIndex + 1 })}

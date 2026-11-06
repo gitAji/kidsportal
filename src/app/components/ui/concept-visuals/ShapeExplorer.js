@@ -3,7 +3,7 @@ import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaCheckCircle, FaArrowRight, FaVolumeUp } from 'react-icons/fa';
 
-// Speaks a short phrase in a clear English voice — same "always en-US,
+// Speaks a short phrase in a clear English voice — same "always en-GB,
 // never mismatched with translated text" rule established for AudioPlayer
 // elsewhere, but inlined here since these are rapid-fire tap reactions
 // (a count, a side length) rather than a single page-level narration.
@@ -11,7 +11,7 @@ function speak(text) {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-US';
+  utterance.lang = 'en-GB';
   utterance.rate = 0.95;
   utterance.pitch = 1.1;
   window.speechSynthesis.speak(utterance);
