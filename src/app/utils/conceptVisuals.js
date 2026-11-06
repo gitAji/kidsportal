@@ -22,6 +22,7 @@ import PieChartExplorer from '@/app/components/ui/concept-visuals/PieChartExplor
 import CuboidVolumeExplorer from '@/app/components/ui/concept-visuals/CuboidVolumeExplorer';
 import ProbabilityExplorer from '@/app/components/ui/concept-visuals/ProbabilityExplorer';
 import CircleExplorer from '@/app/components/ui/concept-visuals/CircleExplorer';
+import SymmetryExplorer from '@/app/components/ui/concept-visuals/SymmetryExplorer';
 
 const CONCEPT_VISUALS = {
   'math-2-level-15-lesson': { Component: ShapeExplorer, props: {} },
@@ -161,6 +162,13 @@ const CONCEPT_VISUALS = {
   },
   'math-6-level-15-lesson': { Component: CircleExplorer, props: { radius: 5, unit: 'cm' } },
   'math-8-level-21-lesson': { Component: CircleExplorer, props: { radius: 7, unit: 'cm' } },
+  // Restored below: a fourth occurrence of the same dropped-wiring
+  // regression, this time from PR #130 — SymmetryExplorer.js survived
+  // as a file, this entry did not.
+  'math-4-level-18-lesson': {
+    Component: SymmetryExplorer,
+    props: { shapes: [{ name: 'Equilateral Triangle', sides: 3 }, { name: 'Square', sides: 4 }, { name: 'Regular Pentagon', sides: 5 }, { name: 'Regular Hexagon', sides: 6 }] },
+  },
 };
 
 export function getConceptVisual(taskId) {
