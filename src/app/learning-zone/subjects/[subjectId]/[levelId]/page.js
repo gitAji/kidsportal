@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../../data/db.json';
 import SkeletonLoader from '../../../../components/ui/SkeletonLoader';
-import { FaBookOpen, FaQuestionCircle, FaAward, FaStar, FaCheckCircle, FaTrophy, FaLock } from 'react-icons/fa';
+import { FaBookOpen, FaQuestionCircle, FaAward, FaStar, FaCheckCircle, FaTrophy, FaLock, FaShieldAlt, FaMedal, FaChevronRight } from 'react-icons/fa';
 import { useChild } from '../../../../providers/ChildProvider';
 import { loadStats } from '../../../../utils/achievements';
 import MinimalBackButton from '../../../../components/child/MinimalBackButton';
@@ -23,6 +23,16 @@ const taskIconMap = {
   "quiz": FaQuestionCircle,
   "exam": FaAward,
   "default": FaStar,
+};
+
+// Playful "did it" copy per task type, for the ribbon badge on a finished
+// card — matches the trophy-cabinet tone the rest of Learning Zone already
+// uses, instead of a bare checkmark.
+const doneBadgeMap = {
+  "lesson": { text: "Mastered!", icon: FaShieldAlt, color: "bg-emerald-500" },
+  "quiz": { text: "Quiz Whiz!", icon: FaMedal, color: "bg-blue-500" },
+  "exam": { text: "Champion!", icon: FaTrophy, color: "bg-amber-500" },
+  "default": { text: "Done!", icon: FaCheckCircle, color: "bg-emerald-500" },
 };
 
 import { doc, getDoc } from 'firebase/firestore';
@@ -139,6 +149,27 @@ export default function LevelTasksPage() {
   );
   const isLessonDone = !lessonTask || !!childStats?.completedTasks_list?.includes(lessonTask.taskId);
 
+  // ── Journey progress: how many of this level's steps are done, and
+  // which one is the very next thing to do (first task that's neither
+  // already done nor still locked) — drives the progress bar and the
+  // "Start Here!" badge below. ─────────────────────────────────────────
+  const completedTaskCount = useMemo(() => {
+    if (!levelData?.tasks) return 0;
+    const completedIds = childStats?.completedTasks_list || [];
+    return levelData.tasks.filter(t => completedIds.includes(t.taskId)).length;
+  }, [levelData, childStats]);
+
+  const nextTaskId = useMemo(() => {
+    if (!levelData?.tasks) return null;
+    const completedIds = childStats?.completedTasks_list || [];
+    const next = levelData.tasks.find(t => {
+      const done = completedIds.includes(t.taskId);
+      const locked = t.type?.toLowerCase() !== 'lesson' && !isLessonDone && !done;
+      return !done && !locked;
+    });
+    return next?.taskId || null;
+  }, [levelData, childStats, isLessonDone]);
+
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center p-8">
       <SkeletonLoader variant="page" message="Getting your tasks ready..." />
@@ -178,6 +209,30 @@ export default function LevelTasksPage() {
             Finish to earn {levelData.xpReward} XP
           </div>
         )}
+
+        {/* Journey Progress — same completedTasks data as the badges below,
+            just shown as one glanceable strip above the path. */}
+        {levelData.tasks?.length > 0 && !allTasksDone && (
+          <div className="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-full shadow-sm border border-slate-100 mt-4">
+            <span className="text-xs sm:text-sm font-bold text-slate-500 whitespace-nowrap">
+              Journey Progress: {completedTaskCount}/{levelData.tasks.length} Steps
+            </span>
+            <div className="flex gap-1.5">
+              {levelData.tasks.map((t) => {
+                const stepDone = childStats?.completedTasks_list?.includes(t.taskId);
+                return (
+                  <div
+                    key={t.taskId}
+                    className={`w-7 sm:w-9 h-2 sm:h-2.5 rounded-full transition-colors ${stepDone
+                      ? 'bg-gradient-to-r from-blue-500 to-cyan-400'
+                      : 'bg-slate-100 border border-dashed border-slate-300'
+                      }`}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
       </motion.div>
 
       {/* Level Complete banner — shown when ALL tasks are done */}
@@ -207,7 +262,7 @@ export default function LevelTasksPage() {
       )}
 
       <motion.div
-        className="flex flex-wrap justify-center items-start gap-6 md:gap-8 w-full max-w-5xl mx-auto z-10 relative pb-20"
+        className="flex flex-wrap justify-center items-start gap-6 md:gap-8 w-full max-w-6xl mx-auto z-10 relative pb-20"
         initial="hidden"
         animate="visible"
         variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
@@ -219,10 +274,15 @@ export default function LevelTasksPage() {
               const taskColor = taskColorMap[task.type?.toLowerCase()] || taskColorMap.default;
               const isDone = childStats?.completedTasks_list?.includes(task.taskId);
               const isLocked = task.type?.toLowerCase() !== 'lesson' && !isLessonDone && !isDone;
+              const isNext = task.taskId === nextTaskId;
+              const doneBadge = doneBadgeMap[task.type?.toLowerCase()] || doneBadgeMap.default;
+              const nextTask = levelData.tasks[index + 1];
+              const nextIsLocked = nextTask && nextTask.type?.toLowerCase() !== 'lesson' && !isLessonDone
+                && !childStats?.completedTasks_list?.includes(nextTask.taskId);
 
               return (
+                <React.Fragment key={task.taskId}>
                 <motion.div
-                  key={task.taskId}
                   onClick={() => {
                     if (isLocked) {
                       setShakeTaskId(task.taskId);
@@ -247,18 +307,35 @@ export default function LevelTasksPage() {
                     {index + 1}
                   </div>
 
-                  {/* Small checkmark badge when task is done */}
-                  {isDone && (
-                    <div className="absolute top-4 right-4 z-40">
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center shadow-lg border-2 border-white"
-                      >
-                        <FaCheckCircle size={20} className="text-white" />
-                      </motion.div>
+                  {/* Status ribbon: what finishing (or not finishing) this
+                      step actually means, instead of a bare checkmark */}
+                  {isDone ? (
+                    <motion.div
+                      initial={{ scale: 0, rotate: 0 }}
+                      animate={{ scale: 1, rotate: 6 }}
+                      className="absolute top-3 right-3 z-40"
+                    >
+                      <div className={`${doneBadge.color} text-white text-[10px] font-black uppercase tracking-wide pl-2.5 pr-3 py-1.5 rounded-xl shadow-lg border-2 border-white flex items-center gap-1.5 whitespace-nowrap`}>
+                        <doneBadge.icon className="text-xs" /> {doneBadge.text}
+                      </div>
+                    </motion.div>
+                  ) : isLocked ? (
+                    <div className="absolute top-3 right-3 z-40 -rotate-6">
+                      <div className="bg-slate-600 text-white text-[10px] font-black uppercase tracking-wide pl-2.5 pr-3 py-1.5 rounded-xl shadow-lg border-2 border-white flex items-center gap-1.5">
+                        <FaLock className="text-[10px]" /> Locked
+                      </div>
                     </div>
-                  )}
+                  ) : isNext ? (
+                    <motion.div
+                      className="absolute top-3 right-3 z-40"
+                      animate={{ y: [0, -4, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+                    >
+                      <div className="bg-white text-blue-600 text-[10px] font-black uppercase tracking-wide pl-2.5 pr-3 py-1.5 rounded-xl shadow-lg border-2 border-blue-400 flex items-center gap-1.5 whitespace-nowrap">
+                        <FaStar className="text-amber-400 text-xs" /> Start Here!
+                      </div>
+                    </motion.div>
+                  ) : null}
 
                   {isLocked ? (
                     // Locked state replaces the usual icon/title/badge, centered
@@ -295,6 +372,18 @@ export default function LevelTasksPage() {
                     </>
                   )}
                 </motion.div>
+
+                {/* Path connector — only once there's a next card to connect
+                    to, and only where all 3 cards reliably fit on one row
+                    (lg+); below that, cards wrap and a floating connector
+                    would land on the wrong line. */}
+                {index < levelData.tasks.length - 1 && (
+                  <div className="hidden lg:flex items-center flex-shrink-0 -mx-1 mt-[88px]">
+                    <div className={`h-1 w-8 rounded-full ${nextIsLocked ? 'bg-slate-200' : 'bg-gradient-to-r from-sky-300 to-cyan-300'}`} />
+                    <FaChevronRight className={`text-base ${nextIsLocked ? 'text-slate-300' : 'text-cyan-400'}`} />
+                  </div>
+                )}
+                </React.Fragment>
               );
             })
         ) : (
