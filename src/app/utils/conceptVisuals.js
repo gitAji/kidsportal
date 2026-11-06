@@ -17,6 +17,7 @@ import WeightBalance from '@/app/components/ui/concept-visuals/WeightBalance';
 import NumberLineExplorer from '@/app/components/ui/concept-visuals/NumberLineExplorer';
 import FractionShapeExplorer from '@/app/components/ui/concept-visuals/FractionShapeExplorer';
 import CoordinatePlotter from '@/app/components/ui/concept-visuals/CoordinatePlotter';
+import TimesTableExplorer from '@/app/components/ui/concept-visuals/TimesTableExplorer';
 
 const CONCEPT_VISUALS = {
   'math-2-level-15-lesson': { Component: ShapeExplorer, props: {} },
@@ -116,6 +117,26 @@ const CONCEPT_VISUALS = {
   'math-5-level-18-lesson': {
     Component: CoordinatePlotter,
     props: { range: { minX: -5, maxX: 5, minY: -5, maxY: 5 }, points: [{ x: 3, y: 2, label: 'A' }, { x: -2, y: 4, label: 'B' }, { x: -3, y: -3, label: 'C' }, { x: 4, y: -2, label: 'D' }] },
+  },
+  'math-1-level-9-lesson': {
+    Component: TimesTableExplorer,
+    props: { tables: [{ factor: 2, upTo: 10 }, { factor: 5, upTo: 10 }, { factor: 10, upTo: 10 }] },
+  },
+  'math-2-level-11-lesson': {
+    Component: TimesTableExplorer,
+    props: { tables: [{ factor: 2, upTo: 12 }, { factor: 5, upTo: 12 }, { factor: 10, upTo: 12 }] },
+  },
+  'math-2-level-3-lesson': {
+    Component: TimesTableExplorer,
+    props: { tables: [{ factor: 3, upTo: 12 }, { factor: 4, upTo: 12 }, { factor: 8, upTo: 12 }] },
+  },
+  'math-2-level-14-lesson': {
+    Component: TimesTableExplorer,
+    props: { tables: [{ factor: 3, upTo: 12 }, { factor: 4, upTo: 12 }] },
+  },
+  'math-3-level-3-lesson': {
+    Component: TimesTableExplorer,
+    props: { tables: [{ factor: 6, upTo: 12 }, { factor: 7, upTo: 12 }, { factor: 9, upTo: 12 }, { factor: 11, upTo: 12 }, { factor: 12, upTo: 12 }] },
   },
 };
 
