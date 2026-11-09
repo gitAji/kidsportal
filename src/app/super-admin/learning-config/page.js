@@ -1,13 +1,29 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '@/firebase/config';
+import { db, auth } from '@/firebase/config';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     FaGlobeAmericas, FaBookOpen, FaSave, FaSpinner,
-    FaCheck, FaPlus, FaTimes, FaArrowLeft
+    FaCheck, FaPlus, FaTimes, FaArrowLeft, FaWrench, FaMagic
 } from 'react-icons/fa';
 import Link from 'next/link';
+
+async function authedFetch(path, options = {}) {
+    const idToken = await auth.currentUser?.getIdToken();
+    if (!idToken) throw new Error('Not signed in.');
+    const res = await fetch(path, {
+        ...options,
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${idToken}`,
+            ...(options.headers || {}),
+        },
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || 'Request failed.');
+    return data;
+}
 
 // ── Default available languages ─────────────────────────────────
 const ALL_LANGUAGES = [
@@ -63,6 +79,42 @@ export default function LearningConfigPage() {
     const [newSubjectName, setNewSubjectName] = useState("");
     const [newSubjectEmoji, setNewSubjectEmoji] = useState("📚");
     const [newSubjectCategory, setNewSubjectCategory] = useState("General");
+
+    // Curriculum maintenance: backfill the real moduleName (e.g. "Module 1:
+    // Reading & Phonics Foundations") onto any Firestore level doc that's
+    // missing it or has a stale value, so every subject groups by its real
+    // syllabus module instead of falling back to "Standard Lessons".
+    const [backfillPlan, setBackfillPlan] = useState(null);
+    const [backfillLoading, setBackfillLoading] = useState(false);
+    const [backfillApplying, setBackfillApplying] = useState(false);
+    const [backfillResult, setBackfillResult] = useState(null);
+    const [backfillError, setBackfillError] = useState("");
+
+    const previewBackfill = async () => {
+        setBackfillLoading(true);
+        setBackfillError("");
+        setBackfillResult(null);
+        try {
+            const data = await authedFetch('/api/admin/backfill-module-names');
+            setBackfillPlan(data);
+        } catch (err) {
+            setBackfillError(err.message);
+        }
+        setBackfillLoading(false);
+    };
+
+    const applyBackfill = async () => {
+        setBackfillApplying(true);
+        setBackfillError("");
+        try {
+            const data = await authedFetch('/api/admin/backfill-module-names', { method: 'POST' });
+            setBackfillResult(data);
+            setBackfillPlan(null);
+        } catch (err) {
+            setBackfillError(err.message);
+        }
+        setBackfillApplying(false);
+    };
 
     // Load existing config from Firestore
     useEffect(() => {
@@ -181,6 +233,77 @@ export default function LearningConfigPage() {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            {/* ── Curriculum Maintenance Section ── */}
+            <div className="bg-slate-950 border border-slate-800 rounded-[3rem] p-10">
+                <div className="flex items-center gap-3 mb-2">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-600 to-orange-600 flex items-center justify-center text-xl text-white shadow-lg">
+                        <FaWrench />
+                    </div>
+                    <div>
+                        <h2 className="text-2xl font-black text-white tracking-tight">Curriculum Maintenance</h2>
+                        <p className="text-sm text-slate-500 font-medium">Fix levels stuck showing under the generic &quot;Standard Lessons&quot; group instead of their real syllabus module.</p>
+                    </div>
+                </div>
+
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={previewBackfill}
+                        disabled={backfillLoading || backfillApplying}
+                        className="flex items-center gap-2 px-6 py-3 bg-slate-800 text-white font-black rounded-2xl text-sm uppercase tracking-widest disabled:opacity-60"
+                    >
+                        {backfillLoading ? <FaSpinner className="animate-spin" /> : <FaMagic />}
+                        {backfillLoading ? "Checking…" : "Preview Fix"}
+                    </motion.button>
+
+                    {backfillPlan && backfillPlan.updateCount > 0 && (
+                        <motion.button
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={applyBackfill}
+                            disabled={backfillApplying}
+                            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-black rounded-2xl text-sm uppercase tracking-widest disabled:opacity-60"
+                        >
+                            {backfillApplying ? <FaSpinner className="animate-spin" /> : <FaCheck />}
+                            {backfillApplying ? "Applying…" : `Apply to ${backfillPlan.updateCount} Level${backfillPlan.updateCount === 1 ? '' : 's'}`}
+                        </motion.button>
+                    )}
+                </div>
+
+                {backfillError && (
+                    <p className="mt-4 text-sm font-bold text-rose-400">{backfillError}</p>
+                )}
+
+                {backfillPlan && (
+                    <div className="mt-6 text-sm text-slate-400 font-medium space-y-2">
+                        <p>Checked {backfillPlan.checked} levels with a module name in the syllabus data. {backfillPlan.missingDoc} have no live Firestore doc yet (fine — those already use the correct fallback).</p>
+                        {backfillPlan.updateCount === 0 ? (
+                            <p className="text-emerald-400 font-bold">Nothing to fix — every level's module name already matches the syllabus.</p>
+                        ) : (
+                            <>
+                                <p className="text-amber-400 font-bold">{backfillPlan.updateCount} level{backfillPlan.updateCount === 1 ? '' : 's'} need their module name corrected. First {backfillPlan.sample.length}:</p>
+                                <ul className="space-y-1 max-h-48 overflow-y-auto pr-2">
+                                    {backfillPlan.sample.map((u) => (
+                                        <li key={u.docId} className="text-xs font-mono text-slate-500">
+                                            {u.docId}: &quot;{u.from}&quot; → <span className="text-slate-300">&quot;{u.to}&quot;</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+                        )}
+                    </div>
+                )}
+
+                {backfillResult && (
+                    <div className="mt-6 flex items-center gap-3 p-4 rounded-2xl border bg-emerald-500/10 border-emerald-500/20 text-emerald-400 text-sm font-bold">
+                        <FaCheck /> Updated {backfillResult.written} level{backfillResult.written === 1 ? '' : 's'}.
+                    </div>
+                )}
+            </div>
 
             {/* ── Languages Section ── */}
             <div className="bg-slate-950 border border-slate-800 rounded-[3rem] p-10">
