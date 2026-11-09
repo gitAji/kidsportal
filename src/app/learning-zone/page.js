@@ -38,6 +38,9 @@ export default function LearningZonePage() {
   const [stats, setStats] = useState({ level: 1, points: 0, streak: 0, levelsCompleted: [] });
   const [greeting, setGreeting] = useState(timeGreeting());
   const [continueTask, setContinueTask] = useState(null);
+  // First-time tour: 0 = not yet decided, 1 = pointing at Subjects,
+  // 2 = pointing at Games/Daily Challenge, 3 = finished/inactive.
+  const [tourStep, setTourStep] = useState(0);
 
   useEffect(() => {
     const childId = childUser?.uid || childUser?.id;
@@ -114,15 +117,31 @@ export default function LearningZonePage() {
     checkTimeStatus();
   }, [childUser?.id, childUser?.timeLimits]);
 
+  // Arm the first-time tour once we actually know this is a first-time
+  // child (zero levels ever completed, nothing to "continue") and they
+  // haven't already seen it — not a grade-1/2 guess, so it reaches a
+  // first-time learner at any grade. The "seen" flag is written the
+  // moment the tour is armed, not only on an explicit dismiss, so it
+  // can only ever show once per child no matter how they leave the page
+  // (tapping a subject card immediately included).
+  useEffect(() => {
+    if (subjectsLoading || tourStep !== 0) return;
+    const childId = childUser?.uid || childUser?.id;
+    if (!childId || typeof window === 'undefined') return;
+    const isFirstTimer = stats.levelsCompleted.length === 0 && !continueTask;
+    if (!isFirstTimer) { setTourStep(3); return; }
+    const flagKey = `kidsportal_tour_seen_${childId}`;
+    if (window.localStorage.getItem(flagKey)) { setTourStep(3); return; }
+    window.localStorage.setItem(flagKey, '1');
+    setTourStep(1);
+  }, [subjectsLoading, tourStep, childUser, stats.levelsCompleted, continueTask]);
+
   if (!childUser) return null;
   if (timeStatus?.isBlocked) return <TimeLimitBlockedScreen status={timeStatus} />;
 
   const xpIntoLevel = stats.points % 100;
 
-  // Younger explorers get a bouncing "start here" pointer at the first
-  // subject card, since they're less likely to already know a subjects
-  // grid is tappable.
-  const needsPointer = childUser.gradeId === 'grade-1' || childUser.gradeId === 'grade-2';
+  const dismissTour = () => setTourStep(3);
 
   const renderSmallAvatar = () => {
     if (childUser.photoURL) {
@@ -262,6 +281,38 @@ export default function LearningZonePage() {
            <h2 className="text-3xl font-black text-slate-700">Your Subjects</h2>
         </div>
 
+        {/* First-time tour, step 1 — sits in normal flow (not absolutely
+            positioned over the heading above it, which is what the old
+            per-card pointer did and why it overlapped "Your Subjects"). */}
+        {tourStep === 1 && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-col items-center sm:items-start mb-5 px-2"
+          >
+            <div className="bg-white border-2 border-amber-200 rounded-2xl shadow-lg px-4 py-3 flex flex-wrap items-center gap-3 max-w-sm">
+              <span className="text-amber-900 font-black text-sm leading-snug">
+                👋 Start here! Tap a subject below to begin your first lesson.
+              </span>
+              <div className="flex items-center gap-1.5 shrink-0 ml-auto">
+                <button onClick={dismissTour} className="text-[11px] font-bold text-slate-400 hover:text-slate-600 px-2 py-1">
+                  Skip
+                </button>
+                <button onClick={() => setTourStep(2)} className="text-[11px] font-black text-white bg-amber-500 hover:bg-amber-600 rounded-full px-3 py-1.5 transition-colors whitespace-nowrap">
+                  Next →
+                </button>
+              </div>
+            </div>
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }}
+              className="ml-6"
+            >
+              <FaHandPointDown className="text-amber-400 text-3xl drop-shadow-md" />
+            </motion.div>
+          </motion.div>
+        )}
+
         {subjectsLoading ? (
           <SkeletonLoader variant="subjects" count={6} />
         ) : (
@@ -273,7 +324,6 @@ export default function LearningZonePage() {
               const Icon = subjectIconMap[subject.subjectName] || subjectIconMap.default;
               const style = subjectStyleMap[subject.subjectName] || subjectStyleMap.default;
               const displayName = t(`subjects.${subject.subjectName}`) || subject.subjectName;
-              const showPointer = needsPointer && index === 0;
 
               // Levels completed in this subject so far, out of this
               // subject's curriculum total — levelId is always prefixed
@@ -287,19 +337,6 @@ export default function LearningZonePage() {
 
               return (
                 <div key={subject.subjectId} className="relative">
-                  {showPointer && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: [0, -10, 0] }}
-                      transition={{ opacity: { duration: 0.4 }, y: { duration: 1.1, repeat: Infinity, ease: "easeInOut" } }}
-                      className="absolute -top-16 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none"
-                    >
-                      <span className="bg-yellow-300 text-yellow-900 font-black text-sm px-4 py-1.5 rounded-full shadow-md whitespace-nowrap border-2 border-white">
-                        Complete the levels! 👋
-                      </span>
-                      <FaHandPointDown className="text-yellow-300 text-4xl drop-shadow-md -mt-1" />
-                    </motion.div>
-                  )}
                   <Link href={`/learning-zone/subjects/${subject.subjectId}`}>
                     <motion.div
                       variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1, transition: { type: "spring", bounce: 0.5 } } }}
@@ -340,6 +377,31 @@ export default function LearningZonePage() {
                 </div>
               );
             })}
+          </motion.div>
+        )}
+
+        {/* First-time tour, step 2. */}
+        {tourStep === 2 && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-col items-center sm:items-start mt-10 px-2"
+          >
+            <div className="bg-white border-2 border-pink-200 rounded-2xl shadow-lg px-4 py-3 flex flex-wrap items-center gap-3 max-w-sm">
+              <span className="text-pink-700 font-black text-sm leading-snug">
+                🎮 Come back here anytime for games and your daily challenge!
+              </span>
+              <button onClick={dismissTour} className="text-[11px] font-black text-white bg-pink-500 hover:bg-pink-600 rounded-full px-3 py-1.5 transition-colors whitespace-nowrap ml-auto">
+                Got it!
+              </button>
+            </div>
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }}
+              className="ml-6"
+            >
+              <FaHandPointDown className="text-pink-400 text-3xl drop-shadow-md" />
+            </motion.div>
           </motion.div>
         )}
 
