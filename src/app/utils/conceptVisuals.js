@@ -43,6 +43,7 @@ import loopRepeater from './conceptVisualRegistry/loopRepeater';
 import debugHunt from './conceptVisualRegistry/debugHunt';
 import binaryExplorer from './conceptVisualRegistry/binaryExplorer';
 import logicGateExplorer from './conceptVisualRegistry/logicGateExplorer';
+import percentageBar from './conceptVisualRegistry/percentageBar';
 
 const CONCEPT_VISUALS = {
   ...shapeExplorer,
@@ -68,6 +69,7 @@ const CONCEPT_VISUALS = {
   ...debugHunt,
   ...binaryExplorer,
   ...logicGateExplorer,
+  ...percentageBar,
 };
 
 export function getConceptVisual(taskId) {
