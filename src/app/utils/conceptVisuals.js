@@ -48,6 +48,10 @@ import partsLabeler from './conceptVisualRegistry/partsLabeler';
 import patternSequencer from './conceptVisualRegistry/patternSequencer';
 import cycleExplorer from './conceptVisualRegistry/cycleExplorer';
 import sortingBins from './conceptVisualRegistry/sortingBins';
+import wordSorter from './conceptVisualRegistry/wordSorter';
+import punctuationPicker from './conceptVisualRegistry/punctuationPicker';
+import sentenceBuilder from './conceptVisualRegistry/sentenceBuilder';
+import vocabFlashcards from './conceptVisualRegistry/vocabFlashcards';
 
 const CONCEPT_VISUALS = {
   ...shapeExplorer,
@@ -78,6 +82,10 @@ const CONCEPT_VISUALS = {
   ...patternSequencer,
   ...cycleExplorer,
   ...sortingBins,
+  ...wordSorter,
+  ...punctuationPicker,
+  ...sentenceBuilder,
+  ...vocabFlashcards,
 };
 
 export function getConceptVisual(taskId) {
