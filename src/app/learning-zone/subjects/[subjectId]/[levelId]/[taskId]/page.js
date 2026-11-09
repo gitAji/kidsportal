@@ -20,6 +20,7 @@ import { db } from '@/firebase/config';
 import Image from 'next/image';
 import MinimalBackButton from '../../../../../components/child/MinimalBackButton';
 import { trackEvent } from '../../../../../utils/trackEvent';
+import { getNarrationLang } from '../../../../../utils/narrationLang';
 
 // Quiz/exam questions (and multiple-choice options) get shuffled so
 // retaking the same lesson doesn't show an identical, memorizable order.
@@ -988,7 +989,7 @@ export default function TaskContentPage() {
             <div className="mt-3 bg-blue-50 text-blue-500 rounded-full hover:bg-blue-100 transition-colors">
               <AudioPlayer
                 text={cleanString(displayQuestion?.questionText)}
-                lang="en-GB"
+                lang={getNarrationLang(subjectId)}
                 onPlay={() => trackEvent(childUser?.uid || childUser?.id, 'audio_listen_used', { taskId: taskData?.taskId, questionIndex: currentQuestionIndex + 1 })}
               />
             </div>
@@ -1053,7 +1054,7 @@ export default function TaskContentPage() {
                       {selectButton}
                       <AudioPlayer
                         text={optionText}
-                        lang="en-GB"
+                        lang={getNarrationLang(subjectId)}
                         customClassName="absolute right-1.5 sm:right-3 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 rounded-full bg-white/90 text-blue-500 hover:bg-blue-50 shadow-sm border border-blue-100 transition-colors z-10"
                       />
                     </div>

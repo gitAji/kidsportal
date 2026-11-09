@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaBrain, FaTimes, FaArrowLeft, FaArrowRight, FaCheckCircle, FaRedo, FaVolumeUp } from 'react-icons/fa';
 import AudioPlayer from '../ui/AudioPlayer';
 import { getWeakSpots } from '@/app/utils/reviewQueue';
+import { getNarrationLang } from '@/app/utils/narrationLang';
 
 const subjectDisplayNames = {
     english: 'English', math: 'Math', science: 'Science', tamil: 'Tamil',
@@ -147,7 +148,7 @@ export default function ReviewReminderCard({ childUser }) {
                                             <p className="font-black text-slate-800 text-lg leading-snug">{current.correctAnswer}</p>
                                             <AudioPlayer
                                                 text={`${current.question}. The answer is ${current.correctAnswer}.`}
-                                                lang="en-GB"
+                                                lang={getNarrationLang(current.subjectId)}
                                                 icon={<FaVolumeUp className="text-xs" />}
                                                 customClassName="mt-1 p-2 rounded-full bg-blue-50 text-blue-500 hover:bg-blue-100 transition-colors"
                                             />
