@@ -7,6 +7,7 @@ import { FaBookOpen, FaQuestionCircle, FaAward, FaStar, FaCheckCircle, FaTrophy,
 import { useChild } from '../../../../providers/ChildProvider';
 import { loadStats } from '../../../../utils/achievements';
 import MinimalBackButton from '../../../../components/child/MinimalBackButton';
+import AiPracticeModal from '../../../../components/child/AiPracticeModal';
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -48,6 +49,7 @@ export default function LevelTasksPage() {
   const { subjectId, levelId } = params;
   const [greeting, setGreeting] = useState(null);
   const [shakeTaskId, setShakeTaskId] = useState(null);
+  const [showAiPractice, setShowAiPractice] = useState(false);
 
   useEffect(() => {
     if (childUser && levelData && !loading) {
@@ -251,14 +253,32 @@ export default function LevelTasksPage() {
               <h2 className="text-2xl font-black drop-shadow">Level Complete! ✓</h2>
               <p className="text-green-100 font-bold text-sm mt-1">All tasks finished — the next level is now unlocked!</p>
             </div>
-            <button
-              onClick={() => router.push(`/learning-zone/subjects/${subjectId}`)}
-              className="bg-white text-green-700 font-black px-6 py-3 rounded-full text-base hover:bg-green-50 hover:scale-105 transition-all shadow-lg flex-shrink-0"
-            >
-              Next Level →
-            </button>
+            <div className="flex items-center gap-2 flex-shrink-0 flex-wrap justify-center">
+              <button
+                onClick={() => setShowAiPractice(true)}
+                className="bg-white/15 border-2 border-white/40 text-white font-black px-5 py-3 rounded-full text-sm hover:bg-white/25 hover:scale-105 transition-all shadow-lg flex items-center gap-2"
+              >
+                🧠 AI Practice Round
+              </button>
+              <button
+                onClick={() => router.push(`/learning-zone/subjects/${subjectId}`)}
+                className="bg-white text-green-700 font-black px-6 py-3 rounded-full text-base hover:bg-green-50 hover:scale-105 transition-all shadow-lg"
+              >
+                Next Level →
+              </button>
+            </div>
           </div>
         </motion.div>
+      )}
+
+      {showAiPractice && (
+        <AiPracticeModal
+          gradeId={childUser?.gradeId}
+          subjectId={subjectId}
+          levelId={levelId}
+          childId={childUser?.uid || childUser?.id}
+          onClose={() => setShowAiPractice(false)}
+        />
       )}
 
       <motion.div
