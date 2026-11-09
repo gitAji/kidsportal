@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dbData from '../../../data/db.json';
 import SkeletonLoader from '../../../components/ui/SkeletonLoader';
@@ -352,19 +352,11 @@ export default function SubjectLevelsPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [processedLevels, replayMode, replaySeed, isSubjectFullyCompleted]);
 
-  if (loading) return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-8">
-      <SkeletonLoader variant="page" message="Getting your levels ready..." />
-    </div>
-  );
-
-  if (timeStatus?.isBlocked) {
-    return <TimeLimitBlockedScreen status={timeStatus} />;
-  }
-
   // Once every existing level is done, generate a brand-new one on demand
   // (via Gemini, persisted to Firestore) so there's always real new
   // curriculum to reach for instead of just a shuffle of old content.
+  // Defined here (ahead of the loading/time-limit early returns below) so
+  // the auto-trigger effect right after it can call it unconditionally.
   const handleGenerateMore = async () => {
     if (generatingMore || !childUser?.gradeId) return;
     setGeneratingMore(true);
@@ -389,6 +381,40 @@ export default function SubjectLevelsPage() {
       setGeneratingMore(false);
     }
   };
+
+  // Auto-fire that same generation the first time a subject is ever fully
+  // completed, so bonus content just shows up instead of waiting for a tap
+  // on "Get More Levels!". A plain "did this just flip true" ref can't
+  // drive this safely: this component remounts on every page visit, so a
+  // child re-opening an already-finished subject days later would look
+  // identical to "just now finished it" and silently fire a fresh Gemini
+  // call (and a new level) on every single revisit. A one-time flag
+  // persisted per child+subject avoids that — it only fires the first
+  // time this subject is seen fully completed, ever; the "Get More
+  // Levels!" button below stays as the (manual, intentional) way to grab
+  // further rounds after that, including a retry if this one fails.
+  const autoGenFiredRef = useRef(false);
+  useEffect(() => {
+    if (!isSubjectFullyCompleted || generatingMore || autoGenFiredRef.current) return;
+    const childId = childUser?.uid || childUser?.id;
+    if (!childId || typeof window === 'undefined') return;
+    const flagKey = `kidsportal_autogen_level_${childId}_${subjectId}`;
+    if (window.localStorage.getItem(flagKey)) return;
+    autoGenFiredRef.current = true;
+    window.localStorage.setItem(flagKey, '1');
+    handleGenerateMore();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSubjectFullyCompleted, childUser, subjectId]);
+
+  if (loading) return (
+    <div className="min-h-screen bg-white flex items-center justify-center p-8">
+      <SkeletonLoader variant="page" message="Getting your levels ready..." />
+    </div>
+  );
+
+  if (timeStatus?.isBlocked) {
+    return <TimeLimitBlockedScreen status={timeStatus} />;
+  }
 
   const handleLevelClick = (level) => {
     if (level.overrideIsLocked || level.isLocked || level.requiresPreviousLevel) {
