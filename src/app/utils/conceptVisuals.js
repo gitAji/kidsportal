@@ -38,6 +38,8 @@ import cuboidVolumeExplorer from './conceptVisualRegistry/cuboidVolumeExplorer';
 import probabilityExplorer from './conceptVisualRegistry/probabilityExplorer';
 import circleExplorer from './conceptVisualRegistry/circleExplorer';
 import symmetryExplorer from './conceptVisualRegistry/symmetryExplorer';
+import cycleExplorer from './conceptVisualRegistry/cycleExplorer';
+import sortingBins from './conceptVisualRegistry/sortingBins';
 
 const CONCEPT_VISUALS = {
   ...shapeExplorer,
@@ -58,6 +60,8 @@ const CONCEPT_VISUALS = {
   ...probabilityExplorer,
   ...circleExplorer,
   ...symmetryExplorer,
+  ...cycleExplorer,
+  ...sortingBins,
 };
 
 export function getConceptVisual(taskId) {
