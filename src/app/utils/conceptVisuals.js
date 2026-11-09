@@ -38,6 +38,11 @@ import cuboidVolumeExplorer from './conceptVisualRegistry/cuboidVolumeExplorer';
 import probabilityExplorer from './conceptVisualRegistry/probabilityExplorer';
 import circleExplorer from './conceptVisualRegistry/circleExplorer';
 import symmetryExplorer from './conceptVisualRegistry/symmetryExplorer';
+import sequenceOrderer from './conceptVisualRegistry/sequenceOrderer';
+import loopRepeater from './conceptVisualRegistry/loopRepeater';
+import debugHunt from './conceptVisualRegistry/debugHunt';
+import binaryExplorer from './conceptVisualRegistry/binaryExplorer';
+import logicGateExplorer from './conceptVisualRegistry/logicGateExplorer';
 import cycleExplorer from './conceptVisualRegistry/cycleExplorer';
 import sortingBins from './conceptVisualRegistry/sortingBins';
 
@@ -60,6 +65,11 @@ const CONCEPT_VISUALS = {
   ...probabilityExplorer,
   ...circleExplorer,
   ...symmetryExplorer,
+  ...sequenceOrderer,
+  ...loopRepeater,
+  ...debugHunt,
+  ...binaryExplorer,
+  ...logicGateExplorer,
   ...cycleExplorer,
   ...sortingBins,
 };
