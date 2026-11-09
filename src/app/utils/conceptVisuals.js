@@ -44,6 +44,10 @@ import debugHunt from './conceptVisualRegistry/debugHunt';
 import binaryExplorer from './conceptVisualRegistry/binaryExplorer';
 import logicGateExplorer from './conceptVisualRegistry/logicGateExplorer';
 import percentageBar from './conceptVisualRegistry/percentageBar';
+import partsLabeler from './conceptVisualRegistry/partsLabeler';
+import patternSequencer from './conceptVisualRegistry/patternSequencer';
+import cycleExplorer from './conceptVisualRegistry/cycleExplorer';
+import sortingBins from './conceptVisualRegistry/sortingBins';
 
 const CONCEPT_VISUALS = {
   ...shapeExplorer,
@@ -70,6 +74,10 @@ const CONCEPT_VISUALS = {
   ...binaryExplorer,
   ...logicGateExplorer,
   ...percentageBar,
+  ...partsLabeler,
+  ...patternSequencer,
+  ...cycleExplorer,
+  ...sortingBins,
 };
 
 export function getConceptVisual(taskId) {
