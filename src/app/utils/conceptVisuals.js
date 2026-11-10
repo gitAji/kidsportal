@@ -52,6 +52,7 @@ import wordSorter from './conceptVisualRegistry/wordSorter';
 import punctuationPicker from './conceptVisualRegistry/punctuationPicker';
 import sentenceBuilder from './conceptVisualRegistry/sentenceBuilder';
 import vocabFlashcards from './conceptVisualRegistry/vocabFlashcards';
+import wasteSortingBins from './conceptVisualRegistry/wasteSortingBins';
 
 const CONCEPT_VISUALS = {
   ...shapeExplorer,
@@ -86,6 +87,7 @@ const CONCEPT_VISUALS = {
   ...punctuationPicker,
   ...sentenceBuilder,
   ...vocabFlashcards,
+  ...wasteSortingBins,
 };
 
 export function getConceptVisual(taskId) {
