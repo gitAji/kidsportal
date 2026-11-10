@@ -31604,7 +31604,7 @@
                   "taskId": "tamil-2-level-19-lesson",
                   "taskName": "Lesson: Days of the Week & Months",
                   "type": "lesson",
-                  "content": "தமிழில் வாரத்தின் நாட்களுக்குக் கோள்களின் பெயர்கள் இணைந்துள்ளன: திங்கள், செவ்வாய், புதன், வியாழன், வெள்ளி, சனி, ஞாயிறு. வார நாட்களைத் தெரிந்துகொள்வது, திட்டங்கள், நேர அட்டவணைகள் பற்றிப் பேச உதவும்.",
+                  "content": "தமிழ் பாரம்பரிய ஆண்டில் 12 மாதங்கள் உள்ளன. சில மாதங்களின் பெயர்கள்: சித்திரை, வைகாசி, ஆனி, ஆடி, ஆவணி, புரட்டாசி. 'சித்திரை' தமிழ்ப் புத்தாண்டு தொடங்கும் முதல் மாதம். ஒவ்வொரு மாதமும் குறிப்பிட்ட பருவத்துடன் தொடர்புடையது, எடுத்துக்காட்டாக 'ஆடி' மாதத்தில் மழை பெய்யும்.",
                   "questions": []
                 },
                 {
@@ -31612,66 +31612,54 @@
                   "taskName": "Practice Quiz",
                   "type": "quiz",
                   "timeLimit": 180,
-                  "content": "நாம் கற்றதை இப்போது பயிற்சி செய்வோம்!",
+                  "content": "Let's practice what we just learned!",
                   "questions": [
                     {
                       "questionId": "tamil-2-level-19-quiz-q1",
-                      "questionText": "வாரத்தின் முதல் நாளை என்ன என்போம்?",
-                      "correctAnswer": "திங்கள்",
+                      "questionText": "தமிழ்ப் புத்தாண்டு தொடங்கும் மாதம் எது?",
+                      "correctAnswer": "சித்திரை",
                       "type": "multiple-choice",
                       "options": [
-                        "திங்கள்",
-                        "செவ்வாய்",
-                        "புதன்",
-                        "வெள்ளி"
+                        "சித்திரை",
+                        "ஆடி",
+                        "தை",
+                        "மார்கழி"
                       ]
                     },
                     {
                       "questionId": "tamil-2-level-19-quiz-q2",
-                      "questionText": "வாரத்தின் கடைசி நாளை என்ன என்போம்?",
-                      "correctAnswer": "ஞாயிறு",
+                      "questionText": "தமிழ் பாரம்பரிய ஆண்டில் எத்தனை மாதங்கள் உள்ளன?",
+                      "correctAnswer": "12",
                       "type": "multiple-choice",
                       "options": [
-                        "சனி",
-                        "ஞாயிறு",
-                        "செவ்வாய்",
-                        "வெள்ளி"
+                        "10",
+                        "12",
+                        "7",
+                        "365"
                       ]
                     },
                     {
                       "questionId": "tamil-2-level-19-quiz-q3",
-                      "questionText": "வெள்ளிக்கிழமையைக் குறிக்கும் சொல் எது?",
-                      "correctAnswer": "வெள்ளி",
+                      "questionText": "மழைக் காலத்துடன் தொடர்புடைய மாதம் எது?",
+                      "correctAnswer": "ஆடி",
                       "type": "multiple-choice",
                       "options": [
-                        "திங்கள்",
-                        "சனி",
-                        "வெள்ளி",
-                        "புதன்"
+                        "ஆடி",
+                        "சித்திரை",
+                        "வைகாசி",
+                        "ஆனி"
                       ]
                     },
                     {
                       "questionId": "tamil-2-level-19-quiz-q4",
-                      "questionText": "சனிக்கிழமையைக் குறிக்கும் சொல் எது?",
-                      "correctAnswer": "சனி",
+                      "questionText": "'வைகாசி' என்பது எதைக் குறிக்கும்?",
+                      "correctAnswer": "ஒரு தமிழ் மாதம்",
                       "type": "multiple-choice",
                       "options": [
-                        "புதன்",
-                        "சனி",
-                        "ஞாயிறு",
-                        "வியாழன்"
-                      ]
-                    },
-                    {
-                      "questionId": "tamil-2-level-19-quiz-q5",
-                      "questionText": "புதன்கிழமையைக் குறிக்கும் சொல் எது?",
-                      "correctAnswer": "புதன்",
-                      "type": "multiple-choice",
-                      "options": [
-                        "புதன்",
-                        "வியாழன்",
-                        "செவ்வாய்",
-                        "சனி"
+                        "ஒரு தமிழ் மாதம்",
+                        "ஒரு வார நாள்",
+                        "ஒரு நிறம்",
+                        "ஒரு விலங்கு"
                       ]
                     }
                   ]
@@ -31681,78 +31669,66 @@
                   "taskName": "Level Challenge!",
                   "type": "exam",
                   "timeLimit": 300,
-                  "content": "நீ என்ன கற்றுக்கொண்டாய் என்று இப்போது காட்டு!",
+                  "content": "Time to show what you know!",
                   "questions": [
                     {
                       "questionId": "tamil-2-level-19-exam-q1",
-                      "questionText": "செவ்வாய்க்கிழமையைக் குறிக்கும் சொல் எது?",
-                      "correctAnswer": "செவ்வாய்",
+                      "questionText": "சித்திரை, வைகாசி, ஆனி — இவை என்ன?",
+                      "correctAnswer": "தமிழ் மாதங்கள்",
                       "type": "multiple-choice",
                       "options": [
-                        "வியாழன்",
-                        "ஞாயிறு",
-                        "புதன்",
-                        "செவ்வாய்"
+                        "தமிழ் மாதங்கள்",
+                        "வார நாட்கள்",
+                        "நிறங்கள்",
+                        "எண்கள்"
                       ]
                     },
                     {
                       "questionId": "tamil-2-level-19-exam-q2",
-                      "questionText": "வியாழக்கிழமையைக் குறிக்கும் சொல் எது?",
-                      "correctAnswer": "வியாழன்",
+                      "questionText": "தமிழ்ப் புத்தாண்டு எந்த மாதத்தில் தொடங்குகிறது?",
+                      "correctAnswer": "சித்திரை",
                       "type": "multiple-choice",
                       "options": [
-                        "செவ்வாய்",
-                        "வியாழன்",
-                        "வெள்ளி",
-                        "சனி"
+                        "சித்திரை",
+                        "தை",
+                        "மார்கழி",
+                        "ஆவணி"
                       ]
                     },
                     {
                       "questionId": "tamil-2-level-19-exam-q3",
-                      "questionText": "'வெள்ளி'க்குப் பின் வரும் நாள் எது?",
-                      "correctAnswer": "சனி",
+                      "questionText": "'ஆடி' மாதத்தில் பொதுவாக என்ன நடக்கும்?",
+                      "correctAnswer": "மழை பெய்யும்",
                       "type": "multiple-choice",
                       "options": [
-                        "திங்கள்",
-                        "சனி",
-                        "வெள்ளி",
-                        "புதன்"
+                        "மழை பெய்யும்",
+                        "பனி பெய்யும்",
+                        "வெயில் மட்டும் இருக்கும்",
+                        "பனி படரும்"
                       ]
                     },
                     {
                       "questionId": "tamil-2-level-19-exam-q4",
-                      "questionText": "வார நாட்களைத் தமிழில் தெரிந்துகொள்வது ஏன் பயனுள்ளது?",
-                      "correctAnswer": "திட்டங்கள், நேர அட்டவணைகள் பற்றிப் பேச உதவும்",
+                      "questionText": "வார நாட்களுக்கும் தமிழ் மாதங்களுக்கும் உள்ள வேறுபாடு என்ன?",
+                      "correctAnswer": "வார நாட்கள் 7, மாதங்கள் 12",
                       "type": "multiple-choice",
                       "options": [
-                        "திட்டங்கள், நேர அட்டவணைகள் பற்றிப் பேச உதவும்",
-                        "வார நாட்களைப் பற்றி யாரும் பேசுவதில்லை",
-                        "பெரியவர்கள் மட்டும் வார நாட்களை அறிந்தால் போதும்",
-                        "இந்தச் சொற்களுக்கு நடைமுறைப் பயன் இல்லை"
+                        "வார நாட்கள் 7, மாதங்கள் 12",
+                        "இரண்டும் ஒன்றே",
+                        "மாதங்கள் 7, வார நாட்கள் 12",
+                        "இரண்டுக்கும் வேறுபாடு இல்லை"
                       ]
                     },
                     {
                       "questionId": "tamil-2-level-19-exam-q5",
-                      "questionText": "'திங்கள்'க்குப் பின் வரும் நாள் எது?",
-                      "correctAnswer": "செவ்வாய்",
+                      "questionText": "புரட்டாசி என்பது எதன் பெயர்?",
+                      "correctAnswer": "ஒரு தமிழ் மாதத்தின் பெயர்",
                       "type": "multiple-choice",
                       "options": [
-                        "திங்கள்",
-                        "ஞாயிறு",
-                        "செவ்வாய்",
-                        "வெள்ளி"
-                      ]
-                    },
-                    {
-                      "questionId": "tamil-2-level-19-exam-q6",
-                      "questionText": "தமிழ் வார நாட்களின் பெயர்கள் கோள்களோடு தொடர்புடையவை ஆவது ஏன்?",
-                      "correctAnswer": "பல பண்பாடுகளின் நாட்காட்டிகள் வாரநாட்களை வானியல் பொருள்களோடு இணைக்கின்றன",
-                      "type": "multiple-choice",
-                      "options": [
-                        "பல பண்பாடுகளின் நாட்காட்டிகள் வாரநாட்களை வானியல் பொருள்களோடு இணைக்கின்றன",
-                        "வாரநாட்களுக்கும் கோள்களுக்கும் எந்த மொழியிலும் தொடர்பு இல்லை",
-                        "தமிழ் நாட்களுக்கு வரலாற்றுத் தொடக்கமே இல்லை",
-                        "இது தமிழில் மட்டும்தான் நடக்கும்"
+                        "ஒரு தமிழ் மாதத்தின் பெயர்",
+                        "ஒரு பழத்தின் பெயர்",
+                        "ஒரு விலங்கின் பெயர்",
+                        "ஒரு நிறத்தின் பெயர்"
                       ]
                     }
                   ]
@@ -45503,7 +45479,7 @@
                   "taskId": "english-3-level-14-lesson",
                   "taskName": "Lesson: Expanded Noun Phrases",
                   "type": "lesson",
-                  "content": "A noun phrase is a noun with extra describing words added, like 'the dog' becoming 'the big, fluffy dog'. Expanding noun phrases with adjectives adds detail and makes writing more interesting and precise, helping the reader picture exactly what is being described rather than something vague and general.",
+                  "content": "You can make an expanded noun phrase even richer by combining more than one technique at once: stacking adjectives AND adding a phrase after the noun, like 'the enormous, battle-scarred dragon with golden eyes'. Another powerful technique is adding a participle (an '-ing' or '-ed' word) to describe an action, like 'the dog, barking loudly,' or 'the cake, covered in icing,' — note the commas around the participle phrase. Combining these techniques lets a writer paint a really vivid picture in just one sentence.",
                   "questions": []
                 },
                 {
@@ -45515,62 +45491,50 @@
                   "questions": [
                     {
                       "questionId": "english-3-level-14-quiz-q1",
-                      "questionText": "What is a noun phrase?",
-                      "correctAnswer": "A noun with extra describing words added",
+                      "questionText": "Which sentence combines TWO describing techniques (adjectives AND a phrase after the noun)?",
+                      "correctAnswer": "the enormous, battle-scarred dragon with golden eyes",
                       "type": "multiple-choice",
                       "options": [
-                        "A noun with extra describing words added",
-                        "A verb with an adjective",
-                        "A full sentence",
-                        "A question"
+                        "the dragon",
+                        "the enormous dragon",
+                        "the enormous, battle-scarred dragon with golden eyes",
+                        "dragon with eyes"
                       ]
                     },
                     {
                       "questionId": "english-3-level-14-quiz-q2",
-                      "questionText": "Expand 'the dog' into a noun phrase using two adjectives.",
-                      "correctAnswer": "the big, fluffy dog (or similar)",
+                      "questionText": "What punctuation goes around a participle phrase added to a noun, like 'the dog, barking loudly,'?",
+                      "correctAnswer": "commas",
                       "type": "multiple-choice",
                       "options": [
-                        "the big, fluffy dog (or similar)",
-                        "the tall, ancient oak tree",
-                        "To add detail and make writing more interesting and precise",
-                        "it lacks descriptive detail"
+                        "commas",
+                        "a full stop",
+                        "a question mark",
+                        "nothing"
                       ]
                     },
                     {
                       "questionId": "english-3-level-14-quiz-q3",
-                      "questionText": "Why do we expand noun phrases?",
-                      "correctAnswer": "To add detail and make writing more interesting and precise",
+                      "questionText": "Which word is the participle in 'the cake, covered in icing, looked delicious'?",
+                      "correctAnswer": "covered",
                       "type": "multiple-choice",
                       "options": [
-                        "To add detail and make writing more interesting and precise",
-                        "To make sentences shorter",
-                        "To remove all description",
-                        "Expanding has no purpose"
+                        "cake",
+                        "covered",
+                        "icing",
+                        "looked"
                       ]
                     },
                     {
                       "questionId": "english-3-level-14-quiz-q4",
-                      "questionText": "What type of word is usually added to expand a noun phrase?",
-                      "correctAnswer": "an adjective (describing word)",
+                      "questionText": "Why do writers combine more than one expanding technique?",
+                      "correctAnswer": "To paint a more vivid picture",
                       "type": "multiple-choice",
                       "options": [
-                        "the big, fluffy dog (or similar)",
-                        "a tall, crumbling house (or similar)",
-                        "an adjective (describing word)",
-                        "The small, nervous kitten hid under the bed."
-                      ]
-                    },
-                    {
-                      "questionId": "english-3-level-14-quiz-q5",
-                      "questionText": "Which is an expanded noun phrase?",
-                      "correctAnswer": "the tall, ancient oak tree",
-                      "type": "multiple-choice",
-                      "options": [
-                        "the tree",
-                        "the tall, ancient oak tree",
-                        "tree",
-                        "a tree is there"
+                        "To paint a more vivid picture",
+                        "To make the sentence shorter",
+                        "To remove all description",
+                        "To confuse the reader"
                       ]
                     }
                   ]
@@ -45584,74 +45548,62 @@
                   "questions": [
                     {
                       "questionId": "english-3-level-14-exam-q1",
-                      "questionText": "Expand 'the cat' into a noun phrase with one adjective.",
-                      "correctAnswer": "the fluffy cat (or similar)",
+                      "questionText": "Expand 'the wolf' using both an adjective AND a participle phrase.",
+                      "correctAnswer": "the fierce wolf, howling at the moon, (or similar)",
                       "type": "multiple-choice",
                       "options": [
-                        "it lacks descriptive detail",
-                        "A noun with extra describing words added",
-                        "the fluffy cat (or similar)",
-                        "the big, fluffy dog (or similar)"
+                        "the wolf",
+                        "the fierce wolf, howling at the moon, (or similar)",
+                        "wolf howling",
+                        "a wolf"
                       ]
                     },
                     {
                       "questionId": "english-3-level-14-exam-q2",
-                      "questionText": "Which sentence uses an expanded noun phrase?",
-                      "correctAnswer": "The small, nervous kitten hid under the bed.",
+                      "questionText": "Which is a participle word ending?",
+                      "correctAnswer": "-ing or -ed",
                       "type": "multiple-choice",
                       "options": [
-                        "The kitten hid.",
-                        "The small, nervous kitten hid under the bed.",
-                        "Kitten hid bed.",
-                        "It hid."
+                        "-ing or -ed",
+                        "-ly",
+                        "-ful",
+                        "-est"
                       ]
                     },
                     {
                       "questionId": "english-3-level-14-exam-q3",
-                      "questionText": "Why might 'the car' be considered vague compared to 'the shiny red sports car'?",
-                      "correctAnswer": "it lacks descriptive detail",
+                      "questionText": "\"the castle, crumbling with age,\" — what does the participle phrase describe?",
+                      "correctAnswer": "the castle",
                       "type": "multiple-choice",
                       "options": [
-                        "it lacks descriptive detail",
-                        "the tall, ancient oak tree",
-                        "the big, fluffy dog (or similar)",
-                        "It makes the picture clearer and more precise"
+                        "the castle",
+                        "age",
+                        "crumbling",
+                        "with"
                       ]
                     },
                     {
                       "questionId": "english-3-level-14-exam-q4",
-                      "questionText": "What effect does expanding a noun phrase have on a reader's mental picture?",
-                      "correctAnswer": "It makes the picture clearer and more precise",
+                      "questionText": "Combining adjectives and phrases after the noun makes writing:",
+                      "correctAnswer": "more vivid and detailed",
                       "type": "multiple-choice",
                       "options": [
-                        "It makes the picture clearer and more precise",
-                        "It has no effect on the reader's picture",
-                        "It makes the description less clear",
-                        "It removes the noun entirely"
+                        "more vivid and detailed",
+                        "shorter and simpler",
+                        "harder to understand only",
+                        "less descriptive"
                       ]
                     },
                     {
                       "questionId": "english-3-level-14-exam-q5",
-                      "questionText": "Expand 'a house' with two adjectives.",
-                      "correctAnswer": "a tall, crumbling house (or similar)",
+                      "questionText": "Which sentence uses a participle phrase correctly?",
+                      "correctAnswer": "The river, flowing swiftly, carried the leaves away.",
                       "type": "multiple-choice",
                       "options": [
-                        "the tall, ancient oak tree",
-                        "an adjective (describing word)",
-                        "The small, nervous kitten hid under the bed.",
-                        "a tall, crumbling house (or similar)"
-                      ]
-                    },
-                    {
-                      "questionId": "english-3-level-14-exam-q6",
-                      "questionText": "Which best explains why writers use expanded noun phrases?",
-                      "correctAnswer": "To give the reader more vivid and specific detail",
-                      "type": "multiple-choice",
-                      "options": [
-                        "To give the reader more vivid and specific detail",
-                        "To avoid using any nouns",
-                        "To make sentences harder to understand",
-                        "They have no effect on writing quality"
+                        "The river flowing swiftly carried the leaves away fast river.",
+                        "The river, flowing swiftly, carried the leaves away.",
+                        "Flowing the river swiftly carried leaves.",
+                        "The swiftly river flowing carried leaves."
                       ]
                     }
                   ]
@@ -46163,7 +46115,7 @@
                   "taskId": "english-3-level-18-lesson",
                   "taskName": "Lesson: Persuasive Writing Basics",
                   "type": "lesson",
-                  "content": "Persuasive writing tries to convince the reader to agree with an opinion or take an action, using strong, confident language and reasons or evidence to support the argument. Techniques include asking rhetorical questions ('Wouldn't you want to help?'), using emotive words, and giving facts. A strong persuasive piece states its opinion clearly and backs it up with convincing reasons.",
+                  "content": "Beyond strong opinions and reasons, persuasive writers use special techniques to make their argument more powerful. Emotive language uses words that create strong feelings, like 'devastating' or 'wonderful', instead of plain words like 'bad' or 'good'. The rule of three lists three things together for a punchy effect, like 'safer, cheaper, and better for everyone'. Addressing the reader directly with 'you' makes them feel personally involved, like 'You deserve a cleaner park.'",
                   "questions": []
                 },
                 {
@@ -46175,62 +46127,50 @@
                   "questions": [
                     {
                       "questionId": "english-3-level-18-quiz-q1",
-                      "questionText": "What is the goal of persuasive writing?",
-                      "correctAnswer": "To convince the reader to agree with an opinion or take an action",
+                      "questionText": "What is emotive language?",
+                      "correctAnswer": "Words that create strong feelings",
                       "type": "multiple-choice",
                       "options": [
-                        "To convince the reader to agree with an opinion or take an action",
-                        "To simply describe a scene",
-                        "To tell a made-up story",
-                        "To list unrelated facts with no argument"
+                        "Words that create strong feelings",
+                        "Words with no feeling at all",
+                        "Only long words",
+                        "Words that rhyme"
                       ]
                     },
                     {
                       "questionId": "english-3-level-18-quiz-q2",
-                      "questionText": "Name one technique used in persuasive writing, mentioned in the lesson.",
-                      "correctAnswer": "rhetorical questions (or emotive words, or facts)",
+                      "questionText": "Which phrase uses the 'rule of three'?",
+                      "correctAnswer": "safer, cheaper, and better for everyone",
                       "type": "multiple-choice",
                       "options": [
-                        "emotive words",
-                        "To make the reader think, without expecting a direct answer",
-                        "e.g. 'Don't we all want a cleaner planet?'",
-                        "rhetorical questions (or emotive words, or facts)"
+                        "safer, cheaper, and better for everyone",
+                        "safer and cheaper",
+                        "It is safe.",
+                        "cheap"
                       ]
                     },
                     {
                       "questionId": "english-3-level-18-quiz-q3",
-                      "questionText": "What is a rhetorical question used for in persuasive writing?",
-                      "correctAnswer": "To make the reader think, without expecting a direct answer",
+                      "questionText": "Which word is more emotive than 'bad'?",
+                      "correctAnswer": "devastating",
                       "type": "multiple-choice",
                       "options": [
-                        "To make the reader think, without expecting a direct answer",
-                        "To confuse the reader completely",
-                        "It is never used in persuasive writing",
-                        "To end the piece of writing"
+                        "devastating",
+                        "not good",
+                        "okay",
+                        "fine"
                       ]
                     },
                     {
                       "questionId": "english-3-level-18-quiz-q4",
-                      "questionText": "What type of words appeal to the reader's feelings in persuasive writing?",
-                      "correctAnswer": "emotive words",
+                      "questionText": "What does addressing the reader with 'you' do?",
+                      "correctAnswer": "Makes them feel personally involved",
                       "type": "multiple-choice",
                       "options": [
-                        "rhetorical questions",
-                        "Back it up with convincing reasons",
-                        "emotive words",
-                        "statistics"
-                      ]
-                    },
-                    {
-                      "questionId": "english-3-level-18-quiz-q5",
-                      "questionText": "What should a strong persuasive piece do, besides stating an opinion?",
-                      "correctAnswer": "Back it up with convincing reasons",
-                      "type": "multiple-choice",
-                      "options": [
-                        "Back it up with convincing reasons",
-                        "Avoid giving any reasons",
-                        "Only ask questions",
-                        "State the opposite opinion too"
+                        "Makes them feel personally involved",
+                        "Makes the writing shorter",
+                        "Removes all opinion",
+                        "Makes it less persuasive"
                       ]
                     }
                   ]
@@ -46244,74 +46184,62 @@
                   "questions": [
                     {
                       "questionId": "english-3-level-18-exam-q1",
-                      "questionText": "Write an example of a rhetorical question that could be used to persuade someone to recycle.",
-                      "correctAnswer": "e.g. 'Don't we all want a cleaner planet?'",
+                      "questionText": "Rewrite 'bad' as a more emotive word.",
+                      "correctAnswer": "devastating (or similar)",
                       "type": "multiple-choice",
                       "options": [
-                        "emotive words",
-                        "e.g. 'Don't we all want a cleaner planet?'",
-                        "To make the reader think, without expecting a direct answer",
-                        "clarity and confidence"
+                        "devastating (or similar)",
+                        "okay",
+                        "fine",
+                        "average"
                       ]
                     },
                     {
                       "questionId": "english-3-level-18-exam-q2",
-                      "questionText": "Why might a persuasive writer use facts as well as emotive language?",
-                      "correctAnswer": "Facts add credibility, making the argument more convincing alongside the emotional appeal",
+                      "questionText": "\"You deserve a cleaner park\" is an example of:",
+                      "correctAnswer": "addressing the reader directly",
                       "type": "multiple-choice",
                       "options": [
-                        "Facts add credibility, making the argument more convincing alongside the emotional appeal",
-                        "Facts always weaken a persuasive argument",
-                        "Emotive language alone is always more convincing",
-                        "Facts have no place in persuasive writing"
+                        "addressing the reader directly",
+                        "the rule of three",
+                        "a plain fact",
+                        "a question"
                       ]
                     },
                     {
                       "questionId": "english-3-level-18-exam-q3",
-                      "questionText": "What should the opinion in a persuasive piece be stated with?",
-                      "correctAnswer": "clarity and confidence",
+                      "questionText": "How many items does the 'rule of three' list together?",
+                      "correctAnswer": "Three",
                       "type": "multiple-choice",
                       "options": [
-                        "clarity and confidence",
-                        "Surely everyone deserves a chance to learn - please support this cause today!",
-                        "rhetorical questions (or emotive words, or facts)",
-                        "Back it up with convincing reasons"
+                        "Three",
+                        "Two",
+                        "Four",
+                        "One"
                       ]
                     },
                     {
                       "questionId": "english-3-level-18-exam-q4",
-                      "questionText": "Which sentence is the most persuasive?",
-                      "correctAnswer": "Surely everyone deserves a chance to learn - please support this cause today!",
+                      "questionText": "Which sentence uses emotive language?",
+                      "correctAnswer": "This devastating pollution is destroying our wonderful river.",
                       "type": "multiple-choice",
                       "options": [
-                        "Surely everyone deserves a chance to learn - please support this cause today!",
-                        "Some people like learning.",
-                        "Learning is a topic.",
-                        "This is a sentence about education."
+                        "This devastating pollution is destroying our wonderful river.",
+                        "There is some pollution in the river.",
+                        "The river has water in it.",
+                        "Pollution exists."
                       ]
                     },
                     {
                       "questionId": "english-3-level-18-exam-q5",
-                      "questionText": "Why might a persuasive writer repeat their main opinion at the end of their writing?",
-                      "correctAnswer": "to remind the reader of the key message and reinforce their argument",
+                      "questionText": "Why do persuasive writers use these techniques together?",
+                      "correctAnswer": "To make their argument more powerful",
                       "type": "multiple-choice",
                       "options": [
-                        "emotive words",
-                        "to remind the reader of the key message and reinforce their argument",
-                        "It helps convince people to support a cause, buy a product, or change their views",
-                        "Surely everyone deserves a chance to learn - please support this cause today!"
-                      ]
-                    },
-                    {
-                      "questionId": "english-3-level-18-exam-q6",
-                      "questionText": "Why is persuasive writing useful in real life, such as in adverts or campaigns?",
-                      "correctAnswer": "It helps convince people to support a cause, buy a product, or change their views",
-                      "type": "multiple-choice",
-                      "options": [
-                        "It helps convince people to support a cause, buy a product, or change their views",
-                        "Persuasive writing has no real-world use",
-                        "It only appears in school exercises",
-                        "It always has to be about recycling"
+                        "To make their argument more powerful",
+                        "To make the writing longer only",
+                        "To confuse the reader",
+                        "To remove all opinions"
                       ]
                     }
                   ]
@@ -50054,7 +49982,7 @@
                   "taskId": "math-3-level-21-lesson",
                   "taskName": "Lesson: Multi-Step Word Problems",
                   "type": "lesson",
-                  "content": "Some word problems need more than one calculation to solve - for example, 'Tom has 15 sweets, eats 4, then buys 10 more. How many does he have now?' needs two steps: 15 - 4 = 11, then 11 + 10 = 21. Breaking the problem into smaller steps, in the right order, makes it much easier to solve.",
+                  "content": "Some word problems need three steps instead of two. For example: 'A shop has 48 apples. They sell 15 in the morning and 12 in the afternoon, then a delivery brings 20 more. How many apples are there now?' Step 1: 48 - 15 = 33. Step 2: 33 - 12 = 21. Step 3: 21 + 20 = 41. Writing down each step clearly, in order, helps you avoid mistakes in longer problems.",
                   "questions": []
                 },
                 {
@@ -50066,62 +49994,50 @@
                   "questions": [
                     {
                       "questionId": "math-3-level-21-quiz-q1",
-                      "questionText": "What makes a problem a 'multi-step' word problem?",
-                      "correctAnswer": "It needs more than one calculation to solve",
+                      "questionText": "A shop has 48 apples, sells 15, then sells 12 more. How many are left after both sales (before the delivery)?",
+                      "correctAnswer": "21",
                       "type": "multiple-choice",
                       "options": [
-                        "It needs more than one calculation to solve",
-                        "It only ever needs one calculation",
-                        "It needs no calculation at all",
-                        "It only involves addition"
+                        "21",
+                        "33",
+                        "41",
+                        "48"
                       ]
                     },
                     {
                       "questionId": "math-3-level-21-quiz-q2",
-                      "questionText": "In the example, what is the first calculation needed: 15 sweets, eats 4?",
-                      "correctAnswer": "15 - 4 = 11",
+                      "questionText": "In the example, what is the final answer after all three steps?",
+                      "correctAnswer": "41",
                       "type": "multiple-choice",
                       "options": [
-                        "It needs more than one calculation to solve",
-                        "15 - 4 = 11",
-                        "They require correctly identifying, ordering and carrying out more than one calculation instead of just one",
-                        "choosing the wrong operation at any step would make the whole multi-step calculation incorrect"
+                        "41",
+                        "21",
+                        "33",
+                        "48"
                       ]
                     },
                     {
                       "questionId": "math-3-level-21-quiz-q3",
-                      "questionText": "What is the second calculation needed in the example, after 15 - 4 = 11?",
-                      "correctAnswer": "11 + 10 = 21",
+                      "questionText": "Why do we write down each step in a 3-step problem?",
+                      "correctAnswer": "To avoid mistakes",
                       "type": "multiple-choice",
                       "options": [
-                        "11 + 10 = 21",
-                        "11 - 10 = 1",
-                        "15 + 10 = 25",
-                        "4 + 10 = 14"
+                        "To avoid mistakes",
+                        "To make it longer",
+                        "It isn't necessary",
+                        "To skip steps"
                       ]
                     },
                     {
                       "questionId": "math-3-level-21-quiz-q4",
-                      "questionText": "What does breaking a problem into smaller steps help you do?",
-                      "correctAnswer": "makes it much easier to solve",
+                      "questionText": "A class has 30 pupils. 5 go home sick, then 3 more leave, then 8 new pupils join. How many are there now?",
+                      "correctAnswer": "30",
                       "type": "multiple-choice",
                       "options": [
-                        "it lets you keep track of the running total and avoid losing track partway through the problem",
-                        "Multi-step problems rely on getting each intermediate result correct before moving to the next calculation",
-                        "12 - 5 = 7, then 7 + 9 = 16",
-                        "makes it much easier to solve"
-                      ]
-                    },
-                    {
-                      "questionId": "math-3-level-21-quiz-q5",
-                      "questionText": "Why must the steps in a multi-step problem be done in the right order?",
-                      "correctAnswer": "Each step's result is needed to correctly complete the next step",
-                      "type": "multiple-choice",
-                      "options": [
-                        "Each step's result is needed to correctly complete the next step",
-                        "Order never matters in multi-step problems",
-                        "Steps can always be done in any random order",
-                        "The first step is never actually needed"
+                        "30",
+                        "22",
+                        "25",
+                        "33"
                       ]
                     }
                   ]
@@ -50135,74 +50051,62 @@
                   "questions": [
                     {
                       "questionId": "math-3-level-21-exam-q1",
-                      "questionText": "Mia has 20 stickers, gives away 6, then earns 8 more. How many does she have now? Show the two steps.",
-                      "correctAnswer": "20 - 6 = 14, then 14 + 8 = 22",
+                      "questionText": "Tom has £50. He spends £12, then £8, then earns £15. How much does he have now?",
+                      "correctAnswer": "£45",
                       "type": "multiple-choice",
                       "options": [
-                        "They require correctly identifying, ordering and carrying out more than one calculation instead of just one",
-                        "It needs more than one calculation to solve",
-                        "20 - 6 = 14, then 14 + 8 = 22",
-                        "11 + 10 = 21"
+                        "£45",
+                        "£30",
+                        "£38",
+                        "£65"
                       ]
                     },
                     {
                       "questionId": "math-3-level-21-exam-q2",
-                      "questionText": "Why might skipping straight to a final answer, without working through each step, lead to mistakes?",
-                      "correctAnswer": "Multi-step problems rely on getting each intermediate result correct before moving to the next calculation",
+                      "questionText": "A baker makes 60 buns, sells 25, bakes 10 more, then sells 15. How many buns are left?",
+                      "correctAnswer": "30",
                       "type": "multiple-choice",
                       "options": [
-                        "Multi-step problems rely on getting each intermediate result correct before moving to the next calculation",
-                        "Skipping steps always leads to the correct answer anyway",
-                        "Intermediate steps are never actually necessary",
-                        "Final answers can always be guessed correctly without steps"
+                        "30",
+                        "35",
+                        "45",
+                        "20"
                       ]
                     },
                     {
                       "questionId": "math-3-level-21-exam-q3",
-                      "questionText": "Why might writing down each step's answer help you solve a multi-step problem correctly?",
-                      "correctAnswer": "it lets you keep track of the running total and avoid losing track partway through the problem",
+                      "questionText": "What is the first step you should do in a multi-step problem?",
+                      "correctAnswer": "Solve the first calculation in order",
                       "type": "multiple-choice",
                       "options": [
-                        "12 - 5 = 7, then 7 + 9 = 16",
-                        "Multi-step problems rely on getting each intermediate result correct before moving to the next calculation",
-                        "it lets you keep track of the running total and avoid losing track partway through the problem",
-                        "11 + 10 = 21"
+                        "Solve the first calculation in order",
+                        "Guess the final answer",
+                        "Skip to the last step",
+                        "Add all numbers together randomly"
                       ]
                     },
                     {
                       "questionId": "math-3-level-21-exam-q4",
-                      "questionText": "A problem says: 'There are 12 birds, 5 fly away, then 9 more arrive.' What are the two calculations needed?",
-                      "correctAnswer": "12 - 5 = 7, then 7 + 9 = 16",
+                      "questionText": "A library has 120 books. 40 are borrowed, 15 are returned, then 25 more are borrowed. How many books are in the library now?",
+                      "correctAnswer": "70",
                       "type": "multiple-choice",
                       "options": [
-                        "12 - 5 = 7, then 7 + 9 = 16",
-                        "12 + 5 = 17, then 17 - 9 = 8",
-                        "12 - 5 = 7, then 9 - 7 = 2",
-                        "12 + 9 = 21, then 21 - 5 = 16"
+                        "70",
+                        "80",
+                        "95",
+                        "120"
                       ]
                     },
                     {
                       "questionId": "math-3-level-21-exam-q5",
-                      "questionText": "Why is identifying which operation (add or subtract) each part of the problem needs an important first step?",
-                      "correctAnswer": "choosing the wrong operation at any step would make the whole multi-step calculation incorrect",
+                      "questionText": "How many calculation steps does a \"three-step\" word problem have?",
+                      "correctAnswer": "Three",
                       "type": "multiple-choice",
                       "options": [
-                        "They require correctly identifying, ordering and carrying out more than one calculation instead of just one",
-                        "it lets you keep track of the running total and avoid losing track partway through the problem",
-                        "15 - 4 = 11",
-                        "choosing the wrong operation at any step would make the whole multi-step calculation incorrect"
-                      ]
-                    },
-                    {
-                      "questionId": "math-3-level-21-exam-q6",
-                      "questionText": "Why are multi-step word problems considered more challenging than single-step ones?",
-                      "correctAnswer": "They require correctly identifying, ordering and carrying out more than one calculation instead of just one",
-                      "type": "multiple-choice",
-                      "options": [
-                        "They require correctly identifying, ordering and carrying out more than one calculation instead of just one",
-                        "Multi-step problems are always easier than single-step ones",
-                        "They never require more than one calculation despite the name",
-                        "Difficulty has no connection to how many steps a problem needs"
+                        "Three",
+                        "Two",
+                        "One",
+                        "Four"
                       ]
                     }
                   ]
@@ -55361,7 +55265,7 @@
                   "taskId": "science-3-level-12-lesson",
                   "taskName": "Lesson: The Water Cycle",
                   "type": "lesson",
-                  "content": "The water cycle describes how water moves around Earth: evaporation (the sun heats water, turning it to vapour), condensation (water vapour cools and forms clouds), precipitation (water falls as rain, snow or hail), and collection (water gathers in rivers, lakes and oceans, ready to evaporate again). This cycle repeats endlessly and is essential for all life on Earth.",
+                  "content": "After rain falls, not all the water stays on the surface — some soaks into the ground and becomes groundwater, stored in gaps between rocks and soil called aquifers, which is where wells get their water from. The rest of the rain flows over the land as rivers and streams, eventually reaching lakes or the sea, where it's ready to evaporate all over again. Because the water cycle keeps repeating forever, the same water has been moving around Earth for billions of years — it never runs out, just changes form and location.",
                   "questions": []
                 },
                 {
@@ -55373,62 +55277,50 @@
                   "questions": [
                     {
                       "questionId": "science-3-level-12-quiz-q1",
-                      "questionText": "What is evaporation in the water cycle?",
-                      "correctAnswer": "The sun heating water, turning it to vapour",
+                      "questionText": "What is groundwater?",
+                      "correctAnswer": "Water that soaks into the ground",
                       "type": "multiple-choice",
                       "options": [
-                        "The sun heating water, turning it to vapour",
-                        "Water falling as rain",
-                        "Water gathering in rivers",
-                        "Clouds forming"
+                        "Water that soaks into the ground",
+                        "Water in the clouds",
+                        "Water in the ocean only",
+                        "Water vapour in the air"
                       ]
                     },
                     {
                       "questionId": "science-3-level-12-quiz-q2",
-                      "questionText": "What do we call water vapour cooling and forming clouds?",
-                      "correctAnswer": "condensation",
+                      "questionText": "What is an aquifer?",
+                      "correctAnswer": "A store of water in gaps between rocks and soil",
                       "type": "multiple-choice",
                       "options": [
-                        "collection",
-                        "The sun's heat",
-                        "condensation",
-                        "Because it repeats endlessly"
+                        "A store of water in gaps between rocks and soil",
+                        "A type of cloud",
+                        "A kind of river",
+                        "A weather station"
                       ]
                     },
                     {
                       "questionId": "science-3-level-12-quiz-q3",
-                      "questionText": "What is precipitation?",
-                      "correctAnswer": "Water falling as rain, snow or hail",
+                      "questionText": "Where do wells get their water from?",
+                      "correctAnswer": "Groundwater/aquifers",
                       "type": "multiple-choice",
                       "options": [
-                        "Water evaporating",
-                        "Water falling as rain, snow or hail",
-                        "Water gathering in oceans",
-                        "Water freezing solid"
+                        "Groundwater/aquifers",
+                        "Clouds",
+                        "The sun",
+                        "Snow only"
                       ]
                     },
                     {
                       "questionId": "science-3-level-12-quiz-q4",
-                      "questionText": "What is the stage where water gathers in rivers, lakes and oceans called?",
-                      "correctAnswer": "collection",
+                      "questionText": "Why does the water cycle mean water never runs out?",
+                      "correctAnswer": "It keeps repeating forever",
                       "type": "multiple-choice",
                       "options": [
-                        "Water falling as rain, snow or hail",
-                        "collection",
-                        "Because it repeats endlessly",
-                        "It condenses into clouds"
-                      ]
-                    },
-                    {
-                      "questionId": "science-3-level-12-quiz-q5",
-                      "questionText": "What powers the evaporation stage of the water cycle?",
-                      "correctAnswer": "The sun's heat",
-                      "type": "multiple-choice",
-                      "options": [
-                        "The sun's heat",
-                        "The moon",
-                        "Wind only",
-                        "Nothing, it happens randomly"
+                        "It keeps repeating forever",
+                        "Water is made new each day",
+                        "Water disappears and reappears",
+                        "It only happens once a year"
                       ]
                     }
                   ]
@@ -55442,74 +55334,62 @@
                   "questions": [
                     {
                       "questionId": "science-3-level-12-exam-q1",
-                      "questionText": "What are the four main stages of the water cycle: evaporation, condensation, precipitation, and ___?",
-                      "correctAnswer": "collection",
+                      "questionText": "What happens to rain that doesn't soak into the ground?",
+                      "correctAnswer": "It flows as rivers/streams to lakes or the sea",
                       "type": "multiple-choice",
                       "options": [
-                        "It condenses into clouds",
-                        "evaporation",
-                        "collection",
-                        "condensation"
+                        "It flows as rivers/streams to lakes or the sea",
+                        "It disappears forever",
+                        "It turns to rock",
+                        "It stays frozen always"
                       ]
                     },
                     {
                       "questionId": "science-3-level-12-exam-q2",
-                      "questionText": "What happens to water vapour as it rises and cools?",
-                      "correctAnswer": "It condenses into clouds",
+                      "questionText": "How long has the same water been moving around Earth?",
+                      "correctAnswer": "Billions of years",
                       "type": "multiple-choice",
                       "options": [
-                        "It condenses into clouds",
-                        "It disappears completely",
-                        "It turns into rock",
-                        "Nothing happens"
+                        "Billions of years",
+                        "One year",
+                        "A few days",
+                        "It's brand new each time"
                       ]
                     },
                     {
                       "questionId": "science-3-level-12-exam-q3",
-                      "questionText": "Name one form precipitation can take, besides rain.",
-                      "correctAnswer": "snow (or hail)",
+                      "questionText": "What happens to water once it reaches the sea?",
+                      "correctAnswer": "It's ready to evaporate again",
                       "type": "multiple-choice",
                       "options": [
-                        "snow (or hail)",
-                        "fog",
-                        "dew",
-                        "Because it repeats endlessly"
+                        "It's ready to evaporate again",
+                        "It stops moving forever",
+                        "It turns into rock",
+                        "It disappears"
                       ]
                     },
                     {
                       "questionId": "science-3-level-12-exam-q4",
-                      "questionText": "Why is the water cycle described as a 'cycle'?",
-                      "correctAnswer": "Because it repeats endlessly",
+                      "questionText": "Where is groundwater stored?",
+                      "correctAnswer": "In gaps between rocks and soil",
                       "type": "multiple-choice",
                       "options": [
-                        "Because it repeats endlessly",
-                        "Because it only happens once",
-                        "Because it only happens in winter",
-                        "Because it has no repeating pattern"
+                        "In gaps between rocks and soil",
+                        "In the clouds",
+                        "In the sun",
+                        "In the air only"
                       ]
                     },
                     {
                       "questionId": "science-3-level-12-exam-q5",
-                      "questionText": "Why is the water cycle essential for life on Earth?",
-                      "correctAnswer": "it provides fresh water for living things",
+                      "questionText": "What does the water cycle being endless mean for Earth's water supply?",
+                      "correctAnswer": "It never runs out",
                       "type": "multiple-choice",
                       "options": [
-                        "it provides fresh water for living things",
-                        "It condenses into clouds",
-                        "condensation",
-                        "snow (or hail)"
-                      ]
-                    },
-                    {
-                      "questionId": "science-3-level-12-exam-q6",
-                      "questionText": "What happens after water collects in rivers, lakes and oceans?",
-                      "correctAnswer": "It can evaporate again, restarting the cycle",
-                      "type": "multiple-choice",
-                      "options": [
-                        "It disappears forever",
-                        "It can evaporate again, restarting the cycle",
-                        "It turns to rock",
-                        "Nothing further happens"
+                        "It never runs out",
+                        "It runs out every year",
+                        "It only exists in summer",
+                        "It gets used up"
                       ]
                     }
                   ]
@@ -58592,7 +58472,7 @@
                   "taskId": "computerscience-3-level-11-lesson",
                   "taskName": "Lesson: Introduction to Spreadsheets",
                   "type": "lesson",
-                  "content": "A spreadsheet is a grid of rows and columns used to organise numbers and data, made up of cells (where a row and column meet). Spreadsheets can automatically calculate totals using formulas - for example, a formula could add up a column of numbers instantly. Spreadsheets are useful for things like keeping score, tracking pocket money, or organising a list of favourite books.",
+                  "content": "Once data is entered into a spreadsheet, you can turn it into a chart or graph to make it easier to understand at a glance. A bar chart is good for comparing amounts, like how many pets each pupil has, while a pie chart shows how a whole is split into parts, like favourite ice cream flavours in a class. Most spreadsheet programs let you select your data and choose a chart type with just a few clicks, and the chart updates automatically if the data changes.",
                   "questions": []
                 },
                 {
@@ -58604,62 +58484,50 @@
                   "questions": [
                     {
                       "questionId": "computerscience-3-level-11-quiz-q1",
-                      "questionText": "What is a spreadsheet made up of?",
-                      "correctAnswer": "Rows and columns of cells",
+                      "questionText": "Why turn spreadsheet data into a chart?",
+                      "correctAnswer": "To make it easier to understand at a glance",
                       "type": "multiple-choice",
                       "options": [
-                        "Rows and columns of cells",
-                        "Only pictures",
-                        "Only text with no structure",
-                        "A single long paragraph"
+                        "To make it easier to understand at a glance",
+                        "To delete the data",
+                        "To make it harder to read",
+                        "To remove the numbers"
                       ]
                     },
                     {
                       "questionId": "computerscience-3-level-11-quiz-q2",
-                      "questionText": "What do we call the box where a row and column meet in a spreadsheet?",
-                      "correctAnswer": "a cell",
+                      "questionText": "Which chart type is best for comparing amounts?",
+                      "correctAnswer": "Bar chart",
                       "type": "multiple-choice",
                       "options": [
-                        "Automatically calculate totals",
-                        "a cell",
-                        "It calculates automatically and instantly",
-                        "Rows and columns of cells"
+                        "Bar chart",
+                        "Pie chart",
+                        "Neither",
+                        "A spreadsheet cell"
                       ]
                     },
                     {
                       "questionId": "computerscience-3-level-11-quiz-q3",
-                      "questionText": "What can a spreadsheet formula do?",
-                      "correctAnswer": "Automatically calculate totals",
+                      "questionText": "Which chart type shows how a whole is split into parts?",
+                      "correctAnswer": "Pie chart",
                       "type": "multiple-choice",
                       "options": [
-                        "Automatically calculate totals",
-                        "Only display pictures",
-                        "Delete all your data",
-                        "Nothing useful"
+                        "Pie chart",
+                        "Bar chart",
+                        "A cell",
+                        "A row"
                       ]
                     },
                     {
                       "questionId": "computerscience-3-level-11-quiz-q4",
-                      "questionText": "Give an example of something a spreadsheet could be used to track.",
-                      "correctAnswer": "pocket money (or scores/a list)",
+                      "questionText": "What happens to a chart if the spreadsheet data changes?",
+                      "correctAnswer": "It updates automatically",
                       "type": "multiple-choice",
                       "options": [
-                        "Automatically calculate totals",
-                        "pocket money (or scores/a list)",
-                        "Keeping track of pocket money over several weeks",
-                        "a sum formula (or total formula)"
-                      ]
-                    },
-                    {
-                      "questionId": "computerscience-3-level-11-quiz-q5",
-                      "questionText": "Why are spreadsheets useful for organising data?",
-                      "correctAnswer": "They arrange information clearly into rows and columns",
-                      "type": "multiple-choice",
-                      "options": [
-                        "They arrange information clearly into rows and columns",
-                        "They have no organisational benefit",
-                        "They only work with pictures",
-                        "They cannot hold numbers"
+                        "It updates automatically",
+                        "It disappears",
+                        "It stays exactly the same",
+                        "It must be redrawn by hand every time"
                       ]
                     }
                   ]
@@ -58673,74 +58541,62 @@
                   "questions": [
                     {
                       "questionId": "computerscience-3-level-11-exam-q1",
-                      "questionText": "What is the term for a formula that automatically adds up numbers?",
-                      "correctAnswer": "a sum formula (or total formula)",
+                      "questionText": "You want to compare how many books 5 pupils read. Which chart fits best?",
+                      "correctAnswer": "A bar chart",
                       "type": "multiple-choice",
                       "options": [
-                        "pocket money (or scores/a list)",
-                        "Rows and columns of cells",
-                        "a sum formula (or total formula)",
-                        "It can calculate and organise numbers automatically"
+                        "A bar chart",
+                        "A pie chart",
+                        "Neither",
+                        "A single cell"
                       ]
                     },
                     {
                       "questionId": "computerscience-3-level-11-exam-q2",
-                      "questionText": "Why might a formula be faster than adding numbers by hand?",
-                      "correctAnswer": "It calculates automatically and instantly",
+                      "questionText": "You want to show favourite ice cream flavours as parts of a whole class. Which chart fits best?",
+                      "correctAnswer": "A pie chart",
                       "type": "multiple-choice",
                       "options": [
-                        "It calculates automatically and instantly",
-                        "Formulas are always slower",
-                        "Formulas never work correctly",
-                        "It requires more manual work"
+                        "A pie chart",
+                        "A bar chart",
+                        "A row",
+                        "A column"
                       ]
                     },
                     {
                       "questionId": "computerscience-3-level-11-exam-q3",
-                      "questionText": "What are the two main structural elements that form a spreadsheet grid?",
-                      "correctAnswer": "rows and columns",
+                      "questionText": "What do you select before creating a chart?",
+                      "correctAnswer": "Your data",
                       "type": "multiple-choice",
                       "options": [
-                        "dots and lines",
-                        "pocket money (or scores/a list)",
-                        "rows and columns",
-                        "Automatically calculate totals"
+                        "Your data",
+                        "The whole computer",
+                        "Nothing at all",
+                        "A password"
                       ]
                     },
                     {
                       "questionId": "computerscience-3-level-11-exam-q4",
-                      "questionText": "Which of these is a good use for a spreadsheet?",
-                      "correctAnswer": "Keeping track of pocket money over several weeks",
+                      "questionText": "Charts are created from information already in:",
+                      "correctAnswer": "a spreadsheet",
                       "type": "multiple-choice",
                       "options": [
-                        "Drawing a picture",
-                        "Keeping track of pocket money over several weeks",
-                        "Writing a long story",
-                        "Taking a photo"
+                        "a spreadsheet",
+                        "a photograph",
+                        "a password",
+                        "an email"
                       ]
                     },
                     {
                       "questionId": "computerscience-3-level-11-exam-q5",
-                      "questionText": "What is stored inside a spreadsheet cell?",
-                      "correctAnswer": "data (a number, word, or formula)",
+                      "questionText": "What is one benefit of a chart over a table of numbers?",
+                      "correctAnswer": "It's easier to understand at a glance",
                       "type": "multiple-choice",
                       "options": [
-                        "Rows and columns of cells",
-                        "Automatically calculate totals",
-                        "data (a number, word, or formula)",
-                        "pocket money (or scores/a list)"
-                      ]
-                    },
-                    {
-                      "questionId": "computerscience-3-level-11-exam-q6",
-                      "questionText": "Why might a spreadsheet be better than a plain list for tracking numbers?",
-                      "correctAnswer": "It can calculate and organise numbers automatically",
-                      "type": "multiple-choice",
-                      "options": [
-                        "A plain list is always better",
-                        "It can calculate and organise numbers automatically",
-                        "Spreadsheets cannot use numbers",
-                        "There is no real difference"
+                        "It's easier to understand at a glance",
+                        "It hides the data completely",
+                        "It has fewer numbers",
+                        "It never changes"
                       ]
                     }
                   ]
