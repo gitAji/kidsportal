@@ -56,6 +56,7 @@ const ALL_SUBJECTS = [
     { id: "German", emoji: "🇩🇪", category: "Language" },
     { id: "Math", emoji: "🔢", category: "Core" },
     { id: "Science", emoji: "🔬", category: "Core" },
+    { id: "Life Skills", emoji: "🤝", category: "Core" },
     { id: "Art", emoji: "🎨", category: "Creative" },
     { id: "Music", emoji: "🎵", category: "Creative" },
     { id: "History", emoji: "📜", category: "General" },

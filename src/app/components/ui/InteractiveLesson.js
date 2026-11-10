@@ -30,6 +30,7 @@ const SUBJECT_THEMES = [
     { match: /coding/i, icon: FaCode, gradient: 'from-violet-500 to-purple-500', glow: 'bg-violet-300/30' },
     { match: /tamil/i, icon: FaFeatherAlt, gradient: 'from-orange-500 to-rose-500', glow: 'bg-orange-300/30' },
     { match: /english/i, icon: FaBookOpen, gradient: 'from-cyan-500 to-blue-500', glow: 'bg-cyan-300/30' },
+    { match: /lifeskills|life.?skills/i, icon: FaGraduationCap, gradient: 'from-teal-500 to-emerald-500', glow: 'bg-teal-300/30' },
 ];
 const DEFAULT_THEME = { icon: FaGlobeAmericas, gradient: 'from-blue-500 to-cyan-500', glow: 'bg-blue-300/30' };
 

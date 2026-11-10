@@ -409,6 +409,7 @@ export default function SettingsPage() {
                       { id: "Geography", label: "🌍 Geography", color: "teal" },
                       { id: "Computer Science", label: "💻 Computer Science", color: "cyan" },
                       { id: "Coding", label: "⌨️ Coding", color: "violet" },
+                      { id: "Life Skills", label: "🤝 Life Skills", color: "teal" },
                       { id: "Physical Education", label: "⚽ Physical Education", color: "red" },
                       { id: "Norwegian", label: "🇳🇴 Norwegian", color: "blue" },
                       { id: "French", label: "🇫🇷 French", color: "blue" },

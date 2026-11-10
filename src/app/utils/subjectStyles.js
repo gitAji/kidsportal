@@ -5,7 +5,7 @@
 // before this file existed — the modules page hard-coded its own copy of
 // these exact colors, but cycled through all of them per-level instead of
 // using the one that actually matches the subject you're in.
-import { FaBookOpen, FaCalculator, FaMicroscope, FaLanguage, FaStar, FaCode, FaLaptopCode } from 'react-icons/fa';
+import { FaBookOpen, FaCalculator, FaMicroscope, FaLanguage, FaStar, FaCode, FaLaptopCode, FaHandsHelping } from 'react-icons/fa';
 
 // hex/borderHex duplicate the bg/border Tailwind arbitrary-value colors as
 // raw hex, for code that needs to compute a shade from them at runtime
@@ -20,6 +20,7 @@ export const SUBJECT_STYLE_MAP = {
   "Science": { bg: "bg-[#FFC972]", border: "border-[#E5A840]", icon: "text-[#E5A840]", hex: "#FFC972", borderHex: "#E5A840" },
   "Coding": { bg: "bg-[#C48CFF]", border: "border-[#A05CFF]", icon: "text-[#A05CFF]", hex: "#C48CFF", borderHex: "#A05CFF" },
   "Computer Science": { bg: "bg-[#8CEFFF]", border: "border-[#5CCEE5]", icon: "text-[#5CCEE5]", hex: "#8CEFFF", borderHex: "#5CCEE5" },
+  "Life Skills": { bg: "bg-[#5CD9B8]", border: "border-[#2EBE9B]", icon: "text-[#2EBE9B]", hex: "#5CD9B8", borderHex: "#2EBE9B" },
   "default": { bg: "bg-[#D1D5DB]", border: "border-[#9CA3AF]", icon: "text-[#9CA3AF]", hex: "#D1D5DB", borderHex: "#9CA3AF" },
 };
 
@@ -95,5 +96,6 @@ export const SUBJECT_ICON_MAP = {
   "Science": FaMicroscope,
   "Coding": FaCode,
   "Computer Science": FaLaptopCode,
+  "Life Skills": FaHandsHelping,
   "default": FaStar,
 };

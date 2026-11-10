@@ -5,7 +5,7 @@ import db from '../data/db.json';
 // content in db.json. Keep this in sync with that set; the toggle screen
 // also lists subjects (Art, Music, History, ...) that have no content yet,
 // so it intentionally stays broader than this default.
-export const DEFAULT_LEARNING_SUBJECTS = ['English', 'Math', 'Science', 'Tamil', 'Computer Science', 'Coding'];
+export const DEFAULT_LEARNING_SUBJECTS = ['English', 'Math', 'Science', 'Tamil', 'Computer Science', 'Coding', 'Life Skills'];
 
 /**
  * Fetches subjects from db.json based on the child's grade,
