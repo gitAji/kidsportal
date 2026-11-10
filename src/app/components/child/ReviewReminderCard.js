@@ -9,7 +9,7 @@ import { getNarrationLang } from '@/app/utils/narrationLang';
 
 const subjectDisplayNames = {
     english: 'English', math: 'Math', science: 'Science', tamil: 'Tamil',
-    computerscience: 'Computer Science', coding: 'Coding',
+    computerscience: 'Computer Science', coding: 'Coding', lifeskills: 'Life Skills',
 };
 
 function subjectLabel(subjectId) {

@@ -16,6 +16,7 @@ const subjectDisplayNames = {
     tamil: 'Tamil',
     computerscience: 'Computer Science',
     coding: 'Coding',
+    lifeskills: 'Life Skills',
 };
 
 function getSubjectDisplayName(subjectId) {

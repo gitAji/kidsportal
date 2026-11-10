@@ -20933,6 +20933,1140 @@
               "moduleName": "Module 8: Timing, Dance Parties & Sharing My Project"
             }
           ]
+        },
+        {
+          "subjectId": "lifeskills-1",
+          "subjectName": "Life Skills",
+          "levels": [
+            {
+              "levelId": "lifeskills-1-level-1",
+              "levelName": "Personal Hygiene Basics",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-1-level-1-lesson",
+                  "taskName": "Lesson: Personal Hygiene Basics",
+                  "type": "lesson",
+                  "content": "Washing your hands with soap before eating and after using the toilet stops germs from making you sick. Brushing your teeth twice a day, morning and night, keeps them strong and healthy. Taking a bath or shower and wearing clean clothes helps your whole body feel fresh and ready for the day.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-1-level-1-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-1-quiz-q1",
+                      "questionText": "When should you wash your hands?",
+                      "correctAnswer": "Before eating and after the toilet",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Only on Mondays",
+                        "Before eating and after the toilet",
+                        "Never",
+                        "Only when they look dirty"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-1-quiz-q2",
+                      "questionText": "How many times a day should you brush your teeth?",
+                      "correctAnswer": "Twice",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Once a week",
+                        "Twice",
+                        "Never",
+                        "Five times"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-1-quiz-q3",
+                      "questionText": "What do you use to wash your hands properly?",
+                      "correctAnswer": "Soap and water",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Just water",
+                        "Soap and water",
+                        "Juice",
+                        "Sand"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-1-quiz-q4",
+                      "questionText": "Why do we wear clean clothes?",
+                      "correctAnswer": "To feel fresh and healthy",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To feel fresh and healthy",
+                        "To get dirty faster",
+                        "Clothes don't matter",
+                        "To avoid washing"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-1-level-1-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-1-exam-q1",
+                      "questionText": "What can happen if you don't wash your hands?",
+                      "correctAnswer": "You can get sick from germs",
+                      "type": "multiple-choice",
+                      "options": [
+                        "You can get sick from germs",
+                        "Nothing at all",
+                        "Your hands grow bigger",
+                        "You become stronger"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-1-exam-q2",
+                      "questionText": "What should you do after using the toilet?",
+                      "correctAnswer": "Wash your hands",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Wash your hands",
+                        "Go straight to bed",
+                        "Eat a snack",
+                        "Nothing"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-1-exam-q3",
+                      "questionText": "When should you brush your teeth?",
+                      "correctAnswer": "Morning and night",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Morning and night",
+                        "Only on weekends",
+                        "Once a year",
+                        "Never"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-1-exam-q4",
+                      "questionText": "What helps keep your whole body feeling fresh?",
+                      "correctAnswer": "A bath or shower and clean clothes",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A bath or shower and clean clothes",
+                        "Staying dirty",
+                        "Wearing the same clothes all week",
+                        "Skipping baths"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-1-exam-q5",
+                      "questionText": "Which of these is a hygiene habit?",
+                      "correctAnswer": "Washing hands before eating",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Washing hands before eating",
+                        "Never brushing teeth",
+                        "Wearing muddy clothes",
+                        "Skipping baths"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Taking Care of Myself"
+            },
+            {
+              "levelId": "lifeskills-1-level-2",
+              "levelName": "Dressing Myself & Tidying Up",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-1-level-2-lesson",
+                  "taskName": "Lesson: Dressing Myself & Tidying Up",
+                  "type": "lesson",
+                  "content": "Learning to dress yourself, like doing up buttons and zips, helps you become more independent every day. After playing, putting your toys back in their place keeps your room tidy and makes it easy to find them again next time. Hanging up your clothes or putting them in the laundry basket is a simple job you can do all by yourself.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-1-level-2-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-2-quiz-q1",
+                      "questionText": "Where should toys go after you finish playing?",
+                      "correctAnswer": "Back in their place",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Back in their place",
+                        "Under the bed forever",
+                        "In the garden",
+                        "Nowhere"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-2-quiz-q2",
+                      "questionText": "What does tidying your room make easier?",
+                      "correctAnswer": "Finding things again",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Finding things again",
+                        "Losing things",
+                        "Making more mess",
+                        "Nothing"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-2-quiz-q3",
+                      "questionText": "Where do dirty clothes go?",
+                      "correctAnswer": "In the laundry basket",
+                      "type": "multiple-choice",
+                      "options": [
+                        "In the laundry basket",
+                        "On the floor forever",
+                        "In the toy box",
+                        "In the fridge"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-2-quiz-q4",
+                      "questionText": "What skill helps you dress yourself?",
+                      "correctAnswer": "Doing up buttons and zips",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Doing up buttons and zips",
+                        "Watching TV",
+                        "Eating breakfast",
+                        "Sleeping"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-1-level-2-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-2-exam-q1",
+                      "questionText": "Why is tidying up a good habit?",
+                      "correctAnswer": "It keeps things easy to find",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It keeps things easy to find",
+                        "It makes more mess",
+                        "It wastes time",
+                        "It has no benefit"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-2-exam-q2",
+                      "questionText": "What is something you can do all by yourself?",
+                      "correctAnswer": "Put clothes in the laundry basket",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Put clothes in the laundry basket",
+                        "Drive a car",
+                        "Cook a big meal",
+                        "Pay the bills"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-2-exam-q3",
+                      "questionText": "What does dressing yourself help you become?",
+                      "correctAnswer": "More independent",
+                      "type": "multiple-choice",
+                      "options": [
+                        "More independent",
+                        "More tired",
+                        "Less careful",
+                        "More forgetful"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-2-exam-q4",
+                      "questionText": "After playing with blocks, what should you do?",
+                      "correctAnswer": "Put them away",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Put them away",
+                        "Leave them out forever",
+                        "Hide them",
+                        "Throw them away"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-2-exam-q5",
+                      "questionText": "Which is a tidying-up job?",
+                      "correctAnswer": "Hanging up your clothes",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Hanging up your clothes",
+                        "Watching cartoons",
+                        "Eating lunch",
+                        "Taking a nap"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Taking Care of Myself"
+            },
+            {
+              "levelId": "lifeskills-1-level-3",
+              "levelName": "Healthy Eating Basics",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-1-level-3-lesson",
+                  "taskName": "Lesson: Healthy Eating Basics",
+                  "type": "lesson",
+                  "content": "Eating fruits and vegetables every day gives your body the vitamins it needs to grow strong. Drinking water instead of sugary drinks keeps you healthy and helps your body work well. Treats like sweets and crisps are fine sometimes, but they shouldn't be eaten every single day.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-1-level-3-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-3-quiz-q1",
+                      "questionText": "What gives your body vitamins to grow strong?",
+                      "correctAnswer": "Fruits and vegetables",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Fruits and vegetables",
+                        "Sweets",
+                        "Crisps",
+                        "Fizzy drinks"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-3-quiz-q2",
+                      "questionText": "What should you drink instead of sugary drinks?",
+                      "correctAnswer": "Water",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Water",
+                        "More sugary drinks",
+                        "Nothing",
+                        "Only juice"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-3-quiz-q3",
+                      "questionText": "How often should you eat treats like sweets?",
+                      "correctAnswer": "Sometimes, not every day",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Sometimes, not every day",
+                        "Every single meal",
+                        "Never think about food",
+                        "All day long"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-3-quiz-q4",
+                      "questionText": "Why is water a healthy drink choice?",
+                      "correctAnswer": "It helps your body work well",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It helps your body work well",
+                        "It has lots of sugar",
+                        "It makes you sick",
+                        "It has no benefit"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-1-level-3-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-3-exam-q1",
+                      "questionText": "Name a healthy food that gives you vitamins.",
+                      "correctAnswer": "Fruits or vegetables",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Fruits or vegetables",
+                        "Sweets",
+                        "Crisps",
+                        "Fizzy drinks"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-3-exam-q2",
+                      "questionText": "What is the healthiest drink for your body?",
+                      "correctAnswer": "Water",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Water",
+                        "Fizzy drinks",
+                        "Sugary juice",
+                        "Soda"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-3-exam-q3",
+                      "questionText": "How often is it okay to eat sweets?",
+                      "correctAnswer": "Sometimes",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Sometimes",
+                        "Every meal",
+                        "All day",
+                        "Instead of dinner"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-3-exam-q4",
+                      "questionText": "What do fruits and vegetables help you do?",
+                      "correctAnswer": "Grow strong",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Grow strong",
+                        "Feel sick",
+                        "Get smaller",
+                        "Nothing"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-3-exam-q5",
+                      "questionText": "Which is better every day, water or sugary drinks?",
+                      "correctAnswer": "Water",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Water",
+                        "Sugary drinks",
+                        "Both are the same",
+                        "Neither"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Taking Care of Myself"
+            },
+            {
+              "levelId": "lifeskills-1-level-4",
+              "levelName": "Understanding Feelings",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-1-level-4-lesson",
+                  "taskName": "Lesson: Understanding Feelings",
+                  "type": "lesson",
+                  "content": "Everyone feels happy, sad, angry, or scared sometimes, and all feelings are okay to have. Naming your feeling, like saying 'I feel sad,' helps grown-ups understand how to help you. Taking slow, deep breaths can help you feel calmer when you are upset.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-1-level-4-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-4-quiz-q1",
+                      "questionText": "Are feelings like anger or sadness okay to have?",
+                      "correctAnswer": "Yes, all feelings are okay",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Yes, all feelings are okay",
+                        "No, you should hide them",
+                        "Only happy feelings are okay",
+                        "Feelings are bad"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-4-quiz-q2",
+                      "questionText": "What helps grown-ups understand how you feel?",
+                      "correctAnswer": "Naming your feeling",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Naming your feeling",
+                        "Staying silent",
+                        "Running away",
+                        "Ignoring it"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-4-quiz-q3",
+                      "questionText": "What can help you feel calmer when upset?",
+                      "correctAnswer": "Taking slow, deep breaths",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Taking slow, deep breaths",
+                        "Shouting louder",
+                        "Holding your breath",
+                        "Running fast"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-4-quiz-q4",
+                      "questionText": "Name a feeling everyone has sometimes.",
+                      "correctAnswer": "Sad",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Sad",
+                        "Invisible",
+                        "Purple",
+                        "Square"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-1-level-4-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-4-exam-q1",
+                      "questionText": "What should you do if you feel sad?",
+                      "correctAnswer": "Tell a grown-up how you feel",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Tell a grown-up how you feel",
+                        "Hide in a cupboard",
+                        "Pretend to be happy",
+                        "Say nothing ever"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-4-exam-q2",
+                      "questionText": "Is it okay to feel angry sometimes?",
+                      "correctAnswer": "Yes",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Yes",
+                        "No",
+                        "Only on weekends",
+                        "Never"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-4-exam-q3",
+                      "questionText": "What can calm you down when upset?",
+                      "correctAnswer": "Deep breaths",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Deep breaths",
+                        "Holding your breath",
+                        "Shouting",
+                        "Running in circles"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-4-exam-q4",
+                      "questionText": "Why is naming your feeling helpful?",
+                      "correctAnswer": "It helps others understand and help you",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It helps others understand and help you",
+                        "It makes you more upset",
+                        "It is not helpful at all",
+                        "It confuses people"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-4-exam-q5",
+                      "questionText": "Which is an example of naming a feeling?",
+                      "correctAnswer": "Saying \"I feel scared\"",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Saying \"I feel scared\"",
+                        "Slamming a door",
+                        "Ignoring everyone",
+                        "Running away silently"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Taking Care of Myself"
+            },
+            {
+              "levelId": "lifeskills-1-level-5",
+              "levelName": "Good Manners",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-1-level-5-lesson",
+                  "taskName": "Lesson: Good Manners",
+                  "type": "lesson",
+                  "content": "Saying 'please' when you ask for something and 'thank you' when you receive it shows good manners and makes people feel appreciated. Sharing your toys and taking turns helps everyone have fun together. Waiting patiently instead of interrupting shows that you respect what other people are saying.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-1-level-5-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-5-quiz-q1",
+                      "questionText": "What word do you say when you ask for something?",
+                      "correctAnswer": "Please",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Please",
+                        "No",
+                        "Mine",
+                        "Go away"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-5-quiz-q2",
+                      "questionText": "What word do you say when you receive something?",
+                      "correctAnswer": "Thank you",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Thank you",
+                        "Give me more",
+                        "Nothing",
+                        "Hurry up"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-5-quiz-q3",
+                      "questionText": "What helps everyone have fun when playing together?",
+                      "correctAnswer": "Sharing and taking turns",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Sharing and taking turns",
+                        "Grabbing all the toys",
+                        "Pushing others",
+                        "Playing alone only"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-5-quiz-q4",
+                      "questionText": "What shows you respect what others are saying?",
+                      "correctAnswer": "Waiting patiently / not interrupting",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Waiting patiently / not interrupting",
+                        "Talking over them",
+                        "Walking away",
+                        "Shouting louder"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-1-level-5-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-5-exam-q1",
+                      "questionText": "What should you say after someone gives you a gift?",
+                      "correctAnswer": "Thank you",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Thank you",
+                        "Nothing",
+                        "Give me another",
+                        "Is that all?"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-5-exam-q2",
+                      "questionText": "What should you say when asking for help?",
+                      "correctAnswer": "Please",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Please",
+                        "Now!",
+                        "Hurry",
+                        "Mine"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-5-exam-q3",
+                      "questionText": "What is a good way to play with others?",
+                      "correctAnswer": "Take turns and share",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Take turns and share",
+                        "Keep everything for yourself",
+                        "Push and grab",
+                        "Play alone and ignore others"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-5-exam-q4",
+                      "questionText": "What should you avoid doing while someone else is talking?",
+                      "correctAnswer": "Interrupting",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Interrupting",
+                        "Listening",
+                        "Nodding",
+                        "Waiting"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-5-exam-q5",
+                      "questionText": "Which word shows good manners?",
+                      "correctAnswer": "Please",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Please",
+                        "Gimme",
+                        "Now",
+                        "Mine"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 2: Being Safe and Kind"
+            },
+            {
+              "levelId": "lifeskills-1-level-6",
+              "levelName": "Safety at Home",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-1-level-6-lesson",
+                  "taskName": "Lesson: Safety at Home",
+                  "type": "lesson",
+                  "content": "Sharp objects like knives and scissors should only be used with a grown-up watching. The stove and oven get very hot, so children should stay away unless an adult says it's okay. If there is ever an emergency at home, like a fire, you should tell a grown-up straight away or call for help.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-1-level-6-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-6-quiz-q1",
+                      "questionText": "Who should be with you when using sharp objects?",
+                      "correctAnswer": "A grown-up",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A grown-up",
+                        "No one",
+                        "A pet",
+                        "A toy"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-6-quiz-q2",
+                      "questionText": "What parts of the kitchen are very hot?",
+                      "correctAnswer": "The stove and oven",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The stove and oven",
+                        "The fridge",
+                        "The sink",
+                        "The table"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-6-quiz-q3",
+                      "questionText": "What should you do in an emergency?",
+                      "correctAnswer": "Tell a grown-up or call for help",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Tell a grown-up or call for help",
+                        "Hide quietly",
+                        "Do nothing",
+                        "Go back to sleep"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-6-quiz-q4",
+                      "questionText": "Should children use scissors alone?",
+                      "correctAnswer": "No, only with a grown-up",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No, only with a grown-up",
+                        "Yes, anytime",
+                        "Only at night",
+                        "Only outside"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-1-level-6-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-6-exam-q1",
+                      "questionText": "Why should you stay away from the stove?",
+                      "correctAnswer": "It gets very hot",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It gets very hot",
+                        "It is very cold",
+                        "It is a toy",
+                        "It is soft"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-6-exam-q2",
+                      "questionText": "What should you do if you see a fire at home?",
+                      "correctAnswer": "Tell a grown-up straight away",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Tell a grown-up straight away",
+                        "Hide under the bed",
+                        "Ignore it",
+                        "Go back to playing"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-6-exam-q3",
+                      "questionText": "Who should watch you use sharp objects?",
+                      "correctAnswer": "A grown-up",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A grown-up",
+                        "No one",
+                        "Your pet",
+                        "A friend your age"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-6-exam-q4",
+                      "questionText": "Name something hot you should stay away from.",
+                      "correctAnswer": "Stove or oven",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Stove or oven",
+                        "Pillow",
+                        "Blanket",
+                        "Toy box"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-6-exam-q5",
+                      "questionText": "What is the safest way to use scissors?",
+                      "correctAnswer": "With a grown-up present",
+                      "type": "multiple-choice",
+                      "options": [
+                        "With a grown-up present",
+                        "Alone in your room",
+                        "In the dark",
+                        "Running with them"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 2: Being Safe and Kind"
+            },
+            {
+              "levelId": "lifeskills-1-level-7",
+              "levelName": "Safety Outside",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-1-level-7-lesson",
+                  "taskName": "Lesson: Safety Outside",
+                  "type": "lesson",
+                  "content": "Before crossing the road, always stop, look both ways, and listen for cars. You should never go anywhere with a stranger or get into a stranger's car, even if they say it's an emergency. If you ever get lost, look for a police officer, a shop worker, or another grown-up with children to ask for help.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-1-level-7-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-7-quiz-q1",
+                      "questionText": "What should you do before crossing the road?",
+                      "correctAnswer": "Stop, look both ways, and listen",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Stop, look both ways, and listen",
+                        "Run across quickly",
+                        "Close your eyes",
+                        "Look at your phone"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-7-quiz-q2",
+                      "questionText": "Should you go anywhere with a stranger?",
+                      "correctAnswer": "No, never",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No, never",
+                        "Yes, if they are nice",
+                        "Only on weekends",
+                        "Yes, always"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-7-quiz-q3",
+                      "questionText": "If you get lost, who can you ask for help?",
+                      "correctAnswer": "A police officer or shop worker",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A police officer or shop worker",
+                        "Anyone at all",
+                        "No one",
+                        "A stranger in a car"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-7-quiz-q4",
+                      "questionText": "What should you check for before crossing?",
+                      "correctAnswer": "Cars",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Cars",
+                        "Clouds",
+                        "Birds",
+                        "Nothing"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-1-level-7-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-7-exam-q1",
+                      "questionText": "What are the three steps before crossing a road?",
+                      "correctAnswer": "Stop, look, listen",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Stop, look, listen",
+                        "Run, jump, skip",
+                        "Sing, dance, wave",
+                        "Close eyes and go"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-7-exam-q2",
+                      "questionText": "What should you do if a stranger offers you a ride?",
+                      "correctAnswer": "Say no and find a trusted adult",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Say no and find a trusted adult",
+                        "Get in the car",
+                        "Follow them quietly",
+                        "Ignore your instincts"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-7-exam-q3",
+                      "questionText": "Who is a safe person to ask for help if lost?",
+                      "correctAnswer": "A police officer",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A police officer",
+                        "Any stranger",
+                        "No one",
+                        "A person in a car offering candy"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-7-exam-q4",
+                      "questionText": "Why do we look both ways before crossing?",
+                      "correctAnswer": "To check for cars",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To check for cars",
+                        "To see the sky",
+                        "For fun",
+                        "No reason"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-7-exam-q5",
+                      "questionText": "Is it safe to get into a stranger's car for any reason?",
+                      "correctAnswer": "No",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No",
+                        "Yes, always",
+                        "Only if they smile",
+                        "Only if it is raining"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 2: Being Safe and Kind"
+            },
+            {
+              "levelId": "lifeskills-1-level-8",
+              "levelName": "Recognising Coins & Simple Money",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-1-level-8-lesson",
+                  "taskName": "Lesson: Recognising Coins & Simple Money",
+                  "type": "lesson",
+                  "content": "Money comes in coins and notes, and each one is worth a different amount. We use money to buy things we need, like food, and things we want, like toys. Saving some of your money in a money box instead of spending it all means you can buy something bigger later.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-1-level-8-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-8-quiz-q1",
+                      "questionText": "What are the two main forms money comes in?",
+                      "correctAnswer": "Coins and notes",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Coins and notes",
+                        "Leaves and rocks",
+                        "Stickers and cards",
+                        "Toys and books"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-8-quiz-q2",
+                      "questionText": "What do we use money for?",
+                      "correctAnswer": "To buy things we need and want",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To buy things we need and want",
+                        "To throw away",
+                        "To eat",
+                        "To draw on"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-8-quiz-q3",
+                      "questionText": "What happens when you save money instead of spending it?",
+                      "correctAnswer": "You can buy something bigger later",
+                      "type": "multiple-choice",
+                      "options": [
+                        "You can buy something bigger later",
+                        "It disappears",
+                        "Nothing changes",
+                        "You lose it"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-8-quiz-q4",
+                      "questionText": "Where can you keep money you are saving?",
+                      "correctAnswer": "A money box",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A money box",
+                        "The bin",
+                        "The fridge",
+                        "Outside in the rain"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-1-level-8-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-1-level-8-exam-q1",
+                      "questionText": "Name something you might buy with money.",
+                      "correctAnswer": "Food or a toy",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Food or a toy",
+                        "Sunshine",
+                        "Air",
+                        "A rainbow"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-8-exam-q2",
+                      "questionText": "What is a 'need'?",
+                      "correctAnswer": "Something you must have, like food",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Something you must have, like food",
+                        "Something fun but not necessary",
+                        "A type of coin",
+                        "A toy only"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-8-exam-q3",
+                      "questionText": "What is a 'want'?",
+                      "correctAnswer": "Something nice to have, like a toy",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Something nice to have, like a toy",
+                        "Something you must have to live",
+                        "A kind of note",
+                        "Food only"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-8-exam-q4",
+                      "questionText": "Why might you save money instead of spending it right away?",
+                      "correctAnswer": "To buy something bigger later",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To buy something bigger later",
+                        "To throw it away",
+                        "Money cannot be saved",
+                        "For no reason"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-1-level-8-exam-q5",
+                      "questionText": "What are coins and notes both examples of?",
+                      "correctAnswer": "Money",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Money",
+                        "Food",
+                        "Toys",
+                        "Clothes"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 2: Being Safe and Kind"
+            }
+          ]
         }
       ]
     },
@@ -41308,6 +42442,1140 @@
                 }
               ],
               "moduleName": "Module 8: If-Else, Broadcasting & Memory Games"
+            }
+          ]
+        },
+        {
+          "subjectId": "lifeskills-2",
+          "subjectName": "Life Skills",
+          "levels": [
+            {
+              "levelId": "lifeskills-2-level-1",
+              "levelName": "Daily Routines & Time",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-2-level-1-lesson",
+                  "taskName": "Lesson: Daily Routines & Time",
+                  "type": "lesson",
+                  "content": "A daily routine is a set of things you do in the same order every day, like waking up, getting dressed, and brushing your teeth. Having a morning and bedtime routine helps your day feel organised and makes sure you don't forget important things. Looking at a clock or a daily planner can help you know what to do and when.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-2-level-1-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-1-quiz-q1",
+                      "questionText": "What is a daily routine?",
+                      "correctAnswer": "Things you do in the same order every day",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Things you do in the same order every day",
+                        "Things you never do",
+                        "A type of food",
+                        "A game you play once"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-1-quiz-q2",
+                      "questionText": "What can a morning routine help you remember?",
+                      "correctAnswer": "Important things, like brushing your teeth",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Important things, like brushing your teeth",
+                        "Nothing at all",
+                        "Your favourite colour",
+                        "A song"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-1-quiz-q3",
+                      "questionText": "What can help you know what to do and when?",
+                      "correctAnswer": "A clock or daily planner",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A clock or daily planner",
+                        "A toy",
+                        "A pillow",
+                        "A snack"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-1-quiz-q4",
+                      "questionText": "Name something that might be part of a bedtime routine.",
+                      "correctAnswer": "Brushing teeth",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Brushing teeth",
+                        "Playing outside",
+                        "Eating lunch",
+                        "Going to school"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-2-level-1-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-1-exam-q1",
+                      "questionText": "Why is having a routine helpful?",
+                      "correctAnswer": "It keeps your day organised",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It keeps your day organised",
+                        "It makes your day messy",
+                        "It has no effect",
+                        "It wastes time"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-1-exam-q2",
+                      "questionText": "What are two routines mentioned in the lesson?",
+                      "correctAnswer": "Morning and bedtime routines",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Morning and bedtime routines",
+                        "Lunch and dinner routines",
+                        "Summer and winter routines",
+                        "Weekend and weekday routines"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-1-exam-q3",
+                      "questionText": "What tool helps you know what time it is?",
+                      "correctAnswer": "A clock",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A clock",
+                        "A spoon",
+                        "A ball",
+                        "A blanket"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-1-exam-q4",
+                      "questionText": "What might you forget without a routine?",
+                      "correctAnswer": "Important daily tasks",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Important daily tasks",
+                        "Your name",
+                        "How to walk",
+                        "Your favourite food"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-1-exam-q5",
+                      "questionText": "Give an example of a daily routine step.",
+                      "correctAnswer": "Getting dressed",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Getting dressed",
+                        "Flying a kite once a year",
+                        "Visiting the moon",
+                        "Winning a race"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Everyday Responsibility"
+            },
+            {
+              "levelId": "lifeskills-2-level-2",
+              "levelName": "Simple Chores & Responsibility",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-2-level-2-lesson",
+                  "taskName": "Lesson: Simple Chores & Responsibility",
+                  "type": "lesson",
+                  "content": "A chore is a small job you help with at home, like setting the table, feeding a pet, or putting away your shoes. Doing chores shows you are responsible and helps your family, because everyone pitching in makes the work easier for everyone. Finishing a chore you started, even if it's hard, is an important part of being responsible.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-2-level-2-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-2-quiz-q1",
+                      "questionText": "What is a chore?",
+                      "correctAnswer": "A small job you help with at home",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A small job you help with at home",
+                        "A type of game",
+                        "A food you eat",
+                        "A TV show"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-2-quiz-q2",
+                      "questionText": "Name an example of a chore.",
+                      "correctAnswer": "Setting the table",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Setting the table",
+                        "Watching cartoons",
+                        "Sleeping all day",
+                        "Eating candy"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-2-quiz-q3",
+                      "questionText": "What does doing chores show?",
+                      "correctAnswer": "That you are responsible",
+                      "type": "multiple-choice",
+                      "options": [
+                        "That you are responsible",
+                        "That you are tired",
+                        "That you dislike your family",
+                        "Nothing"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-2-quiz-q4",
+                      "questionText": "What should you do even if a chore is hard?",
+                      "correctAnswer": "Finish it",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Finish it",
+                        "Give up",
+                        "Ignore it",
+                        "Complain forever"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-2-level-2-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-2-exam-q1",
+                      "questionText": "Why does doing chores help your family?",
+                      "correctAnswer": "Everyone pitching in makes the work easier",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Everyone pitching in makes the work easier",
+                        "It makes more work for everyone",
+                        "It has no effect",
+                        "It makes the house messier"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-2-exam-q2",
+                      "questionText": "What is an example of a pet-related chore?",
+                      "correctAnswer": "Feeding a pet",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Feeding a pet",
+                        "Watching TV with a pet",
+                        "Ignoring a pet",
+                        "Hiding from a pet"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-2-exam-q3",
+                      "questionText": "What does 'being responsible' mean when doing a chore?",
+                      "correctAnswer": "Finishing what you started",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Finishing what you started",
+                        "Starting but never finishing",
+                        "Avoiding all chores",
+                        "Doing chores only sometimes"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-2-exam-q4",
+                      "questionText": "Is setting the table an example of a chore?",
+                      "correctAnswer": "Yes",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Yes",
+                        "No",
+                        "Only on Sundays",
+                        "Only for adults"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-2-exam-q5",
+                      "questionText": "Who benefits when everyone helps with chores?",
+                      "correctAnswer": "The whole family",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The whole family",
+                        "No one",
+                        "Only one person",
+                        "Strangers"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Everyday Responsibility"
+            },
+            {
+              "levelId": "lifeskills-2-level-3",
+              "levelName": "Saving vs Spending Money",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-2-level-3-lesson",
+                  "taskName": "Lesson: Saving vs Spending Money",
+                  "type": "lesson",
+                  "content": "When you get pocket money, you can choose to spend it right away or save some of it for later. Saving a little bit each week adds up over time, so you can buy something bigger than you could afford all at once. Before spending money, it helps to ask yourself if you really need or want the thing you're buying.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-2-level-3-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-3-quiz-q1",
+                      "questionText": "What are the two choices you have with pocket money?",
+                      "correctAnswer": "Spend it or save it",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Spend it or save it",
+                        "Eat it or wear it",
+                        "Hide it or lose it",
+                        "Burn it or bury it"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-3-quiz-q2",
+                      "questionText": "What happens when you save a little each week?",
+                      "correctAnswer": "It adds up over time",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It adds up over time",
+                        "It disappears",
+                        "It shrinks",
+                        "Nothing happens"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-3-quiz-q3",
+                      "questionText": "What question should you ask before spending money?",
+                      "correctAnswer": "Do I really need or want this?",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Do I really need or want this?",
+                        "What colour is it?",
+                        "Is it Tuesday?",
+                        "Is it heavy?"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-3-quiz-q4",
+                      "questionText": "Why might you save instead of spending right away?",
+                      "correctAnswer": "To buy something bigger later",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To buy something bigger later",
+                        "To throw the money away",
+                        "Because money is bad",
+                        "For no reason"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-2-level-3-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-3-exam-q1",
+                      "questionText": "What does 'saving money' mean?",
+                      "correctAnswer": "Keeping some money instead of spending it",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Keeping some money instead of spending it",
+                        "Spending all your money at once",
+                        "Giving away all your money",
+                        "Losing your money"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-3-exam-q2",
+                      "questionText": "Why does saving a little each week help?",
+                      "correctAnswer": "It adds up to more over time",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It adds up to more over time",
+                        "It makes you poorer",
+                        "It has no effect",
+                        "It disappears over time"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-3-exam-q3",
+                      "questionText": "What should you think about before buying something?",
+                      "correctAnswer": "If you need or want it",
+                      "type": "multiple-choice",
+                      "options": [
+                        "If you need or want it",
+                        "What day it is",
+                        "The weather",
+                        "Nothing at all"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-3-exam-q4",
+                      "questionText": "Can saving money help you buy bigger things later?",
+                      "correctAnswer": "Yes",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Yes",
+                        "No",
+                        "Only on holidays",
+                        "Never"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-3-exam-q5",
+                      "questionText": "Name one thing you can do with pocket money.",
+                      "correctAnswer": "Save it or spend it",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Save it or spend it",
+                        "Eat it",
+                        "Plant it",
+                        "Throw it in the bin"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Everyday Responsibility"
+            },
+            {
+              "levelId": "lifeskills-2-level-4",
+              "levelName": "Working Together & Teamwork",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-2-level-4-lesson",
+                  "taskName": "Lesson: Working Together & Teamwork",
+                  "type": "lesson",
+                  "content": "Teamwork means working with other people to reach a shared goal, like building something together or winning a game. Listening to other people's ideas, even if they're different from yours, makes a team stronger. When everyone does their part and helps each other, the whole team does better than just one person alone.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-2-level-4-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-4-quiz-q1",
+                      "questionText": "What does teamwork mean?",
+                      "correctAnswer": "Working with others to reach a shared goal",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Working with others to reach a shared goal",
+                        "Working alone always",
+                        "Competing against your friends",
+                        "Never helping anyone"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-4-quiz-q2",
+                      "questionText": "What makes a team stronger?",
+                      "correctAnswer": "Listening to other people's ideas",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Listening to other people's ideas",
+                        "Ignoring everyone else",
+                        "Only using your own ideas",
+                        "Arguing constantly"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-4-quiz-q3",
+                      "questionText": "What happens when everyone does their part?",
+                      "correctAnswer": "The whole team does better",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The whole team does better",
+                        "The team falls apart",
+                        "Nothing changes",
+                        "Only one person wins"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-4-quiz-q4",
+                      "questionText": "Name an example of a teamwork activity.",
+                      "correctAnswer": "Building something together",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Building something together",
+                        "Sitting alone",
+                        "Ignoring your classmates",
+                        "Watching TV by yourself"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-2-level-4-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-4-exam-q1",
+                      "questionText": "Why is listening to others' ideas important in a team?",
+                      "correctAnswer": "It makes the team stronger",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It makes the team stronger",
+                        "It wastes time",
+                        "It makes the team weaker",
+                        "It has no effect"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-4-exam-q2",
+                      "questionText": "What is a shared goal?",
+                      "correctAnswer": "Something a team works together to achieve",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Something a team works together to achieve",
+                        "A goal only one person wants",
+                        "A type of toy",
+                        "A snack everyone shares"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-4-exam-q3",
+                      "questionText": "Does a team do better when only one person helps?",
+                      "correctAnswer": "No, everyone helping does better",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No, everyone helping does better",
+                        "Yes, always",
+                        "It makes no difference",
+                        "Teams do not need help"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-4-exam-q4",
+                      "questionText": "Give an example of working as a team.",
+                      "correctAnswer": "Winning a game together",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Winning a game together",
+                        "Playing alone in a corner",
+                        "Refusing to share ideas",
+                        "Ignoring your teammates"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-4-exam-q5",
+                      "questionText": "What should you do with ideas that are different from yours?",
+                      "correctAnswer": "Listen to them",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Listen to them",
+                        "Ignore them completely",
+                        "Shout them down",
+                        "Walk away"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Everyday Responsibility"
+            },
+            {
+              "levelId": "lifeskills-2-level-5",
+              "levelName": "Solving Small Problems",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-2-level-5-lesson",
+                  "taskName": "Lesson: Solving Small Problems",
+                  "type": "lesson",
+                  "content": "When you disagree with a friend, it helps to calmly explain how you feel instead of shouting or getting angry. Listening to the other person's side helps you understand why they feel that way too. Finding a solution that works for both of you, like taking turns, is a fair way to solve a small problem.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-2-level-5-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-5-quiz-q1",
+                      "questionText": "What should you do instead of shouting when you disagree?",
+                      "correctAnswer": "Calmly explain how you feel",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Calmly explain how you feel",
+                        "Walk away angrily",
+                        "Shout louder",
+                        "Ignore the other person"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-5-quiz-q2",
+                      "questionText": "What helps you understand the other person?",
+                      "correctAnswer": "Listening to their side",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Listening to their side",
+                        "Interrupting them",
+                        "Ignoring them",
+                        "Talking over them"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-5-quiz-q3",
+                      "questionText": "What is a fair way to solve a problem?",
+                      "correctAnswer": "Finding a solution that works for both",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Finding a solution that works for both",
+                        "Only one person getting their way",
+                        "Fighting about it",
+                        "Never speaking again"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-5-quiz-q4",
+                      "questionText": "Give an example of a fair solution.",
+                      "correctAnswer": "Taking turns",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Taking turns",
+                        "Grabbing it first",
+                        "Hiding it",
+                        "Breaking it"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-2-level-5-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-5-exam-q1",
+                      "questionText": "Why is listening important when solving a problem?",
+                      "correctAnswer": "It helps you understand the other person",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It helps you understand the other person",
+                        "It wastes time",
+                        "It makes things worse",
+                        "It has no benefit"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-5-exam-q2",
+                      "questionText": "What should you avoid doing when you disagree?",
+                      "correctAnswer": "Shouting or getting angry",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Shouting or getting angry",
+                        "Explaining calmly",
+                        "Listening",
+                        "Finding a solution"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-5-exam-q3",
+                      "questionText": "What makes a solution fair?",
+                      "correctAnswer": "It works for both people",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It works for both people",
+                        "It only helps one person",
+                        "It helps no one",
+                        "It's random"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-5-exam-q4",
+                      "questionText": "What is a good way to share something with a friend?",
+                      "correctAnswer": "Take turns",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Take turns",
+                        "Keep it all to yourself",
+                        "Hide it from them",
+                        "Throw it away"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-5-exam-q5",
+                      "questionText": "How should you explain your feelings in a disagreement?",
+                      "correctAnswer": "Calmly",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Calmly",
+                        "By shouting",
+                        "By crying only",
+                        "By ignoring the person"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 2: Staying Safe & Smart"
+            },
+            {
+              "levelId": "lifeskills-2-level-6",
+              "levelName": "Fire Safety Basics",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-2-level-6-lesson",
+                  "taskName": "Lesson: Fire Safety Basics",
+                  "type": "lesson",
+                  "content": "If you hear a smoke alarm, get out of the building straight away and tell a grown-up — never hide or go back inside for toys. Every home should have an escape plan with two ways out, in case one path is blocked by smoke or fire. 'Stop, Drop, and Roll' is what you do if your clothes ever catch fire, to put the flames out safely.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-2-level-6-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-6-quiz-q1",
+                      "questionText": "What should you do when you hear a smoke alarm?",
+                      "correctAnswer": "Get out straight away",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Get out straight away",
+                        "Hide under the bed",
+                        "Go back to sleep",
+                        "Look for toys first"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-6-quiz-q2",
+                      "questionText": "Should you go back inside for toys during a fire?",
+                      "correctAnswer": "No, never",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No, never",
+                        "Yes, always",
+                        "Only your favourite toy",
+                        "Only if it is quick"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-6-quiz-q3",
+                      "questionText": "What should a home escape plan have?",
+                      "correctAnswer": "Two ways out",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Two ways out",
+                        "Only one door",
+                        "No doors",
+                        "A secret tunnel"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-6-quiz-q4",
+                      "questionText": "What do you do if your clothes catch fire?",
+                      "correctAnswer": "Stop, Drop, and Roll",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Stop, Drop, and Roll",
+                        "Run as fast as you can",
+                        "Wave your arms",
+                        "Jump up and down"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-2-level-6-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-6-exam-q1",
+                      "questionText": "What is 'Stop, Drop, and Roll' used for?",
+                      "correctAnswer": "Putting out flames on your clothes",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Putting out flames on your clothes",
+                        "Playing a game",
+                        "Exercising",
+                        "Cooling down when hot"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-6-exam-q2",
+                      "questionText": "Why does an escape plan need two ways out?",
+                      "correctAnswer": "In case one is blocked by smoke or fire",
+                      "type": "multiple-choice",
+                      "options": [
+                        "In case one is blocked by smoke or fire",
+                        "Because one door is too small",
+                        "For fun",
+                        "It does not need two ways out"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-6-exam-q3",
+                      "questionText": "What should you never do during a fire?",
+                      "correctAnswer": "Hide or go back inside",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Hide or go back inside",
+                        "Leave the building",
+                        "Tell a grown-up",
+                        "Call for help"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-6-exam-q4",
+                      "questionText": "Who should you tell when you hear a smoke alarm?",
+                      "correctAnswer": "A grown-up",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A grown-up",
+                        "No one",
+                        "Your pet",
+                        "Your toys"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-6-exam-q5",
+                      "questionText": "What sound warns you about a fire?",
+                      "correctAnswer": "A smoke alarm",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A smoke alarm",
+                        "A doorbell",
+                        "Music",
+                        "A phone ringing"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 2: Staying Safe & Smart"
+            },
+            {
+              "levelId": "lifeskills-2-level-7",
+              "levelName": "Internet & Screen Safety Basics",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-2-level-7-lesson",
+                  "taskName": "Lesson: Internet & Screen Safety Basics",
+                  "type": "lesson",
+                  "content": "You should never share your name, address, or school with someone you only know online. If something online makes you feel uncomfortable or scared, tell a trusted grown-up straight away instead of keeping it a secret. Taking breaks from screens to play outside or read a book is good for your eyes and your body.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-2-level-7-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-7-quiz-q1",
+                      "questionText": "What should you never share with someone you only know online?",
+                      "correctAnswer": "Your name, address, or school",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Your name, address, or school",
+                        "Your favourite colour",
+                        "A drawing",
+                        "A joke"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-7-quiz-q2",
+                      "questionText": "What should you do if something online scares you?",
+                      "correctAnswer": "Tell a trusted grown-up",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Tell a trusted grown-up",
+                        "Keep it a secret",
+                        "Ignore it",
+                        "Tell no one"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-7-quiz-q3",
+                      "questionText": "Why should you take breaks from screens?",
+                      "correctAnswer": "It's good for your eyes and body",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It's good for your eyes and body",
+                        "It is bad for you",
+                        "It wastes time",
+                        "There is no reason"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-7-quiz-q4",
+                      "questionText": "Should you keep uncomfortable online messages a secret?",
+                      "correctAnswer": "No, tell a grown-up",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No, tell a grown-up",
+                        "Yes, always",
+                        "Only sometimes",
+                        "Only from your parents"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-2-level-7-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-7-exam-q1",
+                      "questionText": "Why shouldn't you share personal information online?",
+                      "correctAnswer": "It can be unsafe",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It can be unsafe",
+                        "It is required",
+                        "It is always fun",
+                        "It makes you famous safely"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-7-exam-q2",
+                      "questionText": "Who should you tell if something online upsets you?",
+                      "correctAnswer": "A trusted grown-up",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A trusted grown-up",
+                        "A stranger online",
+                        "No one",
+                        "Your pet"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-7-exam-q3",
+                      "questionText": "What can you do instead of using screens?",
+                      "correctAnswer": "Play outside or read",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Play outside or read",
+                        "Stare at the wall",
+                        "Nothing",
+                        "Use two screens at once"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-7-exam-q4",
+                      "questionText": "Is it safe to tell an online stranger your address?",
+                      "correctAnswer": "No",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No",
+                        "Yes",
+                        "Only on weekends",
+                        "Only if they ask nicely"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-7-exam-q5",
+                      "questionText": "What is a good screen safety habit?",
+                      "correctAnswer": "Taking regular breaks",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Taking regular breaks",
+                        "Never stopping",
+                        "Sharing your address",
+                        "Talking to strangers online"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 2: Staying Safe & Smart"
+            },
+            {
+              "levelId": "lifeskills-2-level-8",
+              "levelName": "Caring for the Environment",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-2-level-8-lesson",
+                  "taskName": "Lesson: Caring for the Environment",
+                  "type": "lesson",
+                  "content": "Recycling paper, plastic, and glass instead of throwing them in the bin helps protect the environment and reduces waste. Turning off lights and taps when you're not using them saves water and electricity. Planting trees and picking up litter are simple ways children can help take care of the planet.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-2-level-8-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-8-quiz-q1",
+                      "questionText": "What does recycling help protect?",
+                      "correctAnswer": "The environment",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The environment",
+                        "Nothing",
+                        "Only your house",
+                        "Your toys"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-8-quiz-q2",
+                      "questionText": "What does turning off lights and taps save?",
+                      "correctAnswer": "Water and electricity",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Water and electricity",
+                        "Nothing",
+                        "Time only",
+                        "Toys"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-8-quiz-q3",
+                      "questionText": "Name a simple way children can help the planet.",
+                      "correctAnswer": "Planting trees",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Planting trees",
+                        "Littering",
+                        "Wasting water",
+                        "Leaving lights on"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-8-quiz-q4",
+                      "questionText": "What three materials are mentioned as recyclable?",
+                      "correctAnswer": "Paper, plastic, and glass",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Paper, plastic, and glass",
+                        "Food, sand, and rocks",
+                        "Clouds, rain, and wind",
+                        "Toys, games, and books"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-2-level-8-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-2-level-8-exam-q1",
+                      "questionText": "Why should you turn off a tap you're not using?",
+                      "correctAnswer": "To save water",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To save water",
+                        "To waste water",
+                        "For no reason",
+                        "To make noise"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-8-exam-q2",
+                      "questionText": "What happens when you recycle instead of throwing things away?",
+                      "correctAnswer": "It reduces waste",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It reduces waste",
+                        "It increases waste",
+                        "Nothing changes",
+                        "It creates more pollution"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-8-exam-q3",
+                      "questionText": "Name something you can recycle.",
+                      "correctAnswer": "Paper",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Paper",
+                        "Rainwater",
+                        "Sunlight",
+                        "Air"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-8-exam-q4",
+                      "questionText": "What can picking up litter help do?",
+                      "correctAnswer": "Take care of the planet",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Take care of the planet",
+                        "Make more mess",
+                        "Harm the environment",
+                        "Nothing"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-2-level-8-exam-q5",
+                      "questionText": "Give an example of saving electricity.",
+                      "correctAnswer": "Turning off lights when not needed",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Turning off lights when not needed",
+                        "Leaving all lights on all day",
+                        "Using more electricity",
+                        "Ignoring the lights"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 2: Staying Safe & Smart"
             }
           ]
         }
@@ -61690,6 +63958,1140 @@
                 }
               ],
               "moduleName": "Module 8: Lives, Quizzes & Timers"
+            }
+          ]
+        },
+        {
+          "subjectId": "lifeskills-3",
+          "subjectName": "Life Skills",
+          "levels": [
+            {
+              "levelId": "lifeskills-3-level-1",
+              "levelName": "Budgeting with Pocket Money",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-3-level-1-lesson",
+                  "taskName": "Lesson: Budgeting with Pocket Money",
+                  "type": "lesson",
+                  "content": "A budget is a simple plan for how you will spend and save your money, so you don't run out before you get more. One way to budget is to split your pocket money into three jars: spending, saving, and sharing. Keeping track of how much you have left helps you make smarter choices about what to buy.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-3-level-1-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-1-quiz-q1",
+                      "questionText": "What is a budget?",
+                      "correctAnswer": "A plan for spending and saving money",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A plan for spending and saving money",
+                        "A type of toy",
+                        "A kind of food",
+                        "A game"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-1-quiz-q2",
+                      "questionText": "What three jars can you split pocket money into?",
+                      "correctAnswer": "Spending, saving, and sharing",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Spending, saving, and sharing",
+                        "Red, blue, and green",
+                        "Morning, noon, and night",
+                        "Big, medium, and small"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-1-quiz-q3",
+                      "questionText": "What does keeping track of your money help you do?",
+                      "correctAnswer": "Make smarter choices",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Make smarter choices",
+                        "Forget everything",
+                        "Lose your money",
+                        "Spend it all instantly"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-1-quiz-q4",
+                      "questionText": "Why might you make a budget?",
+                      "correctAnswer": "So you don't run out of money",
+                      "type": "multiple-choice",
+                      "options": [
+                        "So you don't run out of money",
+                        "To waste money faster",
+                        "For no reason",
+                        "To lose track of money"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-3-level-1-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-1-exam-q1",
+                      "questionText": "Name the three parts of the jar budgeting method.",
+                      "correctAnswer": "Spending, saving, sharing",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Spending, saving, sharing",
+                        "Eating, sleeping, playing",
+                        "Running, jumping, swimming",
+                        "Reading, writing, drawing"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-1-exam-q2",
+                      "questionText": "What is the purpose of a budget?",
+                      "correctAnswer": "To plan how you spend and save",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To plan how you spend and save",
+                        "To spend all your money at once",
+                        "To lose your money",
+                        "To ignore your money"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-1-exam-q3",
+                      "questionText": "What could happen if you don't budget your money?",
+                      "correctAnswer": "You might run out before you get more",
+                      "type": "multiple-choice",
+                      "options": [
+                        "You might run out before you get more",
+                        "You will always have extra",
+                        "Nothing would change",
+                        "You would get more money automatically"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-1-exam-q4",
+                      "questionText": "Why is tracking your money a smart habit?",
+                      "correctAnswer": "It helps you make better choices",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It helps you make better choices",
+                        "It makes spending harder to understand",
+                        "It has no benefit",
+                        "It wastes time"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-1-exam-q5",
+                      "questionText": "What might you do with the 'sharing' jar?",
+                      "correctAnswer": "Give to others",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Give to others",
+                        "Hide it forever",
+                        "Throw it away",
+                        "Lose it on purpose"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Growing Independence"
+            },
+            {
+              "levelId": "lifeskills-3-level-2",
+              "levelName": "Planning My Day (Time Management)",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-3-level-2-lesson",
+                  "taskName": "Lesson: Planning My Day (Time Management)",
+                  "type": "lesson",
+                  "content": "Making a simple to-do list of what you need to do helps you remember tasks and feel less overwhelmed. Doing the most important or hardest task first, while you have the most energy, is a smart way to manage your time. Leaving time for breaks and fun activities is just as important as getting your work done.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-3-level-2-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-2-quiz-q1",
+                      "questionText": "What helps you remember tasks you need to do?",
+                      "correctAnswer": "A to-do list",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A to-do list",
+                        "A toy",
+                        "A snack",
+                        "A nap"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-2-quiz-q2",
+                      "questionText": "Which task should you do first?",
+                      "correctAnswer": "The most important or hardest one",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The most important or hardest one",
+                        "The easiest one only",
+                        "A random one",
+                        "None of them"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-2-quiz-q3",
+                      "questionText": "Why should you do hard tasks first?",
+                      "correctAnswer": "You have the most energy then",
+                      "type": "multiple-choice",
+                      "options": [
+                        "You have the most energy then",
+                        "You have no energy then",
+                        "It is more fun",
+                        "It takes longer that way"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-2-quiz-q4",
+                      "questionText": "What else is important besides getting work done?",
+                      "correctAnswer": "Breaks and fun activities",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Breaks and fun activities",
+                        "Working non-stop",
+                        "Ignoring rest",
+                        "Nothing else matters"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-3-level-2-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-2-exam-q1",
+                      "questionText": "What is a simple way to plan your day?",
+                      "correctAnswer": "Make a to-do list",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Make a to-do list",
+                        "Guess randomly",
+                        "Do nothing",
+                        "Forget everything"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-2-exam-q2",
+                      "questionText": "Why do a hard task first?",
+                      "correctAnswer": "While you have the most energy",
+                      "type": "multiple-choice",
+                      "options": [
+                        "While you have the most energy",
+                        "When you are most tired",
+                        "It does not matter when",
+                        "At the very end of the day"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-2-exam-q3",
+                      "questionText": "What should a good daily plan include?",
+                      "correctAnswer": "Time for breaks too",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Time for breaks too",
+                        "Only work, no breaks",
+                        "Nothing but sleep",
+                        "Only fun, no tasks"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-2-exam-q4",
+                      "questionText": "What does a to-do list help reduce?",
+                      "correctAnswer": "Feeling overwhelmed",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Feeling overwhelmed",
+                        "Feeling organised",
+                        "Having fun",
+                        "Energy"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-2-exam-q5",
+                      "questionText": "Name a benefit of planning your day.",
+                      "correctAnswer": "You remember important tasks",
+                      "type": "multiple-choice",
+                      "options": [
+                        "You remember important tasks",
+                        "You forget everything",
+                        "Your day becomes harder",
+                        "Nothing changes"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Growing Independence"
+            },
+            {
+              "levelId": "lifeskills-3-level-3",
+              "levelName": "First Aid Basics",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-3-level-3-lesson",
+                  "taskName": "Lesson: First Aid Basics",
+                  "type": "lesson",
+                  "content": "If you get a small cut, the first step is to wash it gently with clean water to remove any dirt. Pressing a clean cloth on the cut helps stop the bleeding, and then a plaster can protect it while it heals. For anything more serious, like a big cut, a burn, or someone not breathing properly, you should get a grown-up to help immediately or call for emergency help.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-3-level-3-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-3-quiz-q1",
+                      "questionText": "What should you do first with a small cut?",
+                      "correctAnswer": "Wash it gently with clean water",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Wash it gently with clean water",
+                        "Ignore it",
+                        "Cover it with mud",
+                        "Rub it hard"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-3-quiz-q2",
+                      "questionText": "What helps stop the bleeding from a small cut?",
+                      "correctAnswer": "Pressing a clean cloth on it",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Pressing a clean cloth on it",
+                        "Blowing on it",
+                        "Shaking your hand",
+                        "Ignoring it"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-3-quiz-q3",
+                      "questionText": "What protects a cut while it heals?",
+                      "correctAnswer": "A plaster",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A plaster",
+                        "Mud",
+                        "Nothing",
+                        "A sticker"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-3-quiz-q4",
+                      "questionText": "What should you do for a serious injury?",
+                      "correctAnswer": "Get a grown-up or call for emergency help",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Get a grown-up or call for emergency help",
+                        "Handle it alone",
+                        "Ignore it",
+                        "Wait quietly and say nothing"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-3-level-3-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-3-exam-q1",
+                      "questionText": "Why do you wash a cut with clean water first?",
+                      "correctAnswer": "To remove dirt",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To remove dirt",
+                        "To make it hurt more",
+                        "For no reason",
+                        "To add germs"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-3-exam-q2",
+                      "questionText": "What do you use to stop bleeding from a small cut?",
+                      "correctAnswer": "A clean cloth",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A clean cloth",
+                        "A dirty towel",
+                        "Your sleeve only",
+                        "Nothing at all"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-3-exam-q3",
+                      "questionText": "What covers a cut after it stops bleeding?",
+                      "correctAnswer": "A plaster",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A plaster",
+                        "A rock",
+                        "Tape only",
+                        "Nothing"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-3-exam-q4",
+                      "questionText": "Should you treat a serious injury by yourself?",
+                      "correctAnswer": "No, get help immediately",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No, get help immediately",
+                        "Yes, always by yourself",
+                        "Only sometimes",
+                        "Wait a few days"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-3-exam-q5",
+                      "questionText": "Name something that counts as a serious injury.",
+                      "correctAnswer": "A big cut or burn",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A big cut or burn",
+                        "A small scratch",
+                        "A sneeze",
+                        "A yawn"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Growing Independence"
+            },
+            {
+              "levelId": "lifeskills-3-level-4",
+              "levelName": "Stranger Danger & Personal Safety",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-3-level-4-lesson",
+                  "taskName": "Lesson: Stranger Danger & Personal Safety",
+                  "type": "lesson",
+                  "content": "A stranger is someone you don't know, and it's never safe to go anywhere with one or accept gifts from them, even if they seem nice. If a stranger approaches you, it's okay to say 'no' loudly and walk or run to a trusted adult. Having a family password that only your family knows can help you check if someone claiming to be sent by your parents is telling the truth.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-3-level-4-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-4-quiz-q1",
+                      "questionText": "What is a stranger?",
+                      "correctAnswer": "Someone you don't know",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Someone you don't know",
+                        "A close friend",
+                        "A family member",
+                        "A teacher you know well"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-4-quiz-q2",
+                      "questionText": "Is it safe to accept gifts from strangers?",
+                      "correctAnswer": "No",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No",
+                        "Yes",
+                        "Only small gifts",
+                        "Only on birthdays"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-4-quiz-q3",
+                      "questionText": "What should you do if a stranger approaches you?",
+                      "correctAnswer": "Say 'no' loudly and go to a trusted adult",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Say 'no' loudly and go to a trusted adult",
+                        "Follow them quietly",
+                        "Accept their offer",
+                        "Ignore your feelings"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-4-quiz-q4",
+                      "questionText": "What is a family password used for?",
+                      "correctAnswer": "Checking if someone is really sent by your parents",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Checking if someone is really sent by your parents",
+                        "Opening a locked door",
+                        "Playing a game",
+                        "Unlocking a phone"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-3-level-4-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-4-exam-q1",
+                      "questionText": "Why shouldn't you go anywhere with a stranger?",
+                      "correctAnswer": "It is not safe",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It is not safe",
+                        "It is always safe",
+                        "It is required",
+                        "It is fun"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-4-exam-q2",
+                      "questionText": "What can you say loudly if a stranger bothers you?",
+                      "correctAnswer": "No",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No",
+                        "Yes",
+                        "Maybe",
+                        "Okay"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-4-exam-q3",
+                      "questionText": "Who should you run to if you feel unsafe?",
+                      "correctAnswer": "A trusted adult",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A trusted adult",
+                        "Any stranger",
+                        "No one",
+                        "The nearest car"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-4-exam-q4",
+                      "questionText": "What can help you check if someone is telling the truth about your parents?",
+                      "correctAnswer": "A family password",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A family password",
+                        "A guess",
+                        "A coin flip",
+                        "Nothing"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-4-exam-q5",
+                      "questionText": "Is it safe to trust a stranger just because they seem nice?",
+                      "correctAnswer": "No",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No",
+                        "Yes",
+                        "Always",
+                        "Usually"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Growing Independence"
+            },
+            {
+              "levelId": "lifeskills-3-level-5",
+              "levelName": "Being a Good Digital Citizen",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-3-level-5-lesson",
+                  "taskName": "Lesson: Being a Good Digital Citizen",
+                  "type": "lesson",
+                  "content": "A good digital citizen is kind online, just like they would be in person — never writing mean comments or messages to hurt someone. Before sharing a photo or message, it's important to think about whether it could embarrass or hurt someone else. If you see someone being bullied online, telling a trusted adult is an important and brave thing to do.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-3-level-5-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-5-quiz-q1",
+                      "questionText": "What does a good digital citizen do online?",
+                      "correctAnswer": "Is kind, like in person",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Is kind, like in person",
+                        "Writes mean comments",
+                        "Ignores everyone",
+                        "Bullies others"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-5-quiz-q2",
+                      "questionText": "What should you think about before sharing a photo or message?",
+                      "correctAnswer": "If it could hurt or embarrass someone",
+                      "type": "multiple-choice",
+                      "options": [
+                        "If it could hurt or embarrass someone",
+                        "Nothing at all",
+                        "How many likes it gets",
+                        "What colour it is"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-5-quiz-q3",
+                      "questionText": "What should you do if you see online bullying?",
+                      "correctAnswer": "Tell a trusted adult",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Tell a trusted adult",
+                        "Join in",
+                        "Ignore it completely",
+                        "Keep it a secret"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-5-quiz-q4",
+                      "questionText": "Is writing mean comments okay if it's just online?",
+                      "correctAnswer": "No, never",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No, never",
+                        "Yes, always",
+                        "Only sometimes",
+                        "Only to strangers"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-3-level-5-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-5-exam-q1",
+                      "questionText": "How should you treat people online?",
+                      "correctAnswer": "Kindly, like in person",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Kindly, like in person",
+                        "Meanly",
+                        "Differently from in person",
+                        "With no manners"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-5-exam-q2",
+                      "questionText": "What should you consider before posting something?",
+                      "correctAnswer": "Whether it could hurt someone",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Whether it could hurt someone",
+                        "How fast you can post it",
+                        "Nothing",
+                        "Only your own opinion"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-5-exam-q3",
+                      "questionText": "What is a brave thing to do if you see bullying online?",
+                      "correctAnswer": "Tell a trusted adult",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Tell a trusted adult",
+                        "Stay silent",
+                        "Join in",
+                        "Laugh along"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-5-exam-q4",
+                      "questionText": "Should you send mean messages to hurt someone?",
+                      "correctAnswer": "No",
+                      "type": "multiple-choice",
+                      "options": [
+                        "No",
+                        "Yes",
+                        "Only if they deserve it",
+                        "Only once"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-5-exam-q5",
+                      "questionText": "What makes someone a 'good digital citizen'?",
+                      "correctAnswer": "Being kind and thoughtful online",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Being kind and thoughtful online",
+                        "Posting as much as possible",
+                        "Ignoring other people",
+                        "Being mean anonymously"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 2: Community & World"
+            },
+            {
+              "levelId": "lifeskills-3-level-6",
+              "levelName": "Recycling & Reducing Waste",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-3-level-6-lesson",
+                  "taskName": "Lesson: Recycling & Reducing Waste",
+                  "type": "lesson",
+                  "content": "Reducing means using less of something in the first place, like bringing a reusable water bottle instead of buying a new plastic one. Reusing means finding a new use for something instead of throwing it away, like turning a jar into a pencil holder. Recycling turns materials like paper and plastic into new products instead of letting them sit in a landfill forever.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-3-level-6-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-6-quiz-q1",
+                      "questionText": "What does 'reducing' mean?",
+                      "correctAnswer": "Using less of something",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Using less of something",
+                        "Using more of something",
+                        "Throwing everything away",
+                        "Buying more plastic"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-6-quiz-q2",
+                      "questionText": "Give an example of reusing.",
+                      "correctAnswer": "Turning a jar into a pencil holder",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Turning a jar into a pencil holder",
+                        "Throwing a jar away",
+                        "Buying a new jar every day",
+                        "Breaking a jar"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-6-quiz-q3",
+                      "questionText": "What does recycling do with materials?",
+                      "correctAnswer": "Turns them into new products",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Turns them into new products",
+                        "Destroys them forever",
+                        "Buries them deeper",
+                        "Burns them instantly"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-6-quiz-q4",
+                      "questionText": "Where do materials end up if not recycled?",
+                      "correctAnswer": "A landfill",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A landfill",
+                        "The ocean floor only",
+                        "Outer space",
+                        "A recycling plant"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-3-level-6-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-6-exam-q1",
+                      "questionText": "What are the three R's mentioned in the lesson?",
+                      "correctAnswer": "Reduce, reuse, recycle",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Reduce, reuse, recycle",
+                        "Run, rest, read",
+                        "Red, round, rare",
+                        "Rain, river, rock"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-6-exam-q2",
+                      "questionText": "Give an example of reducing waste.",
+                      "correctAnswer": "Using a reusable water bottle",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Using a reusable water bottle",
+                        "Buying a new plastic bottle every day",
+                        "Throwing away bottles after one use",
+                        "Ignoring waste"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-6-exam-q3",
+                      "questionText": "What happens to materials in a landfill?",
+                      "correctAnswer": "They sit there, unused",
+                      "type": "multiple-choice",
+                      "options": [
+                        "They sit there, unused",
+                        "They turn into gold",
+                        "They disappear instantly",
+                        "They become new toys automatically"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-6-exam-q4",
+                      "questionText": "Why is reusing items a good habit?",
+                      "correctAnswer": "It finds new use instead of throwing away",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It finds new use instead of throwing away",
+                        "It wastes more materials",
+                        "It has no benefit",
+                        "It creates more landfill waste"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-6-exam-q5",
+                      "questionText": "Name something you could recycle.",
+                      "correctAnswer": "Paper",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Paper",
+                        "Sunlight",
+                        "Rainwater",
+                        "Air"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 2: Community & World"
+            },
+            {
+              "levelId": "lifeskills-3-level-7",
+              "levelName": "Healthy Habits & Exercise",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-3-level-7-lesson",
+                  "taskName": "Lesson: Healthy Habits & Exercise",
+                  "type": "lesson",
+                  "content": "Being active for at least an hour a day, through things like playing sport, dancing, or riding a bike, keeps your body strong and healthy. Getting enough sleep every night helps your brain and body rest and recover so you can learn and grow well. Balancing screen time with active play and time outside is an important part of a healthy lifestyle.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-3-level-7-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-7-quiz-q1",
+                      "questionText": "How much activity should you get each day?",
+                      "correctAnswer": "At least an hour",
+                      "type": "multiple-choice",
+                      "options": [
+                        "At least an hour",
+                        "Five minutes",
+                        "Zero minutes",
+                        "One minute"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-7-quiz-q2",
+                      "questionText": "Name an example of being active.",
+                      "correctAnswer": "Riding a bike",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Riding a bike",
+                        "Watching TV all day",
+                        "Sitting still",
+                        "Sleeping all day"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-7-quiz-q3",
+                      "questionText": "What does getting enough sleep help with?",
+                      "correctAnswer": "Resting and recovering",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Resting and recovering",
+                        "Making you more tired",
+                        "Nothing",
+                        "Making you sick"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-7-quiz-q4",
+                      "questionText": "What should screen time be balanced with?",
+                      "correctAnswer": "Active play and time outside",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Active play and time outside",
+                        "More screen time",
+                        "Nothing else",
+                        "Only sleeping"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-3-level-7-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-7-exam-q1",
+                      "questionText": "Why is daily activity important?",
+                      "correctAnswer": "It keeps your body strong and healthy",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It keeps your body strong and healthy",
+                        "It makes you weaker",
+                        "It has no benefit",
+                        "It is only for adults"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-7-exam-q2",
+                      "questionText": "What helps your brain and body recover?",
+                      "correctAnswer": "Enough sleep",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Enough sleep",
+                        "Staying up all night",
+                        "Skipping meals",
+                        "Too much screen time"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-7-exam-q3",
+                      "questionText": "Give an example of active play.",
+                      "correctAnswer": "Riding a bike",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Riding a bike",
+                        "Watching a movie",
+                        "Sitting on the sofa",
+                        "Playing a video game all day"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-7-exam-q4",
+                      "questionText": "What should you balance screen time with?",
+                      "correctAnswer": "Active play and time outside",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Active play and time outside",
+                        "Even more screens",
+                        "Staying indoors all day",
+                        "Nothing"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-7-exam-q5",
+                      "questionText": "How long should you be active for each day?",
+                      "correctAnswer": "At least an hour",
+                      "type": "multiple-choice",
+                      "options": [
+                        "At least an hour",
+                        "Never",
+                        "Only on weekends",
+                        "Ten seconds"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 2: Community & World"
+            },
+            {
+              "levelId": "lifeskills-3-level-8",
+              "levelName": "Kindness & Community Helpers",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "lifeskills-3-level-8-lesson",
+                  "taskName": "Lesson: Kindness & Community Helpers",
+                  "type": "lesson",
+                  "content": "Community helpers, like doctors, firefighters, and teachers, work hard every day to keep people safe, healthy, and learning. Showing kindness, like helping a neighbour carry their bags or including someone new at school, makes your community a better place. Saying thank you to community helpers, like a bus driver or a nurse, shows you appreciate the work they do.",
+                  "questions": []
+                },
+                {
+                  "taskId": "lifeskills-3-level-8-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-8-quiz-q1",
+                      "questionText": "Name a community helper.",
+                      "correctAnswer": "Doctor",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Doctor",
+                        "A rock",
+                        "A cloud",
+                        "A toy"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-8-quiz-q2",
+                      "questionText": "What does showing kindness do for your community?",
+                      "correctAnswer": "Makes it a better place",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Makes it a better place",
+                        "Makes it worse",
+                        "Has no effect",
+                        "Causes problems"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-8-quiz-q3",
+                      "questionText": "Give an example of a kind act.",
+                      "correctAnswer": "Helping a neighbour",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Helping a neighbour",
+                        "Ignoring everyone",
+                        "Being rude",
+                        "Pushing others"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-8-quiz-q4",
+                      "questionText": "Why should you thank community helpers?",
+                      "correctAnswer": "To show you appreciate their work",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To show you appreciate their work",
+                        "It is not necessary",
+                        "To confuse them",
+                        "For no reason"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "lifeskills-3-level-8-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "lifeskills-3-level-8-exam-q1",
+                      "questionText": "What do community helpers do?",
+                      "correctAnswer": "Keep people safe, healthy, and learning",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Keep people safe, healthy, and learning",
+                        "Cause problems",
+                        "Nothing important",
+                        "Make people unsafe"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-8-exam-q2",
+                      "questionText": "Name two examples of community helpers.",
+                      "correctAnswer": "Doctor and firefighter",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Doctor and firefighter",
+                        "Rock and cloud",
+                        "Table and chair",
+                        "Shoe and sock"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-8-exam-q3",
+                      "questionText": "What is a kind thing you could do for a neighbour?",
+                      "correctAnswer": "Help carry their bags",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Help carry their bags",
+                        "Ignore them",
+                        "Be rude to them",
+                        "Hide from them"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-8-exam-q4",
+                      "questionText": "Why is including someone new at school kind?",
+                      "correctAnswer": "It makes them feel welcome",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It makes them feel welcome",
+                        "It makes them feel left out",
+                        "It has no effect",
+                        "It is unkind"
+                      ]
+                    },
+                    {
+                      "questionId": "lifeskills-3-level-8-exam-q5",
+                      "questionText": "How can you show appreciation to a bus driver?",
+                      "correctAnswer": "Say thank you",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Say thank you",
+                        "Ignore them",
+                        "Say nothing",
+                        "Be rude"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 2: Community & World"
             }
           ]
         }
