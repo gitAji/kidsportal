@@ -24,23 +24,47 @@ import { verifySuperAdmin } from '@/lib/verifySuperAdmin';
 import { safeErrorResponse } from '@/lib/apiError';
 import dbData from '@/app/data/db.json';
 
+// One query per grade+subject (fetches every level doc for that subject
+// in a single round trip), not one query per level. The first version of
+// this did a separate adminDb.doc(docId).get() for every one of the
+// ~1,300 levels across all grades/subjects, sequentially awaited — each
+// call's network round trip adds up, and the whole GET blew past
+// Netlify's function timeout (observed: a 502 after ~30s with the
+// function killed before it could even log an error) long before it
+// reached the last grade. Batching to ~60 queries (one per grade+subject
+// pair) instead keeps this comfortably under the timeout.
 async function computePlan() {
     let checked = 0;
     let missingDoc = 0;
     const toUpdate = [];
 
+    const subjectQueries = [];
     for (const grade of dbData.grades) {
         for (const subject of grade.subjects) {
-            for (const level of subject.levels) {
-                if (!level.moduleName) continue;
-                checked++;
-                const docId = `${grade.gradeId}_${subject.subjectId}_${level.levelId}`;
-                const snap = await adminDb.collection('levels').doc(docId).get();
-                if (!snap.exists) { missingDoc++; continue; }
-                const current = snap.data();
-                if (current.moduleName !== level.moduleName) {
-                    toUpdate.push({ docId, from: current.moduleName || '(none)', to: level.moduleName });
-                }
+            subjectQueries.push({ grade, subject });
+        }
+    }
+
+    const results = await Promise.all(
+        subjectQueries.map(({ grade, subject }) =>
+            adminDb.collection('levels')
+                .where('gradeId', '==', grade.gradeId)
+                .where('subjectId', '==', subject.subjectId)
+                .get()
+                .then((snap) => ({ grade, subject, snap }))
+        )
+    );
+
+    for (const { grade, subject, snap } of results) {
+        const byId = new Map(snap.docs.map((d) => [d.id, d.data()]));
+        for (const level of subject.levels) {
+            if (!level.moduleName) continue;
+            checked++;
+            const docId = `${grade.gradeId}_${subject.subjectId}_${level.levelId}`;
+            const current = byId.get(docId);
+            if (!current) { missingDoc++; continue; }
+            if (current.moduleName !== level.moduleName) {
+                toUpdate.push({ docId, from: current.moduleName || '(none)', to: level.moduleName });
             }
         }
     }
