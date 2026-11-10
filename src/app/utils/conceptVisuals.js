@@ -52,6 +52,11 @@ import wordSorter from './conceptVisualRegistry/wordSorter';
 import punctuationPicker from './conceptVisualRegistry/punctuationPicker';
 import sentenceBuilder from './conceptVisualRegistry/sentenceBuilder';
 import vocabFlashcards from './conceptVisualRegistry/vocabFlashcards';
+import lifeSkillsScenarios from './conceptVisualRegistry/lifeSkillsScenarios';
+import lifeSkillsSequences from './conceptVisualRegistry/lifeSkillsSequences';
+import lifeSkillsSorting from './conceptVisualRegistry/lifeSkillsSorting';
+import lifeSkillsWordSort from './conceptVisualRegistry/lifeSkillsWordSort';
+import lifeSkillsVocab from './conceptVisualRegistry/lifeSkillsVocab';
 
 const CONCEPT_VISUALS = {
   ...shapeExplorer,
@@ -86,6 +91,11 @@ const CONCEPT_VISUALS = {
   ...punctuationPicker,
   ...sentenceBuilder,
   ...vocabFlashcards,
+  ...lifeSkillsScenarios,
+  ...lifeSkillsSequences,
+  ...lifeSkillsSorting,
+  ...lifeSkillsWordSort,
+  ...lifeSkillsVocab,
 };
 
 export function getConceptVisual(taskId) {
