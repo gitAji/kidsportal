@@ -73,8 +73,8 @@ function DashboardSkeleton() {
   );
 }
 
-// ── Full-page loading spinner (branded premium) ───────────────────
-function PageLoader({ message = "Preparing your adventure..." }) {
+// ── Full-page loading spinner, professional variant (admin/parent tools) ──
+function ProLoader({ message = "Preparing your adventure..." }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-8 font-outfit">
       <div className="relative w-24 h-24">
@@ -126,9 +126,55 @@ function PageLoader({ message = "Preparing your adventure..." }) {
   );
 }
 
+// ── Full-page loading spinner, kid variant — a bouncing rocket with a
+// trail of rainbow dots instead of a spinning corporate-SaaS ring. This
+// is the DEFAULT for PageLoader/variant="page", since almost every call
+// site is a kid-facing screen (Learning Zone, child dashboard/settings).
+// Admin/parent tools opt out with variant="pro" instead. ──────────────
+const DOT_COLORS = ["bg-rose-400", "bg-amber-400", "bg-sky-400", "bg-emerald-400"];
+
+function KidLoader({ message = "Loading your adventure..." }) {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 font-outfit">
+      <motion.div
+        animate={{ y: [0, -18, 0], rotate: [-8, 8, -8] }}
+        transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+        className="text-7xl sm:text-8xl drop-shadow-lg select-none"
+        role="img"
+        aria-label="Rocket blasting off"
+      >
+        🚀
+      </motion.div>
+
+      <div className="flex items-center gap-2.5">
+        {DOT_COLORS.map((color, i) => (
+          <motion.span
+            key={color}
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.15, ease: "easeInOut" }}
+            className={`w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full ${color} shadow-md`}
+          />
+        ))}
+      </div>
+
+      <motion.p
+        animate={{ scale: [1, 1.05, 1] }}
+        transition={{ duration: 1.6, repeat: Infinity }}
+        className="text-slate-700 font-black text-lg sm:text-xl text-center px-6"
+      >
+        {message}
+      </motion.p>
+    </div>
+  );
+}
+
+function PageLoader({ message, variant = "kid" }) {
+  return variant === "pro" ? <ProLoader message={message} /> : <KidLoader message={message} />;
+}
+
 // ── Default export: dynamic skeleton handler ──────────────────
-export default function SkeletonLoader({ variant = "grid", message, count = 8 }) {
-  if (variant === "page") return <PageLoader message={message} />;
+export default function SkeletonLoader({ variant = "grid", message, count = 8, professional = false }) {
+  if (variant === "page") return <PageLoader message={message} variant={professional ? "pro" : "kid"} />;
   if (variant === "dashboard") return <DashboardSkeleton />;
   if (variant === "subjects") {
     return (

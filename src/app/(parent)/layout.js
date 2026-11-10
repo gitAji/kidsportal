@@ -71,7 +71,7 @@ export default function ParentLayout({ children }) {
   if (loadingAuth && isWorkspace) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-slate-50">
-        <PageLoader message="Loading KidsPortal..." />
+        <PageLoader message="Loading KidsPortal..." variant="pro" />
       </div>
     );
   }
@@ -115,7 +115,7 @@ export default function ParentLayout({ children }) {
             setIsAboutUsOpen={() => openPanel('about')}
           />
           <main className="flex-grow">
-            <Suspense fallback={<PageLoader message="Initializing your workspace..." />}>
+            <Suspense fallback={<PageLoader message="Initializing your workspace..." variant="pro" />}>
               {children}
             </Suspense>
           </main>

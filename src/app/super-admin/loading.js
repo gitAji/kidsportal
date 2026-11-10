@@ -1,5 +1,5 @@
 import { PageLoader } from "@/app/components/ui/SkeletonLoader";
 
 export default function Loading() {
-    return <PageLoader message="Initializing Superadmin Dashboard..." />;
+    return <PageLoader message="Initializing Superadmin Dashboard..." variant="pro" />;
 }
