@@ -69,7 +69,8 @@ export const translations = {
             "Tamil": "Tamil",
             "Science": "Science",
             "Coding": "Coding",
-            "Computer Science": "Computer Science"
+            "Computer Science": "Computer Science",
+            "Life Skills": "Life Skills"
         },
 
         // Footer
@@ -173,7 +174,8 @@ export const translations = {
             "Tamil": "தமிழ்",
             "Science": "அறிவியல்",
             "Coding": "நிரலாக்கம்",
-            "Computer Science": "கணினி அறிவியல்"
+            "Computer Science": "கணினி அறிவியல்",
+            "Life Skills": "வாழ்க்கைத் திறன்கள்"
         },
 
         // Footer
@@ -277,7 +279,8 @@ export const translations = {
             "Tamil": "Tamil",
             "Science": "Naturfag",
             "Coding": "Koding",
-            "Computer Science": "Informatikk"
+            "Computer Science": "Informatikk",
+            "Life Skills": "Livsmestring"
         },
 
         // Footer
@@ -314,7 +317,7 @@ export const translations = {
         back_to_dashboard: "Retour au tableau de bord",
         your_subjects: "Vos matières",
         no_subjects: "Aucune matière trouvée pour votre classe.",
-        subjects: { "English": "Anglais", "Math": "Mathématiques", "Tamil": "Tamoul", "Science": "Sciences", "Coding": "Programmation", "Computer Science": "Informatique" },
+        subjects: { "English": "Anglais", "Math": "Mathématiques", "Tamil": "Tamoul", "Science": "Sciences", "Coding": "Programmation", "Computer Science": "Informatique", "Life Skills": "Compétences de vie" },
         crafted: "Conçu pour l'excellence",
         inspiring: "Inspirer la prochaine génération",
         safety: "Sécurité et confidentialité garanties",
@@ -346,7 +349,7 @@ export const translations = {
         back_to_dashboard: "Volver al panel",
         your_subjects: "Tus materias",
         no_subjects: "No se encontraron materias para tu grado.",
-        subjects: { "English": "Inglés", "Math": "Matemáticas", "Tamil": "Tamil", "Science": "Ciencias", "Coding": "Programación", "Computer Science": "Informática" },
+        subjects: { "English": "Inglés", "Math": "Matemáticas", "Tamil": "Tamil", "Science": "Ciencias", "Coding": "Programación", "Computer Science": "Informática", "Life Skills": "Habilidades para la vida" },
         crafted: "Hecho con excelencia",
         inspiring: "Inspirando a la próxima generación",
         safety: "Seguridad y privacidad garantizadas",
@@ -378,7 +381,7 @@ export const translations = {
         back_to_dashboard: "Zurück zum Dashboard",
         your_subjects: "Deine Fächer",
         no_subjects: "Keine Fächer für deine Klasse gefunden.",
-        subjects: { "English": "Englisch", "Math": "Mathematik", "Tamil": "Tamil", "Science": "Naturwissenschaften", "Coding": "Programmieren", "Computer Science": "Informatik" },
+        subjects: { "English": "Englisch", "Math": "Mathematik", "Tamil": "Tamil", "Science": "Naturwissenschaften", "Coding": "Programmieren", "Computer Science": "Informatik", "Life Skills": "Lebenskompetenzen" },
         crafted: "Für Spitzenleistung gemacht",
         inspiring: "Die nächste Generation inspirieren",
         safety: "Sicherheit und Datenschutz garantiert",
