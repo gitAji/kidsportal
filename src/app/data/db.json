@@ -716,7 +716,7 @@
                       "options": [
                         "but",
                         "or",
-                        "I went to bed early because I was tired.",
+                        "because",
                         "and"
                       ]
                     }
@@ -996,7 +996,7 @@
                       "correctAnswer": "the beginning",
                       "type": "multiple-choice",
                       "options": [
-                        "First I ate breakfast, then we went to the park.",
+                        "the middle",
                         "First",
                         "Next",
                         "the beginning"
@@ -1197,9 +1197,9 @@
                       "correctAnswer": "rhythm",
                       "type": "multiple-choice",
                       "options": [
-                        "Your voice, making it louder or faster",
+                        "pitch",
                         "rhythm",
-                        "practising saying it until you remember it",
+                        "tone",
                         "Rhyme"
                       ]
                     },
@@ -1701,7 +1701,7 @@
                       "correctAnswer": "sunny",
                       "type": "multiple-choice",
                       "options": [
-                        "The small, furry, brown rabbit hopped.",
+                        "rainy",
                         "adjective",
                         "sunny",
                         "loud"
@@ -1727,7 +1727,7 @@
                       "options": [
                         "adjective",
                         "happy",
-                        "The small, furry, brown rabbit hopped.",
+                        "sad",
                         "huge"
                       ]
                     },
@@ -1749,7 +1749,7 @@
                       "correctAnswer": "round",
                       "type": "multiple-choice",
                       "options": [
-                        "The small, furry, brown rabbit hopped.",
+                        "square",
                         "loud",
                         "round",
                         "tall"
@@ -2329,7 +2329,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "your own words",
-                        "The listener would miss key information needed to understand the story",
+                        "the pictures",
                         "how it ended",
                         "how the story ended"
                       ]
@@ -2362,8 +2362,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "your own words",
-                        "Explaining what happened in your own words, in order",
-                        "It helps the listener understand events the way they actually happened",
+                        "the exact same words",
+                        "a very short summary",
                         "how the story ended"
                       ]
                     },
@@ -2471,7 +2471,7 @@
                       "options": [
                         "yes",
                         "car (or far, jar)",
-                        "say them out loud and listen to their ending sounds",
+                        "no",
                         "They end with the same sound"
                       ]
                     },
@@ -2575,9 +2575,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "fox (or socks)",
-                        "They make them fun to listen to and easy to remember",
+                        "Mix",
                         "Log",
-                        "say them out loud and listen to their ending sounds"
+                        "Top"
                       ]
                     },
                     {
@@ -2634,10 +2634,10 @@
                       "correctAnswer": "cat",
                       "type": "multiple-choice",
                       "options": [
-                        "It lets you quickly narrow down where a word will be, using its letters in order",
+                        "dog",
                         "cat",
                         "elephant, lion, zebra",
-                        "Arranging words the same way letters appear in the alphabet"
+                        "bat"
                       ]
                     },
                     {
@@ -2741,7 +2741,7 @@
                       "options": [
                         "tap",
                         "In dictionaries and lists",
-                        "Arranging words the same way letters appear in the alphabet",
+                        "tiger",
                         "The second letter"
                       ]
                     },
@@ -2823,10 +2823,10 @@
                       "correctAnswer": "an adjective",
                       "type": "multiple-choice",
                       "options": [
-                        "Paint a picture in the reader's mind",
+                        "a noun",
                         "an adjective",
-                        "specific sensory details, e.g. 'The golden sand felt warm between my toes'",
-                        "dark (or spooky, quiet - any suitable adjective)"
+                        "a verb",
+                        "an adverb"
                       ]
                     },
                     {
@@ -3023,7 +3023,7 @@
                       "options": [
                         "a statement",
                         "a question mark",
-                        "The punctuation signals how the sentence should be read or understood - as a fact, a question, or strong feeling",
+                        "an exclamation",
                         "The sun is bright."
                       ]
                     },
@@ -3296,7 +3296,7 @@
                       "options": [
                         "empty",
                         "slow",
-                        "Using antonyms like these highlights a clear contrast between the two characters",
+                        "huge",
                         "small"
                       ]
                     },
@@ -3319,7 +3319,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "Cold",
-                        "Using antonyms like these highlights a clear contrast between the two characters",
+                        "quick",
                         "slow",
                         "closed (or shut)"
                       ]
@@ -9155,7 +9155,7 @@
                       "correctAnswer": "ஓடுதல்",
                       "type": "multiple-choice",
                       "options": [
-                        "யார் செயலைச் செய்கிறார்கள், எப்போது என்பதற்கு ஏற்ப",
+                        "குதித்தல்",
                         "நட",
                         "ஓடுதல்",
                         "படி"
@@ -9463,7 +9463,7 @@
                       "options": [
                         "கண்",
                         "கைக்கு வலி",
-                        "வலியை விவரிக்கவும் எளிய கட்டளைகளைப் பின்பற்றவும் உதவும்",
+                        "மூக்கு",
                         "உன் கண்களை மூடு"
                       ]
                     },
@@ -9627,7 +9627,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "உட்காருதல்",
-                        "அன்றாட கட்டளைகளுக்கு விரைவாகவும் சரியாகவும் பதிலளிக்க உதவும்",
+                        "நடத்தல்",
                         "உட்கார வேண்டும்",
                         "நிற்றல்"
                       ]
@@ -9683,7 +9683,7 @@
                       "correctAnswer": "உட்கார வேண்டும்",
                       "type": "multiple-choice",
                       "options": [
-                        "அன்றாட கட்டளைகளுக்கு விரைவாகவும் சரியாகவும் பதிலளிக்க உதவும்",
+                        "நில்",
                         "பெற்றோரும் ஆசிரியர்களும்",
                         "உட்கார வேண்டும்",
                         "போ"
@@ -9980,7 +9980,7 @@
                       "correctAnswer": "மீன்",
                       "type": "multiple-choice",
                       "options": [
-                        "விலங்குகள் பாடல்கள், கதைகள், உரையாடல்களில் அடிக்கடி வரும் பொதுவான தலைப்பு",
+                        "நாய்",
                         "விலங்குகள் பழக்கமானவை, குழந்தைகளுக்குக் கற்றலை சுவாரசியமாக்கும்",
                         "மான்",
                         "மீன்"
@@ -10013,7 +10013,7 @@
                       "correctAnswer": "மான்",
                       "type": "multiple-choice",
                       "options": [
-                        "விலங்குகள் பாடல்கள், கதைகள், உரையாடல்களில் அடிக்கடி வரும் பொதுவான தலைப்பு",
+                        "குரங்கு",
                         "விலங்குகள் பழக்கமானவை, குழந்தைகளுக்குக் கற்றலை சுவாரசியமாக்கும்",
                         "யானை",
                         "மான்"
@@ -10121,7 +10121,7 @@
                       "correctAnswer": "தண்ணீர்",
                       "type": "multiple-choice",
                       "options": [
-                        "சாப்பாட்டைப் பற்றிய உரையாடலில் ஒவ்வொரு நாளும் வரும்",
+                        "பால்",
                         "மாங்காய்",
                         "பழவகை (பெரும்பாலும் வாழைப்பழம்)",
                         "தண்ணீர்"
@@ -10147,7 +10147,7 @@
                       "options": [
                         "மாங்காய்",
                         "பால்",
-                        "இது அவர்களுக்கு அன்றாட சாப்பாட்டையும் வழக்கங்களையும் பற்றிப் பேச உதவும்",
+                        "தண்ணீர்",
                         "பழம்"
                       ]
                     },
@@ -10226,7 +10226,7 @@
                       "correctAnswer": "சோறு",
                       "type": "multiple-choice",
                       "options": [
-                        "சாப்பாட்டைப் பற்றிய உரையாடலில் ஒவ்வொரு நாளும் வரும்",
+                        "அரிசி",
                         "பால்",
                         "தண்ணீர்",
                         "சோறு"
@@ -10369,7 +10369,7 @@
                       "options": [
                         "குளிர்",
                         "குடை",
-                        "அன்றைய நாள் எப்படி இருக்கிறது என்று விவரிக்கவும் புரிந்துகொள்ளவும் உதவும்",
+                        "தொப்பி",
                         "மழை பொழிவது"
                       ]
                     },
@@ -10392,7 +10392,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "வெயில்",
-                        "அன்றைய நாள் எப்படி இருக்கிறது என்று விவரிக்கவும் புரிந்துகொள்ளவும் உதவும்",
+                        "மழை",
                         "வெயிலாக இருக்கிறது",
                         "காற்று"
                       ]
@@ -10451,7 +10451,7 @@
                       "correctAnswer": "பாட்டி",
                       "type": "multiple-choice",
                       "options": [
-                        "ஒவ்வொரு உறவினரையும் சரியான, மரியாதையான சொல்லால் அழைக்கவும் பேசவும் முடியும்",
+                        "அத்தை",
                         "சித்தப்பா",
                         "தாத்தா",
                         "பாட்டி"
@@ -10478,7 +10478,7 @@
                         "உங்கள் பாட்டியை",
                         "பாட்டி",
                         "சித்தி",
-                        "ஒரே பொதுவான சொல்லுக்குப் பதிலாக சரியான உறவை காட்ட"
+                        "மாமி"
                       ]
                     },
                     {
@@ -10641,9 +10641,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "உச்சரிப்பு",
-                        "மீண்டும் வரும் ஓசையும் தாளமும் சொற்களை நினைவில் நிற்க வைக்கும்",
-                        "கூட்டமாகக் கேட்டுப் பின்பற்றும் திறனும் தமிழ் பேசும் நம்பிக்கையும்",
-                        "வேடிக்கை, மீள்சொல்லல், எளிய சொற்கள் ஆகியவை இணைந்து மொழியைக் கற்பவர்களுக்கு எளிதாக்குகிறது"
+                        "எழுத்து",
+                        "வாசிப்பு",
+                        "நினைவாற்றல்"
                       ]
                     },
                     {
@@ -10846,7 +10846,7 @@
                       "options": [
                         "Water (or food/air)",
                         "Dead",
-                        "A bird (or any living thing, e.g. a tree, a worm, a person)",
+                        "Alive",
                         "A plastic spoon"
                       ]
                     },
@@ -11069,7 +11069,7 @@
                       "correctAnswer": "Lungs",
                       "type": "multiple-choice",
                       "options": [
-                        "All animals need food, water and air",
+                        "Heart",
                         "Clean water and food",
                         "Lungs",
                         "Food, water and air"
@@ -11351,7 +11351,7 @@
                       "correctAnswer": "Observing",
                       "type": "multiple-choice",
                       "options": [
-                        "To notice details that help them think of good questions",
+                        "Measuring",
                         "Sight (or touch, smell, hearing)",
                         "Observing",
                         "A magnifying glass"
@@ -11435,7 +11435,7 @@
                         "A magnifying glass",
                         "Observation",
                         "Noticing how they are the same and different",
-                        "To notice details that help them think of good questions"
+                        "A thermometer"
                       ]
                     },
                     {
@@ -11494,7 +11494,7 @@
                       "options": [
                         "Winter",
                         "Autumn",
-                        "Days becoming shorter and leaves falling",
+                        "Summer",
                         "Frost or snow (or cold rain)"
                       ]
                     },
@@ -11519,7 +11519,7 @@
                         "Autumn",
                         "Spring",
                         "Winter",
-                        "Days becoming shorter and leaves falling"
+                        "Summer"
                       ]
                     }
                   ]
@@ -11633,9 +11633,9 @@
                       "correctAnswer": "Washing hands",
                       "type": "multiple-choice",
                       "options": [
-                        "Vegetables, some rice, and a piece of chicken",
+                        "Brushing hair",
                         "Washing hands",
-                        "It removes germs that could make them ill",
+                        "Eating sweets",
                         "Running (or swimming, cycling, walking)"
                       ]
                     },
@@ -11774,7 +11774,7 @@
                       "correctAnswer": "A pond",
                       "type": "multiple-choice",
                       "options": [
-                        "It provides food, shelter and safety they need",
+                        "A desert",
                         "The seal",
                         "A pond",
                         "Grass to caterpillar to bird"
@@ -11799,7 +11799,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "Grass",
-                        "The natural home of a plant or animal",
+                        "A prey",
                         "A predator",
                         "A pond"
                       ]
@@ -11833,7 +11833,7 @@
                       "options": [
                         "Food (or water, shelter)",
                         "A producer",
-                        "It provides food, shelter and safety they need",
+                        "A predator",
                         "Grass to caterpillar to bird"
                       ]
                     },
@@ -11915,7 +11915,7 @@
                       "correctAnswer": "Stretching",
                       "type": "multiple-choice",
                       "options": [
-                        "Pressing an object to make it flatter or smaller",
+                        "Squashing",
                         "A strip of paper",
                         "Playdough",
                         "Stretching"
@@ -11939,7 +11939,7 @@
                       "correctAnswer": "Twisting",
                       "type": "multiple-choice",
                       "options": [
-                        "Pressing an object to make it flatter or smaller",
+                        "Bending",
                         "Twisting",
                         "Playdough",
                         "Squashing"
@@ -12388,7 +12388,7 @@
                       "options": [
                         "weather",
                         "summer",
-                        "It helps us know what to expect and prepare for, like clothing or crops",
+                        "winter",
                         "Spring"
                       ]
                     },
@@ -12446,7 +12446,7 @@
                         "4",
                         "summer",
                         "Winter",
-                        "Weather changes daily, seasons are longer yearly patterns"
+                        "12"
                       ]
                     },
                     {
@@ -12530,7 +12530,7 @@
                         "Wheel and axle",
                         "Pulley",
                         "lever",
-                        "Makes work easier by changing a force"
+                        "Screw"
                       ]
                     },
                     {
@@ -12692,7 +12692,7 @@
                       "correctAnswer": "iron (or steel)",
                       "type": "multiple-choice",
                       "options": [
-                        "They can pick up or hold metal objects without touching them directly",
+                        "Gold",
                         "No",
                         "A steel nail",
                         "iron (or steel)"
@@ -12859,8 +12859,8 @@
                       "options": [
                         "proteins",
                         "to play and learn",
-                        "Eating a variety of foods from different food groups",
-                        "It helps your body grow, stay healthy, and have energy"
+                        "carbohydrates",
+                        "vitamins"
                       ]
                     },
                     {
@@ -12883,7 +12883,7 @@
                       "options": [
                         "proteins",
                         "water",
-                        "It helps your body grow, stay healthy, and have energy",
+                        "soda",
                         "Dairy"
                       ]
                     },
@@ -13048,8 +13048,8 @@
                       "options": [
                         "the Earth spins underneath it",
                         "night-time",
-                        "The Earth spinning (rotating) on its axis",
-                        "Different places face the Sun or face away from it as the Earth rotates"
+                        "sunset",
+                        "daytime"
                       ]
                     },
                     {
@@ -13081,7 +13081,7 @@
                       "options": [
                         "night-time",
                         "its axis",
-                        "Different places face the Sun or face away from it as the Earth rotates",
+                        "its orbit",
                         "Sunset"
                       ]
                     },
@@ -13129,7 +13129,7 @@
                       "options": [
                         "its axis",
                         "sunrise",
-                        "Different places face the Sun or face away from it as the Earth rotates",
+                        "sunset",
                         "24 hours"
                       ]
                     },
@@ -13189,7 +13189,7 @@
                       "options": [
                         "New plants grow",
                         "Spring",
-                        "Different temperatures and conditions need different clothing to stay comfortable and safe",
+                        "autumn",
                         "summer"
                       ]
                     },
@@ -13211,9 +13211,9 @@
                       "correctAnswer": "winter",
                       "type": "multiple-choice",
                       "options": [
-                        "It is cold and food can be hard to find, so sleeping saves energy",
+                        "summer",
                         "spring, summer, autumn, winter",
-                        "The Earth's tilt changes how directly sunlight reaches different parts of the world as it orbits the Sun",
+                        "autumn",
                         "winter"
                       ]
                     },
@@ -13377,7 +13377,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "nose",
-                        "Different senses give different information, like taste, smell and sight of the food together",
+                        "tongue",
                         "ears",
                         "smell"
                       ]
@@ -13436,7 +13436,7 @@
                         "smell",
                         "nose",
                         "5",
-                        "Different senses give different information, like taste, smell and sight of the food together"
+                        "sight"
                       ]
                     },
                     {
@@ -13459,7 +13459,7 @@
                       "options": [
                         "Sight",
                         "touch",
-                        "They give us warning information, like heat or danger, so we can react quickly",
+                        "hearing",
                         "Taste"
                       ]
                     },
@@ -13518,8 +13518,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "wood",
-                        "glass is see-through, letting light in, which wood cannot do",
-                        "Fabric is soft, bendy and can keep in warmth, unlike rigid, cold metal",
+                        "glass",
+                        "fabric",
                         "plastic"
                       ]
                     },
@@ -13542,9 +13542,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "plastic",
-                        "Plastic is lighter and less likely to hurt someone if dropped, compared to heavy metal",
+                        "metal",
                         "Fabric",
-                        "It helps choose materials that suit an object's purpose, like strength, flexibility or appearance"
+                        "wood"
                       ]
                     },
                     {
@@ -13684,8 +13684,8 @@
                       "options": [
                         "with milk",
                         "in water",
-                        "a mammal, because it has fur and feeds its babies milk",
-                        "Animals in the same group often share similar features and needs, like how they breathe or feed their young"
+                        "with eggs",
+                        "with leaves"
                       ]
                     },
                     {
@@ -13709,7 +13709,7 @@
                         "with milk",
                         "in water",
                         "feathers",
-                        "Its gills need water to take in oxygen, unlike lungs which breathe air"
+                        "in trees"
                       ]
                     },
                     {
@@ -13787,10 +13787,10 @@
                       "correctAnswer": "feathers",
                       "type": "multiple-choice",
                       "options": [
-                        "a mammal, because it has fur and feeds its babies milk",
-                        "Its gills need water to take in oxygen, unlike lungs which breathe air",
+                        "fur",
+                        "scales",
                         "feathers",
-                        "It helps them organise and compare animals based on shared features"
+                        "gills"
                       ]
                     },
                     {
@@ -13849,7 +13849,7 @@
                       "options": [
                         "the stem",
                         "The roots",
-                        "Leaves use sunlight, along with water and air, to make the food the plant needs to grow",
+                        "the flower",
                         "Take in water from the soil"
                       ]
                     },
@@ -13873,7 +13873,7 @@
                       "options": [
                         "the flower",
                         "Make food using sunlight",
-                        "It helps explain how the whole plant works together to survive and grow",
+                        "the stem",
                         "Take in water from the soil"
                       ]
                     },
@@ -14012,9 +14012,9 @@
                       "correctAnswer": "water",
                       "type": "multiple-choice",
                       "options": [
-                        "Starting healthy habits early can help them become a normal part of daily life as you grow up",
+                        "juice",
                         "water",
-                        "Exercise can also support your heart, lungs and overall fitness, not just your muscles",
+                        "sleep",
                         "Stay strong and fit"
                       ]
                     },
@@ -14037,8 +14037,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "sleep",
-                        "sleep helps your body rest and recover, so missing it can make you tired and more likely to get ill",
-                        "water helps your body work properly and stay hydrated, which food alone cannot fully provide",
+                        "water",
+                        "exercise",
                         "Stay strong and fit"
                       ]
                     },
@@ -14208,7 +14208,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "The screen (monitor)",
-                        "A laptop, tablet, smartphone, games console, digital watch, or washing machine",
+                        "A keyboard",
                         "A mouse",
                         "To show pictures and words"
                       ]
@@ -14348,7 +14348,7 @@
                       "correctAnswer": "Kind",
                       "type": "multiple-choice",
                       "options": [
-                        "Your full name, home address, school name, or phone number",
+                        "Rude",
                         "Stop and tell a trusted adult",
                         "Kind",
                         "Ask a trusted adult"
@@ -14405,7 +14405,7 @@
                       "correctAnswer": "False",
                       "type": "multiple-choice",
                       "options": [
-                        "Your full name, home address, school name, or phone number",
+                        "True",
                         "Stop and tell a trusted adult",
                         "Kind",
                         "False"
@@ -14759,9 +14759,9 @@
                       "correctAnswer": "Socks",
                       "type": "multiple-choice",
                       "options": [
-                        "Because doing steps in the wrong order can make the task fail",
+                        "Shoes",
                         "Socks",
-                        "Wet toothbrush, brush teeth, rinse mouth",
+                        "Coat",
                         "Move forward"
                       ]
                     },
@@ -14828,9 +14828,9 @@
                       "correctAnswer": "A sequence",
                       "type": "multiple-choice",
                       "options": [
-                        "Putting instructions in the correct order",
-                        "Wet toothbrush, brush teeth, rinse mouth",
-                        "From the top block to the bottom block",
+                        "A loop",
+                        "A variable",
+                        "A sprite",
                         "A sequence"
                       ]
                     },
@@ -14947,7 +14947,7 @@
                       "options": [
                         "Finding and fixing a mistake",
                         "Debugging",
-                        "Carefully check each step to find where it goes wrong",
+                        "Testing",
                         "A bug"
                       ]
                     },
@@ -15183,7 +15183,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "A word processing program",
-                        "You can easily delete and fix mistakes with the backspace key",
+                        "The enter key",
                         "The backspace key",
                         "Read it, add more to it, or change/edit it"
                       ]
@@ -15368,10 +15368,10 @@
                       "correctAnswer": "A search engine",
                       "type": "multiple-choice",
                       "options": [
-                        "Because not every website is suitable or safe for children",
+                        "A social media site",
                         "A search engine",
-                        "Stop and ask a trusted adult before doing anything",
-                        "A huge network that connects computers all over the world"
+                        "An online store",
+                        "A video sharing site"
                       ]
                     },
                     {
@@ -15593,10 +15593,10 @@
                       "correctAnswer": "tap it",
                       "type": "multiple-choice",
                       "options": [
-                        "Each app is designed for a different specific purpose",
+                        "double-tap it",
                         "Performs a specific job or task",
                         "tap it",
-                        "It helps you use many different devices confidently"
+                        "shake it"
                       ]
                     },
                     {
@@ -15618,7 +15618,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "swiping (or pinching)",
-                        "Each app is designed for a different specific purpose",
+                        "tap",
                         "Smaller and touchscreen-based",
                         "swipe"
                       ]
@@ -15677,7 +15677,7 @@
                         "pinch",
                         "Performs a specific job or task",
                         "tap it",
-                        "It helps you use many different devices confidently"
+                        "swipe"
                       ]
                     },
                     {
@@ -15761,7 +15761,7 @@
                         "It builds trust, just like in real life",
                         "It could be seen by many people",
                         "a trusted adult",
-                        "Technology use starts young and safe habits matter early on"
+                        "a stranger online"
                       ]
                     },
                     {
@@ -15785,7 +15785,7 @@
                         "Being safe and kind online",
                         "being a good citizen in real life",
                         "polite/kind",
-                        "Considering the consequences of an online action before doing it"
+                        "rude/mean"
                       ]
                     },
                     {
@@ -15924,9 +15924,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "blue",
-                        "A way of solving problems that computers can also use, like spotting patterns",
+                        "green",
                         "4",
-                        "it lets you predict what comes next without checking everything"
+                        "yellow"
                       ]
                     },
                     {
@@ -15980,10 +15980,10 @@
                       "correctAnswer": "4",
                       "type": "multiple-choice",
                       "options": [
-                        "it lets you predict what comes next without checking everything",
+                        "2",
                         "blue",
                         "4",
-                        "Predicting what comes next in a sequence"
+                        "6"
                       ]
                     },
                     {
@@ -16113,9 +16113,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "dragging",
-                        "They are the basic way most people interact with a computer",
+                        "clicking",
                         "Extra options",
-                        "It often reveals extra options relevant to the item clicked"
+                        "typing"
                       ]
                     },
                     {
@@ -16145,9 +16145,9 @@
                       "correctAnswer": "a trackpad",
                       "type": "multiple-choice",
                       "options": [
-                        "Moving icons or selecting several things at once",
+                        "a joystick",
                         "Double-click it",
-                        "They are the basic way most people interact with a computer",
+                        "a stylus",
                         "a trackpad"
                       ]
                     },
@@ -16170,7 +16170,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "Selects something",
-                        "It often reveals extra options relevant to the item clicked",
+                        "a scrollbar",
                         "a pointer (cursor)",
                         "Extra options"
                       ]
@@ -16195,7 +16195,7 @@
                       "options": [
                         "dragging",
                         "a trackpad",
-                        "They are the basic way most people interact with a computer",
+                        "clicking",
                         "a pointer (cursor)"
                       ]
                     },
@@ -16583,7 +16583,7 @@
                       "correctAnswer": "the keyboard",
                       "type": "multiple-choice",
                       "options": [
-                        "Understanding the hardware helps you know how to physically interact with and control the computer",
+                        "the mouse",
                         "the tower (or case)",
                         "the keyboard",
                         "The monitor (screen)"
@@ -16640,10 +16640,10 @@
                       "correctAnswer": "the mouse",
                       "type": "multiple-choice",
                       "options": [
-                        "It helps you talk about and use a computer confidently",
+                        "the monitor",
                         "the keyboard",
                         "the mouse",
-                        "To make the computer portable and convenient to carry and use anywhere"
+                        "the speaker"
                       ]
                     },
                     {
@@ -16665,7 +16665,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "the monitor (screen)",
-                        "To make the computer portable and convenient to carry and use anywhere",
+                        "the webcam",
                         "the tower (or case)",
                         "the keyboard"
                       ]
@@ -16772,10 +16772,10 @@
                       "correctAnswer": "computers",
                       "type": "multiple-choice",
                       "options": [
-                        "the internet connects computers worldwide, so information can travel across these connections regardless of distance",
-                        "a network is designed to link many devices together, not just one or two",
+                        "roads",
+                        "letters",
                         "computers",
-                        "It instantly connects computers across huge distances, letting information travel quickly between them"
+                        "mailboxes"
                       ]
                     },
                     {
@@ -16938,9 +16938,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "yes",
-                        "It is a good idea just like it would be if the unkindness happened in person",
-                        "you might not see the other person's reaction directly, which can make unkind words feel less real or consequential",
-                        "mean things (or making fun of people)"
+                        "no",
+                        "sometimes",
+                        "only with friends"
                       ]
                     },
                     {
@@ -17102,10 +17102,10 @@
                       "correctAnswer": "a computer",
                       "type": "multiple-choice",
                       "options": [
-                        "Computer programs are made of a precise sequence of instructions, just like giving clear instructions to a person",
-                        "following steps out of order can change how the final result turns out, just like with any set of instructions",
+                        "a robot",
+                        "a toy car",
                         "a computer",
-                        "Telling someone exactly what to do, step by step"
+                        "a calculator"
                       ]
                     },
                     {
@@ -17409,9 +17409,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "a clear name",
-                        "organising files into folders makes it easier and faster to find specific work later, rather than searching through everything",
-                        "Saving regularly means less work is lost if something goes wrong, like the computer turning off unexpectedly",
-                        "organising and saving project files clearly is an important habit in all computer work, including writing and managing larger programs"
+                        "a random name",
+                        "no name at all",
+                        "the date only"
                       ]
                     },
                     {
@@ -17604,8 +17604,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "Being clear, exact, and in order",
-                        "Open the bag, take out bread, spread peanut butter, add the top slice",
-                        "Making a peanut butter sandwich (or tying a shoe, washing hands, walking to the door)",
+                        "An app",
+                        "A file",
                         "Code"
                       ]
                     }
@@ -18308,8 +18308,8 @@
                       "correctAnswer": "Lego bricks",
                       "type": "multiple-choice",
                       "options": [
-                        "You do not need to remember exact spelling or typing",
-                        "By snapping blocks together in order",
+                        "Puzzle pieces",
+                        "Toy cars",
                         "Lego bricks",
                         "ScratchJr"
                       ]
@@ -18731,8 +18731,8 @@
                       "correctAnswer": "Debugging",
                       "type": "multiple-choice",
                       "options": [
-                        "A loop that repeats \"change costume\"",
-                        "Use debugging skills to find and fix the mistake",
+                        "Looping",
+                        "Coding",
                         "Debugging",
                         "An event, like a tap"
                       ]
@@ -19072,7 +19072,7 @@
                       "options": [
                         "sequencing",
                         "following a recipe",
-                        "It shows the concept of order without needing to read complex code",
+                        "looping",
                         "The task may not complete correctly"
                       ]
                     },
@@ -19154,7 +19154,7 @@
                       "correctAnswer": "a repeat block",
                       "type": "multiple-choice",
                       "options": [
-                        "it avoids repeating code and is easier to edit",
+                        "an if block",
                         "a repeat block",
                         "Repeats the same action multiple times",
                         "a loop"
@@ -19236,9 +19236,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "a loop",
-                        "It makes code shorter, neater, and easier to change",
-                        "You only need to change one number instead of many blocks",
-                        "They let you repeat actions efficiently, avoiding repetitive code"
+                        "a variable",
+                        "an event",
+                        "a condition"
                       ]
                     },
                     {
@@ -19260,9 +19260,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "a repeat block",
-                        "Repeats the same action multiple times",
+                        "copying and pasting",
                         "using a loop",
-                        "You only need to change one number instead of many blocks"
+                        "deleting the code"
                       ]
                     },
                     {
@@ -19322,7 +19322,7 @@
                         "a speech bubble",
                         "Plan the beginning, middle and end",
                         "the background",
-                        "It makes it easier to know which blocks to use and in what order"
+                        "a thought bubble"
                       ]
                     },
                     {
@@ -19484,10 +19484,10 @@
                       "correctAnswer": "meow (or pop)",
                       "type": "multiple-choice",
                       "options": [
-                        "The right sounds enhance the player's experience and understanding of events",
+                        "boing",
                         "meow (or pop)",
                         "audio feedback/atmosphere",
-                        "an event block (when clicked) and a sound block"
+                        "ding"
                       ]
                     },
                     {
@@ -19510,7 +19510,7 @@
                       "options": [
                         "Playing a 'ding' sound when a player scores a point",
                         "meow (or pop)",
-                        "to give the player clear audio feedback about what happened",
+                        "5 seconds",
                         "the sound finishing"
                       ]
                     },
@@ -19649,9 +19649,9 @@
                       "correctAnswer": "pathfinding",
                       "type": "multiple-choice",
                       "options": [
-                        "Moves a character step by step towards a goal, avoiding walls",
+                        "sequencing",
                         "pathfinding",
-                        "Planning, testing and adjusting a sequence of moves to reach a goal while avoiding obstacles",
+                        "debugging",
                         "Walls"
                       ]
                     },
@@ -19755,8 +19755,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "up, up, right, right",
-                        "Planning, testing and adjusting a sequence of moves to reach a goal while avoiding obstacles",
-                        "random movement is unlikely to reliably reach the goal without hitting walls",
+                        "time limits",
+                        "other players",
                         "walls/obstacles"
                       ]
                     },
@@ -19979,10 +19979,10 @@
                       "correctAnswer": "a loop",
                       "type": "multiple-choice",
                       "options": [
-                        "with a loop, you only need to change one single number, rather than adding or removing many individual blocks",
+                        "a variable",
                         "a loop",
                         "easier to read",
-                        "Loops clearly show that an action repeats a certain number of times, rather than listing the same block over and over"
+                        "an event"
                       ]
                     },
                     {
@@ -20005,8 +20005,8 @@
                       "options": [
                         "easier to read",
                         "The same action multiple times",
-                        "it achieves the same result with far fewer blocks, making the program quicker to build",
-                        "A loop can repeat a small turn many times with just one instruction, instead of needing a separate block for every small turn"
+                        "harder to read",
+                        "slower to run"
                       ]
                     },
                     {
@@ -20310,8 +20310,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "The 'ask' block",
-                        "It lets the program give different feedback (correct or incorrect) depending on whether the typed answer matches the right one",
-                        "the score should reflect how many questions the player actually answered correctly, not just how many questions were asked",
+                        "a 'repeat' block",
+                        "a 'wait' block",
                         "an 'if/else' block"
                       ]
                     },
@@ -20334,8 +20334,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "a score variable",
-                        "It lets the program give different feedback (correct or incorrect) depending on whether the typed answer matches the right one",
-                        "the score should reflect how many questions the player actually answered correctly, not just how many questions were asked",
+                        "a sound variable",
+                        "a background variable",
                         "Correct!"
                       ]
                     },
@@ -22411,7 +22411,7 @@
                       "options": [
                         "Moving to a new event or setting",
                         "a paragraph",
-                        "When the topic, time or place changes",
+                        "a sentence",
                         "paragraph"
                       ]
                     },
@@ -22492,7 +22492,7 @@
                       "options": [
                         "Moving to a new event or setting",
                         "paragraph",
-                        "helping them follow ideas clearly, one at a time",
+                        "a chapter",
                         "A new character starts speaking"
                       ]
                     }
@@ -22833,7 +22833,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "He trudged wearily.",
-                        "Her hands trembled as she gripped the sword.",
+                        "smell",
                         "taste",
                         "sight, sound, smell, touch or taste"
                       ]
@@ -22913,8 +22913,8 @@
                       "correctAnswer": "showing, not telling",
                       "type": "multiple-choice",
                       "options": [
-                        "Shadows crept across the crumbling walls as the wind howled outside.",
-                        "The ancient forest smelled of damp moss and rustled with hidden creatures.",
+                        "personification",
+                        "alliteration",
                         "sight, sound, smell, touch or taste",
                         "showing, not telling"
                       ]
@@ -22975,7 +22975,7 @@
                       "options": [
                         "present tense",
                         "topic, using headings",
-                        "What is a volcano?, Types of volcano, Famous eruptions",
+                        "past tense",
                         "Subheadings"
                       ]
                     },
@@ -23055,7 +23055,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "Subheadings",
-                        "Sharks have several rows of sharp teeth.",
+                        "future tense",
                         "present tense",
                         "subheadings (or diagrams, captions)"
                       ]
@@ -23336,10 +23336,10 @@
                       "correctAnswer": "lion",
                       "type": "multiple-choice",
                       "options": [
-                        "To make it seem alive and give it feeling",
+                        "mouse",
                         "The clouds raced across the sky.",
                         "lion",
-                        "The old house groaned and creaked as if it were alive."
+                        "feather"
                       ]
                     }
                   ]
@@ -23937,7 +23937,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "To share a clear picture or feeling",
-                        "Wherever it fits the rhythm or meaning",
+                        "verbs",
                         "read it aloud",
                         "adjectives"
                       ]
@@ -24047,7 +24047,7 @@
                         "sad",
                         "afraid (or frightened)",
                         "large (or huge, enormous)",
-                        "They help you avoid repeating the same word too often"
+                        "joyful"
                       ]
                     },
                     {
@@ -24266,7 +24266,7 @@
                       "correctAnswer": "3",
                       "type": "multiple-choice",
                       "options": [
-                        "Separates items so the reader knows where one ends and the next begins",
+                        "2",
                         "We saw lions, tigers, and bears.",
                         "3",
                         "no"
@@ -24290,7 +24290,7 @@
                       "correctAnswer": "no",
                       "type": "multiple-choice",
                       "options": [
-                        "It clearly shows where each separate item starts and ends",
+                        "yes",
                         "no",
                         "2",
                         "and"
@@ -24351,7 +24351,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "went (or saw, played)",
-                        "It helps the reader understand the sequence of what occurred",
+                        "present tense",
                         "what happened and when",
                         "past tense"
                       ]
@@ -24516,7 +24516,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "not / opposite",
-                        "Changes its meaning by adding to the beginning",
+                        "again",
                         "not",
                         "unkind"
                       ]
@@ -24574,7 +24574,7 @@
                       "options": [
                         "disagree",
                         "Rewrite",
-                        "Changes its meaning by adding to the beginning",
+                        "Redo",
                         "Unhappy"
                       ]
                     },
@@ -24596,7 +24596,7 @@
                       "correctAnswer": "unkind",
                       "type": "multiple-choice",
                       "options": [
-                        "They give a clue to the meaning before you even see the rest of the word",
+                        "Dislike",
                         "again",
                         "unkind",
                         "not"
@@ -24622,7 +24622,7 @@
                       "options": [
                         "dislike",
                         "again",
-                        "Changes its meaning by adding to the beginning",
+                        "Rewrite",
                         "unkind"
                       ]
                     },
@@ -24927,8 +24927,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "rhythm",
-                        "They might prefer to focus on rhythm or imagery instead",
-                        "feelings (or nature, or any suitable topic)",
+                        "rhyme",
+                        "tone",
                         "Its rhythm and rhyme"
                       ]
                     },
@@ -25001,7 +25001,7 @@
                         "At the end",
                         "At the beginning",
                         "In the middle",
-                        "Nowhere - suffixes aren't added to words"
+                        "Anywhere"
                       ]
                     },
                     {
@@ -25036,7 +25036,7 @@
                       "options": [
                         "Helpless",
                         "'without'",
-                        "the suffixes -ful ('full of') and -less ('without') give opposite meanings to the same base word",
+                        "'again'",
                         "'full of'"
                       ]
                     },
@@ -25176,7 +25176,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "a closing (like 'Love from,')",
-                        "It teaches a practical way to communicate news, thanks or requests to someone else in a clear, organised way",
+                        "Dear Diary,",
                         "The main message",
                         "Dear Grandma,"
                       ]
@@ -30583,7 +30583,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "வேகம்",
-                        "இரு சொற்களையும் ஒன்றாகக் கற்பது நினைவில் வைக்க உதவும்",
+                        "நல்ல",
                         "கெட்ட",
                         "பழைய"
                       ]
@@ -30642,8 +30642,8 @@
                       "correctAnswer": "பண்பாடு",
                       "type": "multiple-choice",
                       "options": [
-                        "அது உள்ளுறைப் பொருள், நேரடிப் பொருள் அல்ல",
-                        "சொற்களின் நேரடிப் பொருளைவிட வேறு பொருள் தரும் தொடர்",
+                        "இலக்கணம்",
+                        "எண்ணிக்கை",
                         "கைதட்டல்",
                         "பண்பாடு"
                       ]
@@ -30667,8 +30667,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "இல்லை",
-                        "அது உள்ளுறைப் பொருள், நேரடிப் பொருள் அல்ல",
-                        "சொற்களை வைத்து மட்டும் பொருளை எளிதில் அறிய முடியாது",
+                        "ஆம்",
+                        "ஓரளவு",
                         "மிகுந்த மகிழ்ச்சி"
                       ]
                     },
@@ -30702,7 +30702,7 @@
                         "பண்பாடு",
                         "அதன் பண்பாட்டுப் பின்னணியையும் பயன்பாட்டையும் கற்றுக்கொள்வது",
                         "கைதட்டல்",
-                        "சொற்களை வைத்து மட்டும் பொருளை எளிதில் அறிய முடியாது"
+                        "சிரித்தல்"
                       ]
                     },
                     {
@@ -30725,7 +30725,7 @@
                       "options": [
                         "அதன் பண்பாட்டுப் பின்னணியையும் பயன்பாட்டையும் கற்றுக்கொள்வது",
                         "இல்லை",
-                        "அன்றாடப் பேச்சில் தாய்மொழி பேசுபவர்கள் மரபுத் தொடர்களைப் பயன்படுத்துகிறார்கள்",
+                        "எண்கள்",
                         "பண்பாடு"
                       ]
                     },
@@ -31138,7 +31138,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "வெயில்",
-                        "மழை வரவிருக்கிறது என்று அன்றாடம் சொல்ல உதவும்",
+                        "மழை",
                         "நான்கு",
                         "குளிர்"
                       ]
@@ -31197,7 +31197,7 @@
                         "மழை பெய்யப் போகிறது",
                         "மழை",
                         "வெயில்",
-                        "மழை வரவிருக்கிறது என்று அன்றாடம் சொல்ல உதவும்"
+                        "குளிர்"
                       ]
                     },
                     {
@@ -31219,9 +31219,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "காற்று",
-                        "மழை வரவிருக்கிறது என்று அன்றாடம் சொல்ல உதவும்",
+                        "மழை",
                         "வெயில்",
-                        "நாள் பற்றிப் பேசவும் வெளியே என்ன அணிய வேண்டும் என்று தெரிந்துகொள்ளவும் உதவும்"
+                        "குளிர்"
                       ]
                     },
                     {
@@ -31243,7 +31243,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "வெயில்",
-                        "நாள் பற்றிப் பேசவும் வெளியே என்ன அணிய வேண்டும் என்று தெரிந்துகொள்ளவும் உதவும்",
+                        "மூன்று",
                         "நான்கு",
                         "காற்று"
                       ]
@@ -31305,7 +31305,7 @@
                         "பழைய",
                         "சிறிய",
                         "பெரிய",
-                        "அளவு, தரம் போன்றவற்றை ஒப்பிட்டுக் காட்ட உதவும்"
+                        "நீளமான"
                       ]
                     },
                     {
@@ -31329,7 +31329,7 @@
                         "கெட்ட",
                         "நல்ல",
                         "பெரிய",
-                        "ஒன்றோடு ஒன்று இணைத்து நினைவில் வைக்க உதவும்"
+                        "புதிய"
                       ]
                     },
                     {
@@ -31359,7 +31359,7 @@
                       "correctAnswer": "பழைய",
                       "type": "multiple-choice",
                       "options": [
-                        "அளவு, தரம் போன்றவற்றை ஒப்பிட்டுக் காட்ட உதவும்",
+                        "பெரிய",
                         "புதிய",
                         "சிறிய",
                         "பழைய"
@@ -31409,8 +31409,8 @@
                       "options": [
                         "நல்ல",
                         "பழைய",
-                        "ஒன்றோடு ஒன்று இணைத்து நினைவில் வைக்க உதவும்",
-                        "அளவு, தரம் போன்றவற்றை ஒப்பிட்டுக் காட்ட உதவும்"
+                        "கெட்ட",
+                        "சிறிய"
                       ]
                     },
                     {
@@ -31468,7 +31468,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "ஆசிரியர்",
-                        "தன் அன்றாடப் பள்ளி வாழ்க்கையை விவரிக்க உதவும்",
+                        "மாணவன்",
                         "பள்ளிக்கூடம்",
                         "படிக்கும் நூல்"
                       ]
@@ -31527,7 +31527,7 @@
                         "மாணவி",
                         "பள்ளிக்கூடம்",
                         "ஆசிரியர்",
-                        "இவை பள்ளியில் அடிக்கடி கேட்கும், பயன்படுத்தும் சொற்கள்"
+                        "புத்தகம்"
                       ]
                     },
                     {
@@ -31572,7 +31572,7 @@
                       "correctAnswer": "மாணவி",
                       "type": "multiple-choice",
                       "options": [
-                        "தன் அன்றாடப் பள்ளி வாழ்க்கையை விவரிக்க உதவும்",
+                        "மாணவன்",
                         "புத்தகம்",
                         "மாணவி",
                         "ஆசிரியர்"
@@ -31632,7 +31632,7 @@
                       "correctAnswer": "ஞாயிறு",
                       "type": "multiple-choice",
                       "options": [
-                        "பல பண்பாடுகளின் நாட்காட்டிகள் வாரநாட்களை வானியல் பொருள்களோடு இணைக்கின்றன",
+                        "சனி",
                         "ஞாயிறு",
                         "செவ்வாய்",
                         "வெள்ளி"
@@ -31658,7 +31658,7 @@
                       "options": [
                         "புதன்",
                         "சனி",
-                        "திட்டங்கள், நேர அட்டவணைகள் பற்றிப் பேச உதவும்",
+                        "ஞாயிறு",
                         "வியாழன்"
                       ]
                     },
@@ -31689,7 +31689,7 @@
                       "correctAnswer": "செவ்வாய்",
                       "type": "multiple-choice",
                       "options": [
-                        "பல பண்பாடுகளின் நாட்காட்டிகள் வாரநாட்களை வானியல் பொருள்களோடு இணைக்கின்றன",
+                        "வியாழன்",
                         "ஞாயிறு",
                         "புதன்",
                         "செவ்வாய்"
@@ -31740,7 +31740,7 @@
                         "திங்கள்",
                         "ஞாயிறு",
                         "செவ்வாய்",
-                        "பல பண்பாடுகளின் நாட்காட்டிகள் வாரநாட்களை வானியல் பொருள்களோடு இணைக்கின்றன"
+                        "வெள்ளி"
                       ]
                     },
                     {
@@ -31798,7 +31798,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "மணி",
-                        "அந்த எண் எத்தனை மணி என்பதைக் காட்டும்",
+                        "இரண்டு",
                         "மூன்று",
                         "ஒன்று"
                       ]
@@ -31822,7 +31822,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "மற்றவரிடம் நேரத்தைக் கேட்டு அறிந்துகொள்ள உதவும்",
-                        "சாப்பாட்டு நேரம், பள்ளி நேரம் போன்ற அட்டவணைகளைப் புரிந்துகொள்ள உதவும்",
+                        "எப்போது",
                         "நேரத்தை",
                         "என்ன"
                       ]
@@ -31857,7 +31857,7 @@
                         "நேரத்தை",
                         "மூன்று",
                         "மற்றவரிடம் நேரத்தைக் கேட்டு அறிந்துகொள்ள உதவும்",
-                        "அந்த எண் எத்தனை மணி என்பதைக் காட்டும்"
+                        "நான்கு"
                       ]
                     },
                     {
@@ -32020,7 +32020,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "சதுரம்",
-                        "அன்றாடப் பொருள்களின் வடிவத்தைத் தெளிவாக விவரிக்க உதவும்",
+                        "முக்கோணம்",
                         "உருண்டையான வடிவம்",
                         "பந்து வட்டம் போல உருண்டையாக இருக்கும்"
                       ]
@@ -32045,7 +32045,7 @@
                       "options": [
                         "முக்கோணம்",
                         "உருண்டையான வடிவம்",
-                        "அன்றாடப் பொருள்களின் வடிவத்தைத் தெளிவாக விவரிக்க உதவும்",
+                        "நான்கு",
                         "மூன்று"
                       ]
                     },
@@ -32129,7 +32129,7 @@
                       "options": [
                         "சட்டை",
                         "பாவாடை",
-                        "தமிழில் பேசும்போது, படிக்கும்போது மக்கள் என்ன அணிந்துள்ளனர் என்று விவரிக்க உதவும்",
+                        "வேட்டி",
                         "ஆண்கள் அணியும் பாரம்பரிய ஆடை"
                       ]
                     },
@@ -32210,7 +32210,7 @@
                       "options": [
                         "சட்டை",
                         "வேட்டி",
-                        "அது பண்பாடு, சிறப்பு நிகழ்வுகளோடு தொடர்புடைய பாரம்பரிய ஆடை",
+                        "மேலாடை",
                         "கீழாடை"
                       ]
                     },
@@ -32232,7 +32232,7 @@
                       "correctAnswer": "சட்டை",
                       "type": "multiple-choice",
                       "options": [
-                        "தமிழில் பேசும்போது, படிக்கும்போது மக்கள் என்ன அணிந்துள்ளனர் என்று விவரிக்க உதவும்",
+                        "வேட்டி",
                         "சட்டை",
                         "ஆண்கள் அணியும் பாரம்பரிய ஆடை",
                         "கீழாடை"
@@ -32298,10 +32298,10 @@
                       "correctAnswer": "Germination",
                       "type": "multiple-choice",
                       "options": [
-                        "To transport water and support the plant upright",
+                        "Pollination",
                         "Germination",
                         "The roots",
-                        "Making food for the plant using sunlight"
+                        "Photosynthesis"
                       ]
                     },
                     {
@@ -32322,10 +32322,10 @@
                       "correctAnswer": "The stem",
                       "type": "multiple-choice",
                       "options": [
-                        "Making food for the plant using sunlight",
+                        "The leaves",
                         "The stem",
-                        "They anchor the plant and take in water and nutrients",
-                        "To transport water and support the plant upright"
+                        "The flower",
+                        "The seed"
                       ]
                     }
                   ]
@@ -32381,7 +32381,7 @@
                       "options": [
                         "Pollination",
                         "Germination",
-                        "They anchor the plant and take in water and nutrients",
+                        "Photosynthesis",
                         "The stem"
                       ]
                     },
@@ -32463,7 +32463,7 @@
                       "correctAnswer": "Protein",
                       "type": "multiple-choice",
                       "options": [
-                        "It supports the body, protects organs, and helps movement",
+                        "Sugar",
                         "The ribs",
                         "Protein",
                         "The skull"
@@ -32522,8 +32522,8 @@
                       "options": [
                         "The skull",
                         "Carbohydrates",
-                        "It supports the body, protects organs, and helps movement",
-                        "Because they cannot make their own food like plants"
+                        "The ribs",
+                        "The spine"
                       ]
                     },
                     {
@@ -32581,7 +32581,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "Granite",
-                        "Building material (e.g. worktops, roofing, walls)",
+                        "Chalk",
                         "Broken-down rock and organic matter",
                         "Granite is harder than chalk"
                       ]
@@ -32604,8 +32604,8 @@
                       "correctAnswer": "Chalk",
                       "type": "multiple-choice",
                       "options": [
-                        "Building material (e.g. worktops, roofing, walls)",
-                        "Whether it lets water pass through (permeability)",
+                        "Granite",
+                        "Sandstone",
                         "Chalk",
                         "Granite is harder than chalk"
                       ]
@@ -32663,8 +32663,8 @@
                       "options": [
                         "Broken-down rock and organic matter",
                         "Chalk",
-                        "Building material (e.g. worktops, roofing, walls)",
-                        "Whether it lets water pass through (permeability)"
+                        "Granite",
+                        "Sandstone"
                       ]
                     },
                     {
@@ -32724,7 +32724,7 @@
                         "A torch (or a lamp, a light bulb)",
                         "The sun",
                         "Opaque",
-                        "The shadows change position/length (they move)"
+                        "Transparent"
                       ]
                     },
                     {
@@ -32745,9 +32745,9 @@
                       "correctAnswer": "The sun",
                       "type": "multiple-choice",
                       "options": [
-                        "A dark shape formed when an object blocks light",
+                        "The moon",
                         "The sun",
-                        "The shadows change position/length (they move)",
+                        "A candle",
                         "A torch (or a lamp, a light bulb)"
                       ]
                     }
@@ -32863,7 +32863,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "An iron nail",
-                        "There is more friction on the carpet",
+                        "Forces",
                         "They attract (pull together)",
                         "Poles"
                       ]
@@ -32889,7 +32889,7 @@
                         "They attract (pull together)",
                         "Rough grass",
                         "Iron (or steel)",
-                        "Magnets can pull certain metals without touching them"
+                        "Gold"
                       ]
                     }
                   ]
@@ -33003,10 +33003,10 @@
                       "correctAnswer": "Variable",
                       "type": "multiple-choice",
                       "options": [
-                        "The starting temperature of the drink (or the amount of liquid, the time measured)",
+                        "Constant",
                         "Variable",
-                        "Dropping each ball from a different height",
-                        "Testing how far three different toy cars roll, releasing each from the same ramp height"
+                        "Conclusion",
+                        "Prediction"
                       ]
                     },
                     {
@@ -33060,8 +33060,8 @@
                       "correctAnswer": "A fair test",
                       "type": "multiple-choice",
                       "options": [
-                        "The starting temperature of the drink (or the amount of liquid, the time measured)",
-                        "The amount of water used (or the size of the towel)",
+                        "A hypothesis",
+                        "A conclusion",
                         "A fair test",
                         "Variable"
                       ]
@@ -33144,10 +33144,10 @@
                       "correctAnswer": "Fossils",
                       "type": "multiple-choice",
                       "options": [
-                        "A shell buried in mud millions of years ago",
+                        "Minerals",
                         "Fossils",
                         "Millions of years",
-                        "A dead plant or animal is buried and slowly turns to rock over a very long time"
+                        "Sediment"
                       ]
                     },
                     {
@@ -33201,10 +33201,10 @@
                       "correctAnswer": "Millions of years",
                       "type": "multiple-choice",
                       "options": [
-                        "To learn about living things and environments from long ago",
+                        "A few days",
                         "Millions of years",
                         "Organic matter from decayed plants and animals",
-                        "A dead plant or animal is buried and slowly turns to rock over a very long time"
+                        "A few weeks"
                       ]
                     },
                     {
@@ -33288,7 +33288,7 @@
                         "It shortens and pulls tight",
                         "Contracting",
                         "Tendons",
-                        "The biceps (or triceps, or any named muscle)"
+                        "Relaxing"
                       ]
                     },
                     {
@@ -33342,10 +33342,10 @@
                       "correctAnswer": "A tendon",
                       "type": "multiple-choice",
                       "options": [
-                        "The biceps (or triceps, or any named muscle)",
+                        "A ligament",
                         "A tendon",
                         "Contracting",
-                        "In pairs, with one contracting while the other relaxes"
+                        "Relaxing"
                       ]
                     },
                     {
@@ -33427,9 +33427,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "A mirror",
-                        "A mirror (or polished metal, a spoon, glass)",
+                        "A sponge",
                         "It reflects off the surface",
-                        "In a scattered way, not a clear image"
+                        "In a blurry way"
                       ]
                     },
                     {
@@ -33708,10 +33708,10 @@
                       "correctAnswer": "metamorphosis",
                       "type": "multiple-choice",
                       "options": [
-                        "It shows how living things grow, change and reproduce",
+                        "hibernation",
                         "metamorphosis",
                         "simply grows bigger into a dog",
-                        "The stages an animal goes through from birth to adulthood"
+                        "migration"
                       ]
                     },
                     {
@@ -33789,7 +33789,7 @@
                       "correctAnswer": "egg",
                       "type": "multiple-choice",
                       "options": [
-                        "It shows how living things grow, change and reproduce",
+                        "tadpole",
                         "Egg, caterpillar, chrysalis, adult butterfly",
                         "simply grows bigger into a dog",
                         "egg"
@@ -33813,7 +33813,7 @@
                       "correctAnswer": "metamorphosis",
                       "type": "multiple-choice",
                       "options": [
-                        "It shows how living things grow, change and reproduce",
+                        "hibernation",
                         "Butterfly",
                         "metamorphosis",
                         "Tadpole"
@@ -34038,7 +34038,7 @@
                       "correctAnswer": "pull",
                       "type": "multiple-choice",
                       "options": [
-                        "A push or pull that affects an object's movement or shape",
+                        "push",
                         "A push or a pull",
                         "push and pull",
                         "pull"
@@ -34121,7 +34121,7 @@
                       "options": [
                         "Push",
                         "push and pull",
-                        "A push or pull that affects an object's movement or shape",
+                        "up and down",
                         "A push or a pull"
                       ]
                     },
@@ -34144,7 +34144,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "Push",
-                        "Speed it up, slow it down, or change its direction",
+                        "no",
                         "pull",
                         "yes"
                       ]
@@ -34229,8 +34229,8 @@
                       "options": [
                         "A spider",
                         "drying out",
-                        "legs for crawling (or wings for flying, antennae for sensing)",
-                        "It helps us understand how living things adapt to survive in their environment"
+                        "sunlight",
+                        "cold weather"
                       ]
                     },
                     {
@@ -34368,9 +34368,9 @@
                       "correctAnswer": "float",
                       "type": "multiple-choice",
                       "options": [
-                        "Its wide, hollow shape displaces enough water to help it float",
+                        "sink",
                         "A metal spoon",
-                        "its shape helps spread its weight and displace more water",
+                        "dissolve",
                         "float"
                       ]
                     },
@@ -34393,9 +34393,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "its shape",
-                        "It is filled with air, making it less dense overall",
+                        "its colour",
                         "Its density compared to water",
-                        "It helps engineers design objects that can stay on top of water"
+                        "its smell"
                       ]
                     },
                     {
@@ -34427,8 +34427,8 @@
                       "options": [
                         "its shape",
                         "density",
-                        "It helps engineers design objects that can stay on top of water",
-                        "its shape helps spread its weight and displace more water"
+                        "volume",
+                        "mass"
                       ]
                     },
                     {
@@ -34473,7 +34473,7 @@
                       "correctAnswer": "float",
                       "type": "multiple-choice",
                       "options": [
-                        "its shape helps spread its weight and displace more water",
+                        "neither",
                         "float",
                         "Sink",
                         "A metal spoon"
@@ -34560,7 +34560,7 @@
                         "sweat",
                         "Fluffy wool",
                         "Thin cotton",
-                        "It takes heat away as it evaporates from the skin"
+                        "shiver"
                       ]
                     },
                     {
@@ -34590,9 +34590,9 @@
                       "correctAnswer": "air",
                       "type": "multiple-choice",
                       "options": [
-                        "to trap more air and keep warmer in cold weather",
+                        "water",
                         "air",
-                        "It takes heat away as it evaporates from the skin",
+                        "cold",
                         "sweat"
                       ]
                     },
@@ -34698,10 +34698,10 @@
                       "correctAnswer": "roots",
                       "type": "multiple-choice",
                       "options": [
-                        "Soil provides nutrients that help the plant grow strong and healthy",
+                        "leaves",
                         "roots",
-                        "Growing toward light helps the plant's leaves capture more sunlight for energy",
-                        "they need to take in water and nutrients from the soil to support the rest of the plant's growth"
+                        "flowers",
+                        "stem"
                       ]
                     },
                     {
@@ -34864,8 +34864,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "dark",
-                        "shadows need a light source to form, and there is no light to be blocked",
-                        "Understanding shadow patterns helps with telling time, navigation, and creating realistic art",
+                        "bright",
+                        "colourful",
                         "early morning"
                       ]
                     },
@@ -34887,10 +34887,10 @@
                       "correctAnswer": "early morning",
                       "type": "multiple-choice",
                       "options": [
-                        "The object blocks light travelling from the source, casting a dark area behind it on the far side",
-                        "light passes through transparent materials instead of being blocked",
+                        "midday",
+                        "midnight",
                         "early morning",
-                        "The angle and position of the sunlight changes as the day goes on"
+                        "late evening"
                       ]
                     },
                     {
@@ -35029,9 +35029,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "your vocal cords",
-                        "Something vibrating (moving back and forth quickly)",
+                        "light waves",
                         "vibrations",
-                        "The speaker is physically vibrating to create sound waves, and you can feel that movement"
+                        "echoes"
                       ]
                     },
                     {
@@ -35053,8 +35053,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "Bigger vibrations",
-                        "A bigger drum skin can create bigger vibrations, producing a louder sound",
-                        "shouting creates bigger vibrations in your vocal cords and the air than whispering does",
+                        "your ears",
+                        "your lungs",
                         "your vocal cords"
                       ]
                     },
@@ -35193,10 +35193,10 @@
                       "correctAnswer": "freezing",
                       "type": "multiple-choice",
                       "options": [
-                        "the temperature rises until it reaches boiling point",
+                        "boiling",
                         "freezing",
                         "Water in its solid state",
-                        "Freezing happens when water gets cold enough, which a freezer provides but room temperature does not"
+                        "melting"
                       ]
                     },
                     {
@@ -35524,7 +35524,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "a lever",
-                        "the lever (see-saw) uses a pivot point to share the effort, making lifting easier than without it",
+                        "a pulley",
                         "friction with the ground",
                         "A see-saw"
                       ]
@@ -35706,10 +35706,10 @@
                       "correctAnswer": "Code (a program)",
                       "type": "multiple-choice",
                       "options": [
-                        "Every program starts as an algorithm, but not every algorithm becomes a program",
+                        "An algorithm",
                         "Code (a program)",
                         "Executing (running) the program",
-                        "A recipe, or any set of step-by-step instructions written for a person, such as directions or a routine"
+                        "A debug"
                       ]
                     },
                     {
@@ -35850,7 +35850,7 @@
                         "Sequence, loops (repetition), or selection",
                         "By dragging and connecting blocks",
                         "One instruction",
-                        "To help stop simple mistakes when building a program"
+                        "A whole program"
                       ]
                     },
                     {
@@ -35989,9 +35989,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "A forever loop",
-                        "The number inside the loop (how many times it repeats, or the distance moved)",
-                        "It makes the program shorter, tidier, and easier to update",
-                        "A character that should always be checking if it has been touched, or something that should keep happening continuously"
+                        "A repeat 10 loop",
+                        "A single block",
+                        "A sequence"
                       ]
                     },
                     {
@@ -36001,9 +36001,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "4 times",
-                        "The blocks inside the loop will run exactly 10 times",
-                        "It makes the program shorter and easier to change",
-                        "A character that should always be checking if it has been touched, or something that should keep happening continuously"
+                        "2 times",
+                        "8 times",
+                        "Forever"
                       ]
                     }
                   ]
@@ -36271,7 +36271,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "Software",
-                        "So they are easier to find again later",
+                        "Tabs",
                         "Delete it (remove that slide)",
                         "Folders"
                       ]
@@ -36412,9 +36412,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "Wi-Fi",
-                        "It is made up of millions of smaller networks connected together",
-                        "A smaller network connecting nearby devices, like computers and printers",
-                        "Because it directs information to the correct device"
+                        "Bluetooth",
+                        "A cable",
+                        "Infrared"
                       ]
                     },
                     {
@@ -36424,9 +36424,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "A router",
-                        "Devices can share things like an internet connection or a printer without a cable to every device",
-                        "Because it directs information to the correct device",
-                        "A group of computers and devices connected together to share information"
+                        "A modem",
+                        "A switch",
+                        "A server"
                       ]
                     }
                   ]
@@ -36565,8 +36565,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "volcano facts for children",
-                        "A website that helps you find information on the internet",
-                        "Because not every website is accurate, safe, or suitable for children",
+                        "Teach a lesson",
+                        "Tell a story",
                         "Sell something"
                       ]
                     }
@@ -36621,10 +36621,10 @@
                       "correctAnswer": "Adverts",
                       "type": "multiple-choice",
                       "options": [
-                        "Because not every website is accurate, safe, or suitable for children",
+                        "Pop-up quizzes",
                         "Use a few clear keywords",
                         "Adverts",
-                        "It often gives clearer, more useful results"
+                        "Error messages"
                       ]
                     },
                     {
@@ -37269,10 +37269,10 @@
                       "correctAnswer": "a web browser",
                       "type": "multiple-choice",
                       "options": [
-                        "A collection of linked pages you can visit online",
+                        "a search engine",
                         "Share information with each other",
                         "a web browser",
-                        "a street address (tells you where to find something)"
+                        "an email app"
                       ]
                     },
                     {
@@ -37352,7 +37352,7 @@
                       "options": [
                         "a web browser",
                         "the internet",
-                        "It connects many computers together so they can share information",
+                        "a Wi-Fi router",
                         "Chrome (or Safari)"
                       ]
                     },
@@ -37435,7 +37435,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "understanding the key/legend",
-                        "It makes data quicker and easier to understand visually",
+                        "the title",
                         "It's more visual and intuitive to interpret",
                         "the key (legend)"
                       ]
@@ -37458,7 +37458,7 @@
                       "correctAnswer": "6",
                       "type": "multiple-choice",
                       "options": [
-                        "It makes data quicker and easier to understand visually",
+                        "3",
                         "A certain number of items",
                         "understanding the key/legend",
                         "6"
@@ -37516,9 +37516,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "20",
-                        "A way to show data using pictures or symbols",
+                        "9",
                         "A certain number of items",
-                        "They make it easy to compare amounts at a glance"
+                        "15"
                       ]
                     },
                     {
@@ -37600,9 +37600,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "the shapes tool",
-                        "They offer flexibility like undoing, resizing and saving without damaging the work",
+                        "the paintbrush",
                         "the eraser",
-                        "to make it fit a specific space or need, like a poster or a small icon"
+                        "the fill tool"
                       ]
                     },
                     {
@@ -37624,9 +37624,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "the shapes tool",
-                        "It lets them experiment and fix mistakes without fear of ruining their work",
+                        "the eraser tool",
                         "Undo",
-                        "to make it fit a specific space or need, like a poster or a small icon"
+                        "the text tool"
                       ]
                     },
                     {
@@ -37954,8 +37954,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "a robot vacuum cleaner",
-                        "it senses obstacles in its surroundings and reacts to avoid them",
-                        "it carries out the program/commands given to it by people",
+                        "light levels only",
+                        "other robots' names",
                         "their surroundings"
                       ]
                     },
@@ -37966,7 +37966,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "People",
-                        "No one, robots think for themselves completely",
+                        "Animals",
                         "Other robots only",
                         "Nothing gives robots instructions"
                       ]
@@ -38259,10 +38259,10 @@
                       "correctAnswer": "microphone",
                       "type": "multiple-choice",
                       "options": [
-                        "it takes information from the computer and sends it OUT as a physical, printed document",
+                        "scanner",
                         "microphone",
-                        "It sends video and image information from the camera INTO the computer",
-                        "it sends sound information from the outside world INTO the computer"
+                        "touchscreen",
+                        "joystick"
                       ]
                     },
                     {
@@ -38424,10 +38424,10 @@
                       "correctAnswer": "algorithms",
                       "type": "multiple-choice",
                       "options": [
-                        "It is one of the simplest and most fundamental building blocks, which more complex coding concepts build upon",
-                        "Running steps in the wrong order can give an incorrect result",
+                        "loops",
+                        "variables",
                         "algorithms",
-                        "Instructions are carried out one after another, in a specific order"
+                        "conditionals"
                       ]
                     },
                     {
@@ -38920,8 +38920,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "point and click",
-                        "Combining devices gives the user flexibility to choose the best method for each different task they want to do",
-                        "it helps you pick a device suited to what you actually need to do, rather than just any available option",
+                        "type and save",
+                        "scroll and zoom",
                         "A keyboard"
                       ]
                     },
@@ -39114,9 +39114,9 @@
                       "correctAnswer": "Sequencing",
                       "type": "multiple-choice",
                       "options": [
-                        "From the top block down to the bottom block",
-                        "The plant would not grow the way you want",
-                        "Because sequencing is the foundation underneath everything else we build",
+                        "Looping",
+                        "Debugging",
+                        "Variables",
                         "Sequencing"
                       ]
                     }
@@ -39466,8 +39466,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "Repeat 6: clap",
-                        "A border pattern that repeats a shape a set number of times",
-                        "It saves typing and makes the code easier to read",
+                        "Clap clap clap clap clap clap",
+                        "Repeat 3: clap clap",
                         "A number telling how many times to repeat"
                       ]
                     }
@@ -39539,7 +39539,7 @@
                       "options": [
                         "Each window on a house (4 windows)",
                         "20",
-                        "To describe patterns that repeat inside of other repeating patterns",
+                        "9",
                         "6"
                       ]
                     }
@@ -40171,8 +40171,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "One sprite bumping into another sprite",
-                        "It might start only that one sprite's code",
-                        "It often starts the whole project at once",
+                        "The cat jumps",
+                        "The background changes",
                         "The cat meows"
                       ]
                     }
@@ -40501,9 +40501,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "the 'then' part",
-                        "The same way every time, regardless of the situation",
+                        "repeat and loop",
                         "if and then",
-                        "They let programs respond differently to different situations"
+                        "wait and stop"
                       ]
                     },
                     {
@@ -40608,7 +40608,7 @@
                         "Make a decision based on a condition",
                         "the 'then' part",
                         "if and then",
-                        "The same way every time, regardless of the situation"
+                        "the 'if' part"
                       ]
                     },
                     {
@@ -40724,7 +40724,7 @@
                       "options": [
                         "a variable",
                         "the player's points/score",
-                        "Stores a piece of information that can change",
+                        "a loop",
                         "0"
                       ]
                     },
@@ -40771,8 +40771,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "a 'lives' variable",
-                        "The score needs to change and update as the player plays",
-                        "A named container that stores information which can change",
+                        "a 'score' variable",
+                        "a 'sound' variable",
                         "any changeable data (e.g. lives, time, name)"
                       ]
                     },
@@ -40911,9 +40911,9 @@
                       "correctAnswer": "costume animation",
                       "type": "multiple-choice",
                       "options": [
-                        "They are how your program knows when to start doing something",
+                        "event broadcasting",
                         "costume animation",
-                        "Costumes control appearance; events control when code runs",
+                        "variable tracking",
                         "the illusion of animation"
                       ]
                     },
@@ -41161,8 +41161,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "10",
-                        "a 'wait 1 second' block (combined with a loop)",
-                        "it adds challenge and urgency by giving a limited time to complete a task",
+                        "a background decoration",
+                        "a sound effect",
                         "a time limit"
                       ]
                     },
@@ -41265,10 +41265,10 @@
                       "correctAnswer": "10",
                       "type": "multiple-choice",
                       "options": [
-                        "it adds challenge and urgency by giving a limited time to complete a task",
+                        "0",
                         "10",
                         "a time limit",
-                        "a 'wait 1 second' block (combined with a loop)"
+                        "100"
                       ]
                     },
                     {
@@ -41326,9 +41326,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "W/A/S/D",
-                        "So each player's input only controls their own sprite",
-                        "Sprite A listens for arrow keys; Sprite B listens for W/A/S/D",
-                        "They can track each player's score separately"
+                        "I/J/K/L",
+                        "the number keys",
+                        "the space bar only"
                       ]
                     },
                     {
@@ -41490,10 +41490,10 @@
                       "correctAnswer": "points",
                       "type": "multiple-choice",
                       "options": [
-                        "A variable can change as the game is played, accurately reflecting the player's current progress, unlike a fixed number",
+                        "lives",
                         "points",
                         "Yes",
-                        "a clear name immediately explains what the variable represents, making the project easier for others to follow"
+                        "speed"
                       ]
                     },
                     {
@@ -43638,10 +43638,10 @@
                       "correctAnswer": "skimming",
                       "type": "multiple-choice",
                       "options": [
-                        "get a quick overview before reading in detail",
-                        "Move quickly across the page looking just for that word",
+                        "scanning",
+                        "proofreading",
                         "skimming",
-                        "Running your eyes down the page looking for a specific word"
+                        "rereading"
                       ]
                     },
                     {
@@ -43683,8 +43683,8 @@
                       "correctAnswer": "scanning",
                       "type": "multiple-choice",
                       "options": [
-                        "They help you find information quickly without reading every word",
-                        "reading quickly to get the general idea",
+                        "skimming",
+                        "rereading",
                         "scanning",
                         "scan for key words or numbers"
                       ]
@@ -43720,9 +43720,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "scan for key words or numbers",
-                        "get a quick overview before reading in detail",
+                        "scanning",
                         "skimming",
-                        "They help you find information quickly without reading every word"
+                        "proofreading"
                       ]
                     }
                   ]
@@ -44389,9 +44389,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "emotive language",
-                        "Wouldn't you want a safer playground for your children?",
+                        "rhetorical questions",
                         "you",
-                        "To make the reader think and agree without expecting a reply"
+                        "repetition"
                       ]
                     },
                     {
@@ -44425,8 +44425,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "you",
-                        "emotive language (or rhetorical questions, repetition)",
-                        "Wouldn't you want a safer playground for your children?",
+                        "we",
+                        "they",
                         "This is the best park in town."
                       ]
                     }
@@ -44530,7 +44530,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "Present tense",
-                        "Explanations tell you how/why something happens; instructions tell you what to do",
+                        "a glossary",
                         "a diagram",
                         "This causes"
                       ]
@@ -44565,7 +44565,7 @@
                       "correctAnswer": "because",
                       "type": "multiple-choice",
                       "options": [
-                        "This happens because... and as a result...",
+                        "so",
                         "because",
                         "This causes",
                         "Present tense"
@@ -44811,9 +44811,9 @@
                       "correctAnswer": "stanza",
                       "type": "multiple-choice",
                       "options": [
-                        "they both tell a story with characters and events",
+                        "a paragraph",
                         "Rhyme and rhythm",
-                        "poetic features like rhyme and rhythm",
+                        "a chapter",
                         "stanza"
                       ]
                     },
@@ -45473,7 +45473,7 @@
                       "options": [
                         "what they care about",
                         "To convince the reader",
-                        "This is clearly the best choice, and here's why.",
+                        "narrative",
                         "persuasive"
                       ]
                     },
@@ -45754,7 +45754,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "\"Where are you going?\" asked Maya.",
-                        "It belongs to the exact words the speaker said",
+                        "narrative voice",
                         "reported/indirect speech",
                         "direct speech"
                       ]
@@ -45777,7 +45777,7 @@
                       "correctAnswer": "an exclamation mark",
                       "type": "multiple-choice",
                       "options": [
-                        "It makes it clear who is speaking and keeps dialogue easy to follow",
+                        "a question mark",
                         "an exclamation mark",
                         "The exact words someone said",
                         "direct speech"
@@ -46109,8 +46109,8 @@
                       "options": [
                         "Sentences about the same idea",
                         "an indent",
-                        "A character moves to a completely new location",
-                        "it makes the writing much easier to follow"
+                        "a margin",
+                        "a heading"
                       ]
                     },
                     {
@@ -46215,10 +46215,10 @@
                       "correctAnswer": "emotive words",
                       "type": "multiple-choice",
                       "options": [
-                        "To make the reader think, without expecting a direct answer",
+                        "rhetorical questions",
                         "Back it up with convincing reasons",
                         "emotive words",
-                        "It helps convince people to support a cause, buy a product, or change their views"
+                        "statistics"
                       ]
                     },
                     {
@@ -46521,8 +46521,8 @@
                       "correctAnswer": "The dog barked.",
                       "type": "multiple-choice",
                       "options": [
-                        "Joins two simple sentences together using a connective",
-                        "the comma marks the point where the first simple sentence ends and the joining word begins, making the sentence easier to read",
+                        "The cat slept.",
+                        "It was raining.",
                         "The dog barked.",
                         "I like apples, and I like oranges."
                       ]
@@ -46686,9 +46686,9 @@
                       "correctAnswer": "the date",
                       "type": "multiple-choice",
                       "options": [
-                        "the writer's own thoughts and feelings",
-                        "It gives an informal, low-pressure space to describe experiences and reflect on emotions, which is good practice for personal and narrative writing",
-                        "It creates a written record of daily events and feelings that might otherwise be forgotten over time",
+                        "the time",
+                        "a greeting",
+                        "the weather",
                         "the date"
                       ]
                     },
@@ -46878,7 +46878,7 @@
                         "Facts about a real topic",
                         "Topic",
                         "no",
-                        "a captioned picture can show what something looks like and quickly explain what's happening in the image, supporting the written facts"
+                        "yes"
                       ]
                     },
                     {
@@ -49315,9 +49315,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "The amount or quantity for that category",
-                        "A pictogram uses repeated pictures/symbols instead of bars",
+                        "dots (points)",
                         "bars (rectangles)",
-                        "They make it easy to compare different categories at a glance"
+                        "lines"
                       ]
                     },
                     {
@@ -49339,7 +49339,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "the key (legend)",
-                        "Bars can represent different amounts depending on the scale used",
+                        "the axis labels",
                         "the title of the chart",
                         "bars (rectangles)"
                       ]
@@ -49423,9 +49423,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "2/4",
-                        "Changing only one number would change the actual value of the fraction",
+                        "3/4",
                         "1/2",
-                        "Multiply or divide the top and bottom number by the same amount"
+                        "1/4"
                       ]
                     },
                     {
@@ -49447,8 +49447,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "2/4",
-                        "Changing only one number would change the actual value of the fraction",
-                        "Different fractions that represent the same amount",
+                        "1/4",
+                        "3/4",
                         "1/2"
                       ]
                     },
@@ -49480,9 +49480,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "1/2",
-                        "Different fractions that represent the same amount",
+                        "3/6",
                         "2/6",
-                        "Changing only one number would change the actual value of the fraction"
+                        "1/6"
                       ]
                     },
                     {
@@ -49527,9 +49527,9 @@
                       "correctAnswer": "1/2",
                       "type": "multiple-choice",
                       "options": [
-                        "Multiply or divide the top and bottom number by the same amount",
-                        "Different fractions that represent the same amount",
-                        "They let you rewrite fractions with a matching bottom number so they're easy to compare",
+                        "5/10",
+                        "2/5",
+                        "1/4",
                         "1/2"
                       ]
                     },
@@ -49752,7 +49752,7 @@
                       "correctAnswer": "15:00",
                       "type": "multiple-choice",
                       "options": [
-                        "Because midnight (12:00 am) is written as 00:00, not 12:00, in the 24-hour system",
+                        "13:00",
                         "15:00",
                         "11:00 pm",
                         "4:30 pm"
@@ -49779,7 +49779,7 @@
                         "19:00",
                         "11:00 pm",
                         "15:00",
-                        "Because midnight (12:00 am) is written as 00:00, not 12:00, in the 24-hour system"
+                        "17:00"
                       ]
                     },
                     {
@@ -49835,7 +49835,7 @@
                       "options": [
                         "09:00",
                         "4:30 pm",
-                        "Because midnight (12:00 am) is written as 00:00, not 12:00, in the 24-hour system",
+                        "12:00",
                         "00:00"
                       ]
                     },
@@ -49860,7 +49860,7 @@
                         "22:00",
                         "4:30 pm",
                         "11:00 pm",
-                        "It avoids confusion between am and pm times"
+                        "21:00"
                       ]
                     },
                     {
@@ -49919,7 +49919,7 @@
                       "options": [
                         "20 square units",
                         "12 square units",
-                        "It builds a concrete understanding of what area actually represents, which the formula then calculates more efficiently",
+                        "cubic units",
                         "square units"
                       ]
                     },
@@ -49942,7 +49942,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "square units",
-                        "By counting how many whole squares it covers",
+                        "perimeter",
                         "area",
                         "12 square units"
                       ]
@@ -49977,7 +49977,7 @@
                         "20 square units",
                         "12 square units",
                         "By counting how many whole squares it covers",
-                        "it directly shows what area means (covered space) in a visual, hands-on way before introducing a formula"
+                        "9 square units"
                       ]
                     },
                     {
@@ -51570,9 +51570,9 @@
                       "correctAnswer": "ஆத்திசூடி",
                       "type": "multiple-choice",
                       "options": [
-                        "A list of one-line sayings (moral maxims)",
+                        "நாலடியார்",
                         "ஆத்திசூடி",
-                        "Because its lessons about kindness, patience, and hard work are still true and useful today",
+                        "திருக்குறள்",
                         "Effort / diligence"
                       ]
                     }
@@ -51852,7 +51852,7 @@
                       "correctAnswer": "he",
                       "type": "multiple-choice",
                       "options": [
-                        "A word that names a person, place or thing",
+                        "she",
                         "he",
                         "school",
                         "you"
@@ -52100,7 +52100,7 @@
                       "options": [
                         "beginning, middle, end",
                         "a dictionary",
-                        "It helps you keep reading without constant interruptions",
+                        "a thesaurus",
                         "short stories"
                       ]
                     },
@@ -52216,7 +52216,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "irupadhu",
-                        "By combining 'paththu' with the ones digit",
+                        "moondru",
                         "ettu",
                         "irandu"
                       ]
@@ -52325,7 +52325,7 @@
                       "options": [
                         "Regular",
                         "puthagangal",
-                        "You can usually apply the same '-gal' rule to most nouns",
+                        "puthagams",
                         "-gal"
                       ]
                     },
@@ -52383,7 +52383,7 @@
                         "marangal",
                         "veedugal",
                         "Regular",
-                        "You can usually apply the same '-gal' rule to most nouns"
+                        "veedus"
                       ]
                     },
                     {
@@ -52404,7 +52404,7 @@
                       "correctAnswer": "trees",
                       "type": "multiple-choice",
                       "options": [
-                        "You can usually apply the same '-gal' rule to most nouns",
+                        "houses",
                         "-gal",
                         "puthagangal",
                         "trees"
@@ -52655,7 +52655,7 @@
                       "options": [
                         "Vanakkam",
                         "I am fine",
-                        "Greeting someone and asking how they are",
+                        "What is your name?",
                         "meeting someone new"
                       ]
                     },
@@ -52735,7 +52735,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "Vanakkam",
-                        "Greeting someone and asking how they are",
+                        "Nandri",
                         "Nalla irukken",
                         "Ungal peyar enna?"
                       ]
@@ -52758,7 +52758,7 @@
                       "correctAnswer": "meeting someone new",
                       "type": "multiple-choice",
                       "options": [
-                        "It prepares you for real back-and-forth speaking situations",
+                        "saying goodbye",
                         "meeting someone new",
                         "Greeting someone and asking how they are",
                         "What is your name?"
@@ -52875,7 +52875,7 @@
                       "correctAnswer": "present tense",
                       "type": "multiple-choice",
                       "options": [
-                        "It helps you tell whether an action is happening now, already happened, or will happen later",
+                        "future tense",
                         "Past tense",
                         "The ending of the verb",
                         "present tense"
@@ -52901,7 +52901,7 @@
                       "options": [
                         "present tense",
                         "The ending of the verb",
-                        "Many Tamil verbs follow similar tense-ending patterns, so one example can guide understanding of others",
+                        "past tense",
                         "future tense"
                       ]
                     },
@@ -52924,7 +52924,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "I will eat (future tense)",
-                        "Many Tamil verbs follow similar tense-ending patterns, so one example can guide understanding of others",
+                        "padiuven",
                         "padigiren",
                         "future tense"
                       ]
@@ -53148,10 +53148,10 @@
                       "correctAnswer": "your name",
                       "type": "multiple-choice",
                       "options": [
-                        "different relationships call for different levels of formality and respect",
+                        "the date",
                         "a more casual and relaxed tone",
                         "your name",
-                        "details like the date, time and location of the party"
+                        "a question"
                       ]
                     },
                     {
@@ -53316,7 +53316,7 @@
                         "keezh",
                         "after the noun",
                         "On top of the table",
-                        "Because in Tamil they are placed after the noun, not before it"
+                        "arugil"
                       ]
                     },
                     {
@@ -53339,7 +53339,7 @@
                       "options": [
                         "keezh",
                         "On top of",
-                        "Because in Tamil they are placed after the noun, not before it",
+                        "before the noun",
                         "after the noun"
                       ]
                     },
@@ -53478,10 +53478,10 @@
                       "correctAnswer": "a moral",
                       "type": "multiple-choice",
                       "options": [
-                        "So the reader understands exactly what lesson the story was trying to teach",
+                        "a summary",
                         "a moral",
                         "the Panchatantra",
-                        "To show the reader the negative outcome of foolish behaviour, reinforcing the moral"
+                        "a title"
                       ]
                     },
                     {
@@ -53502,9 +53502,9 @@
                       "correctAnswer": "the Panchatantra",
                       "type": "multiple-choice",
                       "options": [
-                        "Their simple stories and animal characters make important life lessons easy to remember and pass on",
-                        "that hard work and preparation are rewarded, while laziness has consequences",
-                        "To show the reader the negative outcome of foolish behaviour, reinforcing the moral",
+                        "Aesop's Fables",
+                        "the Mahabharata",
+                        "the Ramayana",
                         "the Panchatantra"
                       ]
                     },
@@ -53667,10 +53667,10 @@
                       "correctAnswer": "polite",
                       "type": "multiple-choice",
                       "options": [
-                        "so the guest knows who is hosting the event and inviting them",
-                        "The date, time and place of the party",
+                        "rude",
+                        "formal",
                         "polite",
-                        "the guest would not know where to go, and might miss the event"
+                        "casual"
                       ]
                     },
                     {
@@ -53814,9 +53814,9 @@
                       "correctAnswer": "A classification key",
                       "type": "multiple-choice",
                       "options": [
-                        "It helps identify unknown organisms and see how they are related",
+                        "A food chain",
                         "A dog",
-                        "Body covering (fur/feathers/scales), or a similar valid feature",
+                        "A thermometer",
                         "A classification key"
                       ]
                     },
@@ -53871,7 +53871,7 @@
                       "correctAnswer": "Reptiles",
                       "type": "multiple-choice",
                       "options": [
-                        "They usually live part of their life in water and part on land",
+                        "Amphibians",
                         "Reptiles",
                         "A cat and a whale (both mammals)",
                         "A dog"
@@ -54013,7 +54013,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "The stomach",
-                        "It is churned and broken down by acid and muscles",
+                        "Bile",
                         "Saliva",
                         "Mouth"
                       ]
@@ -54123,7 +54123,7 @@
                         "0 degrees Celsius",
                         "100 degrees Celsius",
                         "Liquid",
-                        "Spreads out to fill all the space available"
+                        "Gas"
                       ]
                     }
                   ]
@@ -54156,7 +54156,7 @@
                         "0 degrees Celsius",
                         "Liquid",
                         "Melting",
-                        "It boils and turns into steam (a gas)"
+                        "Freezing"
                       ]
                     },
                     {
@@ -54295,7 +54295,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "Something vibrating",
-                        "They travel as sound waves through the air",
+                        "Volume",
                         "They become bigger (greater amplitude)",
                         "Pitch"
                       ]
@@ -54379,8 +54379,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "A conductor",
-                        "A complete, unbroken loop connected to a power source",
-                        "To provide the energy that pushes electricity around the circuit",
+                        "A circuit",
+                        "A battery",
                         "Plastic, because it is an insulator"
                       ]
                     },
@@ -54459,8 +54459,8 @@
                       "correctAnswer": "An insulator",
                       "type": "multiple-choice",
                       "options": [
-                        "A complete, unbroken loop connected to a power source",
-                        "The circuit is broken and the bulb will not light",
+                        "A switch",
+                        "A wire",
                         "An insulator",
                         "A conductor"
                       ]
@@ -54519,10 +54519,10 @@
                       "correctAnswer": "A producer",
                       "type": "multiple-choice",
                       "options": [
-                        "The frog population would likely decline due to lack of food",
+                        "A predator",
                         "A producer",
                         "Prey",
-                        "They will struggle to find food and may decline in number"
+                        "A consumer"
                       ]
                     },
                     {
@@ -54577,9 +54577,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "A producer",
-                        "The frog population would likely decline due to lack of food",
+                        "A predator",
                         "Prey",
-                        "Planting trees (or creating nature reserves, cleaning rivers)"
+                        "A consumer"
                       ]
                     },
                     {
@@ -54717,7 +54717,7 @@
                       "correctAnswer": "Incisors",
                       "type": "multiple-choice",
                       "options": [
-                        "Incisors cut food while canines tear food",
+                        "Molars",
                         "Canines",
                         "Incisors",
                         "Grinding/chewing food into smaller pieces"
@@ -54858,7 +54858,7 @@
                       "correctAnswer": "Condensation",
                       "type": "multiple-choice",
                       "options": [
-                        "Because water moves through the same stages again and again",
+                        "Precipitation",
                         "Condensation",
                         "Heat from the sun",
                         "Evaporation"
@@ -54942,7 +54942,7 @@
                       "correctAnswer": "A thermometer",
                       "type": "multiple-choice",
                       "options": [
-                        "In an organised table with plant names and weekly measurements",
+                        "A ruler",
                         "A bar chart",
                         "A thermometer",
                         "In a table"
@@ -54956,7 +54956,7 @@
                       "options": [
                         "In a table",
                         "Scattered randomly on scrap paper",
-                        "By memory only, without writing anything down",
+                        "By guessing",
                         "By throwing it away"
                       ]
                     },
@@ -54968,8 +54968,8 @@
                       "options": [
                         "A ruler",
                         "A bar chart",
-                        "So the results are not forgotten or mixed up",
-                        "It makes it easier to compare results and spot patterns"
+                        "A pie chart",
+                        "A line graph"
                       ]
                     }
                   ]
@@ -55084,9 +55084,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "A conclusion",
-                        "So the results are reliable and can be trusted",
-                        "Recording results accurately and explaining what they show",
-                        "Report the results honestly and explain what they show, rather than changing them"
+                        "A prediction",
+                        "A method",
+                        "A variable"
                       ]
                     },
                     {
@@ -55225,7 +55225,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "metamorphic",
-                        "Heat and pressure changing existing rock",
+                        "igneous",
                         "Metamorphic rock",
                         "sedimentary"
                       ]
@@ -55250,7 +55250,7 @@
                       "options": [
                         "humus",
                         "Igneous",
-                        "They contain different amounts of rock particles and organic matter",
+                        "clay",
                         "sandstone"
                       ]
                     },
@@ -55282,7 +55282,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "metamorphic",
-                        "Broken pieces of rock mixed with decayed matter",
+                        "chalk",
                         "sandstone",
                         "granite"
                       ]
@@ -55305,7 +55305,7 @@
                       "correctAnswer": "sandstone",
                       "type": "multiple-choice",
                       "options": [
-                        "They contain different amounts of rock particles and organic matter",
+                        "marble",
                         "granite",
                         "sandstone",
                         "Igneous"
@@ -55329,7 +55329,7 @@
                       "correctAnswer": "metamorphic",
                       "type": "multiple-choice",
                       "options": [
-                        "Heat and pressure changing existing rock",
+                        "volcanic",
                         "sandstone",
                         "humus",
                         "metamorphic"
@@ -55447,9 +55447,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "It condenses into clouds",
-                        "It can evaporate again, restarting the cycle",
+                        "evaporation",
                         "collection",
-                        "it provides fresh water for living things"
+                        "condensation"
                       ]
                     },
                     {
@@ -55471,8 +55471,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "snow (or hail)",
-                        "It can evaporate again, restarting the cycle",
-                        "The sun heating water, turning it to vapour",
+                        "fog",
+                        "dew",
                         "Because it repeats endlessly"
                       ]
                     },
@@ -55556,7 +55556,7 @@
                       "options": [
                         "The object blocks it completely",
                         "an opaque object",
-                        "A dark area where light can't reach because it's blocked",
+                        "a transparent object",
                         "a lamp (or torch)"
                       ]
                     },
@@ -55593,7 +55593,7 @@
                         "The sun",
                         "A shadow",
                         "A mirror",
-                        "The moon reflecting no light of its own"
+                        "A lamp"
                       ]
                     }
                   ]
@@ -55638,7 +55638,7 @@
                         "The object blocks it completely",
                         "it becomes shorter",
                         "The angle of the sun (light source) changes",
-                        "A dark area where light can't reach because it's blocked"
+                        "it becomes longer"
                       ]
                     },
                     {
@@ -55779,7 +55779,7 @@
                         "reproduction (making seeds, via pollination)",
                         "water (and nutrients)",
                         "photosynthesis",
-                        "Each part has a specialised job that supports the whole plant's survival"
+                        "germination"
                       ]
                     },
                     {
@@ -55943,7 +55943,7 @@
                       "options": [
                         "Iron",
                         "no",
-                        "it quickly and directly shows whether the material is attracted or not",
+                        "yes",
                         "Magnetic materials"
                       ]
                     },
@@ -55989,7 +55989,7 @@
                       "correctAnswer": "cobalt (or nickel)",
                       "type": "multiple-choice",
                       "options": [
-                        "it quickly and directly shows whether the material is attracted or not",
+                        "copper",
                         "They are not magnetic",
                         "No",
                         "cobalt (or nickel)"
@@ -56049,8 +56049,8 @@
                       "correctAnswer": "opaque",
                       "type": "multiple-choice",
                       "options": [
-                        "So it can squash and absorb liquid easily",
-                        "to withstand force without bending or breaking",
+                        "flexible",
+                        "transparent",
                         "metal (or stone, glass)",
                         "opaque"
                       ]
@@ -56130,7 +56130,7 @@
                       "correctAnswer": "rubber (or fabric)",
                       "type": "multiple-choice",
                       "options": [
-                        "Choosing the right properties ensures an object works well for its purpose",
+                        "glass",
                         "flexibility",
                         "Whether it bends easily or stays rigid",
                         "rubber (or fabric)"
@@ -56155,7 +56155,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "opaque",
-                        "Whether it bends easily or stays rigid",
+                        "transparency",
                         "metal (or stone, glass)",
                         "flexibility"
                       ]
@@ -56214,8 +56214,8 @@
                       "correctAnswer": "igneous rock",
                       "type": "multiple-choice",
                       "options": [
-                        "it cools and hardens quickly from very hot magma or lava, forming tightly packed crystals",
-                        "It forms from layers of material (like mud or sand) settling over time, which can trap and preserve remains",
+                        "sedimentary rock",
+                        "metamorphic rock",
                         "Igneous, sedimentary and metamorphic",
                         "igneous rock"
                       ]
@@ -56274,7 +56274,7 @@
                         "igneous rock",
                         "clay soil",
                         "metamorphic rock",
-                        "clay soil holds more water and nutrients, which many plants need to grow well"
+                        "sandy soil"
                       ]
                     },
                     {
@@ -56403,9 +56403,9 @@
                       "correctAnswer": "a pull",
                       "type": "multiple-choice",
                       "options": [
-                        "The direction you need the door to move determines whether the force applied is a pull or a push",
+                        "a push",
                         "A push or a pull",
-                        "A push or pull applied from a particular angle can redirect how an object is moving",
+                        "gravity",
                         "a pull"
                       ]
                     },
@@ -56544,7 +56544,7 @@
                       "correctAnswer": "energy",
                       "type": "multiple-choice",
                       "options": [
-                        "Carbohydrates provide energy, which is especially useful for sustained physical activity",
+                        "fibre",
                         "energy",
                         "calcium",
                         "Vitamins"
@@ -56569,8 +56569,8 @@
                       "type": "multiple-choice",
                       "options": [
                         "calcium",
-                        "protein supports growth and the repair of body tissues, important during childhood development",
-                        "each food group provides different nutrients the body needs, so variety ensures a balanced diet",
+                        "protein",
+                        "fibre",
                         "energy"
                       ]
                     },
@@ -56711,7 +56711,7 @@
                       "options": [
                         "Steel",
                         "magnetic",
-                        "magnetic materials can be used so magnets can stick to them, which is useful for items like fridge magnets",
+                        "non-magnetic",
                         "Attracts (pulls) them"
                       ]
                     },
@@ -56898,10 +56898,10 @@
                       "correctAnswer": "a solid",
                       "type": "multiple-choice",
                       "options": [
-                        "removing heat energy from a gas causes its particles to slow down and come together, forming a liquid",
-                        "the warmer air heats the ice, and heating a solid enough causes it to melt into a liquid",
+                        "a liquid",
+                        "a gas",
                         "a solid",
-                        "It explains that the water is evaporating into water vapour (a gas), not simply vanishing"
+                        "water vapour"
                       ]
                     },
                     {
@@ -57040,9 +57040,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "the skull",
-                        "An X-ray can reveal if a bone underneath the skin is broken, which cannot be seen from the outside",
-                        "Supports it, protects organs, and allows movement",
-                        "A joint, like the elbow, allows bending, while a single solid bone itself cannot bend"
+                        "the ribs",
+                        "the spine",
+                        "the pelvis"
                       ]
                     },
                     {
@@ -57063,10 +57063,10 @@
                       "correctAnswer": "joints",
                       "type": "multiple-choice",
                       "options": [
-                        "An X-ray can reveal if a bone underneath the skin is broken, which cannot be seen from the outside",
+                        "muscles",
                         "joints",
-                        "Supports it, protects organs, and allows movement",
-                        "It shows how different body systems rely on bones for more than one purpose, working together with other parts like muscles and organs"
+                        "tendons",
+                        "ligaments"
                       ]
                     },
                     {
@@ -57690,10 +57690,10 @@
                       "correctAnswer": "Decomposition",
                       "type": "multiple-choice",
                       "options": [
-                        "Smaller parts are usually much easier to understand and solve",
-                        "It can feel overwhelming and confusing compared to solving smaller parts",
+                        "Debugging",
+                        "Abstraction",
                         "Decomposition",
-                        "Breaking a big cleaning job into smaller tasks"
+                        "Iteration"
                       ]
                     },
                     {
@@ -57831,9 +57831,9 @@
                       "correctAnswer": "Charts or graphs",
                       "type": "multiple-choice",
                       "options": [
-                        "You do not need to recalculate the answer by hand",
-                        "Organising, calculating and displaying information in rows and columns",
-                        "To automatically calculate a result using values in other cells",
+                        "Formulas",
+                        "Filters",
+                        "Templates",
                         "Charts or graphs"
                       ]
                     },
@@ -57927,9 +57927,9 @@
                       "correctAnswer": "A client",
                       "type": "multiple-choice",
                       "options": [
-                        "It helps us see the internet as an organised system rather than something magical",
+                        "A server",
                         "A client",
-                        "The client requests information and the server sends the information back",
+                        "A router",
                         "An IP address"
                       ]
                     },
@@ -58221,10 +58221,10 @@
                       "correctAnswer": "A trusted adult",
                       "type": "multiple-choice",
                       "options": [
-                        "The trail of information left behind by everything we do online",
-                        "Because it shows a trail of what someone has done, which others can sometimes see",
+                        "A classmate",
+                        "An online stranger",
                         "A trusted adult",
-                        "Messages, photographs, comments, or websites visited"
+                        "No one — just post it"
                       ]
                     }
                   ]
@@ -58352,8 +58352,8 @@
                       "options": [
                         "A frame",
                         "Cartoons or animated films",
-                        "Making still pictures appear to move using a fast sequence of images",
-                        "Repeat several times: switch to next costume, wait a short time"
+                        "A layer",
+                        "A pixel"
                       ]
                     },
                     {
@@ -58701,7 +58701,7 @@
                       "correctAnswer": "rows and columns",
                       "type": "multiple-choice",
                       "options": [
-                        "They arrange information clearly into rows and columns",
+                        "dots and lines",
                         "pocket money (or scores/a list)",
                         "rows and columns",
                         "Automatically calculate totals"
@@ -58788,7 +58788,7 @@
                         "A huge network of networks connecting the world",
                         "Local Area Network",
                         "Wi-Fi",
-                        "A group of connected computers that can share information"
+                        "Wide Area Network"
                       ]
                     },
                     {
@@ -58866,8 +58866,8 @@
                       "correctAnswer": "Wi-Fi",
                       "type": "multiple-choice",
                       "options": [
-                        "Information and resources like a printer",
-                        "A huge network of networks connecting the world",
+                        "Bluetooth",
+                        "a USB cable",
                         "Local Area Network",
                         "Wi-Fi"
                       ]
@@ -58891,9 +58891,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "cables",
-                        "They let computers share information and resources efficiently",
+                        "satellites",
                         "a printer (or internet connection)",
-                        "Connecting computers within one building, like a school or home"
+                        "sound waves"
                       ]
                     },
                     {
@@ -59115,9 +59115,9 @@
                       "correctAnswer": "an attachment",
                       "type": "multiple-choice",
                       "options": [
-                        "It tends to be more formal, especially to teachers or organisations",
+                        "a signature",
                         "an attachment",
-                        "Clear subject line, polite tone, organised structure, and appropriate attachments",
+                        "a bookmark",
                         "Summarises the topic of the message"
                       ]
                     },
@@ -59446,9 +59446,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "permission",
-                        "to respect copyright and avoid using work without the right to do so",
+                        "a password",
                         "Creative Commons (licensed work)",
-                        "Always check permissions and give credit before using someone else's creative work"
+                        "a screenshot"
                       ]
                     },
                     {
@@ -59800,9 +59800,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "Even experienced programmers",
-                        "Writing complex instructions is difficult, and finding and fixing mistakes is simply part of the development process",
+                        "no",
                         "yes",
-                        "going through the program step by step, checking what each part does"
+                        "only for beginners"
                       ]
                     },
                     {
@@ -59940,10 +59940,10 @@
                       "correctAnswer": "specific keywords",
                       "type": "multiple-choice",
                       "options": [
-                        "Not all information online is accurate or safe, so checking helps you avoid misleading or harmful content",
-                        "Looks through billions of webpages to find ones matching your search words",
+                        "a single letter",
+                        "random words",
                         "specific keywords",
-                        "More specific keywords narrow down the search engine's results to more relevant, precise information"
+                        "your home address"
                       ]
                     },
                     {
@@ -59965,9 +59965,9 @@
                       "type": "multiple-choice",
                       "options": [
                         "If it looks trustworthy",
-                        "It helps them find reliable, useful information while avoiding unsafe or inappropriate content",
+                        "an online stranger",
                         "a trusted adult",
-                        "an adult can help explain or verify information, and help if something seems unsafe or inappropriate"
+                        "nobody"
                       ]
                     },
                     {
@@ -60105,8 +60105,8 @@
                       "correctAnswer": "the 'repeat' block",
                       "type": "multiple-choice",
                       "options": [
-                        "Loops are a fundamental programming concept used in nearly every language, so understanding them in Scratch builds a foundation for later",
-                        "they let you repeat the 'move' instruction 10 times without writing it out 10 separate times",
+                        "the 'if' block",
+                        "the 'wait' block",
                         "Runs instructions endlessly",
                         "the 'repeat' block"
                       ]
@@ -60294,10 +60294,10 @@
                       "correctAnswer": "no, never",
                       "type": "multiple-choice",
                       "options": [
-                        "real companies never need your actual password, and sharing it with a stranger could let them access and misuse your account",
+                        "yes, if they ask nicely",
                         "no, never",
-                        "It can be harder to guess than a simple word, while still being memorable to you because of the unusual combination",
-                        "A mix of letters, numbers and symbols that is hard to guess"
+                        "yes, if it's a friend",
+                        "only sometimes"
                       ]
                     },
                     {
@@ -60459,9 +60459,9 @@
                       "correctAnswer": "MP3",
                       "type": "multiple-choice",
                       "options": [
-                        "Some formats or settings compress the image data to reduce file size, often by removing some less noticeable detail",
-                        "it helps you pick a format that suits how the file will be used, shared, or opened by others",
-                        "PDF files are generally harder to edit directly compared to formats like DOC, making them useful for sharing a 'final' version",
+                        "JPG",
+                        "PDF",
+                        "DOCX",
                         "MP3"
                       ]
                     },
@@ -60699,10 +60699,10 @@
                       "correctAnswer": "Orange",
                       "type": "multiple-choice",
                       "options": [
-                        "Drag blocks from the palette into the coding area and snap them together",
-                        "The area where your project actually plays and shows the action",
+                        "Blue",
+                        "Green",
                         "Orange",
-                        "Click on that sprite in the sprite list"
+                        "Yellow"
                       ]
                     }
                   ]
@@ -61617,10 +61617,10 @@
                       "correctAnswer": "A detective",
                       "type": "multiple-choice",
                       "options": [
-                        "Whether the variables are changing the way you expect",
-                        "Debugging sample projects with common Scratch mistakes already built in",
+                        "A chef",
+                        "A firefighter",
                         "A detective",
-                        "The if-then block only checks its condition once instead of continuously"
+                        "A teacher"
                       ]
                     }
                   ]
@@ -61899,10 +61899,10 @@
                       "correctAnswer": "A variable",
                       "type": "multiple-choice",
                       "options": [
-                        "Test small pieces as you go instead of waiting until the very end",
+                        "A costume",
                         "A variable",
-                        "Think like a detective and look for clues about what is actually happening compared to what you expected",
-                        "Motion, loops, events, sound, if-then blocks, and variables"
+                        "A backdrop",
+                        "A sound effect"
                       ]
                     }
                   ]
@@ -62043,7 +62043,7 @@
                         "the inner loop",
                         "complex geometric patterns/shapes",
                         "the outer loop",
-                        "how many times each loop (inner and outer) should repeat"
+                        "the main script"
                       ]
                     },
                     {
@@ -62075,7 +62075,7 @@
                       "options": [
                         "the outer loop",
                         "the inner loop",
-                        "how many times each loop (inner and outer) should repeat",
+                        "the event block",
                         "10"
                       ]
                     },
@@ -62346,9 +62346,9 @@
                       "correctAnswer": "conditionals",
                       "type": "multiple-choice",
                       "options": [
-                        "it makes building the game far more manageable/organised",
+                        "sequencing",
                         "A loop",
-                        "what makes you win, lose, or score points",
+                        "broadcasting",
                         "conditionals"
                       ]
                     },
@@ -62403,10 +62403,10 @@
                       "correctAnswer": "sequencing",
                       "type": "multiple-choice",
                       "options": [
-                        "Games need sequencing, repetition, decisions and data tracking together",
+                        "cloning",
                         "Variables",
                         "sequencing",
-                        "tracking how many lives/attempts the player has left"
+                        "lists"
                       ]
                     },
                     {
@@ -62440,7 +62440,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "A loop",
-                        "A single sequence with no repetition",
+                        "A broadcast message",
                         "Only a variable",
                         "Only a costume change"
                       ]
@@ -62571,7 +62571,7 @@
                         "it would create 10 clones",
                         "multiple enemies (or raindrops)",
                         "yes",
-                        "Efficiently creating multiple copies of a sprite with their own position and behaviour"
+                        "no"
                       ]
                     },
                     {
@@ -62619,7 +62619,7 @@
                         "loops",
                         "it would create 10 clones",
                         "yes",
-                        "It lets each clone run its own behaviour, separate from the original sprite's code"
+                        "variables"
                       ]
                     },
                     {
@@ -62700,7 +62700,7 @@
                       "correctAnswer": "a Python list",
                       "type": "multiple-choice",
                       "options": [
-                        "Remove them (and check items at a position)",
+                        "a Python dictionary",
                         "Multiple pieces of information together",
                         "a list",
                         "a Python list"
@@ -62733,10 +62733,10 @@
                       "correctAnswer": "a list",
                       "type": "multiple-choice",
                       "options": [
-                        "a Python list",
-                        "Remove them (and check items at a position)",
+                        "a variable",
+                        "a single string",
                         "a list",
-                        "They help organise and work with groups of related data"
+                        "a loop"
                       ]
                     },
                     {
@@ -62865,10 +62865,10 @@
                       "correctAnswer": "broadcasts",
                       "type": "multiple-choice",
                       "options": [
-                        "it breaks the story into clear pages/scenes, making the project easier to build",
-                        "they can signal multiple sprites/backgrounds to change together at the same moment",
+                        "loops",
+                        "variables",
                         "broadcasts",
-                        "Plan your story's pages, like a comic strip"
+                        "clones"
                       ]
                     },
                     {
@@ -63195,9 +63195,9 @@
                       "correctAnswer": "6 times",
                       "type": "multiple-choice",
                       "options": [
-                        "the inner loop controls how many sides and turns make up the basic repeated shape, so changing its repeat count changes that shape",
-                        "the inner loop handles the repeated steps needed to draw one square, while the outer loop repeats that entire process multiple times",
-                        "nested loops build directly on the concept of a single loop, so understanding how one loop works is necessary before combining two together",
+                        "4 times",
+                        "8 times",
+                        "10 times",
                         "6 times"
                       ]
                     },
@@ -63360,9 +63360,9 @@
                       "correctAnswer": "a 'touching' block",
                       "type": "multiple-choice",
                       "options": [
-                        "Without correctly detecting the platform, the falling code would continue to move the sprite downward with nothing to stop it",
-                        "It lets the program check, in real time, whether the sprite's position overlaps with the platform, so it can stop falling appropriately",
-                        "separate sprite platforms could be moved, resized, or interacted with more easily using code, unlike a fixed backdrop image",
+                        "a 'repeat' block",
+                        "a 'broadcast' block",
+                        "a 'variable' block",
                         "a 'touching' block"
                       ]
                     },
@@ -63501,10 +63501,10 @@
                       "correctAnswer": "it decreases",
                       "type": "multiple-choice",
                       "options": [
-                        "3 (or another small starting number)",
+                        "it increases",
                         "A 'change variable by -1' block",
                         "it decreases",
-                        "checking the value is how the game knows when it has reached 0, so it can trigger the game-over event at the right moment"
+                        "it stays the same"
                       ]
                     },
                     {
@@ -63514,7 +63514,7 @@
                       "type": "multiple-choice",
                       "options": [
                         "The game ends",
-                        "The player gets more lives automatically",
+                        "The score resets to 0",
                         "Nothing happens at all",
                         "The game restarts with extra lives"
                       ]
@@ -63668,7 +63668,7 @@
                       "options": [
                         "an if-then block",
                         "in the answer box that appears",
-                        "Multiple questions make the quiz feel more substantial and give a better overall measure of what the player knows, rather than just one single result",
+                        "a 'repeat' block",
                         "A score variable"
                       ]
                     },
@@ -63831,9 +63831,9 @@
                       "correctAnswer": "a variable",
                       "type": "multiple-choice",
                       "options": [
-                        "the 1-second wait inside the loop makes sure the timer variable changes at a steady, real-time pace, matching actual seconds passing",
-                        "It creates urgency to finish a task before time runs out",
-                        "Counts down (or up) to add challenge",
+                        "a costume",
+                        "a sound block",
+                        "a broadcast",
                         "a variable"
                       ]
                     },
@@ -63846,7 +63846,7 @@
                         "Every second",
                         "Only once, ever",
                         "Every single frame with no pattern",
-                        "Never - timers don't actually change"
+                        "Every minute"
                       ]
                     },
                     {
