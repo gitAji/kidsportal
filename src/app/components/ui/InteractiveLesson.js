@@ -14,6 +14,7 @@ import AudioPlayer from './AudioPlayer';
 import { getConceptEmoji } from '@/app/utils/conceptEmoji';
 import { trackEvent } from '@/app/utils/trackEvent';
 import { getConceptVisual } from '@/app/utils/conceptVisuals';
+import { getNarrationLang } from '@/app/utils/narrationLang';
 
 const SWIPE_THRESHOLD = 80;
 
@@ -458,7 +459,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                                                 </p>
                                                                 <AudioPlayer
                                                                     text={sentence}
-                                                                    lang="en-GB"
+                                                                    lang={getNarrationLang(taskData?.subjectId)}
                                                                     icon={<FaVolumeUp className="text-xs" />}
                                                                     autoPlay
                                                                     onPlay={() => {
@@ -540,7 +541,7 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
                                     {/* Listen Button */}
                                     <AudioPlayer
                                         text={sentences[validCurrentSentenceIndex]}
-                                        lang="en-GB"
+                                        lang={getNarrationLang(taskData?.subjectId)}
                                         label="Listen"
                                         icon={<FaVolumeUp />}
                                         onPlay={() => trackEvent(childId, 'audio_listen_used', { taskId: taskData?.taskId, cardIndex: validCurrentSentenceIndex + 1 })}

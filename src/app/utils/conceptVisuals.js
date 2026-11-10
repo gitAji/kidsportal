@@ -5,124 +5,87 @@
 // hear explained. Deliberately opt-in and per-lesson rather than a
 // blanket redesign of every lesson: most lesson content doesn't have (or
 // need) a bespoke visual, so InteractiveLesson falls back to the normal
-// card-based flow whenever a taskId isn't listed here. Add more entries
-// here as more concept visuals are built.
-import ShapeExplorer from '@/app/components/ui/concept-visuals/ShapeExplorer';
-import PerimeterTracer from '@/app/components/ui/concept-visuals/PerimeterTracer';
-import ClockExplorer from '@/app/components/ui/concept-visuals/ClockExplorer';
-import BarChartExplorer from '@/app/components/ui/concept-visuals/BarChartExplorer';
-import CoinCounter from '@/app/components/ui/concept-visuals/CoinCounter';
-import AngleExplorer from '@/app/components/ui/concept-visuals/AngleExplorer';
-import WeightBalance from '@/app/components/ui/concept-visuals/WeightBalance';
-import NumberLineExplorer from '@/app/components/ui/concept-visuals/NumberLineExplorer';
-import FractionShapeExplorer from '@/app/components/ui/concept-visuals/FractionShapeExplorer';
-import CoordinatePlotter from '@/app/components/ui/concept-visuals/CoordinatePlotter';
-import PlaceValueExplorer from '@/app/components/ui/concept-visuals/PlaceValueExplorer';
+// card-based flow whenever a taskId isn't listed here.
+//
+// Each component's wiring lives in its own file under
+// ./conceptVisualRegistry/ instead of one shared growing object here —
+// deliberately, after the registry entries for five different concept
+// visuals were each silently dropped in this same file during PR
+// merges (components survived as files, their wiring didn't, because
+// every new entry landed on the same handful of lines near the end of
+// one big object literal, which conflicted almost every time two
+// visual PRs merged close together). Splitting wiring into one file
+// per component means a new visual's PR only ever *adds a new file*
+// here, which can't conflict with anyone else's new file the same way.
+// To add a concept visual: create ./conceptVisualRegistry/yourVisual.js
+// exporting a default object of `{ taskId: { Component, props } }`,
+// then add one import + one spread line below.
+import shapeExplorer from './conceptVisualRegistry/shapeExplorer';
+import perimeterTracer from './conceptVisualRegistry/perimeterTracer';
+import clockExplorer from './conceptVisualRegistry/clockExplorer';
+import barChartExplorer from './conceptVisualRegistry/barChartExplorer';
+import coinCounter from './conceptVisualRegistry/coinCounter';
+import angleExplorer from './conceptVisualRegistry/angleExplorer';
+import weightBalance from './conceptVisualRegistry/weightBalance';
+import numberLineExplorer from './conceptVisualRegistry/numberLineExplorer';
+import fractionShapeExplorer from './conceptVisualRegistry/fractionShapeExplorer';
+import coordinatePlotter from './conceptVisualRegistry/coordinatePlotter';
+import placeValueExplorer from './conceptVisualRegistry/placeValueExplorer';
+import timesTableExplorer from './conceptVisualRegistry/timesTableExplorer';
+import areaGridExplorer from './conceptVisualRegistry/areaGridExplorer';
+import pieChartExplorer from './conceptVisualRegistry/pieChartExplorer';
+import cuboidVolumeExplorer from './conceptVisualRegistry/cuboidVolumeExplorer';
+import probabilityExplorer from './conceptVisualRegistry/probabilityExplorer';
+import circleExplorer from './conceptVisualRegistry/circleExplorer';
+import symmetryExplorer from './conceptVisualRegistry/symmetryExplorer';
+import sequenceOrderer from './conceptVisualRegistry/sequenceOrderer';
+import loopRepeater from './conceptVisualRegistry/loopRepeater';
+import debugHunt from './conceptVisualRegistry/debugHunt';
+import binaryExplorer from './conceptVisualRegistry/binaryExplorer';
+import logicGateExplorer from './conceptVisualRegistry/logicGateExplorer';
+import percentageBar from './conceptVisualRegistry/percentageBar';
+import partsLabeler from './conceptVisualRegistry/partsLabeler';
+import patternSequencer from './conceptVisualRegistry/patternSequencer';
+import cycleExplorer from './conceptVisualRegistry/cycleExplorer';
+import sortingBins from './conceptVisualRegistry/sortingBins';
+import wordSorter from './conceptVisualRegistry/wordSorter';
+import punctuationPicker from './conceptVisualRegistry/punctuationPicker';
+import sentenceBuilder from './conceptVisualRegistry/sentenceBuilder';
+import vocabFlashcards from './conceptVisualRegistry/vocabFlashcards';
 
 const CONCEPT_VISUALS = {
-  'math-2-level-15-lesson': { Component: ShapeExplorer, props: {} },
-  'math-2-level-5-lesson': { Component: PerimeterTracer, props: { length: 5, width: 3, unit: 'cm' } },
-  'math-1-level-17-lesson': {
-    Component: ClockExplorer,
-    props: { times: [{ hour: 3, minute: 0 }, { hour: 7, minute: 30 }, { hour: 11, minute: 0 }] },
-  },
-  'math-2-level-16-lesson': {
-    Component: ClockExplorer,
-    props: { times: [{ hour: 5, minute: 5 }, { hour: 8, minute: 15 }, { hour: 2, minute: 30 }, { hour: 6, minute: 45 }] },
-  },
-  'math-2-level-9-lesson': {
-    Component: BarChartExplorer,
-    props: { bars: [{ label: 'Football', value: 15 }, { label: 'Tennis', value: 9 }, { label: 'Swimming', value: 6 }], unit: 'votes' },
-  },
-  'math-3-level-16-lesson': {
-    Component: BarChartExplorer,
-    props: { bars: [{ label: 'Apples', value: 12 }, { label: 'Bananas', value: 8 }, { label: 'Oranges', value: 5 }, { label: 'Grapes', value: 10 }], unit: 'children' },
-  },
-  // Restored below: these two components (CoinCounter, AngleExplorer) and
-  // their wiring here were dropped silently when PR #124 merged Test into
-  // its branch and a conflict on this exact file got resolved in favor of
-  // the wrong side — the component files survived, the wiring didn't, so
-  // these 6 lessons silently fell back to the old flip-card flow.
-  'math-1-level-15-lesson': { Component: CoinCounter, props: { coins: [1, 2, 5, 10] } },
-  'math-1-level-16-lesson': { Component: CoinCounter, props: { coins: [10, 20, 50] } },
-  'math-2-level-19-lesson': { Component: CoinCounter, props: { coins: [500, 200, 100, 50] } },
-  'math-2-level-8-lesson': { Component: AngleExplorer, props: { angles: [45, 90, 135, 180] } },
-  'math-4-level-7-lesson': { Component: AngleExplorer, props: { angles: [60, 90, 150, 200] } },
-  'math-5-level-15-lesson': { Component: AngleExplorer, props: { angles: [40, 90, 180, 300] } },
-  'math-1-level-12-lesson': {
-    Component: WeightBalance,
-    props: { pairs: [
-      { left: { label: 'A feather', grams: 5 }, right: { label: 'A brick', grams: 2000 } },
-      { left: { label: 'An apple', grams: 150 }, right: { label: 'A watermelon', grams: 3000 } },
-    ] },
-  },
-  'math-2-level-13-lesson': {
-    Component: WeightBalance,
-    props: { pairs: [
-      { left: { label: 'A bag of flour', grams: 1500 }, right: { label: 'A bag of sugar', grams: 1000 } },
-      { left: { label: 'A kitten', grams: 1200 }, right: { label: 'A kitten', grams: 1200 } },
-    ] },
-  },
-  'math-2-level-21-lesson': {
-    Component: WeightBalance,
-    props: { pairs: [
-      { left: { label: '1 kg weight', grams: 1000 }, right: { label: '1,000 one-gram candies', grams: 1000 } },
-      { left: { label: 'A 500 g bag of rice', grams: 500 }, right: { label: 'Two 250 g weights', grams: 500 } },
-    ] },
-  },
-  'math-1-level-3-lesson': {
-    Component: NumberLineExplorer,
-    props: { min: 0, max: 50, points: [{ value: 12, label: '12' }, { value: 38, label: '38' }, { value: 23, label: '23' }, { value: 45, label: '45' }] },
-  },
-  'math-3-level-2-lesson': {
-    Component: NumberLineExplorer,
-    props: { min: -10, max: 10, points: [{ value: -5, label: '-5' }, { value: 3, label: '3' }, { value: -2, label: '-2' }, { value: 7, label: '7' }] },
-  },
-  'math-4-level-16-lesson': {
-    Component: NumberLineExplorer,
-    props: { min: -10, max: 10, points: [{ value: -8, label: '-8' }, { value: -3, label: '-3' }, { value: 0, label: '0' }, { value: 5, label: '5' }] },
-  },
-  'math-6-level-22-lesson': {
-    Component: NumberLineExplorer,
-    props: { min: -15, max: 15, points: [{ value: -12, label: '-12' }, { value: 4, label: '4' }, { value: -7, label: '-7' }, { value: 9, label: '9' }] },
-  },
-  'math-1-level-18-lesson': {
-    Component: FractionShapeExplorer,
-    props: { examples: [{ totalParts: 2, shadedParts: 1, shape: 'circle' }, { totalParts: 4, shadedParts: 1, shape: 'circle' }] },
-  },
-  'math-2-level-4-lesson': {
-    Component: FractionShapeExplorer,
-    props: { examples: [{ totalParts: 10, shadedParts: 3, shape: 'bar' }, { totalParts: 10, shadedParts: 7, shape: 'bar' }] },
-  },
-  'math-2-level-12-lesson': {
-    Component: FractionShapeExplorer,
-    props: { examples: [{ totalParts: 4, shadedParts: 3, shape: 'circle' }, { totalParts: 8, shadedParts: 5, shape: 'bar' }] },
-  },
-  'math-2-level-18-lesson': {
-    Component: FractionShapeExplorer,
-    props: { examples: [{ totalParts: 2, shadedParts: 1, shape: 'circle' }, { totalParts: 4, shadedParts: 3, shape: 'circle' }] },
-  },
-  'math-3-level-17-lesson': {
-    Component: FractionShapeExplorer,
-    props: { examples: [{ totalParts: 4, shadedParts: 2, shape: 'bar' }, { totalParts: 8, shadedParts: 4, shape: 'bar' }] },
-  },
-  'math-4-level-21-lesson': {
-    Component: CoordinatePlotter,
-    props: { range: { minX: 0, maxX: 6, minY: 0, maxY: 6 }, points: [{ x: 2, y: 3, label: 'A' }, { x: 5, y: 1, label: 'B' }, { x: 4, y: 4, label: 'C' }] },
-  },
-  'math-3-level-8-lesson': {
-    Component: CoordinatePlotter,
-    props: { range: { minX: 0, maxX: 8, minY: 0, maxY: 8 }, points: [{ x: 4, y: 5, label: 'A' }, { x: 7, y: 1, label: 'B' }, { x: 5, y: 3, label: 'C' }] },
-  },
-  'math-5-level-18-lesson': {
-    Component: CoordinatePlotter,
-    props: { range: { minX: -5, maxX: 5, minY: -5, maxY: 5 }, points: [{ x: 3, y: 2, label: 'A' }, { x: -2, y: 4, label: 'B' }, { x: -3, y: -3, label: 'C' }, { x: 4, y: -2, label: 'D' }] },
-  },
-  'math-1-level-7-lesson': { Component: PlaceValueExplorer, props: { numbers: [58, 94] } },
-  'math-2-level-1-lesson': { Component: PlaceValueExplorer, props: { numbers: [481, 803] } },
-  'math-3-level-1-lesson': { Component: PlaceValueExplorer, props: { numbers: [4672, 9105] } },
-  'math-4-level-1-lesson': { Component: PlaceValueExplorer, props: { numbers: [385420, 920006] } },
-  'math-5-level-1-lesson': { Component: PlaceValueExplorer, props: { numbers: [4582917, 10350026] } },
+  ...shapeExplorer,
+  ...perimeterTracer,
+  ...clockExplorer,
+  ...barChartExplorer,
+  ...coinCounter,
+  ...angleExplorer,
+  ...weightBalance,
+  ...numberLineExplorer,
+  ...fractionShapeExplorer,
+  ...coordinatePlotter,
+  ...placeValueExplorer,
+  ...timesTableExplorer,
+  ...areaGridExplorer,
+  ...pieChartExplorer,
+  ...cuboidVolumeExplorer,
+  ...probabilityExplorer,
+  ...circleExplorer,
+  ...symmetryExplorer,
+  ...sequenceOrderer,
+  ...loopRepeater,
+  ...debugHunt,
+  ...binaryExplorer,
+  ...logicGateExplorer,
+  ...percentageBar,
+  ...partsLabeler,
+  ...patternSequencer,
+  ...cycleExplorer,
+  ...sortingBins,
+  ...wordSorter,
+  ...punctuationPicker,
+  ...sentenceBuilder,
+  ...vocabFlashcards,
 };
 
 export function getConceptVisual(taskId) {
