@@ -65,16 +65,19 @@ export async function POST(request) {
         const levelId = `${subjectId}-level-${nextLevelNumber}`;
         const coveredTopics = existingLevels.map(l => l.levelName).filter(Boolean);
         const lastModule = existingLevels[existingLevels.length - 1]?.moduleName || null;
-        const gradeNumber = parseInt(gradeId.replace(/\D/g, ''), 10) || '';
+        const parsedGradeNumber = parseInt(gradeId.replace(/\D/g, ''), 10);
+        const gradeNumber = Number.isNaN(parsedGradeNumber) ? '' : parsedGradeNumber;
+        const gradeLabel = gradeNumber === 0 ? 'Preschool' : `Grade ${gradeNumber}`;
         const subjectName = getSubjectDisplayName(subjectId);
         const isTamil = subjectId.toLowerCase().includes('tamil');
-        // Grade 1-3 kids are still learning to type/spell, so keep their
-        // questions tap-to-select only instead of testing typing ability.
-        const questionTypeRule = gradeNumber && gradeNumber <= 3
+        // Preschool (grade-0) and Grade 1-3 kids are still learning to
+        // type/spell, so keep their questions tap-to-select only instead of
+        // testing typing ability.
+        const questionTypeRule = gradeNumber !== '' && gradeNumber <= 3
             ? 'Every question must be type "multiple-choice" (4 options) — this grade is still learning to type and spell, so there must be NO "identification" (typed-answer) questions at all.'
             : 'Keep a healthy mix of "multiple-choice" and "identification" question types across the quiz and exam.';
 
-        const prompt = `You are an expert curriculum designer creating the NEXT level for a ${subjectName} course for Grade ${gradeNumber} students (age-appropriate for that grade).
+        const prompt = `You are an expert curriculum designer creating the NEXT level for a ${subjectName} course for ${gradeLabel} students (age-appropriate for that grade).
 
 This student has already completed every existing level in this subject, so this is bonus/extension content that continues their learning journey. It must be a NEW topic, appropriately harder or a natural next step after what they've already covered.
 

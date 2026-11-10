@@ -54,7 +54,7 @@ export async function POST(request) {
         // question tests typing as much as the actual concept — keep their
         // tasks tap-to-select only. Older grades keep the existing mix.
         const gradeNumber = parseInt(String(gradeId).replace(/\D/g, ''), 10) || 0;
-        const questionTypeInstruction = gradeNumber > 0 && gradeNumber <= 3
+        const questionTypeInstruction = gradeNumber >= 0 && gradeNumber <= 3
             ? `2. type: Always "multiple-choice" — this grade is still learning to type and spell, so every question must be tap-to-select, never typed.`
             : `2. type: Either "multiple-choice" or "identification" (where they type the answer). Ensure a mix of both.`;
 

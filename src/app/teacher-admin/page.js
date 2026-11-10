@@ -18,7 +18,7 @@ import { useTeacher } from '@/context/TeacherContext';
 import { useUnsavedChanges } from '@/context/UnsavedChangesContext';
 
 // ── Static metadata ──────────────────────────────────────────────
-const ALL_GRADES = Array.from({ length: 10 }, (_, i) => ({ id: `grade-${i + 1}`, name: `Grade ${i + 1}` }));
+const ALL_GRADES = [{ id: 'grade-0', name: 'Preschool' }, ...Array.from({ length: 10 }, (_, i) => ({ id: `grade-${i + 1}`, name: `Grade ${i + 1}` }))];
 const ALL_SUBJECTS = [
     { id: 'all', name: 'All Subjects', icon: '🌟', color: 'slate' },
     { id: 'English', name: 'English', icon: '📝', color: 'blue' },
@@ -28,6 +28,7 @@ const ALL_SUBJECTS = [
     { id: 'Computer Science', name: 'Computer Science', icon: '💻', color: 'cyan' },
     { id: 'Coding', name: 'Coding', icon: '⌨️', color: 'violet' },
     { id: 'Life Skills', name: 'Life Skills', icon: '🤝', color: 'teal' },
+    { id: 'Early Learning', name: 'Early Learning', icon: '🧸', color: 'pink' },
 ];
 
 

@@ -17,11 +17,11 @@ const avatars = [
   { id: 'default', icon: <FaUserCircle />, color: 'from-indigo-400 to-cyan-500' },
 ];
 
-// Must match db.json's grade names exactly ("Grade 1".."Grade 10") — some
+// Must match db.json's grade names exactly ("Preschool", "Grade 1".."Grade 10") — some
 // downstream lookups (e.g. dbData.grades.find(g => g.gradeName === grade))
 // require an exact match, so this used to be a free-text field a typo could
 // silently break (a child assigned "2nd" or "Grade2" saw an empty subject list).
-const GRADE_OPTIONS = Array.from({ length: 10 }, (_, i) => `Grade ${i + 1}`);
+const GRADE_OPTIONS = ['Preschool', ...Array.from({ length: 10 }, (_, i) => `Grade ${i + 1}`)];
 
 const generatePassword = () => {
   const adjectives = ['Happy', 'Sunny', 'Brave', 'Clever', 'Fast'];

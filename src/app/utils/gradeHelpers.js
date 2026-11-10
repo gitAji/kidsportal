@@ -8,6 +8,9 @@ export function gradeNumber(gradeId) {
 }
 
 export function isEarlyGrade(gradeId) {
-  const n = gradeNumber(gradeId);
-  return n > 0 && n <= 3;
+  // Preschool is "grade-0" and belongs here too, so this can't just check
+  // gradeNumber() > 0 — that's also what a missing/invalid gradeId parses
+  // to, so an empty gradeId is ruled out explicitly instead.
+  if (!gradeId) return false;
+  return gradeNumber(gradeId) <= 3;
 }

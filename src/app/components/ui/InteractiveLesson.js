@@ -64,10 +64,10 @@ export default function InteractiveLesson({ taskData, childUser, onComplete }) {
     const [speakingTileIndex, setSpeakingTileIndex] = useState(null);
     const theme = getSubjectTheme(taskData);
     const ThemeIcon = theme.icon;
-    // Grades 1-3 get the tap-to-discover board (see revealedTiles above)
-    // instead of swiping through sentence cards.
+    // Preschool (grade-0) and Grades 1-3 get the tap-to-discover board (see
+    // revealedTiles above) instead of swiping through sentence cards.
     const gradeNum = parseInt((childUser?.gradeId || taskData?.gradeId || '').replace(/[^0-9]/g, ''), 10);
-    const isEarlyGrade = gradeNum >= 1 && gradeNum <= 3;
+    const isEarlyGrade = gradeNum >= 0 && gradeNum <= 3;
     const childId = childUser?.uid || childUser?.id;
     // Some lessons (e.g. shape/geometry concepts) have a dedicated
     // interactive visual instead of the card-based flow — tapping an

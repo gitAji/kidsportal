@@ -15,6 +15,7 @@ import {
 
 const GRADES = [
     { id: 'all', name: 'All Grades' },
+    { id: 'grade-0', name: 'Preschool' },
     { id: 'grade-1', name: 'Grade 1' },
     { id: 'grade-2', name: 'Grade 2' },
     { id: 'grade-3', name: 'Grade 3' },
@@ -35,6 +36,7 @@ const SUBJECTS = [
     { id: 'Tamil', name: 'Tamil', icon: '📚' },
     { id: 'Computer Science', name: 'Computer Science', icon: '💻' },
     { id: 'Coding', name: 'Coding', icon: '⌨️' },
+    { id: 'Early Learning', name: 'Early Learning', icon: '🧸' },
 ];
 
 export default function TeachersManagement() {

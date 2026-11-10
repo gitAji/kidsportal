@@ -77,11 +77,18 @@ export function ChildProvider({ children }) {
 
             // Ensure gradeId matches db.json format
             if (freshData.grade) {
-              const gradeNum = parseInt(freshData.grade.toString().replace('Grade ', ''), 10);
-              if (!isNaN(gradeNum)) {
-                freshData.gradeId = `grade-${gradeNum}`;
+              if (freshData.grade.toString().toLowerCase() === 'preschool') {
+                // Preschool is "grade-0" — every other gradeId is "grade-N" and gets
+                // parsed with parseInt(...).replace(/\D/g, ''), so it has to stay in
+                // that numeric family rather than becoming the odd-one-out "preschool".
+                freshData.gradeId = 'grade-0';
               } else {
-                freshData.gradeId = freshData.grade.toLowerCase().replace(' ', '-');
+                const gradeNum = parseInt(freshData.grade.toString().replace('Grade ', ''), 10);
+                if (!isNaN(gradeNum)) {
+                  freshData.gradeId = `grade-${gradeNum}`;
+                } else {
+                  freshData.gradeId = freshData.grade.toLowerCase().replace(' ', '-');
+                }
               }
             }
 

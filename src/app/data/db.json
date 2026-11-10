@@ -1,6 +1,300 @@
 {
   "grades": [
     {
+      "gradeId": "grade-0",
+      "gradeName": "Preschool",
+      "subjects": [
+        {
+          "subjectId": "earlylearning-0",
+          "subjectName": "Early Learning",
+          "levels": [
+            {
+              "levelId": "earlylearning-0-level-1",
+              "levelName": "Letters & Sounds",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "earlylearning-0-level-1-lesson",
+                  "taskName": "Lesson: Letters & Sounds",
+                  "type": "lesson",
+                  "content": "Every letter in the alphabet has its own special sound. The letter A says 'ah', like in apple. The letter B says 'buh', like in ball. The letter C says 'kuh', like in cat. When we put sounds together, they make words! Learning each letter's shape and sound is the first step to reading.",
+                  "questions": []
+                },
+                {
+                  "taskId": "earlylearning-0-level-1-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "earlylearning-0-level-1-quiz-q1",
+                      "questionText": "Which letter makes the sound 'ah', like in apple?",
+                      "correctAnswer": "A",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-1-quiz-q2",
+                      "questionText": "Which letter makes the sound 'buh', like in ball?",
+                      "correctAnswer": "B",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-1-quiz-q3",
+                      "questionText": "Which word starts with the letter C?",
+                      "correctAnswer": "Cat",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Dog",
+                        "Cat",
+                        "Apple",
+                        "Ball"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-1-quiz-q4",
+                      "questionText": "What do we call the letters we use to make words?",
+                      "correctAnswer": "The alphabet",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The alphabet",
+                        "A number",
+                        "A shape",
+                        "A color"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "earlylearning-0-level-1-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "earlylearning-0-level-1-exam-q1",
+                      "questionText": "Which letter comes first in the alphabet?",
+                      "correctAnswer": "A",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "Z"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-1-exam-q2",
+                      "questionText": "Which letter makes the sound 'kuh', like in cat?",
+                      "correctAnswer": "C",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-1-exam-q3",
+                      "questionText": "Which word starts with the letter B?",
+                      "correctAnswer": "Ball",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Ball",
+                        "Cat",
+                        "Apple",
+                        "Sun"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-1-exam-q4",
+                      "questionText": "What does the letter A say?",
+                      "correctAnswer": "Ah, like in apple",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Ah, like in apple",
+                        "Buh, like in ball",
+                        "Kuh, like in cat",
+                        "Duh, like in dog"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-1-exam-q5",
+                      "questionText": "Why do we learn letter sounds?",
+                      "correctAnswer": "They help us read words",
+                      "type": "multiple-choice",
+                      "options": [
+                        "They help us read words",
+                        "They help us run faster",
+                        "They help us count",
+                        "They help us draw"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Getting Started"
+            },
+            {
+              "levelId": "earlylearning-0-level-2",
+              "levelName": "Numbers & Counting",
+              "isLocked": false,
+              "tasks": [
+                {
+                  "taskId": "earlylearning-0-level-2-lesson",
+                  "taskName": "Lesson: Numbers & Counting",
+                  "type": "lesson",
+                  "content": "Numbers help us count how many things there are. We count 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 — always in the same order! If you have 3 apples and someone gives you 1 more, you now have 4 apples. Counting things one at a time, in order, is how we find out how many we have.",
+                  "questions": []
+                },
+                {
+                  "taskId": "earlylearning-0-level-2-quiz",
+                  "taskName": "Practice Quiz",
+                  "type": "quiz",
+                  "timeLimit": 180,
+                  "content": "Let's practice what we just learned!",
+                  "questions": [
+                    {
+                      "questionId": "earlylearning-0-level-2-quiz-q1",
+                      "questionText": "What number comes right after 3?",
+                      "correctAnswer": "4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "4",
+                        "5",
+                        "6"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-2-quiz-q2",
+                      "questionText": "If you have 2 apples and get 1 more, how many do you have?",
+                      "correctAnswer": "3",
+                      "type": "multiple-choice",
+                      "options": [
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-2-quiz-q3",
+                      "questionText": "What number comes right before 5?",
+                      "correctAnswer": "4",
+                      "type": "multiple-choice",
+                      "options": [
+                        "3",
+                        "4",
+                        "6",
+                        "7"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-2-quiz-q4",
+                      "questionText": "Which number is the smallest?",
+                      "correctAnswer": "1",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1",
+                        "5",
+                        "10",
+                        "7"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "taskId": "earlylearning-0-level-2-exam",
+                  "taskName": "Level Challenge!",
+                  "type": "exam",
+                  "timeLimit": 300,
+                  "content": "Time to show what you know!",
+                  "questions": [
+                    {
+                      "questionId": "earlylearning-0-level-2-exam-q1",
+                      "questionText": "What number comes right after 7?",
+                      "correctAnswer": "8",
+                      "type": "multiple-choice",
+                      "options": [
+                        "6",
+                        "8",
+                        "9",
+                        "10"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-2-exam-q2",
+                      "questionText": "If you have 4 toys and get 1 more, how many do you have?",
+                      "correctAnswer": "5",
+                      "type": "multiple-choice",
+                      "options": [
+                        "4",
+                        "5",
+                        "6",
+                        "3"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-2-exam-q3",
+                      "questionText": "Which number is the biggest?",
+                      "correctAnswer": "10",
+                      "type": "multiple-choice",
+                      "options": [
+                        "1",
+                        "5",
+                        "10",
+                        "7"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-2-exam-q4",
+                      "questionText": "What number comes right before 10?",
+                      "correctAnswer": "9",
+                      "type": "multiple-choice",
+                      "options": [
+                        "8",
+                        "9",
+                        "11",
+                        "7"
+                      ]
+                    },
+                    {
+                      "questionId": "earlylearning-0-level-2-exam-q5",
+                      "questionText": "Why do we count one at a time, in order?",
+                      "correctAnswer": "So we know exactly how many there are",
+                      "type": "multiple-choice",
+                      "options": [
+                        "So we know exactly how many there are",
+                        "So the numbers look nice",
+                        "So we can draw them",
+                        "So they rhyme"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "moduleName": "Module 1: Getting Started"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "gradeId": "grade-1",
       "gradeName": "Grade 1",
       "subjects": [
