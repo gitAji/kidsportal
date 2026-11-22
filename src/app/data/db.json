@@ -26616,14 +26616,14 @@
             },
             {
               "levelId": "math-2-level-7",
-              "levelName": "Time",
+              "levelName": "Days of the Week",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "math-2-level-7-lesson",
-                  "taskName": "Lesson: Time",
+                  "taskName": "Lesson: Days of the Week",
                   "type": "lesson",
-                  "content": "Time can be shown on an analogue clock (with hands) or a digital clock (with numbers), and also using the 24-hour clock, which avoids needing am/pm. To convert an afternoon time to 24-hour time, add 12 to the hour: 3:15pm becomes 15:15.",
+                  "content": "A week has 7 days: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday. Monday to Friday are called weekdays - usually school days - and Saturday and Sunday are the weekend. The days always repeat in the same order, so after Sunday comes Monday again. Knowing today's day helps us work out what yesterday and tomorrow are.",
                   "questions": []
                 },
                 {
@@ -26635,50 +26635,68 @@
                   "questions": [
                     {
                       "questionId": "math-2-level-7-quiz-q1",
-                      "questionText": "What is 3:00pm in 24-hour time?",
-                      "correctAnswer": "15:00",
+                      "questionText": "How many days are there in a week?",
+                      "correctAnswer": "7",
                       "type": "multiple-choice",
                       "options": [
-                        "15:00",
-                        "03:00",
-                        "13:00",
-                        "17:00"
+                        "5",
+                        "6",
+                        "7"
                       ]
                     },
                     {
                       "questionId": "math-2-level-7-quiz-q2",
-                      "questionText": "What is 09:45 in 12-hour time (am/pm)?",
-                      "correctAnswer": "9:45am",
+                      "questionText": "Which day comes right after Wednesday?",
+                      "correctAnswer": "Thursday",
                       "type": "multiple-choice",
                       "options": [
-                        "9:45am",
-                        "9:00pm",
-                        "10:45am",
-                        "15:00"
+                        "Tuesday",
+                        "Thursday",
+                        "Friday"
                       ]
                     },
                     {
                       "questionId": "math-2-level-7-quiz-q3",
-                      "questionText": "What is 7:30pm in 24-hour time?",
-                      "correctAnswer": "19:30",
+                      "questionText": "Which two days make up the weekend?",
+                      "correctAnswer": "Saturday and Sunday",
                       "type": "multiple-choice",
                       "options": [
-                        "19:30",
-                        "07:30",
-                        "17:30",
-                        "09:30"
+                        "Saturday and Sunday",
+                        "Friday and Saturday",
+                        "Sunday and Monday"
                       ]
                     },
                     {
                       "questionId": "math-2-level-7-quiz-q4",
-                      "questionText": "What is 21:00 in 12-hour time?",
-                      "correctAnswer": "9:00pm",
+                      "questionText": "Which day comes right before Monday?",
+                      "correctAnswer": "Sunday",
                       "type": "multiple-choice",
                       "options": [
-                        "15:00",
-                        "19:30",
-                        "9:00pm",
-                        "20:05"
+                        "Friday",
+                        "Saturday",
+                        "Sunday"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-7-quiz-q5",
+                      "questionText": "If today is Friday, what day is tomorrow?",
+                      "correctAnswer": "Saturday",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Saturday",
+                        "Sunday",
+                        "Thursday"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-7-quiz-q6",
+                      "questionText": "What are Monday to Friday usually called?",
+                      "correctAnswer": "Weekdays",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Weekdays",
+                        "The weekend",
+                        "Holidays"
                       ]
                     }
                   ]
@@ -26692,68 +26710,84 @@
                   "questions": [
                     {
                       "questionId": "math-2-level-7-exam-q1",
-                      "questionText": "What is 11:20am in 24-hour time?",
-                      "correctAnswer": "11:20",
+                      "questionText": "If today is Sunday, what day was yesterday?",
+                      "correctAnswer": "Saturday",
                       "type": "multiple-choice",
                       "options": [
-                        "11:20",
-                        "23:20",
-                        "01:20",
-                        "10:20"
+                        "Monday",
+                        "Saturday",
+                        "Friday"
                       ]
                     },
                     {
                       "questionId": "math-2-level-7-exam-q2",
-                      "questionText": "What is 16:45 in 12-hour time?",
-                      "correctAnswer": "4:45pm",
+                      "questionText": "Which day comes exactly in the middle of the school week (Monday to Friday)?",
+                      "correctAnswer": "Wednesday",
                       "type": "multiple-choice",
                       "options": [
-                        "5:45pm",
-                        "9:00pm",
-                        "4:45pm",
-                        "20:05"
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday"
                       ]
                     },
                     {
                       "questionId": "math-2-level-7-exam-q3",
-                      "questionText": "What is 8:05pm in 24-hour time?",
-                      "correctAnswer": "20:05",
+                      "questionText": "How many weekdays are there in one week?",
+                      "correctAnswer": "5",
                       "type": "multiple-choice",
                       "options": [
-                        "20:05",
-                        "08:05",
-                        "18:05",
-                        "20:50"
+                        "4",
+                        "5",
+                        "6"
                       ]
                     },
                     {
                       "questionId": "math-2-level-7-exam-q4",
-                      "questionText": "What is 00:30 in 12-hour time?",
-                      "correctAnswer": "12:30am",
+                      "questionText": "If today is Tuesday, what day will it be in 3 days?",
+                      "correctAnswer": "Friday",
                       "type": "multiple-choice",
                       "options": [
-                        "11:20",
-                        "19:30",
-                        "20:05",
-                        "12:30am"
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
                       ]
                     },
                     {
                       "questionId": "math-2-level-7-exam-q5",
-                      "questionText": "How many hours are there between 09:00 and 15:00?",
-                      "correctAnswer": "6",
+                      "questionText": "What is the correct order of these three days?",
+                      "correctAnswer": "Monday, Tuesday, Wednesday",
                       "type": "multiple-choice",
                       "options": [
-                        "6",
-                        "5",
-                        "7",
-                        "9"
+                        "Monday, Tuesday, Wednesday",
+                        "Wednesday, Monday, Tuesday",
+                        "Tuesday, Monday, Wednesday"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-7-exam-q6",
+                      "questionText": "After Sunday ends, which day starts the next week?",
+                      "correctAnswer": "Monday",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Monday",
+                        "Saturday",
+                        "Sunday again"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-7-exam-q7",
+                      "questionText": "Why is it useful to know the order of the days of the week?",
+                      "correctAnswer": "It helps us plan what happens on school days and rest days",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It helps us plan what happens on school days and rest days",
+                        "It tells us the exact time of day",
+                        "It changes how many hours are in a day"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 3: Shape, Time & Position"
+              ]
             },
             {
               "levelId": "math-2-level-8",
@@ -27039,14 +27073,14 @@
             },
             {
               "levelId": "math-2-level-10",
-              "levelName": "Reasoning & Problem Solving",
+              "levelName": "Ordering Numbers to 100",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "math-2-level-10-lesson",
-                  "taskName": "Lesson: Reasoning & Problem Solving",
+                  "taskName": "Lesson: Ordering Numbers to 100",
                   "type": "lesson",
-                  "content": "Worded problems ask us to decide which operation (addition, subtraction, multiplication or division) to use before we calculate. For example, 'A farmer has 6 baskets with 9 eggs in each - how many eggs in total?' is a multiplication problem: 6 x 9 = 54 eggs. Read carefully to spot whether you are combining, sharing, finding a difference, or grouping.",
+                  "content": "To put numbers in order, we compare them using place value - first look at the tens digit, and if those are the same, look at the ones digit. Ordering from smallest to largest is called ascending order, and ordering from largest to smallest is called descending order. For example, 34, 48 and 52 in ascending order stay as 34, 48, 52, because each number's tens digit gets bigger.",
                   "questions": []
                 },
                 {
@@ -27058,50 +27092,68 @@
                   "questions": [
                     {
                       "questionId": "math-2-level-10-quiz-q1",
-                      "questionText": "A farmer has 6 baskets with 9 eggs in each. How many eggs in total?",
-                      "correctAnswer": "54",
+                      "questionText": "What is it called when numbers are ordered from smallest to largest?",
+                      "correctAnswer": "Ascending order",
                       "type": "multiple-choice",
                       "options": [
-                        "135",
-                        "108",
-                        "7",
-                        "54"
+                        "Ascending order",
+                        "Descending order",
+                        "Random order"
                       ]
                     },
                     {
                       "questionId": "math-2-level-10-quiz-q2",
-                      "questionText": "There are 48 sweets shared equally between 6 children. How many does each child get?",
-                      "correctAnswer": "8",
+                      "questionText": "What is it called when numbers are ordered from largest to smallest?",
+                      "correctAnswer": "Descending order",
                       "type": "multiple-choice",
                       "options": [
-                        "8",
-                        "6",
-                        "9",
-                        "12"
+                        "Ascending order",
+                        "Descending order",
+                        "Random order"
                       ]
                     },
                     {
                       "questionId": "math-2-level-10-quiz-q3",
-                      "questionText": "A class of 30 children is split into groups of 5. How many groups are there?",
-                      "correctAnswer": "6",
+                      "questionText": "Put these numbers in ascending order: 27, 15, 42",
+                      "correctAnswer": "15, 27, 42",
                       "type": "multiple-choice",
                       "options": [
-                        "6",
-                        "8",
-                        "54",
-                        "135"
+                        "15, 27, 42",
+                        "42, 27, 15",
+                        "27, 15, 42"
                       ]
                     },
                     {
                       "questionId": "math-2-level-10-quiz-q4",
-                      "questionText": "There are 24 apples in a box, and 3 boxes. How many apples in total?",
-                      "correctAnswer": "72",
+                      "questionText": "Which number is the smallest: 56, 65, 50?",
+                      "correctAnswer": "50",
                       "type": "multiple-choice",
                       "options": [
-                        "72",
-                        "27",
-                        "69",
-                        "81"
+                        "50",
+                        "56",
+                        "65"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-10-quiz-q5",
+                      "questionText": "When two numbers have the same tens digit, what should you compare next?",
+                      "correctAnswer": "The ones digit",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The ones digit",
+                        "The colour of the number",
+                        "The hundreds digit"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-10-quiz-q6",
+                      "questionText": "Put these numbers in descending order: 18, 81, 8",
+                      "correctAnswer": "81, 18, 8",
+                      "type": "multiple-choice",
+                      "options": [
+                        "81, 18, 8",
+                        "8, 18, 81",
+                        "18, 8, 81"
                       ]
                     }
                   ]
@@ -27115,68 +27167,84 @@
                   "questions": [
                     {
                       "questionId": "math-2-level-10-exam-q1",
-                      "questionText": "A baker makes 7 trays of 12 buns. How many buns in total?",
-                      "correctAnswer": "84",
+                      "questionText": "Put these numbers in ascending order: 73, 37, 70",
+                      "correctAnswer": "37, 70, 73",
                       "type": "multiple-choice",
                       "options": [
-                        "8",
-                        "72",
-                        "6",
-                        "84"
+                        "37, 70, 73",
+                        "73, 70, 37",
+                        "70, 37, 73"
                       ]
                     },
                     {
                       "questionId": "math-2-level-10-exam-q2",
-                      "questionText": "56 books are shared equally among 8 shelves. How many books on each shelf?",
-                      "correctAnswer": "7",
+                      "questionText": "Which number is the largest: 94, 49, 90?",
+                      "correctAnswer": "94",
                       "type": "multiple-choice",
                       "options": [
-                        "7",
-                        "6",
-                        "8",
-                        "9"
+                        "49",
+                        "90",
+                        "94"
                       ]
                     },
                     {
                       "questionId": "math-2-level-10-exam-q3",
-                      "questionText": "A school has 4 classes of 27 pupils. How many pupils in total?",
-                      "correctAnswer": "108",
+                      "questionText": "Two numbers, 62 and 68, have the same tens digit. Which is larger?",
+                      "correctAnswer": "68",
                       "type": "multiple-choice",
                       "options": [
-                        "84",
-                        "7",
-                        "8",
-                        "108"
+                        "62",
+                        "68",
+                        "They are equal"
                       ]
                     },
                     {
                       "questionId": "math-2-level-10-exam-q4",
-                      "questionText": "A shop sells 9 boxes of 15 pencils. How many pencils in total?",
-                      "correctAnswer": "135",
+                      "questionText": "Put these numbers in descending order: 11, 99, 55",
+                      "correctAnswer": "99, 55, 11",
                       "type": "multiple-choice",
                       "options": [
-                        "135",
-                        "125",
-                        "145",
-                        "150"
+                        "99, 55, 11",
+                        "11, 55, 99",
+                        "55, 99, 11"
                       ]
                     },
                     {
                       "questionId": "math-2-level-10-exam-q5",
-                      "questionText": "There are 96 chairs to be arranged into rows of 8. How many rows are needed?",
-                      "correctAnswer": "12",
+                      "questionText": "What do we compare first when ordering two-digit numbers?",
+                      "correctAnswer": "The tens digit",
                       "type": "multiple-choice",
                       "options": [
-                        "8",
-                        "6",
-                        "108",
-                        "12"
+                        "The tens digit",
+                        "The ones digit",
+                        "The sum of both digits"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-10-exam-q6",
+                      "questionText": "Which list is already in ascending order?",
+                      "correctAnswer": "12, 34, 56",
+                      "type": "multiple-choice",
+                      "options": [
+                        "12, 34, 56",
+                        "56, 34, 12",
+                        "34, 12, 56"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-10-exam-q7",
+                      "questionText": "Why is place value useful for ordering numbers?",
+                      "correctAnswer": "It lets us compare digit by digit to see which number is bigger",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It lets us compare digit by digit to see which number is bigger",
+                        "It changes the value of the numbers",
+                        "It only works for numbers under 10"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 4: Data & Problem Solving"
+              ]
             },
             {
               "levelId": "math-2-level-11",
@@ -28660,14 +28728,14 @@
             },
             {
               "levelId": "math-2-level-20",
-              "levelName": "Measuring Length in cm and m",
+              "levelName": "Solid Shapes & Geometric Designs",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "math-2-level-20-lesson",
-                  "taskName": "Lesson: Measuring Length in cm and m",
+                  "taskName": "Lesson: Solid Shapes & Geometric Designs",
                   "type": "lesson",
-                  "content": "Length is measured in centimetres (cm) for shorter things and metres (m) for longer things, with 100 cm making 1 m. A pencil might be about 15 cm long, while a classroom door might be about 2 m tall. Choosing the right unit depends on how big the thing you're measuring is.",
+                  "content": "Solid (3D) shapes take up space, unlike flat 2D shapes. A cube has 6 flat square faces, like a dice. A cuboid is like a stretched cube, like a box. A sphere is perfectly round like a ball, a cylinder is like a can, a cone is like an ice cream cone, and a pyramid comes to a point at the top. We can also combine flat shapes like triangles, squares and circles to build geometric designs and patterns.",
                   "questions": []
                 },
                 {
@@ -28679,62 +28747,68 @@
                   "questions": [
                     {
                       "questionId": "math-2-level-20-quiz-q1",
-                      "questionText": "What unit is used to measure shorter lengths?",
-                      "correctAnswer": "Centimetres (cm)",
+                      "questionText": "How many flat square faces does a cube have?",
+                      "correctAnswer": "6",
                       "type": "multiple-choice",
                       "options": [
-                        "Centimetres (cm)",
-                        "Kilograms",
-                        "Litres",
-                        "Hours"
+                        "4",
+                        "6",
+                        "8"
                       ]
                     },
                     {
                       "questionId": "math-2-level-20-quiz-q2",
-                      "questionText": "How many centimetres make 1 metre?",
-                      "correctAnswer": "100",
+                      "questionText": "Which solid shape is perfectly round, like a ball?",
+                      "correctAnswer": "Sphere",
                       "type": "multiple-choice",
                       "options": [
-                        "100",
-                        "10",
-                        "1000",
-                        "50"
+                        "Sphere",
+                        "Cube",
+                        "Cone"
                       ]
                     },
                     {
                       "questionId": "math-2-level-20-quiz-q3",
-                      "questionText": "What unit is used to measure longer lengths, like a room?",
-                      "correctAnswer": "Metres (m)",
+                      "questionText": "Which solid shape looks like a can of food?",
+                      "correctAnswer": "Cylinder",
                       "type": "multiple-choice",
                       "options": [
-                        "Metres (m)",
-                        "Grams",
-                        "Seconds",
-                        "Millilitres"
+                        "Cylinder",
+                        "Cuboid",
+                        "Pyramid"
                       ]
                     },
                     {
                       "questionId": "math-2-level-20-quiz-q4",
-                      "questionText": "About how long is a pencil, in cm, according to the lesson?",
-                      "correctAnswer": "about 15 cm",
+                      "questionText": "Which solid shape comes to a point at the top?",
+                      "correctAnswer": "Pyramid",
                       "type": "multiple-choice",
                       "options": [
-                        "about 1.5 cm",
-                        "about 15 cm",
-                        "about 150 cm",
-                        "about 1.5 m"
+                        "Cube",
+                        "Pyramid",
+                        "Cylinder"
                       ]
                     },
                     {
                       "questionId": "math-2-level-20-quiz-q5",
-                      "questionText": "What determines whether you should use cm or m to measure something?",
-                      "correctAnswer": "How big the thing you're measuring is",
+                      "questionText": "A cuboid is best described as:",
+                      "correctAnswer": "A box-shaped solid with rectangular faces",
                       "type": "multiple-choice",
                       "options": [
-                        "How big the thing you're measuring is",
-                        "The colour of the object",
-                        "Nothing - cm and m are always interchangeable",
-                        "The day of the week"
+                        "A box-shaped solid with rectangular faces",
+                        "A perfectly round ball",
+                        "A flat triangle"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-20-quiz-q6",
+                      "questionText": "Which solid shape looks like an ice cream cone?",
+                      "correctAnswer": "Cone",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Cone",
+                        "Cube",
+                        "Sphere"
                       ]
                     }
                   ]
@@ -28748,80 +28822,84 @@
                   "questions": [
                     {
                       "questionId": "math-2-level-20-exam-q1",
-                      "questionText": "How many centimetres are in 2 metres?",
-                      "correctAnswer": "200",
+                      "questionText": "Which of these objects is shaped like a sphere?",
+                      "correctAnswer": "A football",
                       "type": "multiple-choice",
                       "options": [
-                        "200",
-                        "20",
-                        "2000",
-                        "400"
+                        "A football",
+                        "A cereal box",
+                        "A birthday hat"
                       ]
                     },
                     {
                       "questionId": "math-2-level-20-exam-q2",
-                      "questionText": "Why would measuring a classroom door in centimetres be less convenient than in metres?",
-                      "correctAnswer": "It would need a much bigger number, making it harder to work with than a simple metre measurement",
+                      "questionText": "Which of these objects is shaped like a cuboid?",
+                      "correctAnswer": "A shoebox",
                       "type": "multiple-choice",
                       "options": [
-                        "It would need a much bigger number, making it harder to work with than a simple metre measurement",
-                        "Centimetres are always more convenient for any measurement",
-                        "Doors are too small to measure in any unit",
-                        "There is no difference in convenience between the units"
+                        "A shoebox",
+                        "A party hat",
+                        "An orange"
                       ]
                     },
                     {
                       "questionId": "math-2-level-20-exam-q3",
-                      "questionText": "Why would measuring a pencil in metres be awkward?",
-                      "correctAnswer": "a pencil is much shorter than a metre, so the measurement would be an awkward small fraction",
+                      "questionText": "What makes a shape \"solid\" rather than \"flat\"?",
+                      "correctAnswer": "It takes up space in three dimensions, not just on a flat surface",
                       "type": "multiple-choice",
                       "options": [
-                        "a pencil is much shorter than a metre, so the measurement would be an awkward small fraction",
-                        "A pencil is longer than a metre, so the number would be too big",
-                        "Centimetres can never be converted to metres",
-                        "There is no real difference between the two units"
+                        "It takes up space in three dimensions, not just on a flat surface",
+                        "It can only be drawn on paper",
+                        "It has no faces at all"
                       ]
                     },
                     {
                       "questionId": "math-2-level-20-exam-q4",
-                      "questionText": "If a table is 1 metre and 20 centimetres long, how many centimetres is that in total?",
-                      "correctAnswer": "120 cm",
+                      "questionText": "If you combine triangles and squares, what can you build?",
+                      "correctAnswer": "A geometric design or pattern",
                       "type": "multiple-choice",
                       "options": [
-                        "12 cm",
-                        "100 cm",
-                        "120 cm",
-                        "200 cm"
+                        "A geometric design or pattern",
+                        "A single flat colour",
+                        "A sound"
                       ]
                     },
                     {
                       "questionId": "math-2-level-20-exam-q5",
-                      "questionText": "Why do we have two different units (cm and m) for length, instead of just one?",
-                      "correctAnswer": "different sized objects are easier to measure and describe using a unit that suits their size",
+                      "questionText": "Which solid shape would roll smoothly in every direction?",
+                      "correctAnswer": "Sphere",
                       "type": "multiple-choice",
                       "options": [
-                        "different sized objects are easier to measure and describe using a unit that suits their size",
-                        "Only one unit is ever needed for any length",
-                        "Centimetres and metres always give the exact same number",
-                        "Metres are only used for very tiny objects"
+                        "Sphere",
+                        "Cube",
+                        "Cuboid"
                       ]
                     },
                     {
                       "questionId": "math-2-level-20-exam-q6",
-                      "questionText": "Why is it useful to be able to estimate whether something is better measured in cm or m before measuring it?",
-                      "correctAnswer": "It helps you choose a sensible unit quickly, rather than getting a confusing, awkward number",
+                      "questionText": "A party hat is closest in shape to which solid?",
+                      "correctAnswer": "Cone",
                       "type": "multiple-choice",
                       "options": [
-                        "It helps you choose a sensible unit quickly, rather than getting a confusing, awkward number",
-                        "Estimating units has no practical use",
-                        "The unit chosen never affects how easy a measurement is to understand",
-                        "You should always measure everything in the same single unit"
+                        "Cone",
+                        "Cylinder",
+                        "Cuboid"
+                      ]
+                    },
+                    {
+                      "questionId": "math-2-level-20-exam-q7",
+                      "questionText": "Why might builders use cuboids and cylinders when designing buildings?",
+                      "correctAnswer": "Because combining solid shapes helps create stable and useful structures",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Because combining solid shapes helps create stable and useful structures",
+                        "Because all buildings must be spheres",
+                        "Because solid shapes cannot be combined"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 8: Measurement & Simple Data"
+              ]
             },
             {
               "levelId": "math-2-level-21",
