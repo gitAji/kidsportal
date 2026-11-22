@@ -33661,14 +33661,14 @@
             },
             {
               "levelId": "science-2-level-9",
-              "levelName": "Light",
+              "levelName": "The Sky We See: Clouds & Weather",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "science-2-level-9-lesson",
-                  "taskName": "Lesson: Light",
+                  "taskName": "Lesson: The Sky We See: Clouds & Weather",
                   "type": "lesson",
-                  "content": "Light travels from a light source, like the sun or a lamp, in straight lines, and we see objects because light bounces, or reflects, off their surfaces and travels into our eyes. Shiny, smooth surfaces such as a mirror or polished metal reflect a lot of light very clearly, which is why we can see a clear reflection of ourselves in a mirror. It is very dangerous to look directly at the sun, even briefly, because the sun's light is so bright and strong that it can seriously harm our eyes.",
+                  "content": "Clouds are made of tiny droplets of water floating high up in the sky, and different cloud shapes can give us clues about the weather. Big, fluffy white clouds often mean fair weather, while thick, dark grey clouds often mean rain is coming. We describe the weather using words like sunny, cloudy, windy, rainy, and stormy, and watching the sky over several days helps us notice patterns, like certain seasons bringing more rain or more sunshine than others.",
                   "questions": []
                 },
                 {
@@ -33680,50 +33680,70 @@
                   "questions": [
                     {
                       "questionId": "science-2-level-9-quiz-q1",
-                      "questionText": "Why can we see an object that does not make its own light?",
-                      "correctAnswer": "Light reflects off it and travels into our eyes",
+                      "questionText": "What are clouds made of?",
+                      "correctAnswer": "Tiny droplets of water floating in the sky",
                       "type": "multiple-choice",
                       "options": [
-                        "Light reflects off it and travels into our eyes",
-                        "The object glows in the dark",
-                        "Our eyes make their own light that shines out",
-                        "Objects are always invisible without a torch touching them"
+                        "Tiny droplets of water floating in the sky",
+                        "Solid pieces of ice that never melt",
+                        "Smoke from fires",
+                        "Cotton that fell from trees"
                       ]
                     },
                     {
                       "questionId": "science-2-level-9-quiz-q2",
-                      "questionText": "Name a very shiny object that reflects a clear image of your face.",
-                      "correctAnswer": "A mirror",
+                      "questionText": "What kind of clouds often mean rain is coming?",
+                      "correctAnswer": "Thick, dark grey clouds",
                       "type": "multiple-choice",
                       "options": [
-                        "A mirror",
-                        "A mirror (or polished metal, a spoon, glass)",
-                        "It reflects off the surface",
-                        "In a scattered way, not a clear image"
+                        "Thick, dark grey clouds",
+                        "Thin, wispy white clouds",
+                        "No clouds at all",
+                        "Bright blue clouds"
                       ]
                     },
                     {
                       "questionId": "science-2-level-9-quiz-q3",
-                      "questionText": "Which surface reflects light the most clearly?",
-                      "correctAnswer": "A smooth, shiny mirror",
+                      "questionText": "Which word describes weather with no clouds and lots of sunshine?",
+                      "correctAnswer": "Sunny",
                       "type": "multiple-choice",
                       "options": [
-                        "A smooth, shiny mirror",
-                        "A rough brick wall",
-                        "A woolly jumper",
-                        "A muddy puddle bank"
+                        "Sunny",
+                        "Stormy",
+                        "Foggy"
                       ]
                     },
                     {
                       "questionId": "science-2-level-9-quiz-q4",
-                      "questionText": "Why should you never look directly at the sun?",
-                      "correctAnswer": "Its light is so strong it can seriously damage your eyes",
+                      "questionText": "What might big, fluffy white clouds usually mean?",
+                      "correctAnswer": "Fair, pleasant weather",
                       "type": "multiple-choice",
                       "options": [
-                        "It has a smooth, shiny surface that reflects light",
-                        "A mirror (or polished metal, a spoon, glass)",
-                        "It reflects off the surface",
-                        "Its light is so strong it can seriously damage your eyes"
+                        "Fair, pleasant weather",
+                        "A snowstorm is certain",
+                        "The sun has disappeared forever"
+                      ]
+                    },
+                    {
+                      "questionId": "science-2-level-9-quiz-q5",
+                      "questionText": "Why is it useful to watch the sky over several days?",
+                      "correctAnswer": "It helps us notice weather patterns, like a season bringing more rain",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It helps us notice weather patterns, like a season bringing more rain",
+                        "It changes the shape of the clouds permanently",
+                        "It has no use at all"
+                      ]
+                    },
+                    {
+                      "questionId": "science-2-level-9-quiz-q6",
+                      "questionText": "Which of these is a weather word?",
+                      "correctAnswer": "Windy",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Windy",
+                        "Triangle",
+                        "Yesterday"
                       ]
                     }
                   ]
@@ -33737,68 +33757,84 @@
                   "questions": [
                     {
                       "questionId": "science-2-level-9-exam-q1",
-                      "questionText": "What happens to light when it hits a mirror?",
-                      "correctAnswer": "It reflects off the surface",
+                      "questionText": "You look outside and see thick, dark grey clouds filling the sky. What would you expect?",
+                      "correctAnswer": "Rain is likely coming soon",
                       "type": "multiple-choice",
                       "options": [
-                        "It reflects off the surface",
-                        "It disappears completely",
-                        "It turns into sound",
-                        "It changes into heat only"
+                        "Rain is likely coming soon",
+                        "It will definitely stay sunny all day",
+                        "The clouds will turn into mountains"
                       ]
                     },
                     {
                       "questionId": "science-2-level-9-exam-q2",
-                      "questionText": "Give one reason a polished spoon can show a reflection.",
-                      "correctAnswer": "It has a smooth, shiny surface that reflects light",
+                      "questionText": "What are clouds mostly made of?",
+                      "correctAnswer": "Tiny water droplets",
                       "type": "multiple-choice",
                       "options": [
-                        "Its light is so strong it can seriously damage your eyes",
-                        "It has a smooth, shiny surface that reflects light",
-                        "It reflects off the surface",
-                        "A smooth, shiny mirror"
+                        "Tiny water droplets",
+                        "Cotton wool",
+                        "Grey paint"
                       ]
                     },
                     {
                       "questionId": "science-2-level-9-exam-q3",
-                      "questionText": "Which of these is the safest way to view the sun's effects, such as during a solar eclipse?",
-                      "correctAnswer": "Using special approved eclipse glasses or indirect projection methods",
+                      "questionText": "Which weather word describes a day with strong moving air?",
+                      "correctAnswer": "Windy",
                       "type": "multiple-choice",
                       "options": [
-                        "Using special approved eclipse glasses or indirect projection methods",
-                        "Looking directly at the sun with the naked eye",
-                        "Looking at the sun through ordinary sunglasses",
-                        "Staring at the sun through a telescope unprotected"
+                        "Windy",
+                        "Sunny",
+                        "Cloudy"
                       ]
                     },
                     {
                       "questionId": "science-2-level-9-exam-q4",
-                      "questionText": "Name one everyday object that reflects light well because it has a shiny surface.",
-                      "correctAnswer": "A mirror (or polished metal, a spoon, glass)",
+                      "questionText": "If you notice it rains almost every afternoon for a whole week, what is this an example of?",
+                      "correctAnswer": "A weather pattern over time",
                       "type": "multiple-choice",
                       "options": [
-                        "A mirror (or polished metal, a spoon, glass)",
-                        "A mirror",
-                        "It has a smooth, shiny surface that reflects light",
-                        "Its light is so strong it can seriously damage your eyes"
+                        "A weather pattern over time",
+                        "A single clap of thunder",
+                        "A type of cloud shape only"
                       ]
                     },
                     {
                       "questionId": "science-2-level-9-exam-q5",
-                      "questionText": "A rough, matte surface like a woolly jumper reflects light...",
-                      "correctAnswer": "In a scattered way, not a clear image",
+                      "questionText": "Which of these clouds would most likely mean pleasant, dry weather?",
+                      "correctAnswer": "Big, fluffy white clouds",
                       "type": "multiple-choice",
                       "options": [
-                        "In a scattered way, not a clear image",
-                        "As a perfect clear mirror image",
-                        "Not at all, it absorbs no light and reflects none",
-                        "Only at night"
+                        "Big, fluffy white clouds",
+                        "Thick, dark grey clouds covering the whole sky",
+                        "Clouds that look almost black"
+                      ]
+                    },
+                    {
+                      "questionId": "science-2-level-9-exam-q6",
+                      "questionText": "Why do people look at the sky and clouds before deciding what to wear outside?",
+                      "correctAnswer": "To guess what the weather will be like and dress for it",
+                      "type": "multiple-choice",
+                      "options": [
+                        "To guess what the weather will be like and dress for it",
+                        "Because clouds tell us the time of day exactly",
+                        "Because it changes the colour of their clothes"
+                      ]
+                    },
+                    {
+                      "questionId": "science-2-level-9-exam-q7",
+                      "questionText": "Which of these best describes \"cloudy\" weather?",
+                      "correctAnswer": "The sky is covered with clouds, with little or no direct sunshine",
+                      "type": "multiple-choice",
+                      "options": [
+                        "The sky is covered with clouds, with little or no direct sunshine",
+                        "There are no clouds anywhere in the sky",
+                        "It is raining heavily with thunder"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 4: Enquiry Project & Review"
+              ]
             },
             {
               "levelId": "science-2-level-10",
