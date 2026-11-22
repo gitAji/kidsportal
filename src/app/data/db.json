@@ -11892,14 +11892,14 @@
             },
             {
               "levelId": "science-1-level-7",
-              "levelName": "Animals Including Humans",
+              "levelName": "Animals That Visit Our Garden",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "science-1-level-7-lesson",
-                  "taskName": "Lesson: Animals Including Humans",
+                  "taskName": "Lesson: Animals That Visit Our Garden",
                   "type": "lesson",
-                  "content": "Staying healthy involves three important habits: getting regular exercise, eating the right amounts of different foods, and keeping clean. Exercise, such as running or cycling, keeps our muscles and heart strong. Eating a balanced mix of foods, like fruits, vegetables, and proteins, gives our bodies the nutrients we need to grow. Good hygiene, such as washing our hands before eating and after using the toilet, stops harmful germs from making us ill.",
+                  "content": "Many small animals visit gardens and yards looking for food, water, or a safe place to rest. Birds hop around looking for seeds or worms, butterflies and bees visit flowers to drink nectar, squirrels search for nuts, and ants march in lines carrying crumbs back to their nest. Each of these animals needs food, water, and shelter just like we do, and a garden with plants, flowers, and a little water can provide all three.",
                   "questions": []
                 },
                 {
@@ -11911,50 +11911,57 @@
                   "questions": [
                     {
                       "questionId": "science-1-level-7-quiz-q1",
-                      "questionText": "Why is regular exercise important for the human body?",
-                      "correctAnswer": "It keeps muscles and the heart strong",
+                      "questionText": "Why do bees and butterflies often visit flowers in a garden?",
+                      "correctAnswer": "To drink nectar from the flowers",
                       "type": "multiple-choice",
                       "options": [
-                        "It keeps muscles and the heart strong",
-                        "It makes teeth fall out",
-                        "It stops us from growing",
-                        "It has no effect on the body"
+                        "To drink nectar from the flowers",
+                        "To build a nest inside the flower",
+                        "To sleep for the winter"
                       ]
                     },
                     {
                       "questionId": "science-1-level-7-quiz-q2",
-                      "questionText": "Name one habit that helps stop germs from spreading and making us ill.",
-                      "correctAnswer": "Washing hands",
+                      "questionText": "What might a bird be looking for when it hops around a garden?",
+                      "correctAnswer": "Seeds or worms to eat",
                       "type": "multiple-choice",
                       "options": [
-                        "Vegetables, some rice, and a piece of chicken",
-                        "Washing hands",
-                        "It removes germs that could make them ill",
-                        "Running (or swimming, cycling, walking)"
+                        "Seeds or worms to eat",
+                        "A bath to swim in",
+                        "Nothing at all"
                       ]
                     },
                     {
                       "questionId": "science-1-level-7-quiz-q3",
-                      "questionText": "Which of these is part of eating a healthy, balanced diet?",
-                      "correctAnswer": "Eating the right amounts of different food types",
+                      "questionText": "What are ants usually doing when you see them marching in a line in a garden?",
+                      "correctAnswer": "Carrying food back to their nest",
                       "type": "multiple-choice",
                       "options": [
-                        "Eating the right amounts of different food types",
-                        "Only eating sweets",
-                        "Never eating any fruit or vegetables",
-                        "Eating just one type of food"
+                        "Carrying food back to their nest",
+                        "Sleeping",
+                        "Flying"
                       ]
                     },
                     {
                       "questionId": "science-1-level-7-quiz-q4",
-                      "questionText": "Give one example of a form of exercise.",
-                      "correctAnswer": "Running (or swimming, cycling, walking)",
+                      "questionText": "What does a squirrel often search for in a garden?",
+                      "correctAnswer": "Nuts",
                       "type": "multiple-choice",
                       "options": [
-                        "Eating the right amounts of different food types",
-                        "Running (or swimming, cycling, walking)",
-                        "It removes germs that could make them ill",
-                        "Exercise, good food, and hygiene all help keep us healthy"
+                        "Nuts",
+                        "Fish",
+                        "Sand"
+                      ]
+                    },
+                    {
+                      "questionId": "science-1-level-7-quiz-q5",
+                      "questionText": "Why might animals visit a garden that has flowers and a little water?",
+                      "correctAnswer": "Because it gives them food, water, and shelter",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Because it gives them food, water, and shelter",
+                        "Because gardens are always noisy",
+                        "Animals never visit gardens"
                       ]
                     }
                   ]
@@ -11968,68 +11975,62 @@
                   "questions": [
                     {
                       "questionId": "science-1-level-7-exam-q1",
-                      "questionText": "A pupil washes their hands before lunch. Why is this a good habit?",
-                      "correctAnswer": "It removes germs that could make them ill",
+                      "questionText": "You see a butterfly resting on a flower. What is it most likely doing?",
+                      "correctAnswer": "Drinking nectar",
                       "type": "multiple-choice",
                       "options": [
-                        "It removes germs that could make them ill",
-                        "It makes their food taste better",
-                        "It is required to grow taller",
-                        "It has no real purpose"
+                        "Drinking nectar",
+                        "Eating the whole flower",
+                        "Sleeping underground"
                       ]
                     },
                     {
                       "questionId": "science-1-level-7-exam-q2",
-                      "questionText": "Name one reason why exercise is good for the human body.",
-                      "correctAnswer": "It strengthens muscles and the heart (keeps you fit)",
+                      "questionText": "Which of these is something a garden visitor like a bird needs to survive?",
+                      "correctAnswer": "Food and water",
                       "type": "multiple-choice",
                       "options": [
-                        "It strengthens muscles and the heart (keeps you fit)",
-                        "It keeps muscles and the heart strong",
-                        "Vegetables, some rice, and a piece of chicken",
-                        "Washing hands (or brushing teeth, bathing)"
+                        "Food and water",
+                        "A television",
+                        "A pair of shoes"
                       ]
                     },
                     {
                       "questionId": "science-1-level-7-exam-q3",
-                      "questionText": "Which meal shows the best example of a balanced diet?",
-                      "correctAnswer": "Vegetables, some rice, and a piece of chicken",
+                      "questionText": "Why do many small animals, like insects and birds, like visiting gardens?",
+                      "correctAnswer": "Gardens can provide food, water, and shelter",
                       "type": "multiple-choice",
                       "options": [
-                        "Vegetables, some rice, and a piece of chicken",
-                        "Sweets and fizzy drinks only",
-                        "Crisps and chocolate only",
-                        "Nothing at all"
+                        "Gardens can provide food, water, and shelter",
+                        "Gardens are always completely empty",
+                        "Animals dislike plants and flowers"
                       ]
                     },
                     {
                       "questionId": "science-1-level-7-exam-q4",
-                      "questionText": "Give one example of good personal hygiene.",
-                      "correctAnswer": "Washing hands (or brushing teeth, bathing)",
+                      "questionText": "What is one way you could help animals that visit your garden?",
+                      "correctAnswer": "Leave out a little water or plant flowers for them",
                       "type": "multiple-choice",
                       "options": [
-                        "Running (or swimming, cycling, walking)",
-                        "It keeps muscles and the heart strong",
-                        "Vegetables, some rice, and a piece of chicken",
-                        "Washing hands (or brushing teeth, bathing)"
+                        "Leave out a little water or plant flowers for them",
+                        "Chase every animal away",
+                        "Cover the whole garden in plastic"
                       ]
                     },
                     {
                       "questionId": "science-1-level-7-exam-q5",
-                      "questionText": "Which statement about staying healthy is correct?",
-                      "correctAnswer": "Exercise, good food, and hygiene all help keep us healthy",
+                      "questionText": "If you see ants carrying crumbs, where are they probably taking the food?",
+                      "correctAnswer": "Back to their nest",
                       "type": "multiple-choice",
                       "options": [
-                        "Exercise, good food, and hygiene all help keep us healthy",
-                        "Only exercise matters for good health",
-                        "Hygiene has no effect on illness",
-                        "Eating any amount of any food is fine"
+                        "Back to their nest",
+                        "Into a flower",
+                        "Up into the sky"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 3: Seasons, Habitats & Change"
+              ]
             },
             {
               "levelId": "science-1-level-8",
@@ -12621,14 +12622,14 @@
             },
             {
               "levelId": "science-1-level-12",
-              "levelName": "Weather & Seasons in Depth",
+              "levelName": "Playing With Water",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "science-1-level-12-lesson",
-                  "taskName": "Lesson: Weather & Seasons in Depth",
+                  "taskName": "Lesson: Playing With Water",
                   "type": "lesson",
-                  "content": "Weather changes day to day - it might be sunny, rainy, windy, cloudy or snowy. Seasons are longer patterns of weather that repeat each year: spring (mild, flowers grow), summer (warm/hot), autumn/fall (cooler, leaves change colour), and winter (cold). Scientists observe clouds, temperature and wind to help predict what weather is coming.",
+                  "content": "Water is all around us, and playing with it safely helps us learn about how it behaves. Water takes the shape of whatever container you pour it into - it looks tall and thin in a tall cup, but flat and wide in a shallow dish. Some objects, like a leaf or a plastic duck, float on top of water, while others, like a stone or a coin, sink straight to the bottom. Water can also be poured, splashed, and used for important jobs like washing our hands, giving plants a drink, and helping us cook.",
                   "questions": []
                 },
                 {
@@ -12640,62 +12641,57 @@
                   "questions": [
                     {
                       "questionId": "science-1-level-12-quiz-q1",
-                      "questionText": "Which season usually comes after winter?",
-                      "correctAnswer": "Spring",
+                      "questionText": "What happens to water when you pour it into a different-shaped container?",
+                      "correctAnswer": "It takes the shape of the new container",
                       "type": "multiple-choice",
                       "options": [
-                        "Spring",
-                        "Summer",
-                        "Autumn",
-                        "Winter"
+                        "It takes the shape of the new container",
+                        "It turns into ice immediately",
+                        "It disappears completely"
                       ]
                     },
                     {
                       "questionId": "science-1-level-12-quiz-q2",
-                      "questionText": "Name one season that is usually warm or hot.",
-                      "correctAnswer": "summer",
+                      "questionText": "Which of these objects would most likely float on water?",
+                      "correctAnswer": "A leaf",
                       "type": "multiple-choice",
                       "options": [
-                        "4",
-                        "weather",
-                        "summer",
-                        "autumn/fall"
+                        "A leaf",
+                        "A stone",
+                        "A coin"
                       ]
                     },
                     {
                       "questionId": "science-1-level-12-quiz-q3",
-                      "questionText": "What happens to leaves in autumn/fall?",
-                      "correctAnswer": "They change colour",
+                      "questionText": "Which of these objects would most likely sink in water?",
+                      "correctAnswer": "A stone",
                       "type": "multiple-choice",
                       "options": [
-                        "They change colour",
-                        "They grow bigger",
-                        "Nothing changes",
-                        "They turn into flowers"
+                        "A stone",
+                        "A leaf",
+                        "A plastic duck"
                       ]
                     },
                     {
                       "questionId": "science-1-level-12-quiz-q4",
-                      "questionText": "What do we call day-to-day changes like sunny, rainy or windy conditions?",
-                      "correctAnswer": "weather",
+                      "questionText": "Name one important job that water helps us do every day.",
+                      "correctAnswer": "Washing our hands (or watering plants, cooking)",
                       "type": "multiple-choice",
                       "options": [
-                        "weather",
-                        "summer",
-                        "It helps us know what to expect and prepare for, like clothing or crops",
-                        "Spring"
+                        "Washing our hands (or watering plants, cooking)",
+                        "Charging a phone",
+                        "Painting a wall"
                       ]
                     },
                     {
                       "questionId": "science-1-level-12-quiz-q5",
-                      "questionText": "Which season is usually the coldest?",
-                      "correctAnswer": "Winter",
+                      "questionText": "If you pour water from a tall thin cup into a wide shallow dish, what happens to its shape?",
+                      "correctAnswer": "It spreads out to match the dish",
                       "type": "multiple-choice",
                       "options": [
-                        "Spring",
-                        "Summer",
-                        "Autumn",
-                        "Winter"
+                        "It spreads out to match the dish",
+                        "It stays tall and thin",
+                        "It turns into a solid block"
                       ]
                     }
                   ]
@@ -12709,80 +12705,62 @@
                   "questions": [
                     {
                       "questionId": "science-1-level-12-exam-q1",
-                      "questionText": "What do we call a season known for flowers growing and mild weather?",
-                      "correctAnswer": "spring",
+                      "questionText": "Why does water look different in a tall cup than in a wide bowl?",
+                      "correctAnswer": "Water always takes the shape of its container",
                       "type": "multiple-choice",
                       "options": [
-                        "They change colour",
-                        "Winter",
-                        "Clouds, temperature and wind",
-                        "spring"
+                        "Water always takes the shape of its container",
+                        "Water changes colour depending on the container",
+                        "The amount of water always changes"
                       ]
                     },
                     {
                       "questionId": "science-1-level-12-exam-q2",
-                      "questionText": "What might scientists observe to help predict the weather?",
-                      "correctAnswer": "Clouds, temperature and wind",
+                      "questionText": "A plastic toy boat is placed in water. What would you expect it to do?",
+                      "correctAnswer": "Float on top of the water",
                       "type": "multiple-choice",
                       "options": [
-                        "Clouds, temperature and wind",
-                        "Only the time of day",
-                        "Only the date",
-                        "Nothing, weather can't be predicted"
+                        "Float on top of the water",
+                        "Sink straight to the bottom",
+                        "Turn into ice"
                       ]
                     },
                     {
                       "questionId": "science-1-level-12-exam-q3",
-                      "questionText": "How many main seasons are there in a year?",
-                      "correctAnswer": "4",
+                      "questionText": "A small metal key is dropped into a bowl of water. What would you expect to happen?",
+                      "correctAnswer": "It sinks to the bottom",
                       "type": "multiple-choice",
                       "options": [
-                        "4",
-                        "summer",
-                        "Winter",
-                        "Weather changes daily, seasons are longer yearly patterns"
+                        "It sinks to the bottom",
+                        "It floats on top",
+                        "It disappears"
                       ]
                     },
                     {
                       "questionId": "science-1-level-12-exam-q4",
-                      "questionText": "What is the difference between weather and seasons?",
-                      "correctAnswer": "Weather changes daily, seasons are longer yearly patterns",
+                      "questionText": "Why is water important for plants in a garden?",
+                      "correctAnswer": "Plants need water to grow and stay healthy",
                       "type": "multiple-choice",
                       "options": [
-                        "They are exactly the same thing",
-                        "Weather changes daily, seasons are longer yearly patterns",
-                        "Seasons change every hour",
-                        "Weather never changes"
+                        "Plants need water to grow and stay healthy",
+                        "Plants dislike water completely",
+                        "Water makes plants shrink"
                       ]
                     },
                     {
                       "questionId": "science-1-level-12-exam-q5",
-                      "questionText": "Which season usually comes right before winter?",
-                      "correctAnswer": "autumn/fall",
+                      "questionText": "Which of these is a safe, fun way to learn about water?",
+                      "correctAnswer": "Pouring water between containers of different shapes and sizes",
                       "type": "multiple-choice",
                       "options": [
-                        "summer",
-                        "Winter",
-                        "Clouds, temperature and wind",
-                        "autumn/fall"
-                      ]
-                    },
-                    {
-                      "questionId": "science-1-level-12-exam-q6",
-                      "questionText": "Why is it useful to understand seasons?",
-                      "correctAnswer": "It helps us know what to expect and prepare for, like clothing or crops",
-                      "type": "multiple-choice",
-                      "options": [
-                        "It has no practical use",
-                        "It helps us know what to expect and prepare for, like clothing or crops",
-                        "Seasons are the same everywhere",
-                        "Only scientists need to know this"
+                        "Pouring water between containers of different shapes and sizes",
+                        "Drinking water from a puddle outside",
+                        "Playing with water near an open electrical socket"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 5: Exploring Our World"
+              ]
             },
             {
               "levelId": "science-1-level-13",
