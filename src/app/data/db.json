@@ -4281,14 +4281,14 @@
             },
             {
               "levelId": "math-1-level-4",
-              "levelName": "Odd & Even Numbers",
+              "levelName": "Sorting Objects by Type, Colour, Shape & Size",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "math-1-level-4-lesson",
-                  "taskName": "Lesson: Odd & Even Numbers",
+                  "taskName": "Lesson: Sorting Objects by Type, Colour, Shape & Size",
                   "type": "lesson",
-                  "content": "Even numbers can be split into two equal groups with nothing left over, and always end in 0, 2, 4, 6 or 8 - like 12 or 30. Odd numbers always have one left over when split into two groups, and end in 1, 3, 5, 7 or 9 - like 7 or 15. A quick way to check is to look at the very last digit of the number.",
+                  "content": "We can sort a group of mixed objects into smaller groups that share something in common - like putting all the red things together, or all the round things together, or all the big things together. The same group of objects can be sorted in more than one way, depending on which property (type, colour, shape or size) you choose to sort by.",
                   "questions": []
                 },
                 {
@@ -4300,68 +4300,68 @@
                   "questions": [
                     {
                       "questionId": "math-1-level-4-quiz-q1",
-                      "questionText": "Is 8 an odd or an even number?",
-                      "correctAnswer": "Even",
+                      "questionText": "You have red balls and blue balls mixed together. What is one way to sort them?",
+                      "correctAnswer": "By colour",
                       "type": "multiple-choice",
                       "options": [
-                        "Odd",
-                        "Even"
+                        "By colour",
+                        "By sound",
+                        "By weight"
                       ]
                     },
                     {
                       "questionId": "math-1-level-4-quiz-q2",
-                      "questionText": "Is 13 an odd or an even number?",
-                      "correctAnswer": "Odd",
+                      "questionText": "A group has big circles and small circles. What property could you sort them by?",
+                      "correctAnswer": "Size",
                       "type": "multiple-choice",
                       "options": [
-                        "Odd",
-                        "Even"
+                        "Size",
+                        "Smell",
+                        "Taste"
                       ]
                     },
                     {
                       "questionId": "math-1-level-4-quiz-q3",
-                      "questionText": "Which of these is an even number?",
-                      "correctAnswer": "24",
+                      "questionText": "Which of these describes sorting objects by shape?",
+                      "correctAnswer": "Putting all the squares together and all the circles together",
                       "type": "multiple-choice",
                       "options": [
-                        "21",
-                        "23",
-                        "24",
-                        "27"
+                        "Putting all the squares together and all the circles together",
+                        "Putting all the objects in one big pile",
+                        "Throwing some objects away"
                       ]
                     },
                     {
                       "questionId": "math-1-level-4-quiz-q4",
-                      "questionText": "Which of these is an odd number?",
-                      "correctAnswer": "15",
+                      "questionText": "A fruit basket has apples and bananas. What is one property you could sort them by?",
+                      "correctAnswer": "Type of fruit",
                       "type": "multiple-choice",
                       "options": [
-                        "12",
-                        "14",
-                        "15",
-                        "18"
+                        "Type of fruit",
+                        "The day of the week",
+                        "How loud they are"
                       ]
                     },
                     {
                       "questionId": "math-1-level-4-quiz-q5",
-                      "questionText": "What digit must an even number end in, besides 0, 2, 4 or 6?",
-                      "correctAnswer": "8",
+                      "questionText": "Can the same group of toys be sorted in more than one way?",
+                      "correctAnswer": "Yes, by colour, shape, or size",
                       "type": "multiple-choice",
                       "options": [
-                        "1",
-                        "5",
-                        "7",
-                        "8"
+                        "Yes, by colour, shape, or size",
+                        "No, only one way is ever correct",
+                        "No, toys cannot be sorted"
                       ]
                     },
                     {
                       "questionId": "math-1-level-4-quiz-q6",
-                      "questionText": "Is 30 an odd or an even number?",
-                      "correctAnswer": "Even",
+                      "questionText": "You sort blocks into \"small\" and \"big\" groups. What property are you sorting by?",
+                      "correctAnswer": "Size",
                       "type": "multiple-choice",
                       "options": [
-                        "Odd",
-                        "Even"
+                        "Colour",
+                        "Size",
+                        "Shape"
                       ]
                     }
                   ]
@@ -4375,88 +4375,84 @@
                   "questions": [
                     {
                       "questionId": "math-1-level-4-exam-q1",
-                      "questionText": "What is the smallest even number greater than 0?",
-                      "correctAnswer": "2",
+                      "questionText": "A box has red cars and yellow cars, some big and some small. Name two different ways you could sort them.",
+                      "correctAnswer": "By colour, and by size",
                       "type": "multiple-choice",
                       "options": [
-                        "0",
-                        "1",
-                        "2",
-                        "4"
+                        "By colour, and by size",
+                        "By how fast they can go",
+                        "There is only one way"
                       ]
                     },
                     {
                       "questionId": "math-1-level-4-exam-q2",
-                      "questionText": "Which of these is an odd number?",
-                      "correctAnswer": "37",
+                      "questionText": "Which group shows objects sorted by shape?",
+                      "correctAnswer": "All triangles together, all squares together",
                       "type": "multiple-choice",
                       "options": [
-                        "32",
-                        "34",
-                        "37",
-                        "38"
+                        "All triangles together, all squares together",
+                        "All objects mixed randomly",
+                        "All objects in a single line"
                       ]
                     },
                     {
                       "questionId": "math-1-level-4-exam-q3",
-                      "questionText": "Is 45 an odd or an even number?",
-                      "correctAnswer": "Odd",
+                      "questionText": "What is sorting by type?",
+                      "correctAnswer": "Grouping objects that are the same kind of thing, like all fruits together",
                       "type": "multiple-choice",
                       "options": [
-                        "Odd",
-                        "Even"
+                        "Grouping objects that are the same kind of thing, like all fruits together",
+                        "Throwing away objects you do not like",
+                        "Counting every object one by one"
                       ]
                     },
                     {
                       "questionId": "math-1-level-4-exam-q4",
-                      "questionText": "Which of these is an even number?",
-                      "correctAnswer": "50",
+                      "questionText": "You have 3 green leaves and 2 brown leaves. If you sort by colour, how many groups do you make?",
+                      "correctAnswer": "2",
                       "type": "multiple-choice",
                       "options": [
-                        "43",
-                        "47",
-                        "49",
-                        "50"
+                        "1",
+                        "2",
+                        "3"
                       ]
                     },
                     {
                       "questionId": "math-1-level-4-exam-q5",
-                      "questionText": "What digit must an odd number end in, besides 1, 3 or 5?",
-                      "correctAnswer": "9",
+                      "questionText": "Which is an example of sorting by size?",
+                      "correctAnswer": "Putting all the tiny beads in one cup and all the large beads in another",
                       "type": "multiple-choice",
                       "options": [
-                        "0",
-                        "2",
-                        "7",
-                        "9"
+                        "Putting all the tiny beads in one cup and all the large beads in another",
+                        "Putting beads of every size in one cup",
+                        "Counting all the beads together"
                       ]
                     },
                     {
                       "questionId": "math-1-level-4-exam-q6",
-                      "questionText": "Is 61 an odd or an even number?",
-                      "correctAnswer": "Odd",
+                      "questionText": "A pile of buttons has round ones and square ones in red and blue. If you sort by shape first, what do you look at?",
+                      "correctAnswer": "Whether each button is round or square",
                       "type": "multiple-choice",
                       "options": [
-                        "Odd",
-                        "Even"
+                        "Whether each button is round or square",
+                        "Whether each button is red or blue",
+                        "How many buttons there are in total"
                       ]
                     },
                     {
                       "questionId": "math-1-level-4-exam-q7",
-                      "questionText": "Which of these numbers is even?",
-                      "correctAnswer": "88",
+                      "questionText": "Why is sorting objects useful?",
+                      "correctAnswer": "It helps us organise and compare groups of things",
                       "type": "multiple-choice",
                       "options": [
-                        "81",
-                        "83",
-                        "85",
-                        "88"
+                        "It helps us organise and compare groups of things",
+                        "It makes objects disappear",
+                        "It changes what the objects are made of"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 1: Number Sense & Counting"
+              ]
             },
             {
               "levelId": "math-1-level-5",
@@ -5006,14 +5002,14 @@
             },
             {
               "levelId": "math-1-level-8",
-              "levelName": "Adding & Subtracting Tens",
+              "levelName": "Matching Sets One-to-One",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "math-1-level-8-lesson",
-                  "taskName": "Lesson: Adding & Subtracting Tens",
+                  "taskName": "Lesson: Matching Sets One-to-One",
                   "type": "lesson",
-                  "content": "When adding or subtracting whole tens, it helps to think of them as groups: 20 + 30 is 2 groups of ten plus 3 groups of ten, which is 5 groups of ten, so 20 + 30 = 50. We can also add a small number to a two-digit number without any regrouping, like 23 + 5 = 28, because 3 + 5 = 8 fits neatly into the ones place.",
+                  "content": "To compare two groups fairly, we can match each object in one group to exactly one object in the other group, drawing a line between pairs. If every object gets a partner with none left over, the two groups have the same amount. If one group has objects left over with no partner, that group has more.",
                   "questions": []
                 },
                 {
@@ -5025,68 +5021,68 @@
                   "questions": [
                     {
                       "questionId": "math-1-level-8-quiz-q1",
-                      "questionText": "What is 20 + 30?",
-                      "correctAnswer": "50",
+                      "questionText": "What does it mean to match two sets \"one-to-one\"?",
+                      "correctAnswer": "Pairing each object in one group with exactly one object in the other",
                       "type": "multiple-choice",
                       "options": [
-                        "40",
-                        "50",
-                        "60"
+                        "Pairing each object in one group with exactly one object in the other",
+                        "Counting only the first group",
+                        "Mixing both groups together"
                       ]
                     },
                     {
                       "questionId": "math-1-level-8-quiz-q2",
-                      "questionText": "What is 23 + 5?",
-                      "correctAnswer": "28",
+                      "questionText": "If every cup has exactly one spoon matched to it with none left over, what do we know?",
+                      "correctAnswer": "There are the same number of cups and spoons",
                       "type": "multiple-choice",
                       "options": [
-                        "27",
-                        "28",
-                        "29"
+                        "There are the same number of cups and spoons",
+                        "There are more cups than spoons",
+                        "There are more spoons than cups"
                       ]
                     },
                     {
                       "questionId": "math-1-level-8-quiz-q3",
-                      "questionText": "What is 70 - 40?",
-                      "correctAnswer": "30",
+                      "questionText": "There are 5 dogs and 4 bones. If each dog gets one bone, what happens?",
+                      "correctAnswer": "One dog is left without a bone",
                       "type": "multiple-choice",
                       "options": [
-                        "20",
-                        "30",
-                        "40"
+                        "One dog is left without a bone",
+                        "One bone is left over",
+                        "They match exactly"
                       ]
                     },
                     {
                       "questionId": "math-1-level-8-quiz-q4",
-                      "questionText": "What is 34 + 4?",
-                      "correctAnswer": "38",
+                      "questionText": "There are 3 plates and 3 cups. If you match them one-to-one, what do you find?",
+                      "correctAnswer": "They match exactly, with none left over",
                       "type": "multiple-choice",
                       "options": [
-                        "37",
-                        "38",
-                        "39"
+                        "They match exactly, with none left over",
+                        "There is one extra plate",
+                        "There is one extra cup"
                       ]
                     },
                     {
                       "questionId": "math-1-level-8-quiz-q5",
-                      "questionText": "What is 60 + 20?",
-                      "correctAnswer": "80",
+                      "questionText": "Why is matching one-to-one a fair way to compare two groups?",
+                      "correctAnswer": "Because every object gets exactly one partner, so nothing is missed or double-counted",
                       "type": "multiple-choice",
                       "options": [
-                        "70",
-                        "80",
-                        "90"
+                        "Because every object gets exactly one partner, so nothing is missed or double-counted",
+                        "Because it is the fastest way to guess",
+                        "Because it only works for small numbers"
                       ]
                     },
                     {
                       "questionId": "math-1-level-8-quiz-q6",
-                      "questionText": "What is 48 - 5?",
-                      "correctAnswer": "43",
+                      "questionText": "There are 6 chairs and 6 children. If each child sits in one chair with none left over, what does this tell us?",
+                      "correctAnswer": "There are exactly as many chairs as children",
                       "type": "multiple-choice",
                       "options": [
-                        "42",
-                        "43",
-                        "44"
+                        "There are exactly as many chairs as children",
+                        "There are more chairs than children",
+                        "There are more children than chairs"
                       ]
                     }
                   ]
@@ -5100,85 +5096,84 @@
                   "questions": [
                     {
                       "questionId": "math-1-level-8-exam-q1",
-                      "questionText": "What is 50 + 40?",
-                      "correctAnswer": "90",
+                      "questionText": "There are 7 hats and 5 heads. If each head gets one hat, what happens?",
+                      "correctAnswer": "2 hats are left over",
                       "type": "multiple-choice",
                       "options": [
-                        "80",
-                        "90",
-                        "100"
+                        "2 hats are left over",
+                        "2 heads are left without a hat",
+                        "They match exactly"
                       ]
                     },
                     {
                       "questionId": "math-1-level-8-exam-q2",
-                      "questionText": "What is 62 + 6?",
-                      "correctAnswer": "68",
+                      "questionText": "What is left over if you match 8 socks to 8 feet, one-to-one?",
+                      "correctAnswer": "Nothing, they match exactly",
                       "type": "multiple-choice",
                       "options": [
-                        "67",
-                        "68",
-                        "69"
+                        "Nothing, they match exactly",
+                        "1 sock",
+                        "1 foot"
                       ]
                     },
                     {
                       "questionId": "math-1-level-8-exam-q3",
-                      "questionText": "What is 90 - 30?",
-                      "correctAnswer": "60",
+                      "questionText": "A set of 4 pencils is matched one-to-one with a set of 6 erasers. Which group has more?",
+                      "correctAnswer": "The erasers",
                       "type": "multiple-choice",
                       "options": [
-                        "50",
-                        "60",
-                        "70"
+                        "The pencils",
+                        "The erasers",
+                        "They are equal"
                       ]
                     },
                     {
                       "questionId": "math-1-level-8-exam-q4",
-                      "questionText": "What is 75 - 3?",
-                      "correctAnswer": "72",
+                      "questionText": "If two sets match one-to-one with none left over in either set, what must be true?",
+                      "correctAnswer": "The two sets have an equal number of objects",
                       "type": "multiple-choice",
                       "options": [
-                        "71",
-                        "72",
-                        "73"
+                        "The two sets have an equal number of objects",
+                        "The first set has more objects",
+                        "The second set has more objects"
                       ]
                     },
                     {
                       "questionId": "math-1-level-8-exam-q5",
-                      "questionText": "What is 40 + 50?",
-                      "correctAnswer": "90",
+                      "questionText": "There are 5 birds and 5 nests. Matching one-to-one, what do you find?",
+                      "correctAnswer": "Every bird has its own nest, with none left over",
                       "type": "multiple-choice",
                       "options": [
-                        "80",
-                        "90",
-                        "100"
+                        "Every bird has its own nest, with none left over",
+                        "One bird has no nest",
+                        "One nest has no bird"
                       ]
                     },
                     {
                       "questionId": "math-1-level-8-exam-q6",
-                      "questionText": "What is 86 - 4?",
-                      "correctAnswer": "82",
+                      "questionText": "Why might matching one-to-one be easier than counting large numbers separately?",
+                      "correctAnswer": "It lets you compare two groups directly without needing to count each one first",
                       "type": "multiple-choice",
                       "options": [
-                        "81",
-                        "82",
-                        "83"
+                        "It lets you compare two groups directly without needing to count each one first",
+                        "It only works for groups bigger than 100",
+                        "It changes how many objects are in each group"
                       ]
                     },
                     {
                       "questionId": "math-1-level-8-exam-q7",
-                      "questionText": "What is 25 + 4?",
-                      "correctAnswer": "29",
+                      "questionText": "There are 9 shoes and 10 feet. What does matching one-to-one tell you?",
+                      "correctAnswer": "There is 1 foot left without a shoe",
                       "type": "multiple-choice",
                       "options": [
-                        "28",
-                        "29",
-                        "30"
+                        "There is 1 foot left without a shoe",
+                        "There is 1 shoe left over",
+                        "They match exactly"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 2: Bigger Numbers"
+              ]
             },
             {
               "levelId": "math-1-level-9",
@@ -5534,14 +5529,14 @@
             },
             {
               "levelId": "math-1-level-11",
-              "levelName": "Comparing Capacity (More/Less Full)",
+              "levelName": "Recognising Time Through Daily & Seasonal Changes",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "math-1-level-11-lesson",
-                  "taskName": "Lesson: Comparing Capacity (More/Less Full)",
+                  "taskName": "Lesson: Recognising Time Through Daily & Seasonal Changes",
                   "type": "lesson",
-                  "content": "Capacity means how much a container can hold, and we can compare two containers by checking which one is more full, less full, empty or full. A tall thin cup might look bigger, but a short wide cup could actually hold more liquid - so comparing capacity fairly means pouring the same amount into each and seeing what happens.",
+                  "content": "Even before we learn to read a clock, we can tell roughly what time of day it is by looking around us. The sky is bright and we eat breakfast in the morning, the sun is high and we eat lunch in the afternoon, and the sky grows dark in the evening and night. Seasons change too - some times of year are hot and sunny, and others are cool or rainy - and these changes help us know what to wear and what activities to expect.",
                   "questions": []
                 },
                 {
@@ -5553,68 +5548,68 @@
                   "questions": [
                     {
                       "questionId": "math-1-level-11-quiz-q1",
-                      "questionText": "What does capacity mean?",
-                      "correctAnswer": "How much a container can hold",
+                      "questionText": "What usually happens in the morning?",
+                      "correctAnswer": "The sky becomes bright and we eat breakfast",
                       "type": "multiple-choice",
                       "options": [
-                        "How heavy a container is",
-                        "How much a container can hold",
-                        "How tall a container is"
+                        "The sky becomes bright and we eat breakfast",
+                        "The sky goes completely dark",
+                        "We go to sleep for the night"
                       ]
                     },
                     {
                       "questionId": "math-1-level-11-quiz-q2",
-                      "questionText": "What word describes a container with nothing inside it?",
-                      "correctAnswer": "Empty",
+                      "questionText": "What tells us it might be night time?",
+                      "correctAnswer": "The sky is dark",
                       "type": "multiple-choice",
                       "options": [
-                        "Full",
-                        "Empty",
-                        "Half full"
+                        "The sky is dark",
+                        "The sun is at its highest point",
+                        "We are eating breakfast"
                       ]
                     },
                     {
                       "questionId": "math-1-level-11-quiz-q3",
-                      "questionText": "What word describes a container that is completely filled?",
-                      "correctAnswer": "Full",
+                      "questionText": "Which meal usually happens in the afternoon?",
+                      "correctAnswer": "Lunch",
                       "type": "multiple-choice",
                       "options": [
-                        "Full",
-                        "Empty",
-                        "Half full"
+                        "Breakfast",
+                        "Lunch",
+                        "A midnight snack"
                       ]
                     },
                     {
                       "questionId": "math-1-level-11-quiz-q4",
-                      "questionText": "A jug is half full. What word could describe the empty part of the jug?",
-                      "correctAnswer": "Half empty",
+                      "questionText": "What can change from one season to another?",
+                      "correctAnswer": "The weather, like how hot, cold, or rainy it is",
                       "type": "multiple-choice",
                       "options": [
-                        "Full",
-                        "Half empty",
-                        "Completely empty"
+                        "The weather, like how hot, cold, or rainy it is",
+                        "The number of days in a week",
+                        "The colour of the sky at noon only"
                       ]
                     },
                     {
                       "questionId": "math-1-level-11-quiz-q5",
-                      "questionText": "Which container holds more if cup A is full and cup B is empty?",
-                      "correctAnswer": "Cup A",
+                      "questionText": "Why might you wear different clothes in a rainy season than a hot season?",
+                      "correctAnswer": "Because the weather is different and we dress to stay comfortable",
                       "type": "multiple-choice",
                       "options": [
-                        "Cup A",
-                        "Cup B",
-                        "They are equal"
+                        "Because the weather is different and we dress to stay comfortable",
+                        "Because clothes change colour by themselves",
+                        "Clothes never need to change between seasons"
                       ]
                     },
                     {
                       "questionId": "math-1-level-11-quiz-q6",
-                      "questionText": "What is a fair way to compare the capacity of two different-shaped containers?",
-                      "correctAnswer": "Pour the same liquid into each and see which fills more",
+                      "questionText": "What is one clue (without looking at a clock) that evening is coming?",
+                      "correctAnswer": "The sky starts to get darker",
                       "type": "multiple-choice",
                       "options": [
-                        "Guess by looking at their shape",
-                        "Pour the same liquid into each and see which fills more",
-                        "Weigh them while empty"
+                        "The sky starts to get darker",
+                        "The sun rises for the first time",
+                        "Breakfast is being served"
                       ]
                     }
                   ]
@@ -5628,85 +5623,84 @@
                   "questions": [
                     {
                       "questionId": "math-1-level-11-exam-q1",
-                      "questionText": "How could you fairly compare the capacity of two different-shaped containers?",
-                      "correctAnswer": "Pour the same liquid into each and see which fills up first",
+                      "questionText": "You wake up, the sky is bright, and your family is making breakfast. What time of day is it?",
+                      "correctAnswer": "Morning",
                       "type": "multiple-choice",
                       "options": [
-                        "Compare their colours",
-                        "Pour the same liquid into each and see which fills up first",
-                        "Compare their weight when empty"
+                        "Morning",
+                        "Night",
+                        "Midnight"
                       ]
                     },
                     {
                       "questionId": "math-1-level-11-exam-q2",
-                      "questionText": "A bottle is three-quarters full. Is it closer to empty or full?",
-                      "correctAnswer": "Full",
+                      "questionText": "Which is a sign that it is getting close to night time?",
+                      "correctAnswer": "The sky is turning dark and the air feels cooler",
                       "type": "multiple-choice",
                       "options": [
-                        "Empty",
-                        "Full",
-                        "Exactly half"
+                        "The sky is turning dark and the air feels cooler",
+                        "The sun has just risen",
+                        "Everyone is eating breakfast"
                       ]
                     },
                     {
                       "questionId": "math-1-level-11-exam-q3",
-                      "questionText": "Which word means a container has no space left for more liquid?",
-                      "correctAnswer": "Full",
+                      "questionText": "During a hot, sunny season, what might you notice outside?",
+                      "correctAnswer": "Bright sunshine and warm weather",
                       "type": "multiple-choice",
                       "options": [
-                        "Empty",
-                        "Full",
-                        "Half full"
+                        "Bright sunshine and warm weather",
+                        "Heavy snowfall every day",
+                        "No sunlight at all"
                       ]
                     },
                     {
                       "questionId": "math-1-level-11-exam-q4",
-                      "questionText": "A bowl has a little water in the bottom. Which word best fits?",
-                      "correctAnswer": "Nearly empty",
+                      "questionText": "During a rainy season, what might you see more often?",
+                      "correctAnswer": "Clouds and rain",
                       "type": "multiple-choice",
                       "options": [
-                        "Full",
-                        "Nearly empty",
-                        "Overflowing"
+                        "Clouds and rain",
+                        "A completely dark sky at noon",
+                        "No change in the weather at all"
                       ]
                     },
                     {
                       "questionId": "math-1-level-11-exam-q5",
-                      "questionText": "Why might a tall thin cup not actually hold more than a short wide cup?",
-                      "correctAnswer": "Because capacity depends on all of the container's shape, not just height",
+                      "questionText": "Without using a clock, how can you tell it is afternoon rather than early morning?",
+                      "correctAnswer": "The sun is high in the sky and lunch time has likely come",
                       "type": "multiple-choice",
                       "options": [
-                        "Tall cups always hold more",
-                        "Because capacity depends on all of the container's shape, not just height",
-                        "Shape never matters"
+                        "The sun is high in the sky and lunch time has likely come",
+                        "The sky is completely dark",
+                        "Everyone is still asleep"
                       ]
                     },
                     {
                       "questionId": "math-1-level-11-exam-q6",
-                      "questionText": "Two jugs are poured from the same tap for the same time. Jug A overflows first. Which jug has less capacity?",
-                      "correctAnswer": "Jug A",
+                      "questionText": "Why do people change their activities with the seasons?",
+                      "correctAnswer": "Because the weather changes what is comfortable or safe to do",
                       "type": "multiple-choice",
                       "options": [
-                        "Jug A",
-                        "Jug B",
-                        "They are equal"
+                        "Because the weather changes what is comfortable or safe to do",
+                        "Because the days get shorter forever",
+                        "Activities never change with the seasons"
                       ]
                     },
                     {
                       "questionId": "math-1-level-11-exam-q7",
-                      "questionText": "What word describes a cup that has exactly the same amount of empty space as filled space?",
-                      "correctAnswer": "Half full",
+                      "questionText": "Which of these is an example of telling time without a clock?",
+                      "correctAnswer": "Knowing it is evening because the sky is getting dark",
                       "type": "multiple-choice",
                       "options": [
-                        "Full",
-                        "Empty",
-                        "Half full"
+                        "Knowing it is evening because the sky is getting dark",
+                        "Reading the minute hand on a clock face",
+                        "Counting backwards from 100"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 3: Measuring the World"
+              ]
             },
             {
               "levelId": "math-1-level-12",
@@ -6941,14 +6935,14 @@
             },
             {
               "levelId": "math-1-level-19",
-              "levelName": "Position & Direction",
+              "levelName": "Position: Front, Behind & In Between",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "math-1-level-19-lesson",
-                  "taskName": "Lesson: Position & Direction",
+                  "taskName": "Lesson: Position: Front, Behind & In Between",
                   "type": "lesson",
-                  "content": "We describe position using words like left, right, above and below, and describe movement using turns. A quarter turn is a small turn, and a half turn turns you all the way around to face the opposite way. Turns can go clockwise (the way clock hands move) or anticlockwise (the other way).",
+                  "content": "When three people or objects are lined up, we can describe where each one is using position words. The one at the start of the line is in front, the one at the end is behind (or last), and the one in the middle is in between the other two. These words help us describe order and position clearly, like saying the red car is in front, the blue car is behind, and the green car is in between them.",
                   "questions": []
                 },
                 {
@@ -6960,68 +6954,68 @@
                   "questions": [
                     {
                       "questionId": "math-1-level-19-quiz-q1",
-                      "questionText": "Which word describes something that is underneath another object?",
-                      "correctAnswer": "Below",
+                      "questionText": "Three children stand in a line: Amal, then Nimal, then Kamal. Who is in front?",
+                      "correctAnswer": "Amal",
                       "type": "multiple-choice",
                       "options": [
-                        "Above",
-                        "Below",
-                        "Beside"
+                        "Amal",
+                        "Nimal",
+                        "Kamal"
                       ]
                     },
                     {
                       "questionId": "math-1-level-19-quiz-q2",
-                      "questionText": "If you make a half turn, which way do you end up facing?",
-                      "correctAnswer": "The opposite way",
+                      "questionText": "In the same line (Amal, Nimal, Kamal), who is in between?",
+                      "correctAnswer": "Nimal",
                       "type": "multiple-choice",
                       "options": [
-                        "The same way",
-                        "The opposite way",
-                        "Sideways"
+                        "Amal",
+                        "Nimal",
+                        "Kamal"
                       ]
                     },
                     {
                       "questionId": "math-1-level-19-quiz-q3",
-                      "questionText": "Which word describes turning the same way clock hands move?",
-                      "correctAnswer": "Clockwise",
+                      "questionText": "In the same line (Amal, Nimal, Kamal), who is behind?",
+                      "correctAnswer": "Kamal",
                       "type": "multiple-choice",
                       "options": [
-                        "Clockwise",
-                        "Anticlockwise",
-                        "Sideways"
+                        "Amal",
+                        "Nimal",
+                        "Kamal"
                       ]
                     },
                     {
                       "questionId": "math-1-level-19-quiz-q4",
-                      "questionText": "If a ball is above the table, where is it?",
-                      "correctAnswer": "Higher than the table",
+                      "questionText": "What does \"in between\" mean when describing three objects in a row?",
+                      "correctAnswer": "The middle one, with one object on each side of it",
                       "type": "multiple-choice",
                       "options": [
-                        "Higher than the table",
-                        "Lower than the table",
-                        "Next to the table"
+                        "The middle one, with one object on each side of it",
+                        "The very first object",
+                        "The very last object"
                       ]
                     },
                     {
                       "questionId": "math-1-level-19-quiz-q5",
-                      "questionText": "A half turn is made up of how many quarter turns?",
-                      "correctAnswer": "2",
+                      "questionText": "A red ball, a blue ball, and a green ball are lined up. The blue ball is in between. Where are the red and green balls?",
+                      "correctAnswer": "One in front and one behind the blue ball",
                       "type": "multiple-choice",
                       "options": [
-                        "1",
-                        "2",
-                        "3"
+                        "One in front and one behind the blue ball",
+                        "Both in front of the blue ball",
+                        "Both behind the blue ball"
                       ]
                     },
                     {
                       "questionId": "math-1-level-19-quiz-q6",
-                      "questionText": "Which hand do most people write with if they are 'right-handed'?",
-                      "correctAnswer": "Their right hand",
+                      "questionText": "If you are standing behind your friend, where are you?",
+                      "correctAnswer": "After your friend, not in front",
                       "type": "multiple-choice",
                       "options": [
-                        "Their right hand",
-                        "Their left hand",
-                        "Both hands equally"
+                        "After your friend, not in front",
+                        "Exactly where your friend is standing",
+                        "Ahead of your friend"
                       ]
                     }
                   ]
@@ -7035,96 +7029,95 @@
                   "questions": [
                     {
                       "questionId": "math-1-level-19-exam-q1",
-                      "questionText": "If you face forward and make a half turn, which way do you now face?",
-                      "correctAnswer": "Backward",
+                      "questionText": "A cat, a dog, and a rabbit are lined up: dog, rabbit, cat. Which animal is in front?",
+                      "correctAnswer": "The dog",
                       "type": "multiple-choice",
                       "options": [
-                        "Forward",
-                        "Backward",
-                        "Sideways"
+                        "The dog",
+                        "The rabbit",
+                        "The cat"
                       ]
                     },
                     {
                       "questionId": "math-1-level-19-exam-q2",
-                      "questionText": "Which word means turning the opposite way to clock hands?",
-                      "correctAnswer": "Anticlockwise",
+                      "questionText": "In the line (dog, rabbit, cat), which animal is in between?",
+                      "correctAnswer": "The rabbit",
                       "type": "multiple-choice",
                       "options": [
-                        "Clockwise",
-                        "Anticlockwise",
-                        "Half turn"
+                        "The dog",
+                        "The rabbit",
+                        "The cat"
                       ]
                     },
                     {
                       "questionId": "math-1-level-19-exam-q3",
-                      "questionText": "A full turn is made up of how many half turns?",
-                      "correctAnswer": "2",
+                      "questionText": "In the line (dog, rabbit, cat), which animal is behind?",
+                      "correctAnswer": "The cat",
                       "type": "multiple-choice",
                       "options": [
-                        "1",
-                        "2",
-                        "4"
+                        "The dog",
+                        "The rabbit",
+                        "The cat"
                       ]
                     },
                     {
                       "questionId": "math-1-level-19-exam-q4",
-                      "questionText": "If a cat is below the table, where is it?",
-                      "correctAnswer": "Lower than the table",
+                      "questionText": "Three books are stacked in a row on a shelf: blue, yellow, red. Which book is in between the other two?",
+                      "correctAnswer": "The yellow book",
                       "type": "multiple-choice",
                       "options": [
-                        "Higher than the table",
-                        "Lower than the table",
-                        "Next to the table"
+                        "The blue book",
+                        "The yellow book",
+                        "The red book"
                       ]
                     },
                     {
                       "questionId": "math-1-level-19-exam-q5",
-                      "questionText": "You turn clockwise then make the same turn clockwise again. If each was a half turn, where do you end up facing?",
-                      "correctAnswer": "The same way you started",
+                      "questionText": "If Priya is in front, Sunil is in between, and Mala is behind, who is in the middle of the three?",
+                      "correctAnswer": "Sunil",
                       "type": "multiple-choice",
                       "options": [
-                        "The same way you started",
-                        "Sideways",
-                        "You can't tell"
+                        "Priya",
+                        "Sunil",
+                        "Mala"
                       ]
                     },
                     {
                       "questionId": "math-1-level-19-exam-q6",
-                      "questionText": "Which word best describes an object on your left side when you turn to face the opposite way?",
-                      "correctAnswer": "It is now on your right",
+                      "questionText": "Why is \"in between\" a useful position word?",
+                      "correctAnswer": "It describes something with one thing in front of it and one thing behind it",
                       "type": "multiple-choice",
                       "options": [
-                        "It is now on your right",
-                        "It stays on your left",
-                        "It disappears"
+                        "It describes something with one thing in front of it and one thing behind it",
+                        "It only describes the very first object",
+                        "It means the object is missing"
                       ]
                     },
                     {
                       "questionId": "math-1-level-19-exam-q7",
-                      "questionText": "A quarter turn is how much of a full turn?",
-                      "correctAnswer": "A quarter of it",
+                      "questionText": "Three flowers are planted in a row: rose, then lily, then daisy. If the lily is pulled out, which two flowers are now next to each other?",
+                      "correctAnswer": "The rose and the daisy",
                       "type": "multiple-choice",
                       "options": [
-                        "A half of it",
-                        "A quarter of it",
-                        "All of it"
+                        "The rose and the daisy",
+                        "The rose and the lily",
+                        "The lily and the daisy"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 6: Fractions, Position & Data"
+              ]
             },
             {
               "levelId": "math-1-level-20",
-              "levelName": "Pictograms & Simple Tables",
+              "levelName": "Ordinal Numbers 1st to 9th",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "math-1-level-20-lesson",
-                  "taskName": "Lesson: Pictograms & Simple Tables",
+                  "taskName": "Lesson: Ordinal Numbers 1st to 9th",
                   "type": "lesson",
-                  "content": "Pictograms use one picture for each item, so you can count the pictures to find the total straight away. For example, if a row has 4 apple pictures, that means 4 apples. Tables organise information into rows and columns so we can read and compare amounts easily, like comparing how many pets different children have.",
+                  "content": "Ordinal numbers tell us the position or order of something in a line, like 1st (first), 2nd (second), 3rd (third), and so on up to 9th (ninth). Unlike counting numbers (1, 2, 3...) which tell us how many things there are, ordinal numbers tell us where something comes in an order - like who finished first in a race, or which seat is the fifth seat from the front.",
                   "questions": []
                 },
                 {
@@ -7136,68 +7129,68 @@
                   "questions": [
                     {
                       "questionId": "math-1-level-20-quiz-q1",
-                      "questionText": "In a pictogram, each symbol = 1 apple. If there are 5 symbols, how many apples are there?",
-                      "correctAnswer": "5",
+                      "questionText": "If you finish a race in first place, what ordinal number describes your position?",
+                      "correctAnswer": "1st",
                       "type": "multiple-choice",
                       "options": [
-                        "4",
-                        "5",
-                        "6"
+                        "1st",
+                        "2nd",
+                        "3rd"
                       ]
                     },
                     {
                       "questionId": "math-1-level-20-quiz-q2",
-                      "questionText": "A table shows 3 red cars and 2 blue cars. How many cars in total?",
-                      "correctAnswer": "5",
+                      "questionText": "What is the ordinal number for the position right after 2nd?",
+                      "correctAnswer": "3rd",
                       "type": "multiple-choice",
                       "options": [
-                        "4",
-                        "5",
-                        "6"
+                        "2nd",
+                        "3rd",
+                        "4th"
                       ]
                     },
                     {
                       "questionId": "math-1-level-20-quiz-q3",
-                      "questionText": "In a pictogram, each symbol = 1 dog. There are 7 symbols in the 'dogs' row. How many dogs?",
-                      "correctAnswer": "7",
+                      "questionText": "In a line of 9 children, what ordinal number describes the very last child?",
+                      "correctAnswer": "9th",
                       "type": "multiple-choice",
                       "options": [
-                        "6",
-                        "7",
-                        "8"
+                        "7th",
+                        "8th",
+                        "9th"
                       ]
                     },
                     {
                       "questionId": "math-1-level-20-quiz-q4",
-                      "questionText": "A table shows 4 cats and 3 rabbits. How many more cats than rabbits are there?",
-                      "correctAnswer": "1",
+                      "questionText": "What do ordinal numbers describe?",
+                      "correctAnswer": "The position or order of something, like 1st, 2nd, or 3rd",
                       "type": "multiple-choice",
                       "options": [
-                        "0",
-                        "1",
-                        "2"
+                        "The position or order of something, like 1st, 2nd, or 3rd",
+                        "How many objects there are in total",
+                        "The colour of an object"
                       ]
                     },
                     {
                       "questionId": "math-1-level-20-quiz-q5",
-                      "questionText": "A pictogram has 6 star symbols, one for each sticker. How many stickers are there?",
-                      "correctAnswer": "6",
+                      "questionText": "Which comes right before 5th?",
+                      "correctAnswer": "4th",
                       "type": "multiple-choice",
                       "options": [
-                        "5",
-                        "6",
-                        "7"
+                        "3rd",
+                        "4th",
+                        "6th"
                       ]
                     },
                     {
                       "questionId": "math-1-level-20-quiz-q6",
-                      "questionText": "A table shows Monday: 3 sunny hours, Tuesday: 5 sunny hours. Which day had more sun?",
-                      "correctAnswer": "Tuesday",
+                      "questionText": "If a book is the 6th one on a shelf of 9 books, how many books are after it?",
+                      "correctAnswer": "3",
                       "type": "multiple-choice",
                       "options": [
-                        "Monday",
-                        "Tuesday",
-                        "They had the same"
+                        "2",
+                        "3",
+                        "4"
                       ]
                     }
                   ]
@@ -7211,96 +7204,106 @@
                   "questions": [
                     {
                       "questionId": "math-1-level-20-exam-q1",
-                      "questionText": "A table shows 5 red cars, 3 blue cars and 2 green cars. How many cars in total?",
-                      "correctAnswer": "10",
+                      "questionText": "A line of children is numbered 1st to 9th. Which child is exactly in the middle?",
+                      "correctAnswer": "5th",
                       "type": "multiple-choice",
                       "options": [
-                        "9",
-                        "10",
-                        "11"
+                        "4th",
+                        "5th",
+                        "6th"
                       ]
                     },
                     {
                       "questionId": "math-1-level-20-exam-q2",
-                      "questionText": "In a pictogram, each symbol = 1 book. There are 8 symbols. How many books?",
-                      "correctAnswer": "8",
+                      "questionText": "What ordinal number comes right after 7th?",
+                      "correctAnswer": "8th",
                       "type": "multiple-choice",
                       "options": [
-                        "7",
-                        "8",
-                        "9"
+                        "6th",
+                        "8th",
+                        "9th"
                       ]
                     },
                     {
                       "questionId": "math-1-level-20-exam-q3",
-                      "questionText": "A table shows 4 red cars, 6 blue cars and 3 green cars. How many cars in total?",
-                      "correctAnswer": "13",
+                      "questionText": "If Kumari finished 3rd in a running race, how many people finished ahead of her?",
+                      "correctAnswer": "2",
                       "type": "multiple-choice",
                       "options": [
-                        "12",
-                        "13",
-                        "14"
+                        "1",
+                        "2",
+                        "3"
                       ]
                     },
                     {
                       "questionId": "math-1-level-20-exam-q4",
-                      "questionText": "A table shows 7 cats, 5 dogs and 3 rabbits. How many pets altogether?",
-                      "correctAnswer": "15",
+                      "questionText": "Which ordinal number tells you something is in the very first position?",
+                      "correctAnswer": "1st",
                       "type": "multiple-choice",
                       "options": [
-                        "14",
-                        "15",
-                        "16"
+                        "1st",
+                        "2nd",
+                        "Last"
                       ]
                     },
                     {
                       "questionId": "math-1-level-20-exam-q5",
-                      "questionText": "In a pictogram, each symbol = 1 sticker. Class A has 6 symbols and Class B has 9 symbols. Which class has more stickers?",
-                      "correctAnswer": "Class B",
+                      "questionText": "A row has 9 seats. What ordinal number is the seat right before the last one?",
+                      "correctAnswer": "8th",
                       "type": "multiple-choice",
                       "options": [
-                        "Class A",
-                        "Class B",
-                        "They are equal"
+                        "7th",
+                        "8th",
+                        "9th"
                       ]
                     },
                     {
                       "questionId": "math-1-level-20-exam-q6",
-                      "questionText": "A table shows class A has 12 pupils and class B has 15 pupils. How many pupils in both classes?",
-                      "correctAnswer": "27",
+                      "questionText": "How is an ordinal number different from a counting number?",
+                      "correctAnswer": "An ordinal number shows order or position, while a counting number shows how many there are",
                       "type": "multiple-choice",
                       "options": [
-                        "26",
-                        "27",
-                        "28"
+                        "An ordinal number shows order or position, while a counting number shows how many there are",
+                        "They are exactly the same thing",
+                        "Ordinal numbers are only used for counting money"
                       ]
                     },
                     {
                       "questionId": "math-1-level-20-exam-q7",
-                      "questionText": "In a pictogram, each symbol = 1 sweet. There are 9 symbols. How many sweets?",
-                      "correctAnswer": "9",
+                      "questionText": "In a queue of 9 people, the 4th person leaves. What ordinal number was the person right behind them?",
+                      "correctAnswer": "5th",
                       "type": "multiple-choice",
                       "options": [
-                        "8",
-                        "9",
-                        "10"
+                        "3rd",
+                        "5th",
+                        "6th"
+                      ]
+                    },
+                    {
+                      "questionId": "math-1-level-20-exam-q8",
+                      "questionText": "Which of these correctly lists three ordinal numbers in order?",
+                      "correctAnswer": "6th, 7th, 8th",
+                      "type": "multiple-choice",
+                      "options": [
+                        "6th, 7th, 8th",
+                        "8th, 6th, 7th",
+                        "7th, 9th, 6th"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 6: Fractions, Position & Data"
+              ]
             },
             {
               "levelId": "math-1-level-21",
-              "levelName": "Grouping & Counting in Tens",
+              "levelName": "Numbers Before & After",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "math-1-level-21-lesson",
-                  "taskName": "Lesson: Grouping & Counting in Tens",
+                  "taskName": "Lesson: Numbers Before & After",
                   "type": "lesson",
-                  "content": "Counting large groups of objects is much easier if you group them into tens first, then count the groups, then count any leftovers. For example, 34 objects can be grouped into 3 tens (30) and 4 leftover ones, making 34 total. This is a helpful strategy that leads straight into place value.",
+                  "content": "Every whole number has a number that comes right before it and a number that comes right after it when we count in order. The number before is always one less, and the number after is always one more. For example, for the number 7, the number before is 6 and the number after is 8. Knowing this helps us fill in missing numbers in a counting sequence.",
                   "questions": []
                 },
                 {
@@ -7312,68 +7315,68 @@
                   "questions": [
                     {
                       "questionId": "math-1-level-21-quiz-q1",
-                      "questionText": "Why is grouping objects into tens helpful for counting?",
-                      "correctAnswer": "It makes counting large groups much easier and faster",
+                      "questionText": "What number comes right after 7?",
+                      "correctAnswer": "8",
                       "type": "multiple-choice",
                       "options": [
-                        "It makes the objects disappear",
-                        "It makes counting large groups much easier and faster",
-                        "It changes how many objects there are"
+                        "6",
+                        "7",
+                        "8"
                       ]
                     },
                     {
                       "questionId": "math-1-level-21-quiz-q2",
-                      "questionText": "If you have 3 full groups of ten and 4 leftover ones, how many objects do you have in total?",
-                      "correctAnswer": "34",
+                      "questionText": "What number comes right before 10?",
+                      "correctAnswer": "9",
                       "type": "multiple-choice",
                       "options": [
-                        "30",
-                        "34",
-                        "40"
+                        "9",
+                        "10",
+                        "11"
                       ]
                     },
                     {
                       "questionId": "math-1-level-21-quiz-q3",
-                      "questionText": "If you have 50 objects, how many full groups of ten is that?",
-                      "correctAnswer": "5",
+                      "questionText": "The number before a given number is always how much less?",
+                      "correctAnswer": "1 less",
                       "type": "multiple-choice",
                       "options": [
-                        "4",
-                        "5",
-                        "6"
+                        "1 less",
+                        "2 less",
+                        "10 less"
                       ]
                     },
                     {
                       "questionId": "math-1-level-21-quiz-q4",
-                      "questionText": "If you have 2 full groups of ten and 7 leftover ones, how many objects is that?",
-                      "correctAnswer": "27",
+                      "questionText": "What number comes right after 15?",
+                      "correctAnswer": "16",
                       "type": "multiple-choice",
                       "options": [
-                        "20",
-                        "27",
-                        "29"
+                        "14",
+                        "16",
+                        "17"
                       ]
                     },
                     {
                       "questionId": "math-1-level-21-quiz-q5",
-                      "questionText": "If you have 46 objects, how many leftover ones are there after making groups of ten?",
-                      "correctAnswer": "6",
+                      "questionText": "What number comes right before 1?",
+                      "correctAnswer": "0",
                       "type": "multiple-choice",
                       "options": [
-                        "4",
-                        "6",
-                        "10"
+                        "0",
+                        "1",
+                        "2"
                       ]
                     },
                     {
                       "questionId": "math-1-level-21-quiz-q6",
-                      "questionText": "What do we call it when we put objects into groups of 10 to count them faster?",
-                      "correctAnswer": "Grouping in tens",
+                      "questionText": "If a number's \"after\" number is 12, what is the number itself?",
+                      "correctAnswer": "11",
                       "type": "multiple-choice",
                       "options": [
-                        "Halving",
-                        "Grouping in tens",
-                        "Skip counting in 2s"
+                        "10",
+                        "11",
+                        "13"
                       ]
                     }
                   ]
@@ -7387,85 +7390,84 @@
                   "questions": [
                     {
                       "questionId": "math-1-level-21-exam-q1",
-                      "questionText": "If you have 62 objects, how many full tens are there?",
-                      "correctAnswer": "6",
+                      "questionText": "What are the numbers that come immediately before and after 9?",
+                      "correctAnswer": "8 and 10",
                       "type": "multiple-choice",
                       "options": [
-                        "5",
-                        "6",
-                        "7"
+                        "8 and 10",
+                        "7 and 11",
+                        "9 and 10"
                       ]
                     },
                     {
                       "questionId": "math-1-level-21-exam-q2",
-                      "questionText": "If you have 62 objects, how many leftover ones are there?",
-                      "correctAnswer": "2",
+                      "questionText": "What number comes right before 20?",
+                      "correctAnswer": "19",
                       "type": "multiple-choice",
                       "options": [
-                        "1",
-                        "2",
-                        "3"
+                        "18",
+                        "19",
+                        "21"
                       ]
                     },
                     {
                       "questionId": "math-1-level-21-exam-q3",
-                      "questionText": "Why does grouping into tens prepare you for learning place value later?",
-                      "correctAnswer": "It shows numbers can be broken into tens and ones, which place value builds on",
+                      "questionText": "What number comes right after 19?",
+                      "correctAnswer": "20",
                       "type": "multiple-choice",
                       "options": [
-                        "It has nothing to do with place value",
-                        "It shows numbers can be broken into tens and ones, which place value builds on",
-                        "It only works for even numbers"
+                        "18",
+                        "20",
+                        "21"
                       ]
                     },
                     {
                       "questionId": "math-1-level-21-exam-q4",
-                      "questionText": "If you have 4 full groups of ten and 5 leftover ones, how many objects is that?",
-                      "correctAnswer": "45",
+                      "questionText": "If the number after a number is 14, what is that number?",
+                      "correctAnswer": "13",
                       "type": "multiple-choice",
                       "options": [
-                        "40",
-                        "45",
-                        "50"
+                        "12",
+                        "13",
+                        "15"
                       ]
                     },
                     {
                       "questionId": "math-1-level-21-exam-q5",
-                      "questionText": "If you have 78 objects, how many full tens are there?",
-                      "correctAnswer": "7",
+                      "questionText": "If the number before a number is 16, what is that number?",
+                      "correctAnswer": "17",
                       "type": "multiple-choice",
                       "options": [
-                        "6",
-                        "7",
-                        "8"
+                        "15",
+                        "17",
+                        "18"
                       ]
                     },
                     {
                       "questionId": "math-1-level-21-exam-q6",
-                      "questionText": "If you have 78 objects, how many leftover ones are there?",
-                      "correctAnswer": "8",
+                      "questionText": "Fill in the missing number: 11, 12, __, 14",
+                      "correctAnswer": "13",
                       "type": "multiple-choice",
                       "options": [
-                        "7",
-                        "8",
-                        "9"
+                        "12",
+                        "13",
+                        "15"
                       ]
                     },
                     {
                       "questionId": "math-1-level-21-exam-q7",
-                      "questionText": "What is the fastest way to count 90 identical counters: one at a time, or in groups of ten?",
-                      "correctAnswer": "In groups of ten",
+                      "questionText": "Why is it useful to know the number before and after a given number?",
+                      "correctAnswer": "It helps fill in missing numbers in a counting sequence",
                       "type": "multiple-choice",
                       "options": [
-                        "One at a time",
-                        "In groups of ten",
-                        "Both take the same time"
+                        "It helps fill in missing numbers in a counting sequence",
+                        "It changes what the number means",
+                        "It only works with even numbers"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 6: Fractions, Position & Data"
+              ]
             },
             {
               "levelId": "math-1-level-22",
