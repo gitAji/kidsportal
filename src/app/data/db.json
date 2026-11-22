@@ -55387,14 +55387,14 @@
             },
             {
               "levelId": "science-3-level-11",
-              "levelName": "Rocks & Soils",
+              "levelName": "The Home Garden: What Plants Need to Grow",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "science-3-level-11-lesson",
-                  "taskName": "Lesson: Rocks & Soils",
+                  "taskName": "Lesson: The Home Garden: What Plants Need to Grow",
                   "type": "lesson",
-                  "content": "There are three main types of rock: igneous (formed from cooled melted rock, like granite), sedimentary (formed from layers of sand and mud pressed together over time, like sandstone), and metamorphic (formed when rock is changed by heat and pressure, like marble). Soil is made from tiny broken pieces of rock mixed with decayed plants and animals (humus), and different soils have different properties.",
+                  "content": "A home garden is a great place to see plant science in action. For a plant to grow well, it needs four main things: sunlight for energy, water to carry nutrients, good soil to anchor its roots and supply nutrients, and air for its leaves to breathe. Gardeners improve soil by adding compost, made from decayed plant scraps, which adds nutrients back into the soil. Different plants also need different amounts of these things - a cactus needs very little water, while a tomato plant needs regular watering to grow juicy fruit.",
                   "questions": []
                 },
                 {
@@ -55406,62 +55406,69 @@
                   "questions": [
                     {
                       "questionId": "science-3-level-11-quiz-q1",
-                      "questionText": "What type of rock forms from cooled melted rock?",
-                      "correctAnswer": "Igneous",
+                      "questionText": "Name one of the four main things a plant needs to grow well.",
+                      "correctAnswer": "Sunlight (or water, soil, air)",
                       "type": "multiple-choice",
                       "options": [
-                        "Igneous",
-                        "Sedimentary",
-                        "Metamorphic",
-                        "None of these"
+                        "Sunlight (or water, soil, air)",
+                        "Sand",
+                        "Plastic",
+                        "Metal"
                       ]
                     },
                     {
                       "questionId": "science-3-level-11-quiz-q2",
-                      "questionText": "What type of rock forms from layers of sand and mud pressed together?",
-                      "correctAnswer": "sedimentary",
+                      "questionText": "What does a plant use water for?",
+                      "correctAnswer": "To carry nutrients through the plant",
                       "type": "multiple-choice",
                       "options": [
-                        "metamorphic",
-                        "Heat and pressure changing existing rock",
-                        "Metamorphic rock",
-                        "sedimentary"
+                        "To carry nutrients through the plant",
+                        "To make the plant a different colour",
+                        "To stop the plant growing"
                       ]
                     },
                     {
                       "questionId": "science-3-level-11-quiz-q3",
-                      "questionText": "What is marble an example of?",
-                      "correctAnswer": "Metamorphic rock",
+                      "questionText": "What is compost made from?",
+                      "correctAnswer": "Decayed plant scraps",
                       "type": "multiple-choice",
                       "options": [
-                        "Igneous rock",
-                        "Sedimentary rock",
-                        "Metamorphic rock",
-                        "Soil"
+                        "Decayed plant scraps",
+                        "Melted rock",
+                        "Plastic bottles"
                       ]
                     },
                     {
                       "questionId": "science-3-level-11-quiz-q4",
-                      "questionText": "What do we call decayed plant and animal matter found in soil?",
-                      "correctAnswer": "humus",
+                      "questionText": "Why do gardeners add compost to soil?",
+                      "correctAnswer": "To add nutrients back into the soil",
                       "type": "multiple-choice",
                       "options": [
-                        "humus",
-                        "Igneous",
-                        "They contain different amounts of rock particles and organic matter",
-                        "sandstone"
+                        "To add nutrients back into the soil",
+                        "To make the soil a brighter colour",
+                        "To stop plants growing roots"
                       ]
                     },
                     {
                       "questionId": "science-3-level-11-quiz-q5",
-                      "questionText": "What is soil mainly made from?",
-                      "correctAnswer": "Broken pieces of rock mixed with decayed matter",
+                      "questionText": "Which plant would need the least amount of watering?",
+                      "correctAnswer": "A cactus",
                       "type": "multiple-choice",
                       "options": [
-                        "Broken pieces of rock mixed with decayed matter",
-                        "Only water",
-                        "Only plants",
-                        "Only metal"
+                        "A cactus",
+                        "A tomato plant",
+                        "A rice plant"
+                      ]
+                    },
+                    {
+                      "questionId": "science-3-level-11-quiz-q6",
+                      "questionText": "What do a plant's roots do in the soil?",
+                      "correctAnswer": "Anchor the plant and take in nutrients",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Anchor the plant and take in nutrients",
+                        "Make the soil disappear",
+                        "Turn the soil into water"
                       ]
                     }
                   ]
@@ -55475,80 +55482,84 @@
                   "questions": [
                     {
                       "questionId": "science-3-level-11-exam-q1",
-                      "questionText": "Give an example of an igneous rock.",
-                      "correctAnswer": "granite",
+                      "questionText": "A gardener notices their tomato plant is wilting in dry soil. What does the plant most likely need?",
+                      "correctAnswer": "More water",
                       "type": "multiple-choice",
                       "options": [
-                        "metamorphic",
-                        "Broken pieces of rock mixed with decayed matter",
-                        "sandstone",
-                        "granite"
+                        "More water",
+                        "Less sunlight",
+                        "Less soil"
                       ]
                     },
                     {
                       "questionId": "science-3-level-11-exam-q2",
-                      "questionText": "What causes metamorphic rock to form?",
-                      "correctAnswer": "Heat and pressure changing existing rock",
+                      "questionText": "Why do different plants need different amounts of water?",
+                      "correctAnswer": "Because plants are adapted to different environments and conditions",
                       "type": "multiple-choice",
                       "options": [
-                        "Cooling of melted rock",
-                        "Heat and pressure changing existing rock",
-                        "Layers of sand pressing together",
-                        "Nothing, it forms randomly"
+                        "Because plants are adapted to different environments and conditions",
+                        "All plants always need the exact same amount",
+                        "Water has no effect on plants"
                       ]
                     },
                     {
                       "questionId": "science-3-level-11-exam-q3",
-                      "questionText": "Give an example of a sedimentary rock.",
-                      "correctAnswer": "sandstone",
+                      "questionText": "What is one benefit of growing a home garden?",
+                      "correctAnswer": "You can grow your own fresh food and see plant science up close",
                       "type": "multiple-choice",
                       "options": [
-                        "They contain different amounts of rock particles and organic matter",
-                        "granite",
-                        "sandstone",
-                        "Igneous"
+                        "You can grow your own fresh food and see plant science up close",
+                        "Gardens remove the need for sunlight entirely",
+                        "Plants in a garden do not need water"
                       ]
                     },
                     {
                       "questionId": "science-3-level-11-exam-q4",
-                      "questionText": "How many main types of rock are there?",
-                      "correctAnswer": "3",
+                      "questionText": "If a plant is kept in a dark cupboard with no sunlight, what will most likely happen?",
+                      "correctAnswer": "It will struggle to grow and may become weak or die",
                       "type": "multiple-choice",
                       "options": [
-                        "2",
-                        "3",
-                        "4",
-                        "5"
+                        "It will struggle to grow and may become weak or die",
+                        "It will grow faster than normal",
+                        "Nothing will change at all"
                       ]
                     },
                     {
                       "questionId": "science-3-level-11-exam-q5",
-                      "questionText": "What are the three main rock types: igneous, sedimentary, and ___?",
-                      "correctAnswer": "metamorphic",
+                      "questionText": "Name one thing a gardener can add to soil to make it richer in nutrients.",
+                      "correctAnswer": "Compost",
                       "type": "multiple-choice",
                       "options": [
-                        "Heat and pressure changing existing rock",
-                        "sandstone",
-                        "humus",
-                        "metamorphic"
+                        "Compost",
+                        "Sand",
+                        "Plastic"
                       ]
                     },
                     {
                       "questionId": "science-3-level-11-exam-q6",
-                      "questionText": "Why might different soils have different properties?",
-                      "correctAnswer": "They contain different amounts of rock particles and organic matter",
+                      "questionText": "Why is air important for a plant, even though it also needs soil and water?",
+                      "correctAnswer": "A plant's leaves need air to carry out important life processes",
                       "type": "multiple-choice",
                       "options": [
-                        "All soils are exactly identical",
-                        "They contain different amounts of rock particles and organic matter",
-                        "Soil never varies",
-                        "Soil contains no rock at all"
+                        "A plant's leaves need air to carry out important life processes",
+                        "Air makes the soil heavier",
+                        "Plants do not actually need air"
+                      ]
+                    },
+                    {
+                      "questionId": "science-3-level-11-exam-q7",
+                      "questionText": "A cactus and a tomato plant are both watered the same large amount every day. What is most likely to happen to the cactus?",
+                      "correctAnswer": "It may be damaged by getting too much water",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It may be damaged by getting too much water",
+                        "It will grow extra quickly with no problems",
+                        "It will turn into a different plant"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 5: Materials & the Water Cycle"
+              ]
             },
             {
               "levelId": "science-3-level-12",
@@ -56023,14 +56034,14 @@
             },
             {
               "levelId": "science-3-level-15",
-              "levelName": "Magnets & Materials",
+              "levelName": "Simple Machines: Making Work Easier",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "science-3-level-15-lesson",
-                  "taskName": "Lesson: Magnets & Materials",
+                  "taskName": "Lesson: Simple Machines: Making Work Easier",
                   "type": "lesson",
-                  "content": "Building on earlier magnet learning, this lesson explores which materials are magnetic (attracted to magnets) and which are not. Magnetic materials include iron, steel, cobalt and nickel, while materials like wood, plastic, glass, rubber and most other metals (like aluminium and copper) are not magnetic. Testing materials with a magnet is a simple way to classify them.",
+                  "content": "A simple machine is a tool that makes a job easier by changing the amount or direction of the force (push or pull) we need. A ramp lets you push a heavy box up to a higher place using less force than lifting it straight up. A lever, like a seesaw or a crowbar, uses a pivot point to help lift or move something heavy with less effort. Wheels let objects roll smoothly instead of being dragged, which needs much less force to move the same object.",
                   "questions": []
                 },
                 {
@@ -56042,62 +56053,68 @@
                   "questions": [
                     {
                       "questionId": "science-3-level-15-quiz-q1",
-                      "questionText": "Which of these materials is magnetic?",
-                      "correctAnswer": "Iron",
+                      "questionText": "What is a simple machine?",
+                      "correctAnswer": "A tool that makes a job easier by changing the force needed",
                       "type": "multiple-choice",
                       "options": [
-                        "Iron",
-                        "Wood",
-                        "Plastic",
-                        "Glass"
+                        "A tool that makes a job easier by changing the force needed",
+                        "A toy that makes no difference to work",
+                        "A machine that only uses electricity"
                       ]
                     },
                     {
                       "questionId": "science-3-level-15-quiz-q2",
-                      "questionText": "Name one magnetic material besides iron.",
-                      "correctAnswer": "steel (or cobalt, nickel)",
+                      "questionText": "How does a ramp make moving a heavy box easier?",
+                      "correctAnswer": "It lets you push the box up using less force than lifting it straight up",
                       "type": "multiple-choice",
                       "options": [
-                        "cobalt (or nickel)",
-                        "steel (or cobalt, nickel)",
-                        "They are not magnetic",
-                        "Rubber"
+                        "It lets you push the box up using less force than lifting it straight up",
+                        "It makes the box lighter",
+                        "It makes the box disappear"
                       ]
                     },
                     {
                       "questionId": "science-3-level-15-quiz-q3",
-                      "questionText": "Is aluminium magnetic?",
-                      "correctAnswer": "No",
+                      "questionText": "What is the pivot point on a lever, like a seesaw, used for?",
+                      "correctAnswer": "To help lift or move something heavy with less effort",
                       "type": "multiple-choice",
                       "options": [
-                        "Yes",
-                        "No",
-                        "Only sometimes",
-                        "Only when cold"
+                        "To help lift or move something heavy with less effort",
+                        "To make the lever heavier",
+                        "To stop the lever from moving at all"
                       ]
                     },
                     {
                       "questionId": "science-3-level-15-quiz-q4",
-                      "questionText": "What simple test can you use to find out if a material is magnetic?",
-                      "correctAnswer": "testing it with a magnet",
+                      "questionText": "Why are wheels useful for moving heavy objects?",
+                      "correctAnswer": "They let objects roll smoothly, needing much less force than dragging",
                       "type": "multiple-choice",
                       "options": [
-                        "it quickly and directly shows whether the material is attracted or not",
-                        "Iron",
-                        "They are not magnetic",
-                        "testing it with a magnet"
+                        "They let objects roll smoothly, needing much less force than dragging",
+                        "They make objects heavier",
+                        "They stop objects from moving"
                       ]
                     },
                     {
                       "questionId": "science-3-level-15-quiz-q5",
-                      "questionText": "Which of these is NOT magnetic?",
-                      "correctAnswer": "Rubber",
+                      "questionText": "Give an example of a simple machine that is a type of lever.",
+                      "correctAnswer": "A seesaw (or a crowbar)",
                       "type": "multiple-choice",
                       "options": [
-                        "Rubber",
-                        "Iron",
-                        "Steel",
-                        "Nickel"
+                        "A seesaw (or a crowbar)",
+                        "A ramp",
+                        "A wheel"
+                      ]
+                    },
+                    {
+                      "questionId": "science-3-level-15-quiz-q6",
+                      "questionText": "Why might someone use a ramp instead of carrying boxes up stairs?",
+                      "correctAnswer": "It takes less force to push a box up a ramp than to lift it",
+                      "type": "multiple-choice",
+                      "options": [
+                        "It takes less force to push a box up a ramp than to lift it",
+                        "Ramps make boxes heavier",
+                        "Stairs are always easier than ramps"
                       ]
                     }
                   ]
@@ -56111,80 +56128,84 @@
                   "questions": [
                     {
                       "questionId": "science-3-level-15-exam-q1",
-                      "questionText": "Is copper magnetic?",
-                      "correctAnswer": "no",
+                      "questionText": "A delivery worker uses a trolley with wheels to move heavy boxes. Why does this make the job easier?",
+                      "correctAnswer": "The wheels let the boxes roll, needing much less force than carrying them",
                       "type": "multiple-choice",
                       "options": [
-                        "Iron",
-                        "no",
-                        "it quickly and directly shows whether the material is attracted or not",
-                        "Magnetic materials"
+                        "The wheels let the boxes roll, needing much less force than carrying them",
+                        "The wheels make the boxes lighter in weight",
+                        "The wheels make the job take longer"
                       ]
                     },
                     {
                       "questionId": "science-3-level-15-exam-q2",
-                      "questionText": "Which group of materials includes iron, steel, cobalt and nickel?",
-                      "correctAnswer": "Magnetic materials",
+                      "questionText": "What do all simple machines have in common?",
+                      "correctAnswer": "They all make a task easier by changing the force needed",
                       "type": "multiple-choice",
                       "options": [
-                        "Magnetic materials",
-                        "Non-magnetic materials",
-                        "Liquid materials",
-                        "Gas materials"
+                        "They all make a task easier by changing the force needed",
+                        "They all run on electricity",
+                        "They all make objects disappear"
                       ]
                     },
                     {
                       "questionId": "science-3-level-15-exam-q3",
-                      "questionText": "Why might testing a material with a magnet be considered a 'simple' classification method?",
-                      "correctAnswer": "it quickly and directly shows whether the material is attracted or not",
+                      "questionText": "A see-saw is an example of which type of simple machine?",
+                      "correctAnswer": "A lever",
                       "type": "multiple-choice",
                       "options": [
-                        "it quickly and directly shows whether the material is attracted or not",
-                        "Rubber",
-                        "Magnetic materials",
-                        "No"
+                        "A lever",
+                        "A wheel",
+                        "A ramp"
                       ]
                     },
                     {
                       "questionId": "science-3-level-15-exam-q4",
-                      "questionText": "Why is it useful to know which materials are magnetic?",
-                      "correctAnswer": "It helps us understand material properties and use magnets effectively",
+                      "questionText": "Why would a mover use a ramp to load a sofa into a truck, rather than lifting it straight up?",
+                      "correctAnswer": "Pushing the sofa up a ramp needs less force than lifting it straight up",
                       "type": "multiple-choice",
                       "options": [
-                        "It helps us understand material properties and use magnets effectively",
-                        "Magnetism has no practical use",
-                        "All metals are always magnetic",
-                        "Magnetic testing is never useful"
+                        "Pushing the sofa up a ramp needs less force than lifting it straight up",
+                        "A ramp makes the sofa weigh less",
+                        "Lifting straight up is always easier"
                       ]
                     },
                     {
                       "questionId": "science-3-level-15-exam-q5",
-                      "questionText": "Besides iron and steel, name another magnetic metal from this lesson.",
-                      "correctAnswer": "cobalt (or nickel)",
+                      "questionText": "If a crowbar is used to lift a heavy rock, what is it an example of?",
+                      "correctAnswer": "A lever",
                       "type": "multiple-choice",
                       "options": [
-                        "it quickly and directly shows whether the material is attracted or not",
-                        "They are not magnetic",
-                        "No",
-                        "cobalt (or nickel)"
+                        "A lever",
+                        "A wheel",
+                        "A ramp"
                       ]
                     },
                     {
                       "questionId": "science-3-level-15-exam-q6",
-                      "questionText": "Which best describes most metals, besides iron, steel, cobalt and nickel?",
-                      "correctAnswer": "They are not magnetic",
+                      "questionText": "Why is it harder to drag a heavy box across the floor than to roll it on a trolley?",
+                      "correctAnswer": "Dragging needs more force because there are no wheels to help it move smoothly",
                       "type": "multiple-choice",
                       "options": [
-                        "They are not magnetic",
-                        "They are always magnetic",
-                        "They turn into magnets over time",
-                        "Magnetism depends only on colour"
+                        "Dragging needs more force because there are no wheels to help it move smoothly",
+                        "Dragging always needs less force than rolling",
+                        "There is no difference between dragging and rolling"
+                      ]
+                    },
+                    {
+                      "questionId": "science-3-level-15-exam-q7",
+                      "questionText": "Name one simple machine you might find at a playground.",
+                      "correctAnswer": "A seesaw (or a slide, which works like a ramp)",
+                      "type": "multiple-choice",
+                      "options": [
+                        "A seesaw (or a slide, which works like a ramp)",
+                        "A thermometer",
+                        "A battery"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 6: Plants, Magnets & Material Grouping"
+              ]
             },
             {
               "levelId": "science-3-level-16",
@@ -57013,14 +57034,14 @@
             },
             {
               "levelId": "science-3-level-21",
-              "levelName": "Changing Between States of Matter",
+              "levelName": "The Earth and Sky",
               "isLocked": false,
               "tasks": [
                 {
                   "taskId": "science-3-level-21-lesson",
-                  "taskName": "Lesson: Changing Between States of Matter",
+                  "taskName": "Lesson: The Earth and Sky",
                   "type": "lesson",
-                  "content": "Matter can change between solid, liquid, and gas when it is heated or cooled. Heating a solid can melt it into a liquid, and heating a liquid can turn it into a gas. Cooling reverses these changes.",
+                  "content": "The Earth is a huge ball of rock, water, and air that spins once every 24 hours, which is why we have day and night - the side facing the Sun has day, while the side facing away has night. Looking up at the sky, we see the Sun during the day, and at night we might see the Moon and stars, which are actually other suns very far away. The sky also shows us weather, like clouds, rain, or clear blue skies, which can change from one day to the next depending on where the air and water in the atmosphere are moving.",
                   "questions": []
                 },
                 {
@@ -57032,62 +57053,68 @@
                   "questions": [
                     {
                       "questionId": "science-3-level-21-quiz-q1",
-                      "questionText": "What happens when a solid is heated enough?",
-                      "correctAnswer": "It melts into a liquid",
+                      "questionText": "Why do we have day and night?",
+                      "correctAnswer": "The Earth spins, so different sides face the Sun at different times",
                       "type": "multiple-choice",
                       "options": [
-                        "It melts into a liquid",
-                        "It turns into a gas instantly",
-                        "Nothing happens at all",
-                        "It becomes heavier"
+                        "The Earth spins, so different sides face the Sun at different times",
+                        "The Sun turns off every night",
+                        "The Earth stops moving at night"
                       ]
                     },
                     {
                       "questionId": "science-3-level-21-quiz-q2",
-                      "questionText": "What happens when a liquid is heated enough?",
-                      "correctAnswer": "it turns into a gas (boils/evaporates)",
+                      "questionText": "About how long does it take the Earth to spin around once?",
+                      "correctAnswer": "24 hours",
                       "type": "multiple-choice",
                       "options": [
-                        "It explains that the water is evaporating into water vapour (a gas), not simply vanishing",
-                        "the warmer air heats the ice, and heating a solid enough causes it to melt into a liquid",
-                        "it turns into a gas (boils/evaporates)",
-                        "water's state depends on its temperature, so the same substance changes between solid, liquid and gas as temperature changes"
+                        "24 hours",
+                        "24 minutes",
+                        "1 week"
                       ]
                     },
                     {
                       "questionId": "science-3-level-21-quiz-q3",
-                      "questionText": "What does cooling a liquid enough do?",
-                      "correctAnswer": "Turns it into a solid (freezing)",
+                      "questionText": "What do we usually see in the sky at night, besides the Moon?",
+                      "correctAnswer": "Stars",
                       "type": "multiple-choice",
                       "options": [
-                        "Turns it into a solid (freezing)",
-                        "Turns it into a gas",
-                        "Has no effect at all",
-                        "Makes it disappear completely"
+                        "Stars",
+                        "The Sun",
+                        "Rainbows only"
                       ]
                     },
                     {
                       "questionId": "science-3-level-21-quiz-q4",
-                      "questionText": "What state of matter is ice?",
-                      "correctAnswer": "a solid",
+                      "questionText": "What are stars actually?",
+                      "correctAnswer": "Other suns that are very far away",
                       "type": "multiple-choice",
                       "options": [
-                        "removing heat energy from a gas causes its particles to slow down and come together, forming a liquid",
-                        "the warmer air heats the ice, and heating a solid enough causes it to melt into a liquid",
-                        "a solid",
-                        "It explains that the water is evaporating into water vapour (a gas), not simply vanishing"
+                        "Other suns that are very far away",
+                        "Tiny lights stuck to the sky",
+                        "Pieces of the Moon"
                       ]
                     },
                     {
                       "questionId": "science-3-level-21-quiz-q5",
-                      "questionText": "What state of matter is steam?",
-                      "correctAnswer": "A gas",
+                      "questionText": "What is the Earth mainly made up of?",
+                      "correctAnswer": "Rock, water, and air",
                       "type": "multiple-choice",
                       "options": [
-                        "A gas",
-                        "A solid",
-                        "A liquid",
-                        "None of these"
+                        "Rock, water, and air",
+                        "Only metal",
+                        "Only clouds"
+                      ]
+                    },
+                    {
+                      "questionId": "science-3-level-21-quiz-q6",
+                      "questionText": "What can we see in the sky that shows us the weather is changing?",
+                      "correctAnswer": "Clouds",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Clouds",
+                        "Stars",
+                        "The Moon"
                       ]
                     }
                   ]
@@ -57101,80 +57128,84 @@
                   "questions": [
                     {
                       "questionId": "science-3-level-21-exam-q1",
-                      "questionText": "Why does an ice cube melt into a puddle of water when left out at room temperature?",
-                      "correctAnswer": "the warmer air heats the ice, and heating a solid enough causes it to melt into a liquid",
+                      "questionText": "If it is daytime where you live, what does that tell you about your side of the Earth?",
+                      "correctAnswer": "Your side is currently facing the Sun",
                       "type": "multiple-choice",
                       "options": [
-                        "water's state depends on its temperature, so the same substance changes between solid, liquid and gas as temperature changes",
-                        "it turns into a gas (boils/evaporates)",
-                        "the warmer air heats the ice, and heating a solid enough causes it to melt into a liquid",
-                        "A gas"
+                        "Your side is currently facing the Sun",
+                        "Your side is facing away from the Sun",
+                        "The Earth has stopped spinning"
                       ]
                     },
                     {
                       "questionId": "science-3-level-21-exam-q2",
-                      "questionText": "Why are the changes between solid, liquid and gas described as being caused mainly by heating and cooling?",
-                      "correctAnswer": "Adding or removing heat energy is what causes matter to change between these states",
+                      "questionText": "Why might the sky look clear and blue one day, and cloudy and grey the next?",
+                      "correctAnswer": "Weather changes as air and water in the atmosphere move around",
                       "type": "multiple-choice",
                       "options": [
-                        "Adding or removing heat energy is what causes matter to change between these states",
-                        "Heating and cooling have no connection to changes of state",
-                        "Matter changes state completely randomly",
-                        "Only cooling can ever cause a change of state"
+                        "Weather changes as air and water in the atmosphere move around",
+                        "The sky changes colour completely at random with no cause",
+                        "Clouds appear only once a year"
                       ]
                     },
                     {
                       "questionId": "science-3-level-21-exam-q3",
-                      "questionText": "Why can water be found as ice, liquid water, and steam, even though it's always the same substance?",
-                      "correctAnswer": "water's state depends on its temperature, so the same substance changes between solid, liquid and gas as temperature changes",
+                      "questionText": "What happens on the side of the Earth facing away from the Sun?",
+                      "correctAnswer": "It experiences night",
                       "type": "multiple-choice",
                       "options": [
-                        "Adding or removing heat energy is what causes matter to change between these states",
-                        "a solid",
-                        "water's state depends on its temperature, so the same substance changes between solid, liquid and gas as temperature changes",
-                        "the warmer air heats the ice, and heating a solid enough causes it to melt into a liquid"
+                        "It experiences night",
+                        "It experiences day",
+                        "Nothing changes there"
                       ]
                     },
                     {
                       "questionId": "science-3-level-21-exam-q4",
-                      "questionText": "Why might a scientist heat a solid material slowly, rather than very quickly, when observing it melt?",
-                      "correctAnswer": "Heating slowly allows them to carefully observe exactly when and how the change of state happens",
+                      "questionText": "Why can we usually see many more stars at night than during the day?",
+                      "correctAnswer": "The Sun's bright light during the day makes the fainter starlight impossible to see",
                       "type": "multiple-choice",
                       "options": [
-                        "Heating slowly allows them to carefully observe exactly when and how the change of state happens",
-                        "Heating speed has no effect on how a change of state can be observed",
-                        "Solids never melt no matter how they are heated",
-                        "Heating quickly always prevents melting from happening"
+                        "The Sun's bright light during the day makes the fainter starlight impossible to see",
+                        "Stars only exist at night",
+                        "Stars move away from Earth during the day"
                       ]
                     },
                     {
                       "questionId": "science-3-level-21-exam-q5",
-                      "questionText": "Why does cooling a gas, like steam, eventually turn it back into a liquid?",
-                      "correctAnswer": "removing heat energy from a gas causes its particles to slow down and come together, forming a liquid",
+                      "questionText": "Which of these is part of the Earth's makeup?",
+                      "correctAnswer": "Water",
                       "type": "multiple-choice",
                       "options": [
-                        "removing heat energy from a gas causes its particles to slow down and come together, forming a liquid",
-                        "water's state depends on its temperature, so the same substance changes between solid, liquid and gas as temperature changes",
-                        "A gas",
-                        "a solid"
+                        "Water",
+                        "Only sand",
+                        "Only plastic"
                       ]
                     },
                     {
                       "questionId": "science-3-level-21-exam-q6",
-                      "questionText": "Why is understanding changes of state useful for explaining everyday events, like puddles disappearing on a sunny day?",
-                      "correctAnswer": "It explains that the water is evaporating into water vapour (a gas), not simply vanishing",
+                      "questionText": "If the Earth suddenly spun twice as fast, what would most likely happen to day and night?",
+                      "correctAnswer": "Day and night would each become shorter",
                       "type": "multiple-choice",
                       "options": [
-                        "It explains that the water is evaporating into water vapour (a gas), not simply vanishing",
-                        "Puddles disappearing has no connection to changes of state",
-                        "Water can never evaporate into a gas",
-                        "Changes of state only happen in a laboratory, not outdoors"
+                        "Day and night would each become shorter",
+                        "There would be no more night at all",
+                        "Nothing about day and night would change"
+                      ]
+                    },
+                    {
+                      "questionId": "science-3-level-21-exam-q7",
+                      "questionText": "What might you see in the sky that tells you rain could be coming soon?",
+                      "correctAnswer": "Dark, heavy clouds gathering",
+                      "type": "multiple-choice",
+                      "options": [
+                        "Dark, heavy clouds gathering",
+                        "A completely clear, starry night",
+                        "The Moon appearing during the day"
                       ]
                     }
                   ]
                 }
-              ],
-              "moduleName": "Module 8: Magnetism, States of Matter & The Skeleton"
+              ]
             },
             {
               "levelId": "science-3-level-22",
